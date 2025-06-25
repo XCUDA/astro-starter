@@ -1,0 +1,145 @@
+---
+// Layout.astro - Foundation layout for professional Astro starter
+// This component serves as the main template wrapper for all pages
+
+// TypeScript interface for layout props ensures type safety across all pages
+export interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  keywords?: string;
+}
+
+// Destructure props with sensible defaults for SEO and social sharing
+const { 
+  title, 
+  description = "Professional Astro starter with TailwindCSS 4 and shadcn/ui",
+  image = "/og-image.jpg",
+  keywords = "astro, tailwindcss, shadcn/ui, typescript, professional"
+} = Astro.props;
+
+// Generate canonical URL for SEO - crucial for preventing duplicate content issues
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+// Site metadata - centralized configuration that can be easily customized per client
+const siteName = "Astro Professional Starter";
+const siteDescription = "A modern, performant starter built with Astro 5, TailwindCSS 4, and shadcn/ui";
+---
+
+<!doctype html>
+<html lang="en" class="h-full">
+  <head>
+    <!-- Essential meta tags for proper document structure -->
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Canonical URL prevents SEO issues with duplicate content -->
+    <link rel="canonical" href={canonicalURL} />
+    
+    <!-- Essential Open Graph meta tags for social media sharing -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, Astro.url)} />
+    <meta property="og:site_name" content={siteName} />
+    
+    <!-- Twitter Card meta tags for enhanced Twitter sharing -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(image, Astro.url)} />
+    
+    <!-- Astro generator meta tag - useful for analytics and debugging -->
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- Page title with site name for consistent branding -->
+    <title>{title} | {siteName}</title>
+    
+    <!-- Favicon and app icons - essential for professional presentation -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    
+    <!-- Import TailwindCSS 4 global styles - this activates our entire design system -->
+    <style>
+      @import "../../styles/global.css";
+    </style>
+    
+    <!-- Preload critical fonts if we add custom fonts later -->
+    <!-- <link rel="preload" href="/fonts/inter.woff2" as="font" type="font/woff2" crossorigin /> -->
+  </head>
+  
+  <!-- 
+    Body setup with full height and antialiased text for optimal rendering
+    The h-full class ensures our layout can take full viewport height when needed
+    text-rendering optimizeSpeed vs optimizeLegibility is a performance vs quality tradeoff
+  -->
+  <body class="h-full bg-background text-foreground antialiased">
+    <!-- 
+      Skip to main content link for accessibility compliance
+      This is essential for screen readers and keyboard navigation
+      Hidden by default but visible when focused
+    -->
+    <a 
+      href="#main-content" 
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 
+             bg-primary text-primary-foreground px-4 py-2 rounded-md
+             transition-all duration-200 z-50"
+    >
+      Skip to main content
+    </a>
+    
+    <!-- 
+      Main layout wrapper with minimum height and flex layout
+      This ensures our footer stays at bottom even with little content
+    -->
+    <div class="min-h-full flex flex-col">
+      <!-- 
+        Header placeholder - this will be replaced with actual navigation component
+        Using semantic HTML5 header element for accessibility and SEO
+      -->
+      <header class="bg-card border-b border-border">
+        <div class="container mx-auto px-4 py-4">
+          <nav aria-label="Main navigation">
+            <h1 class="text-2xl font-bold text-primary">
+              {siteName}
+            </h1>
+            <!-- Navigation items will go here when we add them -->
+          </nav>
+        </div>
+      </header>
+      
+      <!-- 
+        Main content area with proper ARIA landmark
+        The flex-1 class makes this area grow to fill available space
+        This pushes the footer to the bottom of the viewport
+      -->
+      <main id="main-content" class="flex-1" role="main">
+        <slot />
+      </main>
+      
+      <!-- 
+        Footer with basic information
+        Using semantic HTML5 footer element
+        Stays at bottom thanks to flex layout above
+      -->
+      <footer class="bg-card border-t border-border mt-auto">
+        <div class="container mx-auto px-4 py-6">
+          <div class="text-center text-sm text-muted-foreground">
+            <p>&copy; 2025 {siteName}. Built with Astro 5, TailwindCSS 4, and shadcn/ui.</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <!-- 
+      Script slot for page-specific JavaScript
+      Placed at the end of body for optimal loading performance
+      This slot allows individual pages to add their own scripts if needed
+    -->
+    <slot name="scripts" />
+  </body>
+</html>
