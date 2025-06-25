@@ -1,16 +1,189 @@
 ---
+// index.astro - Home page using our professional layout architecture
+// This demonstrates how clean and maintainable page-specific code becomes 
+// when using a well-structured layout system
 
+// Import our professional layout component
+import Layout from '../components/layouts/Layout.astro';
+
+// Page-specific metadata that will be passed to our layout
+// This approach keeps SEO management centralized while allowing per-page customization
+const pageTitle = "Welcome to Your Professional Astro Starter";
+const pageDescription = "Experience the power of Astro 5 combined with TailwindCSS 4 and shadcn/ui for building lightning-fast, accessible web applications.";
+const pageKeywords = "astro 5, tailwindcss 4, shadcn/ui, professional starter, web development";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<!-- 
+  Notice how clean this becomes: we pass our page-specific data to the layout
+  and focus only on the content that makes this page unique
+-->
+<Layout 
+  title={pageTitle}
+  description={pageDescription}
+  keywords={pageKeywords}
+>
+  <!-- Hero section with modern TailwindCSS 4 styling -->
+  <section class="bg-gradient-to-br from-primary/10 via-background to-secondary/10 py-20">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <!-- Main headline with improved typography -->
+        <h1 class="text-4xl md:text-6xl font-bold tracking-tight text-foreground mb-6">
+          Professional 
+          <span class="text-primary">Astro</span> 
+          Starter
+        </h1>
+        
+        <!-- Subheadline with semantic color classes -->
+        <p class="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
+          Built with cutting-edge technologies for maximum performance, 
+          accessibility, and developer experience. Ready for your next project.
+        </p>
+        
+        <!-- Call-to-action buttons demonstrating button styling -->
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <button class="bg-primary text-primary-foreground px-8 py-3 rounded-lg font-semibold 
+                         hover:bg-primary/90 transition-colors duration-200
+                         focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+            Get Started
+          </button>
+          <button class="border border-border text-foreground px-8 py-3 rounded-lg font-semibold
+                         hover:bg-accent hover:text-accent-foreground transition-colors duration-200
+                         focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+            View Documentation
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features section demonstrating responsive grid and card layouts -->
+  <section class="py-20 bg-background">
+    <div class="container mx-auto px-4">
+      <div class="max-w-6xl mx-auto">
+        <!-- Section header -->
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            Why This Starter?
+          </h2>
+          <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Every decision in this starter has been made with professional development in mind,
+            from performance optimization to maintainability and scalability.
+          </p>
+        </div>
+
+        <!-- Features grid using modern CSS Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Feature card 1 -->
+          <div class="bg-card border border-border rounded-xl p-6 hover:shadow-lg transition-shadow duration-300">
+            <div class="text-primary text-4xl mb-4" aria-hidden="true">⚡</div>
+            <h3 class="text-xl font-semibold text-card-foreground mb-3">
+              Lightning Fast
+            </h3>
+            <p class="text-muted-foreground">
+              Powered by Astro 5's static generation and TailwindCSS 4's new performance engine
+              for sub-second page loads and instant navigation.
+            </p>
+          </div>
+
+          <!-- Feature card 2 -->
+          <div class="bg-card border border-border rounded-xl p-6 hover:shadow-lg transition-shadow duration-300">
+            <div class="text-primary text-4xl mb-4" aria-hidden="true">♿</div>
+            <h3 class="text-xl font-semibold text-card-foreground mb-3">
+              Accessibility First
+            </h3>
+            <p class="text-muted-foreground">
+              Built with WCAG 2.1 AA compliance in mind, featuring semantic HTML,
+              proper ARIA labels, and keyboard navigation support.
+            </p>
+          </div>
+
+          <!-- Feature card 3 -->
+          <div class="bg-card border border-border rounded-xl p-6 hover:shadow-lg transition-shadow duration-300">
+            <div class="text-primary text-4xl mb-4" aria-hidden="true">🎨</div>
+            <h3 class="text-xl font-semibold text-card-foreground mb-3">
+              Design System Ready
+            </h3>
+            <p class="text-muted-foreground">
+              Integrated shadcn/ui components with customizable themes,
+              dark mode support, and consistent design tokens.
+            </p>
+          </div>
+
+          <!-- Feature card 4 -->
+          <div class="bg-card border border-border rounded-xl p-6 hover:shadow-lg transition-shadow duration-300">
+            <div class="text-primary text-4xl mb-4" aria-hidden="true">🔧</div>
+            <h3 class="text-xl font-semibold text-card-foreground mb-3">
+              Developer Experience
+            </h3>
+            <p class="text-muted-foreground">
+              TypeScript support, hot reload, intelligent IntelliSense,
+              and modern tooling for efficient development workflows.
+            </p>
+          </div>
+
+          <!-- Feature card 5 -->
+          <div class="bg-card border border-border rounded-xl p-6 hover:shadow-lg transition-shadow duration-300">
+            <div class="text-primary text-4xl mb-4" aria-hidden="true">📱</div>
+            <h3 class="text-xl font-semibold text-card-foreground mb-3">
+              Mobile First
+            </h3>
+            <p class="text-muted-foreground">
+              Responsive design with mobile-first approach, touch-friendly interfaces,
+              and optimized performance on all devices.
+            </p>
+          </div>
+
+          <!-- Feature card 6 -->
+          <div class="bg-card border border-border rounded-xl p-6 hover:shadow-lg transition-shadow duration-300">
+            <div class="text-primary text-4xl mb-4" aria-hidden="true">🚀</div>
+            <h3 class="text-xl font-semibold text-card-foreground mb-3">
+              Production Ready
+            </h3>
+            <p class="text-muted-foreground">
+              Optimized builds, SEO meta tags, social sharing cards,
+              and deployment-ready configuration for any hosting platform.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technology showcase section -->
+  <section class="py-20 bg-accent/30">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-foreground mb-8">
+          Built with Modern Technologies
+        </h2>
+        
+        <!-- Technology badges -->
+        <div class="flex flex-wrap justify-center gap-4 mb-12">
+          <span class="bg-primary text-primary-foreground px-4 py-2 rounded-full font-medium">
+            Astro 5
+          </span>
+          <span class="bg-secondary text-secondary-foreground px-4 py-2 rounded-full font-medium">
+            TailwindCSS 4
+          </span>
+          <span class="bg-accent text-accent-foreground px-4 py-2 rounded-full font-medium">
+            shadcn/ui
+          </span>
+          <span class="bg-muted text-muted-foreground px-4 py-2 rounded-full font-medium">
+            TypeScript
+          </span>
+        </div>
+
+        <!-- Status indicator showing our current progress -->
+        <div class="bg-card border border-border rounded-lg p-6">
+          <h3 class="text-lg font-semibold text-card-foreground mb-4">
+            Current Status: TailwindCSS 4 Integration Complete ✅
+          </h3>
+          <p class="text-muted-foreground">
+            This page demonstrates TailwindCSS 4's new semantic color classes, responsive design,
+            and performance optimizations. Next up: shadcn/ui component integration.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
