@@ -6,6 +6,9 @@
 // Import our professional layout component
 import Layout from '../components/layouts/Layout.astro';
 
+// Import our first React Island component
+import InteractiveDemo from '../components/islands/InteractiveDemo.tsx';
+
 // Page-specific metadata that will be passed to our layout
 // This approach keeps SEO management centralized while allowing per-page customization
 const pageTitle = "Welcome to Your Professional Astro Starter";
@@ -176,12 +179,67 @@ const pageKeywords = "astro 5, tailwindcss 4, shadcn/ui, professional starter, w
         <!-- Status indicator showing our current progress -->
         <div class="bg-card border border-border rounded-lg p-6">
           <h3 class="text-lg font-semibold text-card-foreground mb-4">
-            Current Status: TailwindCSS 4 Integration Complete ✅
+            Current Status: shadcn/ui Integration Complete ✅
           </h3>
           <p class="text-muted-foreground">
-            This page demonstrates TailwindCSS 4's new semantic color classes, responsive design,
-            and performance optimizations. Next up: shadcn/ui component integration.
+            This page now demonstrates the complete integration of Astro 5, TailwindCSS 4, 
+            and shadcn/ui with React Islands architecture. Interactive components are ready!
           </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Demo Section - showcasing React Islands -->
+  <section class="py-20 bg-background">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-foreground mb-4">
+          Interactive Components Demo
+        </h2>
+        <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+          Experience the power of React Islands architecture with shadcn/ui components.
+          This section demonstrates selective hydration and performance optimization.
+        </p>
+      </div>
+      
+      <!-- React Island Component with client-side hydration -->
+      <InteractiveDemo client:visible />
+    </div>
+  </section>
+
+  <!-- Performance Benefits Section -->
+  <section class="py-20 bg-accent/10">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold text-foreground mb-8 text-center">
+          Architecture Benefits
+        </h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Performance card -->
+          <div class="bg-card border border-border rounded-xl p-6">
+            <div class="text-green-500 text-3xl mb-4">⚡</div>
+            <h3 class="text-xl font-semibold text-card-foreground mb-3">
+              Selective Hydration
+            </h3>
+            <p class="text-muted-foreground">
+              Only interactive components load JavaScript. Static content remains 
+              HTML for instant loading and optimal Core Web Vitals scores.
+            </p>
+          </div>
+
+          <!-- Developer Experience card -->
+          <div class="bg-card border border-border rounded-xl p-6">
+            <div class="text-blue-500 text-3xl mb-4">🛠️</div>
+            <h3 class="text-xl font-semibold text-card-foreground mb-3">
+              Modern Developer Experience
+            </h3>
+            <p class="text-muted-foreground">
+              Full React capabilities within Islands, TypeScript support, 
+              hot reload, and complete component library access.
+            </p>
+          </div>
         </div>
       </div>
     </div>

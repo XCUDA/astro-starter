@@ -1,0 +1,10 @@
+// .vscode/settings.json 
+{
+  "tailwindCSS.experimental.configFile": "components.json",
+  "tailwindCSS.includeLanguages": {
+    "astro": "html"
+  },
+  "css.customData": [
+    ".vscode/tailwind.json"
+  ]
+}
