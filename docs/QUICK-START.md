@@ -24,6 +24,29 @@ npx shadcn@latest init --force  # Choisir la palette appropriée
 npm run dev
 ```
 
+## ⚠️ Configuration Cruciale
+
+### Correction obligatoire pour TailwindCSS 4
+
+**AVANT** de commencer, vérifier que `src/components/layouts/Layout.astro` contient :
+
+```astro
+<!-- ✅ CORRECT - Styles globaux -->
+<style is:global>
+  @import "../../styles/global.css";
+</style>
+```
+
+**PAS :**
+```astro
+<!-- ❌ INCORRECT - Styles scopés -->
+<style>
+  @import "../../styles/global.css";
+</style>
+```
+
+**⚠️ Sans `is:global`, shadcn/ui ne fonctionne pas !**
+
 ### Choix rapide de palette selon le client
 
 | Si le client est... | Choisir |
@@ -38,6 +61,7 @@ npm run dev
 
 ```bash
 # Exemples de composants utiles
+npx shadcn@latest add button
 npx shadcn@latest add card
 npx shadcn@latest add dialog  
 npx shadcn@latest add form
@@ -74,14 +98,43 @@ npm run preview
 
 ## 🆘 Dépannage rapide
 
-### Les composants shadcn/ui ne s'affichent pas
-1. Vérifier que React est configuré dans `astro.config.mjs`
-2. S'assurer que les alias d'import sont correctement configurés dans `tsconfig.json`
+### ❌ Les composants shadcn/ui ne s'affichent pas
+1. **Vérifier `is:global`** dans `src/components/layouts/Layout.astro` (problème #1)
+2. Vérifier que React est configuré dans `astro.config.mjs`
+3. S'assurer que les alias d'import sont correctement configurés dans `tsconfig.json`
 
-### Erreurs de build TailwindCSS
-1. Vérifier que `@tailwindcss/vite` est dans `astro.config.mjs`
-2. Contrôler l'import dans `src/styles/global.css`
+### ❌ Erreurs "classe inconnue" TailwindCSS
+1. **Vérifier `is:global`** dans Layout.astro (problème principal)
+2. Vérifier que `@tailwindcss/vite` est dans `astro.config.mjs`
+3. Contrôler l'import dans `src/styles/global.css`
 
-### Composants React non interactifs
+### ❌ Composants React non interactifs
 1. Ajouter une directive client (`client:load`, `client:visible`, etc.)
 2. Vérifier que le composant est dans un fichier `.tsx`
+
+### ❌ Boutons shadcn/ui invisibles/identiques
+1. **Vérifier `is:global`** - c'est 99% du temps ce problème
+2. Tester avec couleurs Tailwind standards (`bg-red-500`) pour confirmer
+3. Vérifier les variables CSS dans global.css
+
+## ✅ Test de validation rapide
+
+Créer un composant de test simple :
+
+```tsx
+// Test.tsx
+import { Button } from '@/components/ui/button';
+
+export default function Test() {
+  return (
+    <div className="flex gap-3">
+      <Button variant="default">Default</Button>
+      <Button variant="outline">Outline</Button>
+      <Button variant="ghost">Ghost</Button>
+    </div>
+  );
+}
+```
+
+Si tous les boutons s'affichent différemment → ✅ Configuration OK !  
+Si tous les boutons sont identiques → ❌ Problème `is:global`
