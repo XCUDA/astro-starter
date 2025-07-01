@@ -6,14 +6,15 @@
 // Import our professional layout component
 import Layout from '../components/layouts/Layout.astro';
 
-// Import our first React Island component
+// Import our React Island components
 import InteractiveDemo from '../components/islands/InteractiveDemo.tsx';
+import DarkModeToggle from '../components/islands/DarkModeToggle.tsx';
 
 // Page-specific metadata that will be passed to our layout
 // This approach keeps SEO management centralized while allowing per-page customization
 const pageTitle = "Welcome to Your Professional Astro Starter";
 const pageDescription = "Experience the power of Astro 5 combined with TailwindCSS 4 and shadcn/ui for building lightning-fast, accessible web applications.";
-const pageKeywords = "astro 5, tailwindcss 4, shadcn/ui, professional starter, web development";
+const pageKeywords = "astro 5, tailwindcss 4, shadcn/ui, professional starter, web development, dark mode";
 ---
 
 <!-- 
@@ -25,9 +26,15 @@ const pageKeywords = "astro 5, tailwindcss 4, shadcn/ui, professional starter, w
   description={pageDescription}
   keywords={pageKeywords}
 >
-  <!-- Hero section with modern TailwindCSS 4 styling -->
-  <section class="bg-gradient-to-br from-primary/10 via-background to-secondary/10 py-20">
+  <!-- Hero section with dark mode toggle -->
+  <section class="bg-gradient-to-br from-primary/10 via-background to-secondary/10 py-20 relative">
     <div class="container mx-auto px-4">
+      
+      <!-- Dark Mode Toggle - positioned top-right -->
+      <div class="absolute top-6 right-6 z-10">
+        <DarkModeToggle client:load />
+      </div>
+
       <div class="max-w-4xl mx-auto text-center">
         <!-- Main headline with improved typography -->
         <h1 class="text-4xl md:text-6xl font-bold tracking-tight text-foreground mb-6">
@@ -136,16 +143,71 @@ const pageKeywords = "astro 5, tailwindcss 4, shadcn/ui, professional starter, w
             </p>
           </div>
 
-          <!-- Feature card 6 -->
+          <!-- Feature card 6 - Updated to mention dark mode -->
           <div class="bg-card border border-border rounded-xl p-6 hover:shadow-lg transition-shadow duration-300">
-            <div class="text-primary text-4xl mb-4" aria-hidden="true">🚀</div>
+            <div class="text-primary text-4xl mb-4" aria-hidden="true">🌓</div>
             <h3 class="text-xl font-semibold text-card-foreground mb-3">
-              Production Ready
+              Dark Mode Ready
             </h3>
             <p class="text-muted-foreground">
-              Optimized builds, SEO meta tags, social sharing cards,
-              and deployment-ready configuration for any hosting platform.
+              Complete dark mode implementation with automatic preference detection,
+              manual toggle, and consistent theming across all components.
             </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dark Mode Demo Section -->
+  <section class="py-20 bg-muted/30">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-foreground mb-8">
+          🌓 Dark Mode Integration
+        </h2>
+        
+        <p class="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto">
+          Experience our complete dark mode implementation. Use the toggle in the top-right corner 
+          to switch between light and dark themes. Your preference is automatically saved.
+        </p>
+
+        <!-- Demo cards showing theme adaptation -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <div class="bg-card text-card-foreground p-6 rounded-lg border border-border">
+            <h4 class="font-semibold mb-2">Adaptive Cards</h4>
+            <p class="text-muted-foreground text-sm">All components automatically adapt to the selected theme</p>
+          </div>
+          <div class="bg-accent text-accent-foreground p-6 rounded-lg">
+            <h4 class="font-semibold mb-2">Consistent Colors</h4>
+            <p class="text-sm">Semantic color system ensures perfect contrast in both modes</p>
+          </div>
+          <div class="bg-secondary text-secondary-foreground p-6 rounded-lg">
+            <h4 class="font-semibold mb-2">System Preference</h4>
+            <p class="text-sm">Detects your OS preference on first visit, then remembers your choice</p>
+          </div>
+        </div>
+
+        <!-- Theme status indicator -->
+        <div class="bg-card border border-border rounded-lg p-6">
+          <h3 class="text-lg font-semibold text-card-foreground mb-3">
+            ✨ Theme System Features
+          </h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-muted-foreground">
+            <div class="text-left">
+              <ul class="space-y-2">
+                <li>• <strong>System Detection:</strong> Reads OS dark mode preference</li>
+                <li>• <strong>Manual Override:</strong> Toggle button in header</li>
+                <li>• <strong>Persistent Storage:</strong> Remembers your choice</li>
+              </ul>
+            </div>
+            <div class="text-left">
+              <ul class="space-y-2">
+                <li>• <strong>Instant Switch:</strong> No flash or reload needed</li>
+                <li>• <strong>All Components:</strong> shadcn/ui fully compatible</li>
+                <li>• <strong>WCAG Compliant:</strong> Proper contrast ratios maintained</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -179,11 +241,11 @@ const pageKeywords = "astro 5, tailwindcss 4, shadcn/ui, professional starter, w
         <!-- Status indicator showing our current progress -->
         <div class="bg-card border border-border rounded-lg p-6">
           <h3 class="text-lg font-semibold text-card-foreground mb-4">
-            Current Status: shadcn/ui Integration Complete ✅
+            Current Status: Dark Mode + shadcn/ui Integration Complete ✅
           </h3>
           <p class="text-muted-foreground">
-            This page now demonstrates the complete integration of Astro 5, TailwindCSS 4, 
-            and shadcn/ui with React Islands architecture. Interactive components are ready!
+            This starter now features complete Astro 5 + TailwindCSS 4 + shadcn/ui integration 
+            with full dark mode support, React Islands architecture, and production-ready performance.
           </p>
         </div>
       </div>
