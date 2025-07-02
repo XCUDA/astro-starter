@@ -53,30 +53,105 @@
 
 **✅ PHASE 2.2 : COMPLÈTE (v1.3.0)**
 
-### ❌ 2.3 Layout system
-- [ ] **Header/Footer adaptatifs**
-- [ ] **Navigation responsive**  
-- [ ] **Grid system flexible**
+### 🔄 2.2+ Extension Bibliothèque de Composants (Option B)
 
-**📊 PHASE 2 : 85% COMPLÈTE** (2.1 ✅ + 2.2 ✅ + 2.3 à faire)
+#### **🔧 2.2.1 Form Components**
+- [ ] **Label** : Labels sémantiques pour formulaires
+- [ ] **Textarea** : Zones de texte multilignes
+- [ ] **Select** : Listes déroulantes avec recherche
+- [ ] **Checkbox** : Cases à cocher avec états
+- [ ] **Radio Group** : Boutons radio groupés
+- [ ] **Switch** : Interrupteurs toggle
+- [ ] **Slider** : Curseurs de valeurs
+
+#### **🧭 2.2.2 Navigation Components**
+- [ ] **Breadcrumb** : Fil d'ariane pour navigation
+- [ ] **Tabs** : Onglets pour organisation de contenu
+- [ ] **Pagination** : Navigation entre pages
+- [ ] **Command** : Palette de commandes (search)
+- [ ] **Menubar** : Barre de menu principale
+
+#### **📢 2.2.3 Feedback Components**
+- [ ] **Alert** : Messages d'information/erreur
+- [ ] **Toast** : Notifications temporaires
+- [ ] **Progress** : Barres de progression
+- [ ] **Badge** : Étiquettes et statuts
+- [ ] **Skeleton** : Placeholders de chargement
+- [ ] **Spinner** : Indicateurs de chargement
+
+#### **📊 2.2.4 Data Display Components**
+- [ ] **Table** : Tableaux de données avec tri/filtrage
+- [ ] **Avatar** : Photos de profil et initiales
+- [ ] **Tooltip** : Info-bulles contextuelles
+- [ ] **Popover** : Contenus flottants
+- [ ] **Accordion** : Sections pliables/dépliables
+- [ ] **Collapsible** : Contenu extensible
+
+#### **📅 2.2.5 Advanced Components**
+- [ ] **Calendar** : Sélecteur de dates
+- [ ] **Date Picker** : Sélection de date complète
+- [ ] **Combobox** : Sélection avec autocomplétion
+- [ ] **Context Menu** : Menus contextuels
+- [ ] **Dropdown Menu** : Menus déroulants
+- [ ] **Sheet** : Panneaux latéraux
+
+**🎯 PRIORITÉ OPTION B (Prochaine étape) :**
+```bash
+# Form Components (priorité haute)
+npx shadcn@latest add label
+npx shadcn@latest add textarea  
+npx shadcn@latest add select
+npx shadcn@latest add checkbox
+
+# Navigation Components
+npx shadcn@latest add breadcrumb
+npx shadcn@latest add tabs
+
+# Feedback Components
+npx shadcn@latest add alert
+npx shadcn@latest add badge
+```
+
+### ❌ 2.3 Layout System (Option A - après Option B)
+- [ ] **Header/Footer adaptatifs**
+- [ ] **Navigation responsive avec menu mobile**  
+- [ ] **Grid system flexible**
+- [ ] **Sidebar navigation**
+- [ ] **Sticky/Fixed layouts**
+
+**📊 PHASE 2 : 70% COMPLÈTE** (2.1 ✅ + 2.2 ✅ + 2.2+ en cours + 2.3 à faire)
 
 ---
 
-## 🚀 Phase 3 : Fonctionnalités Avancées
+## 🚀 Phase 3 : Fonctionnalités Avancées (Option C - final)
 
 ### ❌ 3.1 Content Layer API (Astro 5)
-- [ ] Configuration Markdown/MDX
-- [ ] Support CMS headless
-- [ ] Collections typées
+- [ ] **Configuration Markdown/MDX** avec syntaxe highlighting
+- [ ] **Support CMS headless** (Strapi, Sanity, Contentful)
+- [ ] **Collections typées** pour blog/portfolio
+- [ ] **Dynamic routing** avec content collections
+- [ ] **RSS feeds** automatiques
 
-### ❌ 3.2 Server Islands  
-- [ ] Composants dynamiques optimisés
-- [ ] Rendu hybride
+### ❌ 3.2 Server Islands & Performance
+- [ ] **Server Islands** pour composants dynamiques optimisés
+- [ ] **Rendu hybride** statique/dynamique intelligent
+- [ ] **Image optimization** avec Picture component
+- [ ] **Lazy loading** avancé
+- [ ] **Core Web Vitals** monitoring intégré
 
-### ❌ 3.3 SEO et Performance
-- [ ] Meta tags automatiques
-- [ ] Open Graph intégré  
-- [ ] Core Web Vitals optimisés
+### ❌ 3.3 SEO & Analytics
+- [ ] **Meta tags automatiques** basés sur content
+- [ ] **Open Graph** dynamique avec images
+- [ ] **JSON-LD** structured data
+- [ ] **Sitemap** automatique
+- [ ] **Analytics** intégration (GA4, Plausible)
+
+### ❌ 3.4 Advanced Features
+- [ ] **Search functionality** avec Fuse.js ou Algolia
+- [ ] **Internationalization (i18n)** multi-langues
+- [ ] **PWA capabilities** (Service Worker, offline)
+- [ ] **Email integration** (contact forms avec EmailJS/Resend)
+- [ ] **Form validation** avancée avec Zod
 
 **📊 PHASE 3 : 0% COMPLÈTE**
 
@@ -85,14 +160,18 @@
 ## 🔧 Phase 4 : Tooling et DX
 
 ### ❌ 4.1 Configuration développement
-- [ ] ESLint + Prettier
-- [ ] VS Code settings
-- [ ] Git hooks avec husky
+- [ ] **ESLint + Prettier** avec configs Astro
+- [ ] **VS Code settings** optimisées
+- [ ] **Git hooks** avec husky et lint-staged
+- [ ] **Conventional commits** avec commitizen
+- [ ] **Pre-commit validation** (types, tests, lint)
 
 ### ❌ 4.2 Build et déploiement
-- [ ] Configuration Vercel/Netlify
-- [ ] Support Infomaniak Node.js
-- [ ] CI/CD pipeline
+- [ ] **Configuration Vercel/Netlify** optimisée
+- [ ] **Support Infomaniak Node.js** avec configs
+- [ ] **CI/CD pipeline** GitHub Actions
+- [ ] **Automated testing** avec Playwright
+- [ ] **Performance monitoring** en production
 
 **📊 PHASE 4 : 0% COMPLÈTE**
 
@@ -104,92 +183,69 @@
 - [x] **QUICK-START.md** complet avec troubleshooting
 - [x] **Dark mode documentation** intégrée dans homepage
 - [x] **Components showcase** page interactive de démonstration
-- [ ] Documentation technique détaillée
-- [ ] Best practices
+- [ ] **Storybook integration** pour documentation composants
+- [ ] **Best practices guide** pour développement client
 
 ### ❌ 5.2 Templates d'exemple
-- [ ] Page d'accueil complète
-- [ ] Page à propos
-- [ ] Page contact avec formulaire
+- [ ] **Landing page template** complète
+- [ ] **Portfolio template** avec projets
+- [ ] **Blog template** avec articles
+- [ ] **Contact page** avec formulaire avancé
+- [ ] **About page** avec team/services
 
 **📊 PHASE 5 : 50% COMPLÈTE**
 
 ---
 
-## 🎯 ÉTAT GLOBAL DU PROJET
+## 🎯 PLAN D'EXÉCUTION STRATÉGIQUE
 
-### ✅ **COMPLÉTÉ (50%)**
-- **Phase 1 : Configuration de base (100%)**
-- **Phase 2.1 : Système de thème complet avec dark mode (100%)**
-- **Phase 2.2 : Composants shadcn/ui essentiels (100%)**
-- Partie de Phase 5.1 : Documentation et showcase (75%)
+### **🎯 ÉTAPE ACTUELLE : Option B (Extension Bibliothèque)**
+**Objectif :** Enrichir massivement la bibliothèque de composants
 
-### 🔄 **EN COURS (15%)**  
-- Phase 2.3 : Layout system (prochaine priorité)
+#### **Sprint 1 : Form Components (priorité business)**
+```bash
+npx shadcn@latest add label textarea select checkbox
+```
+- Formulaires complets pour sites vitrine
+- Validation et accessibilité avancées
 
-### ❌ **À FAIRE (35%)**
-- Phase 3 : Fonctionnalités avancées
-- Phase 4 : Tooling et DX  
-- Complétion Phase 5 : Templates d'exemple
+#### **Sprint 2 : Navigation & Feedback**
+```bash
+npx shadcn@latest add breadcrumb tabs alert badge
+```
+- Navigation professionnelle
+- Feedback utilisateur moderne
 
----
+#### **Sprint 3 : Data Display**
+```bash
+npx shadcn@latest add table avatar tooltip accordion
+```
+- Affichage de données riche
+- Interfaces utilisateur avancées
 
-## 🎉 ACHIEVEMENTS v1.3.0
+### **🎯 ÉTAPE SUIVANTE : Option A (Layout System)**
+**Objectif :** Headers/Footers/Navigation avec tous les composants disponibles
 
-### 🧩 **Complete UI Component Library**
-- ✅ **Button System** : Tous variants (default, destructive, outline, secondary, ghost, link)
-- ✅ **Input System** : Types variés (text, email, password, number, date), états (normal, disabled, focus)
-- ✅ **Card System** : Structure flexible (header, content, footer), responsive design
-- ✅ **Dialog System** : Modales avec overlay, formulaires intégrés, gestion focus
-- ✅ **Interactive Showcase** : Page dédiée avec tests complets et exemples d'usage
-- ✅ **Dark Mode Integration** : Tous composants s'adaptent parfaitement aux deux thèmes
-
-### 💼 **Business Value**
-- **90% des sites vitrine** peuvent être créés avec ces composants
-- **Formulaires complets** prêts (contact, newsletter, etc.)
-- **Interfaces modernes** avec cards et modales professionnelles
-- **Expérience utilisateur** cohérente avec dark mode système
-
-### 🏆 **Major Milestone Achievement**
-**Phase 2.2 Composants de base shadcn/ui : COMPLÈTE** ✅
-
-Cette phase représente un système de composants UI complet, production-ready et prêt pour personnalisation client.
-
----
-
-## 🚀 PROCHAINES ACTIONS PRIORITAIRES
-
-### Option A - Immédiat (compléter Phase 2) :
-1. **Header/Footer components** professionnels et adaptatifs
-2. **Navigation responsive** avec menu mobile
-3. **Grid system** flexible pour layouts
-
-### Option B - Enrichir la bibliothèque de composants :
-1. **Form components** : Label, Textarea, Select, Checkbox, Radio
-2. **Navigation** : Breadcrumb, Pagination, Tabs
-3. **Feedback** : Alert, Toast, Progress, Badge
-4. **Data Display** : Table, Avatar, Tooltip
-
-### Option C - Features avancées (Phase 3) :
-1. **Content Layer API** pour gestion de contenu
-2. **SEO optimization** automatique
-3. **Performance monitoring**
+### **🎯 ÉTAPE FINALE : Option C (Features Avancées)**
+**Objectif :** CMS, SEO, Performance, PWA
 
 ---
 
 ## 📈 PROGRESSION METRICS
 
-| Phase | Statut | Progression |
-|-------|--------|-------------|
-| Phase 1 | ✅ Complete | 100% |
-| Phase 2.1 | ✅ Complete | 100% |
-| Phase 2.2 | ✅ Complete | 100% |
-| Phase 2.3 | 🔄 Next | 0% |
-| **TOTAL** | **🚀 50%** | **Halfway!** |
+| Phase | Statut | Progression | Priorité |
+|-------|--------|-------------|----------|
+| Phase 1 | ✅ Complete | 100% | ✅ Done |
+| Phase 2.1 | ✅ Complete | 100% | ✅ Done |
+| Phase 2.2 | ✅ Complete | 100% | ✅ Done |
+| **Phase 2.2+ (Option B)** | **🔄 Current** | **0%** | **🎯 NOW** |
+| Phase 2.3 (Option A) | ⏳ Planned | 0% | 🔜 Next |
+| Phase 3 (Option C) | ⏳ Planned | 0% | 🔮 Future |
+| **TOTAL** | **🚀 50%** | **Halfway!** | **↗️ Growing** |
 
 ---
 
 **🏷️ Version actuelle : v1.3.0 - Complete UI Component Library**
 **📅 Dernière mise à jour :** 2025-01-XX
-**🎯 Objectif suivant :** Phase 2.3 (Layout System) ou enrichir la bibliothèque de composants
-**🎊 Achievement :** 50% du projet terminé - Halfway milestone!
+**🎯 Prochaine action :** Option B - Form Components Sprint 1
+**🎊 Milestone :** 50% du projet - Direction 80% avec Option B complète!
