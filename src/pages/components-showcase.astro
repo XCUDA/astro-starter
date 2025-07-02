@@ -1,0 +1,98 @@
+---
+// components-showcase.astro - Showcase des composants shadcn/ui installés
+import Layout from '../components/layouts/Layout.astro';
+import ComponentsDemo from '../components/islands/ComponentsDemo.tsx';
+import DarkModeToggle from '../components/islands/DarkModeToggle.tsx';
+---
+
+<Layout title="Components Showcase - shadcn/ui Integration">
+  <section class="py-20 min-h-screen">
+    <div class="container mx-auto px-4 max-w-6xl">
+      
+      <!-- Header avec dark mode toggle -->
+      <div class="flex justify-between items-center mb-12">
+        <div>
+          <h1 class="text-4xl font-bold text-foreground mb-4">
+            🧩 Components Showcase
+          </h1>
+          <p class="text-lg text-muted-foreground">
+            Validation complète des composants shadcn/ui avec support dark mode
+          </p>
+        </div>
+        <DarkModeToggle client:load />
+      </div>
+
+      <!-- Status de la Phase 2.2 -->
+      <div class="bg-card border border-border rounded-lg p-6 mb-12">
+        <h2 class="text-xl font-semibold text-card-foreground mb-4">
+          📋 Phase 2.2 - Composants de base shadcn/ui
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 bg-green-500 rounded-full"></span>
+            <span class="font-medium">Button</span>
+            <span class="text-xs text-muted-foreground">✅ v1.2.0</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 bg-blue-500 rounded-full"></span>
+            <span class="font-medium">Input</span>
+            <span class="text-xs text-muted-foreground">🔄 Testing</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 bg-blue-500 rounded-full"></span>
+            <span class="font-medium">Card</span>
+            <span class="text-xs text-muted-foreground">🔄 Testing</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 bg-blue-500 rounded-full"></span>
+            <span class="font-medium">Dialog</span>
+            <span class="text-xs text-muted-foreground">🔄 Testing</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Démonstration interactive des composants -->
+      <ComponentsDemo client:load />
+
+      <!-- Instructions de validation -->
+      <div class="mt-12 bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
+        <h3 class="text-lg font-semibold text-blue-800 dark:text-blue-200 mb-4">
+          ✅ Checklist de validation
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <h4 class="font-semibold text-blue-700 dark:text-blue-300 mb-2">Fonctionnalités :</h4>
+            <ul class="text-sm text-blue-600 dark:text-blue-400 space-y-1">
+              <li>• Tous les variants de Button fonctionnent</li>
+              <li>• Input accepte la saisie et gère le focus</li>
+              <li>• Cards s'affichent avec contenu structuré</li>
+              <li>• Dialog s'ouvre/ferme correctement</li>
+              <li>• Formulaire de contact fonctionnel</li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-semibold text-blue-700 dark:text-blue-300 mb-2">Dark Mode :</h4>
+            <ul class="text-sm text-blue-600 dark:text-blue-400 space-y-1">
+              <li>• Toggle fonctionne (top-right)</li>
+              <li>• Tous composants s'adaptent aux deux modes</li>
+              <li>• Contraste maintenu (WCAG compliance)</li>
+              <li>• Transitions fluides sans flash</li>
+              <li>• Préférence sauvegardée après refresh</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <div class="mt-8 text-center">
+        <a 
+          href="/" 
+          class="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium"
+        >
+          ← Retour à l'accueil
+        </a>
+      </div>
+
+    </div>
+  </section>
+</Layout>
