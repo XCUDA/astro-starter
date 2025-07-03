@@ -1,5 +1,4 @@
-// FormShowcaseDemo.tsx - Démonstration complète des Form Components
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -57,11 +56,12 @@ export default function FormShowcaseDemo() {
     registration: 'idle'
   });
 
-  const [notifications, setNotifications] = useState<string[]>([]);
+  // Messages de feedback pour les soumissions
+  const [feedbackMessages, setFeedbackMessages] = useState<string[]>([]);
 
-  // Fonction pour ajouter une notification
-  const addNotification = (message: string) => {
-    setNotifications(prev => [message, ...prev.slice(0, 4)]);
+  // Fonction pour ajouter un message de feedback
+  const addFeedbackMessage = (message: string) => {
+    setFeedbackMessages(prev => [message, ...prev.slice(0, 4)]);
   };
 
   // Simuler soumission de formulaire
@@ -76,7 +76,7 @@ export default function FormShowcaseDemo() {
     
     if (success) {
       setSubmissions(prev => ({ ...prev, [formType]: 'success' }));
-      addNotification(`✅ ${formType} form submitted successfully`);
+      addFeedbackMessage(`✅ Formulaire ${formType} soumis avec succès`);
       
       // Reset form après succès
       setTimeout(() => {
@@ -84,7 +84,7 @@ export default function FormShowcaseDemo() {
       }, 3000);
     } else {
       setSubmissions(prev => ({ ...prev, [formType]: 'error' }));
-      addNotification(`❌ ${formType} form submission failed`);
+      addFeedbackMessage(`❌ Erreur lors de la soumission du formulaire ${formType}`);
       
       setTimeout(() => {
         setSubmissions(prev => ({ ...prev, [formType]: 'idle' }));
@@ -116,15 +116,13 @@ export default function FormShowcaseDemo() {
   return (
     <div className="space-y-12">
       
-      {/* Notifications */}
-      {notifications.length > 0 && (
-        <div className="bg-green-50 dark:bg-green-950 border border-green-200 dark:border-green-800 rounded-lg p-4">
-          <h4 className="font-semibold text-green-800 dark:text-green-200 mb-2">
-            📬 Form Submissions:
-          </h4>
-          <ul className="text-sm text-green-700 dark:text-green-300 space-y-1">
-            {notifications.map((notif, index) => (
-              <li key={index}>• {notif}</li>
+      {/* Form Submissions Feedback */}
+      {feedbackMessages.length > 0 && (
+        <div className="bg-muted/50 border rounded-lg p-4">
+          <h4 className="font-semibold mb-2">📬 Soumissions de formulaires :</h4>
+          <ul className="text-sm space-y-1">
+            {feedbackMessages.map((message, index) => (
+              <li key={index} className="text-muted-foreground">• {message}</li>
             ))}
           </ul>
         </div>

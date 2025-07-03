@@ -1,8 +1,10 @@
 ---
 // form-showcase.astro - Showcase dédié aux composants Form
+// Path: /src/pages/form-showcase.astro
 import Layout from '../components/layouts/Layout.astro';
 import FormShowcaseDemo from '../components/islands/FormShowcaseDemo.tsx';
 import DarkModeToggle from '../components/islands/DarkModeToggle.tsx';
+import Navigation from '../components/layouts/Navigation.astro';
 ---
 
 <Layout title="Form Components Showcase - shadcn/ui Forms">
@@ -86,36 +88,8 @@ import DarkModeToggle from '../components/islands/DarkModeToggle.tsx';
         </div>
       </div>
 
-      <!-- Navigation enrichie cohérente -->
-        <div class="mt-8 flex flex-wrap gap-4 justify-center">
-        <a 
-            href="/" 
-            class="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium"
-        >
-            ← Accueil
-        </a>
-        <span class="text-muted-foreground">•</span>
-        <a 
-            href="/form-showcase" 
-            class="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium"
-        >
-            📝 Form Components
-        </a>
-        <span class="text-muted-foreground">•</span>
-        <a 
-            href="/navigation-showcase" 
-            class="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium"
-        >
-            🧭 Navigation Components
-        </a>
-        <span class="text-muted-foreground">•</span>
-        <a 
-            href="/components-showcase" 
-            class="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium"
-        >
-            🧩 All Components
-        </a>
-        </div>
+      <!-- Centralized Navigation Component -->
+      <Navigation currentPage="form" />
 
     </div>
   </section>

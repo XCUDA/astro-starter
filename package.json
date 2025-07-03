@@ -1,7 +1,8 @@
 {
   "name": "astro-starter",
   "type": "module",
-  "version": "1.3.2",
+  "version": "1.3.3",
+  "description": "A modern, production-ready Astro 5 starter with TailwindCSS 4, shadcn/ui, and TypeScript.",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
@@ -10,15 +11,18 @@
   },
   "dependencies": {
     "@astrojs/react": "^4.3.0",
+    "@radix-ui/react-accordion": "^1.2.11",
+    "@radix-ui/react-avatar": "^1.1.10",
     "@radix-ui/react-checkbox": "^1.3.2",
     "@radix-ui/react-dialog": "^1.1.14",
     "@radix-ui/react-label": "^2.1.7",
     "@radix-ui/react-select": "^2.2.5",
     "@radix-ui/react-slot": "^1.2.3",
     "@radix-ui/react-tabs": "^1.1.12",
+    "@radix-ui/react-tooltip": "^1.2.7",
     "@tailwindcss/vite": "^4.1.10",
     "@types/react": "^19.1.8",
-    "@types/react-dom": "^19.1.6",
+    "@types/react-3dom": "^19.1.6",
     "astro": "^5.10.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -30,5 +34,33 @@
   },
   "devDependencies": {
     "tw-animate-css": "^1.3.4"
+  },
+  "keywords": [
+    "astro",
+    "astro5",
+    "tailwindcss",
+    "tailwindcss4",
+    "shadcn-ui",
+    "typescript",
+    "react",
+    "starter",
+    "template",
+    "performance",
+    "production-ready",
+    "data-display",
+    "table",
+    "avatar",
+    "tooltip",
+    "accordion"
+  ],
+  "author": "XCUDA (Angelo Bedoni)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/XCUDA/astro-starter.git"
+  },
+  "homepage": "https://github.com/XCUDA/astro-starter#readme",
+  "engines": {
+    "node": ">=18.0.0"
   }
 }

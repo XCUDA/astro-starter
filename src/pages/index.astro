@@ -1,326 +1,301 @@
 ---
-// index.astro - Home page using our professional layout architecture
-// This demonstrates how clean and maintainable page-specific code becomes 
-// when using a well-structured layout system
-
-// Import our professional layout component
 import Layout from '../components/layouts/Layout.astro';
-
-// Import our React Island components
-import InteractiveDemo from '../components/islands/InteractiveDemo.tsx';
-import DarkModeToggle from '../components/islands/DarkModeToggle.tsx';
-
-// Page-specific metadata that will be passed to our layout
-// This approach keeps SEO management centralized while allowing per-page customization
-const pageTitle = "Welcome to Your Professional Astro Starter";
-const pageDescription = "Experience the power of Astro 5 combined with TailwindCSS 4 and shadcn/ui for building lightning-fast, accessible web applications.";
-const pageKeywords = "astro 5, tailwindcss 4, shadcn/ui, professional starter, web development, dark mode";
 ---
 
-<!-- 
-  Notice how clean this becomes: we pass our page-specific data to the layout
-  and focus only on the content that makes this page unique
--->
-<Layout 
-  title={pageTitle}
-  description={pageDescription}
-  keywords={pageKeywords}
->
-  <!-- Hero section with dark mode toggle -->
-  <section class="bg-gradient-to-br from-primary/10 via-background to-secondary/10 py-20 relative">
-    <div class="container mx-auto px-4">
-      
-      <!-- Dark Mode Toggle - positioned top-right -->
-      <div class="absolute top-6 right-6 z-10">
-        <DarkModeToggle client:load />
-      </div>
+<Layout title="Astro Professional Starter">
+	<main class="min-h-screen bg-background">
+		<!-- Hero Section -->
+		<section class="container mx-auto px-4 py-16 text-center">
+			<h1 class="text-4xl md:text-6xl font-bold tracking-tight mb-6">
+				⚡ Astro Professional Starter
+			</h1>
+			<p class="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
+				A modern, production-ready starter with <strong>Astro 5</strong>, <strong>TailwindCSS 4</strong>, 
+				and <strong>shadcn/ui</strong>. Optimized for performance, accessibility, and professional workflows.
+			</p>
+			
+			<!-- CTA Buttons -->
+			<div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+				<a 
+					href="/data-display-showcase" 
+					class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary-foreground bg-primary hover:bg-primary/90 transition-colors"
+				>
+					📊 Try Data Display
+				</a>
+				<a 
+					href="/form-showcase" 
+					class="inline-flex items-center px-6 py-3 border border-input text-base font-medium rounded-md text-foreground bg-background hover:bg-accent hover:text-accent-foreground transition-colors"
+				>
+					📝 Explore Forms
+				</a>
+				<a 
+					href="/navigation-showcase" 
+					class="inline-flex items-center px-6 py-3 border border-input text-base font-medium rounded-md text-foreground bg-background hover:bg-accent hover:text-accent-foreground transition-colors"
+				>
+					🧭 View Navigation
+				</a>
+				<a 
+					href="/components-showcase" 
+					class="inline-flex items-center px-6 py-3 border border-input text-base font-medium rounded-md text-foreground bg-background hover:bg-accent hover:text-accent-foreground transition-colors"
+				>
+					🧩 All Components
+				</a>
+			</div>
+		</section>
 
-      <div class="max-w-4xl mx-auto text-center">
-        <!-- Main headline with improved typography -->
-        <h1 class="text-4xl md:text-6xl font-bold tracking-tight text-foreground mb-6">
-          Professional 
-          <span class="text-primary">Astro</span> 
-          Starter
-        </h1>
-        
-        <!-- Subheadline with semantic color classes -->
-        <p class="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
-          Built with cutting-edge technologies for maximum performance, 
-          accessibility, and developer experience. Ready for your next project.
-        </p>
-        
-        <!-- Call-to-action buttons demonstrating button styling -->
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a 
-            href="/navigation-showcase"
-            class="bg-primary text-primary-foreground px-8 py-3 rounded-lg font-semibold 
-                  hover:bg-primary/90 transition-colors duration-200
-                  focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2
-                  inline-flex items-center justify-center gap-2"
-          >
-            🧭 Try Navigation
-          </a>
-          <a 
-            href="/form-showcase"
-            class="border border-border text-foreground px-8 py-3 rounded-lg font-semibold
-                  hover:bg-accent hover:text-accent-foreground transition-colors duration-200
-                  focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2
-                  inline-flex items-center justify-center gap-2"
-          >
-            📝 Try Forms
-          </a>
-          <a 
-            href="/components-showcase"
-            class="border border-border text-foreground px-8 py-3 rounded-lg font-semibold
-                  hover:bg-accent hover:text-accent-foreground transition-colors duration-200
-                  focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2
-                  inline-flex items-center justify-center gap-2"
-          >
-            🧩 All Components
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
+		<!-- Features Grid -->
+		<section class="container mx-auto px-4 py-16">
+			<h2 class="text-3xl font-bold text-center mb-12">✨ Production-Ready Features</h2>
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+				<!-- Astro 5 -->
+				<div class="p-6 rounded-lg border bg-card text-card-foreground">
+					<div class="flex items-center mb-4">
+						<span class="text-2xl mr-3">🚀</span>
+						<h3 class="text-xl font-semibold">Astro 5</h3>
+					</div>
+					<p class="text-muted-foreground">
+						Latest performance optimizations with Islands architecture. 
+						Static-first with selective hydration for optimal loading speeds.
+					</p>
+				</div>
 
-  <!-- Features section demonstrating responsive grid and card layouts -->
-  <section class="py-20 bg-background">
-    <div class="container mx-auto px-4">
-      <div class="max-w-6xl mx-auto">
-        <!-- Section header -->
-        <div class="text-center mb-16">
-          <h2 class="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Why This Starter?
-          </h2>
-          <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Every decision in this starter has been made with professional development in mind,
-            from performance optimization to maintainability and scalability.
-          </p>
-        </div>
+				<!-- TailwindCSS 4 -->
+				<div class="p-6 rounded-lg border bg-card text-card-foreground">
+					<div class="flex items-center mb-4">
+						<span class="text-2xl mr-3">🎨</span>
+						<h3 class="text-xl font-semibold">TailwindCSS 4</h3>
+					</div>
+					<p class="text-muted-foreground">
+						New high-performance engine with CSS-first configuration. 
+						Faster builds and improved developer experience.
+					</p>
+				</div>
 
-        <!-- Features grid using modern CSS Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <!-- Feature card 1 -->
-          <div class="bg-card border border-border rounded-xl p-6 hover:shadow-lg transition-shadow duration-300">
-            <div class="text-primary text-4xl mb-4" aria-hidden="true">⚡</div>
-            <h3 class="text-xl font-semibold text-card-foreground mb-3">
-              Lightning Fast
-            </h3>
-            <p class="text-muted-foreground">
-              Powered by Astro 5's static generation and TailwindCSS 4's new performance engine
-              for sub-second page loads and instant navigation.
-            </p>
-          </div>
+				<!-- shadcn/ui -->
+				<div class="p-6 rounded-lg border bg-card text-card-foreground">
+					<div class="flex items-center mb-4">
+						<span class="text-2xl mr-3">🧩</span>
+						<h3 class="text-xl font-semibold">shadcn/ui</h3>
+					</div>
+					<p class="text-muted-foreground">
+						Beautiful, accessible components with full code ownership. 
+						Copy/paste components you control and customize.
+					</p>
+				</div>
 
-          <!-- Feature card 2 -->
-          <div class="bg-card border border-border rounded-xl p-6 hover:shadow-lg transition-shadow duration-300">
-            <div class="text-primary text-4xl mb-4" aria-hidden="true">♿</div>
-            <h3 class="text-xl font-semibold text-card-foreground mb-3">
-              Accessibility First
-            </h3>
-            <p class="text-muted-foreground">
-              Built with WCAG 2.1 AA compliance in mind, featuring semantic HTML,
-              proper ARIA labels, and keyboard navigation support.
-            </p>
-          </div>
+				<!-- TypeScript -->
+				<div class="p-6 rounded-lg border bg-card text-card-foreground">
+					<div class="flex items-center mb-4">
+						<span class="text-2xl mr-3">📘</span>
+						<h3 class="text-xl font-semibold">TypeScript</h3>
+					</div>
+					<p class="text-muted-foreground">
+						Full type safety with modern JSX transformation. 
+						Better DX with IntelliSense and compile-time error catching.
+					</p>
+				</div>
 
-          <!-- Feature card 3 -->
-          <div class="bg-card border border-border rounded-xl p-6 hover:shadow-lg transition-shadow duration-300">
-            <div class="text-primary text-4xl mb-4" aria-hidden="true">🎨</div>
-            <h3 class="text-xl font-semibold text-card-foreground mb-3">
-              Design System Ready
-            </h3>
-            <p class="text-muted-foreground">
-              Integrated shadcn/ui components with customizable themes,
-              dark mode support, and consistent design tokens.
-            </p>
-          </div>
+				<!-- Performance -->
+				<div class="p-6 rounded-lg border bg-card text-card-foreground">
+					<div class="flex items-center mb-4">
+						<span class="text-2xl mr-3">⚡</span>
+						<h3 class="text-xl font-semibold">Performance</h3>
+					</div>
+					<p class="text-muted-foreground">
+						100/100 Lighthouse scores with Core Web Vitals optimization. 
+						Minimal JavaScript footprint and fast loading times.
+					</p>
+				</div>
 
-          <!-- Feature card 4 -->
-          <div class="bg-card border border-border rounded-xl p-6 hover:shadow-lg transition-shadow duration-300">
-            <div class="text-primary text-4xl mb-4" aria-hidden="true">🔧</div>
-            <h3 class="text-xl font-semibold text-card-foreground mb-3">
-              Developer Experience
-            </h3>
-            <p class="text-muted-foreground">
-              TypeScript support, hot reload, intelligent IntelliSense,
-              and modern tooling for efficient development workflows.
-            </p>
-          </div>
+				<!-- Accessibility -->
+				<div class="p-6 rounded-lg border bg-card text-card-foreground">
+					<div class="flex items-center mb-4">
+						<span class="text-2xl mr-3">♿</span>
+						<h3 class="text-xl font-semibold">Accessibility</h3>
+					</div>
+					<p class="text-muted-foreground">
+						WCAG 2.1 AA compliant structure and navigation. 
+						Semantic HTML with proper ARIA labels and keyboard support.
+					</p>
+				</div>
+			</div>
+		</section>
 
-          <!-- Feature card 5 -->
-          <div class="bg-card border border-border rounded-xl p-6 hover:shadow-lg transition-shadow duration-300">
-            <div class="text-primary text-4xl mb-4" aria-hidden="true">📱</div>
-            <h3 class="text-xl font-semibold text-card-foreground mb-3">
-              Mobile First
-            </h3>
-            <p class="text-muted-foreground">
-              Responsive design with mobile-first approach, touch-friendly interfaces,
-              and optimized performance on all devices.
-            </p>
-          </div>
+		<!-- Component Showcases -->
+		<section class="container mx-auto px-4 py-16">
+			<h2 class="text-3xl font-bold text-center mb-12">🎯 Component Showcases</h2>
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+				
+				<!-- Data Display Showcase -->
+				<div class="p-6 rounded-lg border bg-card text-card-foreground hover:bg-accent/50 transition-colors">
+					<div class="flex items-center mb-4">
+						<span class="text-3xl mr-4">📊</span>
+						<div>
+							<h3 class="text-xl font-semibold">Data Display Components</h3>
+							<p class="text-sm text-muted-foreground">Sprint 3 - Latest Addition</p>
+						</div>
+					</div>
+					<p class="text-muted-foreground mb-4">
+						Professional data presentation with Table, Avatar, Tooltip, and Accordion components. 
+						Interactive demos for dashboards, team pages, and business analytics.
+					</p>
+					<div class="flex flex-wrap gap-2 mb-4">
+						<span class="px-2 py-1 text-xs bg-primary/10 text-primary rounded">Table</span>
+						<span class="px-2 py-1 text-xs bg-primary/10 text-primary rounded">Avatar</span>
+						<span class="px-2 py-1 text-xs bg-primary/10 text-primary rounded">Tooltip</span>
+						<span class="px-2 py-1 text-xs bg-primary/10 text-primary rounded">Accordion</span>
+					</div>
+					<a 
+						href="/data-display-showcase" 
+						class="inline-flex items-center text-primary hover:text-primary/80 font-medium"
+					>
+						View Data Display →
+					</a>
+				</div>
 
-          <!-- Feature card 6 - Updated to mention dark mode -->
-          <div class="bg-card border border-border rounded-xl p-6 hover:shadow-lg transition-shadow duration-300">
-            <div class="text-primary text-4xl mb-4" aria-hidden="true">🌓</div>
-            <h3 class="text-xl font-semibold text-card-foreground mb-3">
-              Dark Mode Ready
-            </h3>
-            <p class="text-muted-foreground">
-              Complete dark mode implementation with automatic preference detection,
-              manual toggle, and consistent theming across all components.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+				<!-- Form Components Showcase -->
+				<div class="p-6 rounded-lg border bg-card text-card-foreground hover:bg-accent/50 transition-colors">
+					<div class="flex items-center mb-4">
+						<span class="text-3xl mr-4">📝</span>
+						<div>
+							<h3 class="text-xl font-semibold">Form Components</h3>
+							<p class="text-sm text-muted-foreground">Sprint 1 - Complete</p>
+						</div>
+					</div>
+					<p class="text-muted-foreground mb-4">
+						Complete form system with validation states and business-ready examples. 
+						Contact forms, newsletters, quotes, and registration forms.
+					</p>
+					<div class="flex flex-wrap gap-2 mb-4">
+						<span class="px-2 py-1 text-xs bg-secondary/50 text-secondary-foreground rounded">Input</span>
+						<span class="px-2 py-1 text-xs bg-secondary/50 text-secondary-foreground rounded">Textarea</span>
+						<span class="px-2 py-1 text-xs bg-secondary/50 text-secondary-foreground rounded">Select</span>
+						<span class="px-2 py-1 text-xs bg-secondary/50 text-secondary-foreground rounded">Checkbox</span>
+					</div>
+					<a 
+						href="/form-showcase" 
+						class="inline-flex items-center text-primary hover:text-primary/80 font-medium"
+					>
+						Explore Forms →
+					</a>
+				</div>
 
-  <!-- Dark Mode Demo Section -->
-  <section class="py-20 bg-muted/30">
-    <div class="container mx-auto px-4">
-      <div class="max-w-4xl mx-auto text-center">
-        <h2 class="text-3xl md:text-4xl font-bold text-foreground mb-8">
-          🌓 Dark Mode Integration
-        </h2>
-        
-        <p class="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto">
-          Experience our complete dark mode implementation. Use the toggle in the top-right corner 
-          to switch between light and dark themes. Your preference is automatically saved.
-        </p>
+				<!-- Navigation & Feedback Showcase -->
+				<div class="p-6 rounded-lg border bg-card text-card-foreground hover:bg-accent/50 transition-colors">
+					<div class="flex items-center mb-4">
+						<span class="text-3xl mr-4">🧭</span>
+						<div>
+							<h3 class="text-xl font-semibold">Navigation & Feedback</h3>
+							<p class="text-sm text-muted-foreground">Sprint 2 - Complete</p>
+						</div>
+					</div>
+					<p class="text-muted-foreground mb-4">
+						Professional navigation and user feedback systems. 
+						Breadcrumbs, tabs, alerts, and badges for e-commerce and business sites.
+					</p>
+					<div class="flex flex-wrap gap-2 mb-4">
+						<span class="px-2 py-1 text-xs bg-secondary/50 text-secondary-foreground rounded">Breadcrumb</span>
+						<span class="px-2 py-1 text-xs bg-secondary/50 text-secondary-foreground rounded">Tabs</span>
+						<span class="px-2 py-1 text-xs bg-secondary/50 text-secondary-foreground rounded">Alert</span>
+						<span class="px-2 py-1 text-xs bg-secondary/50 text-secondary-foreground rounded">Badge</span>
+					</div>
+					<a 
+						href="/navigation-showcase" 
+						class="inline-flex items-center text-primary hover:text-primary/80 font-medium"
+					>
+						View Navigation →
+					</a>
+				</div>
 
-        <!-- Demo cards showing theme adaptation -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <div class="bg-card text-card-foreground p-6 rounded-lg border border-border">
-            <h4 class="font-semibold mb-2">Adaptive Cards</h4>
-            <p class="text-muted-foreground text-sm">All components automatically adapt to the selected theme</p>
-          </div>
-          <div class="bg-accent text-accent-foreground p-6 rounded-lg">
-            <h4 class="font-semibold mb-2">Consistent Colors</h4>
-            <p class="text-sm">Semantic color system ensures perfect contrast in both modes</p>
-          </div>
-          <div class="bg-secondary text-secondary-foreground p-6 rounded-lg">
-            <h4 class="font-semibold mb-2">System Preference</h4>
-            <p class="text-sm">Detects your OS preference on first visit, then remembers your choice</p>
-          </div>
-        </div>
+				<!-- All Components Showcase -->
+				<div class="p-6 rounded-lg border bg-card text-card-foreground hover:bg-accent/50 transition-colors">
+					<div class="flex items-center mb-4">
+						<span class="text-3xl mr-4">🧩</span>
+						<div>
+							<h3 class="text-xl font-semibold">All Components</h3>
+							<p class="text-sm text-muted-foreground">Complete Library</p>
+						</div>
+					</div>
+					<p class="text-muted-foreground mb-4">
+						Complete shadcn/ui component library with interactive examples. 
+						Button, Card, Dialog, and all base components with variants.
+					</p>
+					<div class="flex flex-wrap gap-2 mb-4">
+						<span class="px-2 py-1 text-xs bg-muted text-muted-foreground rounded">Button</span>
+						<span class="px-2 py-1 text-xs bg-muted text-muted-foreground rounded">Card</span>
+						<span class="px-2 py-1 text-xs bg-muted text-muted-foreground rounded">Dialog</span>
+						<span class="px-2 py-1 text-xs bg-muted text-muted-foreground rounded">+12 more</span>
+					</div>
+					<a 
+						href="/components-showcase" 
+						class="inline-flex items-center text-primary hover:text-primary/80 font-medium"
+					>
+						View All Components →
+					</a>
+				</div>
+			</div>
+		</section>
 
-        <!-- Theme status indicator -->
-        <div class="bg-card border border-border rounded-lg p-6">
-          <h3 class="text-lg font-semibold text-card-foreground mb-3">
-            ✨ Theme System Features
-          </h3>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-muted-foreground">
-            <div class="text-left">
-              <ul class="space-y-2">
-                <li>• <strong>System Detection:</strong> Reads OS dark mode preference</li>
-                <li>• <strong>Manual Override:</strong> Toggle button in header</li>
-                <li>• <strong>Persistent Storage:</strong> Remembers your choice</li>
-              </ul>
-            </div>
-            <div class="text-left">
-              <ul class="space-y-2">
-                <li>• <strong>Instant Switch:</strong> No flash or reload needed</li>
-                <li>• <strong>All Components:</strong> shadcn/ui fully compatible</li>
-                <li>• <strong>WCAG Compliant:</strong> Proper contrast ratios maintained</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+		<!-- Dark Mode Section -->
+		<section class="container mx-auto px-4 py-16">
+			<div class="max-w-4xl mx-auto text-center">
+				<h2 class="text-3xl font-bold mb-6">🌙 Dark Mode Ready</h2>
+				<p class="text-xl text-muted-foreground mb-8">
+					Perfect dark mode integration with system preference detection and manual toggle. 
+					All components adapt seamlessly to both light and dark themes.
+				</p>
+				
+				<!-- Dark Mode Toggle Demo -->
+				<div class="inline-block p-1 border rounded-lg bg-muted/50">
+					<div id="dark-mode-toggle"></div>
+				</div>
+				
+				<p class="text-sm text-muted-foreground mt-4">
+					Toggle above to test dark mode across all components
+				</p>
+			</div>
+		</section>
 
-  <!-- Technology showcase section -->
-  <section class="py-20 bg-accent/30">
-    <div class="container mx-auto px-4">
-      <div class="max-w-4xl mx-auto text-center">
-        <h2 class="text-3xl md:text-4xl font-bold text-foreground mb-8">
-          Built with Modern Technologies
-        </h2>
-        
-        <!-- Technology badges -->
-        <div class="flex flex-wrap justify-center gap-4 mb-12">
-          <span class="bg-primary text-primary-foreground px-4 py-2 rounded-full font-medium">
-            Astro 5
-          </span>
-          <span class="bg-secondary text-secondary-foreground px-4 py-2 rounded-full font-medium">
-            TailwindCSS 4
-          </span>
-          <span class="bg-accent text-accent-foreground px-4 py-2 rounded-full font-medium">
-            shadcn/ui
-          </span>
-          <span class="bg-muted text-muted-foreground px-4 py-2 rounded-full font-medium">
-            TypeScript
-          </span>
-        </div>
+		<!-- Quick Start -->
+		<section class="container mx-auto px-4 py-16">
+			<div class="max-w-3xl mx-auto text-center">
+				<h2 class="text-3xl font-bold mb-6">🚀 Quick Start</h2>
+				<div class="bg-muted/50 rounded-lg p-6 text-left">
+					<pre class="text-sm overflow-x-auto"><code># Clone and install
+git clone https://github.com/XCUDA/astro-starter.git
+cd astro-starter
+npm install
 
-        <!-- Status indicator showing our current progress -->
-        <div class="bg-card border border-border rounded-lg p-6">
-          <h3 class="text-lg font-semibold text-card-foreground mb-4">
-            Current Status: Dark Mode + shadcn/ui Integration Complete ✅
-          </h3>
-          <p class="text-muted-foreground">
-            This starter now features complete Astro 5 + TailwindCSS 4 + shadcn/ui integration 
-            with full dark mode support, React Islands architecture, and production-ready performance.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
+# Start development
+npm run dev</code></pre>
+				</div>
+				<p class="text-muted-foreground mt-4">
+					Visit <code class="bg-muted px-2 py-1 rounded text-sm">localhost:4321</code> to see your starter in action.
+				</p>
+			</div>
+		</section>
 
-  <!-- Interactive Demo Section - showcasing React Islands -->
-  <section class="py-20 bg-background">
-    <div class="container mx-auto px-4">
-      <div class="max-w-4xl mx-auto text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold text-foreground mb-4">
-          Interactive Components Demo
-        </h2>
-        <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
-          Experience the power of React Islands architecture with shadcn/ui components.
-          This section demonstrates selective hydration and performance optimization.
-        </p>
-      </div>
-      
-      <!-- React Island Component with client-side hydration -->
-      <InteractiveDemo client:visible />
-    </div>
-  </section>
-
-  <!-- Performance Benefits Section -->
-  <section class="py-20 bg-accent/10">
-    <div class="container mx-auto px-4">
-      <div class="max-w-4xl mx-auto">
-        <h2 class="text-3xl md:text-4xl font-bold text-foreground mb-8 text-center">
-          Architecture Benefits
-        </h2>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <!-- Performance card -->
-          <div class="bg-card border border-border rounded-xl p-6">
-            <div class="text-green-500 text-3xl mb-4">⚡</div>
-            <h3 class="text-xl font-semibold text-card-foreground mb-3">
-              Selective Hydration
-            </h3>
-            <p class="text-muted-foreground">
-              Only interactive components load JavaScript. Static content remains 
-              HTML for instant loading and optimal Core Web Vitals scores.
-            </p>
-          </div>
-
-          <!-- Developer Experience card -->
-          <div class="bg-card border border-border rounded-xl p-6">
-            <div class="text-blue-500 text-3xl mb-4">🛠️</div>
-            <h3 class="text-xl font-semibold text-card-foreground mb-3">
-              Modern Developer Experience
-            </h3>
-            <p class="text-muted-foreground">
-              Full React capabilities within Islands, TypeScript support, 
-              hot reload, and complete component library access.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+		<!-- Progress Badge -->
+		<section class="container mx-auto px-4 py-8 text-center">
+			<div class="inline-block p-4 rounded-lg border bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-950/20 dark:to-blue-950/20">
+				<div class="text-2xl font-bold text-green-600 dark:text-green-400 mb-2">🏆 70% Complete</div>
+				<div class="text-sm text-muted-foreground">
+					Sprint 1 (Forms) + Sprint 2 (Navigation) + Sprint 3 (Data Display) = Triple Sprint Mastery
+				</div>
+			</div>
+		</section>
+	</main>
 </Layout>
+
+<script>
+	import DarkModeToggle from '../components/islands/DarkModeToggle.tsx';
+	import { createElement } from 'react';
+	import { createRoot } from 'react-dom/client';
+
+	// Mount Dark Mode Toggle
+	const toggleContainer = document.getElementById('dark-mode-toggle');
+	if (toggleContainer) {
+		const root = createRoot(toggleContainer);
+		root.render(createElement(DarkModeToggle));
+	}
+</script>

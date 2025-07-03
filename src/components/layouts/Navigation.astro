@@ -1,0 +1,134 @@
+---
+// Central Navigation Component - Updated for Sprint 3
+// Single source of truth for site navigation
+
+export interface Props {
+  currentPage?: string;
+}
+
+const { currentPage } = Astro.props;
+
+// Navigation configuration - Add new showcases here
+const showcases = [
+  {
+    name: "form-showcase",
+    title: "Form Components",
+    href: "/form-showcase",
+    description: "Interactive forms with validation",
+    icon: "📝"
+  },
+  {
+    name: "navigation-showcase", 
+    title: "Navigation & Feedback",
+    href: "/navigation-showcase",
+    description: "Navigation and user feedback systems",
+    icon: "🧭"
+  },
+  {
+    name: "data-display-showcase",
+    title: "Data Display", 
+    href: "/data-display-showcase",
+    description: "Tables, avatars, tooltips and accordions",
+    icon: "📊"
+  },
+  {
+    name: "components-showcase",
+    title: "All Components",
+    href: "/components-showcase", 
+    description: "Complete component library",
+    icon: "🧩"
+  }
+];
+
+const isCurrentPage = (showcaseName: string) => currentPage === showcaseName;
+---
+
+<nav class="w-full border-b bg-background/80 backdrop-blur-sm sticky top-0 z-50">
+  <div class="container mx-auto px-4">
+    <div class="flex items-center justify-between h-16">
+      <!-- Logo/Home Link -->
+      <a 
+        href="/" 
+        class="flex items-center space-x-2 text-lg font-semibold hover:text-primary transition-colors"
+        aria-label="Astro Starter Homepage"
+      >
+        <span>⚡</span>
+        <span>Astro Starter</span>
+      </a>
+
+      <!-- Navigation Links -->
+      <div class="hidden md:flex items-center space-x-6">
+        {showcases.map(showcase => (
+          <a
+            href={showcase.href}
+            class={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+              isCurrentPage(showcase.name) 
+                ? 'bg-primary text-primary-foreground' 
+                : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+            }`}
+            aria-label={`${showcase.title} - ${showcase.description}`}
+            aria-current={isCurrentPage(showcase.name) ? 'page' : undefined}
+          >
+            <span>{showcase.icon}</span>
+            <span>{showcase.title}</span>
+            {isCurrentPage(showcase.name) && (
+              <span class="text-xs opacity-75">(current)</span>
+            )}
+          </a>
+        ))}
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button 
+        class="md:hidden p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
+        aria-label="Toggle mobile menu"
+        onclick="toggleMobileMenu()"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="md:hidden hidden border-t py-4">
+      <div class="space-y-2">
+        {showcases.map(showcase => (
+          <a
+            href={showcase.href}
+            class={`flex items-center space-x-3 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+              isCurrentPage(showcase.name)
+                ? 'bg-primary text-primary-foreground'
+                : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+            }`}
+            aria-label={`${showcase.title} - ${showcase.description}`}
+            aria-current={isCurrentPage(showcase.name) ? 'page' : undefined}
+          >
+            <span>{showcase.icon}</span>
+            <div>
+              <div class="font-medium">{showcase.title}</div>
+              <div class="text-xs opacity-75">{showcase.description}</div>
+              {isCurrentPage(showcase.name) && (
+                <div class="text-xs opacity-75">(current page)</div>
+              )}
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  function toggleMobileMenu() {
+    const menu = document.getElementById('mobile-menu');
+    if (menu) {
+      menu.classList.toggle('hidden');
+    }
+  }
+  
+  // Make function globally available
+  if (typeof window !== 'undefined') {
+    (window as any).toggleMobileMenu = toggleMobileMenu;
+  }
+</script>
