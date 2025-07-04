@@ -17,22 +17,28 @@ import Layout from '../components/layouts/Layout.astro';
 			<!-- CTA Buttons -->
 			<div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
 				<a 
-					href="/data-display-showcase" 
+					href="/advanced-showcase" 
 					class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary-foreground bg-primary hover:bg-primary/90 transition-colors"
 				>
-					📊 Try Data Display
+					🔮 Try Advanced Components
+				</a>
+				<a 
+					href="/data-display-showcase" 
+					class="inline-flex items-center px-6 py-3 border border-input text-base font-medium rounded-md text-foreground bg-background hover:bg-accent hover:text-accent-foreground transition-colors"
+				>
+					📊 Data Display
 				</a>
 				<a 
 					href="/form-showcase" 
 					class="inline-flex items-center px-6 py-3 border border-input text-base font-medium rounded-md text-foreground bg-background hover:bg-accent hover:text-accent-foreground transition-colors"
 				>
-					📝 Explore Forms
+					📝 Forms
 				</a>
 				<a 
 					href="/navigation-showcase" 
 					class="inline-flex items-center px-6 py-3 border border-input text-base font-medium rounded-md text-foreground bg-background hover:bg-accent hover:text-accent-foreground transition-colors"
 				>
-					🧭 View Navigation
+					🧭 Navigation
 				</a>
 				<a 
 					href="/components-showcase" 
@@ -126,13 +132,40 @@ import Layout from '../components/layouts/Layout.astro';
 			<h2 class="text-3xl font-bold text-center mb-12">🎯 Component Showcases</h2>
 			<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 				
+				<!-- Advanced Components Showcase - NEW Sprint 4 -->
+				<div class="p-6 rounded-lg border bg-card text-card-foreground hover:bg-accent/50 transition-colors">
+					<div class="flex items-center mb-4">
+						<span class="text-3xl mr-4">🔮</span>
+						<div>
+							<h3 class="text-xl font-semibold">Advanced Components</h3>
+							<p class="text-sm text-muted-foreground">Sprint 4 - Latest Addition</p>
+						</div>
+					</div>
+					<p class="text-muted-foreground mb-4">
+						Rich interface components with Calendar, Command palette, Date picker, Combobox, Sonner toasts, and Popover.
+						Professional tools for SaaS applications and complex user interfaces.
+					</p>
+					<div class="flex flex-wrap gap-2 mb-4">
+						<span class="px-2 py-1 text-xs bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 rounded">Calendar</span>
+						<span class="px-2 py-1 text-xs bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 rounded">Command</span>
+						<span class="px-2 py-1 text-xs bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 rounded">Sonner</span>
+						<span class="px-2 py-1 text-xs bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 rounded">Popover</span>
+					</div>
+					<a 
+						href="/advanced-showcase" 
+						class="inline-flex items-center text-primary hover:text-primary/80 font-medium"
+					>
+						Explore Advanced →
+					</a>
+				</div>
+
 				<!-- Data Display Showcase -->
 				<div class="p-6 rounded-lg border bg-card text-card-foreground hover:bg-accent/50 transition-colors">
 					<div class="flex items-center mb-4">
 						<span class="text-3xl mr-4">📊</span>
 						<div>
 							<h3 class="text-xl font-semibold">Data Display Components</h3>
-							<p class="text-sm text-muted-foreground">Sprint 3 - Latest Addition</p>
+							<p class="text-sm text-muted-foreground">Sprint 3 - Complete</p>
 						</div>
 					</div>
 					<p class="text-muted-foreground mb-4">
@@ -206,32 +239,25 @@ import Layout from '../components/layouts/Layout.astro';
 						View Navigation →
 					</a>
 				</div>
+			</div>
 
-				<!-- All Components Showcase -->
-				<div class="p-6 rounded-lg border bg-card text-card-foreground hover:bg-accent/50 transition-colors">
-					<div class="flex items-center mb-4">
-						<span class="text-3xl mr-4">🧩</span>
-						<div>
-							<h3 class="text-xl font-semibold">All Components</h3>
-							<p class="text-sm text-muted-foreground">Complete Library</p>
-						</div>
-					</div>
-					<p class="text-muted-foreground mb-4">
-						Complete shadcn/ui component library with interactive examples. 
-						Button, Card, Dialog, and all base components with variants.
-					</p>
-					<div class="flex flex-wrap gap-2 mb-4">
-						<span class="px-2 py-1 text-xs bg-muted text-muted-foreground rounded">Button</span>
-						<span class="px-2 py-1 text-xs bg-muted text-muted-foreground rounded">Card</span>
-						<span class="px-2 py-1 text-xs bg-muted text-muted-foreground rounded">Dialog</span>
-						<span class="px-2 py-1 text-xs bg-muted text-muted-foreground rounded">+12 more</span>
-					</div>
-					<a 
-						href="/components-showcase" 
-						class="inline-flex items-center text-primary hover:text-primary/80 font-medium"
-					>
-						View All Components →
-					</a>
+			<!-- All Components Link -->
+			<div class="text-center mt-8">
+				<a 
+					href="/components-showcase" 
+					class="inline-flex items-center px-6 py-3 border border-input text-base font-medium rounded-md text-foreground bg-background hover:bg-accent hover:text-accent-foreground transition-colors"
+				>
+					🧩 View Complete Component Library →
+				</a>
+			</div>
+		</section>
+
+    <!-- Progress Badge -->
+		<section class="container mx-auto px-4 py-8 text-center">
+			<div class="inline-block p-4 rounded-lg border bg-gradient-to-r from-green-50 to-violet-50 dark:from-green-950/20 dark:to-violet-950/20">
+				<div class="text-2xl font-bold text-violet-600 dark:text-violet-400 mb-2">🏆 85% Complete</div>
+				<div class="text-sm text-muted-foreground">
+					Sprint 1 (Forms) + Sprint 2 (Navigation) + Sprint 3 (Data Display) + Sprint 4 (Advanced) = <strong>Quadruple Sprint Mastery</strong>
 				</div>
 			</div>
 		</section>
