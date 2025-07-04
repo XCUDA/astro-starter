@@ -1,0 +1,189 @@
+---
+// Header.astro - Professional Adaptive Header Component
+// Combines navigation, branding, and interactive elements for business sites
+
+import Navigation from './Navigation.astro';
+import DarkModeToggle from '../islands/DarkModeToggle';
+
+export interface Props {
+  variant?: 'default' | 'minimal' | 'business' | 'landing';
+  showNavigation?: boolean;
+  showDarkModeToggle?: boolean;
+  showCTA?: boolean;
+  ctaText?: string;
+  ctaHref?: string;
+  siteName?: string;
+  siteDescription?: string;
+  currentPage?: string;
+}
+
+// Destructure props with business-friendly defaults
+const { 
+  variant = 'default',
+  showNavigation = true,
+  showDarkModeToggle = true, 
+  showCTA = false,
+  ctaText = "Get Started",
+  ctaHref = "/contact",
+  siteName = "Astro Professional Starter",
+  siteDescription = "Built with Astro 5, TailwindCSS 4, and shadcn/ui",
+  currentPage
+} = Astro.props;
+
+// Header variant styles for different business needs
+const headerVariants = {
+  default: "bg-background/80 backdrop-blur-sm border-b border-border",
+  minimal: "bg-transparent",
+  business: "bg-card/95 backdrop-blur-sm border-b border-border shadow-sm",
+  landing: "bg-gradient-to-r from-background/90 to-card/90 backdrop-blur-sm border-b border-border"
+};
+
+const headerClasses = headerVariants[variant];
+---
+
+<header class={`sticky top-0 z-50 w-full transition-all duration-300 ${headerClasses}`}>
+  <div class="container mx-auto px-4">
+    <div class="flex items-center justify-between h-16 lg:h-20">
+      
+      <!-- Logo/Branding Section -->
+      <div class="flex items-center space-x-4">
+        <a 
+          href="/" 
+          class="flex items-center space-x-3 group transition-all duration-200 hover:scale-105"
+          aria-label={`${siteName} Homepage`}
+        >
+          <!-- Logo with gradient for modern appeal -->
+          <div class="w-8 h-8 lg:w-10 lg:h-10 bg-gradient-to-br from-primary to-primary/70 rounded-lg flex items-center justify-center text-primary-foreground font-bold text-lg lg:text-xl transition-all duration-200 group-hover:shadow-lg group-hover:shadow-primary/25">
+            ⚡
+          </div>
+          
+          <!-- Site Name and Description -->
+          <div class="hidden sm:block">
+            <div class="text-lg lg:text-xl font-bold text-foreground group-hover:text-primary transition-colors">
+              {siteName}
+            </div>
+            {variant === 'business' || variant === 'landing' ? (
+              <div class="text-xs lg:text-sm text-muted-foreground">
+                {siteDescription}
+              </div>
+            ) : null}
+          </div>
+        </a>
+      </div>
+
+      <!-- Center Navigation (hidden on mobile, handled by Navigation component) -->
+      {showNavigation && (
+        <div class="hidden lg:flex flex-1 justify-center">
+          <Navigation currentPage={currentPage} />
+        </div>
+      )}
+
+      <!-- Right Actions Section -->
+      <div class="flex items-center space-x-3 lg:space-x-4">
+        
+        <!-- Optional CTA Button for business/landing variants -->
+        {showCTA && (variant === 'business' || variant === 'landing') && (
+          <a
+            href={ctaHref}
+            class="hidden md:inline-flex items-center px-4 py-2 text-sm font-medium text-primary-foreground bg-primary border border-transparent rounded-md hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all duration-200 hover:scale-105 hover:shadow-lg hover:shadow-primary/25"
+            aria-label={ctaText}
+          >
+            {ctaText}
+          </a>
+        )}
+
+        <!-- Dark Mode Toggle -->
+        {showDarkModeToggle && (
+          <div class="flex items-center">
+            <DarkModeToggle client:load />
+          </div>
+        )}
+
+        <!-- Mobile Menu Button (only when navigation is enabled) -->
+        {showNavigation && (
+          <button 
+            class="lg:hidden p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200 hover:scale-105"
+            aria-label="Toggle mobile menu"
+            onclick="toggleMobileMenu()"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
+        )}
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Menu -->
+    {showNavigation && (
+      <div id="mobile-menu" class="lg:hidden hidden border-t py-4">
+        <div class="space-y-2">
+          <!-- Navigation items will be populated by Navigation.astro script -->
+          
+          <!-- Mobile CTA Button -->
+          {showCTA && (
+            <div class="pt-4 border-t border-border">
+              <a
+                href={ctaHref}
+                class="w-full flex items-center justify-center px-4 py-3 text-sm font-medium text-primary-foreground bg-primary border border-transparent rounded-md hover:bg-primary/90 transition-all duration-200"
+                aria-label={ctaText}
+              >
+                {ctaText}
+              </a>
+            </div>
+          )}
+        </div>
+      </div>
+    )}
+  </div>
+</header>
+
+<!-- Mobile menu toggle script -->
+<script>
+  function toggleMobileMenu() {
+    const menu = document.getElementById('mobile-menu');
+    if (menu) {
+      menu.classList.toggle('hidden');
+    }
+  }
+  
+  // Make function globally available for Navigation.astro compatibility
+  if (typeof window !== 'undefined') {
+    (window as any).toggleMobileMenu = toggleMobileMenu;
+  }
+
+  // Close mobile menu when clicking outside
+  document.addEventListener('click', (event) => {
+    const menu = document.getElementById('mobile-menu');
+    const button = document.querySelector('[aria-label="Toggle mobile menu"]');
+    
+    if (menu && !menu.contains(event.target as Node) && !button?.contains(event.target as Node)) {
+      menu.classList.add('hidden');
+    }
+  });
+
+  // Close mobile menu on escape key
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      const menu = document.getElementById('mobile-menu');
+      if (menu && !menu.classList.contains('hidden')) {
+        menu.classList.add('hidden');
+      }
+    }
+  });
+</script>
+
+<style>
+  /* Smooth scroll behavior when navigating */
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Enhanced focus visibility for accessibility */
+  header a:focus-visible,
+  header button:focus-visible {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+</style>
