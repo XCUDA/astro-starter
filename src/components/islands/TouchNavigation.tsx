@@ -63,8 +63,10 @@ export default function TouchNavigation({
   const drawerRef = useRef<HTMLDivElement>(null);
   const touchStartRef = useRef<{ x: number; y: number } | null>(null);
   
-  // Detect scroll position for back-to-top button
+  // Detect scroll position for back-to-top button (client-side only)
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
     const handleScroll = () => {
       setShowScrollTop(window.scrollY > 300);
     };
@@ -142,7 +144,9 @@ export default function TouchNavigation({
         // Simulate refresh
         setTimeout(() => {
           setIsRefreshing(false);
-          window.location.reload();
+          if (typeof window !== 'undefined') {
+            window.location.reload();
+          }
         }, 1500);
       }
     }
@@ -169,7 +173,7 @@ export default function TouchNavigation({
     }
     
     // Handle swipe navigation (horizontal swipes in content area)
-    if (enableSwipeNavigation && direction === 'horizontal' && Math.abs(deltaX) > 100) {
+    if (enableSwipeNavigation && direction === 'horizontal' && Math.abs(deltaX) > 100 && typeof window !== 'undefined') {
       const currentIndex = navigationItems.findIndex(item => 
         window.location.pathname === item.href || 
         (currentPage && item.href.includes(currentPage))
@@ -202,7 +206,9 @@ export default function TouchNavigation({
 
   // Back to top functionality
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   };
 
   const toggleDrawer = () => {
@@ -210,6 +216,7 @@ export default function TouchNavigation({
   };
 
   const isCurrentPage = (href: string) => {
+    if (typeof window === 'undefined') return false;
     return window.location.pathname === href || 
            (currentPage && href.includes(currentPage));
   };
@@ -420,6 +427,7 @@ export const touchUtils = {
   },
   
   isTouchDevice: () => {
+    if (typeof window === 'undefined') return false;
     return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
   },
   

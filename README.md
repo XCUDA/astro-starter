@@ -1,4 +1,4 @@
-# Astro Professional Starter
+# Astro Starter
 
 A modern, production-ready Astro 5 starter with TailwindCSS 4, shadcn/ui, and TypeScript. Optimized for performance, accessibility, and professional development workflows.
 
