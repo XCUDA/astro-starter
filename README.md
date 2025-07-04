@@ -118,12 +118,14 @@ This starter is optimized for:
 - **Netlify** - Static site hosting with edge functions support  
 - **Node.js Hosts** - Compatible with traditional hosting (Infomaniak, etc.)
 
-## 📊 Performance
+## 📊 Performance & Components
 
 - **Lighthouse Score**: 100/100 for properly implemented pages
 - **Core Web Vitals**: Optimized for real-world performance metrics
 - **Bundle Size**: Minimal JavaScript footprint with selective hydration
 - **Loading Speed**: Sub-second initial page loads
+- **Component Library**: 26+ production-ready shadcn/ui components
+- **Business Ready**: Forms, navigation, data display, and advanced UI components
 
 ## 🤝 Contributing
 

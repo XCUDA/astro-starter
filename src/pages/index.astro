@@ -1,5 +1,6 @@
 ---
 import Layout from '../components/layouts/Layout.astro';
+import DarkModeToggle from '../components/islands/DarkModeToggle.tsx';
 ---
 
 <Layout title="Astro Professional Starter">
@@ -46,6 +47,7 @@ import Layout from '../components/layouts/Layout.astro';
 				>
 					🧩 All Components
 				</a>
+				<DarkModeToggle client:load />
 			</div>
 		</section>
 
@@ -252,16 +254,6 @@ import Layout from '../components/layouts/Layout.astro';
 			</div>
 		</section>
 
-    <!-- Progress Badge -->
-		<section class="container mx-auto px-4 py-8 text-center">
-			<div class="inline-block p-4 rounded-lg border bg-gradient-to-r from-green-50 to-violet-50 dark:from-green-950/20 dark:to-violet-950/20">
-				<div class="text-2xl font-bold text-violet-600 dark:text-violet-400 mb-2">🏆 85% Complete</div>
-				<div class="text-sm text-muted-foreground">
-					Sprint 1 (Forms) + Sprint 2 (Navigation) + Sprint 3 (Data Display) + Sprint 4 (Advanced) = <strong>Quadruple Sprint Mastery</strong>
-				</div>
-			</div>
-		</section>
-
 		<!-- Dark Mode Section -->
 		<section class="container mx-auto px-4 py-16">
 			<div class="max-w-4xl mx-auto text-center">
@@ -301,12 +293,12 @@ npm run dev</code></pre>
 			</div>
 		</section>
 
-		<!-- Progress Badge -->
+		<!-- Final Progress Badge -->
 		<section class="container mx-auto px-4 py-8 text-center">
-			<div class="inline-block p-4 rounded-lg border bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-950/20 dark:to-blue-950/20">
-				<div class="text-2xl font-bold text-green-600 dark:text-green-400 mb-2">🏆 70% Complete</div>
+			<div class="inline-block p-4 rounded-lg border bg-gradient-to-r from-green-50 to-violet-50 dark:from-green-950/20 dark:to-violet-950/20">
+				<div class="text-2xl font-bold text-violet-600 dark:text-violet-400 mb-2">🏆 85% Complete</div>
 				<div class="text-sm text-muted-foreground">
-					Sprint 1 (Forms) + Sprint 2 (Navigation) + Sprint 3 (Data Display) = Triple Sprint Mastery
+					Sprint 1 (Forms) + Sprint 2 (Navigation) + Sprint 3 (Data Display) + Sprint 4 (Advanced) = <strong>Quadruple Sprint Mastery</strong>
 				</div>
 			</div>
 		</section>
