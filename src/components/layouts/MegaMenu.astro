@@ -1,0 +1,483 @@
+---
+// MegaMenu.astro - Multi-Column Dropdown Navigation System
+// Perfect for complex business sites with extensive navigation needs
+// Path: src/components/layouts/MegaMenu.astro
+
+export interface Props {
+  currentPage?: string;
+  variant?: 'business' | 'ecommerce' | 'saas' | 'agency';
+  showPromo?: boolean;
+  promoText?: string;
+  promoLink?: string;
+}
+
+const { 
+  currentPage,
+  variant = 'business',
+  showPromo = false,
+  promoText = "New: Advanced Components Available!",
+  promoLink = "/advanced-showcase"
+} = Astro.props;
+
+// TypeScript interfaces for mega menu structure
+interface MenuItem {
+  name: string;
+  href: string;
+  description: string;
+}
+
+interface MenuColumn {
+  title: string;
+  items: MenuItem[];
+}
+
+interface FeaturedSection {
+  title: string;
+  name: string;
+  description: string;
+  href: string;
+  image: string;
+  badge: string;
+}
+
+interface MenuSection {
+  title: string;
+  icon: string;
+  columns: MenuColumn[];
+  featured: FeaturedSection;
+}
+
+interface MegaMenuVariant {
+  [key: string]: MenuSection;
+}
+
+// Comprehensive navigation structure for complex business sites
+const megaMenuConfig: Record<string, MegaMenuVariant> = {
+  business: {
+    products: {
+      title: "Products & Services",
+      icon: "💼",
+      columns: [
+        {
+          title: "Web Development",
+          items: [
+            { name: "Custom Websites", href: "/services/websites", description: "Tailored web solutions for your business" },
+            { name: "E-commerce", href: "/services/ecommerce", description: "Online stores that convert" },
+            { name: "Web Applications", href: "/services/web-apps", description: "Complex business applications" },
+            { name: "Maintenance", href: "/services/maintenance", description: "Ongoing support and updates" }
+          ]
+        },
+        {
+          title: "Design Services", 
+          items: [
+            { name: "UI/UX Design", href: "/services/design", description: "User-centered design solutions" },
+            { name: "Branding", href: "/services/branding", description: "Complete brand identity packages" },
+            { name: "Prototyping", href: "/services/prototyping", description: "Interactive design mockups" },
+            { name: "Consultation", href: "/services/consultation", description: "Design strategy and planning" }
+          ]
+        },
+        {
+          title: "Solutions",
+          items: [
+            { name: "Startup Package", href: "/solutions/startup", description: "Everything new businesses need" },
+            { name: "Enterprise", href: "/solutions/enterprise", description: "Scalable solutions for large teams" },
+            { name: "Non-Profit", href: "/solutions/nonprofit", description: "Special pricing for good causes" },
+            { name: "Education", href: "/solutions/education", description: "Tools for schools and universities" }
+          ]
+        }
+      ],
+      featured: {
+        title: "Featured Service",
+        name: "Complete Website Package",
+        description: "Get a professional website with hosting, domain, and maintenance included.",
+        href: "/featured/complete-package",
+        image: "🚀",
+        badge: "Popular"
+      }
+    },
+    
+    resources: {
+      title: "Resources & Learning",
+      icon: "📚",
+      columns: [
+        {
+          title: "Documentation",
+          items: [
+            { name: "Getting Started", href: "/docs/getting-started", description: "Quick setup guide" },
+            { name: "API Reference", href: "/docs/api", description: "Complete API documentation" },
+            { name: "Components", href: "/docs/components", description: "UI component library" },
+            { name: "Examples", href: "/docs/examples", description: "Code examples and demos" }
+          ]
+        },
+        {
+          title: "Learning Center",
+          items: [
+            { name: "Tutorials", href: "/learn/tutorials", description: "Step-by-step guides" },
+            { name: "Best Practices", href: "/learn/best-practices", description: "Industry standards and tips" },
+            { name: "Case Studies", href: "/learn/case-studies", description: "Real-world success stories" },
+            { name: "Webinars", href: "/learn/webinars", description: "Live learning sessions" }
+          ]
+        },
+        {
+          title: "Support",
+          items: [
+            { name: "Help Center", href: "/support/help", description: "Frequently asked questions" },
+            { name: "Contact Support", href: "/support/contact", description: "Get technical assistance" },
+            { name: "Community", href: "/support/community", description: "Developer community forum" },
+            { name: "Status", href: "/support/status", description: "Service status and updates" }
+          ]
+        }
+      ],
+      featured: {
+        title: "New Tutorial",
+        name: "Building Modern Web Apps",
+        description: "Learn to create scalable applications with our latest framework.",
+        href: "/learn/modern-web-apps",
+        image: "🎓",
+        badge: "New"
+      }
+    },
+
+    company: {
+      title: "Company & About",
+      icon: "🏢",
+      columns: [
+        {
+          title: "About Us",
+          items: [
+            { name: "Our Story", href: "/about/story", description: "How we started and our mission" },
+            { name: "Team", href: "/about/team", description: "Meet our talented professionals" },
+            { name: "Careers", href: "/about/careers", description: "Join our growing team" },
+            { name: "Culture", href: "/about/culture", description: "Our values and work environment" }
+          ]
+        },
+        {
+          title: "News & Events",
+          items: [
+            { name: "Blog", href: "/blog", description: "Latest insights and updates" },
+            { name: "Press Releases", href: "/news/press", description: "Company announcements" },
+            { name: "Events", href: "/events", description: "Upcoming conferences and meetups" },
+            { name: "Newsletter", href: "/newsletter", description: "Stay updated with our latest news" }
+          ]
+        },
+        {
+          title: "Legal & Policies",
+          items: [
+            { name: "Privacy Policy", href: "/legal/privacy", description: "How we handle your data" },
+            { name: "Terms of Service", href: "/legal/terms", description: "Usage terms and conditions" },
+            { name: "Cookie Policy", href: "/legal/cookies", description: "Information about cookies" },
+            { name: "Accessibility", href: "/legal/accessibility", description: "Our commitment to accessibility" }
+          ]
+        }
+      ],
+      featured: {
+        title: "We're Hiring!",
+        name: "Senior Developer Position",
+        description: "Join our team and work on exciting projects with modern technologies.",
+        href: "/careers/senior-developer",
+        image: "👥",
+        badge: "Hot"
+      }
+    }
+  }
+};
+
+const currentConfig = megaMenuConfig[variant] || megaMenuConfig.business;
+const isCurrentPage = (href: string): boolean => {
+  if (!currentPage) return false;
+  return href.includes(currentPage) || currentPage.includes(href.split('/').pop() || '');
+};
+---
+
+<nav class="w-full border-b bg-background/80 backdrop-blur-sm sticky top-0 z-50">
+  <div class="container mx-auto px-4">
+    
+    <!-- Promo Bar (optional) -->
+    {showPromo && (
+      <div class="border-b border-border">
+        <div class="flex items-center justify-center py-2 px-4">
+          <a 
+            href={promoLink}
+            class="text-sm text-primary hover:text-primary/80 transition-colors duration-200 flex items-center space-x-2"
+          >
+            <span class="animate-pulse">✨</span>
+            <span>{promoText}</span>
+            <span>→</span>
+          </a>
+        </div>
+      </div>
+    )}
+    
+    <!-- Main Navigation -->
+    <div class="flex items-center justify-between h-16">
+      
+      <!-- Logo -->
+      <a 
+        href="/" 
+        class="flex items-center space-x-3 text-lg font-semibold hover:text-primary transition-all duration-200 hover:scale-105 group"
+        aria-label="Homepage"
+      >
+        <div class="w-8 h-8 bg-gradient-to-br from-primary to-primary/70 rounded-lg flex items-center justify-center text-primary-foreground font-bold transition-all duration-200 group-hover:shadow-lg group-hover:shadow-primary/25">
+          ⚡
+        </div>
+        <span class="hidden sm:block">Business Name</span>
+      </a>
+
+      <!-- Desktop Mega Menu -->
+      <div class="hidden lg:flex items-center space-x-1">
+        
+        <!-- Home -->
+        <a
+          href="/"
+          class={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+            currentPage === 'home' || !currentPage
+              ? 'bg-primary text-primary-foreground' 
+              : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+          }`}
+        >
+          Home
+        </a>
+
+        <!-- Mega Menu Items -->
+        {Object.entries(currentConfig).map(([key, section]) => (
+          <div class="relative group">
+            <button
+              class="flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200"
+              aria-label={`${section.title} menu`}
+              onmouseenter={`showMegaMenu('${key}-mega')`}
+              onmouseleave={`hideMegaMenu('${key}-mega')`}
+            >
+              <span>{section.icon}</span>
+              <span>{section.title}</span>
+              <svg class="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            
+            <!-- Mega Menu Dropdown -->
+            <div 
+              id={`${key}-mega`}
+              class="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-screen max-w-4xl bg-card/95 backdrop-blur-sm border border-border rounded-xl shadow-xl opacity-0 invisible transition-all duration-300 translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0"
+              onmouseenter={`showMegaMenu('${key}-mega')`}
+              onmouseleave={`hideMegaMenu('${key}-mega')`}
+            >
+              <div class="p-6">
+                <div class="grid grid-cols-4 gap-6">
+                  
+                  <!-- Menu Columns -->
+                  {section.columns.map((column, colIndex) => (
+                    <div class={colIndex < 3 ? "space-y-4" : "hidden"}>
+                      <h3 class="font-semibold text-foreground text-sm uppercase tracking-wider">
+                        {column.title}
+                      </h3>
+                      <ul class="space-y-3">
+                        {column.items.map(item => (
+                          <li>
+                            <a
+                              href={item.href}
+                              class={`block p-2 rounded-lg transition-all duration-200 hover:bg-muted/50 ${
+                                isCurrentPage(item.href) ? 'bg-primary/10 border border-primary/20' : ''
+                              }`}
+                            >
+                              <div class="font-medium text-foreground text-sm">
+                                {item.name}
+                                {isCurrentPage(item.href) && (
+                                  <span class="ml-2 text-xs bg-primary text-primary-foreground px-2 py-0.5 rounded">current</span>
+                                )}
+                              </div>
+                              <div class="text-xs text-muted-foreground mt-1">
+                                {item.description}
+                              </div>
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                  
+                  <!-- Featured Section -->
+                  <div class="bg-gradient-to-br from-primary/5 to-primary/10 rounded-lg p-4 border border-primary/20">
+                    <div class="flex items-start space-x-3">
+                      <div class="text-2xl">{section.featured.image}</div>
+                      <div class="flex-1">
+                        <div class="flex items-center space-x-2 mb-2">
+                          <span class="text-xs font-medium text-primary uppercase tracking-wider">
+                            {section.featured.title}
+                          </span>
+                          <span class="text-xs bg-primary text-primary-foreground px-2 py-0.5 rounded">
+                            {section.featured.badge}
+                          </span>
+                        </div>
+                        <h4 class="font-semibold text-foreground text-sm mb-2">
+                          {section.featured.name}
+                        </h4>
+                        <p class="text-xs text-muted-foreground mb-3 leading-relaxed">
+                          {section.featured.description}
+                        </p>
+                        <a
+                          href={section.featured.href}
+                          class="inline-flex items-center text-xs font-medium text-primary hover:text-primary/80 transition-colors"
+                        >
+                          Learn more
+                          <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                          </svg>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button 
+        class="lg:hidden p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200"
+        aria-label="Toggle mobile menu"
+        onclick="toggleMobileMegaMenu()"
+        id="mobile-mega-button"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Mega Menu -->
+  <div 
+    id="mobile-mega-menu"
+    class="lg:hidden hidden bg-card border-t border-border"
+  >
+    <div class="p-6 space-y-8 max-h-96 overflow-y-auto">
+      
+      <!-- Home Link -->
+      <a
+        href="/"
+        class={`block p-3 rounded-lg font-medium transition-all duration-200 ${
+          currentPage === 'home' || !currentPage
+            ? 'bg-primary text-primary-foreground'
+            : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+        }`}
+        onclick="closeMobileMegaMenu()"
+      >
+        Home
+      </a>
+
+      <!-- Mobile Menu Sections -->
+      {Object.entries(currentConfig).map(([key, section]) => (
+        <div class="space-y-4">
+          <h2 class="flex items-center space-x-2 text-lg font-semibold text-foreground">
+            <span>{section.icon}</span>
+            <span>{section.title}</span>
+          </h2>
+          
+          <div class="grid grid-cols-1 gap-6">
+            {section.columns.map(column => (
+              <div class="space-y-3">
+                <h3 class="font-medium text-foreground text-sm">
+                  {column.title}
+                </h3>
+                <ul class="space-y-2 pl-4">
+                  {column.items.map(item => (
+                    <li>
+                      <a
+                        href={item.href}
+                        class="block p-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                        onclick="closeMobileMegaMenu()"
+                      >
+                        {item.name}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</nav>
+
+<script>
+  // Mega Menu Management
+  function showMegaMenu(menuId: string): void {
+    const menu = document.getElementById(menuId);
+    if (menu) {
+      menu.classList.remove('opacity-0', 'invisible', 'translate-y-2');
+      menu.classList.add('opacity-100', 'visible', 'translate-y-0');
+    }
+  }
+
+  function hideMegaMenu(menuId: string): void {
+    const menu = document.getElementById(menuId);
+    if (menu) {
+      menu.classList.remove('opacity-100', 'visible', 'translate-y-0');
+      menu.classList.add('opacity-0', 'invisible', 'translate-y-2');
+    }
+  }
+
+  // Mobile Mega Menu Management
+  function toggleMobileMegaMenu(): void {
+    const menu = document.getElementById('mobile-mega-menu');
+    if (menu) {
+      menu.classList.toggle('hidden');
+    }
+  }
+
+  function closeMobileMegaMenu(): void {
+    const menu = document.getElementById('mobile-mega-menu');
+    if (menu) {
+      menu.classList.add('hidden');
+    }
+  }
+
+  // Keyboard Navigation
+  document.addEventListener('keydown', (event: KeyboardEvent) => {
+    if (event.key === 'Escape') {
+      closeMobileMegaMenu();
+      // Close all mega menus
+      document.querySelectorAll('[id$="-mega"]').forEach((menu: Element) => {
+        hideMegaMenu(menu.id);
+      });
+    }
+  });
+
+  // Make functions globally available
+  if (typeof window !== 'undefined') {
+    (window as any).showMegaMenu = showMegaMenu;
+    (window as any).hideMegaMenu = hideMegaMenu;
+    (window as any).toggleMobileMegaMenu = toggleMobileMegaMenu;
+    (window as any).closeMobileMegaMenu = closeMobileMegaMenu;
+  }
+</script>
+
+<style>
+  /* Enhanced mega menu animations */
+  [id$="-mega"] {
+    will-change: transform, opacity;
+  }
+  
+  /* Smooth hover effects */
+  nav a:hover,
+  nav button:hover {
+    transform: translateY(-1px);
+  }
+  
+  /* Enhanced focus styles */
+  nav a:focus-visible,
+  nav button:focus-visible {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+  
+  /* Mobile menu scroll optimization */
+  #mobile-mega-menu {
+    scroll-behavior: smooth;
+  }
+</style>

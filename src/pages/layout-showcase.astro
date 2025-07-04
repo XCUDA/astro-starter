@@ -1,0 +1,528 @@
+---
+// Layout Showcase Page - Demo of all Layout System components
+// Demonstrates Navigation, MegaMenu, Breadcrumbs, and TouchNavigation
+// Path: src/pages/layout-showcase.astro
+
+import Layout from '../components/layouts/Layout.astro';
+import Navigation from '../components/layouts/Navigation.astro';
+import MegaMenu from '../components/layouts/MegaMenu.astro';
+import Breadcrumbs from '../components/layouts/Breadcrumbs.astro';
+import TouchNavigation from '../components/islands/TouchNavigation';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
+import { Badge } from '../components/ui/badge';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
+import { Button } from '../components/ui/button';
+---
+
+<Layout 
+  title="Layout System Showcase"
+  description="Comprehensive demo of adaptive header, footer, navigation, breadcrumbs, and touch components"
+  currentPage="layout-showcase"
+  headerVariant="business"
+  footerVariant="business"
+  showHeaderCTA={true}
+  headerCTAText="Try Layout"
+  showBreadcrumbs={true}
+  keywords="layout system, navigation, breadcrumbs, touch gestures, responsive design"
+>
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-primary/5 via-background to-secondary/5 py-16">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <div class="flex items-center justify-center space-x-2 mb-6">
+          <span class="text-4xl">🏗️</span>
+          <Badge variant="secondary" className="text-sm font-medium">
+            Sprint 6 Complete
+          </Badge>
+        </div>
+        
+        <h1 class="text-4xl lg:text-5xl font-bold text-foreground mb-6">
+          Layout System Showcase
+        </h1>
+        
+        <p class="text-xl text-muted-foreground mb-8 leading-relaxed">
+          Comprehensive demo of our adaptive layout system featuring responsive navigation, 
+          mega menus, breadcrumbs, and advanced touch gestures for modern web applications.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <Button size="lg" className="text-lg px-8">
+            <span class="mr-2">📱</span>
+            Try Touch Gestures
+          </Button>
+          <Button variant="outline" size="lg" className="text-lg px-8">
+            <span class="mr-2">🧭</span>
+            Explore Navigation
+          </Button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Breadcrumbs Demo -->
+  <section class="py-4 bg-muted/30">
+    <div class="container mx-auto px-4">
+      <h2 class="text-lg font-semibold text-foreground mb-4">
+        📍 Breadcrumbs Component (Active Above)
+      </h2>
+      <Breadcrumbs 
+        variant="business"
+        showHome={true}
+        showIcons={true}
+        currentPageTitle="Layout System Showcase"
+      />
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="py-12">
+    <div class="container mx-auto px-4">
+      
+      <!-- Components Overview -->
+      <section class="mb-16">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-foreground mb-4">
+            Layout System Components
+          </h2>
+          <p class="text-lg text-muted-foreground max-w-3xl mx-auto">
+            Professional-grade layout components designed for modern business websites. 
+            Each component is modular, accessible, and optimized for performance.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Header/Footer Card -->
+          <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105">
+            <CardHeader className="text-center">
+              <div class="text-3xl mb-2">🏠</div>
+              <CardTitle className="text-lg">Header & Footer</CardTitle>
+              <CardDescription>
+                Adaptive header and footer with 4 business variants each
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ul class="text-sm space-y-2 text-muted-foreground">
+                <li>• 8 total configurations</li>
+                <li>• Business-ready variants</li>
+                <li>• CTA integration</li>
+                <li>• Dark mode support</li>
+              </ul>
+            </CardContent>
+          </Card>
+
+          <!-- Navigation Card -->
+          <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105">
+            <CardHeader className="text-center">
+              <div class="text-3xl mb-2">🧭</div>
+              <CardTitle className="text-lg">Responsive Navigation</CardTitle>
+              <CardDescription>
+                Advanced navigation with animations and touch gestures
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ul class="text-sm space-y-2 text-muted-foreground">
+                <li>• Mobile drawer with swipe</li>
+                <li>• Dropdown menus</li>
+                <li>• Keyboard navigation</li>
+                <li>• Touch optimized</li>
+              </ul>
+            </CardContent>
+          </Card>
+
+          <!-- Mega Menu Card -->
+          <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105">
+            <CardHeader className="text-center">
+              <div class="text-3xl mb-2">📋</div>
+              <CardTitle className="text-lg">Mega Menu</CardTitle>
+              <CardDescription>
+                Multi-column navigation for complex business sites
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ul class="text-sm space-y-2 text-muted-foreground">
+                <li>• Multi-column layout</li>
+                <li>• Featured sections</li>
+                <li>• Category organization</li>
+                <li>• Business variants</li>
+              </ul>
+            </CardContent>
+          </Card>
+
+          <!-- Touch Navigation Card -->
+          <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105">
+            <CardHeader className="text-center">
+              <div class="text-3xl mb-2">📱</div>
+              <CardTitle className="text-lg">Touch Navigation</CardTitle>
+              <CardDescription>
+                Advanced mobile gestures and interactions
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ul class="text-sm space-y-2 text-muted-foreground">
+                <li>• Swipe gestures</li>
+                <li>• Pull to refresh</li>
+                <li>• FAB navigation</li>
+                <li>• Bottom navigation</li>
+              </ul>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
+      <!-- Interactive Demos -->
+      <section class="mb-16">
+        <h2 class="text-3xl font-bold text-foreground text-center mb-12">
+          Interactive Demonstrations
+        </h2>
+
+        <Tabs defaultValue="navigation" className="w-full">
+          <TabsList className="grid w-full grid-cols-4">
+            <TabsTrigger value="navigation">Navigation</TabsTrigger>
+            <TabsTrigger value="megamenu">Mega Menu</TabsTrigger>
+            <TabsTrigger value="breadcrumbs">Breadcrumbs</TabsTrigger>
+            <TabsTrigger value="touch">Touch</TabsTrigger>
+          </TabsList>
+
+          <!-- Navigation Demo -->
+          <TabsContent value="navigation" className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center space-x-2">
+                  <span>🧭</span>
+                  <span>Responsive Navigation Component</span>
+                </CardTitle>
+                <CardDescription>
+                  Standard navigation with dropdown menus and mobile drawer
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div class="border border-border rounded-lg overflow-hidden">
+                  <Navigation 
+                    currentPage="layout-showcase"
+                    variant="default"
+                    showMobileDrawer={true}
+                    enableTouchGestures={true}
+                    showBreadcrumbs={false}
+                  />
+                </div>
+                <div class="mt-4 text-sm text-muted-foreground space-y-2">
+                  <p><strong>Features:</strong></p>
+                  <ul class="list-disc list-inside space-y-1">
+                    <li>Dropdown menus with hover animations</li>
+                    <li>Mobile drawer with swipe-to-close</li>
+                    <li>Current page highlighting</li>
+                    <li>Keyboard navigation support</li>
+                  </ul>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <!-- Mega Menu Demo -->
+          <TabsContent value="megamenu" className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center space-x-2">
+                  <span>📋</span>
+                  <span>Mega Menu Component</span>
+                </CardTitle>
+                <CardDescription>
+                  Multi-column navigation for complex business websites
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div class="border border-border rounded-lg overflow-hidden">
+                  <MegaMenu 
+                    currentPage="layout-showcase"
+                    variant="business"
+                    showPromo={true}
+                    promoText="New: Layout System Available!"
+                    promoLink="/layout-showcase"
+                  />
+                </div>
+                <div class="mt-4 text-sm text-muted-foreground space-y-2">
+                  <p><strong>Business Applications:</strong></p>
+                  <ul class="list-disc list-inside space-y-1">
+                    <li>E-commerce sites with product categories</li>
+                    <li>Corporate websites with multiple services</li>
+                    <li>SaaS platforms with feature sections</li>
+                    <li>Educational sites with course organization</li>
+                  </ul>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <!-- Breadcrumbs Demo -->
+          <TabsContent value="breadcrumbs" className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center space-x-2">
+                  <span>📍</span>
+                  <span>Breadcrumbs Component</span>
+                </CardTitle>
+                <CardDescription>
+                  Automatic hierarchical navigation with SEO optimization
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div class="space-y-4">
+                  <!-- Default Variant -->
+                  <div class="border border-border rounded-lg p-4">
+                    <h4 class="font-medium mb-2">Default Variant</h4>
+                    <Breadcrumbs 
+                      variant="default"
+                      showHome={true}
+                      showIcons={true}
+                      currentPageTitle="Layout System Showcase"
+                    />
+                  </div>
+                  
+                  <!-- Business Variant -->
+                  <div class="border border-border rounded-lg p-4">
+                    <h4 class="font-medium mb-2">Business Variant</h4>
+                    <Breadcrumbs 
+                      variant="business"
+                      showHome={true}
+                      showIcons={true}
+                      currentPageTitle="Layout System Showcase"
+                    />
+                  </div>
+                  
+                  <!-- E-commerce Variant -->
+                  <div class="border border-border rounded-lg p-4">
+                    <h4 class="font-medium mb-2">E-commerce Variant</h4>
+                    <Breadcrumbs 
+                      variant="ecommerce"
+                      showHome={true}
+                      showIcons={true}
+                      currentPageTitle="Layout System Showcase"
+                    />
+                  </div>
+                </div>
+                
+                <div class="mt-4 text-sm text-muted-foreground space-y-2">
+                  <p><strong>SEO Benefits:</strong></p>
+                  <ul class="list-disc list-inside space-y-1">
+                    <li>Automatic JSON-LD structured data</li>
+                    <li>Improved search engine understanding</li>
+                    <li>Better user navigation experience</li>
+                    <li>Accessible keyboard navigation</li>
+                  </ul>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <!-- Touch Navigation Demo -->
+          <TabsContent value="touch" className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center space-x-2">
+                  <span>📱</span>
+                  <span>Touch Navigation Component</span>
+                </CardTitle>
+                <CardDescription>
+                  Advanced mobile gestures and touch interactions
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <!-- Floating FAB Demo -->
+                  <div class="relative border border-border rounded-lg p-6 h-64 bg-muted/30">
+                    <h4 class="font-medium mb-4">Floating Action Button</h4>
+                    <TouchNavigation 
+                      variant="floating-fab"
+                      showBackToTop={true}
+                      currentPage="layout-showcase"
+                      client:load
+                    />
+                    <p class="text-xs text-muted-foreground mt-4">
+                      Click the floating button in bottom-right corner
+                    </p>
+                  </div>
+                  
+                  <!-- Bottom Navigation Demo -->
+                  <div class="relative border border-border rounded-lg p-6 h-64 bg-muted/30">
+                    <h4 class="font-medium mb-4">Bottom Navigation</h4>
+                    <div class="absolute bottom-0 left-0 right-0">
+                      <TouchNavigation 
+                        variant="bottom-nav"
+                        currentPage="layout-showcase"
+                        client:load
+                      />
+                    </div>
+                    <p class="text-xs text-muted-foreground">
+                      Fixed bottom navigation bar
+                    </p>
+                  </div>
+                </div>
+                
+                <div class="mt-4 text-sm text-muted-foreground space-y-2">
+                  <p><strong>Mobile Gestures Supported:</strong></p>
+                  <ul class="list-disc list-inside space-y-1">
+                    <li>Swipe from left edge to open navigation drawer</li>
+                    <li>Swipe left/right to navigate between pages</li>
+                    <li>Pull down from top to refresh (where enabled)</li>
+                    <li>Touch and drag for interactive feedback</li>
+                  </ul>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+        </Tabs>
+      </section>
+
+      <!-- Business Use Cases -->
+      <section class="mb-16">
+        <h2 class="text-3xl font-bold text-foreground text-center mb-12">
+          Business Use Cases
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Corporate Website -->
+          <Card className="hover:shadow-lg transition-all duration-200">
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2">
+                <span>🏢</span>
+                <span>Corporate Website</span>
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div class="space-y-3 text-sm">
+                <div><strong>Header:</strong> Business variant with CTA</div>
+                <div><strong>Navigation:</strong> Standard with dropdown menus</div>
+                <div><strong>Footer:</strong> Business variant with contact info</div>
+                <div><strong>Breadcrumbs:</strong> For page hierarchy</div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <!-- E-commerce Platform -->
+          <Card className="hover:shadow-lg transition-all duration-200">
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2">
+                <span>🛒</span>
+                <span>E-commerce Platform</span>
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div class="space-y-3 text-sm">
+                <div><strong>Header:</strong> Business variant with search</div>
+                <div><strong>Navigation:</strong> Mega menu with categories</div>
+                <div><strong>Footer:</strong> Comprehensive with links</div>
+                <div><strong>Mobile:</strong> Bottom nav + touch gestures</div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <!-- SaaS Application -->
+          <Card className="hover:shadow-lg transition-all duration-200">
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2">
+                <span>⚡</span>
+                <span>SaaS Application</span>
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div class="space-y-3 text-sm">
+                <div><strong>Header:</strong> Landing variant with pricing CTA</div>
+                <div><strong>Navigation:</strong> Mega menu with feature sections</div>
+                <div><strong>Footer:</strong> Startup variant with newsletter</div>
+                <div><strong>Mobile:</strong> Floating FAB for quick actions</div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <!-- Portfolio Site -->
+          <Card className="hover:shadow-lg transition-all duration-200">
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2">
+                <span>🎨</span>
+                <span>Portfolio Site</span>
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div class="space-y-3 text-sm">
+                <div><strong>Header:</strong> Minimal variant, clean design</div>
+                <div><strong>Navigation:</strong> Simple with smooth transitions</div>
+                <div><strong>Footer:</strong> Minimal variant, focus on content</div>
+                <div><strong>Mobile:</strong> Gesture navigation for galleries</div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
+      <!-- Implementation Guide -->
+      <section class="mb-16">
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-2xl">🚀 Quick Implementation Guide</CardTitle>
+            <CardDescription>
+              Get started with the layout system in your project
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div>
+                <h3 class="font-semibold mb-3">1. Basic Setup</h3>
+                <div class="bg-muted p-4 rounded-lg text-sm font-mono">
+                  {`<Layout 
+  headerVariant="business"
+  footerVariant="business"
+  showNavigation={true}
+  showHeaderCTA={true}
+/>`}
+                </div>
+              </div>
+              
+              <div>
+                <h3 class="font-semibold mb-3">2. Add Touch Navigation</h3>
+                <div class="bg-muted p-4 rounded-lg text-sm font-mono">
+                  {`<TouchNavigation 
+  variant="floating-fab"
+  enableSwipeNavigation={true}
+  client:load
+/>`}
+                </div>
+              </div>
+              
+              <div>
+                <h3 class="font-semibold mb-3">3. Enable Breadcrumbs</h3>
+                <div class="bg-muted p-4 rounded-lg text-sm font-mono">
+                  {`<Breadcrumbs 
+  variant="business"
+  showHome={true}
+  showIcons={true}
+/>`}
+                </div>
+              </div>
+              
+              <div>
+                <h3 class="font-semibold mb-3">4. Complex Sites</h3>
+                <div class="bg-muted p-4 rounded-lg text-sm font-mono">
+                  {`<MegaMenu 
+  variant="business"
+  showPromo={true}
+  currentPage="..."
+/>`}
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Touch Navigation Components (Active) -->
+  <TouchNavigation 
+    variant="gesture-panel"
+    enableSwipeNavigation={true}
+    enablePullToRefresh={false}
+    client:load
+  />
+
+</Layout>

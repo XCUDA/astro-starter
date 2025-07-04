@@ -1,141 +1,584 @@
 ---
-// Central Navigation Component - Updated for Sprint 3
-// Single source of truth for site navigation
+// Navigation.astro - Advanced Responsive Navigation System
+// Enhanced with animations, touch gestures, and intelligent breakpoint management
+// Path: src/components/layouts/Navigation.astro
 
 export interface Props {
   currentPage?: string;
+  variant?: 'default' | 'mega' | 'minimal' | 'business';
+  showMobileDrawer?: boolean;
+  enableTouchGestures?: boolean;
+  showBreadcrumbs?: boolean;
 }
 
-const { currentPage } = Astro.props;
+const { 
+  currentPage, 
+  variant = 'default',
+  showMobileDrawer = true,
+  enableTouchGestures = true,
+  showBreadcrumbs = false
+} = Astro.props;
 
-// Navigation configuration - Add new showcases here
-const showcases = [
-  {
-    name: "form-showcase",
-    title: "Form Components",
-    href: "/form-showcase",
-    description: "Interactive forms with validation",
-    icon: "📝"
-  },
-  {
-    name: "navigation-showcase", 
-    title: "Navigation & Feedback",
-    href: "/navigation-showcase",
-    description: "Navigation and user feedback systems",
-    icon: "🧭"
-  },
-  {
-    name: "data-display-showcase",
-    title: "Data Display", 
-    href: "/data-display-showcase",
-    description: "Tables, avatars, tooltips and accordions",
-    icon: "📊"
-  },
-  {
-    name: "advanced-showcase",
-    title: "Advanced Components",
-    href: "/advanced-showcase",
-    description: "Calendar, Command, Sonner and advanced UI",
-    icon: "🔮"
-  },
-  {
-    name: "components-showcase",
-    title: "All Components",
-    href: "/components-showcase", 
-    description: "Complete component library",
-    icon: "🧩"
-  }
+// Enhanced navigation configuration with categories for mega menu support
+const navigationConfig = {
+  main: [
+    {
+      name: "home",
+      title: "Home",
+      href: "/",
+      description: "Homepage with all features overview",
+      icon: "🏠"
+    }
+  ],
+  
+  showcases: [
+    {
+      name: "form-showcase",
+      title: "Form Components",
+      href: "/form-showcase",
+      description: "Interactive forms with validation",
+      icon: "📝",
+      category: "components"
+    },
+    {
+      name: "navigation-showcase", 
+      title: "Navigation & Feedback",
+      href: "/navigation-showcase",
+      description: "Navigation and user feedback systems",
+      icon: "🧭",
+      category: "components"
+    },
+    {
+      name: "data-display-showcase",
+      title: "Data Display", 
+      href: "/data-display-showcase",
+      description: "Tables, avatars, tooltips and accordions",
+      icon: "📊",
+      category: "components"
+    },
+    {
+      name: "advanced-showcase",
+      title: "Advanced Components",
+      href: "/advanced-showcase",
+      description: "Calendar, Command, Sonner and advanced UI",
+      icon: "🔮",
+      category: "components"
+    },
+    {
+      name: "components-showcase",
+      title: "All Components",
+      href: "/components-showcase", 
+      description: "Complete component library",
+      icon: "🧩",
+      category: "overview"
+    }
+  ],
+
+  resources: [
+    {
+      name: "documentation",
+      title: "Documentation", 
+      href: "/docs",
+      description: "Complete guides and references",
+      icon: "📚",
+      category: "docs"
+    },
+    {
+      name: "quick-start",
+      title: "Quick Start",
+      href: "/quick-start", 
+      description: "Get up and running in minutes",
+      icon: "⚡",
+      category: "docs"
+    }
+  ]
+};
+
+// Combine all navigation items for processing
+const allNavItems = [
+  ...navigationConfig.main,
+  ...navigationConfig.showcases, 
+  ...navigationConfig.resources
 ];
 
-const isCurrentPage = (showcaseName: string) => currentPage === showcaseName;
+const isCurrentPage = (itemName: string) => currentPage === itemName;
+
+// Generate breadcrumbs based on current page
+const generateBreadcrumbs = () => {
+  if (!currentPage || currentPage === 'home') return [];
+  
+  const currentItem = allNavItems.find(item => item.name === currentPage);
+  if (!currentItem) return [];
+  
+  return [
+    { name: "Home", href: "/" },
+    { name: currentItem.title, href: currentItem.href }
+  ];
+};
+
+const breadcrumbs = showBreadcrumbs ? generateBreadcrumbs() : [];
 ---
 
-<nav class="w-full border-b bg-background/80 backdrop-blur-sm sticky top-0 z-50">
+<!-- Enhanced Navigation with Advanced Responsive System -->
+<nav class="w-full border-b bg-background/80 backdrop-blur-sm sticky top-0 z-50 transition-all duration-300" id="main-navigation">
   <div class="container mx-auto px-4">
+    
+    <!-- Main Navigation Bar -->
     <div class="flex items-center justify-between h-16">
-      <!-- Logo/Home Link -->
+      
+      <!-- Logo/Home Link with Enhanced Branding -->
       <a 
         href="/" 
-        class="flex items-center space-x-2 text-lg font-semibold hover:text-primary transition-colors"
+        class="flex items-center space-x-3 text-lg font-semibold hover:text-primary transition-all duration-200 hover:scale-105 group"
         aria-label="Astro Starter Homepage"
       >
-        <span>⚡</span>
-        <span>Astro Starter</span>
+        <div class="w-8 h-8 bg-gradient-to-br from-primary to-primary/70 rounded-lg flex items-center justify-center text-primary-foreground font-bold transition-all duration-200 group-hover:shadow-lg group-hover:shadow-primary/25">
+          ⚡
+        </div>
+        <span class="hidden sm:block">Astro Starter</span>
       </a>
 
-      <!-- Navigation Links -->
-      <div class="hidden md:flex items-center space-x-6">
-        {showcases.map(showcase => (
-          <a
-            href={showcase.href}
-            class={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-              isCurrentPage(showcase.name) 
-                ? 'bg-primary text-primary-foreground' 
-                : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
-            }`}
-            aria-label={`${showcase.title} - ${showcase.description}`}
-            aria-current={isCurrentPage(showcase.name) ? 'page' : undefined}
+      <!-- Desktop Navigation Links -->
+      <div class="hidden lg:flex items-center space-x-1">
+        
+        <!-- Home Link -->
+        <a
+          href="/"
+          class={`flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+            isCurrentPage('home') || !currentPage
+              ? 'bg-primary text-primary-foreground shadow-sm' 
+              : 'text-muted-foreground hover:text-foreground hover:bg-muted/50 hover:scale-105'
+          }`}
+          aria-label="Homepage"
+          aria-current={isCurrentPage('home') ? 'page' : undefined}
+        >
+          <span>🏠</span>
+          <span>Home</span>
+        </a>
+
+        <!-- Showcases Dropdown -->
+        <div class="relative group">
+          <button
+            class="flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200 hover:scale-105"
+            aria-label="Components showcases menu"
+            aria-expanded="false"
+            onmouseenter="showDropdown('showcases-dropdown')"
+            onmouseleave="hideDropdown('showcases-dropdown')"
           >
-            <span>{showcase.icon}</span>
-            <span>{showcase.title}</span>
-            {isCurrentPage(showcase.name) && (
-              <span class="text-xs opacity-75">(current)</span>
-            )}
-          </a>
-        ))}
+            <span>🧩</span>
+            <span>Components</span>
+            <svg class="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          
+          <!-- Dropdown Menu -->
+          <div 
+            id="showcases-dropdown"
+            class="absolute top-full left-0 mt-2 w-80 bg-card/95 backdrop-blur-sm border border-border rounded-lg shadow-lg opacity-0 invisible transition-all duration-300 transform translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0"
+            onmouseenter="showDropdown('showcases-dropdown')"
+            onmouseleave="hideDropdown('showcases-dropdown')"
+          >
+            <div class="p-4 grid grid-cols-1 gap-2">
+              {navigationConfig.showcases.map(showcase => (
+                <a
+                  href={showcase.href}
+                  class={`flex items-start space-x-3 p-3 rounded-lg transition-all duration-200 hover:bg-muted/50 hover:scale-105 ${
+                    isCurrentPage(showcase.name) 
+                      ? 'bg-primary/10 border border-primary/20' 
+                      : ''
+                  }`}
+                  aria-current={isCurrentPage(showcase.name) ? 'page' : undefined}
+                >
+                  <span class="text-lg mt-0.5">{showcase.icon}</span>
+                  <div class="flex-1 min-w-0">
+                    <div class="font-medium text-foreground flex items-center space-x-2">
+                      <span>{showcase.title}</span>
+                      {isCurrentPage(showcase.name) && (
+                        <span class="text-xs bg-primary text-primary-foreground px-2 py-0.5 rounded">current</span>
+                      )}
+                    </div>
+                    <div class="text-xs text-muted-foreground mt-1">
+                      {showcase.description}
+                    </div>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <!-- Resources Dropdown -->
+        <div class="relative group">
+          <button
+            class="flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200 hover:scale-105"
+            aria-label="Resources menu"
+            onmouseenter="showDropdown('resources-dropdown')"
+            onmouseleave="hideDropdown('resources-dropdown')"
+          >
+            <span>📚</span>
+            <span>Resources</span>
+            <svg class="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          
+          <div 
+            id="resources-dropdown"
+            class="absolute top-full left-0 mt-2 w-64 bg-card/95 backdrop-blur-sm border border-border rounded-lg shadow-lg opacity-0 invisible transition-all duration-300 transform translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0"
+            onmouseenter="showDropdown('resources-dropdown')"
+            onmouseleave="hideDropdown('resources-dropdown')"
+          >
+            <div class="p-3">
+              {navigationConfig.resources.map(resource => (
+                <a
+                  href={resource.href}
+                  class="flex items-center space-x-3 p-2 rounded-lg transition-all duration-200 hover:bg-muted/50"
+                >
+                  <span class="text-lg">{resource.icon}</span>
+                  <div>
+                    <div class="font-medium text-foreground">{resource.title}</div>
+                    <div class="text-xs text-muted-foreground">{resource.description}</div>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
 
-      <!-- Mobile Menu Button -->
-      <button 
-        class="md:hidden p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
-        aria-label="Toggle mobile menu"
-        onclick="toggleMobileMenu()"
-      >
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-        </svg>
-      </button>
+      <!-- Mobile Menu Button with Enhanced Animation -->
+      {showMobileDrawer && (
+        <button 
+          class="lg:hidden p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200 hover:scale-105 group"
+          aria-label="Toggle mobile menu"
+          onclick="toggleMobileDrawer()"
+          id="mobile-menu-button"
+        >
+          <!-- Animated hamburger icon -->
+          <div class="w-6 h-6 relative">
+            <span class="absolute top-1 left-0 w-6 h-0.5 bg-current transition-all duration-300 group-hover:w-5"></span>
+            <span class="absolute top-2.5 left-0 w-6 h-0.5 bg-current transition-all duration-300"></span>
+            <span class="absolute top-4 left-0 w-6 h-0.5 bg-current transition-all duration-300 group-hover:w-4"></span>
+          </div>
+        </button>
+      )}
     </div>
 
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="md:hidden hidden border-t py-4">
-      <div class="space-y-2">
-        {showcases.map(showcase => (
+    <!-- Breadcrumbs (when enabled) -->
+    {showBreadcrumbs && breadcrumbs.length > 0 && (
+      <div class="border-t border-border py-3">
+        <nav aria-label="Breadcrumb" class="flex items-center space-x-2 text-sm">
+          {breadcrumbs.map((crumb, index) => (
+            <div class="flex items-center space-x-2">
+              {index > 0 && (
+                <svg class="w-4 h-4 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              )}
+              <a
+                href={crumb.href}
+                class={`transition-colors duration-200 ${
+                  index === breadcrumbs.length - 1
+                    ? 'text-foreground font-medium'
+                    : 'text-muted-foreground hover:text-foreground'
+                }`}
+                aria-current={index === breadcrumbs.length - 1 ? 'page' : undefined}
+              >
+                {crumb.name}
+              </a>
+            </div>
+          ))}
+        </nav>
+      </div>
+    )}
+  </div>
+
+  <!-- Enhanced Mobile Drawer Menu -->
+  {showMobileDrawer && (
+    <div 
+      id="mobile-drawer" 
+      class="lg:hidden fixed inset-0 top-16 bg-background/95 backdrop-blur-sm transform translate-x-full transition-transform duration-300 ease-out z-40"
+      style="will-change: transform;"
+    >
+      <!-- Mobile menu content -->
+      <div class="h-full overflow-y-auto">
+        <div class="p-6 space-y-6">
+          
+          <!-- Home Link -->
           <a
-            href={showcase.href}
-            class={`flex items-center space-x-3 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-              isCurrentPage(showcase.name)
+            href="/"
+            class={`flex items-center space-x-3 p-4 rounded-lg transition-all duration-200 ${
+              isCurrentPage('home') || !currentPage
                 ? 'bg-primary text-primary-foreground'
                 : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
             }`}
-            aria-label={`${showcase.title} - ${showcase.description}`}
-            aria-current={isCurrentPage(showcase.name) ? 'page' : undefined}
+            onclick="closeMobileDrawer()"
           >
-            <span>{showcase.icon}</span>
-            <div>
-              <div class="font-medium">{showcase.title}</div>
-              <div class="text-xs opacity-75">{showcase.description}</div>
-              {isCurrentPage(showcase.name) && (
-                <div class="text-xs opacity-75">(current page)</div>
-              )}
-            </div>
+            <span class="text-xl">🏠</span>
+            <span class="font-medium">Home</span>
           </a>
-        ))}
+
+          <!-- Components Section -->
+          <div class="space-y-3">
+            <h3 class="text-sm font-semibold text-foreground uppercase tracking-wider px-4">
+              Components
+            </h3>
+            <div class="space-y-2">
+              {navigationConfig.showcases.map(showcase => (
+                <a
+                  href={showcase.href}
+                  class={`flex items-start space-x-3 p-4 rounded-lg transition-all duration-200 ${
+                    isCurrentPage(showcase.name)
+                      ? 'bg-primary text-primary-foreground'
+                      : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+                  }`}
+                  onclick="closeMobileDrawer()"
+                >
+                  <span class="text-xl mt-0.5">{showcase.icon}</span>
+                  <div class="flex-1 min-w-0">
+                    <div class="font-medium flex items-center space-x-2">
+                      <span>{showcase.title}</span>
+                      {isCurrentPage(showcase.name) && (
+                        <span class="text-xs bg-background/20 px-2 py-0.5 rounded">current</span>
+                      )}
+                    </div>
+                    <div class="text-sm opacity-75 mt-1">
+                      {showcase.description}
+                    </div>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <!-- Resources Section -->
+          <div class="space-y-3">
+            <h3 class="text-sm font-semibold text-foreground uppercase tracking-wider px-4">
+              Resources
+            </h3>
+            <div class="space-y-2">
+              {navigationConfig.resources.map(resource => (
+                <a
+                  href={resource.href}
+                  class="flex items-center space-x-3 p-4 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200"
+                  onclick="closeMobileDrawer()"
+                >
+                  <span class="text-xl">{resource.icon}</span>
+                  <div>
+                    <div class="font-medium">{resource.title}</div>
+                    <div class="text-sm opacity-75">{resource.description}</div>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
+  )}
+
+  <!-- Mobile Drawer Backdrop -->
+  {showMobileDrawer && (
+    <div 
+      id="mobile-backdrop"
+      class="lg:hidden fixed inset-0 bg-background/50 opacity-0 invisible transition-all duration-300 z-30"
+      onclick="closeMobileDrawer()"
+    ></div>
+  )}
 </nav>
 
 <script>
-  function toggleMobileMenu() {
-    const menu = document.getElementById('mobile-menu');
-    if (menu) {
-      menu.classList.toggle('hidden');
+  // Enhanced Mobile Drawer Management with Touch Gestures
+  let isDrawerOpen = false;
+  let touchStartX = 0;
+  let touchCurrentX = 0;
+  let isDragging = false;
+
+  function toggleMobileDrawer() {
+    const drawer = document.getElementById('mobile-drawer');
+    const backdrop = document.getElementById('mobile-backdrop');
+    const button = document.getElementById('mobile-menu-button');
+    
+    if (!drawer || !backdrop || !button) return;
+
+    isDrawerOpen = !isDrawerOpen;
+    
+    if (isDrawerOpen) {
+      openMobileDrawer();
+    } else {
+      closeMobileDrawer();
+    }
+  }
+
+  function openMobileDrawer() {
+    const drawer = document.getElementById('mobile-drawer');
+    const backdrop = document.getElementById('mobile-backdrop');
+    const button = document.getElementById('mobile-menu-button');
+    
+    if (drawer && backdrop && button) {
+      drawer.style.transform = 'translateX(0)';
+      backdrop.classList.remove('opacity-0', 'invisible');
+      backdrop.classList.add('opacity-100', 'visible');
+      
+      // Animate hamburger to X
+      const spans = button.querySelectorAll('span');
+      if (spans.length === 3) {
+        spans[0].style.transform = 'rotate(45deg) translate(6px, 6px)';
+        spans[1].style.opacity = '0';
+        spans[2].style.transform = 'rotate(-45deg) translate(6px, -6px)';
+      }
+      
+      // Prevent body scroll
+      document.body.style.overflow = 'hidden';
+      isDrawerOpen = true;
+    }
+  }
+
+  function closeMobileDrawer() {
+    const drawer = document.getElementById('mobile-drawer');
+    const backdrop = document.getElementById('mobile-backdrop');
+    const button = document.getElementById('mobile-menu-button');
+    
+    if (drawer && backdrop && button) {
+      drawer.style.transform = 'translateX(100%)';
+      backdrop.classList.remove('opacity-100', 'visible');
+      backdrop.classList.add('opacity-0', 'invisible');
+      
+      // Reset hamburger
+      const spans = button.querySelectorAll('span');
+      if (spans.length === 3) {
+        spans[0].style.transform = 'none';
+        spans[1].style.opacity = '1';
+        spans[2].style.transform = 'none';
+      }
+      
+      // Restore body scroll
+      document.body.style.overflow = '';
+      isDrawerOpen = false;
+    }
+  }
+
+  // Touch Gesture Support for Mobile Drawer
+  function initTouchGestures() {
+    const drawer = document.getElementById('mobile-drawer');
+    if (!drawer) return;
+
+    // Touch start
+    drawer.addEventListener('touchstart', (e) => {
+      touchStartX = e.touches[0].clientX;
+      isDragging = true;
+    });
+
+    // Touch move
+    drawer.addEventListener('touchmove', (e) => {
+      if (!isDragging) return;
+      
+      touchCurrentX = e.touches[0].clientX;
+      const deltaX = touchCurrentX - touchStartX;
+      
+      // Only allow right swipe (close gesture)
+      if (deltaX > 0) {
+        const progress = Math.min(deltaX / 200, 1);
+        drawer.style.transform = `translateX(${progress * 100}%)`;
+      }
+    });
+
+    // Touch end
+    drawer.addEventListener('touchend', () => {
+      if (!isDragging) return;
+      
+      const deltaX = touchCurrentX - touchStartX;
+      isDragging = false;
+      
+      // Close drawer if swiped far enough
+      if (deltaX > 100) {
+        closeMobileDrawer();
+      } else {
+        // Snap back to open position
+        drawer.style.transform = 'translateX(0)';
+      }
+    });
+  }
+
+  // Dropdown Management for Desktop
+  function showDropdown(dropdownId: string): void {
+    const dropdown = document.getElementById(dropdownId);
+    if (dropdown) {
+      dropdown.classList.remove('opacity-0', 'invisible', 'translate-y-2');
+      dropdown.classList.add('opacity-100', 'visible', 'translate-y-0');
+    }
+  }
+
+  function hideDropdown(dropdownId: string): void {
+    const dropdown = document.getElementById(dropdownId);
+    if (dropdown) {
+      dropdown.classList.remove('opacity-100', 'visible', 'translate-y-0');
+      dropdown.classList.add('opacity-0', 'invisible', 'translate-y-2');
+    }
+  }
+
+  // Keyboard Navigation Support
+  function handleKeyNavigation(event: KeyboardEvent): void {
+    if (event.key === 'Escape' && isDrawerOpen) {
+      closeMobileDrawer();
+    }
+  }
+
+  // Initialize when DOM is loaded
+  document.addEventListener('DOMContentLoaded', () => {
+    initTouchGestures();
+    document.addEventListener('keydown', handleKeyNavigation);
+  });
+
+  // Make functions globally available
+  if (typeof window !== 'undefined') {
+    (window as any).toggleMobileDrawer = toggleMobileDrawer;
+    (window as any).openMobileDrawer = openMobileDrawer;
+    (window as any).closeMobileDrawer = closeMobileDrawer;
+    (window as any).showDropdown = showDropdown;
+    (window as any).hideDropdown = hideDropdown;
+  }
+</script>
+
+<style>
+  /* Enhanced hover effects and animations */
+  nav a:hover {
+    transform: translateY(-1px);
+  }
+  
+  /* Smooth transitions for all interactive elements */
+  nav a,
+  nav button {
+    transition: all 0.2s ease-in-out;
+  }
+  
+  /* Enhanced dropdown animations */
+  nav .group:hover .group-hover\:opacity-100 {
+    animation: fadeInUp 0.3s ease-out;
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
     }
   }
   
-  // Make function globally available
-  if (typeof window !== 'undefined') {
-    (window as any).toggleMobileMenu = toggleMobileMenu;
+  /* Mobile drawer optimizations */
+  #mobile-drawer {
+    will-change: transform;
   }
-</script>
+  
+  /* Enhanced focus styles for accessibility */
+  nav a:focus-visible,
+  nav button:focus-visible {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+</style>
