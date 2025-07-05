@@ -1,0 +1,687 @@
+---
+// Sidebar.astro - Professional Sidebar Navigation Component (Sprint 8 - Step 1)
+// Admin Dashboard Layout with collapsible support and business-ready navigation
+// Path: src/components/layouts/Sidebar.astro
+
+export interface Props {
+  variant?: 'admin' | 'dashboard' | 'compact' | 'minimal';
+  currentPage?: string;
+  collapsed?: boolean;
+  showCollapseToggle?: boolean;
+  showUserProfile?: boolean;
+  userProfile?: {
+    name?: string;
+    avatar?: string;
+    role?: string;
+    email?: string;
+  };
+  quickActions?: Array<{
+    name: string;
+    title: string;
+    href: string;
+    icon: string;
+    variant?: 'default' | 'primary' | 'destructive';
+  }>;
+}
+
+const { 
+  variant = 'admin',
+  currentPage,
+  collapsed = false,
+  showCollapseToggle = true,
+  showUserProfile = true,
+  userProfile = {
+    name: "Admin User",
+    avatar: "👤",
+    role: "Administrator",
+    email: "admin@company.com"
+  },
+  quickActions = [
+    {
+      name: "new-project",
+      title: "New Project",
+      href: "/admin/projects/new",
+      icon: "➕",
+      variant: "primary"
+    },
+    {
+      name: "settings",
+      title: "Settings",
+      href: "/admin/settings",
+      icon: "⚙️",
+      variant: "default"
+    }
+  ]
+} = Astro.props;
+
+// Enhanced sidebar navigation configuration for business applications
+const sidebarConfig = {
+  dashboard: [
+    {
+      name: "dashboard",
+      title: "Dashboard",
+      href: "/admin/dashboard",
+      icon: "📊",
+      description: "Overview and analytics",
+      category: "main"
+    },
+    {
+      name: "analytics",
+      title: "Analytics",
+      href: "/admin/analytics", 
+      icon: "📈",
+      description: "Performance metrics",
+      category: "main"
+    }
+  ],
+
+  content: [
+    {
+      name: "projects",
+      title: "Projects",
+      href: "/admin/projects",
+      icon: "📁",
+      description: "Manage your projects",
+      category: "content",
+      children: [
+        { name: "all-projects", title: "All Projects", href: "/admin/projects" },
+        { name: "new-project", title: "New Project", href: "/admin/projects/new" },
+        { name: "archived", title: "Archived", href: "/admin/projects/archived" }
+      ]
+    },
+    {
+      name: "users",
+      title: "Users",
+      href: "/admin/users",
+      icon: "👥",
+      description: "User management",
+      category: "content",
+      children: [
+        { name: "all-users", title: "All Users", href: "/admin/users" },
+        { name: "add-user", title: "Add User", href: "/admin/users/new" },
+        { name: "roles", title: "Roles & Permissions", href: "/admin/users/roles" }
+      ]
+    },
+    {
+      name: "content",
+      title: "Content",
+      href: "/admin/content",
+      icon: "📝",
+      description: "Content management",
+      category: "content"
+    }
+  ],
+
+  settings: [
+    {
+      name: "settings",
+      title: "Settings",
+      href: "/admin/settings",
+      icon: "⚙️",
+      description: "System configuration",
+      category: "settings"
+    },
+    {
+      name: "integrations",
+      title: "Integrations",
+      href: "/admin/integrations",
+      icon: "🔗",
+      description: "Third-party services",
+      category: "settings"
+    },
+    {
+      name: "security",
+      title: "Security",
+      href: "/admin/security",
+      icon: "🔒",
+      description: "Security settings",
+      category: "settings"
+    }
+  ],
+
+  support: [
+    {
+      name: "help",
+      title: "Help Center",
+      href: "/admin/help",
+      icon: "❓",
+      description: "Documentation and support",
+      category: "support"
+    },
+    {
+      name: "feedback",
+      title: "Feedback",
+      href: "/admin/feedback",
+      icon: "💬",
+      description: "Send feedback",
+      category: "support"
+    }
+  ]
+};
+
+// Combine all navigation items for processing
+const allNavItems = [
+  ...sidebarConfig.dashboard,
+  ...sidebarConfig.content,
+  ...sidebarConfig.settings,
+  ...sidebarConfig.support
+];
+
+const isCurrentPage = (itemName: string) => currentPage === itemName;
+
+// Check if current page is in nested menu
+const isCurrentSection = (item: any) => {
+  if (isCurrentPage(item.name)) return true;
+  if (item.children) {
+    return item.children.some((child: any) => isCurrentPage(child.name));
+  }
+  return false;
+};
+
+// Sidebar variant styles for different business needs
+const sidebarVariants = {
+  admin: "w-64 bg-card/95 backdrop-blur-sm border-r border-border",
+  dashboard: "w-72 bg-gradient-to-b from-card/95 to-muted/50 backdrop-blur-sm border-r border-border shadow-sm",
+  compact: "w-56 bg-card border-r border-border",
+  minimal: "w-48 bg-background/80 backdrop-blur-sm border-r border-border/50"
+};
+
+const sidebarClasses = collapsed 
+  ? "w-16 bg-card border-r border-border transition-all duration-300"
+  : `${sidebarVariants[variant]} transition-all duration-300`;
+---
+
+<aside class={`fixed left-0 top-0 h-full z-40 flex flex-col ${sidebarClasses}`} id="admin-sidebar">
+  
+  <!-- Sidebar Header -->
+  <div class="flex items-center justify-between p-4 border-b border-border">
+    {!collapsed ? (
+      <div class="flex items-center space-x-3">
+        <div class="w-8 h-8 bg-gradient-to-br from-primary to-primary/70 rounded-lg flex items-center justify-center text-primary-foreground font-bold text-sm">
+          ⚡
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="text-sm font-semibold text-foreground truncate">
+            Admin Panel
+          </div>
+          <div class="text-xs text-muted-foreground truncate">
+            {variant.charAt(0).toUpperCase() + variant.slice(1)} Layout
+          </div>
+        </div>
+      </div>
+    ) : (
+      <div class="w-8 h-8 bg-gradient-to-br from-primary to-primary/70 rounded-lg flex items-center justify-center text-primary-foreground font-bold text-sm mx-auto">
+        ⚡
+      </div>
+    )}
+    
+    {showCollapseToggle && (
+      <button
+        class={`p-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200 ${collapsed ? 'mx-auto mt-2' : ''}`}
+        onclick="toggleSidebarCollapse()"
+        aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+        id="sidebar-collapse-toggle"
+      >
+        <svg class={`w-4 h-4 transition-transform duration-200 ${collapsed ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7"></path>
+        </svg>
+      </button>
+    )}
+  </div>
+
+  <!-- Quick Actions (when not collapsed) -->
+  {!collapsed && quickActions.length > 0 && (
+    <div class="p-4 border-b border-border">
+      <div class="space-y-2">
+        {quickActions.map(action => (
+          <a
+            href={action.href}
+            class={`flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:scale-105 ${
+              action.variant === 'primary' 
+                ? 'bg-primary text-primary-foreground hover:bg-primary/90' 
+                : action.variant === 'destructive'
+                ? 'bg-destructive text-destructive-foreground hover:bg-destructive/90'
+                : 'bg-muted text-muted-foreground hover:text-foreground hover:bg-muted/80'
+            }`}
+            aria-label={action.title}
+          >
+            <span class="text-base">{action.icon}</span>
+            <span>{action.title}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  )}
+
+  <!-- Navigation Menu -->
+  <nav class="flex-1 overflow-y-auto p-4" role="navigation" aria-label="Sidebar navigation">
+    <div class="space-y-6">
+      
+      <!-- Dashboard Section -->
+      <div>
+        {!collapsed && (
+          <div class="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3 px-2">
+            Dashboard
+          </div>
+        )}
+        <div class="space-y-1">
+          {sidebarConfig.dashboard.map(item => (
+            <a
+              href={item.href}
+              class={`flex items-center space-x-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 hover:scale-105 group ${
+                isCurrentPage(item.name)
+                  ? 'bg-primary text-primary-foreground shadow-sm'
+                  : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+              }`}
+              aria-current={isCurrentPage(item.name) ? 'page' : undefined}
+              title={collapsed ? item.title : undefined}
+            >
+              <span class="text-lg flex-shrink-0">{item.icon}</span>
+              {!collapsed && (
+                <div class="flex-1 min-w-0">
+                  <div>{item.title}</div>
+                  {variant === 'dashboard' && (
+                    <div class="text-xs opacity-75 truncate">
+                      {item.description}
+                    </div>
+                  )}
+                </div>
+              )}
+              {!collapsed && isCurrentPage(item.name) && (
+                <span class="text-xs bg-primary-foreground/20 px-1.5 py-0.5 rounded">active</span>
+              )}
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- Content Management Section -->
+      <div>
+        {!collapsed && (
+          <div class="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3 px-2">
+            Content
+          </div>
+        )}
+        <div class="space-y-1">
+          {sidebarConfig.content.map(item => (
+            <div>
+              <!-- Main Item -->
+              <a
+                href={item.href}
+                class={`flex items-center space-x-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 hover:scale-105 group ${
+                  isCurrentSection(item)
+                    ? 'bg-primary text-primary-foreground shadow-sm'
+                    : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+                }`}
+                aria-current={isCurrentPage(item.name) ? 'page' : undefined}
+                title={collapsed ? item.title : undefined}
+              >
+                <span class="text-lg flex-shrink-0">{item.icon}</span>
+                {!collapsed && (
+                  <div class="flex-1 min-w-0">
+                    <div class="flex items-center justify-between">
+                      <span>{item.title}</span>
+                      {item.children && (
+                        <svg class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                      )}
+                    </div>
+                    {variant === 'dashboard' && (
+                      <div class="text-xs opacity-75 truncate">
+                        {item.description}
+                      </div>
+                    )}
+                  </div>
+                )}
+                {!collapsed && isCurrentSection(item) && (
+                  <span class="text-xs bg-primary-foreground/20 px-1.5 py-0.5 rounded">active</span>
+                )}
+              </a>
+              
+              <!-- Nested Menu (when expanded and has children) -->
+              {!collapsed && item.children && isCurrentSection(item) && (
+                <div class="ml-6 mt-2 space-y-1 border-l border-border/50 pl-4">
+                  {item.children.map((child: any) => (
+                    <a
+                      href={child.href}
+                      class={`flex items-center space-x-2 px-2 py-1.5 rounded text-sm transition-all duration-200 ${
+                        isCurrentPage(child.name)
+                          ? 'bg-primary/20 text-primary font-medium'
+                          : 'text-muted-foreground hover:text-foreground hover:bg-muted/30'
+                      }`}
+                      aria-current={isCurrentPage(child.name) ? 'page' : undefined}
+                    >
+                      <span class="w-1.5 h-1.5 rounded-full bg-current opacity-50"></span>
+                      <span>{child.title}</span>
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Settings Section -->
+      <div>
+        {!collapsed && (
+          <div class="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3 px-2">
+            Settings
+          </div>
+        )}
+        <div class="space-y-1">
+          {sidebarConfig.settings.map(item => (
+            <a
+              href={item.href}
+              class={`flex items-center space-x-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 hover:scale-105 group ${
+                isCurrentPage(item.name)
+                  ? 'bg-primary text-primary-foreground shadow-sm'
+                  : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+              }`}
+              aria-current={isCurrentPage(item.name) ? 'page' : undefined}
+              title={collapsed ? item.title : undefined}
+            >
+              <span class="text-lg flex-shrink-0">{item.icon}</span>
+              {!collapsed && (
+                <div class="flex-1 min-w-0">
+                  <div>{item.title}</div>
+                  {variant === 'dashboard' && (
+                    <div class="text-xs opacity-75 truncate">
+                      {item.description}
+                    </div>
+                  )}
+                </div>
+              )}
+              {!collapsed && isCurrentPage(item.name) && (
+                <span class="text-xs bg-primary-foreground/20 px-1.5 py-0.5 rounded">active</span>
+              )}
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- Support Section -->
+      <div>
+        {!collapsed && (
+          <div class="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3 px-2">
+            Support
+          </div>
+        )}
+        <div class="space-y-1">
+          {sidebarConfig.support.map(item => (
+            <a
+              href={item.href}
+              class={`flex items-center space-x-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 hover:scale-105 group ${
+                isCurrentPage(item.name)
+                  ? 'bg-primary text-primary-foreground shadow-sm'
+                  : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+              }`}
+              aria-current={isCurrentPage(item.name) ? 'page' : undefined}
+              title={collapsed ? item.title : undefined}
+            >
+              <span class="text-lg flex-shrink-0">{item.icon}</span>
+              {!collapsed && (
+                <div class="flex-1 min-w-0">
+                  <div>{item.title}</div>
+                  {variant === 'dashboard' && (
+                    <div class="text-xs opacity-75 truncate">
+                      {item.description}
+                    </div>
+                  )}
+                </div>
+              )}
+              {!collapsed && isCurrentPage(item.name) && (
+                <span class="text-xs bg-primary-foreground/20 px-1.5 py-0.5 rounded">active</span>
+              )}
+            </a>
+          ))}
+        </div>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- User Profile Section (when not collapsed) -->
+  {!collapsed && showUserProfile && (
+    <div class="p-4 border-t border-border">
+      <div class="relative group">
+        <button
+          class="w-full flex items-center space-x-3 p-3 rounded-lg text-sm hover:bg-muted/50 transition-all duration-200"
+          onclick="toggleUserProfileMenu()"
+          id="user-profile-button"
+          aria-label="User profile menu"
+        >
+          <div class="w-8 h-8 bg-gradient-to-br from-primary to-primary/70 rounded-full flex items-center justify-center text-primary-foreground font-medium text-xs">
+            {userProfile.avatar}
+          </div>
+          <div class="flex-1 min-w-0 text-left">
+            <div class="font-medium text-foreground truncate">
+              {userProfile.name}
+            </div>
+            <div class="text-xs text-muted-foreground truncate">
+              {userProfile.role}
+            </div>
+          </div>
+          <svg class="w-4 h-4 text-muted-foreground transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" id="user-profile-chevron">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+
+        <!-- User Profile Dropdown -->
+        <div
+          id="user-profile-menu"
+          class="absolute bottom-full left-0 w-full mb-2 bg-card border border-border rounded-lg shadow-lg opacity-0 invisible transition-all duration-300 transform translate-y-2"
+        >
+          <div class="p-2 space-y-1">
+            <a
+              href="/admin/profile"
+              class="flex items-center space-x-3 px-3 py-2 rounded text-sm text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200"
+            >
+              <span>👤</span>
+              <span>Profile</span>
+            </a>
+            <a
+              href="/admin/account"
+              class="flex items-center space-x-3 px-3 py-2 rounded text-sm text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200"
+            >
+              <span>⚙️</span>
+              <span>Account Settings</span>
+            </a>
+            <div class="border-t border-border my-1"></div>
+            <a
+              href="/logout"
+              class="flex items-center space-x-3 px-3 py-2 rounded text-sm text-destructive hover:bg-destructive/10 transition-all duration-200"
+            >
+              <span>🚪</span>
+              <span>Sign Out</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  )}
+
+  <!-- Collapsed Quick Actions -->
+  {collapsed && quickActions.length > 0 && (
+    <div class="p-2 border-t border-border">
+      <div class="space-y-2">
+        {quickActions.slice(0, 2).map(action => (
+          <a
+            href={action.href}
+            class={`w-10 h-10 rounded-lg flex items-center justify-center text-lg transition-all duration-200 hover:scale-105 ${
+              action.variant === 'primary' 
+                ? 'bg-primary text-primary-foreground hover:bg-primary/90' 
+                : 'bg-muted text-muted-foreground hover:text-foreground hover:bg-muted/80'
+            }`}
+            title={action.title}
+            aria-label={action.title}
+          >
+            {action.icon}
+          </a>
+        ))}
+      </div>
+    </div>
+  )}
+
+</aside>
+
+<!-- Overlay for mobile (when sidebar is open) -->
+<div 
+  id="sidebar-overlay"
+  class="fixed inset-0 bg-background/50 opacity-0 invisible lg:hidden transition-all duration-300 z-30"
+  onclick="closeMobileSidebar()"
+></div>
+
+<script>
+  // TypeScript-compliant declarations
+  declare global {
+    interface Window {
+      toggleSidebarCollapse: () => void;
+      toggleUserProfileMenu: () => void;
+      closeMobileSidebar: () => void;
+    }
+  }
+
+  let isSidebarCollapsed = false;
+  let isUserProfileMenuOpen = false;
+
+  function toggleSidebarCollapse(): void {
+    const sidebar = document.getElementById('admin-sidebar');
+    const toggle = document.getElementById('sidebar-collapse-toggle');
+    
+    if (!sidebar || !toggle) return;
+
+    isSidebarCollapsed = !isSidebarCollapsed;
+    
+    if (isSidebarCollapsed) {
+      sidebar.classList.remove('w-64', 'w-72', 'w-56', 'w-48');
+      sidebar.classList.add('w-16');
+      toggle.querySelector('svg')?.classList.add('rotate-180');
+    } else {
+      sidebar.classList.remove('w-16');
+      sidebar.classList.add('w-64'); // Default width
+      toggle.querySelector('svg')?.classList.remove('rotate-180');
+    }
+    
+    // Store collapse state
+    localStorage.setItem('sidebar-collapsed', isSidebarCollapsed.toString());
+  }
+
+  function toggleUserProfileMenu(): void {
+    const menu = document.getElementById('user-profile-menu');
+    const chevron = document.getElementById('user-profile-chevron');
+    
+    if (!menu || !chevron) return;
+
+    isUserProfileMenuOpen = !isUserProfileMenuOpen;
+    
+    if (isUserProfileMenuOpen) {
+      menu.classList.remove('opacity-0', 'invisible', 'translate-y-2');
+      menu.classList.add('opacity-100', 'visible', 'translate-y-0');
+      chevron.style.transform = 'rotate(180deg)';
+    } else {
+      menu.classList.remove('opacity-100', 'visible', 'translate-y-0');
+      menu.classList.add('opacity-0', 'invisible', 'translate-y-2');
+      chevron.style.transform = 'rotate(0deg)';
+    }
+  }
+
+  function closeMobileSidebar(): void {
+    const sidebar = document.getElementById('admin-sidebar');
+    const overlay = document.getElementById('sidebar-overlay');
+    
+    if (sidebar && overlay) {
+      sidebar.style.transform = 'translateX(-100%)';
+      overlay.classList.remove('opacity-100', 'visible');
+      overlay.classList.add('opacity-0', 'invisible');
+      document.body.style.overflow = '';
+    }
+  }
+
+  // Restore sidebar collapse state on page load
+  if (typeof document !== 'undefined') {
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedCollapsedState = localStorage.getItem('sidebar-collapsed');
+      if (savedCollapsedState === 'true') {
+        isSidebarCollapsed = true;
+        toggleSidebarCollapse();
+      }
+    });
+
+    // Close user profile menu when clicking outside
+    document.addEventListener('click', (event) => {
+      const menu = document.getElementById('user-profile-menu');
+      const button = document.getElementById('user-profile-button');
+      
+      if (menu && button && isUserProfileMenuOpen && 
+          !menu.contains(event.target as Node) && 
+          !button.contains(event.target as Node)) {
+        toggleUserProfileMenu();
+      }
+    });
+
+    // Close menus on escape key
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        if (isUserProfileMenuOpen) {
+          toggleUserProfileMenu();
+        }
+      }
+    });
+  }
+
+  // Global window assignments
+  if (typeof window !== 'undefined') {
+    window.toggleSidebarCollapse = toggleSidebarCollapse;
+    window.toggleUserProfileMenu = toggleUserProfileMenu;
+    window.closeMobileSidebar = closeMobileSidebar;
+  }
+</script>
+
+<style>
+  /* Smooth transitions for all sidebar interactions */
+  #admin-sidebar {
+    transition: width 0.3s ease-in-out;
+  }
+  
+  #admin-sidebar a:hover {
+    transform: translateX(2px);
+  }
+  
+  #admin-sidebar a,
+  #admin-sidebar button {
+    transition: all 0.2s ease-in-out;
+  }
+  
+  /* Enhanced focus visibility for accessibility */
+  #admin-sidebar a:focus-visible,
+  #admin-sidebar button:focus-visible {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+  
+  /* Scroll behavior for navigation */
+  #admin-sidebar nav {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--muted)) transparent;
+  }
+  
+  #admin-sidebar nav::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  #admin-sidebar nav::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  #admin-sidebar nav::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted));
+    border-radius: 2px;
+  }
+  
+  #admin-sidebar nav::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground));
+  }
+</style>

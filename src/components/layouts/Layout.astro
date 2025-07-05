@@ -1,12 +1,14 @@
 ---
-// Layout.astro - Refactored Foundation Layout with Professional Header/Footer System
-// Now uses modular Header.astro and Footer.astro components for maximum flexibility
+// Layout.astro - Enhanced Foundation Layout with Sidebar Integration (Sprint 8)
+// Now supports sidebar navigation for admin/dashboard layouts
+// Path: src/components/layouts/Layout.astro
 
 import Header from './Header.astro';
 import Footer from './Footer.astro';
 import Breadcrumbs from './Breadcrumbs.astro';
+import Sidebar from './Sidebar.astro';
 
-// Enhanced interface for comprehensive layout configuration
+// Enhanced interface for comprehensive layout configuration including sidebar
 export interface Props {
   title: string;
   description?: string;
@@ -27,6 +29,25 @@ export interface Props {
   showQuickLinks?: boolean;
   showBusinessInfo?: boolean;
   showNewsletter?: boolean;
+  
+  // Sidebar configuration options (Sprint 8)
+  showSidebar?: boolean;
+  sidebarVariant?: 'admin' | 'dashboard' | 'compact' | 'minimal';
+  sidebarCollapsed?: boolean;
+  showSidebarUserProfile?: boolean;
+  userProfile?: {
+    name?: string;
+    avatar?: string;
+    role?: string;
+    email?: string;
+  };
+  quickActions?: Array<{
+    name: string;
+    title: string;
+    href: string;
+    icon: string;
+    variant?: 'default' | 'primary' | 'destructive';
+  }>;
   
   // Breadcrumbs configuration
   showBreadcrumbs?: boolean;
@@ -61,6 +82,34 @@ const {
   showBusinessInfo = false,
   showNewsletter = false,
   
+  // Sidebar defaults (Sprint 8)
+  showSidebar = false,
+  sidebarVariant = 'admin',
+  sidebarCollapsed = false,
+  showSidebarUserProfile = true,
+  userProfile = {
+    name: "Admin User",
+    avatar: "👤",
+    role: "Administrator",
+    email: "admin@company.com"
+  },
+  quickActions = [
+    {
+      name: "new-project",
+      title: "New Project",
+      href: "/admin/projects/new",
+      icon: "➕",
+      variant: "primary"
+    },
+    {
+      name: "settings",
+      title: "Settings",
+      href: "/admin/settings",
+      icon: "⚙️",
+      variant: "default"
+    }
+  ],
+  
   // Breadcrumbs defaults
   showBreadcrumbs = false,
   breadcrumbsVariant = 'default',
@@ -78,6 +127,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 // Enhanced site metadata for professional presentation
 const fullSiteName = companyName || siteName;
 const fullSiteDescription = siteDescription;
+
+// Calculate main content margin when sidebar is present
+const mainContentClasses = showSidebar 
+  ? (sidebarCollapsed ? "lg:ml-16" : "lg:ml-64") 
+  : "";
 ---
 
 <!doctype html>
@@ -135,8 +189,9 @@ const fullSiteDescription = siteDescription;
   <!-- 
     Enhanced body setup with professional defaults
     Full height layout with smooth scroll behavior and optimized text rendering
+    Sidebar layout support with conditional classes
   -->
-  <body class="h-full bg-background text-foreground antialiased font-sans">
+  <body class={`h-full bg-background text-foreground antialiased font-sans ${showSidebar ? 'overflow-hidden lg:overflow-auto' : ''}`}>
     <!-- 
       Accessibility: Skip to main content link
       Essential for screen readers and keyboard navigation compliance
@@ -153,67 +208,101 @@ const fullSiteDescription = siteDescription;
     </a>
     
     <!-- 
-      Professional layout wrapper with sticky footer
-      Uses modern flexbox layout for optimal content distribution
+      Layout Container - Conditional structure based on sidebar presence
+      With sidebar: horizontal flex layout
+      Without sidebar: vertical flex layout (original)
     -->
-    <div class="min-h-full flex flex-col">
+    <div class={showSidebar ? "min-h-full flex" : "min-h-full flex flex-col"}>
       
       <!-- 
-        Professional Header Component
-        Modular system allows easy customization per client/project
+        Sidebar Component (Sprint 8)
+        Only rendered when showSidebar is true
+        Fixed position on large screens, overlay on mobile
       -->
-      <Header
-        variant={headerVariant}
-        showNavigation={showNavigation}
-        showDarkModeToggle={showDarkModeToggle}
-        showCTA={showHeaderCTA}
-        ctaText={headerCTAText}
-        ctaHref={headerCTAHref}
-        siteName={fullSiteName}
-        siteDescription={fullSiteDescription}
-        currentPage={currentPage}
-      />
-      
-      <!-- 
-        Breadcrumbs Navigation (when enabled)
-        Provides hierarchical navigation context
-      -->
-      {showBreadcrumbs && (
-        <Breadcrumbs
-          variant={breadcrumbsVariant}
-          showHome={true}
-          showIcons={true}
-          currentPageTitle={title}
+      {showSidebar && (
+        <Sidebar
+          variant={sidebarVariant}
+          currentPage={currentPage}
+          collapsed={sidebarCollapsed}
+          showUserProfile={showSidebarUserProfile}
+          userProfile={userProfile}
+          quickActions={quickActions}
         />
       )}
       
       <!-- 
-        Main content area with proper semantic structure
-        Flexible content area that grows to fill available space
-        Ensures footer stays at bottom regardless of content length
+        Main Content Area
+        Adapts based on sidebar presence and state
       -->
-      <main id="main-content" class="flex-1" role="main">
+      <div class={`flex-1 flex flex-col ${mainContentClasses} transition-all duration-300`}>
+        
         <!-- 
-          Content slot - this is where page-specific content is inserted
-          The slot system allows maximum flexibility for different page layouts
+          Professional Header Component
+          Modular system allows easy customization per client/project
+          Adjusts automatically when sidebar is present
         -->
-        <slot />
-      </main>
-      
-      <!-- 
-        Professional Footer Component  
-        Modular system supports different business needs and client requirements
-      -->
-      <Footer
-        variant={footerVariant}
-        siteName={fullSiteName}
-        siteDescription={fullSiteDescription}
-        showSocials={showSocials}
-        showQuickLinks={showQuickLinks}
-        showBusinessInfo={showBusinessInfo}
-        showNewsletter={showNewsletter}
-        companyName={companyName}
-      />
+        <Header
+          variant={headerVariant}
+          showNavigation={showNavigation && !showSidebar}
+          showDarkModeToggle={showDarkModeToggle}
+          showCTA={showHeaderCTA}
+          ctaText={headerCTAText}
+          ctaHref={headerCTAHref}
+          siteName={fullSiteName}
+          siteDescription={fullSiteDescription}
+          currentPage={currentPage}
+        />
+        
+        <!-- 
+          Breadcrumbs Navigation (when enabled)
+          Provides hierarchical navigation context
+          Works with both sidebar and standard layouts
+        -->
+        {showBreadcrumbs && (
+          <Breadcrumbs
+            variant={breadcrumbsVariant}
+            showHome={true}
+            showIcons={true}
+            currentPageTitle={title}
+          />
+        )}
+        
+        <!-- 
+          Main content area with proper semantic structure
+          Flexible content area that grows to fill available space
+          Ensures footer stays at bottom regardless of content length
+          Adapts to sidebar layout when present
+        -->
+        <main 
+          id="main-content" 
+          class={`flex-1 ${showSidebar ? 'overflow-y-auto' : ''}`} 
+          role="main"
+        >
+          <!-- 
+            Content slot - this is where page-specific content is inserted
+            The slot system allows maximum flexibility for different page layouts
+          -->
+          <slot />
+        </main>
+        
+        <!-- 
+          Professional Footer Component  
+          Modular system supports different business needs and client requirements
+          Hidden when sidebar is present (dashboard layouts typically don't need footer)
+        -->
+        {!showSidebar && (
+          <Footer
+            variant={footerVariant}
+            siteName={fullSiteName}
+            siteDescription={fullSiteDescription}
+            showSocials={showSocials}
+            showQuickLinks={showQuickLinks}
+            showBusinessInfo={showBusinessInfo}
+            showNewsletter={showNewsletter}
+            companyName={companyName}
+          />
+        )}
+      </div>
     </div>
     
     <!-- 
@@ -255,5 +344,21 @@ const fullSiteDescription = siteDescription;
   ::selection {
     background-color: hsl(var(--primary) / 0.2);
     color: hsl(var(--primary-foreground));
+  }
+
+  /* Sidebar layout specific adjustments */
+  body.sidebar-active {
+    overflow: hidden;
+  }
+  
+  @media (min-width: 1024px) {
+    body.sidebar-active {
+      overflow: auto;
+    }
+  }
+  
+  /* Smooth transitions for sidebar layout changes */
+  .main-content-area {
+    transition: margin-left 0.3s ease-in-out;
   }
 </style>

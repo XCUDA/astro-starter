@@ -30,7 +30,7 @@ import { Button } from '../components/ui/button';
         
         <div class="flex items-center justify-center space-x-2 mb-6">
           <span class="text-4xl">🚀</span>
-          <Badge variant="default" class="text-sm font-medium bg-primary text-primary-foreground">
+          <Badge variant="default" className="text-sm font-medium bg-primary text-primary-foreground">
             Business Ready
           </Badge>
         </div>
@@ -48,11 +48,11 @@ import { Button } from '../components/ui/button';
         </p>
 
         <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-          <Button size="lg" class="text-lg px-8">
+          <Button size="lg" className="text-lg px-8">
             <span class="mr-2">👀</span>
             Voir les Variants
           </Button>
-          <Button variant="outline" size="lg" class="text-lg px-8">
+          <Button variant="outline" size="lg" className="text-lg px-8">
             <span class="mr-2">💼</span>
             Business Cases
           </Button>
@@ -90,18 +90,18 @@ import { Button } from '../components/ui/button';
       <div class="space-y-12">
         
         <!-- Corporate Layout -->
-        <Card class="overflow-hidden">
-          <CardHeader class="bg-gradient-to-r from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
+        <Card className="overflow-hidden">
+          <CardHeader className="bg-gradient-to-r from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
             <div class="flex items-center space-x-3">
               <span class="text-3xl">🏢</span>
               <div>
-                <CardTitle class="text-xl">Corporate / Finance</CardTitle>
+                <CardTitle className="text-xl">Corporate / Finance</CardTitle>
                 <CardDescription>Header: business + Footer: business + CTA prominent</CardDescription>
               </div>
               <Badge variant="outline">Recommandé</Badge>
             </div>
           </CardHeader>
-          <CardContent class="p-6">
+          <CardContent className="p-6">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <h4 class="font-semibold mb-3">Configuration :</h4>
@@ -133,18 +133,18 @@ import { Button } from '../components/ui/button';
         </Card>
 
         <!-- Startup/Landing Layout -->
-        <Card class="overflow-hidden">
-          <CardHeader class="bg-gradient-to-r from-green-50 to-emerald-100 dark:from-green-950 dark:to-emerald-900">
+        <Card className="overflow-hidden">
+          <CardHeader className="bg-gradient-to-r from-green-50 to-emerald-100 dark:from-green-950 dark:to-emerald-900">
             <div class="flex items-center space-x-3">
               <span class="text-3xl">🚀</span>
               <div>
-                <CardTitle class="text-xl">Startup / Landing Page</CardTitle>
+                <CardTitle className="text-xl">Startup / Landing Page</CardTitle>
                 <CardDescription>Header: landing + Footer: startup + Newsletter active</CardDescription>
               </div>
               <Badge variant="secondary">Tendance</Badge>
             </div>
           </CardHeader>
-          <CardContent class="p-6">
+          <CardContent className="p-6">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <h4 class="font-semibold mb-3">Configuration :</h4>
@@ -176,18 +176,18 @@ import { Button } from '../components/ui/button';
         </Card>
 
         <!-- E-commerce Layout -->
-        <Card class="overflow-hidden">
-          <CardHeader class="bg-gradient-to-r from-orange-50 to-amber-100 dark:from-orange-950 dark:to-amber-900">
+        <Card className="overflow-hidden">
+          <CardHeader className="bg-gradient-to-r from-orange-50 to-amber-100 dark:from-orange-950 dark:to-amber-900">
             <div class="flex items-center space-x-3">
               <span class="text-3xl">🛒</span>
               <div>
-                <CardTitle class="text-xl">E-commerce / Boutique</CardTitle>
+                <CardTitle className="text-xl">E-commerce / Boutique</CardTitle>
                 <CardDescription>Header: business + MegaMenu + Footer: comprehensive</CardDescription>
               </div>
               <Badge variant="destructive">Hot</Badge>
             </div>
           </CardHeader>
-          <CardContent class="p-6">
+          <CardContent className="p-6">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <h4 class="font-semibold mb-3">Configuration :</h4>
@@ -219,18 +219,18 @@ import { Button } from '../components/ui/button';
         </Card>
 
         <!-- Portfolio/Minimal Layout -->
-        <Card class="overflow-hidden">
-          <CardHeader class="bg-gradient-to-r from-purple-50 to-pink-100 dark:from-purple-950 dark:to-pink-900">
+        <Card className="overflow-hidden">
+          <CardHeader className="bg-gradient-to-r from-purple-50 to-pink-100 dark:from-purple-950 dark:to-pink-900">
             <div class="flex items-center space-x-3">
               <span class="text-3xl">🎨</span>
               <div>
-                <CardTitle class="text-xl">Portfolio / Créatif</CardTitle>
+                <CardTitle className="text-xl">Portfolio / Créatif</CardTitle>
                 <CardDescription>Header: minimal + Footer: minimal + Focus contenu</CardDescription>
               </div>
               <Badge variant="outline">Élégant</Badge>
             </div>
           </CardHeader>
-          <CardContent class="p-6">
+          <CardContent className="p-6">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <h4 class="font-semibold mb-3">Configuration :</h4>
@@ -274,12 +274,12 @@ import { Button } from '../components/ui/button';
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         
         <!-- Floating FAB -->
-        <Card class="relative overflow-hidden h-64">
-          <CardHeader class="pb-3">
-            <CardTitle class="text-lg">Floating FAB</CardTitle>
+        <Card className="relative overflow-hidden h-64">
+          <CardHeader className="pb-3">
+            <CardTitle className="text-lg">Floating FAB</CardTitle>
             <CardDescription>SaaS / Applications</CardDescription>
           </CardHeader>
-          <CardContent class="relative h-full">
+          <CardContent className="relative h-full">
             <TouchNavigation 
               variant="floating-fab"
               showBackToTop={true}
@@ -293,12 +293,12 @@ import { Button } from '../components/ui/button';
         </Card>
 
         <!-- Bottom Navigation -->
-        <Card class="relative overflow-hidden h-64">
-          <CardHeader class="pb-3">
-            <CardTitle class="text-lg">Bottom Nav</CardTitle>
+        <Card className="relative overflow-hidden h-64">
+          <CardHeader className="pb-3">
+            <CardTitle className="text-lg">Bottom Nav</CardTitle>
             <CardDescription>E-commerce / Mobile</CardDescription>
           </CardHeader>
-          <CardContent class="relative h-full">
+          <CardContent className="relative h-full">
             <TouchNavigation 
               variant="bottom-nav"
               currentPage="business-demo"
@@ -311,12 +311,12 @@ import { Button } from '../components/ui/button';
         </Card>
 
         <!-- Swipe Drawer -->
-        <Card class="relative overflow-hidden h-64">
-          <CardHeader class="pb-3">
-            <CardTitle class="text-lg">Swipe Drawer</CardTitle>
+        <Card className="relative overflow-hidden h-64">
+          <CardHeader className="pb-3">
+            <CardTitle className="text-lg">Swipe Drawer</CardTitle>
             <CardDescription>Mobile First</CardDescription>
           </CardHeader>
-          <CardContent class="relative h-full">
+          <CardContent className="relative h-full">
             <TouchNavigation 
               variant="swipe-drawer"
               enableSwipeToClose={true}
@@ -330,12 +330,12 @@ import { Button } from '../components/ui/button';
         </Card>
 
         <!-- Gesture Panel -->
-        <Card class="relative overflow-hidden h-64">
-          <CardHeader class="pb-3">
-            <CardTitle class="text-lg">Gesture Panel</CardTitle>
+        <Card className="relative overflow-hidden h-64">
+          <CardHeader className="pb-3">
+            <CardTitle className="text-lg">Gesture Panel</CardTitle>
             <CardDescription>Navigation Gestuelle</CardDescription>
           </CardHeader>
-          <CardContent class="relative h-full">
+          <CardContent className="relative h-full">
             <TouchNavigation 
               variant="gesture-panel"
               enableSwipeNavigation={true}
@@ -387,7 +387,7 @@ import { Button } from '../components/ui/button';
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         
-        <Card class="text-center">
+        <Card className="text-center">
           <CardHeader>
             <div class="text-4xl mb-4">⚡</div>
             <CardTitle>10x Plus Rapide</CardTitle>
@@ -401,7 +401,7 @@ import { Button } from '../components/ui/button';
           </CardContent>
         </Card>
 
-        <Card class="text-center">
+        <Card className="text-center">
           <CardHeader>
             <div class="text-4xl mb-4">🎯</div>
             <CardTitle>29 Composants</CardTitle>
@@ -415,7 +415,7 @@ import { Button } from '../components/ui/button';
           </CardContent>
         </Card>
 
-        <Card class="text-center">
+        <Card className="text-center">
           <CardHeader>
             <div class="text-4xl mb-4">🏆</div>
             <CardTitle>Business Ready</CardTitle>

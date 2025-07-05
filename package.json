@@ -1,8 +1,8 @@
 {
   "name": "astro-starter",
   "type": "module",
-  "version": "1.5.0",
-  "description": "A modern, production-ready Astro 5 starter with TailwindCSS 4, shadcn/ui, and TypeScript. Complete layout system with responsive navigation, mega menus, breadcrumbs, touch gestures, and flexible grid system with templates and page compositions.",
+  "version": "1.6.0",
+  "description": "A modern, production-ready Astro 5 starter with TailwindCSS 4, shadcn/ui, and TypeScript. Complete layout system with responsive navigation, mega menus, breadcrumbs, touch gestures, flexible grid system with templates and page compositions, and comprehensive sidebar navigation for admin dashboards.",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
@@ -52,6 +52,12 @@
     "template",
     "performance",
     "production-ready",
+    "sidebar-navigation",
+    "admin-dashboard",
+    "collapsible-sidebar",
+    "nested-menus",
+    "quick-actions",
+    "user-profile",
     "grid-system",
     "section-templates", 
     "content-blocks",

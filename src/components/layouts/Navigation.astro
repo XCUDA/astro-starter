@@ -1,5 +1,5 @@
 ---
-// Navigation.astro - Advanced Responsive Navigation System (Fixed TypeScript)
+// Navigation.astro - Advanced Responsive Navigation System (Updated with Sidebar Showcase)
 // Enhanced with animations, touch gestures, and intelligent breakpoint management
 // Path: src/components/layouts/Navigation.astro
 
@@ -86,6 +86,14 @@ const navigationConfig = {
       href: "/grid-showcase",
       description: "Grid layouts and flexible components",
       icon: "📐",
+      category: "layout"
+    },
+    {
+      name: "sidebar-showcase",
+      title: "Sidebar Navigation",
+      href: "/sidebar-showcase",
+      description: "Admin dashboard and sidebar navigation system",
+      icon: "📋",
       category: "layout"
     },
     {
@@ -206,6 +214,9 @@ const breadcrumbs = showBreadcrumbs ? generateBreadcrumbs() : [];
                       <span>{showcase.title}</span>
                       {isCurrentPage(showcase.name) && (
                         <span class="text-xs bg-primary text-primary-foreground px-2 py-0.5 rounded">current</span>
+                      )}
+                      {showcase.name === 'sidebar-showcase' && (
+                        <span class="text-xs bg-green-500 text-green-900 px-2 py-0.5 rounded">NEW</span>
                       )}
                     </div>
                     <div class="text-xs text-muted-foreground mt-1">
@@ -337,8 +348,8 @@ const breadcrumbs = showBreadcrumbs ? generateBreadcrumbs() : [];
                       {isCurrentPage(showcase.name) && (
                         <span class="text-xs bg-background/20 px-2 py-0.5 rounded">current</span>
                       )}
-                      {showcase.name === 'business-demo' && (
-                        <span class="text-xs bg-yellow-500 text-yellow-900 px-2 py-0.5 rounded">NEW</span>
+                      {showcase.name === 'sidebar-showcase' && (
+                        <span class="text-xs bg-green-500 text-green-900 px-2 py-0.5 rounded">NEW</span>
                       )}
                     </div>
                     <div class="text-sm opacity-75 mt-1">
