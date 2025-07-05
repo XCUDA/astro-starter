@@ -1,0 +1,504 @@
+---
+// LayoutComposer.astro - Complete Page Layout Compositions
+// Pre-built page layouts combining GridContainer, SectionTemplates, and ContentBlocks
+// Path: src/components/layouts/LayoutComposer.astro
+
+import GridContainer from './GridContainer.astro';
+import SectionTemplates from './SectionTemplates.astro';
+import { FeatureTabs, InteractivePricing, AnimatedStats, ProcessSteps } from '../islands/ContentBlocks';
+
+export interface Props {
+  composition: 'landing' | 'business' | 'saas' | 'startup' | 'portfolio' | 'agency';
+  variant?: 'default' | 'minimal' | 'business' | 'startup';
+  class?: string;
+  heroTitle?: string;
+  heroSubtitle?: string;
+  heroDescription?: string;
+  showPricing?: boolean;
+  showTestimonials?: boolean;
+  showStats?: boolean;
+  showProcess?: boolean;
+}
+
+const {
+  composition,
+  variant = 'default',
+  class: className = '',
+  heroTitle,
+  heroSubtitle,
+  heroDescription,
+  showPricing = true,
+  showTestimonials = false,
+  showStats = true,
+  showProcess = true
+} = Astro.props;
+---
+
+<div class={`layout-composition-${composition} ${className}`.trim()}>
+
+  {composition === 'landing' && (
+    <>
+      <!-- Hero Section -->
+      <SectionTemplates 
+        template="hero"
+        variant={variant}
+        title={heroTitle || "Build Amazing Websites Faster"}
+        subtitle={heroSubtitle || "Professional Starter"}
+        description={heroDescription || "A modern, production-ready Astro 5 starter with TailwindCSS 4, shadcn/ui, and TypeScript. Perfect for building professional websites quickly."}
+        showBackground={true}
+      />
+
+      <!-- Feature Tabs Interactive Section -->
+      <section class="py-16 md:py-24">
+        <GridContainer variant="default" columns={1} gap="lg">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+              Why Choose Our Starter
+            </h2>
+            <p class="text-lg text-muted-foreground max-w-3xl mx-auto">
+              Discover the powerful features that make development faster and more enjoyable.
+            </p>
+          </div>
+          <FeatureTabs client:load />
+        </GridContainer>
+      </section>
+
+      <!-- Stats Section -->
+      {showStats && (
+        <section class="py-16 md:py-24 bg-muted/30">
+          <GridContainer variant="default" columns={1} gap="lg">
+            <div class="text-center mb-12">
+              <h2 class="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+                By the Numbers
+              </h2>
+              <p class="text-lg text-muted-foreground max-w-3xl mx-auto">
+                See the impact of choosing a professional, well-built starter template.
+              </p>
+            </div>
+            <AnimatedStats client:visible />
+          </GridContainer>
+        </section>
+      )}
+
+      <!-- Features Grid -->
+      <SectionTemplates 
+        template="features"
+        variant={variant}
+        title="Everything You Need"
+        description="Comprehensive toolset for building modern, professional websites with best practices built-in."
+      />
+
+      <!-- Process Steps -->
+      {showProcess && (
+        <section class="py-16 md:py-24 bg-gradient-to-br from-primary/5 to-secondary/5">
+          <GridContainer variant="default" columns={1} gap="lg">
+            <div class="text-center mb-12">
+              <h2 class="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+                Get Started in Minutes
+              </h2>
+              <p class="text-lg text-muted-foreground max-w-3xl mx-auto">
+                Our streamlined process makes it easy to start building amazing websites right away.
+              </p>
+            </div>
+            <ProcessSteps client:visible />
+          </GridContainer>
+        </section>
+      )}
+
+      <!-- Pricing Section -->
+      {showPricing && (
+        <section class="py-16 md:py-24">
+          <GridContainer variant="default" columns={1} gap="lg">
+            <div class="text-center mb-12">
+              <h2 class="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+                Simple, Transparent Pricing
+              </h2>
+              <p class="text-lg text-muted-foreground max-w-3xl mx-auto">
+                Choose the perfect plan for your project needs. All plans include full source code.
+              </p>
+            </div>
+            <InteractivePricing client:load />
+          </GridContainer>
+        </section>
+      )}
+
+      <!-- Call to Action -->
+      <SectionTemplates 
+        template="cta"
+        variant={variant}
+        title="Ready to Build Something Amazing?"
+        description="Join thousands of developers who trust our professional starter template to build exceptional websites."
+        showBackground={true}
+      />
+    </>
+  )}
+
+  {composition === 'business' && (
+    <>
+      <!-- Business Hero -->
+      <SectionTemplates 
+        template="hero"
+        variant="business"
+        title={heroTitle || "Professional Web Solutions"}
+        subtitle={heroSubtitle || "Enterprise Ready"}
+        description={heroDescription || "Transform your business with our professional web development starter. Built for scale, performance, and maintainability."}
+        showBackground={true}
+      />
+
+      <!-- Company Stats -->
+      <SectionTemplates template="stats" variant="business" />
+
+      <!-- Services/Features -->
+      <SectionTemplates 
+        template="features"
+        variant="business"
+        title="Our Core Services"
+        description="Comprehensive solutions designed to meet your business objectives and drive growth."
+      />
+
+      <!-- Process -->
+      {showProcess && (
+        <SectionTemplates 
+          template="process"
+          variant="business"
+          title="Our Proven Process"
+          description="A systematic approach that ensures project success and client satisfaction."
+          showBackground={true}
+        />
+      )}
+
+      <!-- Team -->
+      <SectionTemplates 
+        template="team"
+        variant="business"
+        title="Meet Our Experts"
+        description="Experienced professionals dedicated to delivering exceptional results for your business."
+      />
+
+      <!-- CTA -->
+      <SectionTemplates 
+        template="cta"
+        variant="business"
+        title="Ready to Get Started?"
+        description="Contact us today to discuss your project and discover how we can help your business succeed."
+        showBackground={true}
+      />
+    </>
+  )}
+
+  {composition === 'saas' && (
+    <>
+      <!-- SaaS Hero with Product Demo -->
+      <SectionTemplates 
+        template="hero"
+        variant="startup"
+        title={heroTitle || "The Modern Development Platform"}
+        subtitle={heroSubtitle || "SaaS Solution"}
+        description={heroDescription || "Build, deploy, and scale your applications with our comprehensive development platform. Everything you need in one place."}
+        showBackground={true}
+      />
+
+      <!-- Interactive Feature Showcase -->
+      <section class="py-16 md:py-24">
+        <GridContainer variant="wide" columns={1} gap="xl">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+              Powerful Features
+            </h2>
+            <p class="text-lg text-muted-foreground max-w-3xl mx-auto">
+              Everything you need to build, deploy, and scale modern applications.
+            </p>
+          </div>
+          <FeatureTabs client:load />
+        </GridContainer>
+      </section>
+
+      <!-- Platform Stats -->
+      {showStats && (
+        <section class="py-16 md:py-24 bg-muted/30">
+          <GridContainer variant="default" columns={1} gap="lg">
+            <div class="text-center mb-12">
+              <h2 class="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+                Platform Performance
+              </h2>
+            </div>
+            <AnimatedStats client:visible />
+          </GridContainer>
+        </section>
+      )}
+
+      <!-- Pricing Plans -->
+      {showPricing && (
+        <section class="py-16 md:py-24">
+          <GridContainer variant="default" columns={1} gap="lg">
+            <div class="text-center mb-12">
+              <h2 class="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+                Choose Your Plan
+              </h2>
+              <p class="text-lg text-muted-foreground max-w-3xl mx-auto">
+                Flexible pricing that scales with your business needs.
+              </p>
+            </div>
+            <InteractivePricing client:load />
+          </GridContainer>
+        </section>
+      )}
+
+      <!-- Getting Started Process -->
+      {showProcess && (
+        <section class="py-16 md:py-24 bg-gradient-to-br from-primary/5 to-secondary/5">
+          <GridContainer variant="default" columns={1} gap="lg">
+            <div class="text-center mb-12">
+              <h2 class="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+                Get Started Today
+              </h2>
+            </div>
+            <ProcessSteps client:visible />
+          </GridContainer>
+        </section>
+      )}
+
+      <!-- CTA -->
+      <SectionTemplates 
+        template="cta"
+        variant="startup"
+        title="Start Building Today"
+        description="Join thousands of developers who are already building amazing applications with our platform."
+        showBackground={true}
+      />
+    </>
+  )}
+
+  {composition === 'startup' && (
+    <>
+      <!-- Startup Hero -->
+      <SectionTemplates 
+        template="hero"
+        variant="startup"
+        title={heroTitle || "Disrupt. Innovate. Scale."}
+        subtitle={heroSubtitle || "Startup Kit"}
+        description={heroDescription || "Everything a startup needs to build and launch their MVP quickly. Focus on your product, we'll handle the infrastructure."}
+        showBackground={true}
+      />
+
+      <!-- Quick Stats -->
+      <SectionTemplates template="stats" variant="startup" />
+
+      <!-- Why Choose Us */}
+      <SectionTemplates 
+        template="features"
+        variant="startup"
+        title="Built for Startups"
+        description="Fast, lean, and scalable solutions designed specifically for growing businesses."
+      />
+
+      <!-- Simple Process -->
+      {showProcess && (
+        <section class="py-16 md:py-24 bg-muted/30">
+          <GridContainer variant="default" columns={1} gap="lg">
+            <div class="text-center mb-12">
+              <h2 class="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+                Launch in Record Time
+              </h2>
+            </div>
+            <ProcessSteps client:visible />
+          </GridContainer>
+        </section>
+      )}
+
+      <!-- Simple Pricing -->
+      {showPricing && (
+        <SectionTemplates 
+          template="pricing"
+          variant="startup"
+          title="Startup-Friendly Pricing"
+          description="Pay as you grow. No hidden fees, no long-term contracts."
+          showBackground={true}
+        />
+      )}
+
+      <!-- CTA -->
+      <SectionTemplates 
+        template="cta"
+        variant="startup"
+        title="Ready to Launch?"
+        description="Join the next generation of successful startups. Get started today and bring your vision to life."
+      />
+    </>
+  )}
+
+  {composition === 'portfolio' && (
+    <>
+      <!-- Portfolio Hero -->
+      <SectionTemplates 
+        template="hero"
+        variant="minimal"
+        title={heroTitle || "Creative Developer & Designer"}
+        subtitle={heroSubtitle || "Portfolio"}
+        description={heroDescription || "Passionate about creating beautiful, functional digital experiences that make a difference."}
+        showBackground={true}
+      />
+
+      <!-- Skills/Expertise -->
+      <SectionTemplates 
+        template="features"
+        variant="minimal"
+        title="What I Do"
+        description="Specialized skills and expertise in modern web development and design."
+      />
+
+      <!-- Process/Approach -->
+      {showProcess && (
+        <section class="py-16 md:py-24 bg-muted/30">
+          <GridContainer variant="narrow" columns={1} gap="lg">
+            <div class="text-center mb-12">
+              <h2 class="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+                My Process
+              </h2>
+            </div>
+            <ProcessSteps client:visible />
+          </GridContainer>
+        </section>
+      )}
+
+      <!-- Stats/Achievements -->
+      {showStats && (
+        <section class="py-16 md:py-24">
+          <GridContainer variant="narrow" columns={1} gap="lg">
+            <div class="text-center mb-12">
+              <h2 class="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+                Experience
+              </h2>
+            </div>
+            <AnimatedStats client:visible />
+          </GridContainer>
+        </section>
+      )}
+
+      <!-- CTA -->
+      <SectionTemplates 
+        template="cta"
+        variant="minimal"
+        title="Let's Work Together"
+        description="Have a project in mind? I'd love to hear about it and discuss how we can bring your vision to life."
+        showBackground={true}
+      />
+    </>
+  )}
+
+  {composition === 'agency' && (
+    <>
+      <!-- Agency Hero -->
+      <SectionTemplates 
+        template="hero"
+        variant="business"
+        title={heroTitle || "Digital Agency Excellence"}
+        subtitle={heroSubtitle || "Full Service"}
+        description={heroDescription || "We create digital experiences that drive business growth. From strategy to execution, we're your trusted technology partner."}
+        showBackground={true}
+      />
+
+      <!-- Agency Stats -->
+      <section class="py-16 md:py-24 bg-muted/30">
+        <GridContainer variant="default" columns={1} gap="lg">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+              Proven Results
+            </h2>
+          </div>
+          <AnimatedStats client:visible />
+        </GridContainer>
+      </section>
+
+      <!-- Services -->
+      <SectionTemplates 
+        template="features"
+        variant="business"
+        title="Our Services"
+        description="Comprehensive digital solutions tailored to your business objectives."
+      />
+
+      <!-- Team -->
+      <SectionTemplates 
+        template="team"
+        variant="business"
+        title="Meet the Team"
+        description="Creative professionals with the expertise to bring your vision to life."
+        showBackground={true}
+      />
+
+      <!-- Process */}
+      {showProcess && (
+        <SectionTemplates 
+          template="process"
+          variant="business"
+          title="Our Methodology"
+          description="A proven approach that delivers exceptional results for our clients."
+        />
+      )}
+
+      <!-- CTA -->
+      <SectionTemplates 
+        template="cta"
+        variant="business"
+        title="Ready to Transform Your Business?"
+        description="Let's discuss your project and explore how our expertise can drive your success."
+        showBackground={true}
+      />
+    </>
+  )}
+
+</div>
+
+<!-- 
+Usage Examples:
+
+// Landing Page Composition
+<LayoutComposer 
+  composition="landing"
+  variant="default"
+  heroTitle="Custom Hero Title"
+  heroSubtitle="Featured"
+  showPricing={true}
+  showStats={true}
+  showProcess={true}
+/>
+
+// Business Website
+<LayoutComposer 
+  composition="business"
+  variant="business"
+  heroTitle="Professional Services"
+  showTestimonials={true}
+/>
+
+// SaaS Product Page
+<LayoutComposer 
+  composition="saas"
+  variant="startup"
+  heroTitle="Revolutionary Platform"
+  showPricing={true}
+/>
+
+// Startup Landing
+<LayoutComposer 
+  composition="startup"
+  variant="startup"
+  heroTitle="Disrupt the Market"
+/>
+
+// Portfolio Site
+<LayoutComposer 
+  composition="portfolio"
+  variant="minimal"
+  heroTitle="John Doe"
+  heroSubtitle="Creative Developer"
+/>
+
+// Agency Website
+<LayoutComposer 
+  composition="agency"
+  variant="business"
+  heroTitle="Digital Excellence"
+/>
+-->

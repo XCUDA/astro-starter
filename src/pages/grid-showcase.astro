@@ -1,0 +1,339 @@
+---
+// Grid Showcase Page - Version Simple qui Fonctionne
+// Path: src/pages/grid-showcase.astro
+
+import Layout from '../components/layouts/Layout.astro';
+import GridContainer from '../components/layouts/GridContainer.astro';
+import SectionTemplates from '../components/layouts/SectionTemplates.astro';
+import { FeatureTabs, InteractivePricing, AnimatedStats, ProcessSteps } from '../components/islands/ContentBlocks';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
+import { Badge } from '../components/ui/badge';
+import { Button } from '../components/ui/button';
+---
+
+<Layout 
+  title="Grid System Showcase"
+  description="Complete demonstration of our flexible grid system"
+  currentPage="grid-showcase"
+  headerVariant="business"
+  footerVariant="business"
+  showHeaderCTA={true}
+  headerCTAText="Try Grid System"
+  showBreadcrumbs={true}
+  keywords="grid system, layout templates, content blocks, responsive design"
+>
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-primary/5 via-background to-secondary/5 py-16">
+    <GridContainer variant="wide" columns={1} gap="lg">
+      <div class="text-center max-w-4xl mx-auto">
+        <div class="flex items-center justify-center space-x-2 mb-6">
+          <span class="text-4xl">📐</span>
+          <Badge variant="secondary" className="text-sm font-medium">
+            Phase 2.3.3 Complete
+          </Badge>
+        </div>
+        
+        <h1 class="text-4xl lg:text-5xl font-bold text-foreground mb-6">
+          Grid System Showcase
+        </h1>
+        
+        <p class="text-xl text-muted-foreground mb-8 leading-relaxed">
+          Discover our comprehensive grid system featuring responsive containers, 
+          business templates, interactive blocks, and complete page compositions.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <Button size="lg" className="text-lg px-8">
+            <span class="mr-2">🚀</span>
+            Explore Components
+          </Button>
+          <Button variant="outline" size="lg" className="text-lg px-8">
+            <span class="mr-2">📚</span>
+            View Templates
+          </Button>
+        </div>
+      </div>
+    </GridContainer>
+  </section>
+
+  <!-- Grid System Overview -->
+  <section class="py-16">
+    <GridContainer variant="default" columns={1} gap="lg">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-foreground mb-4">Grid System Components</h2>
+        <p class="text-lg text-muted-foreground max-w-3xl mx-auto">
+          Four main components that work together to create professional, responsive layouts.
+        </p>
+      </div>
+
+      <GridContainer columns={4} gap="lg">
+        <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105">
+          <CardHeader className="text-center">
+            <div class="text-3xl mb-2">📦</div>
+            <CardTitle className="text-lg">GridContainer</CardTitle>
+            <CardDescription>
+              Responsive 12-column grid with 4 container variants
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ul class="text-sm space-y-2 text-muted-foreground">
+              <li>• 4 container widths</li>
+              <li>• Responsive columns</li>
+              <li>• Flexible spacing</li>
+              <li>• Alignment control</li>
+            </ul>
+          </CardContent>
+        </Card>
+
+        <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105">
+          <CardHeader className="text-center">
+            <div class="text-3xl mb-2">🎨</div>
+            <CardTitle className="text-lg">SectionTemplates</CardTitle>
+            <CardDescription>
+              9 pre-built business section templates
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ul class="text-sm space-y-2 text-muted-foreground">
+              <li>• Hero sections</li>
+              <li>• Feature grids</li>
+              <li>• Pricing tables</li>
+              <li>• Team sections</li>
+            </ul>
+          </CardContent>
+        </Card>
+
+        <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105">
+          <CardHeader className="text-center">
+            <div class="text-3xl mb-2">⚡</div>
+            <CardTitle className="text-lg">ContentBlocks</CardTitle>
+            <CardDescription>
+              4 interactive React components with animations
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ul class="text-sm space-y-2 text-muted-foreground">
+              <li>• Feature tabs</li>
+              <li>• Interactive pricing</li>
+              <li>• Animated stats</li>
+              <li>• Process steps</li>
+            </ul>
+          </CardContent>
+        </Card>
+
+        <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105">
+          <CardHeader className="text-center">
+            <div class="text-3xl mb-2">🏗️</div>
+            <CardTitle className="text-lg">LayoutComposer</CardTitle>
+            <CardDescription>
+              6 complete page compositions ready to use
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ul class="text-sm space-y-2 text-muted-foreground">
+              <li>• Landing pages</li>
+              <li>• Business sites</li>
+              <li>• SaaS platforms</li>
+              <li>• Portfolio sites</li>
+            </ul>
+          </CardContent>
+        </Card>
+      </GridContainer>
+    </GridContainer>
+  </section>
+
+  <!-- GridContainer Demo -->
+  <section class="py-16 bg-muted/30">
+    <GridContainer variant="default" columns={1} gap="lg">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-foreground mb-4">GridContainer Variants</h2>
+        <p class="text-lg text-muted-foreground max-w-3xl mx-auto">
+          Four container widths to match any design need, with responsive column systems.
+        </p>
+      </div>
+
+      <div class="space-y-8">
+        <!-- Default Container -->
+        <div>
+          <h3 class="text-xl font-semibold mb-4">Default Container</h3>
+          <div class="border border-border rounded-lg p-4 bg-background">
+            <GridContainer variant="default" columns={3} gap="md">
+              <Card><CardContent className="pt-6 text-center">Item 1</CardContent></Card>
+              <Card><CardContent className="pt-6 text-center">Item 2</CardContent></Card>
+              <Card><CardContent className="pt-6 text-center">Item 3</CardContent></Card>
+            </GridContainer>
+          </div>
+          <p class="text-sm text-muted-foreground mt-2">Standard container with padding • Perfect for most content</p>
+        </div>
+
+        <!-- Wide Container -->
+        <div>
+          <h3 class="text-xl font-semibold mb-4">Wide Container</h3>
+          <div class="border border-border rounded-lg p-4 bg-background">
+            <GridContainer variant="wide" columns={4} gap="lg">
+              <Card><CardContent className="pt-6 text-center">Feature 1</CardContent></Card>
+              <Card><CardContent className="pt-6 text-center">Feature 2</CardContent></Card>
+              <Card><CardContent className="pt-6 text-center">Feature 3</CardContent></Card>
+              <Card><CardContent className="pt-6 text-center">Feature 4</CardContent></Card>
+            </GridContainer>
+          </div>
+          <p class="text-sm text-muted-foreground mt-2">Wider for landing pages • Extra space for showcasing</p>
+        </div>
+      </div>
+    </GridContainer>
+  </section>
+
+  <!-- SectionTemplates Demo -->
+  <section class="py-16">
+    <GridContainer variant="default" columns={1} gap="lg">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-foreground mb-4">Section Templates</h2>
+        <p class="text-lg text-muted-foreground max-w-3xl mx-auto">
+          Pre-built section templates for rapid page construction.
+        </p>
+      </div>
+    </GridContainer>
+
+    <!-- Hero Template Demo -->
+    <SectionTemplates 
+      template="hero"
+      variant="business"
+      title="Transform Your Business"
+      subtitle="Professional Solution"
+      description="A powerful hero section with call-to-action buttons that convert visitors into customers."
+      showBackground={true}
+    />
+
+    <!-- Features Template Demo -->
+    <SectionTemplates 
+      template="features"
+      variant="default"
+      title="Powerful Features"
+      description="Showcase your product features with beautiful cards and clear descriptions."
+    />
+
+    <!-- Stats Template Demo -->
+    <SectionTemplates template="stats" showBackground={true} />
+  </section>
+
+  <!-- Interactive Content Blocks -->
+  <section class="py-16 bg-muted/30">
+    <GridContainer variant="default" columns={1} gap="lg">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-foreground mb-4">Interactive Content Blocks</h2>
+        <p class="text-lg text-muted-foreground max-w-3xl mx-auto">
+          React-powered interactive components that engage users dynamically.
+        </p>
+      </div>
+
+      <div class="space-y-16">
+        <!-- Feature Tabs Block -->
+        <div>
+          <h3 class="text-xl font-semibold mb-6 text-center">Feature Tabs - Interactive Showcase</h3>
+          <div class="border border-border rounded-lg p-6 bg-card">
+            <FeatureTabs client:load />
+          </div>
+        </div>
+
+        <!-- Animated Stats Block -->
+        <div>
+          <h3 class="text-xl font-semibold mb-6 text-center">Animated Stats - Count Up Animation</h3>
+          <div class="border border-border rounded-lg p-6 bg-card">
+            <AnimatedStats client:visible />
+          </div>
+        </div>
+
+        <!-- Interactive Pricing Block -->
+        <div>
+          <h3 class="text-xl font-semibold mb-6 text-center">Interactive Pricing - Smart Selection</h3>
+          <div class="border border-border rounded-lg p-6 bg-card">
+            <InteractivePricing client:load />
+          </div>
+        </div>
+
+        <!-- Process Steps Block -->
+        <div>
+          <h3 class="text-xl font-semibold mb-6 text-center">Process Steps - Interactive Workflow</h3>
+          <div class="border border-border rounded-lg p-6 bg-card">
+            <ProcessSteps client:load />
+          </div>
+        </div>
+      </div>
+    </GridContainer>
+  </section>
+
+  <!-- Business Applications -->
+  <section class="py-16">
+    <GridContainer variant="default" columns={1} gap="lg">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-foreground mb-4">Business Applications</h2>
+        <p class="text-lg text-muted-foreground max-w-3xl mx-auto">
+          Real-world use cases where our grid system shines.
+        </p>
+      </div>
+
+      <GridContainer columns={3} gap="lg">
+        <Card className="hover:shadow-lg transition-all duration-200">
+          <CardHeader>
+            <CardTitle className="flex items-center space-x-2">
+              <span>⚡</span>
+              <span>Rapid Prototyping</span>
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div class="space-y-3 text-sm text-muted-foreground">
+              <div>• Test ideas quickly with pre-built templates</div>
+              <div>• Iterate layouts without starting from scratch</div>
+              <div>• Present professional mockups to clients</div>
+              <div>• Validate concepts before full development</div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="hover:shadow-lg transition-all duration-200">
+          <CardHeader>
+            <CardTitle className="flex items-center space-x-2">
+              <span>🏢</span>
+              <span>Client Projects</span>
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div class="space-y-3 text-sm text-muted-foreground">
+              <div>• Deliver consistent quality across projects</div>
+              <div>• Reduce development time by 70%</div>
+              <div>• Focus on customization, not foundation</div>
+              <div>• Maintain professional standards</div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="hover:shadow-lg transition-all duration-200">
+          <CardHeader>
+            <CardTitle className="flex items-center space-x-2">
+              <span>🔄</span>
+              <span>A/B Testing</span>
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div class="space-y-3 text-sm text-muted-foreground">
+              <div>• Quickly create layout variations</div>
+              <div>• Test different section arrangements</div>
+              <div>• Compare interactive vs static elements</div>
+              <div>• Optimize conversion with data</div>
+            </div>
+          </CardContent>
+        </Card>
+      </GridContainer>
+    </GridContainer>
+  </section>
+
+  <!-- Final CTA -->
+  <SectionTemplates 
+    template="cta"
+    variant="business"
+    title="Ready to Build with Our Grid System?"
+    description="Experience the power of professional-grade layout components. Start building amazing websites today."
+    showBackground={true}
+  />
+
+</Layout>

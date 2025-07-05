@@ -1,5 +1,5 @@
 ---
-// Navigation.astro - Advanced Responsive Navigation System (Clean Version)
+// Navigation.astro - Advanced Responsive Navigation System (Fixed TypeScript)
 // Enhanced with animations, touch gestures, and intelligent breakpoint management
 // Path: src/components/layouts/Navigation.astro
 
@@ -63,6 +63,14 @@ const navigationConfig = {
       description: "Calendar, Command, Sonner and advanced UI",
       icon: "🔮",
       category: "components"
+    },
+    {
+      name: "business-demo",
+      title: "Business Demo",
+      href: "/business-demo",
+      description: "See all business variants and potential in action",
+      icon: "💼",
+      category: "demo"
     },
     {
       name: "layout-showcase",
@@ -329,6 +337,9 @@ const breadcrumbs = showBreadcrumbs ? generateBreadcrumbs() : [];
                       {isCurrentPage(showcase.name) && (
                         <span class="text-xs bg-background/20 px-2 py-0.5 rounded">current</span>
                       )}
+                      {showcase.name === 'business-demo' && (
+                        <span class="text-xs bg-yellow-500 text-yellow-900 px-2 py-0.5 rounded">NEW</span>
+                      )}
                     </div>
                     <div class="text-sm opacity-75 mt-1">
                       {showcase.description}
@@ -374,9 +385,18 @@ const breadcrumbs = showBreadcrumbs ? generateBreadcrumbs() : [];
 </nav>
 
 <script>
+  // TypeScript-compliant declarations
+  declare global {
+    interface Window {
+      toggleNavMobileDrawer: () => void;
+      openNavMobileDrawer: () => void;
+      closeNavMobileDrawer: () => void;
+    }
+  }
+
   let isNavDrawerOpen = false;
 
-  function toggleNavMobileDrawer() {
+  function toggleNavMobileDrawer(): void {
     const drawer = document.getElementById('nav-mobile-drawer');
     const backdrop = document.getElementById('nav-mobile-backdrop');
     const button = document.getElementById('nav-mobile-menu-button');
@@ -392,7 +412,7 @@ const breadcrumbs = showBreadcrumbs ? generateBreadcrumbs() : [];
     }
   }
 
-  function openNavMobileDrawer() {
+  function openNavMobileDrawer(): void {
     const drawer = document.getElementById('nav-mobile-drawer');
     const backdrop = document.getElementById('nav-mobile-backdrop');
     
@@ -406,7 +426,7 @@ const breadcrumbs = showBreadcrumbs ? generateBreadcrumbs() : [];
     }
   }
 
-  function closeNavMobileDrawer() {
+  function closeNavMobileDrawer(): void {
     const drawer = document.getElementById('nav-mobile-drawer');
     const backdrop = document.getElementById('nav-mobile-backdrop');
     
@@ -420,16 +440,18 @@ const breadcrumbs = showBreadcrumbs ? generateBreadcrumbs() : [];
     }
   }
 
-  function handleNavKeyNavigation(event) {
+  function handleNavKeyNavigation(event: KeyboardEvent): void {
     if (event.key === 'Escape' && isNavDrawerOpen) {
       closeNavMobileDrawer();
     }
   }
 
+  // Event listeners
   if (typeof document !== 'undefined') {
     document.addEventListener('keydown', handleNavKeyNavigation);
   }
 
+  // Global window assignments
   if (typeof window !== 'undefined') {
     window.toggleNavMobileDrawer = toggleNavMobileDrawer;
     window.openNavMobileDrawer = openNavMobileDrawer;

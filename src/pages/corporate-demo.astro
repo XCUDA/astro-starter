@@ -1,0 +1,208 @@
+---
+// Corporate Demo Page - Business Professional Layout
+// Path: src/pages/corporate-demo.astro
+
+import Layout from '../components/layouts/Layout.astro';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
+import { Badge } from '../components/ui/badge';
+import { Button } from '../components/ui/button';
+---
+
+<Layout 
+  title="Cabinet Expertise Comptable | Demo Corporate"
+  description="Cabinet d'expertise comptable professionnel - Audit, conseil, fiscalité"
+  currentPage="corporate-demo"
+  headerVariant="business"
+  footerVariant="business"
+  showHeaderCTA={true}
+  headerCTAText="Prendre RDV"
+  headerCTAHref="/contact"
+  showBusinessInfo={true}
+  showBreadcrumbs={true}
+  companyName="Cabinet Expertise & Conseil"
+  siteDescription="Expertise comptable, audit et conseil fiscal depuis 1995"
+>
+  
+  <!-- Hero Corporate -->
+  <section class="bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 py-20">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        
+        <Badge variant="outline" class="mb-6">
+          Expertise depuis 1995
+        </Badge>
+        
+        <h1 class="text-4xl lg:text-6xl font-bold text-foreground mb-6">
+          Cabinet Expertise
+          <span class="text-primary">& Conseil</span>
+        </h1>
+        
+        <p class="text-xl text-muted-foreground mb-8 leading-relaxed">
+          Votre partenaire de confiance pour l'expertise comptable, l'audit et le conseil fiscal. 
+          <strong>Plus de 500 entreprises</strong> nous font confiance.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+          <Button size="lg" class="text-lg px-8">
+            <span class="mr-2">📞</span>
+            Prendre Rendez-vous
+          </Button>
+          <Button variant="outline" size="lg" class="text-lg px-8">
+            <span class="mr-2">📄</span>
+            Nos Services
+          </Button>
+        </div>
+
+        <!-- Stats Corporate -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+          <div class="text-center">
+            <div class="text-3xl font-bold text-primary mb-2">500+</div>
+            <div class="text-sm text-muted-foreground">Entreprises clientes</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-bold text-primary mb-2">25+</div>
+            <div class="text-sm text-muted-foreground">Années d'expérience</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-bold text-primary mb-2">98%</div>
+            <div class="text-sm text-muted-foreground">Satisfaction client</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="py-16">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center mb-12">Nos Expertises</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <Card>
+          <CardHeader>
+            <div class="text-3xl mb-4">📊</div>
+            <CardTitle>Expertise Comptable</CardTitle>
+            <CardDescription>Tenue de comptabilité et établissement des comptes</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ul class="space-y-2 text-sm text-muted-foreground">
+              <li>• Comptabilité générale</li>
+              <li>• Établissement des comptes annuels</li>
+              <li>• Liasse fiscale</li>
+              <li>• Déclarations TVA</li>
+            </ul>
+            <Button variant="outline" class="mt-4 w-full">
+              En savoir plus
+            </Button>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <div class="text-3xl mb-4">🔍</div>
+            <CardTitle>Audit & Contrôle</CardTitle>
+            <CardDescription>Audit légal et contractuel</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ul class="space-y-2 text-sm text-muted-foreground">
+              <li>• Commissariat aux comptes</li>
+              <li>• Audit contractuel</li>
+              <li>• Due diligence</li>
+              <li>• Audit social</li>
+            </ul>
+            <Button variant="outline" class="mt-4 w-full">
+              En savoir plus
+            </Button>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <div class="text-3xl mb-4">⚖️</div>
+            <CardTitle>Conseil Fiscal</CardTitle>
+            <CardDescription>Optimisation fiscale et juridique</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ul class="space-y-2 text-sm text-muted-foreground">
+              <li>• Optimisation fiscale</li>
+              <li>• Conseil en création</li>
+              <li>• Transmission d'entreprise</li>
+              <li>• Fiscalité internationale</li>
+            </ul>
+            <Button variant="outline" class="mt-4 w-full">
+              En savoir plus
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  </section>
+
+  <!-- Demo Info -->
+  <section class="py-16 bg-muted/30">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <div class="bg-card border border-border rounded-xl p-8">
+          <h3 class="text-2xl font-bold mb-6 text-center">
+            🔍 Configuration Corporate Layout
+          </h3>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+              <h4 class="font-semibold mb-4">Layout Configuration :</h4>
+              <div class="bg-muted/50 rounded-lg p-4 font-mono text-sm space-y-1">
+                <div>headerVariant="business"</div>
+                <div>footerVariant="business"</div>
+                <div>showHeaderCTA={`{true}`}</div>
+                <div>showBusinessInfo={`{true}`}</div>
+                <div>showBreadcrumbs={`{true}`}</div>
+              </div>
+            </div>
+            
+            <div>
+              <h4 class="font-semibold mb-4">Features Activées :</h4>
+              <ul class="space-y-2 text-sm">
+                <li class="flex items-center space-x-2">
+                  <span class="text-green-500">✓</span>
+                  <span>Header business avec CTA "Prendre RDV"</span>
+                </li>
+                <li class="flex items-center space-x-2">
+                  <span class="text-green-500">✓</span>
+                  <span>Footer avec informations de contact</span>
+                </li>
+                <li class="flex items-center space-x-2">
+                  <span class="text-green-500">✓</span>
+                  <span>Breadcrumbs pour navigation hiérarchique</span>
+                </li>
+                <li class="flex items-center space-x-2">
+                  <span class="text-green-500">✓</span>
+                  <span>Design professionnel sobre et crédible</span>
+                </li>
+                <li class="flex items-center space-x-2">
+                  <span class="text-green-500">✓</span>
+                  <span>Dark mode adapté au secteur</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="mt-8 flex flex-wrap justify-center gap-4">
+            <Button variant="outline" size="sm">
+              <a href="/startup-demo">🚀 Voir Startup Demo</a>
+            </Button>
+            <Button variant="outline" size="sm">
+              <a href="/ecommerce-demo">🛒 Voir E-commerce Demo</a>
+            </Button>
+            <Button variant="outline" size="sm">
+              <a href="/portfolio-demo">🎨 Voir Portfolio Demo</a>
+            </Button>
+            <Button size="sm">
+              <a href="/business-demo">← Retour Business Demo</a>
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Layout>

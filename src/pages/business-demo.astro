@@ -1,0 +1,462 @@
+---
+// Business Demo Page - Complete Showcase of Business Potential
+// Demonstrates all layout variants and business use cases
+// Path: src/pages/business-demo.astro
+
+import Layout from '../components/layouts/Layout.astro';
+import TouchNavigation from '../components/islands/TouchNavigation';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
+import { Badge } from '../components/ui/badge';
+import { Button } from '../components/ui/button';
+---
+
+<Layout 
+  title="Business Demo - Complete Showcase"
+  description="See all business variants and real-world applications in action"
+  currentPage="business-demo"
+  headerVariant="business"
+  footerVariant="comprehensive"
+  showHeaderCTA={true}
+  headerCTAText="Get Started"
+  showBusinessInfo={true}
+  showNewsletter={true}
+  showBreadcrumbs={true}
+>
+  
+  <!-- Hero Section with Business Context -->
+  <section class="bg-gradient-to-br from-primary/10 via-background to-secondary/10 py-20">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        
+        <div class="flex items-center justify-center space-x-2 mb-6">
+          <span class="text-4xl">🚀</span>
+          <Badge variant="default" class="text-sm font-medium bg-primary text-primary-foreground">
+            Business Ready
+          </Badge>
+        </div>
+        
+        <h1 class="text-4xl lg:text-6xl font-bold text-foreground mb-6">
+          Business Potential
+          <span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+            Showcase
+          </span>
+        </h1>
+        
+        <p class="text-xl text-muted-foreground mb-8 leading-relaxed">
+          Découvrez comment nos <strong>29 composants</strong> et <strong>système de layout adaptatif</strong> 
+          transforment vos idées en sites web professionnels.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+          <Button size="lg" class="text-lg px-8">
+            <span class="mr-2">👀</span>
+            Voir les Variants
+          </Button>
+          <Button variant="outline" size="lg" class="text-lg px-8">
+            <span class="mr-2">💼</span>
+            Business Cases
+          </Button>
+        </div>
+
+        <!-- Current Demo Info -->
+        <div class="bg-card/50 backdrop-blur-sm border border-border rounded-xl p-6">
+          <h3 class="text-lg font-semibold mb-4">🔍 Cette page utilise :</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+            <div class="bg-primary/10 rounded-lg p-3">
+              <strong>Header:</strong> Business variant<br/>
+              <span class="text-muted-foreground">avec CTA "Get Started"</span>
+            </div>
+            <div class="bg-primary/10 rounded-lg p-3">
+              <strong>Footer:</strong> Comprehensive<br/>
+              <span class="text-muted-foreground">avec newsletter + business info</span>
+            </div>
+            <div class="bg-primary/10 rounded-lg p-3">
+              <strong>Navigation:</strong> Responsive<br/>
+              <span class="text-muted-foreground">avec breadcrumbs activés</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Business Layout Variants Demo -->
+  <section class="py-16">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center mb-12">
+        🏗️ Layout Variants Business
+      </h2>
+
+      <div class="space-y-12">
+        
+        <!-- Corporate Layout -->
+        <Card class="overflow-hidden">
+          <CardHeader class="bg-gradient-to-r from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
+            <div class="flex items-center space-x-3">
+              <span class="text-3xl">🏢</span>
+              <div>
+                <CardTitle class="text-xl">Corporate / Finance</CardTitle>
+                <CardDescription>Header: business + Footer: business + CTA prominent</CardDescription>
+              </div>
+              <Badge variant="outline">Recommandé</Badge>
+            </div>
+          </CardHeader>
+          <CardContent class="p-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <h4 class="font-semibold mb-3">Configuration :</h4>
+                <div class="bg-muted/50 rounded-lg p-4 font-mono text-sm">
+                  headerVariant="business"<br/>
+                  footerVariant="business"<br/>
+                  showHeaderCTA={`{true}`}<br/>
+                  showBusinessInfo={`{true}`}
+                </div>
+              </div>
+              <div>
+                <h4 class="font-semibold mb-3">Cas d'usage :</h4>
+                <ul class="space-y-2 text-sm text-muted-foreground">
+                  <li>• Cabinet comptable, banque, assurance</li>
+                  <li>• Entreprise B2B, consulting</li>
+                  <li>• Cabinet juridique, expertise</li>
+                  <li>• Services financiers professionnels</li>
+                </ul>
+              </div>
+            </div>
+            <div class="mt-6 flex gap-3">
+              <Button variant="outline" size="sm">
+                <a href="/corporate-demo" class="flex items-center">
+                  👀 Voir la démo → 
+                </a>
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+
+        <!-- Startup/Landing Layout -->
+        <Card class="overflow-hidden">
+          <CardHeader class="bg-gradient-to-r from-green-50 to-emerald-100 dark:from-green-950 dark:to-emerald-900">
+            <div class="flex items-center space-x-3">
+              <span class="text-3xl">🚀</span>
+              <div>
+                <CardTitle class="text-xl">Startup / Landing Page</CardTitle>
+                <CardDescription>Header: landing + Footer: startup + Newsletter active</CardDescription>
+              </div>
+              <Badge variant="secondary">Tendance</Badge>
+            </div>
+          </CardHeader>
+          <CardContent class="p-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <h4 class="font-semibold mb-3">Configuration :</h4>
+                <div class="bg-muted/50 rounded-lg p-4 font-mono text-sm">
+                  headerVariant="landing"<br/>
+                  footerVariant="startup"<br/>
+                  showNewsletter={`{true}`}<br/>
+                  headerCTAText="Try Free"
+                </div>
+              </div>
+              <div>
+                <h4 class="font-semibold mb-3">Cas d'usage :</h4>
+                <ul class="space-y-2 text-sm text-muted-foreground">
+                  <li>• SaaS, application web</li>
+                  <li>• Startup tech, produit digital</li>
+                  <li>• Landing page conversion</li>
+                  <li>• Freemium, trial gratuit</li>
+                </ul>
+              </div>
+            </div>
+            <div class="mt-6 flex gap-3">
+              <Button variant="outline" size="sm">
+                <a href="/startup-demo" class="flex items-center">
+                  🚀 Voir la démo →
+                </a>
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+
+        <!-- E-commerce Layout -->
+        <Card class="overflow-hidden">
+          <CardHeader class="bg-gradient-to-r from-orange-50 to-amber-100 dark:from-orange-950 dark:to-amber-900">
+            <div class="flex items-center space-x-3">
+              <span class="text-3xl">🛒</span>
+              <div>
+                <CardTitle class="text-xl">E-commerce / Boutique</CardTitle>
+                <CardDescription>Header: business + MegaMenu + Footer: comprehensive</CardDescription>
+              </div>
+              <Badge variant="destructive">Hot</Badge>
+            </div>
+          </CardHeader>
+          <CardContent class="p-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <h4 class="font-semibold mb-3">Configuration :</h4>
+                <div class="bg-muted/50 rounded-lg p-4 font-mono text-sm">
+                  headerVariant="business"<br/>
+                  footerVariant="comprehensive"<br/>
+                  MegaMenu avec catégories<br/>
+                  TouchNavigation="bottom-nav"
+                </div>
+              </div>
+              <div>
+                <h4 class="font-semibold mb-3">Cas d'usage :</h4>
+                <ul class="space-y-2 text-sm text-muted-foreground">
+                  <li>• Boutique en ligne, marketplace</li>
+                  <li>• Catalogue produits complexe</li>
+                  <li>• Navigation par catégories</li>
+                  <li>• Mobile shopping optimisé</li>
+                </ul>
+              </div>
+            </div>
+            <div class="mt-6 flex gap-3">
+              <Button variant="outline" size="sm">
+                <a href="/ecommerce-demo" class="flex items-center">
+                  🛒 Voir la démo →
+                </a>
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+
+        <!-- Portfolio/Minimal Layout -->
+        <Card class="overflow-hidden">
+          <CardHeader class="bg-gradient-to-r from-purple-50 to-pink-100 dark:from-purple-950 dark:to-pink-900">
+            <div class="flex items-center space-x-3">
+              <span class="text-3xl">🎨</span>
+              <div>
+                <CardTitle class="text-xl">Portfolio / Créatif</CardTitle>
+                <CardDescription>Header: minimal + Footer: minimal + Focus contenu</CardDescription>
+              </div>
+              <Badge variant="outline">Élégant</Badge>
+            </div>
+          </CardHeader>
+          <CardContent class="p-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <h4 class="font-semibold mb-3">Configuration :</h4>
+                <div class="bg-muted/50 rounded-lg p-4 font-mono text-sm">
+                  headerVariant="minimal"<br/>
+                  footerVariant="minimal"<br/>
+                  Navigation simple<br/>
+                  TouchNavigation="gesture-panel"
+                </div>
+              </div>
+              <div>
+                <h4 class="font-semibold mb-3">Cas d'usage :</h4>
+                <ul class="space-y-2 text-sm text-muted-foreground">
+                  <li>• Portfolio designer, photographe</li>
+                  <li>• Artiste, créatif, freelance</li>
+                  <li>• Blog personnel, writing</li>
+                  <li>• Focus sur le contenu visuel</li>
+                </ul>
+              </div>
+            </div>
+            <div class="mt-6 flex gap-3">
+              <Button variant="outline" size="sm">
+                <a href="/portfolio-demo" class="flex items-center">
+                  🎨 Voir la démo →
+                </a>
+              </Button>
+            </div>
+          </CardContent>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Touch Navigation Demo Live -->
+  <section class="py-16 bg-muted/30">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center mb-12">
+        📱 Touch Navigation en Action
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- Floating FAB -->
+        <Card class="relative overflow-hidden h-64">
+          <CardHeader class="pb-3">
+            <CardTitle class="text-lg">Floating FAB</CardTitle>
+            <CardDescription>SaaS / Applications</CardDescription>
+          </CardHeader>
+          <CardContent class="relative h-full">
+            <TouchNavigation 
+              variant="floating-fab"
+              showBackToTop={true}
+              currentPage="business-demo"
+              client:load
+            />
+            <div class="absolute bottom-4 left-4 text-xs text-muted-foreground">
+              → Cliquez le bouton flottant
+            </div>
+          </CardContent>
+        </Card>
+
+        <!-- Bottom Navigation -->
+        <Card class="relative overflow-hidden h-64">
+          <CardHeader class="pb-3">
+            <CardTitle class="text-lg">Bottom Nav</CardTitle>
+            <CardDescription>E-commerce / Mobile</CardDescription>
+          </CardHeader>
+          <CardContent class="relative h-full">
+            <TouchNavigation 
+              variant="bottom-nav"
+              currentPage="business-demo"
+              client:load
+            />
+            <div class="absolute bottom-16 left-4 text-xs text-muted-foreground">
+              ↓ Navigation fixe en bas
+            </div>
+          </CardContent>
+        </Card>
+
+        <!-- Swipe Drawer -->
+        <Card class="relative overflow-hidden h-64">
+          <CardHeader class="pb-3">
+            <CardTitle class="text-lg">Swipe Drawer</CardTitle>
+            <CardDescription>Mobile First</CardDescription>
+          </CardHeader>
+          <CardContent class="relative h-full">
+            <TouchNavigation 
+              variant="swipe-drawer"
+              enableSwipeToClose={true}
+              currentPage="business-demo"
+              client:load
+            />
+            <div class="absolute top-20 left-4 text-xs text-muted-foreground">
+              ← Swipe depuis le bord gauche
+            </div>
+          </CardContent>
+        </Card>
+
+        <!-- Gesture Panel -->
+        <Card class="relative overflow-hidden h-64">
+          <CardHeader class="pb-3">
+            <CardTitle class="text-lg">Gesture Panel</CardTitle>
+            <CardDescription>Navigation Gestuelle</CardDescription>
+          </CardHeader>
+          <CardContent class="relative h-full">
+            <TouchNavigation 
+              variant="gesture-panel"
+              enableSwipeNavigation={true}
+              enablePullToRefresh={true}
+              currentPage="business-demo"
+              client:load
+            />
+            <div class="absolute top-20 left-4 text-xs text-muted-foreground max-w-32">
+              Swipe horizontal pour naviguer entre pages
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      <div class="mt-8 text-center">
+        <div class="bg-card border border-border rounded-lg p-6 max-w-4xl mx-auto">
+          <h3 class="font-semibold mb-4">💡 Comment tester les Touch Gestures :</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-left">
+            <div>
+              <strong>Mobile / Tactile :</strong>
+              <ul class="mt-2 space-y-1 text-muted-foreground">
+                <li>• Swipe depuis bord gauche → ouvre drawer</li>
+                <li>• Swipe left/right → navigation pages</li>
+                <li>• Pull down depuis le top → refresh</li>
+                <li>• Long press → actions contextuelles</li>
+              </ul>
+            </div>
+            <div>
+              <strong>Desktop :</strong>
+              <ul class="mt-2 space-y-1 text-muted-foreground">
+                <li>• Click FAB → menu rapide</li>
+                <li>• Hover sur navigation → dropdowns</li>
+                <li>• Keyboard ESC → ferme menus</li>
+                <li>• Focus navigation → accessible</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Business ROI Section -->
+  <section class="py-16">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center mb-12">
+        💰 ROI Business & Gain de Temps
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <Card class="text-center">
+          <CardHeader>
+            <div class="text-4xl mb-4">⚡</div>
+            <CardTitle>10x Plus Rapide</CardTitle>
+            <CardDescription>Développement sites professionnels</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div class="text-2xl font-bold text-primary mb-2">2-3 jours</div>
+            <p class="text-sm text-muted-foreground">
+              au lieu de 2-3 semaines pour un site complet avec tous les composants
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card class="text-center">
+          <CardHeader>
+            <div class="text-4xl mb-4">🎯</div>
+            <CardTitle>29 Composants</CardTitle>
+            <CardDescription>Prêts pour production</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div class="text-2xl font-bold text-primary mb-2">100%</div>
+            <p class="text-sm text-muted-foreground">
+              Composants testés, accessibles, dark mode, TypeScript, responsive
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card class="text-center">
+          <CardHeader>
+            <div class="text-4xl mb-4">🏆</div>
+            <CardTitle>Business Ready</CardTitle>
+            <CardDescription>Configuration client instantanée</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div class="text-2xl font-bold text-primary mb-2">8 variants</div>
+            <p class="text-sm text-muted-foreground">
+              Header/Footer pour corporate, startup, e-commerce, portfolio
+            </p>
+          </CardContent>
+        </Card>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="mt-12 text-center space-y-4">
+        <h3 class="text-xl font-semibold">🚀 Prêt à tester tous les variants ?</h3>
+        <div class="flex flex-wrap justify-center gap-4">
+          <Button size="lg">
+            <a href="/corporate-demo" class="flex items-center">
+              🏢 Corporate Demo
+            </a>
+          </Button>
+          <Button variant="outline" size="lg">
+            <a href="/startup-demo" class="flex items-center">  
+              🚀 Startup Demo
+            </a>
+          </Button>
+          <Button variant="outline" size="lg">
+            <a href="/ecommerce-demo" class="flex items-center">
+              🛒 E-commerce Demo
+            </a>
+          </Button>
+          <Button variant="outline" size="lg">
+            <a href="/portfolio-demo" class="flex items-center">
+              🎨 Portfolio Demo
+            </a>
+          </Button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Layout>
