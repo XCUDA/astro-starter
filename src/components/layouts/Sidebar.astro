@@ -1,6 +1,6 @@
 ---
-// Sidebar.astro - Professional Sidebar Navigation Component (Sprint 8 - Step 1)
-// Admin Dashboard Layout with collapsible support and business-ready navigation
+// Sidebar.astro - Enhanced Professional Fixed Sidebar Component (Sprint 9 - Step 2)
+// Admin Dashboard Layout with fixed scroll behavior and performance optimizations
 // Path: src/components/layouts/Sidebar.astro
 
 export interface Props {
@@ -9,6 +9,8 @@ export interface Props {
   collapsed?: boolean;
   showCollapseToggle?: boolean;
   showUserProfile?: boolean;
+  showScrollIndicators?: boolean;
+  autoScrollToActive?: boolean;
   userProfile?: {
     name?: string;
     avatar?: string;
@@ -30,6 +32,8 @@ const {
   collapsed = false,
   showCollapseToggle = true,
   showUserProfile = true,
+  showScrollIndicators = true,
+  autoScrollToActive = true,
   userProfile = {
     name: "Admin User",
     avatar: "👤",
@@ -178,7 +182,7 @@ const isCurrentSection = (item: any) => {
   return false;
 };
 
-// Sidebar variant styles for different business needs
+// Sidebar variant styles for different business needs with fixed positioning
 const sidebarVariants = {
   admin: "w-64 bg-card/95 backdrop-blur-sm border-r border-border",
   dashboard: "w-72 bg-gradient-to-b from-card/95 to-muted/50 backdrop-blur-sm border-r border-border shadow-sm",
@@ -191,10 +195,15 @@ const sidebarClasses = collapsed
   : `${sidebarVariants[variant]} transition-all duration-300`;
 ---
 
-<aside class={`fixed left-0 top-0 h-full z-40 flex flex-col ${sidebarClasses}`} id="admin-sidebar">
+<aside 
+  class={`fixed left-0 top-0 h-full z-40 flex flex-col ${sidebarClasses}`} 
+  id="admin-sidebar"
+  data-auto-scroll={autoScrollToActive}
+  data-scroll-indicators={showScrollIndicators}
+>
   
   <!-- Sidebar Header -->
-  <div class="flex items-center justify-between p-4 border-b border-border">
+  <div class="flex items-center justify-between p-4 border-b border-border flex-shrink-0">
     {!collapsed ? (
       <div class="flex items-center space-x-3">
         <div class="w-8 h-8 bg-gradient-to-br from-primary to-primary/70 rounded-lg flex items-center justify-center text-primary-foreground font-bold text-sm">
@@ -231,7 +240,7 @@ const sidebarClasses = collapsed
 
   <!-- Quick Actions (when not collapsed) -->
   {!collapsed && quickActions.length > 0 && (
-    <div class="p-4 border-b border-border">
+    <div class="p-4 border-b border-border flex-shrink-0">
       <div class="space-y-2">
         {quickActions.map(action => (
           <a
@@ -253,9 +262,30 @@ const sidebarClasses = collapsed
     </div>
   )}
 
-  <!-- Navigation Menu -->
-  <nav class="flex-1 overflow-y-auto p-4" role="navigation" aria-label="Sidebar navigation">
-    <div class="space-y-6">
+  <!-- Scroll Indicators (Sprint 9 Enhancement) -->
+  {showScrollIndicators && (
+    <div class="relative flex-shrink-0">
+      <!-- Top fade indicator -->
+      <div 
+        id="scroll-indicator-top"
+        class="absolute top-0 left-0 right-0 h-4 bg-gradient-to-b from-card to-transparent pointer-events-none opacity-0 transition-opacity duration-300 z-10"
+      ></div>
+      <!-- Bottom fade indicator -->
+      <div 
+        id="scroll-indicator-bottom"
+        class="absolute bottom-0 left-0 right-0 h-4 bg-gradient-to-t from-card to-transparent pointer-events-none opacity-0 transition-opacity duration-300 z-10"
+      ></div>
+    </div>
+  )}
+
+  <!-- Enhanced Navigation Menu with Fixed Scroll (Sprint 9) -->
+  <nav 
+    class="flex-1 overflow-y-auto sidebar-nav-enhanced" 
+    role="navigation" 
+    aria-label="Sidebar navigation"
+    id="sidebar-navigation"
+  >
+    <div class="p-4 space-y-6">
       
       <!-- Dashboard Section -->
       <div>
@@ -270,11 +300,12 @@ const sidebarClasses = collapsed
               href={item.href}
               class={`flex items-center space-x-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 hover:scale-105 group ${
                 isCurrentPage(item.name)
-                  ? 'bg-primary text-primary-foreground shadow-sm'
+                  ? 'bg-primary text-primary-foreground shadow-sm sidebar-active-item'
                   : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
               }`}
               aria-current={isCurrentPage(item.name) ? 'page' : undefined}
               title={collapsed ? item.title : undefined}
+              data-nav-item={item.name}
             >
               <span class="text-lg flex-shrink-0">{item.icon}</span>
               {!collapsed && (
@@ -310,11 +341,12 @@ const sidebarClasses = collapsed
                 href={item.href}
                 class={`flex items-center space-x-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 hover:scale-105 group ${
                   isCurrentSection(item)
-                    ? 'bg-primary text-primary-foreground shadow-sm'
+                    ? 'bg-primary text-primary-foreground shadow-sm sidebar-active-item'
                     : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
                 }`}
                 aria-current={isCurrentPage(item.name) ? 'page' : undefined}
                 title={collapsed ? item.title : undefined}
+                data-nav-item={item.name}
               >
                 <span class="text-lg flex-shrink-0">{item.icon}</span>
                 {!collapsed && (
@@ -347,10 +379,11 @@ const sidebarClasses = collapsed
                       href={child.href}
                       class={`flex items-center space-x-2 px-2 py-1.5 rounded text-sm transition-all duration-200 ${
                         isCurrentPage(child.name)
-                          ? 'bg-primary/20 text-primary font-medium'
+                          ? 'bg-primary/20 text-primary font-medium sidebar-active-item'
                           : 'text-muted-foreground hover:text-foreground hover:bg-muted/30'
                       }`}
                       aria-current={isCurrentPage(child.name) ? 'page' : undefined}
+                      data-nav-item={child.name}
                     >
                       <span class="w-1.5 h-1.5 rounded-full bg-current opacity-50"></span>
                       <span>{child.title}</span>
@@ -376,11 +409,12 @@ const sidebarClasses = collapsed
               href={item.href}
               class={`flex items-center space-x-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 hover:scale-105 group ${
                 isCurrentPage(item.name)
-                  ? 'bg-primary text-primary-foreground shadow-sm'
+                  ? 'bg-primary text-primary-foreground shadow-sm sidebar-active-item'
                   : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
               }`}
               aria-current={isCurrentPage(item.name) ? 'page' : undefined}
               title={collapsed ? item.title : undefined}
+              data-nav-item={item.name}
             >
               <span class="text-lg flex-shrink-0">{item.icon}</span>
               {!collapsed && (
@@ -414,11 +448,12 @@ const sidebarClasses = collapsed
               href={item.href}
               class={`flex items-center space-x-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 hover:scale-105 group ${
                 isCurrentPage(item.name)
-                  ? 'bg-primary text-primary-foreground shadow-sm'
+                  ? 'bg-primary text-primary-foreground shadow-sm sidebar-active-item'
                   : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
               }`}
               aria-current={isCurrentPage(item.name) ? 'page' : undefined}
               title={collapsed ? item.title : undefined}
+              data-nav-item={item.name}
             >
               <span class="text-lg flex-shrink-0">{item.icon}</span>
               {!collapsed && (
@@ -444,7 +479,7 @@ const sidebarClasses = collapsed
 
   <!-- User Profile Section (when not collapsed) -->
   {!collapsed && showUserProfile && (
-    <div class="p-4 border-t border-border">
+    <div class="p-4 border-t border-border flex-shrink-0">
       <div class="relative group">
         <button
           class="w-full flex items-center space-x-3 p-3 rounded-lg text-sm hover:bg-muted/50 transition-all duration-200"
@@ -504,7 +539,7 @@ const sidebarClasses = collapsed
 
   <!-- Collapsed Quick Actions -->
   {collapsed && quickActions.length > 0 && (
-    <div class="p-2 border-t border-border">
+    <div class="p-2 border-t border-border flex-shrink-0">
       <div class="space-y-2">
         {quickActions.slice(0, 2).map(action => (
           <a
@@ -540,11 +575,21 @@ const sidebarClasses = collapsed
       toggleSidebarCollapse: () => void;
       toggleUserProfileMenu: () => void;
       closeMobileSidebar: () => void;
+      scrollToActiveItem: () => void;
+      updateScrollIndicators: () => void;
     }
   }
 
   let isSidebarCollapsed = false;
   let isUserProfileMenuOpen = false;
+
+  // Sprint 9: Enhanced scroll handling with performance optimization
+  let scrollTicking = false;
+  
+  // Configuration from Astro props passed via data attributes
+  const sidebarEl = document.getElementById('admin-sidebar');
+  const autoScrollEnabled = sidebarEl?.getAttribute('data-auto-scroll') === 'true';
+  const scrollIndicatorsEnabled = sidebarEl?.getAttribute('data-scroll-indicators') === 'true';
 
   function toggleSidebarCollapse(): void {
     const sidebar = document.getElementById('admin-sidebar');
@@ -562,6 +607,13 @@ const sidebarClasses = collapsed
       sidebar.classList.remove('w-16');
       sidebar.classList.add('w-64'); // Default width
       toggle.querySelector('svg')?.classList.remove('rotate-180');
+      
+      // Sprint 9: Auto-scroll to active item when expanded
+      setTimeout(() => {
+        if (autoScrollEnabled) {
+          scrollToActiveItem();
+        }
+      }, 300);
     }
     
     // Store collapse state
@@ -599,13 +651,82 @@ const sidebarClasses = collapsed
     }
   }
 
-  // Restore sidebar collapse state on page load
+  // Sprint 9: Auto-scroll to active navigation item
+  function scrollToActiveItem(): void {
+    const nav = document.getElementById('sidebar-navigation');
+    const activeItem = document.querySelector('.sidebar-active-item');
+    
+    if (nav && activeItem && !isSidebarCollapsed) {
+      activeItem.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+      });
+    }
+  }
+
+  // Sprint 9: Update scroll indicators based on scroll position
+  function updateScrollIndicators(): void {
+    if (!scrollIndicatorsEnabled) return;
+    
+    const nav = document.getElementById('sidebar-navigation');
+    const topIndicator = document.getElementById('scroll-indicator-top');
+    const bottomIndicator = document.getElementById('scroll-indicator-bottom');
+    
+    if (!nav || !topIndicator || !bottomIndicator) return;
+    
+    // Type assertion for scroll properties
+    const navElement = nav as HTMLElement;
+    const { scrollTop, scrollHeight, clientHeight } = navElement;
+    const isScrolledFromTop = scrollTop > 10;
+    const isScrolledFromBottom = scrollTop < (scrollHeight - clientHeight - 10);
+    
+    // Show/hide indicators based on scroll position
+    if (isScrolledFromTop) {
+      topIndicator.style.opacity = '1';
+    } else {
+      topIndicator.style.opacity = '0';
+    }
+    
+    if (isScrolledFromBottom && scrollHeight > clientHeight) {
+      bottomIndicator.style.opacity = '1';
+    } else {
+      bottomIndicator.style.opacity = '0';
+    }
+  }
+
+  // Sprint 9: Throttled scroll handler for performance
+  function handleNavScroll(): void {
+    if (!scrollTicking) {
+      requestAnimationFrame(() => {
+        updateScrollIndicators();
+        scrollTicking = false;
+      });
+      scrollTicking = true;
+    }
+  }
+
+  // Enhanced initialization
   if (typeof document !== 'undefined') {
     document.addEventListener('DOMContentLoaded', () => {
+      // Restore sidebar collapse state
       const savedCollapsedState = localStorage.getItem('sidebar-collapsed');
       if (savedCollapsedState === 'true') {
         isSidebarCollapsed = true;
         toggleSidebarCollapse();
+      }
+      
+      // Sprint 9: Setup scroll listener for indicators
+      const nav = document.getElementById('sidebar-navigation');
+      if (nav && scrollIndicatorsEnabled) {
+        nav.addEventListener('scroll', handleNavScroll, { passive: true });
+        
+        // Initial indicator state
+        setTimeout(updateScrollIndicators, 100);
+      }
+      
+      // Sprint 9: Auto-scroll to active item on load
+      if (autoScrollEnabled && !isSidebarCollapsed) {
+        setTimeout(scrollToActiveItem, 500);
       }
     });
 
@@ -636,15 +757,52 @@ const sidebarClasses = collapsed
     window.toggleSidebarCollapse = toggleSidebarCollapse;
     window.toggleUserProfileMenu = toggleUserProfileMenu;
     window.closeMobileSidebar = closeMobileSidebar;
+    window.scrollToActiveItem = scrollToActiveItem;
+    window.updateScrollIndicators = updateScrollIndicators;
   }
 </script>
 
 <style>
-  /* Smooth transitions for all sidebar interactions */
+  /* Sprint 9: Enhanced Fixed Sidebar Styles with Performance Optimizations */
+  
   #admin-sidebar {
     transition: width 0.3s ease-in-out;
+    /* GPU acceleration for smooth animations */
+    will-change: width, transform;
+    transform: translateZ(0);
   }
   
+  /* Enhanced navigation scroll area with performance optimization */
+  .sidebar-nav-enhanced {
+    /* GPU-accelerated scrolling */
+    will-change: scroll-position;
+    transform: translateZ(0);
+    
+    /* Custom scrollbar styling */
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--muted)) transparent;
+  }
+  
+  .sidebar-nav-enhanced::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .sidebar-nav-enhanced::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 3px;
+  }
+  
+  .sidebar-nav-enhanced::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted));
+    border-radius: 3px;
+    transition: background-color 0.2s ease;
+  }
+  
+  .sidebar-nav-enhanced::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground));
+  }
+  
+  /* Smooth hover animations */
   #admin-sidebar a:hover {
     transform: translateX(2px);
   }
@@ -662,26 +820,51 @@ const sidebarClasses = collapsed
     border-radius: 6px;
   }
   
-  /* Scroll behavior for navigation */
-  #admin-sidebar nav {
-    scrollbar-width: thin;
-    scrollbar-color: hsl(var(--muted)) transparent;
+  /* Sprint 9: Scroll indicator animations */
+  #scroll-indicator-top,
+  #scroll-indicator-bottom {
+    transition: opacity 0.3s ease-in-out;
+    backdrop-filter: blur(4px);
   }
   
-  #admin-sidebar nav::-webkit-scrollbar {
-    width: 4px;
+  /* Active item highlight enhancement */
+  .sidebar-active-item {
+    position: relative;
   }
   
-  #admin-sidebar nav::-webkit-scrollbar-track {
-    background: transparent;
+  .sidebar-active-item::before {
+    content: '';
+    position: absolute;
+    left: -12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 20px;
+    background: hsl(var(--primary));
+    border-radius: 0 2px 2px 0;
   }
   
-  #admin-sidebar nav::-webkit-scrollbar-thumb {
-    background: hsl(var(--muted));
-    border-radius: 2px;
+  /* Performance optimization for mobile */
+  @media (max-width: 1024px) {
+    #admin-sidebar {
+      /* Optimize mobile animations */
+      transition: transform 0.3s ease-in-out;
+    }
   }
   
-  #admin-sidebar nav::-webkit-scrollbar-thumb:hover {
-    background: hsl(var(--muted-foreground));
+  /* Smooth transitions for collapsed state */
+  #admin-sidebar.w-16 .sidebar-nav-enhanced {
+    overflow: hidden;
+  }
+  
+  /* Sprint 9: Enhanced performance hints */
+  #admin-sidebar * {
+    /* Optimize rendering */
+    box-sizing: border-box;
+  }
+  
+  /* Prevent layout shift during transitions */
+  #admin-sidebar .flex-shrink-0 {
+    flex-shrink: 0 !important;
   }
 </style>

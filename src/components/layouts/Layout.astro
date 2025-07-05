@@ -23,6 +23,13 @@ export interface Props {
   headerCTAText?: string;
   headerCTAHref?: string;
   
+  // Sprint 9: Enhanced sticky header behavior options
+  stickyBehavior?: 'always-visible' | 'hide-on-scroll' | 'auto-hide' | 'scroll-up-show' | 'static';
+  hideOnScroll?: boolean;
+  scrollThreshold?: number;
+  hideDelay?: number;
+  showScrollIndicator?: boolean;
+  
   // Footer configuration options  
   footerVariant?: 'minimal' | 'business' | 'comprehensive' | 'startup';
   showSocials?: boolean;
@@ -74,6 +81,13 @@ const {
   showHeaderCTA = false,
   headerCTAText = "Get Started",
   headerCTAHref = "/contact",
+  
+  // Sprint 9: Sticky header defaults - conservative for backward compatibility
+  stickyBehavior = 'static', // Default to static to preserve existing behavior
+  hideOnScroll = false,
+  scrollThreshold = 100,
+  hideDelay = 2000,
+  showScrollIndicator = false,
   
   // Footer defaults - business-oriented
   footerVariant = 'business', 
@@ -238,6 +252,7 @@ const mainContentClasses = showSidebar
         
         <!-- 
           Professional Header Component
+          Enhanced with intelligent sticky behavior (Sprint 9)
           Modular system allows easy customization per client/project
           Adjusts automatically when sidebar is present
         -->
@@ -251,6 +266,11 @@ const mainContentClasses = showSidebar
           siteName={fullSiteName}
           siteDescription={fullSiteDescription}
           currentPage={currentPage}
+          stickyBehavior={stickyBehavior}
+          hideOnScroll={hideOnScroll}
+          scrollThreshold={scrollThreshold}
+          hideDelay={hideDelay}
+          showScrollIndicator={showScrollIndicator}
         />
         
         <!-- 

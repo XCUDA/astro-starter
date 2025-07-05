@@ -1,0 +1,520 @@
+---
+// Floating Action Buttons Showcase Page - Sprint 9 Step 3 Demo
+// Interactive demonstration of all FAB variants and configurations
+// Path: src/pages/fab-showcase.astro
+
+import Layout from '../components/layouts/Layout.astro';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
+import { Badge } from '../components/ui/badge';
+import { Button } from '../components/ui/button';
+import FloatingActionButton, { BusinessFAB, SupportFAB, EcommerceFAB } from '../components/islands/FloatingActionButton';
+---
+
+<Layout 
+  title="Floating Action Buttons Demo - Sprint 9"
+  description="Interactive demonstration of mobile-optimized floating action buttons with business configurations"
+  currentPage="fab-showcase"
+  headerVariant="business"
+  footerVariant="business"
+  keywords="floating action button, FAB, mobile UI, touch interface, quick actions"
+>
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-primary/5 via-background to-secondary/5 py-16">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <div class="flex items-center justify-center space-x-2 mb-6">
+          <span class="text-4xl">🎯</span>
+          <Badge variant="secondary" className="text-sm font-medium">
+            Sprint 9 - Step 3
+          </Badge>
+        </div>
+        
+        <h1 class="text-4xl lg:text-5xl font-bold text-foreground mb-6">
+          Floating Action Buttons Demo
+        </h1>
+        
+        <p class="text-xl text-muted-foreground mb-8 leading-relaxed">
+          Professional FAB components optimized for mobile interactions. 
+          Scroll down to test different variants and behaviors!
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <Button size="lg" className="text-lg px-8">
+            <span class="mr-2">📱</span>
+            Mobile Optimized
+          </Button>
+          <Button variant="outline" size="lg" className="text-lg px-8">
+            <span class="mr-2">⚡</span>
+            Business Ready
+          </Button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Current Demo Info -->
+  <section class="py-8 bg-muted/30">
+    <div class="container mx-auto px-4">
+      <Card className="border-primary/20 bg-primary/5">
+        <CardHeader>
+          <CardTitle className="flex items-center space-x-2">
+            <span>🎯</span>
+            <span>Active FAB Demonstrations</span>
+          </CardTitle>
+          <CardDescription>
+            Multiple FAB variants are currently active on this page. Try them on different screen sizes!
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-sm">
+            <div>
+              <strong>Business FAB:</strong> Bottom-right with quick actions
+            </div>
+            <div>
+              <strong>Support FAB:</strong> Bottom-left with help options
+            </div>
+            <div>
+              <strong>E-commerce FAB:</strong> Radial expansion with cart actions
+            </div>
+            <div>
+              <strong>Scroll Behavior:</strong> Hides when scrolling down
+            </div>
+            <div>
+              <strong>Mobile Priority:</strong> Optimized for touch interaction
+            </div>
+            <div>
+              <strong>Accessibility:</strong> Full keyboard and screen reader support
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  </section>
+
+  <!-- FAB Variants Overview -->
+  <section class="py-16">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-foreground mb-4">
+          FAB Variants and Configurations
+        </h2>
+        <p class="text-lg text-muted-foreground max-w-3xl mx-auto">
+          Professional floating action buttons with multiple business-ready configurations
+          and optimized user experience patterns.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <!-- Business FAB -->
+        <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105">
+          <CardHeader className="text-center">
+            <div class="text-3xl mb-2">💼</div>
+            <CardTitle className="text-lg">Business FAB</CardTitle>
+            <CardDescription>
+              Quick actions for business productivity
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ul class="text-sm space-y-2 text-muted-foreground">
+              <li>• <strong>Position:</strong> Bottom-right</li>
+              <li>• <strong>Actions:</strong> New Contact, Project, Note</li>
+              <li>• <strong>Expand:</strong> Vertical (up)</li>
+              <li>• <strong>Best for:</strong> CRM, Project Management</li>
+            </ul>
+          </CardContent>
+        </Card>
+
+        <!-- Support FAB -->
+        <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105">
+          <CardHeader className="text-center">
+            <div class="text-3xl mb-2">🆘</div>
+            <CardTitle className="text-lg">Support FAB</CardTitle>
+            <CardDescription>
+              Help and assistance options
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ul class="text-sm space-y-2 text-muted-foreground">
+              <li>• <strong>Position:</strong> Bottom-left</li>
+              <li>• <strong>Actions:</strong> Live Chat, Docs, Feedback</li>
+              <li>• <strong>Expand:</strong> Vertical (up)</li>
+              <li>• <strong>Best for:</strong> Customer Support, SaaS</li>
+            </ul>
+          </CardContent>
+        </Card>
+
+        <!-- E-commerce FAB -->
+        <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105">
+          <CardHeader className="text-center">
+            <div class="text-3xl mb-2">🛒</div>
+            <CardTitle className="text-lg">E-commerce FAB</CardTitle>
+            <CardDescription>
+              Shopping and cart actions
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ul class="text-sm space-y-2 text-muted-foreground">
+              <li>• <strong>Position:</strong> Bottom-right</li>
+              <li>• <strong>Actions:</strong> Wishlist, Compare, Search</li>
+              <li>• <strong>Expand:</strong> Radial</li>
+              <li>• <strong>Best for:</strong> Online Stores, Marketplaces</li>
+            </ul>
+          </CardContent>
+        </Card>
+
+        <!-- Custom Single FAB -->
+        <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105">
+          <CardHeader className="text-center">
+            <div class="text-3xl mb-2">⚡</div>
+            <CardTitle className="text-lg">Single Action FAB</CardTitle>
+            <CardDescription>
+              One primary action only
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ul class="text-sm space-y-2 text-muted-foreground">
+              <li>• <strong>Use case:</strong> Call-to-Action</li>
+              <li>• <strong>Examples:</strong> Add to Cart, Contact</li>
+              <li>• <strong>Behavior:</strong> Direct action</li>
+              <li>• <strong>Best for:</strong> Landing Pages, Forms</li>
+            </ul>
+          </CardContent>
+        </Card>
+
+        <!-- Scroll-Responsive FAB -->
+        <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105">
+          <CardHeader className="text-center">
+            <div class="text-3xl mb-2">📜</div>
+            <CardTitle className="text-lg">Scroll-Responsive</CardTitle>
+            <CardDescription>
+              Adapts to user scroll behavior
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ul class="text-sm space-y-2 text-muted-foreground">
+              <li>• <strong>Behavior:</strong> Hide on scroll down</li>
+              <li>• <strong>Show:</strong> On scroll up</li>
+              <li>• <strong>Threshold:</strong> Configurable</li>
+              <li>• <strong>Best for:</strong> Content-heavy pages</li>
+            </ul>
+          </CardContent>
+        </Card>
+
+        <!-- Position Variants -->
+        <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105">
+          <CardHeader className="text-center">
+            <div class="text-3xl mb-2">📍</div>
+            <CardTitle className="text-lg">Position Variants</CardTitle>
+            <CardDescription>
+              Multiple positioning options
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ul class="text-sm space-y-2 text-muted-foreground">
+              <li>• <strong>Options:</strong> 5 position variants</li>
+              <li>• <strong>Corners:</strong> All four corners</li>
+              <li>• <strong>Center:</strong> Bottom center</li>
+              <li>• <strong>Best for:</strong> Different layouts</li>
+            </ul>
+          </CardContent>
+        </Card>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Implementation Examples -->
+  <section class="py-16 bg-muted/30">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-foreground text-center mb-12">
+        Implementation Examples
+      </h2>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        
+        <!-- Basic Usage -->
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center space-x-2">
+              <span>🚀</span>
+              <span>Basic FAB</span>
+            </CardTitle>
+            <CardDescription>
+              Simple single-action floating button
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div class="bg-muted p-4 rounded-lg text-sm font-mono">
+              {`<FloatingActionButton
+  mainAction={{
+    id: 'add',
+    title: 'Add Item',
+    icon: '➕',
+    onClick: () => alert('Add clicked!')
+  }}
+  position="bottom-right"
+  size="lg"
+/>`}
+            </div>
+          </CardContent>
+        </Card>
+
+        <!-- Multi-Action FAB -->
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center space-x-2">
+              <span>🔧</span>
+              <span>Multi-Action FAB</span>
+            </CardTitle>
+            <CardDescription>
+              FAB with expandable secondary actions
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div class="bg-muted p-4 rounded-lg text-sm font-mono">
+              {`<FloatingActionButton
+  mainAction={{ id: 'main', title: 'Actions', icon: '⚙️' }}
+  secondaryActions={[
+    { id: 'action1', title: 'Action 1', icon: '📁' },
+    { id: 'action2', title: 'Action 2', icon: '✏️' }
+  ]}
+  expandDirection="up"
+/>`}
+            </div>
+          </CardContent>
+        </Card>
+
+        <!-- Business Pre-configured -->
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center space-x-2">
+              <span>💼</span>
+              <span>Business Pre-configured</span>
+            </CardTitle>
+            <CardDescription>
+              Ready-to-use business FAB
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div class="bg-muted p-4 rounded-lg text-sm font-mono">
+              {`<BusinessFAB 
+  position="bottom-right"
+  hideOnScroll={true}
+  showOnlyOnMobile={false}
+/>`}
+            </div>
+          </CardContent>
+        </Card>
+
+        <!-- Advanced Configuration -->
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center space-x-2">
+              <span>⚡</span>
+              <span>Advanced Configuration</span>
+            </CardTitle>
+            <CardDescription>
+              Full customization with all options
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div class="bg-muted p-4 rounded-lg text-sm font-mono">
+              {`<FloatingActionButton
+  mainAction={{ /* ... */ }}
+  secondaryActions={[/* ... */]}
+  position="bottom-left"
+  hideOnScroll={true}
+  scrollThreshold={150}
+  expandDirection="radial"
+  autoClose={true}
+  autoCloseDelay={5000}
+/>`}
+            </div>
+          </CardContent>
+        </Card>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Features and Benefits -->
+  <section class="py-16">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-foreground text-center mb-12">
+        Features and Benefits
+      </h2>
+      
+      <div class="max-w-4xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          
+          <!-- Mobile Optimization -->
+          <div class="space-y-4">
+            <h3 class="text-xl font-semibold flex items-center space-x-2">
+              <span>📱</span>
+              <span>Mobile Optimization</span>
+            </h3>
+            <ul class="space-y-2 text-muted-foreground">
+              <li>• Touch-friendly sizes (44px+ touch targets)</li>
+              <li>• Responsive positioning across screen sizes</li>
+              <li>• Optimized animations for mobile performance</li>
+              <li>• Show/hide based on screen size</li>
+            </ul>
+          </div>
+
+          <!-- Accessibility -->
+          <div class="space-y-4">
+            <h3 class="text-xl font-semibold flex items-center space-x-2">
+              <span>♿</span>
+              <span>Accessibility</span>
+            </h3>
+            <ul class="space-y-2 text-muted-foreground">
+              <li>• Full keyboard navigation support</li>
+              <li>• Screen reader friendly with ARIA labels</li>
+              <li>• Focus management and visual indicators</li>
+              <li>• Semantic HTML structure</li>
+            </ul>
+          </div>
+
+          <!-- Performance -->
+          <div class="space-y-4">
+            <h3 class="text-xl font-semibold flex items-center space-x-2">
+              <span>⚡</span>
+              <span>Performance</span>
+            </h3>
+            <ul class="space-y-2 text-muted-foreground">
+              <li>• GPU-accelerated animations</li>
+              <li>• Throttled scroll listeners</li>
+              <li>• Minimal DOM manipulation</li>
+              <li>• Optimized re-renders with React</li>
+            </ul>
+          </div>
+
+          <!-- Business Features -->
+          <div class="space-y-4">
+            <h3 class="text-xl font-semibold flex items-center space-x-2">
+              <span>💼</span>
+              <span>Business Features</span>
+            </h3>
+            <ul class="space-y-2 text-muted-foreground">
+              <li>• Pre-configured business templates</li>
+              <li>• Customizable action sets</li>
+              <li>• Analytics-friendly event handling</li>
+              <li>• Brand-consistent styling options</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Long Content for Scroll Testing -->
+  <section class="py-16">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-foreground text-center mb-12">
+        Scroll Test Content
+      </h2>
+      
+      <div class="max-w-3xl mx-auto space-y-8">
+        {Array.from({ length: 15 }, (_, i) => (
+          <Card key={i}>
+            <CardHeader>
+              <CardTitle>Test Section {i + 1}</CardTitle>
+              <CardDescription>
+                Scroll through this content to test FAB scroll behavior
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p class="text-muted-foreground leading-relaxed">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
+                nisi ut aliquip ex ea commodo consequat. Notice how the FABs behave 
+                as you scroll down and back up through this content.
+              </p>
+              <p class="text-muted-foreground leading-relaxed mt-4">
+                The scroll-responsive FABs will hide when you scroll down quickly 
+                and reappear when you scroll back up, providing an optimal user 
+                experience that doesn't obstruct content while reading.
+              </p>
+            </CardContent>
+          </Card>
+        )).map(card => card)}
+      </div>
+    </div>
+  </section>
+
+  <!-- Usage Instructions -->
+  <section class="py-16 bg-muted/30">
+    <div class="container mx-auto px-4">
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-2xl">🎯 How to Test the FABs</CardTitle>
+          <CardDescription>
+            Interactive instructions for testing all FAB features
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <!-- Desktop Testing -->
+            <div>
+              <h3 class="font-semibold mb-3">🖥️ Desktop Testing</h3>
+              <ul class="text-sm space-y-2 text-muted-foreground">
+                <li>• Look for <strong>3 FABs</strong> positioned around the screen</li>
+                <li>• <strong>Business FAB</strong> (➕) in bottom-right corner</li>
+                <li>• <strong>Support FAB</strong> (❓) in bottom-left corner</li>
+                <li>• <strong>E-commerce FAB</strong> (🛒) with radial expansion</li>
+                <li>• Click main buttons to expand secondary actions</li>
+                <li>• Scroll down to test hide/show behavior</li>
+              </ul>
+            </div>
+
+            <!-- Mobile Testing -->
+            <div>
+              <h3 class="font-semibold mb-3">📱 Mobile Testing</h3>
+              <ul class="text-sm space-y-2 text-muted-foreground">
+                <li>• Resize browser or test on mobile device</li>
+                <li>• FABs maintain optimal touch target sizes</li>
+                <li>• Touch and hold for tooltips (if supported)</li>
+                <li>• Test scroll behavior with touch gestures</li>
+                <li>• Tap outside expanded FAB to close</li>
+                <li>• FABs auto-close after 3 seconds when expanded</li>
+              </ul>
+            </div>
+
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  </section>
+
+  <!-- Business FAB - Bottom Right -->
+  <BusinessFAB 
+    client:load
+    position="bottom-right"
+    hideOnScroll={true}
+    scrollThreshold={100}
+    showTooltip={true}
+  />
+
+  <!-- Support FAB - Bottom Left -->
+  <SupportFAB 
+    client:load
+    position="bottom-left"
+    hideOnScroll={true}
+    scrollThreshold={100}
+    expandDirection="up"
+  />
+
+  <!-- E-commerce FAB - Custom Position with Radial -->
+  <EcommerceFAB 
+    client:load
+    position="top-right"
+    hideOnScroll={false}
+    expandDirection="radial"
+    size="md"
+  />
+
+</Layout>
