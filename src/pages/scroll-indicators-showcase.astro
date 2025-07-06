@@ -1,0 +1,639 @@
+---
+// Scroll Indicators Showcase Page - Sprint 9 Step 4 Demo
+// Complete demonstration of all scroll tracking and navigation components
+// Path: src/pages/scroll-indicators-showcase.astro
+
+import Layout from '../components/layouts/Layout.astro';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
+import { Badge } from '../components/ui/badge';
+import { Button } from '../components/ui/button';
+import { 
+  ReadingProgress, 
+  ScrollProgressRing, 
+  TableOfContents, 
+  SectionNavigator,
+  PageProgressBar,
+  ScrollToTop
+} from '../components/islands/ScrollIndicators';
+---
+
+<Layout 
+  title="Scroll Indicators Showcase - Sprint 9"
+  description="Complete demonstration of scroll tracking, reading progress, and navigation indicators"
+  currentPage="scroll-indicators-showcase"
+  headerVariant="business"
+  footerVariant="business"
+  keywords="scroll indicators, reading progress, table of contents, scroll tracking, navigation"
+>
+  
+  <!-- Reading Progress at Top -->
+  <ReadingProgress client:load position="top" height={4} showPercentage={false} />
+  
+  <!-- Page Progress Bar at Bottom -->
+  <PageProgressBar client:load position="bottom" thickness="medium" style="gradient" />
+
+  <!-- Hero Section -->
+  <section id="introduction" class="bg-gradient-to-br from-primary/5 via-background to-secondary/5 py-16">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <div class="flex items-center justify-center space-x-2 mb-6">
+          <span class="text-4xl">📊</span>
+          <Badge variant="secondary" className="text-sm font-medium">
+            Sprint 9 - Step 4
+          </Badge>
+        </div>
+        
+        <h1 class="text-4xl lg:text-5xl font-bold text-foreground mb-6">
+          Scroll Indicators Showcase
+        </h1>
+        
+        <p class="text-xl text-muted-foreground mb-8 leading-relaxed">
+          Complete scroll tracking system with reading progress, table of contents, 
+          and modern navigation indicators for professional web applications.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <Button size="lg" className="text-lg px-8">
+            <span class="mr-2">📖</span>
+            Reading Progress
+          </Button>
+          <Button variant="outline" size="lg" className="text-lg px-8">
+            <span class="mr-2">🧭</span>
+            Navigation Tracking
+          </Button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Active Indicators Info -->
+  <section id="overview" class="py-8 bg-muted/30">
+    <div class="container mx-auto px-4">
+      <Card className="border-primary/20 bg-primary/5">
+        <CardHeader>
+          <CardTitle className="flex items-center space-x-2">
+            <span>📊</span>
+            <span>Active Scroll Indicators on This Page</span>
+          </CardTitle>
+          <CardDescription>
+            Multiple scroll indicators are currently active. Try scrolling to see them in action!
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-sm">
+            <div>
+              <strong>Reading Progress:</strong> Top bar showing % completion
+            </div>
+            <div>
+              <strong>Progress Ring:</strong> Circular indicator (bottom-right)
+            </div>
+            <div>
+              <strong>Table of Contents:</strong> Fixed navigation (right side)
+            </div>
+            <div>
+              <strong>Section Navigator:</strong> Dot navigation (left side)
+            </div>
+            <div>
+              <strong>Page Progress Bar:</strong> Gradient bar (bottom)
+            </div>
+            <div>
+              <strong>Scroll to Top:</strong> Appears after scrolling down
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  </section>
+
+  <!-- Components Overview -->
+  <section id="components" class="py-16">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-foreground mb-4">
+          Scroll Indicator Components
+        </h2>
+        <p class="text-lg text-muted-foreground max-w-3xl mx-auto">
+          Professional scroll tracking components designed for modern web applications
+          with business-ready configurations and optimal user experience.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <!-- Reading Progress -->
+        <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105">
+          <CardHeader className="text-center">
+            <div class="text-3xl mb-2">📊</div>
+            <CardTitle className="text-lg">Reading Progress</CardTitle>
+            <CardDescription>
+              Linear progress bar for reading tracking
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ul class="text-sm space-y-2 text-muted-foreground">
+              <li>• <strong>Position:</strong> Top or bottom of page</li>
+              <li>• <strong>Features:</strong> Percentage display, custom colors</li>
+              <li>• <strong>Use case:</strong> Articles, blogs, documentation</li>
+              <li>• <strong>Performance:</strong> GPU-accelerated smooth animation</li>
+            </ul>
+          </CardContent>
+        </Card>
+
+        <!-- Scroll Progress Ring -->
+        <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105">
+          <CardHeader className="text-center">
+            <div class="text-3xl mb-2">⭕</div>
+            <CardTitle className="text-lg">Progress Ring</CardTitle>
+            <CardDescription>
+              Circular progress indicator with percentage
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ul class="text-sm space-y-2 text-muted-foreground">
+              <li>• <strong>Style:</strong> Modern circular design</li>
+              <li>• <strong>Position:</strong> Fixed corners or custom</li>
+              <li>• <strong>Customization:</strong> Size, colors, stroke width</li>
+              <li>• <strong>Best for:</strong> Minimal, elegant interfaces</li>
+            </ul>
+          </CardContent>
+        </Card>
+
+        <!-- Table of Contents -->
+        <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105">
+          <CardHeader className="text-center">
+            <div class="text-3xl mb-2">📋</div>
+            <CardTitle className="text-lg">Table of Contents</CardTitle>
+            <CardDescription>
+              Smart navigation with scroll tracking
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ul class="text-sm space-y-2 text-muted-foreground">
+              <li>• <strong>Auto-tracking:</strong> Highlights current section</li>
+              <li>• <strong>Nested support:</strong> Multi-level headings</li>
+              <li>• <strong>Smooth scroll:</strong> Click to navigate</li>
+              <li>• <strong>Responsive:</strong> Adapts to content structure</li>
+            </ul>
+          </CardContent>
+        </Card>
+
+        <!-- Section Navigator -->
+        <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105">
+          <CardHeader className="text-center">
+            <div class="text-3xl mb-2">🔘</div>
+            <CardTitle className="text-lg">Section Navigator</CardTitle>
+            <CardDescription>
+              Minimal dot-style section navigation
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ul class="text-sm space-y-2 text-muted-foreground">
+              <li>• <strong>Style:</strong> Clean dot indicators</li>
+              <li>• <strong>Interaction:</strong> Hover labels, smooth scroll</li>
+              <li>• <strong>Position:</strong> Left or right fixed</li>
+              <li>• <strong>Perfect for:</strong> Landing pages, portfolios</li>
+            </ul>
+          </CardContent>
+        </Card>
+
+        <!-- Page Progress Bar -->
+        <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105">
+          <CardHeader className="text-center">
+            <div class="text-3xl mb-2">📏</div>
+            <CardTitle className="text-lg">Page Progress Bar</CardTitle>
+            <CardDescription>
+              Enhanced progress bar with styles
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ul class="text-sm space-y-2 text-muted-foreground">
+              <li>• <strong>Styles:</strong> Solid, gradient, animated</li>
+              <li>• <strong>Thickness:</strong> Thin, medium, thick options</li>
+              <li>• <strong>Position:</strong> Top or bottom placement</li>
+              <li>• <strong>Use case:</strong> Enhanced reading experience</li>
+            </ul>
+          </CardContent>
+        </Card>
+
+        <!-- Scroll to Top -->
+        <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105">
+          <CardHeader className="text-center">
+            <div class="text-3xl mb-2">⬆️</div>
+            <CardTitle className="text-lg">Scroll to Top</CardTitle>
+            <CardDescription>
+              Smart back-to-top with progress option
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ul class="text-sm space-y-2 text-muted-foreground">
+              <li>• <strong>Smart show:</strong> Appears after scroll threshold</li>
+              <li>• <strong>Variants:</strong> Button, FAB, minimal styles</li>
+              <li>• <strong>Progress:</strong> Optional percentage display</li>
+              <li>• <strong>Smooth animation:</strong> Fade in/out transitions</li>
+            </ul>
+          </CardContent>
+        </Card>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Implementation Examples -->
+  <section id="implementation" class="py-16 bg-muted/30">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-foreground text-center mb-12">
+        Implementation Examples
+      </h2>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        
+        <!-- Basic Reading Progress -->
+        <Card>
+          <CardHeader>
+            <CardTitle class="flex items-center space-x-2">
+              <span>📊</span>
+              <span>Basic Reading Progress</span>
+            </CardTitle>
+            <CardDescription>
+              Simple progress bar at page top
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div class="bg-muted p-4 rounded-lg text-sm font-mono">
+              {`<ReadingProgress 
+  position="top"
+  height={3}
+  color="primary"
+  showPercentage={false}
+/>`}
+            </div>
+          </CardContent>
+        </Card>
+
+        <!-- Progress Ring -->
+        <Card>
+          <CardHeader>
+            <CardTitle class="flex items-center space-x-2">
+              <span>⭕</span>
+              <span>Circular Progress Ring</span>
+            </CardTitle>
+            <CardDescription>
+              Modern circular indicator with percentage
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div class="bg-muted p-4 rounded-lg text-sm font-mono">
+              {`<ScrollProgressRing
+  size={60}
+  position="bottom-right"
+  showPercentage={true}
+  color="hsl(var(--primary))"
+/>`}
+            </div>
+          </CardContent>
+        </Card>
+
+        <!-- Table of Contents -->
+        <Card>
+          <CardHeader>
+            <CardTitle class="flex items-center space-x-2">
+              <span>📋</span>
+              <span>Auto-Generated TOC</span>
+            </CardTitle>
+            <CardDescription>
+              Smart table of contents from headings
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div class="bg-muted p-4 rounded-lg text-sm font-mono">
+              {`const sections = generateSectionsFromHeadings();
+
+<TableOfContents
+  sections={sections}
+  position="fixed-right"
+  showProgress={true}
+  maxLevel={3}
+/>`}
+            </div>
+          </CardContent>
+        </Card>
+
+        <!-- Complete Setup -->
+        <Card>
+          <CardHeader>
+            <CardTitle class="flex items-center space-x-2">
+              <span>🚀</span>
+              <span>Complete Setup</span>
+            </CardTitle>
+            <CardDescription>
+              Full scroll indicators configuration
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div class="bg-muted p-4 rounded-lg text-sm font-mono">
+              {`// Multiple indicators working together
+<ReadingProgress position="top" />
+<ScrollProgressRing position="bottom-right" />
+<TableOfContents sections={sections} />
+<SectionNavigator sections={sections} />
+<ScrollToTop showAt={300} variant="fab" />`}
+            </div>
+          </CardContent>
+        </Card>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Business Use Cases -->
+  <section id="use-cases" class="py-16">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-foreground text-center mb-12">
+        Business Use Cases
+      </h2>
+      
+      <div class="max-w-4xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          
+          <!-- Content Publishing -->
+          <div class="space-y-4">
+            <h3 class="text-xl font-semibold flex items-center space-x-2">
+              <span>📰</span>
+              <span>Content Publishing</span>
+            </h3>
+            <ul class="space-y-2 text-muted-foreground">
+              <li>• <strong>Blogs & Articles:</strong> Reading progress for engagement</li>
+              <li>• <strong>News Sites:</strong> Section navigation for long articles</li>
+              <li>• <strong>Magazines:</strong> Visual progress for reader satisfaction</li>
+              <li>• <strong>Educational Content:</strong> Learning progress tracking</li>
+            </ul>
+          </div>
+
+          <!-- Documentation -->
+          <div class="space-y-4">
+            <h3 class="text-xl font-semibold flex items-center space-x-2">
+              <span>📚</span>
+              <span>Documentation</span>
+            </h3>
+            <ul class="space-y-2 text-muted-foreground">
+              <li>• <strong>Technical Docs:</strong> TOC with nested navigation</li>
+              <li>• <strong>API Documentation:</strong> Section-based progress</li>
+              <li>• <strong>User Guides:</strong> Step-by-step progress tracking</li>
+              <li>• <strong>Knowledge Base:</strong> Quick section jumping</li>
+            </ul>
+          </div>
+
+          <!-- E-commerce -->
+          <div class="space-y-4">
+            <h3 class="text-xl font-semibold flex items-center space-x-2">
+              <span>🛒</span>
+              <span>E-commerce</span>
+            </h3>
+            <ul class="space-y-2 text-muted-foreground">
+              <li>• <strong>Product Pages:</strong> Feature section navigation</li>
+              <li>• <strong>Reviews:</strong> Progress through long review lists</li>
+              <li>• <strong>Catalogs:</strong> Category navigation indicators</li>
+              <li>• <strong>Checkout:</strong> Multi-step progress visualization</li>
+            </ul>
+          </div>
+
+          <!-- Corporate -->
+          <div class="space-y-4">
+            <h3 class="text-xl font-semibold flex items-center space-x-2">
+              <span>🏢</span>
+              <span>Corporate</span>
+            </h3>
+            <ul class="space-y-2 text-muted-foreground">
+              <li>• <strong>Landing Pages:</strong> Section dot navigation</li>
+              <li>• <strong>Annual Reports:</strong> Reading progress tracking</li>
+              <li>• <strong>Case Studies:</strong> Progress through findings</li>
+              <li>• <strong>Presentations:</strong> Slide progress indicators</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technical Features -->
+  <section id="features" class="py-16 bg-muted/30">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-foreground text-center mb-12">
+        Technical Features
+      </h2>
+      
+      <div class="max-w-4xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          
+          <!-- Performance -->
+          <div class="space-y-4">
+            <h3 class="text-xl font-semibold flex items-center space-x-2">
+              <span>⚡</span>
+              <span>Performance Optimized</span>
+            </h3>
+            <ul class="space-y-2 text-muted-foreground">
+              <li>• <strong>RequestAnimationFrame:</strong> Smooth 60fps animations</li>
+              <li>• <strong>Passive Listeners:</strong> Non-blocking scroll events</li>
+              <li>• <strong>Throttled Updates:</strong> Efficient state management</li>
+              <li>• <strong>GPU Acceleration:</strong> CSS transforms for smoothness</li>
+            </ul>
+          </div>
+
+          <!-- Accessibility -->
+          <div class="space-y-4">
+            <h3 class="text-xl font-semibold flex items-center space-x-2">
+              <span>♿</span>
+              <span>Accessibility First</span>
+            </h3>
+            <ul class="space-y-2 text-muted-foreground">
+              <li>• <strong>ARIA Labels:</strong> Screen reader friendly navigation</li>
+              <li>• <strong>Keyboard Support:</strong> Tab navigation and Enter activation</li>
+              <li>• <strong>Focus Management:</strong> Clear visual focus indicators</li>
+              <li>• <strong>Semantic HTML:</strong> Proper navigation landmarks</li>
+            </ul>
+          </div>
+
+          <!-- Customization -->
+          <div class="space-y-4">
+            <h3 class="text-xl font-semibold flex items-center space-x-2">
+              <span>🎨</span>
+              <span>Highly Customizable</span>
+            </h3>
+            <ul class="space-y-2 text-muted-foreground">
+              <li>• <strong>Positioning:</strong> Multiple fixed position options</li>
+              <li>• <strong>Styling:</strong> Colors, sizes, thickness variants</li>
+              <li>• <strong>Behavior:</strong> Show/hide thresholds, smooth scroll</li>
+              <li>• <strong>Content:</strong> Auto-generation from existing headings</li>
+            </ul>
+          </div>
+
+          <!-- Integration -->
+          <div class="space-y-4">
+            <h3 class="text-xl font-semibold flex items-center space-x-2">
+              <span>🔧</span>
+              <span>Easy Integration</span>
+            </h3>
+            <ul class="space-y-2 text-muted-foreground">
+              <li>• <strong>React Hook:</strong> useScrollProgress for custom components</li>
+              <li>• <strong>Auto-detection:</strong> Generate sections from headings</li>
+              <li>• <strong>TypeScript:</strong> Full type safety and IntelliSense</li>
+              <li>• <strong>Zero Dependencies:</strong> Built with native APIs</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Long Content for Testing -->
+  <section id="testing" class="py-16">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-foreground text-center mb-12">
+        Scroll Testing Content
+      </h2>
+      
+      <div class="max-w-3xl mx-auto space-y-8">
+        
+        <h3 id="test-section-1" class="text-2xl font-semibold text-foreground">Test Section 1: Introduction</h3>
+        {Array.from({ length: 3 }, (_, i) => (
+          <Card key={`intro-${i}`}>
+            <CardHeader>
+              <CardTitle>Introduction Part {i + 1}</CardTitle>
+              <CardDescription>
+                Testing scroll behavior with content sections
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p class="text-muted-foreground leading-relaxed">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
+                nisi ut aliquip ex ea commodo consequat. Notice how the scroll indicators 
+                respond as you move through this content.
+              </p>
+            </CardContent>
+          </Card>
+        )).map(card => card)}
+
+        <h3 id="test-section-2" class="text-2xl font-semibold text-foreground">Test Section 2: Features</h3>
+        {Array.from({ length: 4 }, (_, i) => (
+          <Card key={`features-${i}`}>
+            <CardHeader>
+              <CardTitle>Feature {i + 1}</CardTitle>
+              <CardDescription>
+                Demonstrating scroll tracking across sections
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p class="text-muted-foreground leading-relaxed">
+                The table of contents should highlight this section as you scroll through it. 
+                The reading progress bars show your overall progress through the entire page, 
+                while the section navigator indicates which major section you're currently viewing.
+              </p>
+              <p class="text-muted-foreground leading-relaxed mt-4">
+                All indicators are synchronized and update smoothly as you scroll, 
+                providing an excellent user experience for navigation and progress tracking.
+              </p>
+            </CardContent>
+          </Card>
+        )).map(card => card)}
+
+        <h3 id="test-section-3" class="text-2xl font-semibold text-foreground">Test Section 3: Benefits</h3>
+        {Array.from({ length: 3 }, (_, i) => (
+          <Card key={`benefits-${i}`}>
+            <CardHeader>
+              <CardTitle>Benefit {i + 1}</CardTitle>
+              <CardDescription>
+                Understanding the value of scroll indicators
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p class="text-muted-foreground leading-relaxed">
+                Scroll indicators provide significant value for user engagement and navigation. 
+                They help users understand their progress through content and provide quick 
+                navigation options for long-form content.
+              </p>
+            </CardContent>
+          </Card>
+        )).map(card => card)}
+
+        <h3 id="test-section-4" class="text-2xl font-semibold text-foreground">Test Section 4: Conclusion</h3>
+        {Array.from({ length: 2 }, (_, i) => (
+          <Card key={`conclusion-${i}`}>
+            <CardHeader>
+              <CardTitle>Conclusion Part {i + 1}</CardTitle>
+              <CardDescription>
+                Final thoughts on scroll indicator implementation
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p class="text-muted-foreground leading-relaxed">
+                The scroll indicator system provides a comprehensive solution for modern 
+                web applications. With performance optimization, accessibility features, 
+                and extensive customization options, it's ready for professional use.
+              </p>
+            </CardContent>
+          </Card>
+        )).map(card => card)}
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Scroll Progress Ring (Fixed Bottom Right) -->
+  <ScrollProgressRing 
+    client:load
+    size={60}
+    position="bottom-right"
+    showPercentage={true}
+    color="hsl(var(--primary))"
+  />
+
+  <!-- Table of Contents (Fixed Right) -->
+  <TableOfContents 
+    client:load
+    sections={[
+      { id: 'introduction', title: 'Introduction', level: 1 },
+      { id: 'overview', title: 'Overview', level: 1 },
+      { id: 'components', title: 'Components', level: 1 },
+      { id: 'implementation', title: 'Implementation', level: 1 },
+      { id: 'use-cases', title: 'Use Cases', level: 1 },
+      { id: 'features', title: 'Features', level: 1 },
+      { id: 'testing', title: 'Testing', level: 1 },
+      { id: 'test-section-1', title: 'Test Section 1', level: 2 },
+      { id: 'test-section-2', title: 'Test Section 2', level: 2 },
+      { id: 'test-section-3', title: 'Test Section 3', level: 2 },
+      { id: 'test-section-4', title: 'Test Section 4', level: 2 }
+    ]}
+    position="fixed-right"
+    showProgress={true}
+    maxLevel={2}
+  />
+
+  <!-- Section Navigator (Fixed Left) -->
+  <SectionNavigator 
+    client:load
+    sections={[
+      { id: 'introduction', title: 'Introduction' },
+      { id: 'components', title: 'Components' },
+      { id: 'implementation', title: 'Implementation' },
+      { id: 'use-cases', title: 'Use Cases' },
+      { id: 'features', title: 'Features' },
+      { id: 'testing', title: 'Testing' }
+    ]}
+    position="left"
+    showLabels={true}
+  />
+
+  <!-- Scroll to Top Button -->
+  <ScrollToTop 
+    client:load
+    showAt={400}
+    position="bottom-left"
+    variant="fab"
+    showProgress={false}
+  />
+
+</Layout>
