@@ -1,6 +1,6 @@
 ---
-// Navigation.astro - UNIFIED Desktop + Mobile Navigation System
-// Single Responsibility: ALL navigation logic in one place
+// Navigation.astro - KEYBOARD ACCESSIBLE Navigation System
+// Full keyboard support: Tab, Enter, Escape, Arrow keys
 // Path: src/components/layouts/Navigation.astro
 
 export interface Props {
@@ -62,10 +62,10 @@ const isCurrentPage = (itemName: string) => {
   <!-- Home -->
   <a
     href="/"
-    class={`flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+    class={`flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
       isCurrentPage('home')
         ? 'bg-primary text-primary-foreground shadow-sm' 
-        : 'text-muted-foreground hover:text-foreground hover:bg-muted/50 hover:scale-105'
+        : 'text-muted-foreground hover:text-foreground hover:bg-muted/50 focus:text-foreground focus:bg-muted/50'
     }`}
     aria-label="Homepage"
     aria-current={isCurrentPage('home') ? 'page' : undefined}
@@ -75,28 +75,43 @@ const isCurrentPage = (itemName: string) => {
   </a>
 
   <!-- Components Dropdown -->
-  <div class="relative group">
+  <div class="relative">
     <button
-      class="flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200 hover:scale-105"
+      class="flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:text-foreground focus:bg-muted/50 transition-all duration-200"
       aria-label="Components menu"
+      aria-expanded="false"
+      aria-haspopup="true"
+      id="components-button"
+      onclick="toggleDropdown('components', false)"
+      onkeydown="handleDropdownKeydown(event, 'components')"
     >
       <span>🧩</span>
       <span>Components</span>
-      <svg class="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" id="components-arrow">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
       </svg>
     </button>
     
-    <div class="absolute top-full left-0 mt-2 w-80 bg-card/95 backdrop-blur-sm border border-border rounded-lg shadow-lg opacity-0 invisible transition-all duration-300 transform translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 z-50">
+    <div 
+      class="absolute top-full left-0 mt-2 w-80 bg-card/95 backdrop-blur-sm border border-border rounded-lg shadow-lg opacity-0 invisible transition-all duration-300 transform translate-y-2 z-50"
+      id="components-dropdown"
+      role="menu"
+      aria-labelledby="components-button"
+    >
       <div class="p-4 grid grid-cols-1 gap-2">
-        {navigationSections.components.map(component => (
+        {navigationSections.components.map((component, index) => (
           <a
             href={component.href}
-            class={`flex items-start space-x-3 p-3 rounded-lg transition-all duration-200 hover:bg-muted/50 hover:scale-105 ${
+            role="menuitem"
+            tabindex="-1"
+            data-dropdown="components"
+            data-index={index}
+            class={`flex items-start space-x-3 p-3 rounded-lg transition-all duration-200 hover:bg-muted/50 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:bg-muted/50 ${
               isCurrentPage(component.name) 
                 ? 'bg-primary/10 border border-primary/20' 
                 : ''
             }`}
+            onkeydown="handleMenuItemKeydown(event)"
           >
             <span class="text-lg mt-0.5">{component.icon}</span>
             <div class="flex-1 min-w-0">
@@ -117,28 +132,43 @@ const isCurrentPage = (itemName: string) => {
   </div>
 
   <!-- Layout Dropdown -->
-  <div class="relative group">
+  <div class="relative">
     <button
-      class="flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200 hover:scale-105"
+      class="flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:text-foreground focus:bg-muted/50 transition-all duration-200"
       aria-label="Layout system menu"
+      aria-expanded="false"
+      aria-haspopup="true"
+      id="layout-button"
+      onclick="toggleDropdown('layout', false)"
+      onkeydown="handleDropdownKeydown(event, 'layout')"
     >
       <span>🏗️</span>
       <span>Layout</span>
-      <svg class="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" id="layout-arrow">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
       </svg>
     </button>
     
-    <div class="absolute top-full left-0 mt-2 w-80 bg-card/95 backdrop-blur-sm border border-border rounded-lg shadow-lg opacity-0 invisible transition-all duration-300 transform translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 z-50">
+    <div 
+      class="absolute top-full left-0 mt-2 w-80 bg-card/95 backdrop-blur-sm border border-border rounded-lg shadow-lg opacity-0 invisible transition-all duration-300 transform translate-y-2 z-50"
+      id="layout-dropdown"
+      role="menu"
+      aria-labelledby="layout-button"
+    >
       <div class="p-4 grid grid-cols-1 gap-2">
-        {navigationSections.layout.map(layout => (
+        {navigationSections.layout.map((layout, index) => (
           <a
             href={layout.href}
-            class={`flex items-start space-x-3 p-3 rounded-lg transition-all duration-200 hover:bg-muted/50 hover:scale-105 ${
+            role="menuitem"
+            tabindex="-1"
+            data-dropdown="layout"
+            data-index={index}
+            class={`flex items-start space-x-3 p-3 rounded-lg transition-all duration-200 hover:bg-muted/50 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:bg-muted/50 ${
               isCurrentPage(layout.name) 
                 ? 'bg-primary/10 border border-primary/20' 
                 : ''
             }`}
+            onkeydown="handleMenuItemKeydown(event)"
           >
             <span class="text-lg mt-0.5">{layout.icon}</span>
             <div class="flex-1 min-w-0">
@@ -162,28 +192,43 @@ const isCurrentPage = (itemName: string) => {
   </div>
 
   <!-- Features Dropdown -->
-  <div class="relative group">
+  <div class="relative">
     <button
-      class="flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200 hover:scale-105"
+      class="flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:text-foreground focus:bg-muted/50 transition-all duration-200"
       aria-label="Advanced features menu"
+      aria-expanded="false"
+      aria-haspopup="true"
+      id="features-button"
+      onclick="toggleDropdown('features', false)"
+      onkeydown="handleDropdownKeydown(event, 'features')"
     >
       <span>⚡</span>
       <span>Features</span>
-      <svg class="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" id="features-arrow">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
       </svg>
     </button>
     
-    <div class="absolute top-full left-0 mt-2 w-80 bg-card/95 backdrop-blur-sm border border-border rounded-lg shadow-lg opacity-0 invisible transition-all duration-300 transform translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 z-50">
+    <div 
+      class="absolute top-full left-0 mt-2 w-80 bg-card/95 backdrop-blur-sm border border-border rounded-lg shadow-lg opacity-0 invisible transition-all duration-300 transform translate-y-2 z-50"
+      id="features-dropdown"
+      role="menu"
+      aria-labelledby="features-button"
+    >
       <div class="p-4 grid grid-cols-1 gap-2">
-        {navigationSections.features.map(feature => (
+        {navigationSections.features.map((feature, index) => (
           <a
             href={feature.href}
-            class={`flex items-start space-x-3 p-3 rounded-lg transition-all duration-200 hover:bg-muted/50 hover:scale-105 ${
+            role="menuitem"
+            tabindex="-1"
+            data-dropdown="features"
+            data-index={index}
+            class={`flex items-start space-x-3 p-3 rounded-lg transition-all duration-200 hover:bg-muted/50 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:bg-muted/50 ${
               isCurrentPage(feature.name) 
                 ? 'bg-primary/10 border border-primary/20' 
                 : ''
             }`}
+            onkeydown="handleMenuItemKeydown(event)"
           >
             <span class="text-lg mt-0.5">{feature.icon}</span>
             <div class="flex-1 min-w-0">
@@ -204,24 +249,39 @@ const isCurrentPage = (itemName: string) => {
   </div>
 
   <!-- Resources Dropdown -->
-  <div class="relative group">
+  <div class="relative">
     <button
-      class="flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200 hover:scale-105"
+      class="flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:text-foreground focus:bg-muted/50 transition-all duration-200"
       aria-label="Resources menu"
+      aria-expanded="false"
+      aria-haspopup="true"
+      id="resources-button"
+      onclick="toggleDropdown('resources', false)"
+      onkeydown="handleDropdownKeydown(event, 'resources')"
     >
       <span>📚</span>
       <span>Resources</span>
-      <svg class="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" id="resources-arrow">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
       </svg>
     </button>
     
-    <div class="absolute top-full left-0 mt-2 w-64 bg-card/95 backdrop-blur-sm border border-border rounded-lg shadow-lg opacity-0 invisible transition-all duration-300 transform translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 z-50">
+    <div 
+      class="absolute top-full left-0 mt-2 w-64 bg-card/95 backdrop-blur-sm border border-border rounded-lg shadow-lg opacity-0 invisible transition-all duration-300 transform translate-y-2 z-50"
+      id="resources-dropdown"
+      role="menu"
+      aria-labelledby="resources-button"
+    >
       <div class="p-3">
-        {navigationSections.resources.map(resource => (
+        {navigationSections.resources.map((resource, index) => (
           <a
             href={resource.href}
-            class="flex items-center space-x-3 p-2 rounded-lg transition-all duration-200 hover:bg-muted/50"
+            role="menuitem"
+            tabindex="-1"
+            data-dropdown="resources"
+            data-index={index}
+            class="flex items-center space-x-3 p-2 rounded-lg transition-all duration-200 hover:bg-muted/50 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:bg-muted/50"
+            onkeydown="handleMenuItemKeydown(event)"
           >
             <span class="text-lg">{resource.icon}</span>
             <div>
@@ -240,9 +300,11 @@ const isCurrentPage = (itemName: string) => {
   <>
     <!-- Mobile Menu Button -->
     <button 
-      class="lg:hidden p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200 hover:scale-105"
+      class="lg:hidden p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted/50 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:text-foreground focus:bg-muted/50 transition-all duration-200"
       aria-label="Toggle mobile menu"
-      onclick="toggleMobileMenu()"
+      aria-expanded="false"
+      onclick="toggleMobileMenu(false)"
+      onkeydown="handleMobileButtonKeydown(event)"
       id="mobile-menu-button"
     >
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -251,21 +313,26 @@ const isCurrentPage = (itemName: string) => {
     </button>
 
     <!-- Mobile Navigation Menu -->
-    <div id="mobile-navigation-menu" class="lg:hidden hidden border-t border-border bg-background/95 backdrop-blur-sm fixed left-0 right-0 top-16 lg:top-20 z-[60] max-h-[80vh] overflow-y-auto">
+    <div id="mobile-navigation-menu" class="lg:hidden hidden border-t border-border bg-background/95 backdrop-blur-sm fixed left-0 right-0 top-16 lg:top-20 z-[60] max-h-[80vh] overflow-y-auto" role="menu" aria-labelledby="mobile-menu-button">
       <div class="container mx-auto px-4 py-4">
         <div class="space-y-4">
           
           <!-- Core (Home) -->
           <div class="space-y-2">
-            {navigationSections.core.map(link => (
+            {navigationSections.core.map((link, index) => (
               <a
                 href={link.href}
-                class={`block p-3 rounded-lg text-sm font-medium transition-all duration-200 ${
+                role="menuitem"
+                tabindex="-1"
+                data-section="core"
+                data-index={index}
+                class={`block p-3 rounded-lg text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
                   isCurrentPage(link.name) 
                     ? 'bg-primary text-primary-foreground' 
-                    : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+                    : 'text-muted-foreground hover:text-foreground hover:bg-muted/50 focus:text-foreground focus:bg-muted/50'
                 }`}
                 onclick="closeMobileMenu()"
+                onkeydown="handleMobileItemKeydown(event)"
               >
                 {link.label}
               </a>
@@ -277,15 +344,20 @@ const isCurrentPage = (itemName: string) => {
             <h3 class="text-xs font-semibold text-muted-foreground uppercase tracking-wider px-3">
               Component Showcases
             </h3>
-            {navigationSections.components.map(link => (
+            {navigationSections.components.map((link, index) => (
               <a
                 href={link.href}
-                class={`block p-3 rounded-lg text-sm font-medium transition-all duration-200 ${
+                role="menuitem"
+                tabindex="-1"
+                data-section="components"
+                data-index={index}
+                class={`block p-3 rounded-lg text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
                   isCurrentPage(link.name) 
                     ? 'bg-primary text-primary-foreground' 
-                    : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+                    : 'text-muted-foreground hover:text-foreground hover:bg-muted/50 focus:text-foreground focus:bg-muted/50'
                 }`}
                 onclick="closeMobileMenu()"
+                onkeydown="handleMobileItemKeydown(event)"
               >
                 {link.label}
               </a>
@@ -297,15 +369,20 @@ const isCurrentPage = (itemName: string) => {
             <h3 class="text-xs font-semibold text-muted-foreground uppercase tracking-wider px-3">
               Layout System
             </h3>
-            {navigationSections.layout.map(link => (
+            {navigationSections.layout.map((link, index) => (
               <a
                 href={link.href}
-                class={`block p-3 rounded-lg text-sm font-medium transition-all duration-200 ${
+                role="menuitem"
+                tabindex="-1"
+                data-section="layout"
+                data-index={index}
+                class={`block p-3 rounded-lg text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
                   isCurrentPage(link.name) 
                     ? 'bg-primary text-primary-foreground' 
-                    : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+                    : 'text-muted-foreground hover:text-foreground hover:bg-muted/50 focus:text-foreground focus:bg-muted/50'
                 }`}
                 onclick="closeMobileMenu()"
+                onkeydown="handleMobileItemKeydown(event)"
               >
                 {link.label}
                 {link.name === 'sidebar-showcase' && (
@@ -320,15 +397,20 @@ const isCurrentPage = (itemName: string) => {
             <h3 class="text-xs font-semibold text-muted-foreground uppercase tracking-wider px-3">
               Advanced Features
             </h3>
-            {navigationSections.features.map(link => (
+            {navigationSections.features.map((link, index) => (
               <a
                 href={link.href}
-                class={`block p-3 rounded-lg text-sm font-medium transition-all duration-200 ${
+                role="menuitem"
+                tabindex="-1"
+                data-section="features"
+                data-index={index}
+                class={`block p-3 rounded-lg text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
                   isCurrentPage(link.name) 
                     ? 'bg-primary text-primary-foreground' 
-                    : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+                    : 'text-muted-foreground hover:text-foreground hover:bg-muted/50 focus:text-foreground focus:bg-muted/50'
                 }`}
                 onclick="closeMobileMenu()"
+                onkeydown="handleMobileItemKeydown(event)"
               >
                 {link.label}
               </a>
@@ -340,15 +422,20 @@ const isCurrentPage = (itemName: string) => {
             <h3 class="text-xs font-semibold text-muted-foreground uppercase tracking-wider px-3">
               Resources
             </h3>
-            {navigationSections.resources.map(link => (
+            {navigationSections.resources.map((link, index) => (
               <a
                 href={link.href}
-                class={`block p-3 rounded-lg text-sm font-medium transition-all duration-200 ${
+                role="menuitem"
+                tabindex="-1"
+                data-section="resources"
+                data-index={index}
+                class={`block p-3 rounded-lg text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
                   isCurrentPage(link.name) 
                     ? 'bg-primary text-primary-foreground' 
-                    : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+                    : 'text-muted-foreground hover:text-foreground hover:bg-muted/50 focus:text-foreground focus:bg-muted/50'
                 }`}
                 onclick="closeMobileMenu()"
+                onkeydown="handleMobileItemKeydown(event)"
               >
                 {link.label}
               </a>
@@ -360,15 +447,20 @@ const isCurrentPage = (itemName: string) => {
             <h3 class="text-xs font-semibold text-muted-foreground uppercase tracking-wider px-3">
               Overview
             </h3>
-            {navigationSections.overview.map(link => (
+            {navigationSections.overview.map((link, index) => (
               <a
                 href={link.href}
-                class={`block p-3 rounded-lg text-sm font-medium transition-all duration-200 ${
+                role="menuitem"
+                tabindex="-1"
+                data-section="overview"
+                data-index={index}
+                class={`block p-3 rounded-lg text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
                   isCurrentPage(link.name) 
                     ? 'bg-primary text-primary-foreground' 
-                    : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+                    : 'text-muted-foreground hover:text-foreground hover:bg-muted/50 focus:text-foreground focus:bg-muted/50'
                 }`}
                 onclick="closeMobileMenu()"
+                onkeydown="handleMobileItemKeydown(event)"
               >
                 {link.label}
               </a>
@@ -380,9 +472,178 @@ const isCurrentPage = (itemName: string) => {
   </>
 )}
 
-<!-- Mobile menu management script -->
+<!-- JavaScript for keyboard accessibility -->
 <script>
-  function toggleMobileMenu() {
+  // Track currently open dropdown
+  let currentDropdown: string | null = null;
+
+  // Toggle dropdown function
+  function toggleDropdown(dropdownName: string, focusFirst: boolean = true) {
+    const dropdown = document.getElementById(`${dropdownName}-dropdown`);
+    const button = document.getElementById(`${dropdownName}-button`);
+    const arrow = document.getElementById(`${dropdownName}-arrow`);
+    
+    if (!dropdown || !button || !arrow) return;
+    
+    const isOpen = !dropdown.classList.contains('opacity-0');
+    
+    // Close all dropdowns first
+    closeAllDropdowns();
+    
+    if (!isOpen) {
+      // Open this dropdown
+      dropdown.classList.remove('opacity-0', 'invisible', 'translate-y-2');
+      dropdown.classList.add('opacity-100', 'visible', 'translate-y-0');
+      arrow.classList.add('rotate-180');
+      button.setAttribute('aria-expanded', 'true');
+      currentDropdown = dropdownName;
+      
+      // Only focus first menu item if explicitly requested (Enter/Space, not Tab)
+      if (focusFirst) {
+        setTimeout(() => {
+          const firstMenuItem = dropdown.querySelector('[role="menuitem"]') as HTMLElement;
+          if (firstMenuItem) {
+            firstMenuItem.focus();
+          }
+        }, 50); // Small delay to avoid conflicts
+      }
+    }
+  }
+
+  // Close all dropdowns
+  function closeAllDropdowns() {
+    const dropdowns = ['components', 'layout', 'features', 'resources'];
+    dropdowns.forEach(name => {
+      const dropdown = document.getElementById(`${name}-dropdown`);
+      const button = document.getElementById(`${name}-button`);
+      const arrow = document.getElementById(`${name}-arrow`);
+      
+      if (dropdown && button && arrow) {
+        dropdown.classList.add('opacity-0', 'invisible', 'translate-y-2');
+        dropdown.classList.remove('opacity-100', 'visible', 'translate-y-0');
+        arrow.classList.remove('rotate-180');
+        button.setAttribute('aria-expanded', 'false');
+      }
+    });
+    currentDropdown = null;
+  }
+
+  // Handle dropdown button keydown
+  function handleDropdownKeydown(event: KeyboardEvent, dropdownName: string) {
+    const dropdown = document.getElementById(`${dropdownName}-dropdown`);
+    const isOpen = dropdown && !dropdown.classList.contains('opacity-0');
+    
+    switch (event.key) {
+      case 'Enter':
+      case ' ':
+        event.preventDefault();
+        event.stopPropagation();
+        toggleDropdown(dropdownName, true); // Focus first item
+        break;
+      case 'Escape':
+        event.preventDefault();
+        closeAllDropdowns();
+        break;
+      case 'ArrowDown':
+        event.preventDefault();
+        event.stopPropagation();
+        if (!isOpen) {
+          toggleDropdown(dropdownName, true); // Open and focus first item
+        } else {
+          // Already open, just focus first item
+          const firstMenuItem = dropdown!.querySelector('[role="menuitem"]') as HTMLElement;
+          if (firstMenuItem) {
+            firstMenuItem.focus();
+          }
+        }
+        break;
+      case 'ArrowUp':
+        event.preventDefault();
+        event.stopPropagation();
+        if (!isOpen) {
+          toggleDropdown(dropdownName, true); // Open and focus last item
+          setTimeout(() => {
+            const menuItems = Array.from(dropdown!.querySelectorAll('[role="menuitem"]')) as HTMLElement[];
+            const lastItem = menuItems[menuItems.length - 1];
+            if (lastItem) {
+              lastItem.focus();
+            }
+          }, 50);
+        }
+        break;
+      case 'Tab':
+        // Let Tab work normally, but close dropdown when leaving
+        if (isOpen) {
+          setTimeout(() => {
+            const focused = document.activeElement as HTMLElement;
+            const inDropdown = dropdown!.contains(focused);
+            const onButton = focused === event.target;
+            
+            if (!inDropdown && !onButton) {
+              closeAllDropdowns();
+            }
+          }, 10);
+        }
+        break;
+    }
+  }
+
+  // Handle menu item keydown
+  function handleMenuItemKeydown(event: KeyboardEvent) {
+    const target = event.target as HTMLElement;
+    const dropdownName = target.getAttribute('data-dropdown');
+    const currentIndex = parseInt(target.getAttribute('data-index') || '0');
+    
+    if (!dropdownName) return;
+    
+    const dropdown = document.getElementById(`${dropdownName}-dropdown`);
+    if (!dropdown) return;
+    
+    const menuItems = Array.from(dropdown.querySelectorAll('[role="menuitem"]')) as HTMLElement[];
+    
+    switch (event.key) {
+      case 'Escape':
+        event.preventDefault();
+        event.stopPropagation();
+        closeAllDropdowns();
+        // Focus back to button
+        const button = document.getElementById(`${dropdownName}-button`);
+        if (button) button.focus();
+        break;
+      case 'ArrowDown':
+        event.preventDefault();
+        event.stopPropagation();
+        const nextIndex = (currentIndex + 1) % menuItems.length;
+        menuItems[nextIndex]?.focus();
+        break;
+      case 'ArrowUp':
+        event.preventDefault();
+        event.stopPropagation();
+        const prevIndex = currentIndex === 0 ? menuItems.length - 1 : currentIndex - 1;
+        menuItems[prevIndex]?.focus();
+        break;
+      case 'Home':
+        event.preventDefault();
+        event.stopPropagation();
+        menuItems[0]?.focus();
+        break;
+      case 'End':
+        event.preventDefault();
+        event.stopPropagation();
+        menuItems[menuItems.length - 1]?.focus();
+        break;
+      case 'Tab':
+        // Allow Tab to exit the dropdown
+        closeAllDropdowns();
+        break;
+    }
+  }
+
+  // Track mobile menu state
+  let mobileMenuOpen = false;
+
+  // Mobile menu functions with keyboard support
+  function toggleMobileMenu(focusFirst: boolean = true) {
     const menu = document.getElementById('mobile-navigation-menu');
     const button = document.getElementById('mobile-menu-button');
     
@@ -392,9 +653,21 @@ const isCurrentPage = (itemName: string) => {
       if (isHidden) {
         menu.classList.remove('hidden');
         button.setAttribute('aria-expanded', 'true');
+        mobileMenuOpen = true;
+        
+        // Focus first menu item if requested (Enter/Space, not Tab)
+        if (focusFirst) {
+          setTimeout(() => {
+            const firstMenuItem = menu.querySelector('[role="menuitem"]') as HTMLElement;
+            if (firstMenuItem) {
+              firstMenuItem.focus();
+            }
+          }, 50);
+        }
       } else {
         menu.classList.add('hidden');
         button.setAttribute('aria-expanded', 'false');
+        mobileMenuOpen = false;
       }
     }
   }
@@ -406,63 +679,208 @@ const isCurrentPage = (itemName: string) => {
     if (menu && button) {
       menu.classList.add('hidden');
       button.setAttribute('aria-expanded', 'false');
+      mobileMenuOpen = false;
+    }
+  }
+
+  // Handle mobile button keydown (same logic as desktop)
+  function handleMobileButtonKeydown(event: KeyboardEvent) {
+    const menu = document.getElementById('mobile-navigation-menu');
+    const isOpen = menu && !menu.classList.contains('hidden');
+    
+    switch (event.key) {
+      case 'Enter':
+      case ' ':
+        event.preventDefault();
+        event.stopPropagation();
+        toggleMobileMenu(true); // Focus first item
+        break;
+      case 'Escape':
+        event.preventDefault();
+        closeMobileMenu();
+        break;
+      case 'ArrowDown':
+        event.preventDefault();
+        event.stopPropagation();
+        if (!isOpen) {
+          toggleMobileMenu(true); // Open and focus first item
+        } else {
+          // Already open, focus first item
+          const firstMenuItem = menu!.querySelector('[role="menuitem"]') as HTMLElement;
+          if (firstMenuItem) {
+            firstMenuItem.focus();
+          }
+        }
+        break;
+      case 'ArrowUp':
+        event.preventDefault();
+        event.stopPropagation();
+        if (!isOpen) {
+          toggleMobileMenu(true); // Open and focus last item
+          setTimeout(() => {
+            const menuItems = Array.from(menu!.querySelectorAll('[role="menuitem"]')) as HTMLElement[];
+            const lastItem = menuItems[menuItems.length - 1];
+            if (lastItem) {
+              lastItem.focus();
+            }
+          }, 50);
+        }
+        break;
+    }
+  }
+
+  // Handle mobile menu item keydown (same logic as desktop dropdowns)
+  function handleMobileItemKeydown(event: KeyboardEvent) {
+    const target = event.target as HTMLElement;
+    const menu = document.getElementById('mobile-navigation-menu');
+    
+    if (!menu) return;
+    
+    const menuItems = Array.from(menu.querySelectorAll('[role="menuitem"]')) as HTMLElement[];
+    const currentIndex = menuItems.indexOf(target);
+    
+    switch (event.key) {
+      case 'Escape':
+        event.preventDefault();
+        event.stopPropagation();
+        closeMobileMenu();
+        // Focus back to button
+        const button = document.getElementById('mobile-menu-button');
+        if (button) button.focus();
+        break;
+      case 'ArrowDown':
+        event.preventDefault();
+        event.stopPropagation();
+        const nextIndex = (currentIndex + 1) % menuItems.length;
+        menuItems[nextIndex]?.focus();
+        break;
+      case 'ArrowUp':
+        event.preventDefault();
+        event.stopPropagation();
+        const prevIndex = currentIndex === 0 ? menuItems.length - 1 : currentIndex - 1;
+        menuItems[prevIndex]?.focus();
+        break;
+      case 'Home':
+        event.preventDefault();
+        event.stopPropagation();
+        menuItems[0]?.focus();
+        break;
+      case 'End':
+        event.preventDefault();
+        event.stopPropagation();
+        menuItems[menuItems.length - 1]?.focus();
+        break;
+      case 'Tab':
+        // Allow Tab to exit the mobile menu
+        closeMobileMenu();
+        break;
     }
   }
   
-  // Make functions globally available
+  // Make functions globally available with proper signatures
   if (typeof window !== 'undefined') {
-    (window as any).toggleMobileMenu = toggleMobileMenu;
+    (window as any).toggleDropdown = (name: string, focusFirst: boolean = false) => toggleDropdown(name, focusFirst);
+    (window as any).closeAllDropdowns = closeAllDropdowns;
+    (window as any).handleDropdownKeydown = handleDropdownKeydown;
+    (window as any).handleMenuItemKeydown = handleMenuItemKeydown;
+    (window as any).toggleMobileMenu = (focusFirst: boolean = false) => toggleMobileMenu(focusFirst);
     (window as any).closeMobileMenu = closeMobileMenu;
+    (window as any).handleMobileButtonKeydown = handleMobileButtonKeydown;
+    (window as any).handleMobileItemKeydown = handleMobileItemKeydown;
   }
 
-  // Close menu when clicking outside
+  // Enhanced event management
   if (typeof document !== 'undefined') {
+    // Click outside to close
     document.addEventListener('click', (event) => {
-      const menu = document.getElementById('mobile-navigation-menu');
-      const button = document.getElementById('mobile-menu-button');
+      const target = event.target as Element;
+      const dropdown = target.closest('[id$="-dropdown"]');
+      const button = target.closest('[id$="-button"]');
+      const mobileMenu = target.closest('#mobile-navigation-menu');
+      const mobileButton = target.closest('#mobile-menu-button');
       
-      if (menu && button && !menu.contains(event.target as Node) && !button.contains(event.target as Node)) {
-        menu.classList.add('hidden');
-        button.setAttribute('aria-expanded', 'false');
+      // Close desktop dropdowns if clicking outside
+      if (!dropdown && !button && currentDropdown) {
+        closeAllDropdowns();
+      }
+      
+      // Close mobile menu if clicking outside
+      if (!mobileMenu && !mobileButton && mobileMenuOpen) {
+        closeMobileMenu();
       }
     });
 
-    // Close menu on escape key
+    // Enhanced global keyboard handler
     document.addEventListener('keydown', (event) => {
       if (event.key === 'Escape') {
+        closeAllDropdowns();
         closeMobileMenu();
+      }
+    });
+
+    // Enhanced focus management
+    document.addEventListener('focusin', (event) => {
+      const target = event.target as HTMLElement;
+      
+      // Desktop dropdown focus management
+      if (currentDropdown) {
+        const dropdown = document.getElementById(`${currentDropdown}-dropdown`);
+        const button = document.getElementById(`${currentDropdown}-button`);
+        
+        if (dropdown && button) {
+          const inDropdown = dropdown.contains(target);
+          const onButton = button === target;
+          
+          if (!inDropdown && !onButton) {
+            closeAllDropdowns();
+          }
+        }
+      }
+      
+      // Mobile menu focus management
+      if (mobileMenuOpen) {
+        const mobileMenu = document.getElementById('mobile-navigation-menu');
+        const mobileButton = document.getElementById('mobile-menu-button');
+        
+        if (mobileMenu && mobileButton) {
+          const inMobileMenu = mobileMenu.contains(target);
+          const onMobileButton = mobileButton === target;
+          
+          if (!inMobileMenu && !onMobileButton) {
+            closeMobileMenu();
+          }
+        }
       }
     });
   }
 </script>
 
 <style>
-  /* Desktop dropdown optimizations */
-  .group:hover .group-hover\:opacity-100 {
-    animation: fadeInUp 0.3s ease-out;
-  }
-  
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  /* Enhanced focus styles for better visibility */
+  button:focus-visible,
+  a:focus-visible {
+    outline: 2px solid hsl(var(--primary)) !important;
+    outline-offset: 2px !important;
+    border-radius: 6px !important;
   }
 
-  /* Focus styles */
-  nav a:focus-visible,
-  nav button:focus-visible {
-    outline: 2px solid hsl(var(--primary));
-    outline-offset: 2px;
-    border-radius: 4px;
+  /* Dropdown animations */
+  [id$="-dropdown"] {
+    will-change: transform, opacity;
+  }
+  
+  /* Arrow rotation */
+  [id$="-arrow"] {
+    transition: transform 0.2s ease;
   }
   
   /* Mobile menu scroll optimization */
   #mobile-navigation-menu {
     scroll-behavior: smooth;
+  }
+
+  /* Ensure focus is always visible */
+  * {
+    outline-color: hsl(var(--primary));
   }
 </style>

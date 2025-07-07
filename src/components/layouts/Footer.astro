@@ -1,5 +1,5 @@
 ---
-// Footer.astro - Professional Adaptive Footer Component  
+// Footer.astro - Professional Adaptive Footer Component with Accessible Focus
 // Modular footer system for different business needs and client types
 
 export interface Props {
@@ -132,13 +132,19 @@ const currentYear = new Date().getFullYear();
               </div>
               <div class="flex items-center space-x-2">
                 <span>📞</span>
-                <a href={`tel:${companyPhone}`} class="hover:text-primary transition-colors">
+                <a 
+                  href={`tel:${companyPhone}`} 
+                  class="hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded"
+                >
                   {companyPhone}
                 </a>
               </div>
               <div class="flex items-center space-x-2">
                 <span>✉️</span>
-                <a href={`mailto:${companyEmail}`} class="hover:text-primary transition-colors">
+                <a 
+                  href={`mailto:${companyEmail}`} 
+                  class="hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded"
+                >
                   {companyEmail}
                 </a>
               </div>
@@ -151,7 +157,7 @@ const currentYear = new Date().getFullYear();
               {socialLinks.map(social => (
                 <a
                   href={social.href}
-                  class="w-10 h-10 bg-muted/50 hover:bg-primary hover:text-primary-foreground rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-110 hover:shadow-lg"
+                  class="w-10 h-10 bg-muted/50 hover:bg-primary hover:text-primary-foreground rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-110 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
                   aria-label={social.ariaLabel}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -174,7 +180,7 @@ const currentYear = new Date().getFullYear();
                 <li>
                   <a
                     href={link.href}
-                    class="text-sm text-muted-foreground hover:text-primary transition-colors duration-200 hover:translate-x-1 transform inline-block"
+                    class="text-sm text-muted-foreground hover:text-primary transition-colors duration-200 hover:translate-x-1 transform inline-block focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded"
                     target={link.external ? "_blank" : undefined}
                     rel={link.external ? "noopener noreferrer" : undefined}
                   >
@@ -228,22 +234,52 @@ const currentYear = new Date().getFullYear();
           </p>
           <p class="mt-1">
             Built with 
-            <a href="https://astro.build" class="text-primary hover:underline" target="_blank" rel="noopener">Astro 5</a>,
-            <a href="https://tailwindcss.com" class="text-primary hover:underline" target="_blank" rel="noopener">TailwindCSS 4</a>, and
-            <a href="https://ui.shadcn.com" class="text-primary hover:underline" target="_blank" rel="noopener">shadcn/ui</a>
+            <a 
+              href="https://astro.build" 
+              class="text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded" 
+              target="_blank" 
+              rel="noopener"
+            >
+              Astro 5
+            </a>,
+            <a 
+              href="https://tailwindcss.com" 
+              class="text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded" 
+              target="_blank" 
+              rel="noopener"
+            >
+              TailwindCSS 4
+            </a>, and
+            <a 
+              href="https://ui.shadcn.com" 
+              class="text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded" 
+              target="_blank" 
+              rel="noopener"
+            >
+              shadcn/ui
+            </a>
           </p>
         </div>
 
         <!-- Legal Links (for business/comprehensive variants) -->
         {(variant === 'business' || variant === 'comprehensive') && (
           <div class="flex space-x-6 text-sm text-muted-foreground">
-            <a href="/privacy" class="hover:text-primary transition-colors">
+            <a 
+              href="/privacy" 
+              class="hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded"
+            >
               Privacy Policy
             </a>
-            <a href="/terms" class="hover:text-primary transition-colors">
+            <a 
+              href="/terms" 
+              class="hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded"
+            >
               Terms of Service
             </a>
-            <a href="/cookies" class="hover:text-primary transition-colors">
+            <a 
+              href="/cookies" 
+              class="hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded"
+            >
               Cookie Policy
             </a>
           </div>
@@ -252,7 +288,7 @@ const currentYear = new Date().getFullYear();
         <!-- Back to Top Button -->
         <button
           onclick="scrollToTop()"
-          class="hidden md:flex items-center space-x-2 text-sm text-muted-foreground hover:text-primary transition-all duration-200 hover:scale-105"
+          class="hidden md:flex items-center space-x-2 text-sm text-muted-foreground hover:text-primary transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded"
           aria-label="Scroll to top of page"
         >
           <span>Back to top</span>
@@ -304,6 +340,15 @@ const currentYear = new Date().getFullYear();
 </script>
 
 <style>
+  /* Enhanced focus visibility for all footer interactive elements */
+  footer a:focus-visible,
+  footer button:focus-visible,
+  footer input:focus-visible {
+    outline: 2px solid hsl(var(--primary)) !important;
+    outline-offset: 2px !important;
+    border-radius: 6px !important;
+  }
+
   /* Enhanced hover effects for footer links */
   footer a:hover {
     transform: translateY(-1px);
@@ -311,7 +356,18 @@ const currentYear = new Date().getFullYear();
   
   /* Smooth transitions for all interactive elements */
   footer a,
-  footer button {
+  footer button,
+  footer input {
     transition: all 0.2s ease-in-out;
+  }
+
+  /* Ensure focus rings are always visible */
+  footer * {
+    outline-color: hsl(var(--primary));
+  }
+
+  /* Specific focus styling for social links */
+  footer a[target="_blank"]:focus-visible {
+    box-shadow: 0 0 0 2px hsl(var(--background)), 0 0 0 4px hsl(var(--primary)) !important;
   }
 </style>
