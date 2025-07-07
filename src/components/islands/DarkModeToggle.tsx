@@ -1,14 +1,14 @@
-// DarkModeToggle.tsx - Minimalist Sun/Moon Toggle (FOUC Fixed + UX Improved)
-// Simple, professional dark mode toggle without verbosity
+// DarkModeToggle.tsx - Simplified Astro 5 Approach (FOUC Eliminated)
+// Lightweight toggle component - theme detection handled by Layout.astro inline script
 // Path: src/components/islands/DarkModeToggle.tsx
 
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 
-// Extend window for theme state
+// Extend window for theme state (set by Layout.astro)
 declare global {
   interface Window {
-    __THEME_STATE__?: 'dark' | 'light';
+    __THEME__?: 'dark' | 'light';
   }
 }
 
@@ -16,31 +16,44 @@ export default function DarkModeToggle() {
   const [isDark, setIsDark] = useState(false);
   const [mounted, setMounted] = useState(false);
 
-  // Initialize from pre-set theme state (prevents FOUC)
+  // Initialize from global theme state (set by Layout.astro inline script)
   useEffect(() => {
-    const currentTheme = window.__THEME_STATE__ || 
+    // Get theme from global state or DOM
+    const currentTheme = window.__THEME__ || 
                         (document.documentElement.classList.contains('dark') ? 'dark' : 'light');
     
     setIsDark(currentTheme === 'dark');
     setMounted(true);
+
+    // Listen for theme restoration after ViewTransitions
+    const handleThemeRestore = () => {
+      const restoredTheme = window.__THEME__ || 
+                           (document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+      setIsDark(restoredTheme === 'dark');
+    };
+
+    window.addEventListener('theme:restored', handleThemeRestore);
+    
+    return () => {
+      window.removeEventListener('theme:restored', handleThemeRestore);
+    };
   }, []);
 
-  // Theme toggle function
+  // Simple theme toggle function
   const toggleTheme = () => {
-    const newTheme = !isDark;
-    setIsDark(newTheme);
+    const newTheme = !isDark ? 'dark' : 'light';
+    setIsDark(newTheme === 'dark');
     
-    // Update DOM and storage
+    // Update DOM immediately with explicit classes
     const root = document.documentElement;
-    if (newTheme) {
-      root.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-      window.__THEME_STATE__ = 'dark';
-    } else {
-      root.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-      window.__THEME_STATE__ = 'light';
-    }
+    root.classList.remove('dark', 'light');
+    root.classList.add(newTheme);
+    
+    // Update global state
+    window.__THEME__ = newTheme;
+    
+    // Persist preference
+    localStorage.setItem('theme', newTheme);
   };
 
   // Show loading state until mounted (prevents hydration mismatch)
@@ -68,7 +81,7 @@ export default function DarkModeToggle() {
       title={isDark ? 'Light mode' : 'Dark mode'}
     >
       {isDark ? (
-        // Sun icon (when in dark mode, clicking switches to light)
+        // Sun icon (switch to light)
         <svg 
           className="w-4 h-4 text-yellow-500" 
           fill="none" 
@@ -84,9 +97,9 @@ export default function DarkModeToggle() {
           />
         </svg>
       ) : (
-        // Moon icon (when in light mode, clicking switches to dark)
+        // Moon icon (switch to dark)
         <svg 
-          className="w-4 h-4 text-slate-700" 
+          className="w-4 h-4 text-slate-700 dark:text-slate-300" 
           fill="none" 
           stroke="currentColor" 
           viewBox="0 0 24 24"

@@ -41,8 +41,12 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+/* ASTRO 5 OPTIMIZED: CSS Custom Properties with prefers-color-scheme */
+/* Light theme (default) - using prefers-color-scheme for system detection */
 :root {
   --radius: 0.625rem;
+  
+  /* Light theme variables */
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -76,6 +80,44 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
+/* System dark theme preference (automatic detection) - LOWER PRIORITY */
+@media (prefers-color-scheme: dark) {
+  :root:not(.dark):not(.light) {
+    --background: oklch(0.145 0 0);
+    --foreground: oklch(0.985 0 0);
+    --card: oklch(0.205 0 0);
+    --card-foreground: oklch(0.985 0 0);
+    --popover: oklch(0.205 0 0);
+    --popover-foreground: oklch(0.985 0 0);
+    --primary: oklch(0.922 0 0);
+    --primary-foreground: oklch(0.205 0 0);
+    --secondary: oklch(0.269 0 0);
+    --secondary-foreground: oklch(0.985 0 0);
+    --muted: oklch(0.269 0 0);
+    --muted-foreground: oklch(0.708 0 0);
+    --accent: oklch(0.269 0 0);
+    --accent-foreground: oklch(0.985 0 0);
+    --destructive: oklch(0.704 0.191 22.216);
+    --border: oklch(1 0 0 / 10%);
+    --input: oklch(1 0 0 / 15%);
+    --ring: oklch(0.556 0 0);
+    --chart-1: oklch(0.488 0.243 264.376);
+    --chart-2: oklch(0.696 0.17 162.48);
+    --chart-3: oklch(0.769 0.188 70.08);
+    --chart-4: oklch(0.627 0.265 303.9);
+    --chart-5: oklch(0.645 0.246 16.439);
+    --sidebar: oklch(0.205 0 0);
+    --sidebar-foreground: oklch(0.985 0 0);
+    --sidebar-primary: oklch(0.488 0.243 264.376);
+    --sidebar-primary-foreground: oklch(0.985 0 0);
+    --sidebar-accent: oklch(0.269 0 0);
+    --sidebar-accent-foreground: oklch(0.985 0 0);
+    --sidebar-border: oklch(1 0 0 / 10%);
+    --sidebar-ring: oklch(0.556 0 0);
+  }
+}
+
+/* Explicit dark class override (user preference) */
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
@@ -110,11 +152,163 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+/* Explicit light class override (user preference) */
+.light {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
+  
   body {
     @apply bg-background text-foreground;
+  }
+  
+  /* ASTRO 5 OPTIMIZATION: Color scheme hints for browsers */
+  html {
+    color-scheme: light dark;
+  }
+  
+  html.dark {
+    color-scheme: dark;
+  }
+  
+  html.light {
+    color-scheme: light;
+  }
+}
+
+/* PERFORMANCE OPTIMIZATIONS */
+
+/* Critical rendering path optimization */
+@layer base {
+  /* Prevent FOUC by using system fonts as fallback */
+  body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+  
+  /* Optimize scroll performance */
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Smooth theme transitions (can be disabled for reduced motion) */
+  * {
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  }
+  
+  /* Optimize for reduced motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      transition: none !important;
+      animation: none !important;
+    }
+    
+    html {
+      scroll-behavior: auto;
+    }
+  }
+  
+  /* Optimize rendering performance */
+  * {
+    /* Use GPU acceleration for better performance */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+  
+  /* Critical path optimization */
+  body {
+    /* Prevent layout shift */
+    min-height: 100vh;
+    /* Optimize font rendering */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeSpeed;
+  }
+}
+
+/* ACCESSIBILITY ENHANCEMENTS */
+
+@layer base {
+  /* Enhanced focus indicators */
+  :focus-visible {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+  
+  /* Respect user preferences for contrast */
+  @media (prefers-contrast: high) {
+    :root {
+      --border: oklch(0.5 0 0);
+      --ring: oklch(0.3 0 0);
+    }
+    
+    .dark {
+      --border: oklch(0.7 0 0);
+      --ring: oklch(0.8 0 0);
+    }
+  }
+  
+  /* Motion-safe animations only */
+  @media (prefers-reduced-motion: no-preference) {
+    /* ViewTransitions support */
+    @supports (view-transition-name: none) {
+      :root {
+        view-transition-name: root;
+      }
+    }
+  }
+}
+
+/* PRINT STYLES */
+
+@media print {
+  * {
+    background: white !important;
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  
+  body {
+    font-size: 12pt;
+    line-height: 1.4;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
   }
 }

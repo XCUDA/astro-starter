@@ -1,296 +1,231 @@
 ---
-// Layout.astro - Enhanced Foundation Layout with TRUE FOUC Fix
-// Critical: Theme script BEFORE CSS to prevent flash
+// Layout.astro - Modern Astro 5 Layout with ViewTransitions + CSS Theme System
+// Eliminates FOUC with official Astro 5 recommendations: ViewTransitions + CSS custom properties
 // Path: src/components/layouts/Layout.astro
 
 import Header from './Header.astro';
 import Footer from './Footer.astro';
-import Breadcrumbs from './Breadcrumbs.astro';
 import Sidebar from './Sidebar.astro';
+import { ViewTransitions } from 'astro:transitions';
 
-// Enhanced interface for comprehensive layout configuration including sidebar
 export interface Props {
   title: string;
   description?: string;
+  keywords?: string[];
+  author?: string;
   image?: string;
-  keywords?: string;
   
-  // Header configuration options
+  // Layout configuration
   headerVariant?: 'default' | 'minimal' | 'business' | 'landing';
+  footerVariant?: 'minimal' | 'business' | 'comprehensive' | 'startup';
   showNavigation?: boolean;
   showDarkModeToggle?: boolean;
-  showHeaderCTA?: boolean;
-  headerCTAText?: string;
-  headerCTAHref?: string;
+  showCTA?: boolean;
+  ctaText?: string;
+  ctaHref?: string;
   
-  // Sprint 9: Enhanced sticky header behavior options
+  // Sidebar configuration
+  showSidebar?: boolean;
+  sidebarVariant?: 'admin' | 'dashboard' | 'compact' | 'minimal';
+  sidebarCollapsible?: boolean;
+  
+  // Enhanced sticky behavior (Sprint 9)
   stickyBehavior?: 'always-visible' | 'hide-on-scroll' | 'auto-hide' | 'scroll-up-show' | 'static';
   hideOnScroll?: boolean;
   scrollThreshold?: number;
   hideDelay?: number;
   showScrollIndicator?: boolean;
   
-  // Footer configuration options  
-  footerVariant?: 'minimal' | 'business' | 'comprehensive' | 'startup';
-  showSocials?: boolean;
-  showQuickLinks?: boolean;
-  showBusinessInfo?: boolean;
-  showNewsletter?: boolean;
+  // SEO and meta
+  canonicalURL?: string;
+  noindex?: boolean;
   
-  // Sidebar configuration options (Sprint 8)
-  showSidebar?: boolean;
-  sidebarVariant?: 'admin' | 'dashboard' | 'compact' | 'minimal';
-  sidebarCollapsed?: boolean;
-  showSidebarUserProfile?: boolean;
-  userProfile?: {
-    name?: string;
-    avatar?: string;
-    role?: string;
-    email?: string;
-  };
-  quickActions?: Array<{
-    name: string;
-    title: string;
-    href: string;
-    icon: string;
-    variant?: 'default' | 'primary' | 'destructive';
-  }>;
-  
-  // Breadcrumbs configuration
-  showBreadcrumbs?: boolean;
-  breadcrumbsVariant?: 'default' | 'minimal' | 'business' | 'ecommerce';
-  
-  // Site configuration
-  siteName?: string;
-  siteDescription?: string;
-  companyName?: string;
+  // Page-specific settings
   currentPage?: string;
 }
 
-// Destructure props with business-friendly defaults
-const { 
-  title, 
-  description = "Professional Astro starter with TailwindCSS 4 and shadcn/ui",
+// Destructure props with sensible defaults for business use
+const {
+  title,
+  description = "A modern, production-ready Astro 5 starter with TailwindCSS 4, shadcn/ui, and TypeScript. Perfect for professional websites.",
+  keywords = ["astro", "tailwindcss", "shadcn-ui", "typescript", "starter", "modern", "professional"],
+  author = "XCUDA - Professional Web Development",
   image = "/og-image.jpg",
-  keywords = "astro, tailwindcss, shadcn/ui, typescript, professional",
   
-  // Header defaults - flexible for client needs
+  // Layout defaults optimized for business sites
   headerVariant = 'default',
+  footerVariant = 'business',
   showNavigation = true,
   showDarkModeToggle = true,
-  showHeaderCTA = false,
-  headerCTAText = "Get Started",
-  headerCTAHref = "/contact",
+  showCTA = false,
+  ctaText = "Get Started",
+  ctaHref = "/contact",
   
-  // Sprint 9: Sticky header defaults - conservative for backward compatibility
-  stickyBehavior = 'static', // Default to static to preserve existing behavior
+  // Sidebar defaults (false by default, opt-in)
+  showSidebar = false,
+  sidebarVariant = 'admin',
+  sidebarCollapsible = true,
+  
+  // Sticky behavior defaults (modern scroll-up-show)
+  stickyBehavior = 'scroll-up-show',
   hideOnScroll = false,
   scrollThreshold = 100,
   hideDelay = 2000,
   showScrollIndicator = false,
   
-  // Footer defaults - business-oriented
-  footerVariant = 'business', 
-  showSocials = true,
-  showQuickLinks = true,
-  showBusinessInfo = false,
-  showNewsletter = false,
+  // SEO defaults
+  canonicalURL,
+  noindex = false,
   
-  // Sidebar defaults (Sprint 8)
-  showSidebar = false,
-  sidebarVariant = 'admin',
-  sidebarCollapsed = false,
-  showSidebarUserProfile = true,
-  userProfile = {
-    name: "Admin User",
-    avatar: "👤",
-    role: "Administrator",
-    email: "admin@company.com"
-  },
-  quickActions = [
-    {
-      name: "new-project",
-      title: "New Project",
-      href: "/admin/projects/new",
-      icon: "➕",
-      variant: "primary"
-    },
-    {
-      name: "settings",
-      title: "Settings",
-      href: "/admin/settings",
-      icon: "⚙️",
-      variant: "default"
-    }
-  ],
-  
-  // Breadcrumbs defaults
-  showBreadcrumbs = false,
-  breadcrumbsVariant = 'default',
-  
-  // Site defaults - easily customizable per client
-  siteName = "Astro Starter",
-  siteDescription = "A modern, performant starter built with Astro 5, TailwindCSS 4, and shadcn/ui",
-  companyName,
+  // Page identification
   currentPage
 } = Astro.props;
 
-// Generate canonical URL for SEO - crucial for preventing duplicate content issues
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+// Generate canonical URL if not provided
+const finalCanonicalURL = canonicalURL || new URL(Astro.url.pathname, Astro.site);
 
-// Enhanced site metadata for professional presentation
-const fullSiteName = companyName || siteName;
-const fullSiteDescription = siteDescription;
+// Generate page-specific meta description
+const finalDescription = currentPage ? 
+  `${description} - ${currentPage.charAt(0).toUpperCase() + currentPage.slice(1).replace('-', ' ')}` : 
+  description;
 
-// Calculate main content margin when sidebar is present
-const mainContentClasses = showSidebar 
-  ? (sidebarCollapsed ? "lg:ml-16" : "lg:ml-64") 
-  : "";
+// Keywords enhancement based on current page
+const finalKeywords = currentPage ? 
+  [...keywords, currentPage.replace('-', ' '), 'showcase', 'demo'] : 
+  keywords;
 ---
 
 <!doctype html>
-<html lang="en" class="h-full">
+<html lang="en" class="scroll-smooth">
   <head>
-    <!-- Essential meta tags for proper document structure -->
     <meta charset="UTF-8" />
-    <meta name="description" content={description} />
-    <meta name="keywords" content={keywords} />
+    <meta name="description" content={finalDescription} />
+    <meta name="keywords" content={finalKeywords.join(', ')} />
+    <meta name="author" content={author} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
-    <!-- 
-      CRITICAL FOUC FIX: Theme applied IMMEDIATELY before any CSS loads
-      This prevents Dark → Light → Dark flash by setting correct state upfront
-    -->
+    <!-- Canonical URL for SEO -->
+    <link rel="canonical" href={finalCanonicalURL} />
+    
+    <!-- Robots meta -->
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={finalCanonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={finalDescription} />
+    <meta property="og:image" content={image} />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={finalCanonicalURL} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={finalDescription} />
+    <meta property="twitter:image" content={image} />
+    
+    <!-- Page title -->
+    <title>{title}</title>
+    
+    <!-- ASTRO 5 OFFICIAL SOLUTION: Inline theme script to prevent FOUC -->
+    <!-- This script runs BEFORE any CSS/HTML renders, eliminating flash -->
     <script is:inline>
+      // Astro 5 recommended approach: CSS custom properties + ViewTransitions
       (function() {
-        try {
-          const savedTheme = localStorage.getItem('theme');
-          const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-          const shouldUseDark = savedTheme === 'dark' || (!savedTheme && systemPrefersDark);
-          
-          if (shouldUseDark) {
-            document.documentElement.classList.add('dark');
+        // Get stored theme or system preference
+        const getThemePreference = () => {
+          if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+            return localStorage.getItem('theme');
           }
-          
-          // Store for React hydration sync
-          window.__THEME_STATE__ = shouldUseDark ? 'dark' : 'light';
-        } catch (e) {
-          // Fallback silently if localStorage unavailable
+          return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        };
+        
+        // Apply theme immediately (before any rendering)
+        const theme = getThemePreference();
+        const root = document.documentElement;
+        
+        // Clear any existing theme classes
+        root.classList.remove('dark', 'light');
+        
+        // Apply explicit theme class
+        if (theme === 'dark') {
+          root.classList.add('dark');
+        } else {
+          root.classList.add('light');
         }
+        
+        // Store in global state for components
+        window.__THEME__ = theme;
+        
+        // Listen for system theme changes (only if no stored preference)
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+          if (!localStorage.getItem('theme')) {
+            const newTheme = e.matches ? 'dark' : 'light';
+            root.classList.remove('dark', 'light');
+            root.classList.add(newTheme);
+            window.__THEME__ = newTheme;
+          }
+        });
       })();
     </script>
     
-    <!-- Canonical URL prevents SEO issues with duplicate content -->
-    <link rel="canonical" href={canonicalURL} />
+    <!-- Astro 5 ViewTransitions for smooth page transitions -->
+    <ViewTransitions />
     
-    <!-- Enhanced Open Graph meta tags for professional social media sharing -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content={canonicalURL} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:image" content={new URL(image, Astro.url)} />
-    <meta property="og:site_name" content={fullSiteName} />
-    
-    <!-- Twitter Card meta tags for enhanced Twitter sharing -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content={canonicalURL} />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={new URL(image, Astro.url)} />
-    
-    <!-- Additional professional meta tags -->
-    <meta name="robots" content="index, follow" />
-    <meta name="author" content={fullSiteName} />
-    <meta name="generator" content={Astro.generator} />
-    
-    <!-- Professional page title with consistent branding -->
-    <title>{title} | {fullSiteName}</title>
-    
-    <!-- Enhanced favicon setup for professional presentation -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <meta name="theme-color" content="hsl(var(--primary))" />
-    
-    <!-- 
-      CRITICAL: TailwindCSS 4 global styles with is:global for shadcn/ui compatibility
-      Loaded AFTER theme script so CSS variables match the correct mode
-    -->
+    <!-- Global CSS with TailwindCSS 4 + shadcn/ui (MUST be is:global) -->
     <style is:global>
       @import "../../styles/global.css";
     </style>
-    
-    <!-- Performance optimization: Preload critical fonts if custom fonts are added -->
-    <!-- <link rel="preload" href="/fonts/inter.woff2" as="font" type="font/woff2" crossorigin /> -->
-    
-    <!-- DNS prefetch for external resources if needed -->
-    <!-- <link rel="dns-prefetch" href="//fonts.googleapis.com"> -->
   </head>
-  
-  <!-- 
-    Enhanced body setup with professional defaults
-    Full height layout with smooth scroll behavior and optimized text rendering
-    Sidebar layout support with conditional classes
-  -->
-  <body class={`h-full bg-background text-foreground antialiased font-sans ${showSidebar ? 'overflow-hidden lg:overflow-auto' : ''}`}>
-    <!-- 
-      Accessibility: Skip to main content link
-      Essential for screen readers and keyboard navigation compliance
-      Enhanced styling for better visibility when focused
-    -->
-    <a 
-      href="#main-content" 
-      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 
-             bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium
-             transition-all duration-200 z-50 shadow-lg
-             focus:ring-2 focus:ring-primary focus:ring-offset-2"
-    >
-      Skip to main content
-    </a>
-    
-    <!-- 
-      Layout Container - Conditional structure based on sidebar presence
-      With sidebar: horizontal flex layout
-      Without sidebar: vertical flex layout (original)
-    -->
-    <div class={showSidebar ? "min-h-full flex" : "min-h-full flex flex-col"}>
-      
-      <!-- 
-        Sidebar Component (Sprint 8)
-        Only rendered when showSidebar is true
-        Fixed position on large screens, overlay on mobile
-      -->
-      {showSidebar && (
-        <Sidebar
+
+  <body class="min-h-screen bg-background text-foreground antialiased">
+    <!-- Layout Structure based on sidebar configuration -->
+    {showSidebar ? (
+      <!-- Sidebar Layout -->
+      <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar Component -->
+        <Sidebar 
           variant={sidebarVariant}
+          collapsed={!sidebarCollapsible}
           currentPage={currentPage}
-          collapsed={sidebarCollapsed}
-          showUserProfile={showSidebarUserProfile}
-          userProfile={userProfile}
-          quickActions={quickActions}
         />
-      )}
-      
-      <!-- 
-        Main Content Area
-        Adapts based on sidebar presence and state
-      -->
-      <div class={`flex-1 flex flex-col ${mainContentClasses} transition-all duration-300`}>
         
-        <!-- 
-          Professional Header Component
-          Enhanced with intelligent sticky behavior (Sprint 9)
-          Modular system allows easy customization per client/project
-          Adjusts automatically when sidebar is present
-        -->
-        <Header
+        <!-- Main Content Area -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+          <!-- Header (adapted for sidebar layout) -->
+          <Header 
+            variant={headerVariant}
+            showNavigation={false}
+            showDarkModeToggle={showDarkModeToggle}
+            showCTA={showCTA}
+            ctaText={ctaText}
+            ctaHref={ctaHref}
+            currentPage={currentPage}
+            stickyBehavior="static"
+          />
+          
+          <!-- Scrollable Content -->
+          <main class="flex-1 overflow-y-auto">
+            <div class="p-6">
+              <slot />
+            </div>
+          </main>
+        </div>
+      </div>
+    ) : (
+      <!-- Standard Layout -->
+      <div class="flex flex-col min-h-screen">
+        <!-- Header with enhanced sticky behavior -->
+        <Header 
           variant={headerVariant}
-          showNavigation={showNavigation && !showSidebar}
+          showNavigation={showNavigation}
           showDarkModeToggle={showDarkModeToggle}
-          showCTA={showHeaderCTA}
-          ctaText={headerCTAText}
-          ctaHref={headerCTAHref}
-          siteName={fullSiteName}
-          siteDescription={fullSiteDescription}
+          showCTA={showCTA}
+          ctaText={ctaText}
+          ctaHref={ctaHref}
           currentPage={currentPage}
           stickyBehavior={stickyBehavior}
           hideOnScroll={hideOnScroll}
@@ -299,112 +234,74 @@ const mainContentClasses = showSidebar
           showScrollIndicator={showScrollIndicator}
         />
         
-        <!-- 
-          Breadcrumbs Navigation (when enabled)
-          Provides hierarchical navigation context
-          Works with both sidebar and standard layouts
-        -->
-        {showBreadcrumbs && (
-          <Breadcrumbs
-            variant={breadcrumbsVariant}
-            showHome={true}
-            showIcons={true}
-            currentPageTitle={title}
-          />
-        )}
-        
-        <!-- 
-          Main content area with proper semantic structure
-          Flexible content area that grows to fill available space
-          Ensures footer stays at bottom regardless of content length
-          Adapts to sidebar layout when present
-        -->
-        <main 
-          id="main-content" 
-          class={`flex-1 ${showSidebar ? 'overflow-y-auto' : ''}`} 
-          role="main"
-        >
-          <!-- 
-            Content slot - this is where page-specific content is inserted
-            The slot system allows maximum flexibility for different page layouts
-          -->
+        <!-- Main Content -->
+        <main class="flex-1">
           <slot />
         </main>
         
-        <!-- 
-          Professional Footer Component  
-          Modular system supports different business needs and client requirements
-          Hidden when sidebar is present (dashboard layouts typically don't need footer)
-        -->
-        {!showSidebar && (
-          <Footer
-            variant={footerVariant}
-            siteName={fullSiteName}
-            siteDescription={fullSiteDescription}
-            showSocials={showSocials}
-            showQuickLinks={showQuickLinks}
-            showBusinessInfo={showBusinessInfo}
-            showNewsletter={showNewsletter}
-            companyName={companyName}
-          />
-        )}
+        <!-- Footer -->
+        <Footer 
+          variant={footerVariant}
+        />
       </div>
-    </div>
+    )}
     
-    <!-- 
-      Script slot for page-specific JavaScript
-      Positioned at end of body for optimal loading performance
-      Allows individual pages to add custom scripts when needed
-    -->
-    <slot name="scripts" />
+    <!-- Astro 5 ViewTransitions enhancements -->
+    <script>
+      import type { TransitionBeforeSwapEvent } from 'astro:transitions/client';
+      
+      // Preserve theme state during ViewTransitions
+      document.addEventListener('astro:before-swap', (e) => {
+        const theme = window.__THEME__ || document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+        (e as TransitionBeforeSwapEvent).newDocument.documentElement.classList.toggle('dark', theme === 'dark');
+      });
+      
+      // Re-initialize components after page transition
+      document.addEventListener('astro:page-load', () => {
+        // Dispatch custom event for components that need re-initialization
+        window.dispatchEvent(new CustomEvent('theme:restored'));
+      });
+    </script>
   </body>
 </html>
 
-<!-- Global styles for enhanced professional appearance -->
-<style is:global>
-  /* Smooth scroll behavior for navigation and back-to-top functionality */
+<!-- Performance optimizations -->
+<style>
+  /* Optimize critical rendering path */
+  html {
+    /* Prevent layout shift during theme transitions */
+    color-scheme: light dark;
+  }
+  
+  /* Smooth theme transitions */
+  * {
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  }
+  
+  /* Optimize scroll behavior */
   html {
     scroll-behavior: smooth;
   }
   
-  /* Enhanced focus management for accessibility compliance */
-  *:focus-visible {
-    outline: 2px solid hsl(var(--primary));
-    outline-offset: 2px;
-    border-radius: 4px;
+  /* Prevent flash during transitions */
+  .dark {
+    color-scheme: dark;
   }
   
-  /* Optimized text rendering for professional presentation */
-  body {
-    text-rendering: optimizeSpeed;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  /* ViewTransitions optimizations */
+  @view-transition {
+    navigation: auto;
   }
   
-  /* Prevent horizontal scroll on mobile devices */
-  body {
-    overflow-x: hidden;
-  }
-  
-  /* Enhanced selection styling for brand consistency */
-  ::selection {
-    background-color: hsl(var(--primary) / 0.2);
-    color: hsl(var(--primary-foreground));
-  }
-
-  /* Sidebar layout specific adjustments */
-  body.sidebar-active {
-    overflow: hidden;
-  }
-  
-  @media (min-width: 1024px) {
-    body.sidebar-active {
-      overflow: auto;
+  /* Reduce motion for accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      transition: none !important;
+      animation: none !important;
     }
-  }
-  
-  /* Smooth transitions for sidebar layout changes */
-  .main-content-area {
-    transition: margin-left 0.3s ease-in-out;
+    
+    html {
+      scroll-behavior: auto;
+    }
   }
 </style>

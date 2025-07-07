@@ -1,11 +1,11 @@
 ---
-// Header.astro - Enhanced Professional Adaptive Header Component (Sprint 9 - Step 1)
-// Now includes intelligent sticky behavior with hide/show on scroll and performance optimization
-// Combines navigation, branding, and interactive elements for business sites
+// Header.astro - SIMPLIFIED - Single Responsibility Architecture
+// Responsibilities: ONLY Branding + CTA + DarkMode Toggle
+// Navigation logic delegated to Navigation.astro
+// Path: src/components/layouts/Header.astro
 
 import Navigation from './Navigation.astro';
 import DarkModeToggle from '../islands/DarkModeToggle';
-import StickyHeader from '../islands/StickyHeader';
 
 export interface Props {
   variant?: 'default' | 'minimal' | 'business' | 'landing';
@@ -18,9 +18,9 @@ export interface Props {
   siteDescription?: string;
   currentPage?: string;
   
-  // Sprint 9: Enhanced sticky behavior props
+  // Enhanced sticky behavior props (preserved for future use)
   stickyBehavior?: 'always-visible' | 'hide-on-scroll' | 'auto-hide' | 'scroll-up-show' | 'static';
-  hideOnScroll?: boolean; // Shortcut for common use case
+  hideOnScroll?: boolean;
   scrollThreshold?: number;
   hideDelay?: number;
   showScrollIndicator?: boolean;
@@ -34,20 +34,17 @@ const {
   showCTA = false,
   ctaText = "Get Started",
   ctaHref = "/contact",
-  siteName = "Astro Professional Starter",
+  siteName = "Astro Starter",
   siteDescription = "Built with Astro 5, TailwindCSS 4, and shadcn/ui",
   currentPage,
   
-  // Sprint 9: Sticky behavior with intelligent defaults
-  stickyBehavior = 'scroll-up-show',
+  // Sticky behavior (static by default for simplicity)
+  stickyBehavior = 'static',
   hideOnScroll = false,
   scrollThreshold = 100,
   hideDelay = 2000,
   showScrollIndicator = false
 } = Astro.props;
-
-// Determine final sticky behavior (hideOnScroll prop overrides stickyBehavior)
-const finalStickyBehavior = hideOnScroll ? 'hide-on-scroll' : stickyBehavior;
 
 // Header variant styles for different business needs
 const headerVariants = {
@@ -57,457 +54,81 @@ const headerVariants = {
   landing: "bg-gradient-to-r from-background/90 to-card/90 backdrop-blur-sm border-b border-border"
 };
 
-// Static header classes (used when stickyBehavior is 'static')
+// Static header classes (simplified approach)
 const staticHeaderClasses = `sticky top-0 z-50 w-full transition-all duration-300 ${headerVariants[variant]}`;
 ---
 
-<!-- 
-  Conditional rendering based on sticky behavior:
-  - If 'static': Use traditional sticky header
-  - If enhanced behavior: Use StickyHeader component with React logic
--->
-
-{finalStickyBehavior === 'static' ? (
-  <!-- Traditional Static Sticky Header -->
-  <header class={staticHeaderClasses}>
-    <div class="container mx-auto px-4">
-      <div class="flex items-center justify-between h-16 lg:h-20">
-        
-        <!-- Logo/Branding Section -->
-        <div class="flex items-center space-x-4">
-          <a 
-            href="/" 
-            class="flex items-center space-x-3 group transition-all duration-200 hover:scale-105"
-            aria-label={`${siteName} Homepage`}
-          >
-            <!-- Logo with gradient for modern appeal -->
-            <div class="w-8 h-8 lg:w-10 lg:h-10 bg-gradient-to-br from-primary to-primary/70 rounded-lg flex items-center justify-center text-primary-foreground font-bold text-lg lg:text-xl transition-all duration-200 group-hover:shadow-lg group-hover:shadow-primary/25">
-              ⚡
-            </div>
-            
-            <!-- Site Name and Description -->
-            <div class="hidden sm:block">
-              <div class="text-lg lg:text-xl font-bold text-foreground group-hover:text-primary transition-colors">
-                {siteName}
-              </div>
-              {(variant === 'business' || variant === 'landing') && (
-                <div class="text-xs lg:text-sm text-muted-foreground">
-                  {siteDescription}
-                </div>
-              )}
-            </div>
-          </a>
-        </div>
-
-        <!-- Center Navigation (hidden on mobile, handled by Navigation component) -->
-        {showNavigation && (
-          <div class="hidden lg:flex flex-1 justify-center">
-            <Navigation currentPage={currentPage} />
+<!-- SIMPLIFIED HEADER: Branding + Navigation + CTA + DarkMode -->
+<header class={staticHeaderClasses}>
+  <div class="container mx-auto px-4">
+    <div class="flex items-center justify-between h-16 lg:h-20">
+      
+      <!-- BRANDING SECTION (Logo + Site Info) -->
+      <div class="flex items-center space-x-4">
+        <a 
+          href="/" 
+          class="flex items-center space-x-3 group transition-all duration-200 hover:scale-105"
+          aria-label={`${siteName} Homepage`}
+        >
+          <div class="w-8 h-8 lg:w-10 lg:h-10 bg-gradient-to-br from-primary to-primary/70 rounded-lg flex items-center justify-center text-primary-foreground font-bold text-lg lg:text-xl transition-all duration-200 group-hover:shadow-lg group-hover:shadow-primary/25">
+            ⚡
           </div>
-        )}
-
-        <!-- Right Actions Section -->
-        <div class="flex items-center space-x-3 lg:space-x-4">
           
-          <!-- Optional CTA Button for business/landing variants -->
-          {showCTA && (variant === 'business' || variant === 'landing') && (
-            <a
-              href={ctaHref}
-              class="hidden md:inline-flex items-center px-4 py-2 text-sm font-medium text-primary-foreground bg-primary border border-transparent rounded-md hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all duration-200 hover:scale-105 hover:shadow-lg hover:shadow-primary/25"
-              aria-label={ctaText}
-            >
-              {ctaText}
-            </a>
-          )}
-
-          <!-- Dark Mode Toggle -->
-          {showDarkModeToggle && (
-            <div class="flex items-center">
-              <DarkModeToggle client:load />
+          <div class="hidden sm:block">
+            <div class="text-lg lg:text-xl font-bold text-foreground group-hover:text-primary transition-colors">
+              {siteName}
             </div>
-          )}
-
-          <!-- Mobile Menu Button (only when navigation is enabled) -->
-          {showNavigation && (
-            <button 
-              class="lg:hidden p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200 hover:scale-105"
-              aria-label="Toggle mobile menu"
-              onclick="toggleHeaderMobileMenu()"
-              id="header-mobile-button"
-            >
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-              </svg>
-            </button>
-          )}
-        </div>
+            {(variant === 'business' || variant === 'landing') && (
+              <div class="text-xs lg:text-sm text-muted-foreground">
+                {siteDescription}
+              </div>
+            )}
+          </div>
+        </a>
       </div>
 
-      <!-- Mobile Navigation Menu -->
+      <!-- NAVIGATION SECTION (Desktop + Mobile) -->
       {showNavigation && (
-        <div id="header-mobile-menu" class="lg:hidden hidden border-t border-border">
-          <div class="container mx-auto px-4 py-4">
-            <div class="space-y-2">
-              
-              <!-- Home Link -->
-              <a
-                href="/"
-                class="block p-3 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200"
-              >
-                🏠 Home
-              </a>
-              
-              <!-- Quick Navigation Links -->
-              <a
-                href="/form-showcase"
-                class="block p-3 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200"
-              >
-                📝 Form Components
-              </a>
-              
-              <a
-                href="/navigation-showcase"
-                class="block p-3 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200"
-              >
-                🧭 Navigation & Feedback
-              </a>
-              
-              <a
-                href="/data-display-showcase"
-                class="block p-3 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200"
-              >
-                📊 Data Display
-              </a>
-              
-              <a
-                href="/advanced-showcase"
-                class="block p-3 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200"
-              >
-                🔮 Advanced Components
-              </a>
-              
-              <a
-                href="/layout-showcase"
-                class="block p-3 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200"
-              >
-                🏗️ Layout System
-              </a>
-              
-              <a
-                href="/sidebar-showcase"
-                class="block p-3 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200"
-              >
-                📋 Sidebar Navigation
-              </a>
-              
-              <a
-                href="/sticky-header-demo"
-                class="block p-3 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200"
-              >
-                📌 Sticky Header Demo
-              </a>
-              
-              <a
-                href="/sticky-header-demo"
-                class="block p-3 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200"
-              >
-                📌 Sticky Header Demo
-              </a>
-              
-              <a
-                href="/fab-showcase"
-                class="block p-3 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200"
-              >
-                🎯 Floating Action Buttons
-              </a>
-
-              <a
-                href="/fab-showcase"
-                class="block p-3 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200"
-              >
-                🎯 Floating Action Buttons
-              </a>
-              
-              <a
-                href="/scroll-indicators-showcase"
-                class="block p-3 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200"
-              >
-                📊 Scroll Indicators
-              </a>
-
-              <a
-                href="/scroll-indicators-showcase"
-                class="block p-3 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200"
-              >
-                📊 Scroll Indicators
-              </a>
-              
-              <a
-                href="/smooth-transitions-showcase"
-                class="block p-3 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200"
-              >
-                ✨ Smooth Transitions
-              </a>
-
-              <a
-                href="/components-showcase"
-                class="block p-3 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200"
-              >
-                🧩 All Components (buttons)
-              </a>
-
-              <!-- Mobile CTA Button -->
-              {showCTA && (
-                <div class="pt-4 border-t border-border">
-                  <a
-                    href={ctaHref}
-                    class="w-full flex items-center justify-center px-4 py-3 text-sm font-medium text-primary-foreground bg-primary border border-transparent rounded-md hover:bg-primary/90 transition-all duration-200"
-                    aria-label={ctaText}
-                  >
-                    {ctaText}
-                  </a>
-                </div>
-              )}
-            </div>
-          </div>
+        <div class="flex-1 flex justify-center lg:justify-center">
+          <Navigation 
+            currentPage={currentPage} 
+            variant={variant}
+            showMobileMenu={true}
+          />
         </div>
       )}
-    </div>
-  </header>
-) : (
-  <!-- Enhanced Sticky Header with Intelligent Behavior -->
-  <StickyHeader 
-    behavior={finalStickyBehavior}
-    threshold={scrollThreshold}
-    hideDelay={hideDelay}
-    showScrollIndicator={showScrollIndicator}
-    variant={variant}
-    client:load
-  >
-    <div class="container mx-auto px-4">
-      <div class="flex items-center justify-between h-16 lg:h-20">
-        
-        <!-- Logo/Branding Section -->
-        <div class="flex items-center space-x-4">
-          <a 
-            href="/" 
-            class="flex items-center space-x-3 group transition-all duration-200 hover:scale-105"
-            aria-label={`${siteName} Homepage`}
-          >
-            <!-- Logo with gradient for modern appeal -->
-            <div class="w-8 h-8 lg:w-10 lg:h-10 bg-gradient-to-br from-primary to-primary/70 rounded-lg flex items-center justify-center text-primary-foreground font-bold text-lg lg:text-xl transition-all duration-200 group-hover:shadow-lg group-hover:shadow-primary/25">
-              ⚡
-            </div>
-            
-            <!-- Site Name and Description -->
-            <div class="hidden sm:block">
-              <div class="text-lg lg:text-xl font-bold text-foreground group-hover:text-primary transition-colors">
-                {siteName}
-              </div>
-              {(variant === 'business' || variant === 'landing') && (
-                <div class="text-xs lg:text-sm text-muted-foreground">
-                  {siteDescription}
-                </div>
-              )}
-            </div>
-          </a>
-        </div>
 
-        <!-- Center Navigation (hidden on mobile, handled by Navigation component) -->
-        {showNavigation && (
-          <div class="hidden lg:flex flex-1 justify-center">
-            <Navigation currentPage={currentPage} />
-          </div>
+      <!-- ACTIONS SECTION (CTA + DarkMode) -->
+      <div class="flex items-center space-x-3 lg:space-x-4">
+        
+        <!-- Optional CTA Button for business/landing variants -->
+        {showCTA && (variant === 'business' || variant === 'landing') && (
+          <a
+            href={ctaHref}
+            class="hidden md:inline-flex items-center px-4 py-2 text-sm font-medium text-primary-foreground bg-primary border border-transparent rounded-md hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all duration-200 hover:scale-105 hover:shadow-lg hover:shadow-primary/25"
+            aria-label={ctaText}
+          >
+            {ctaText}
+          </a>
         )}
 
-        <!-- Right Actions Section -->
-        <div class="flex items-center space-x-3 lg:space-x-4">
-          
-          <!-- Optional CTA Button for business/landing variants -->
-          {showCTA && (variant === 'business' || variant === 'landing') && (
-            <a
-              href={ctaHref}
-              class="hidden md:inline-flex items-center px-4 py-2 text-sm font-medium text-primary-foreground bg-primary border border-transparent rounded-md hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all duration-200 hover:scale-105 hover:shadow-lg hover:shadow-primary/25"
-              aria-label={ctaText}
-            >
-              {ctaText}
-            </a>
-          )}
-
-          <!-- Dark Mode Toggle -->
-          {showDarkModeToggle && (
-            <div class="flex items-center">
-              <DarkModeToggle client:load />
-            </div>
-          )}
-
-          <!-- Mobile Menu Button (only when navigation is enabled) -->
-          {showNavigation && (
-            <button 
-              class="lg:hidden p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200 hover:scale-105"
-              aria-label="Toggle mobile menu"
-              onclick="toggleHeaderMobileMenu()"
-              id="header-mobile-button"
-            >
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-              </svg>
-            </button>
-          )}
-        </div>
-      </div>
-
-      <!-- Mobile Navigation Menu -->
-      {showNavigation && (
-        <div id="header-mobile-menu" class="lg:hidden hidden border-t border-border">
-          <div class="container mx-auto px-4 py-4">
-            <div class="space-y-2">
-              
-              <!-- Home Link -->
-              <a
-                href="/"
-                class="block p-3 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200"
-              >
-                🏠 Home
-              </a>
-              
-              <!-- Quick Navigation Links -->
-              <a
-                href="/form-showcase"
-                class="block p-3 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200"
-              >
-                📝 Form Components
-              </a>
-              
-              <a
-                href="/navigation-showcase"
-                class="block p-3 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200"
-              >
-                🧭 Navigation & Feedback
-              </a>
-              
-              <a
-                href="/data-display-showcase"
-                class="block p-3 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200"
-              >
-                📊 Data Display
-              </a>
-              
-              <a
-                href="/advanced-showcase"
-                class="block p-3 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200"
-              >
-                🔮 Advanced Components
-              </a>
-              
-              <a
-                href="/layout-showcase"
-                class="block p-3 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200"
-              >
-                🏗️ Layout System
-              </a>
-              
-              <a
-                href="/sidebar-showcase"
-                class="block p-3 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200"
-              >
-                📋 Sidebar Navigation
-              </a>
-              
-              <a
-                href="/sticky-header-demo"
-                class="block p-3 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200"
-              >
-                📌 Sticky Header Demo
-              </a>
-              
-              <a
-                href="/components-showcase"
-                class="block p-3 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200"
-              >
-                🧩 All Components
-              </a>
-
-              <!-- Mobile CTA Button -->
-              {showCTA && (
-                <div class="pt-4 border-t border-border">
-                  <a
-                    href={ctaHref}
-                    class="w-full flex items-center justify-center px-4 py-3 text-sm font-medium text-primary-foreground bg-primary border border-transparent rounded-md hover:bg-primary/90 transition-all duration-200"
-                    aria-label={ctaText}
-                  >
-                    {ctaText}
-                  </a>
-                </div>
-              )}
-            </div>
+        <!-- Dark Mode Toggle -->
+        {showDarkModeToggle && (
+          <div class="flex items-center">
+            <DarkModeToggle client:load />
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
-  </StickyHeader>
-)}
-
-<!-- Mobile menu toggle script -->
-<script>
-  function toggleHeaderMobileMenu() {
-    const menu = document.getElementById('header-mobile-menu');
-    const button = document.getElementById('header-mobile-button');
-    
-    if (menu && button) {
-      const isHidden = menu.classList.contains('hidden');
-      
-      if (isHidden) {
-        // Show menu
-        menu.classList.remove('hidden');
-        button.setAttribute('aria-expanded', 'true');
-      } else {
-        // Hide menu
-        menu.classList.add('hidden');
-        button.setAttribute('aria-expanded', 'false');
-      }
-    }
-  }
-  
-  // Make function globally available
-  if (typeof window !== 'undefined') {
-    (window as any).toggleHeaderMobileMenu = toggleHeaderMobileMenu;
-  }
-
-  // Close menu when clicking outside (client-side only)
-  if (typeof document !== 'undefined') {
-    document.addEventListener('click', (event) => {
-      const menu = document.getElementById('header-mobile-menu');
-      const button = document.getElementById('header-mobile-button');
-      
-      if (menu && button && !menu.contains(event.target as Node) && !button.contains(event.target as Node)) {
-        menu.classList.add('hidden');
-        button.setAttribute('aria-expanded', 'false');
-      }
-    });
-
-    // Close menu on escape key
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape') {
-        const menu = document.getElementById('header-mobile-menu');
-        const button = document.getElementById('header-mobile-button');
-        
-        if (menu && button && !menu.classList.contains('hidden')) {
-          menu.classList.add('hidden');
-          button.setAttribute('aria-expanded', 'false');
-        }
-      }
-    });
-  }
-</script>
+  </div>
+</header>
 
 <style>
-  /* Smooth scroll behavior when navigating */
+  /* Simple, working styles */
   html {
     scroll-behavior: smooth;
   }
   
-  /* Enhanced focus visibility for accessibility */
   header a:focus-visible,
   header button:focus-visible {
     outline: 2px solid hsl(var(--primary));
@@ -515,18 +136,7 @@ const staticHeaderClasses = `sticky top-0 z-50 w-full transition-all duration-30
     border-radius: 4px;
   }
   
-  /* Ensure proper layering for sticky header */
-  .sticky-header-spacer {
-    pointer-events: none;
-  }
-  
-  /* Smooth transitions for header state changes */
   header {
     will-change: transform, opacity, background-color;
-  }
-  
-  /* Optimize scroll performance */
-  * {
-    scroll-behavior: smooth;
   }
 </style>
