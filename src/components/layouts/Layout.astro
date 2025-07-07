@@ -1,6 +1,6 @@
 ---
-// Layout.astro - Modern Astro 5 Layout with ViewTransitions + CSS Theme System
-// Eliminates FOUC with official Astro 5 recommendations: ViewTransitions + CSS custom properties
+// Layout.astro - Modern Astro 5 Layout with Semantic Landmarks + Skip Links
+// WCAG 2.1 AA compliant with proper semantic structure and navigation aids
 // Path: src/components/layouts/Layout.astro
 
 import Header from './Header.astro';
@@ -182,33 +182,64 @@ const finalKeywords = currentPage ?
   </head>
 
   <body class="min-h-screen bg-background text-foreground antialiased">
-    <!-- Layout Structure based on sidebar configuration -->
+    
+    <!-- SKIP LINKS - WCAG 2.1 AA Navigation Aid -->
+    <div class="sr-only focus:not-sr-only fixed top-0 left-0 z-[9999]">
+      <a 
+        href="#main-content" 
+        class="inline-block m-2 px-4 py-2 bg-primary text-primary-foreground rounded-md focus:outline-none focus:ring-2 focus:ring-primary-foreground"
+      >
+        Skip to main content
+      </a>
+      {showNavigation && (
+        <a 
+          href="#main-navigation" 
+          class="inline-block m-2 px-4 py-2 bg-primary text-primary-foreground rounded-md focus:outline-none focus:ring-2 focus:ring-primary-foreground"
+        >
+          Skip to navigation
+        </a>
+      )}
+      <a 
+        href="#footer-content" 
+        class="inline-block m-2 px-4 py-2 bg-primary text-primary-foreground rounded-md focus:outline-none focus:ring-2 focus:ring-primary-foreground"
+      >
+        Skip to footer
+      </a>
+    </div>
+
+    <!-- SEMANTIC LAYOUT STRUCTURE -->
     {showSidebar ? (
-      <!-- Sidebar Layout -->
+      <!-- Sidebar Layout with Semantic Structure -->
       <div class="flex h-screen overflow-hidden">
-        <!-- Sidebar Component -->
-        <Sidebar 
-          variant={sidebarVariant}
-          collapsed={!sidebarCollapsible}
-          currentPage={currentPage}
-        />
+        
+        <!-- Sidebar Navigation -->
+        <aside role="navigation" aria-label="Sidebar navigation">
+          <Sidebar 
+            variant={sidebarVariant}
+            collapsed={!sidebarCollapsible}
+            currentPage={currentPage}
+          />
+        </aside>
         
         <!-- Main Content Area -->
         <div class="flex-1 flex flex-col overflow-hidden">
-          <!-- Header (adapted for sidebar layout) -->
-          <Header 
-            variant={headerVariant}
-            showNavigation={false}
-            showDarkModeToggle={showDarkModeToggle}
-            showCTA={showCTA}
-            ctaText={ctaText}
-            ctaHref={ctaHref}
-            currentPage={currentPage}
-            stickyBehavior="static"
-          />
           
-          <!-- Scrollable Content -->
-          <main class="flex-1 overflow-y-auto">
+          <!-- Page Header -->
+          <header role="banner" class="relative z-40">
+            <Header 
+              variant={headerVariant}
+              showNavigation={false}
+              showDarkModeToggle={showDarkModeToggle}
+              showCTA={showCTA}
+              ctaText={ctaText}
+              ctaHref={ctaHref}
+              currentPage={currentPage}
+              stickyBehavior="static"
+            />
+          </header>
+          
+          <!-- Main Content -->
+          <main id="main-content" role="main" class="flex-1 overflow-y-auto" tabindex="-1">
             <div class="p-6">
               <slot />
             </div>
@@ -216,33 +247,59 @@ const finalKeywords = currentPage ?
         </div>
       </div>
     ) : (
-      <!-- Standard Layout -->
+      <!-- Standard Layout with Full Semantic Structure -->
       <div class="flex flex-col min-h-screen">
-        <!-- Header with enhanced sticky behavior -->
-        <Header 
-          variant={headerVariant}
-          showNavigation={showNavigation}
-          showDarkModeToggle={showDarkModeToggle}
-          showCTA={showCTA}
-          ctaText={ctaText}
-          ctaHref={ctaHref}
-          currentPage={currentPage}
-          stickyBehavior={stickyBehavior}
-          hideOnScroll={hideOnScroll}
-          scrollThreshold={scrollThreshold}
-          hideDelay={hideDelay}
-          showScrollIndicator={showScrollIndicator}
-        />
+        
+        <!-- Page Header with Navigation -->
+        <header role="banner" class="relative z-40">
+          {showNavigation && (
+            <nav id="main-navigation" role="navigation" aria-label="Main navigation" class="relative z-50">
+              <Header 
+                variant={headerVariant}
+                showNavigation={showNavigation}
+                showDarkModeToggle={showDarkModeToggle}
+                showCTA={showCTA}
+                ctaText={ctaText}
+                ctaHref={ctaHref}
+                currentPage={currentPage}
+                stickyBehavior={stickyBehavior}
+                hideOnScroll={hideOnScroll}
+                scrollThreshold={scrollThreshold}
+                hideDelay={hideDelay}
+                showScrollIndicator={showScrollIndicator}
+              />
+            </nav>
+          )}
+          
+          {!showNavigation && (
+            <Header 
+              variant={headerVariant}
+              showNavigation={showNavigation}
+              showDarkModeToggle={showDarkModeToggle}
+              showCTA={showCTA}
+              ctaText={ctaText}
+              ctaHref={ctaHref}
+              currentPage={currentPage}
+              stickyBehavior={stickyBehavior}
+              hideOnScroll={hideOnScroll}
+              scrollThreshold={scrollThreshold}
+              hideDelay={hideDelay}
+              showScrollIndicator={showScrollIndicator}
+            />
+          )}
+        </header>
         
         <!-- Main Content -->
-        <main class="flex-1">
+        <main id="main-content" role="main" class="flex-1" tabindex="-1">
           <slot />
         </main>
         
-        <!-- Footer -->
-        <Footer 
-          variant={footerVariant}
-        />
+        <!-- Page Footer -->
+        <footer id="footer-content" role="contentinfo">
+          <Footer 
+            variant={footerVariant}
+          />
+        </footer>
       </div>
     )}
     
@@ -261,11 +318,31 @@ const finalKeywords = currentPage ?
         // Dispatch custom event for components that need re-initialization
         window.dispatchEvent(new CustomEvent('theme:restored'));
       });
+
+      // Focus management for skip links
+      document.addEventListener('DOMContentLoaded', () => {
+        // Handle skip link focus
+        const skipLinks = document.querySelectorAll('a[href^="#"]');
+        skipLinks.forEach(link => {
+          link.addEventListener('click', (e) => {
+            const targetId = link.getAttribute('href')?.substring(1);
+            if (targetId) {
+              const target = document.getElementById(targetId);
+              if (target) {
+                // Focus the target element
+                target.focus();
+                // Ensure it's scrolled into view
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }
+            }
+          });
+        });
+      });
     </script>
   </body>
 </html>
 
-<!-- Performance optimizations -->
+<!-- Performance and Accessibility optimizations -->
 <style>
   /* Optimize critical rendering path */
   html {
@@ -291,6 +368,36 @@ const finalKeywords = currentPage ?
   /* ViewTransitions optimizations */
   @view-transition {
     navigation: auto;
+  }
+  
+  /* Skip links styling for accessibility */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  
+  .focus\:not-sr-only:focus,
+  .focus\:not-sr-only:focus-within {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
+  
+  /* Ensure main content is focusable */
+  main:focus {
+    outline: none;
   }
   
   /* Reduce motion for accessibility */
