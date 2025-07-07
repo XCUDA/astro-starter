@@ -659,8 +659,16 @@ import { Button } from '../components/ui/button';
 </Layout>
 
 <script>
+  // TypeScript-compliant script section
+  declare global {
+    interface Window {
+      showTab: (tabName: string) => void;
+      toggleDemoMenu: () => void;
+    }
+  }
+
   // Custom Tab Management for Layout Showcase
-  function showTab(tabName) {
+  function showTab(tabName: string): void {
     // Hide all tab contents
     document.querySelectorAll('.tab-content').forEach((content) => {
       content.classList.add('hidden');
@@ -687,14 +695,14 @@ import { Button } from '../components/ui/button';
   }
 
   // Demo Navigation Menu Toggle - separate from main header
-  function toggleDemoMenu() {
+  function toggleDemoMenu(): void {
     const menu = document.getElementById('demo-mobile-menu');
     if (menu) {
       menu.classList.toggle('hidden');
     }
   }
 
-  // Make functions globally available with unique names
+  // Make functions globally available
   if (typeof window !== 'undefined') {
     window.showTab = showTab;
     window.toggleDemoMenu = toggleDemoMenu;
@@ -704,7 +712,6 @@ import { Button } from '../components/ui/button';
   document.addEventListener('DOMContentLoaded', () => {
     showTab('navigation');
   });
-</script>
 </script>
 
 <style>

@@ -1,76 +1,105 @@
-// DarkModeToggle.tsx - Toggle pour basculer entre mode clair et sombre
+// DarkModeToggle.tsx - Minimalist Sun/Moon Toggle (FOUC Fixed + UX Improved)
+// Simple, professional dark mode toggle without verbosity
+// Path: src/components/islands/DarkModeToggle.tsx
+
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 
+// Extend window for theme state
+declare global {
+  interface Window {
+    __THEME_STATE__?: 'dark' | 'light';
+  }
+}
+
 export default function DarkModeToggle() {
   const [isDark, setIsDark] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
-  // Initialiser le thème au chargement
+  // Initialize from pre-set theme state (prevents FOUC)
   useEffect(() => {
-    // Vérifier la préférence sauvegardée ou la préférence système
-    const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const currentTheme = window.__THEME_STATE__ || 
+                        (document.documentElement.classList.contains('dark') ? 'dark' : 'light');
     
-    const shouldBeDark = savedTheme === 'dark' || (!savedTheme && prefersDark);
-    
-    setIsDark(shouldBeDark);
-    updateTheme(shouldBeDark);
+    setIsDark(currentTheme === 'dark');
+    setMounted(true);
   }, []);
 
-  // Fonction pour mettre à jour le thème
-  const updateTheme = (dark: boolean) => {
-    const root = document.documentElement;
+  // Theme toggle function
+  const toggleTheme = () => {
+    const newTheme = !isDark;
+    setIsDark(newTheme);
     
-    if (dark) {
+    // Update DOM and storage
+    const root = document.documentElement;
+    if (newTheme) {
       root.classList.add('dark');
       localStorage.setItem('theme', 'dark');
+      window.__THEME_STATE__ = 'dark';
     } else {
       root.classList.remove('dark');
       localStorage.setItem('theme', 'light');
+      window.__THEME_STATE__ = 'light';
     }
   };
 
-  // Toggle du thème
-  const toggleTheme = () => {
-    const newIsDark = !isDark;
-    setIsDark(newIsDark);
-    updateTheme(newIsDark);
-  };
-
-  return (
-    <div className="flex items-center gap-3">
-      <span className="text-sm font-medium">
-        {isDark ? '🌙 Mode Sombre' : '☀️ Mode Clair'}
-      </span>
-      
+  // Show loading state until mounted (prevents hydration mismatch)
+  if (!mounted) {
+    return (
       <Button
         variant="outline"
         size="sm"
-        onClick={toggleTheme}
-        className="flex items-center gap-2"
+        disabled
+        className="w-9 h-9 p-0"
+        aria-label="Loading theme toggle"
       >
-        {isDark ? (
-          <>
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-            </svg>
-            Clair
-          </>
-        ) : (
-          <>
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-            </svg>
-            Sombre
-          </>
-        )}
+        <div className="w-4 h-4 animate-pulse bg-muted-foreground/30 rounded-full" />
       </Button>
-      
-      {/* Indicateur de status */}
-      <div className="flex items-center gap-2 text-xs text-muted-foreground">
-        <div className={`w-2 h-2 rounded-full ${isDark ? 'bg-blue-500' : 'bg-yellow-500'}`}></div>
-        <span>{isDark ? 'Dark' : 'Light'}</span>
-      </div>
-    </div>
+    );
+  }
+
+  return (
+    <Button
+      variant="outline"
+      size="sm"
+      onClick={toggleTheme}
+      className="w-9 h-9 p-0 hover:scale-105 transition-all duration-200"
+      aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+      title={isDark ? 'Light mode' : 'Dark mode'}
+    >
+      {isDark ? (
+        // Sun icon (when in dark mode, clicking switches to light)
+        <svg 
+          className="w-4 h-4 text-yellow-500" 
+          fill="none" 
+          stroke="currentColor" 
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path 
+            strokeLinecap="round" 
+            strokeLinejoin="round" 
+            strokeWidth={2} 
+            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" 
+          />
+        </svg>
+      ) : (
+        // Moon icon (when in light mode, clicking switches to dark)
+        <svg 
+          className="w-4 h-4 text-slate-700" 
+          fill="none" 
+          stroke="currentColor" 
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path 
+            strokeLinecap="round" 
+            strokeLinejoin="round" 
+            strokeWidth={2} 
+            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" 
+          />
+        </svg>
+      )}
+    </Button>
   );
 }

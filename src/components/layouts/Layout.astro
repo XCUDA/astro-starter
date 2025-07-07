@@ -1,6 +1,6 @@
 ---
-// Layout.astro - Enhanced Foundation Layout with Sidebar Integration (Sprint 8)
-// Now supports sidebar navigation for admin/dashboard layouts
+// Layout.astro - Enhanced Foundation Layout with TRUE FOUC Fix
+// Critical: Theme script BEFORE CSS to prevent flash
 // Path: src/components/layouts/Layout.astro
 
 import Header from './Header.astro';
@@ -157,6 +157,29 @@ const mainContentClasses = showSidebar
     <meta name="keywords" content={keywords} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
+    <!-- 
+      CRITICAL FOUC FIX: Theme applied IMMEDIATELY before any CSS loads
+      This prevents Dark → Light → Dark flash by setting correct state upfront
+    -->
+    <script is:inline>
+      (function() {
+        try {
+          const savedTheme = localStorage.getItem('theme');
+          const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          const shouldUseDark = savedTheme === 'dark' || (!savedTheme && systemPrefersDark);
+          
+          if (shouldUseDark) {
+            document.documentElement.classList.add('dark');
+          }
+          
+          // Store for React hydration sync
+          window.__THEME_STATE__ = shouldUseDark ? 'dark' : 'light';
+        } catch (e) {
+          // Fallback silently if localStorage unavailable
+        }
+      })();
+    </script>
+    
     <!-- Canonical URL prevents SEO issues with duplicate content -->
     <link rel="canonical" href={canonicalURL} />
     
@@ -188,7 +211,10 @@ const mainContentClasses = showSidebar
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <meta name="theme-color" content="hsl(var(--primary))" />
     
-    <!-- CRITICAL: TailwindCSS 4 global styles with is:global for shadcn/ui compatibility -->
+    <!-- 
+      CRITICAL: TailwindCSS 4 global styles with is:global for shadcn/ui compatibility
+      Loaded AFTER theme script so CSS variables match the correct mode
+    -->
     <style is:global>
       @import "../../styles/global.css";
     </style>
