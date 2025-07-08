@@ -18,10 +18,10 @@ import { Button } from '../components/ui/button';
   currentPage="layout-showcase"
   headerVariant="business"
   footerVariant="business"
-  showHeaderCTA={true}
-  headerCTAText="Try Layout"
-  showBreadcrumbs={true}
-  keywords="layout system, navigation, breadcrumbs, touch gestures, responsive design"
+  showCTA={true}
+  ctaText="Try Layout"
+  ctaHref="/try-layout"
+  keywords={["layout system, navigation, touch gestures, responsive design"]}
 >
   <!-- Hero Section -->
   <section class="bg-gradient-to-br from-primary/5 via-background to-secondary/5 py-16">
@@ -407,7 +407,7 @@ import { Button } from '../components/ui/button';
                 <div class="space-y-4">
                   <!-- Default Variant -->
                   <div class="border border-border rounded-lg p-4">
-                    <h4 class="font-medium mb-2">Default Variant</h4>
+                    <h3 class="font-medium mb-2">Default Variant</h3>
                     <Breadcrumbs 
                       variant="default"
                       showHome={true}
@@ -418,7 +418,7 @@ import { Button } from '../components/ui/button';
                   
                   <!-- Business Variant -->
                   <div class="border border-border rounded-lg p-4">
-                    <h4 class="font-medium mb-2">Business Variant</h4>
+                    <h3 class="font-medium mb-2">Business Variant</h3>
                     <Breadcrumbs 
                       variant="business"
                       showHome={true}
@@ -429,7 +429,7 @@ import { Button } from '../components/ui/button';
                   
                   <!-- E-commerce Variant -->
                   <div class="border border-border rounded-lg p-4">
-                    <h4 class="font-medium mb-2">E-commerce Variant</h4>
+                    <h3 class="font-medium mb-2">E-commerce Variant</h3>
                     <Breadcrumbs 
                       variant="ecommerce"
                       showHome={true}

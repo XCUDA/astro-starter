@@ -307,6 +307,15 @@
 - [ ] **Email integration** (contact forms avec EmailJS/Resend)
 - [ ] **Form validation** avancée avec Zod
 
+### 📋 3.5 Layout Enhancements (Deferred from Phase A Revision)
+- [ ] **Breadcrumbs System Implementation** : Réimplémentation props showBreadcrumbs dans Layout.astro
+  - **Context** : Props nettoyé en Phase A.3.2.2 car feature incomplète
+  - **Files to update** : Layout.astro interface + conditional rendering
+  - **Test pages** : business-demo, corporate-demo, grid-showcase, layout-showcase, sidebar-showcase
+  - **Business value** : SEO hierarchy, UX navigation, accessibility, e-commerce categories
+  - **Effort** : 1-2 heures (composant Breadcrumbs.astro existe déjà)
+  - **Note** : Feature request identifiée 2025-07-08 durant révision Phase A
+
 **📊 PHASE 3 : 0% COMPLÈTE**
 
 ---

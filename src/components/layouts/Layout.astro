@@ -1,6 +1,5 @@
 ---
-// Layout.astro - Modern Astro 5 Layout with Semantic Landmarks + Skip Links
-// WCAG 2.1 AA compliant with proper semantic structure and navigation aids
+// Layout.astro - FIXED - Sans wrapper header (StickyHeader gère tout)
 // Path: src/components/layouts/Layout.astro
 
 import Header from './Header.astro';
@@ -23,6 +22,12 @@ export interface Props {
   showCTA?: boolean;
   ctaText?: string;
   ctaHref?: string;
+  // Business props (for Footer)
+  showBusinessInfo?: boolean;
+  showNewsletter?: boolean;
+  companyName?: string;
+  siteDescription?: string;
+  showSocials?: boolean;
   
   // Sidebar configuration
   showSidebar?: boolean;
@@ -44,7 +49,7 @@ export interface Props {
   currentPage?: string;
 }
 
-// Destructure props with sensible defaults for business use
+// Destructure props avec defaults
 const {
   title,
   description = "A modern, production-ready Astro 5 starter with TailwindCSS 4, shadcn/ui, and TypeScript. Perfect for professional websites.",
@@ -60,14 +65,20 @@ const {
   showCTA = false,
   ctaText = "Get Started",
   ctaHref = "/contact",
-  
+  // Business features
+  showBusinessInfo = false,
+  showNewsletter = false,
+  companyName = "Your Company",
+  siteDescription = "Professional business description", 
+  showSocials = true,
+
   // Sidebar defaults (false by default, opt-in)
   showSidebar = false,
   sidebarVariant = 'admin',
   sidebarCollapsible = true,
   
-  // Sticky behavior defaults (modern scroll-up-show)
-  stickyBehavior = 'scroll-up-show',
+  // Sticky behavior defaults (modern always-visible)
+  stickyBehavior = 'always-visible',
   hideOnScroll = false,
   scrollThreshold = 100,
   hideDelay = 2000,
@@ -131,11 +142,8 @@ const finalKeywords = currentPage ?
     <title>{title}</title>
     
     <!-- ASTRO 5 OFFICIAL SOLUTION: Inline theme script to prevent FOUC -->
-    <!-- This script runs BEFORE any CSS/HTML renders, eliminating flash -->
     <script is:inline>
-      // Astro 5 recommended approach: CSS custom properties + ViewTransitions
       (function() {
-        // Get stored theme or system preference
         const getThemePreference = () => {
           if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
             return localStorage.getItem('theme');
@@ -143,24 +151,19 @@ const finalKeywords = currentPage ?
           return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
         };
         
-        // Apply theme immediately (before any rendering)
         const theme = getThemePreference();
         const root = document.documentElement;
         
-        // Clear any existing theme classes
         root.classList.remove('dark', 'light');
         
-        // Apply explicit theme class
         if (theme === 'dark') {
           root.classList.add('dark');
         } else {
           root.classList.add('light');
         }
         
-        // Store in global state for components
         window.__THEME__ = theme;
         
-        // Listen for system theme changes (only if no stored preference)
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
           if (!localStorage.getItem('theme')) {
             const newTheme = e.matches ? 'dark' : 'light';
@@ -183,25 +186,25 @@ const finalKeywords = currentPage ?
 
   <body class="min-h-screen bg-background text-foreground antialiased">
     
-    <!-- SKIP LINKS - WCAG 2.1 AA Navigation Aid -->
-    <div class="sr-only focus:not-sr-only fixed top-0 left-0 z-[9999]">
+    <!-- SKIP LINKS - WCAG 2.1 AA Navigation Aid - HIERARCHY FIXED -->
+    <div class="sr-only focus:not-sr-only fixed top-0 left-0 z-50">
       <a 
         href="#main-content" 
-        class="inline-block m-2 px-4 py-2 bg-primary text-primary-foreground rounded-md focus:outline-none focus:ring-2 focus:ring-primary-foreground"
+        class="inline-block m-2 px-4 py-2 bg-primary text-primary-foreground rounded-md focus:outline-none focus:ring-2 focus:ring-primary-foreground shadow-xl"
       >
         Skip to main content
       </a>
       {showNavigation && (
         <a 
           href="#main-navigation" 
-          class="inline-block m-2 px-4 py-2 bg-primary text-primary-foreground rounded-md focus:outline-none focus:ring-2 focus:ring-primary-foreground"
+          class="inline-block m-2 px-4 py-2 bg-primary text-primary-foreground rounded-md focus:outline-none focus:ring-2 focus:ring-primary-foreground shadow-xl"
         >
           Skip to navigation
         </a>
       )}
       <a 
         href="#footer-content" 
-        class="inline-block m-2 px-4 py-2 bg-primary text-primary-foreground rounded-md focus:outline-none focus:ring-2 focus:ring-primary-foreground"
+        class="inline-block m-2 px-4 py-2 bg-primary text-primary-foreground rounded-md focus:outline-none focus:ring-2 focus:ring-primary-foreground shadow-xl"
       >
         Skip to footer
       </a>
@@ -209,7 +212,7 @@ const finalKeywords = currentPage ?
 
     <!-- SEMANTIC LAYOUT STRUCTURE -->
     {showSidebar ? (
-      <!-- Sidebar Layout with Semantic Structure -->
+      <!-- Sidebar Layout -->
       <div class="flex h-screen overflow-hidden">
         
         <!-- Sidebar Navigation -->
@@ -224,19 +227,17 @@ const finalKeywords = currentPage ?
         <!-- Main Content Area -->
         <div class="flex-1 flex flex-col overflow-hidden">
           
-          <!-- Page Header -->
-          <header role="banner" class="relative z-40">
-            <Header 
-              variant={headerVariant}
-              showNavigation={false}
-              showDarkModeToggle={showDarkModeToggle}
-              showCTA={showCTA}
-              ctaText={ctaText}
-              ctaHref={ctaHref}
-              currentPage={currentPage}
-              stickyBehavior="static"
-            />
-          </header>
+          <!-- 🎯 SANS WRAPPER HEADER - StickyHeader gère tout -->
+          <Header 
+            variant={headerVariant}
+            showNavigation={false}
+            showDarkModeToggle={showDarkModeToggle}
+            showCTA={showCTA}
+            ctaText={ctaText}
+            ctaHref={ctaHref}
+            currentPage={currentPage}
+            stickyBehavior="always-visible"
+          />
           
           <!-- Main Content -->
           <main id="main-content" role="main" class="flex-1 overflow-y-auto" tabindex="-1">
@@ -247,47 +248,24 @@ const finalKeywords = currentPage ?
         </div>
       </div>
     ) : (
-      <!-- Standard Layout with Full Semantic Structure -->
+      <!-- Standard Layout -->
       <div class="flex flex-col min-h-screen">
         
-        <!-- Page Header with Navigation -->
-        <header role="banner" class="relative z-40">
-          {showNavigation && (
-            <nav id="main-navigation" role="navigation" aria-label="Main navigation" class="relative z-50">
-              <Header 
-                variant={headerVariant}
-                showNavigation={showNavigation}
-                showDarkModeToggle={showDarkModeToggle}
-                showCTA={showCTA}
-                ctaText={ctaText}
-                ctaHref={ctaHref}
-                currentPage={currentPage}
-                stickyBehavior={stickyBehavior}
-                hideOnScroll={hideOnScroll}
-                scrollThreshold={scrollThreshold}
-                hideDelay={hideDelay}
-                showScrollIndicator={showScrollIndicator}
-              />
-            </nav>
-          )}
-          
-          {!showNavigation && (
-            <Header 
-              variant={headerVariant}
-              showNavigation={showNavigation}
-              showDarkModeToggle={showDarkModeToggle}
-              showCTA={showCTA}
-              ctaText={ctaText}
-              ctaHref={ctaHref}
-              currentPage={currentPage}
-              stickyBehavior={stickyBehavior}
-              hideOnScroll={hideOnScroll}
-              scrollThreshold={scrollThreshold}
-              hideDelay={hideDelay}
-              showScrollIndicator={showScrollIndicator}
-            />
-          )}
-        </header>
+        <!-- 🎯 HEADER DIRECT - Sans wrapper header/nav -->
+        <Header 
+          variant={headerVariant}
+          showNavigation={showNavigation}
+          showDarkModeToggle={showDarkModeToggle}
+          showCTA={showCTA}
+          ctaText={ctaText}
+          ctaHref={ctaHref}
+          currentPage={currentPage}
+          stickyBehavior={stickyBehavior}
+          hideOnScroll={hideOnScroll}
+          scrollThreshold={scrollThreshold}
+          hideDelay={hideDelay}
+          showScrollIndicator={showScrollIndicator}
+        />
         
         <!-- Main Content -->
         <main id="main-content" role="main" class="flex-1" tabindex="-1">
@@ -298,6 +276,11 @@ const finalKeywords = currentPage ?
         <footer id="footer-content" role="contentinfo">
           <Footer 
             variant={footerVariant}
+            showBusinessInfo={showBusinessInfo}
+            showNewsletter={showNewsletter}
+            companyName={companyName}
+            siteDescription={siteDescription}
+            showSocials={showSocials}
           />
         </footer>
       </div>
@@ -315,13 +298,11 @@ const finalKeywords = currentPage ?
       
       // Re-initialize components after page transition
       document.addEventListener('astro:page-load', () => {
-        // Dispatch custom event for components that need re-initialization
         window.dispatchEvent(new CustomEvent('theme:restored'));
       });
 
       // Focus management for skip links
       document.addEventListener('DOMContentLoaded', () => {
-        // Handle skip link focus
         const skipLinks = document.querySelectorAll('a[href^="#"]');
         skipLinks.forEach(link => {
           link.addEventListener('click', (e) => {
@@ -329,9 +310,7 @@ const finalKeywords = currentPage ?
             if (targetId) {
               const target = document.getElementById(targetId);
               if (target) {
-                // Focus the target element
                 target.focus();
-                // Ensure it's scrolled into view
                 target.scrollIntoView({ behavior: 'smooth', block: 'start' });
               }
             }
@@ -346,7 +325,6 @@ const finalKeywords = currentPage ?
 <style>
   /* Optimize critical rendering path */
   html {
-    /* Prevent layout shift during theme transitions */
     color-scheme: light dark;
   }
   

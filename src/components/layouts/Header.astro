@@ -1,11 +1,10 @@
 ---
-// Header.astro - SIMPLIFIED - Single Responsibility Architecture
-// Responsibilities: ONLY Branding + CTA + DarkMode Toggle
-// Navigation logic delegated to Navigation.astro
+// Header.astro - Retour avec StickyHeader simplifié
 // Path: src/components/layouts/Header.astro
 
 import Navigation from './Navigation.astro';
 import DarkModeToggle from '../islands/DarkModeToggle';
+import StickyHeader from '../islands/StickyHeader'; // 🎯 RETOUR StickyHeader
 
 export interface Props {
   variant?: 'default' | 'minimal' | 'business' | 'landing';
@@ -18,7 +17,7 @@ export interface Props {
   siteDescription?: string;
   currentPage?: string;
   
-  // Enhanced sticky behavior props (preserved for future use)
+  // Enhanced sticky behavior props
   stickyBehavior?: 'always-visible' | 'hide-on-scroll' | 'auto-hide' | 'scroll-up-show' | 'static';
   hideOnScroll?: boolean;
   scrollThreshold?: number;
@@ -26,7 +25,6 @@ export interface Props {
   showScrollIndicator?: boolean;
 }
 
-// Destructure props with business-friendly defaults
 const { 
   variant = 'default',
   showNavigation = true,
@@ -37,33 +35,29 @@ const {
   siteName = "Astro Starter",
   siteDescription = "Built with Astro 5, TailwindCSS 4, and shadcn/ui",
   currentPage,
-  
-  // Sticky behavior (static by default for simplicity)
-  stickyBehavior = 'static',
+
+  // Props sticky
+  stickyBehavior = 'always-visible',
   hideOnScroll = false,
   scrollThreshold = 100,
   hideDelay = 2000,
   showScrollIndicator = false
 } = Astro.props;
-
-// Header variant styles for different business needs
-const headerVariants = {
-  default: "bg-background/80 backdrop-blur-sm border-b border-border",
-  minimal: "bg-transparent",
-  business: "bg-card/95 backdrop-blur-sm border-b border-border shadow-sm",
-  landing: "bg-gradient-to-r from-background/90 to-card/90 backdrop-blur-sm border-b border-border"
-};
-
-// Static header classes (simplified approach)
-const staticHeaderClasses = `sticky top-0 z-50 w-full transition-all duration-300 ${headerVariants[variant]}`;
 ---
 
-<!-- SIMPLIFIED HEADER: Branding + Navigation + CTA + DarkMode -->
-<header class={staticHeaderClasses}>
+<!-- 🎯 StickyHeader simplifié avec debug -->
+<StickyHeader 
+  behavior={stickyBehavior}
+  threshold={scrollThreshold}
+  hideDelay={hideDelay}
+  showScrollIndicator={showScrollIndicator}
+  variant={variant}
+  client:load
+>
   <div class="container mx-auto px-4">
     <div class="flex items-center justify-between h-16 lg:h-20">
       
-      <!-- BRANDING SECTION (Logo + Site Info) -->
+      <!-- BRANDING SECTION -->
       <div class="flex items-center space-x-4">
         <a 
           href="/" 
@@ -87,7 +81,7 @@ const staticHeaderClasses = `sticky top-0 z-50 w-full transition-all duration-30
         </a>
       </div>
 
-      <!-- NAVIGATION SECTION (Desktop + Mobile) -->
+      <!-- NAVIGATION SECTION -->
       {showNavigation && (
         <div class="flex-1 flex justify-center lg:justify-center">
           <Navigation 
@@ -98,10 +92,10 @@ const staticHeaderClasses = `sticky top-0 z-50 w-full transition-all duration-30
         </div>
       )}
 
-      <!-- ACTIONS SECTION (CTA + DarkMode) -->
+      <!-- ACTIONS SECTION -->
       <div class="flex items-center space-x-3 lg:space-x-4">
         
-        <!-- Optional CTA Button for business/landing variants -->
+        <!-- Optional CTA Button -->
         {showCTA && (variant === 'business' || variant === 'landing') && (
           <a
             href={ctaHref}
@@ -121,36 +115,10 @@ const staticHeaderClasses = `sticky top-0 z-50 w-full transition-all duration-30
       </div>
     </div>
   </div>
-</header>
+</StickyHeader>
 
 <style>
-  /* Simple, working styles */
   html {
     scroll-behavior: smooth;
-  }
-  
-  /* Enhanced focus styles for better visibility */
-  header a:focus-visible,
-  header button:focus-visible {
-    outline: 2px solid hsl(var(--primary)) !important;
-    outline-offset: 2px !important;
-    border-radius: 6px !important;
-  }
-  
-  /* Specific focus for logo link */
-  header a[aria-label*="Homepage"]:focus-visible {
-    outline: 2px solid hsl(var(--primary)) !important;
-    outline-offset: 4px !important;
-    border-radius: 8px !important;
-    box-shadow: 0 0 0 2px hsl(var(--background)), 0 0 0 4px hsl(var(--primary)) !important;
-  }
-  
-  header {
-    will-change: transform, opacity, background-color;
-  }
-  
-  /* Ensure all interactive elements show focus */
-  header * {
-    outline-color: hsl(var(--primary));
   }
 </style>

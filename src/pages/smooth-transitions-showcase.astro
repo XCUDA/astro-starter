@@ -29,10 +29,9 @@ import {
   currentPage="smooth-transitions-showcase"
   headerVariant="business"
   footerVariant="business"
-  keywords="smooth transitions, animations, micro-interactions, loading states, scroll animations"
+  keywords={["smooth transitions, animations, micro-interactions, loading states, scroll animations"]}
 >
-
-  <!-- Hero Section with Page Transition -->
+  {/* <!-- Hero Section with Page Transition --> */}
   <section class="bg-gradient-to-br from-violet-500/10 via-background to-blue-500/10 py-16">
     <div class="container mx-auto px-4">
       <PageTransition client:load config={{ direction: 'up', duration: 800, delay: 200 }}>
