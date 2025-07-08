@@ -19,17 +19,17 @@ import FloatingActionButton, { BusinessFAB, SupportFAB, EcommerceFAB } from '../
   keywords={["floating action button, FAB, mobile UI, touch interface, quick actions"]}
 >
   <!-- Hero Section -->
-  <section class="bg-gradient-to-br from-primary/5 via-background to-secondary/5 py-16">
+  <section class="bg-gradient-to-br from-primary/5 via-background to-secondary/5 py-16" role="banner" aria-labelledby="hero-title">
     <div class="container mx-auto px-4">
       <div class="max-w-4xl mx-auto text-center">
         <div class="flex items-center justify-center space-x-2 mb-6">
-          <span class="text-4xl">🎯</span>
+          <span class="text-4xl" aria-hidden="true">🎯</span>
           <Badge variant="secondary" className="text-sm font-medium">
             Sprint 9 - Step 3
           </Badge>
         </div>
         
-        <h1 class="text-4xl lg:text-5xl font-bold text-foreground mb-6">
+        <h1 id="hero-title" class="text-4xl lg:text-5xl font-bold text-foreground mb-6">
           Floating Action Buttons Demo
         </h1>
         
@@ -38,13 +38,13 @@ import FloatingActionButton, { BusinessFAB, SupportFAB, EcommerceFAB } from '../
           Scroll down to test different variants and behaviors!
         </p>
         
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button size="lg" className="text-lg px-8">
-            <span class="mr-2">📱</span>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center" role="group" aria-label="Page overview action buttons">
+          <Button size="lg" className="text-lg px-8" aria-label="Learn about mobile-optimized floating action buttons">
+            <span class="mr-2" aria-hidden="true">📱</span>
             Mobile Optimized
           </Button>
-          <Button variant="outline" size="lg" className="text-lg px-8">
-            <span class="mr-2">⚡</span>
+          <Button variant="outline" size="lg" className="text-lg px-8" aria-label="Explore business-ready FAB configurations">
+            <span class="mr-2" aria-hidden="true">⚡</span>
             Business Ready
           </Button>
         </div>
@@ -53,12 +53,12 @@ import FloatingActionButton, { BusinessFAB, SupportFAB, EcommerceFAB } from '../
   </section>
 
   <!-- Current Demo Info -->
-  <section class="py-8 bg-muted/30">
+  <section class="py-8 bg-muted/30" role="region" aria-labelledby="demo-status">
     <div class="container mx-auto px-4">
       <Card className="border-primary/20 bg-primary/5">
         <CardHeader>
-          <CardTitle className="flex items-center space-x-2">
-            <span>🎯</span>
+          <CardTitle id="demo-status" className="flex items-center space-x-2">
+            <span aria-hidden="true">🎯</span>
             <span>Active FAB Demonstrations</span>
           </CardTitle>
           <CardDescription>
@@ -66,23 +66,23 @@ import FloatingActionButton, { BusinessFAB, SupportFAB, EcommerceFAB } from '../
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-sm">
-            <div>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-sm" role="list" aria-label="Currently active FAB demonstrations">
+            <div role="listitem">
               <strong>Business FAB:</strong> Bottom-right with quick actions
             </div>
-            <div>
+            <div role="listitem">
               <strong>Support FAB:</strong> Bottom-left with help options
             </div>
-            <div>
+            <div role="listitem">
               <strong>E-commerce FAB:</strong> Radial expansion with cart actions
             </div>
-            <div>
+            <div role="listitem">
               <strong>Scroll Behavior:</strong> Hides when scrolling down
             </div>
-            <div>
+            <div role="listitem">
               <strong>Mobile Priority:</strong> Optimized for touch interaction
             </div>
-            <div>
+            <div role="listitem">
               <strong>Accessibility:</strong> Full keyboard and screen reader support
             </div>
           </div>
@@ -92,10 +92,10 @@ import FloatingActionButton, { BusinessFAB, SupportFAB, EcommerceFAB } from '../
   </section>
 
   <!-- FAB Variants Overview -->
-  <section class="py-16">
+  <section class="py-16" role="region" aria-labelledby="variants-title">
     <div class="container mx-auto px-4">
       <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-foreground mb-4">
+        <h2 id="variants-title" class="text-3xl font-bold text-foreground mb-4">
           FAB Variants and Configurations
         </h2>
         <p class="text-lg text-muted-foreground max-w-3xl mx-auto">
@@ -104,118 +104,118 @@ import FloatingActionButton, { BusinessFAB, SupportFAB, EcommerceFAB } from '../
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" role="list" aria-label="Available FAB variant types">
         
         <!-- Business FAB -->
-        <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105">
+        <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105" role="listitem">
           <CardHeader className="text-center">
-            <div class="text-3xl mb-2">💼</div>
+            <div class="text-3xl mb-2" aria-hidden="true">💼</div>
             <CardTitle className="text-lg">Business FAB</CardTitle>
             <CardDescription>
               Quick actions for business productivity
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ul class="text-sm space-y-2 text-muted-foreground">
-              <li>• <strong>Position:</strong> Bottom-right</li>
-              <li>• <strong>Actions:</strong> New Contact, Project, Note</li>
-              <li>• <strong>Expand:</strong> Vertical (up)</li>
-              <li>• <strong>Best for:</strong> CRM, Project Management</li>
+            <ul class="text-sm space-y-2 text-muted-foreground" role="list" aria-label="Business FAB configuration details">
+              <li role="listitem">• <strong>Position:</strong> Bottom-right</li>
+              <li role="listitem">• <strong>Actions:</strong> New Contact, Project, Note</li>
+              <li role="listitem">• <strong>Expand:</strong> Vertical (up)</li>
+              <li role="listitem">• <strong>Best for:</strong> CRM, Project Management</li>
             </ul>
           </CardContent>
         </Card>
 
         <!-- Support FAB -->
-        <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105">
+        <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105" role="listitem">
           <CardHeader className="text-center">
-            <div class="text-3xl mb-2">🆘</div>
+            <div class="text-3xl mb-2" aria-hidden="true">🆘</div>
             <CardTitle className="text-lg">Support FAB</CardTitle>
             <CardDescription>
               Help and assistance options
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ul class="text-sm space-y-2 text-muted-foreground">
-              <li>• <strong>Position:</strong> Bottom-left</li>
-              <li>• <strong>Actions:</strong> Live Chat, Docs, Feedback</li>
-              <li>• <strong>Expand:</strong> Vertical (up)</li>
-              <li>• <strong>Best for:</strong> Customer Support, SaaS</li>
+            <ul class="text-sm space-y-2 text-muted-foreground" role="list" aria-label="Support FAB configuration details">
+              <li role="listitem">• <strong>Position:</strong> Bottom-left</li>
+              <li role="listitem">• <strong>Actions:</strong> Live Chat, Docs, Feedback</li>
+              <li role="listitem">• <strong>Expand:</strong> Vertical (up)</li>
+              <li role="listitem">• <strong>Best for:</strong> Customer Support, SaaS</li>
             </ul>
           </CardContent>
         </Card>
 
         <!-- E-commerce FAB -->
-        <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105">
+        <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105" role="listitem">
           <CardHeader className="text-center">
-            <div class="text-3xl mb-2">🛒</div>
+            <div class="text-3xl mb-2" aria-hidden="true">🛒</div>
             <CardTitle className="text-lg">E-commerce FAB</CardTitle>
             <CardDescription>
               Shopping and cart actions
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ul class="text-sm space-y-2 text-muted-foreground">
-              <li>• <strong>Position:</strong> Bottom-right</li>
-              <li>• <strong>Actions:</strong> Wishlist, Compare, Search</li>
-              <li>• <strong>Expand:</strong> Radial</li>
-              <li>• <strong>Best for:</strong> Online Stores, Marketplaces</li>
+            <ul class="text-sm space-y-2 text-muted-foreground" role="list" aria-label="E-commerce FAB configuration details">
+              <li role="listitem">• <strong>Position:</strong> Bottom-right</li>
+              <li role="listitem">• <strong>Actions:</strong> Wishlist, Compare, Search</li>
+              <li role="listitem">• <strong>Expand:</strong> Radial</li>
+              <li role="listitem">• <strong>Best for:</strong> Online Stores, Marketplaces</li>
             </ul>
           </CardContent>
         </Card>
 
         <!-- Custom Single FAB -->
-        <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105">
+        <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105" role="listitem">
           <CardHeader className="text-center">
-            <div class="text-3xl mb-2">⚡</div>
+            <div class="text-3xl mb-2" aria-hidden="true">⚡</div>
             <CardTitle className="text-lg">Single Action FAB</CardTitle>
             <CardDescription>
               One primary action only
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ul class="text-sm space-y-2 text-muted-foreground">
-              <li>• <strong>Use case:</strong> Call-to-Action</li>
-              <li>• <strong>Examples:</strong> Add to Cart, Contact</li>
-              <li>• <strong>Behavior:</strong> Direct action</li>
-              <li>• <strong>Best for:</strong> Landing Pages, Forms</li>
+            <ul class="text-sm space-y-2 text-muted-foreground" role="list" aria-label="Single action FAB details">
+              <li role="listitem">• <strong>Use case:</strong> Call-to-Action</li>
+              <li role="listitem">• <strong>Examples:</strong> Add to Cart, Contact</li>
+              <li role="listitem">• <strong>Behavior:</strong> Direct action</li>
+              <li role="listitem">• <strong>Best for:</strong> Landing Pages, Forms</li>
             </ul>
           </CardContent>
         </Card>
 
         <!-- Scroll-Responsive FAB -->
-        <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105">
+        <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105" role="listitem">
           <CardHeader className="text-center">
-            <div class="text-3xl mb-2">📜</div>
+            <div class="text-3xl mb-2" aria-hidden="true">📜</div>
             <CardTitle className="text-lg">Scroll-Responsive</CardTitle>
             <CardDescription>
               Adapts to user scroll behavior
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ul class="text-sm space-y-2 text-muted-foreground">
-              <li>• <strong>Behavior:</strong> Hide on scroll down</li>
-              <li>• <strong>Show:</strong> On scroll up</li>
-              <li>• <strong>Threshold:</strong> Configurable</li>
-              <li>• <strong>Best for:</strong> Content-heavy pages</li>
+            <ul class="text-sm space-y-2 text-muted-foreground" role="list" aria-label="Scroll-responsive FAB behavior details">
+              <li role="listitem">• <strong>Behavior:</strong> Hide on scroll down</li>
+              <li role="listitem">• <strong>Show:</strong> On scroll up</li>
+              <li role="listitem">• <strong>Threshold:</strong> Configurable</li>
+              <li role="listitem">• <strong>Best for:</strong> Content-heavy pages</li>
             </ul>
           </CardContent>
         </Card>
 
         <!-- Position Variants -->
-        <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105">
+        <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105" role="listitem">
           <CardHeader className="text-center">
-            <div class="text-3xl mb-2">📍</div>
+            <div class="text-3xl mb-2" aria-hidden="true">📍</div>
             <CardTitle className="text-lg">Position Variants</CardTitle>
             <CardDescription>
               Multiple positioning options
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ul class="text-sm space-y-2 text-muted-foreground">
-              <li>• <strong>Options:</strong> 5 position variants</li>
-              <li>• <strong>Corners:</strong> All four corners</li>
-              <li>• <strong>Center:</strong> Bottom center</li>
-              <li>• <strong>Best for:</strong> Different layouts</li>
+            <ul class="text-sm space-y-2 text-muted-foreground" role="list" aria-label="Position variant options">
+              <li role="listitem">• <strong>Options:</strong> 5 position variants</li>
+              <li role="listitem">• <strong>Corners:</strong> All four corners</li>
+              <li role="listitem">• <strong>Center:</strong> Bottom center</li>
+              <li role="listitem">• <strong>Best for:</strong> Different layouts</li>
             </ul>
           </CardContent>
         </Card>
@@ -225,19 +225,19 @@ import FloatingActionButton, { BusinessFAB, SupportFAB, EcommerceFAB } from '../
   </section>
 
   <!-- Implementation Examples -->
-  <section class="py-16 bg-muted/30">
+  <section class="py-16 bg-muted/30" role="region" aria-labelledby="implementation-title">
     <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold text-foreground text-center mb-12">
+      <h2 id="implementation-title" class="text-3xl font-bold text-foreground text-center mb-12">
         Implementation Examples
       </h2>
 
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8" role="list" aria-label="Code implementation examples">
         
         <!-- Basic Usage -->
-        <Card>
+        <Card role="listitem">
           <CardHeader>
             <CardTitle className="flex items-center space-x-2">
-              <span>🚀</span>
+              <span aria-hidden="true">🚀</span>
               <span>Basic FAB</span>
             </CardTitle>
             <CardDescription>
@@ -245,7 +245,7 @@ import FloatingActionButton, { BusinessFAB, SupportFAB, EcommerceFAB } from '../
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div class="bg-muted p-4 rounded-lg text-sm font-mono">
+            <div class="bg-muted p-4 rounded-lg text-sm font-mono" role="code" aria-label="Basic FAB implementation code example">
               {`<FloatingActionButton
   mainAction={{
     id: 'add',
@@ -261,10 +261,10 @@ import FloatingActionButton, { BusinessFAB, SupportFAB, EcommerceFAB } from '../
         </Card>
 
         <!-- Multi-Action FAB -->
-        <Card>
+        <Card role="listitem">
           <CardHeader>
             <CardTitle className="flex items-center space-x-2">
-              <span>🔧</span>
+              <span aria-hidden="true">🔧</span>
               <span>Multi-Action FAB</span>
             </CardTitle>
             <CardDescription>
@@ -272,7 +272,7 @@ import FloatingActionButton, { BusinessFAB, SupportFAB, EcommerceFAB } from '../
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div class="bg-muted p-4 rounded-lg text-sm font-mono">
+            <div class="bg-muted p-4 rounded-lg text-sm font-mono" role="code" aria-label="Multi-action FAB implementation code example">
               {`<FloatingActionButton
   mainAction={{ id: 'main', title: 'Actions', icon: '⚙️' }}
   secondaryActions={[
@@ -286,10 +286,10 @@ import FloatingActionButton, { BusinessFAB, SupportFAB, EcommerceFAB } from '../
         </Card>
 
         <!-- Business Pre-configured -->
-        <Card>
+        <Card role="listitem">
           <CardHeader>
             <CardTitle className="flex items-center space-x-2">
-              <span>💼</span>
+              <span aria-hidden="true">💼</span>
               <span>Business Pre-configured</span>
             </CardTitle>
             <CardDescription>
@@ -297,7 +297,7 @@ import FloatingActionButton, { BusinessFAB, SupportFAB, EcommerceFAB } from '../
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div class="bg-muted p-4 rounded-lg text-sm font-mono">
+            <div class="bg-muted p-4 rounded-lg text-sm font-mono" role="code" aria-label="Pre-configured business FAB implementation code">
               {`<BusinessFAB 
   position="bottom-right"
   hideOnScroll={true}
@@ -308,10 +308,10 @@ import FloatingActionButton, { BusinessFAB, SupportFAB, EcommerceFAB } from '../
         </Card>
 
         <!-- Advanced Configuration -->
-        <Card>
+        <Card role="listitem">
           <CardHeader>
             <CardTitle className="flex items-center space-x-2">
-              <span>⚡</span>
+              <span aria-hidden="true">⚡</span>
               <span>Advanced Configuration</span>
             </CardTitle>
             <CardDescription>
@@ -319,7 +319,7 @@ import FloatingActionButton, { BusinessFAB, SupportFAB, EcommerceFAB } from '../
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div class="bg-muted p-4 rounded-lg text-sm font-mono">
+            <div class="bg-muted p-4 rounded-lg text-sm font-mono" role="code" aria-label="Advanced FAB configuration with all options">
               {`<FloatingActionButton
   mainAction={{ /* ... */ }}
   secondaryActions={[/* ... */]}
@@ -339,68 +339,68 @@ import FloatingActionButton, { BusinessFAB, SupportFAB, EcommerceFAB } from '../
   </section>
 
   <!-- Features and Benefits -->
-  <section class="py-16">
+  <section class="py-16" role="region" aria-labelledby="features-title">
     <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold text-foreground text-center mb-12">
+      <h2 id="features-title" class="text-3xl font-bold text-foreground text-center mb-12">
         Features and Benefits
       </h2>
       
       <div class="max-w-4xl mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8" role="list" aria-label="FAB component features and benefits">
           
           <!-- Mobile Optimization -->
-          <div class="space-y-4">
+          <div class="space-y-4" role="listitem">
             <h3 class="text-xl font-semibold flex items-center space-x-2">
-              <span>📱</span>
+              <span aria-hidden="true">📱</span>
               <span>Mobile Optimization</span>
             </h3>
-            <ul class="space-y-2 text-muted-foreground">
-              <li>• Touch-friendly sizes (44px+ touch targets)</li>
-              <li>• Responsive positioning across screen sizes</li>
-              <li>• Optimized animations for mobile performance</li>
-              <li>• Show/hide based on screen size</li>
+            <ul class="space-y-2 text-muted-foreground" role="list" aria-label="Mobile optimization features">
+              <li role="listitem">• Touch-friendly sizes (44px+ touch targets)</li>
+              <li role="listitem">• Responsive positioning across screen sizes</li>
+              <li role="listitem">• Optimized animations for mobile performance</li>
+              <li role="listitem">• Show/hide based on screen size</li>
             </ul>
           </div>
 
           <!-- Accessibility -->
-          <div class="space-y-4">
+          <div class="space-y-4" role="listitem">
             <h3 class="text-xl font-semibold flex items-center space-x-2">
-              <span>♿</span>
+              <span aria-hidden="true">♿</span>
               <span>Accessibility</span>
             </h3>
-            <ul class="space-y-2 text-muted-foreground">
-              <li>• Full keyboard navigation support</li>
-              <li>• Screen reader friendly with ARIA labels</li>
-              <li>• Focus management and visual indicators</li>
-              <li>• Semantic HTML structure</li>
+            <ul class="space-y-2 text-muted-foreground" role="list" aria-label="Accessibility features">
+              <li role="listitem">• Full keyboard navigation support</li>
+              <li role="listitem">• Screen reader friendly with ARIA labels</li>
+              <li role="listitem">• Focus management and visual indicators</li>
+              <li role="listitem">• Semantic HTML structure</li>
             </ul>
           </div>
 
           <!-- Performance -->
-          <div class="space-y-4">
+          <div class="space-y-4" role="listitem">
             <h3 class="text-xl font-semibold flex items-center space-x-2">
-              <span>⚡</span>
+              <span aria-hidden="true">⚡</span>
               <span>Performance</span>
             </h3>
-            <ul class="space-y-2 text-muted-foreground">
-              <li>• GPU-accelerated animations</li>
-              <li>• Throttled scroll listeners</li>
-              <li>• Minimal DOM manipulation</li>
-              <li>• Optimized re-renders with React</li>
+            <ul class="space-y-2 text-muted-foreground" role="list" aria-label="Performance optimization features">
+              <li role="listitem">• GPU-accelerated animations</li>
+              <li role="listitem">• Throttled scroll listeners</li>
+              <li role="listitem">• Minimal DOM manipulation</li>
+              <li role="listitem">• Optimized re-renders with React</li>
             </ul>
           </div>
 
           <!-- Business Features -->
-          <div class="space-y-4">
+          <div class="space-y-4" role="listitem">
             <h3 class="text-xl font-semibold flex items-center space-x-2">
-              <span>💼</span>
+              <span aria-hidden="true">💼</span>
               <span>Business Features</span>
             </h3>
-            <ul class="space-y-2 text-muted-foreground">
-              <li>• Pre-configured business templates</li>
-              <li>• Customizable action sets</li>
-              <li>• Analytics-friendly event handling</li>
-              <li>• Brand-consistent styling options</li>
+            <ul class="space-y-2 text-muted-foreground" role="list" aria-label="Business-oriented features">
+              <li role="listitem">• Pre-configured business templates</li>
+              <li role="listitem">• Customizable action sets</li>
+              <li role="listitem">• Analytics-friendly event handling</li>
+              <li role="listitem">• Brand-consistent styling options</li>
             </ul>
           </div>
 
@@ -410,15 +410,15 @@ import FloatingActionButton, { BusinessFAB, SupportFAB, EcommerceFAB } from '../
   </section>
 
   <!-- Long Content for Scroll Testing -->
-  <section class="py-16">
+  <section class="py-16" role="region" aria-labelledby="scroll-test-title">
     <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold text-foreground text-center mb-12">
+      <h2 id="scroll-test-title" class="text-3xl font-bold text-foreground text-center mb-12">
         Scroll Test Content
       </h2>
       
-      <div class="max-w-3xl mx-auto space-y-8">
+      <div class="max-w-3xl mx-auto space-y-8" role="list" aria-label="Scroll testing content sections">
         {Array.from({ length: 15 }, (_, i) => (
-          <Card key={i}>
+          <Card key={i} role="listitem">
             <CardHeader>
               <CardTitle>Test Section {i + 1}</CardTitle>
               <CardDescription>
@@ -440,17 +440,17 @@ import FloatingActionButton, { BusinessFAB, SupportFAB, EcommerceFAB } from '../
               </p>
             </CardContent>
           </Card>
-        )).map(card => card)}
+        ))}
       </div>
     </div>
   </section>
 
   <!-- Usage Instructions -->
-  <section class="py-16 bg-muted/30">
+  <section class="py-16 bg-muted/30" role="region" aria-labelledby="instructions-title">
     <div class="container mx-auto px-4">
       <Card>
         <CardHeader>
-          <CardTitle className="text-2xl">🎯 How to Test the FABs</CardTitle>
+          <CardTitle id="instructions-title" className="text-2xl">🎯 How to Test the FABs</CardTitle>
           <CardDescription>
             Interactive instructions for testing all FAB features
           </CardDescription>
@@ -459,28 +459,28 @@ import FloatingActionButton, { BusinessFAB, SupportFAB, EcommerceFAB } from '../
           <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             
             <!-- Desktop Testing -->
-            <div>
-              <h3 class="font-semibold mb-3">🖥️ Desktop Testing</h3>
-              <ul class="text-sm space-y-2 text-muted-foreground">
-                <li>• Look for <strong>3 FABs</strong> positioned around the screen</li>
-                <li>• <strong>Business FAB</strong> (➕) in bottom-right corner</li>
-                <li>• <strong>Support FAB</strong> (❓) in bottom-left corner</li>
-                <li>• <strong>E-commerce FAB</strong> (🛒) with radial expansion</li>
-                <li>• Click main buttons to expand secondary actions</li>
-                <li>• Scroll down to test hide/show behavior</li>
+            <div role="group" aria-labelledby="desktop-testing">
+              <h3 id="desktop-testing" class="font-semibold mb-3">🖥️ Desktop Testing</h3>
+              <ul class="text-sm space-y-2 text-muted-foreground" role="list" aria-label="Desktop testing instructions">
+                <li role="listitem">• Look for <strong>3 FABs</strong> positioned around the screen</li>
+                <li role="listitem">• <strong>Business FAB</strong> (➕) in bottom-right corner</li>
+                <li role="listitem">• <strong>Support FAB</strong> (❓) in bottom-left corner</li>
+                <li role="listitem">• <strong>E-commerce FAB</strong> (🛒) with radial expansion</li>
+                <li role="listitem">• Click main buttons to expand secondary actions</li>
+                <li role="listitem">• Scroll down to test hide/show behavior</li>
               </ul>
             </div>
 
             <!-- Mobile Testing -->
-            <div>
-              <h3 class="font-semibold mb-3">📱 Mobile Testing</h3>
-              <ul class="text-sm space-y-2 text-muted-foreground">
-                <li>• Resize browser or test on mobile device</li>
-                <li>• FABs maintain optimal touch target sizes</li>
-                <li>• Touch and hold for tooltips (if supported)</li>
-                <li>• Test scroll behavior with touch gestures</li>
-                <li>• Tap outside expanded FAB to close</li>
-                <li>• FABs auto-close after 3 seconds when expanded</li>
+            <div role="group" aria-labelledby="mobile-testing">
+              <h3 id="mobile-testing" class="font-semibold mb-3">📱 Mobile Testing</h3>
+              <ul class="text-sm space-y-2 text-muted-foreground" role="list" aria-label="Mobile testing instructions">
+                <li role="listitem">• Resize browser or test on mobile device</li>
+                <li role="listitem">• FABs maintain optimal touch target sizes</li>
+                <li role="listitem">• Touch and hold for tooltips (if supported)</li>
+                <li role="listitem">• Test scroll behavior with touch gestures</li>
+                <li role="listitem">• Tap outside expanded FAB to close</li>
+                <li role="listitem">• FABs auto-close after 3 seconds when expanded</li>
               </ul>
             </div>
 
@@ -497,6 +497,7 @@ import FloatingActionButton, { BusinessFAB, SupportFAB, EcommerceFAB } from '../
     hideOnScroll={true}
     scrollThreshold={100}
     showTooltip={true}
+    aria-label="Business productivity floating action button with quick actions for contacts, projects and notes"
   />
 
   <!-- Support FAB - Bottom Left -->
@@ -506,6 +507,7 @@ import FloatingActionButton, { BusinessFAB, SupportFAB, EcommerceFAB } from '../
     hideOnScroll={true}
     scrollThreshold={100}
     expandDirection="up"
+    aria-label="Customer support floating action button with help options including live chat, documentation and feedback"
   />
 
   <!-- E-commerce FAB - Custom Position with Radial -->
@@ -515,6 +517,7 @@ import FloatingActionButton, { BusinessFAB, SupportFAB, EcommerceFAB } from '../
     hideOnScroll={false}
     expandDirection="radial"
     size="md"
+    aria-label="E-commerce floating action button with shopping actions including wishlist, compare and search"
   />
 
 </Layout>

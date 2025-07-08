@@ -24,17 +24,17 @@ import { Button } from '../components/ui/button';
   keywords={["sticky header, scroll behavior, hide on scroll, smart navigation"]}
 >
   <!-- Hero Section -->
-  <section class="bg-gradient-to-br from-primary/5 via-background to-secondary/5 py-16">
+  <section class="bg-gradient-to-br from-primary/5 via-background to-secondary/5 py-16" role="banner" aria-labelledby="hero-title">
     <div class="container mx-auto px-4">
       <div class="max-w-4xl mx-auto text-center">
         <div class="flex items-center justify-center space-x-2 mb-6">
-          <span class="text-4xl">📌</span>
+          <span class="text-4xl" aria-hidden="true">📌</span>
           <Badge variant="secondary" className="text-sm font-medium">
             Sprint 9 - Step 1
           </Badge>
         </div>
         
-        <h1 class="text-4xl lg:text-5xl font-bold text-foreground mb-6">
+        <h1 id="hero-title" class="text-4xl lg:text-5xl font-bold text-foreground mb-6">
           Sticky Header Behaviors Demo
         </h1>
         
@@ -43,13 +43,13 @@ import { Button } from '../components/ui/button';
           Scroll down to see the header behavior in action!
         </p>
         
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button size="lg" className="text-lg px-8">
-            <span class="mr-2">⬇️</span>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center" role="group" aria-label="Sticky header testing actions">
+          <Button size="lg" className="text-lg px-8" aria-label="Start scrolling to test sticky header behavior">
+            <span class="mr-2" aria-hidden="true">⬇️</span>
             Start Scrolling
           </Button>
-          <Button variant="outline" size="lg" className="text-lg px-8">
-            <span class="mr-2">📌</span>
+          <Button variant="outline" size="lg" className="text-lg px-8" aria-label="Learn about different sticky header behaviors">
+            <span class="mr-2" aria-hidden="true">📌</span>
             Test Behaviors
           </Button>
         </div>
@@ -58,12 +58,12 @@ import { Button } from '../components/ui/button';
   </section>
 
   <!-- Current Behavior Info -->
-  <section class="py-8 bg-muted/30">
+  <section class="py-8 bg-muted/30" role="region" aria-labelledby="current-config">
     <div class="container mx-auto px-4">
       <Card className="border-primary/20 bg-primary/5">
         <CardHeader>
-          <CardTitle className="flex items-center space-x-2">
-            <span>🎯</span>
+          <CardTitle id="current-config" className="flex items-center space-x-2">
+            <span aria-hidden="true">🎯</span>
             <span>Current Header Configuration</span>
           </CardTitle>
           <CardDescription>
@@ -71,23 +71,23 @@ import { Button } from '../components/ui/button';
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-sm">
-            <div>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-sm" role="list" aria-label="Current sticky header configuration settings">
+            <div role="listitem">
               <strong>Behavior:</strong> scroll-up-show
             </div>
-            <div>
+            <div role="listitem">
               <strong>Scroll Threshold:</strong> 50px
             </div>
-            <div>
+            <div role="listitem">
               <strong>Scroll Indicator:</strong> Enabled
             </div>
-            <div>
+            <div role="listitem">
               <strong>Variant:</strong> business
             </div>
-            <div>
+            <div role="listitem">
               <strong>Background:</strong> Adaptive
             </div>
-            <div>
+            <div role="listitem">
               <strong>Performance:</strong> Optimized
             </div>
           </div>
@@ -97,10 +97,10 @@ import { Button } from '../components/ui/button';
   </section>
 
   <!-- Sticky Behaviors Overview -->
-  <section class="py-16">
+  <section class="py-16" role="region" aria-labelledby="behaviors-title">
     <div class="container mx-auto px-4">
       <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-foreground mb-4">
+        <h2 id="behaviors-title" class="text-3xl font-bold text-foreground mb-4">
           Available Sticky Behaviors
         </h2>
         <p class="text-lg text-muted-foreground max-w-3xl mx-auto">
@@ -109,117 +109,117 @@ import { Button } from '../components/ui/button';
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" role="list" aria-label="Available sticky header behavior types">
         <!-- Static Behavior -->
-        <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105">
+        <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105" role="listitem">
           <CardHeader className="text-center">
-            <div class="text-3xl mb-2">📍</div>
+            <div class="text-3xl mb-2" aria-hidden="true">📍</div>
             <CardTitle className="text-lg">Static (Default)</CardTitle>
             <CardDescription>
               Traditional sticky header, always visible
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ul class="text-sm space-y-2 text-muted-foreground">
-              <li>• Always visible at top</li>
-              <li>• No scroll animations</li>
-              <li>• Maximum compatibility</li>
-              <li>• Best performance</li>
+            <ul class="text-sm space-y-2 text-muted-foreground" role="list" aria-label="Static behavior features">
+              <li role="listitem">• Always visible at top</li>
+              <li role="listitem">• No scroll animations</li>
+              <li role="listitem">• Maximum compatibility</li>
+              <li role="listitem">• Best performance</li>
             </ul>
           </CardContent>
         </Card>
 
         <!-- Always Visible -->
-        <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105">
+        <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105" role="listitem">
           <CardHeader className="text-center">
-            <div class="text-3xl mb-2">👁️</div>
+            <div class="text-3xl mb-2" aria-hidden="true">👁️</div>
             <CardTitle className="text-lg">Always Visible</CardTitle>
             <CardDescription>
               Enhanced sticky, always shown with effects
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ul class="text-sm space-y-2 text-muted-foreground">
-              <li>• Always visible</li>
-              <li>• Background adaptation</li>
-              <li>• Scroll indicators</li>
-              <li>• Smooth transitions</li>
+            <ul class="text-sm space-y-2 text-muted-foreground" role="list" aria-label="Always visible behavior features">
+              <li role="listitem">• Always visible</li>
+              <li role="listitem">• Background adaptation</li>
+              <li role="listitem">• Scroll indicators</li>
+              <li role="listitem">• Smooth transitions</li>
             </ul>
           </CardContent>
         </Card>
 
         <!-- Hide on Scroll -->
-        <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105">
+        <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105" role="listitem">
           <CardHeader className="text-center">
-            <div class="text-3xl mb-2">⬇️</div>
+            <div class="text-3xl mb-2" aria-hidden="true">⬇️</div>
             <CardTitle className="text-lg">Hide on Scroll</CardTitle>
             <CardDescription>
               Hides when scrolling down, shows when up
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ul class="text-sm space-y-2 text-muted-foreground">
-              <li>• Hides on scroll down</li>
-              <li>• Shows on scroll up</li>
-              <li>• More content space</li>
-              <li>• Modern UX pattern</li>
+            <ul class="text-sm space-y-2 text-muted-foreground" role="list" aria-label="Hide on scroll behavior features">
+              <li role="listitem">• Hides on scroll down</li>
+              <li role="listitem">• Shows on scroll up</li>
+              <li role="listitem">• More content space</li>
+              <li role="listitem">• Modern UX pattern</li>
             </ul>
           </CardContent>
         </Card>
 
         <!-- Auto Hide -->
-        <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105">
+        <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105" role="listitem">
           <CardHeader className="text-center">
-            <div class="text-3xl mb-2">⏰</div>
+            <div class="text-3xl mb-2" aria-hidden="true">⏰</div>
             <CardTitle className="text-lg">Auto Hide</CardTitle>
             <CardDescription>
               Hides automatically, returns after delay
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ul class="text-sm space-y-2 text-muted-foreground">
-              <li>• Hides after scrolling</li>
-              <li>• Reappears after delay</li>
-              <li>• Configurable timing</li>
-              <li>• Balanced approach</li>
+            <ul class="text-sm space-y-2 text-muted-foreground" role="list" aria-label="Auto hide behavior features">
+              <li role="listitem">• Hides after scrolling</li>
+              <li role="listitem">• Reappears after delay</li>
+              <li role="listitem">• Configurable timing</li>
+              <li role="listitem">• Balanced approach</li>
             </ul>
           </CardContent>
         </Card>
 
         <!-- Scroll Up Show (Current) -->
-        <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105 border-primary/20 bg-primary/5">
+        <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105 border-primary/20 bg-primary/5" role="listitem">
           <CardHeader className="text-center">
-            <div class="text-3xl mb-2">⬆️</div>
+            <div class="text-3xl mb-2" aria-hidden="true">⬆️</div>
             <CardTitle className="text-lg text-primary">Scroll Up Show</CardTitle>
             <CardDescription>
               Smart behavior: shows only when scrolling up
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ul class="text-sm space-y-2 text-muted-foreground">
-              <li>• <strong>Currently active</strong></li>
-              <li>• Shows on scroll up intent</li>
-              <li>• Hides on scroll down</li>
-              <li>• Intelligent detection</li>
+            <ul class="text-sm space-y-2 text-muted-foreground" role="list" aria-label="Scroll up show behavior features">
+              <li role="listitem">• <strong>Currently active</strong></li>
+              <li role="listitem">• Shows on scroll up intent</li>
+              <li role="listitem">• Hides on scroll down</li>
+              <li role="listitem">• Intelligent detection</li>
             </ul>
           </CardContent>
         </Card>
 
         <!-- Configuration -->
-        <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105">
+        <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105" role="listitem">
           <CardHeader className="text-center">
-            <div class="text-3xl mb-2">⚙️</div>
+            <div class="text-3xl mb-2" aria-hidden="true">⚙️</div>
             <CardTitle className="text-lg">Configuration</CardTitle>
             <CardDescription>
               Customizable thresholds and timing
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ul class="text-sm space-y-2 text-muted-foreground">
-              <li>• Scroll threshold</li>
-              <li>• Hide delay timing</li>
-              <li>• Progress indicators</li>
-              <li>• Variant-specific styles</li>
+            <ul class="text-sm space-y-2 text-muted-foreground" role="list" aria-label="Configuration options">
+              <li role="listitem">• Scroll threshold</li>
+              <li role="listitem">• Hide delay timing</li>
+              <li role="listitem">• Progress indicators</li>
+              <li role="listitem">• Variant-specific styles</li>
             </ul>
           </CardContent>
         </Card>
@@ -228,18 +228,18 @@ import { Button } from '../components/ui/button';
   </section>
 
   <!-- Implementation Examples -->
-  <section class="py-16 bg-muted/30">
+  <section class="py-16 bg-muted/30" role="region" aria-labelledby="implementation-title">
     <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold text-foreground text-center mb-12">
+      <h2 id="implementation-title" class="text-3xl font-bold text-foreground text-center mb-12">
         Implementation Examples
       </h2>
 
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8" role="list" aria-label="Code implementation examples">
         <!-- Basic Usage -->
-        <Card>
+        <Card role="listitem">
           <CardHeader>
             <CardTitle class="flex items-center space-x-2">
-              <span>⚡</span>
+              <span aria-hidden="true">⚡</span>
               <span>Basic Usage</span>
             </CardTitle>
             <CardDescription>
@@ -247,7 +247,7 @@ import { Button } from '../components/ui/button';
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div class="bg-muted p-4 rounded-lg text-sm font-mono">
+            <div class="bg-muted p-4 rounded-lg text-sm font-mono" role="code" aria-label="Basic sticky header usage code example">
               {`<Layout 
   stickyBehavior="scroll-up-show"
   showScrollIndicator={true}
@@ -258,10 +258,10 @@ import { Button } from '../components/ui/button';
         </Card>
 
         <!-- Advanced Configuration -->
-        <Card>
+        <Card role="listitem">
           <CardHeader>
             <CardTitle class="flex items-center space-x-2">
-              <span>🔧</span>
+              <span aria-hidden="true">🔧</span>
               <span>Advanced Configuration</span>
             </CardTitle>
             <CardDescription>
@@ -269,7 +269,7 @@ import { Button } from '../components/ui/button';
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div class="bg-muted p-4 rounded-lg text-sm font-mono">
+            <div class="bg-muted p-4 rounded-lg text-sm font-mono" role="code" aria-label="Advanced sticky header configuration code example">
               {`<Layout 
   stickyBehavior="auto-hide"
   hideDelay={3000}
@@ -282,10 +282,10 @@ import { Button } from '../components/ui/button';
         </Card>
 
         <!-- Mobile Optimized -->
-        <Card>
+        <Card role="listitem">
           <CardHeader>
             <CardTitle class="flex items-center space-x-2">
-              <span>📱</span>
+              <span aria-hidden="true">📱</span>
               <span>Mobile Optimized</span>
             </CardTitle>
             <CardDescription>
@@ -293,7 +293,7 @@ import { Button } from '../components/ui/button';
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div class="bg-muted p-4 rounded-lg text-sm font-mono">
+            <div class="bg-muted p-4 rounded-lg text-sm font-mono" role="code" aria-label="Mobile optimized sticky header code example">
               {`<Layout 
   hideOnScroll={true}
   scrollThreshold={30}
@@ -304,10 +304,10 @@ import { Button } from '../components/ui/button';
         </Card>
 
         <!-- Performance Focused -->
-        <Card>
+        <Card role="listitem">
           <CardHeader>
             <CardTitle class="flex items-center space-x-2">
-              <span>🚀</span>
+              <span aria-hidden="true">🚀</span>
               <span>Performance Focused</span>
             </CardTitle>
             <CardDescription>
@@ -315,7 +315,7 @@ import { Button } from '../components/ui/button';
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div class="bg-muted p-4 rounded-lg text-sm font-mono">
+            <div class="bg-muted p-4 rounded-lg text-sm font-mono" role="code" aria-label="Performance focused static header code example">
               {`<Layout 
   stickyBehavior="static"
   headerVariant="default"
@@ -328,275 +328,69 @@ import { Button } from '../components/ui/button';
   </section>
 
   <!-- Long Content for Scroll Testing -->
-  <section class="py-16">
+  <section class="py-16" role="region" aria-labelledby="test-content-title">
     <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold text-foreground text-center mb-12">
+      <h2 id="test-content-title" class="text-3xl font-bold text-foreground text-center mb-12">
         Scroll Test Content
       </h2>
       
-      <div class="max-w-3xl mx-auto space-y-8">
-        <!-- Test Section 1 -->
-        <Card>
-          <CardHeader>
-            <CardTitle>Test Section 1</CardTitle>
-            <CardDescription>
-              Scroll through this content to test the sticky header behavior
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <p class="text-muted-foreground leading-relaxed">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-              Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-            <p class="text-muted-foreground leading-relaxed mt-4">
-              Continue scrolling to experience how the header behaves with the current configuration. 
-              Notice how the header background adapts and the scroll indicator updates as you move through the content.
-            </p>
-          </CardContent>
-        </Card>
-        
-        <!-- Test Section 2 -->
-        <Card>
-          <CardHeader>
-            <CardTitle>Test Section 2</CardTitle>
-            <CardDescription>
-              Scroll through this content to test the sticky header behavior
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <p class="text-muted-foreground leading-relaxed">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-              Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-            <p class="text-muted-foreground leading-relaxed mt-4">
-              Continue scrolling to experience how the header behaves with the current configuration. 
-              Notice how the header background adapts and the scroll indicator updates as you move through the content.
-            </p>
-          </CardContent>
-        </Card>
-        
-        <!-- Test Section 3 -->
-        <Card>
-          <CardHeader>
-            <CardTitle>Test Section 3</CardTitle>
-            <CardDescription>
-              Scroll through this content to test the sticky header behavior
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <p class="text-muted-foreground leading-relaxed">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-              Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-            <p class="text-muted-foreground leading-relaxed mt-4">
-              Continue scrolling to experience how the header behaves with the current configuration. 
-              Notice how the header background adapts and the scroll indicator updates as you move through the content.
-            </p>
-          </CardContent>
-        </Card>
-        
-        <!-- Test Section 4 -->
-        <Card>
-          <CardHeader>
-            <CardTitle>Test Section 4</CardTitle>
-            <CardDescription>
-              Scroll through this content to test the sticky header behavior
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <p class="text-muted-foreground leading-relaxed">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-              Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-            <p class="text-muted-foreground leading-relaxed mt-4">
-              Continue scrolling to experience how the header behaves with the current configuration. 
-              Notice how the header background adapts and the scroll indicator updates as you move through the content.
-            </p>
-          </CardContent>
-        </Card>
-        
-        <!-- Test Section 5 -->
-        <Card>
-          <CardHeader>
-            <CardTitle>Test Section 5</CardTitle>
-            <CardDescription>
-              Scroll through this content to test the sticky header behavior
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <p class="text-muted-foreground leading-relaxed">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-              Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-            <p class="text-muted-foreground leading-relaxed mt-4">
-              Continue scrolling to experience how the header behaves with the current configuration. 
-              Notice how the header background adapts and the scroll indicator updates as you move through the content.
-            </p>
-          </CardContent>
-        </Card>
-        
-        <!-- Test Section 6 -->
-        <Card>
-          <CardHeader>
-            <CardTitle>Test Section 6</CardTitle>
-            <CardDescription>
-              Scroll through this content to test the sticky header behavior
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <p class="text-muted-foreground leading-relaxed">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-              Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-            <p class="text-muted-foreground leading-relaxed mt-4">
-              Continue scrolling to experience how the header behaves with the current configuration. 
-              Notice how the header background adapts and the scroll indicator updates as you move through the content.
-            </p>
-          </CardContent>
-        </Card>
-        
-        <!-- Test Section 7 -->
-        <Card>
-          <CardHeader>
-            <CardTitle>Test Section 7</CardTitle>
-            <CardDescription>
-              Scroll through this content to test the sticky header behavior
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <p class="text-muted-foreground leading-relaxed">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-              Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-            <p class="text-muted-foreground leading-relaxed mt-4">
-              Continue scrolling to experience how the header behaves with the current configuration. 
-              Notice how the header background adapts and the scroll indicator updates as you move through the content.
-            </p>
-          </CardContent>
-        </Card>
-        
-        <!-- Test Section 8 -->
-        <Card>
-          <CardHeader>
-            <CardTitle>Test Section 8</CardTitle>
-            <CardDescription>
-              Scroll through this content to test the sticky header behavior
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <p class="text-muted-foreground leading-relaxed">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-              Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-            <p class="text-muted-foreground leading-relaxed mt-4">
-              Continue scrolling to experience how the header behaves with the current configuration. 
-              Notice how the header background adapts and the scroll indicator updates as you move through the content.
-            </p>
-          </CardContent>
-        </Card>
-        
-        <!-- Test Section 9 -->
-        <Card>
-          <CardHeader>
-            <CardTitle>Test Section 9</CardTitle>
-            <CardDescription>
-              Scroll through this content to test the sticky header behavior
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <p class="text-muted-foreground leading-relaxed">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-              Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-            <p class="text-muted-foreground leading-relaxed mt-4">
-              Continue scrolling to experience how the header behaves with the current configuration. 
-              Notice how the header background adapts and the scroll indicator updates as you move through the content.
-            </p>
-          </CardContent>
-        </Card>
-        
-        <!-- Test Section 10 -->
-        <Card>
-          <CardHeader>
-            <CardTitle>Test Section 10</CardTitle>
-            <CardDescription>
-              Scroll through this content to test the sticky header behavior
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <p class="text-muted-foreground leading-relaxed">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-              Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-            <p class="text-muted-foreground leading-relaxed mt-4">
-              Continue scrolling to experience how the header behaves with the current configuration. 
-              Notice how the header background adapts and the scroll indicator updates as you move through the content.
-            </p>
-          </CardContent>
-        </Card>
+      <div class="max-w-3xl mx-auto space-y-8" role="list" aria-label="Scroll testing content sections">
+        {Array.from({ length: 10 }, (_, i) => (
+          <Card key={`test-section-${i}`} role="listitem">
+            <CardHeader>
+              <CardTitle>Test Section {i + 1}</CardTitle>
+              <CardDescription>
+                Scroll through this content to test the sticky header behavior
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p class="text-muted-foreground leading-relaxed">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+              </p>
+              <p class="text-muted-foreground leading-relaxed mt-4">
+                Continue scrolling to experience how the header behaves with the current configuration. 
+                Notice how the header background adapts and the scroll indicator updates as you move through the content.
+              </p>
+            </CardContent>
+          </Card>
+        ))}
       </div>
     </div>
   </section>
 
   <!-- Performance Notes -->
-  <section class="py-16 bg-muted/30">
+  <section class="py-16 bg-muted/30" role="region" aria-labelledby="performance-notes">
     <div class="container mx-auto px-4">
       <Card>
         <CardHeader>
-          <CardTitle class="text-2xl">🚀 Performance Optimizations</CardTitle>
+          <CardTitle id="performance-notes" class="text-2xl">🚀 Performance Optimizations</CardTitle>
           <CardDescription>
             Built-in optimizations for smooth scrolling experience
           </CardDescription>
         </CardHeader>
         <CardContent>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div>
-              <h3 class="font-semibold mb-3">🎯 Smart Throttling</h3>
-              <ul class="text-sm space-y-1 text-muted-foreground">
-                <li>• RequestAnimationFrame for smooth animations</li>
-                <li>• Passive scroll listeners for better performance</li>
-                <li>• Intelligent state tracking to avoid unnecessary updates</li>
-                <li>• Memory-efficient cleanup on component unmount</li>
+            <div role="group" aria-labelledby="smart-throttling">
+              <h3 id="smart-throttling" class="font-semibold mb-3">🎯 Smart Throttling</h3>
+              <ul class="text-sm space-y-1 text-muted-foreground" role="list" aria-label="Smart throttling optimization features">
+                <li role="listitem">• RequestAnimationFrame for smooth animations</li>
+                <li role="listitem">• Passive scroll listeners for better performance</li>
+                <li role="listitem">• Intelligent state tracking to avoid unnecessary updates</li>
+                <li role="listitem">• Memory-efficient cleanup on component unmount</li>
               </ul>
             </div>
             
-            <div>
-              <h3 class="font-semibold mb-3">⚡ Optimization Features</h3>
-              <ul class="text-sm space-y-1 text-muted-foreground">
-                <li>• Will-change CSS hints for GPU acceleration</li>
-                <li>• Transform-based animations instead of position</li>
-                <li>• Minimal DOM queries with efficient caching</li>
-                <li>• Configurable thresholds to reduce sensitivity</li>
+            <div role="group" aria-labelledby="optimization-features">
+              <h3 id="optimization-features" class="font-semibold mb-3">⚡ Optimization Features</h3>
+              <ul class="text-sm space-y-1 text-muted-foreground" role="list" aria-label="Performance optimization features">
+                <li role="listitem">• Will-change CSS hints for GPU acceleration</li>
+                <li role="listitem">• Transform-based animations instead of position</li>
+                <li role="listitem">• Minimal DOM queries with efficient caching</li>
+                <li role="listitem">• Configurable thresholds to reduce sensitivity</li>
               </ul>
             </div>
           </div>

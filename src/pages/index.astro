@@ -4,10 +4,10 @@ import DarkModeToggle from '../components/islands/DarkModeToggle.tsx';
 ---
 
 <Layout title="Astro Starter">
-	<main class="min-h-screen bg-background">
+	<main class="min-h-screen bg-background" role="main">
 		<!-- Hero Section -->
-		<section class="container mx-auto px-4 py-16 text-center">
-			<h1 class="text-4xl md:text-6xl font-bold tracking-tight mb-6">
+		<section class="container mx-auto px-4 py-16 text-center" role="banner" aria-labelledby="hero-title">
+			<h1 id="hero-title" class="text-4xl md:text-6xl font-bold tracking-tight mb-6">
 				⚡ Astro Starter
 			</h1>
 			<p class="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
@@ -16,34 +16,39 @@ import DarkModeToggle from '../components/islands/DarkModeToggle.tsx';
 			</p>
 			
 			<!-- CTA Buttons -->
-			<div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+			<div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12" role="group" aria-label="Main navigation to component showcases">
 				<a 
 					href="/advanced-showcase" 
 					class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary-foreground bg-primary hover:bg-primary/90 transition-colors"
+					aria-label="View advanced components showcase including calendar, command palette, and date picker"
 				>
 					🔮 Try Advanced Components
 				</a>
 				<a 
 					href="/data-display-showcase" 
 					class="inline-flex items-center px-6 py-3 border border-input text-base font-medium rounded-md text-foreground bg-background hover:bg-accent hover:text-accent-foreground transition-colors"
+					aria-label="View data display components including tables, avatars, and tooltips"
 				>
 					📊 Data Display
 				</a>
 				<a 
 					href="/form-showcase" 
 					class="inline-flex items-center px-6 py-3 border border-input text-base font-medium rounded-md text-foreground bg-background hover:bg-accent hover:text-accent-foreground transition-colors"
+					aria-label="View form components including inputs, selects, and validation examples"
 				>
 					📝 Forms
 				</a>
 				<a 
 					href="/navigation-showcase" 
 					class="inline-flex items-center px-6 py-3 border border-input text-base font-medium rounded-md text-foreground bg-background hover:bg-accent hover:text-accent-foreground transition-colors"
+					aria-label="View navigation components including breadcrumbs, tabs, and alerts"
 				>
 					🧭 Navigation
 				</a>
 				<a 
 					href="/components-showcase" 
 					class="inline-flex items-center px-6 py-3 border border-input text-base font-medium rounded-md text-foreground bg-background hover:bg-accent hover:text-accent-foreground transition-colors"
+					aria-label="View complete component library with all available shadcn/ui components"
 				>
 					🧩 All Components
 				</a>
@@ -52,13 +57,13 @@ import DarkModeToggle from '../components/islands/DarkModeToggle.tsx';
 		</section>
 
 		<!-- Features Grid -->
-		<section class="container mx-auto px-4 py-16">
-			<h2 class="text-3xl font-bold text-center mb-12">✨ Production-Ready Features</h2>
-			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+		<section class="container mx-auto px-4 py-16" role="region" aria-labelledby="features-title">
+			<h2 id="features-title" class="text-3xl font-bold text-center mb-12">✨ Production-Ready Features</h2>
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" role="list" aria-label="Technology stack features">
 				<!-- Astro 5 -->
-				<div class="p-6 rounded-lg border bg-card text-card-foreground">
+				<div class="p-6 rounded-lg border bg-card text-card-foreground" role="listitem">
 					<div class="flex items-center mb-4">
-						<span class="text-2xl mr-3">🚀</span>
+						<span class="text-2xl mr-3" aria-hidden="true">🚀</span>
 						<h3 class="text-xl font-semibold">Astro 5</h3>
 					</div>
 					<p class="text-muted-foreground">
@@ -68,9 +73,9 @@ import DarkModeToggle from '../components/islands/DarkModeToggle.tsx';
 				</div>
 
 				<!-- TailwindCSS 4 -->
-				<div class="p-6 rounded-lg border bg-card text-card-foreground">
+				<div class="p-6 rounded-lg border bg-card text-card-foreground" role="listitem">
 					<div class="flex items-center mb-4">
-						<span class="text-2xl mr-3">🎨</span>
+						<span class="text-2xl mr-3" aria-hidden="true">🎨</span>
 						<h3 class="text-xl font-semibold">TailwindCSS 4</h3>
 					</div>
 					<p class="text-muted-foreground">
@@ -80,9 +85,9 @@ import DarkModeToggle from '../components/islands/DarkModeToggle.tsx';
 				</div>
 
 				<!-- shadcn/ui -->
-				<div class="p-6 rounded-lg border bg-card text-card-foreground">
+				<div class="p-6 rounded-lg border bg-card text-card-foreground" role="listitem">
 					<div class="flex items-center mb-4">
-						<span class="text-2xl mr-3">🧩</span>
+						<span class="text-2xl mr-3" aria-hidden="true">🧩</span>
 						<h3 class="text-xl font-semibold">shadcn/ui</h3>
 					</div>
 					<p class="text-muted-foreground">
@@ -92,9 +97,9 @@ import DarkModeToggle from '../components/islands/DarkModeToggle.tsx';
 				</div>
 
 				<!-- TypeScript -->
-				<div class="p-6 rounded-lg border bg-card text-card-foreground">
+				<div class="p-6 rounded-lg border bg-card text-card-foreground" role="listitem">
 					<div class="flex items-center mb-4">
-						<span class="text-2xl mr-3">📘</span>
+						<span class="text-2xl mr-3" aria-hidden="true">📘</span>
 						<h3 class="text-xl font-semibold">TypeScript</h3>
 					</div>
 					<p class="text-muted-foreground">
@@ -104,9 +109,9 @@ import DarkModeToggle from '../components/islands/DarkModeToggle.tsx';
 				</div>
 
 				<!-- Performance -->
-				<div class="p-6 rounded-lg border bg-card text-card-foreground">
+				<div class="p-6 rounded-lg border bg-card text-card-foreground" role="listitem">
 					<div class="flex items-center mb-4">
-						<span class="text-2xl mr-3">⚡</span>
+						<span class="text-2xl mr-3" aria-hidden="true">⚡</span>
 						<h3 class="text-xl font-semibold">Performance</h3>
 					</div>
 					<p class="text-muted-foreground">
@@ -116,9 +121,9 @@ import DarkModeToggle from '../components/islands/DarkModeToggle.tsx';
 				</div>
 
 				<!-- Accessibility -->
-				<div class="p-6 rounded-lg border bg-card text-card-foreground">
+				<div class="p-6 rounded-lg border bg-card text-card-foreground" role="listitem">
 					<div class="flex items-center mb-4">
-						<span class="text-2xl mr-3">♿</span>
+						<span class="text-2xl mr-3" aria-hidden="true">♿</span>
 						<h3 class="text-xl font-semibold">Accessibility</h3>
 					</div>
 					<p class="text-muted-foreground">
@@ -130,14 +135,14 @@ import DarkModeToggle from '../components/islands/DarkModeToggle.tsx';
 		</section>
 
 		<!-- Component Showcases -->
-		<section class="container mx-auto px-4 py-16">
-			<h2 class="text-3xl font-bold text-center mb-12">🎯 Component Showcases</h2>
-			<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+		<section class="container mx-auto px-4 py-16" role="region" aria-labelledby="showcases-title">
+			<h2 id="showcases-title" class="text-3xl font-bold text-center mb-12">🎯 Component Showcases</h2>
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-8" role="list" aria-label="Available component showcase pages">
 				
 				<!-- Advanced Components Showcase - NEW Sprint 4 -->
-				<div class="p-6 rounded-lg border bg-card text-card-foreground hover:bg-accent/50 transition-colors">
+				<div class="p-6 rounded-lg border bg-card text-card-foreground hover:bg-accent/50 transition-colors" role="listitem">
 					<div class="flex items-center mb-4">
-						<span class="text-3xl mr-4">🔮</span>
+						<span class="text-3xl mr-4" aria-hidden="true">🔮</span>
 						<div>
 							<h3 class="text-xl font-semibold">Advanced Components</h3>
 							<p class="text-sm text-muted-foreground">Sprint 4 - Latest Addition</p>
@@ -147,24 +152,25 @@ import DarkModeToggle from '../components/islands/DarkModeToggle.tsx';
 						Rich interface components with Calendar, Command palette, Date picker, Combobox, Sonner toasts, and Popover.
 						Professional tools for SaaS applications and complex user interfaces.
 					</p>
-					<div class="flex flex-wrap gap-2 mb-4">
-						<span class="px-2 py-1 text-xs bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 rounded">Calendar</span>
-						<span class="px-2 py-1 text-xs bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 rounded">Command</span>
-						<span class="px-2 py-1 text-xs bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 rounded">Sonner</span>
-						<span class="px-2 py-1 text-xs bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 rounded">Popover</span>
+					<div class="flex flex-wrap gap-2 mb-4" role="list" aria-label="Advanced component types">
+						<span class="px-2 py-1 text-xs bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 rounded" role="listitem">Calendar</span>
+						<span class="px-2 py-1 text-xs bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 rounded" role="listitem">Command</span>
+						<span class="px-2 py-1 text-xs bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 rounded" role="listitem">Sonner</span>
+						<span class="px-2 py-1 text-xs bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 rounded" role="listitem">Popover</span>
 					</div>
 					<a 
 						href="/advanced-showcase" 
 						class="inline-flex items-center text-primary hover:text-primary/80 font-medium"
+						aria-label="Explore advanced components showcase with calendar, command palette, and other rich UI elements"
 					>
 						Explore Advanced →
 					</a>
 				</div>
 
 				<!-- Data Display Showcase -->
-				<div class="p-6 rounded-lg border bg-card text-card-foreground hover:bg-accent/50 transition-colors">
+				<div class="p-6 rounded-lg border bg-card text-card-foreground hover:bg-accent/50 transition-colors" role="listitem">
 					<div class="flex items-center mb-4">
-						<span class="text-3xl mr-4">📊</span>
+						<span class="text-3xl mr-4" aria-hidden="true">📊</span>
 						<div>
 							<h3 class="text-xl font-semibold">Data Display Components</h3>
 							<p class="text-sm text-muted-foreground">Sprint 3 - Complete</p>
@@ -174,24 +180,25 @@ import DarkModeToggle from '../components/islands/DarkModeToggle.tsx';
 						Professional data presentation with Table, Avatar, Tooltip, and Accordion components. 
 						Interactive demos for dashboards, team pages, and business analytics.
 					</p>
-					<div class="flex flex-wrap gap-2 mb-4">
-						<span class="px-2 py-1 text-xs bg-primary/10 text-primary rounded">Table</span>
-						<span class="px-2 py-1 text-xs bg-primary/10 text-primary rounded">Avatar</span>
-						<span class="px-2 py-1 text-xs bg-primary/10 text-primary rounded">Tooltip</span>
-						<span class="px-2 py-1 text-xs bg-primary/10 text-primary rounded">Accordion</span>
+					<div class="flex flex-wrap gap-2 mb-4" role="list" aria-label="Data display component types">
+						<span class="px-2 py-1 text-xs bg-primary/10 text-primary rounded" role="listitem">Table</span>
+						<span class="px-2 py-1 text-xs bg-primary/10 text-primary rounded" role="listitem">Avatar</span>
+						<span class="px-2 py-1 text-xs bg-primary/10 text-primary rounded" role="listitem">Tooltip</span>
+						<span class="px-2 py-1 text-xs bg-primary/10 text-primary rounded" role="listitem">Accordion</span>
 					</div>
 					<a 
 						href="/data-display-showcase" 
 						class="inline-flex items-center text-primary hover:text-primary/80 font-medium"
+						aria-label="View data display components including interactive tables, avatars, and business analytics"
 					>
 						View Data Display →
 					</a>
 				</div>
 
 				<!-- Form Components Showcase -->
-				<div class="p-6 rounded-lg border bg-card text-card-foreground hover:bg-accent/50 transition-colors">
+				<div class="p-6 rounded-lg border bg-card text-card-foreground hover:bg-accent/50 transition-colors" role="listitem">
 					<div class="flex items-center mb-4">
-						<span class="text-3xl mr-4">📝</span>
+						<span class="text-3xl mr-4" aria-hidden="true">📝</span>
 						<div>
 							<h3 class="text-xl font-semibold">Form Components</h3>
 							<p class="text-sm text-muted-foreground">Sprint 1 - Complete</p>
@@ -201,24 +208,25 @@ import DarkModeToggle from '../components/islands/DarkModeToggle.tsx';
 						Complete form system with validation states and business-ready examples. 
 						Contact forms, newsletters, quotes, and registration forms.
 					</p>
-					<div class="flex flex-wrap gap-2 mb-4">
-						<span class="px-2 py-1 text-xs bg-secondary/50 text-secondary-foreground rounded">Input</span>
-						<span class="px-2 py-1 text-xs bg-secondary/50 text-secondary-foreground rounded">Textarea</span>
-						<span class="px-2 py-1 text-xs bg-secondary/50 text-secondary-foreground rounded">Select</span>
-						<span class="px-2 py-1 text-xs bg-secondary/50 text-secondary-foreground rounded">Checkbox</span>
+					<div class="flex flex-wrap gap-2 mb-4" role="list" aria-label="Form component types">
+						<span class="px-2 py-1 text-xs bg-secondary/50 text-secondary-foreground rounded" role="listitem">Input</span>
+						<span class="px-2 py-1 text-xs bg-secondary/50 text-secondary-foreground rounded" role="listitem">Textarea</span>
+						<span class="px-2 py-1 text-xs bg-secondary/50 text-secondary-foreground rounded" role="listitem">Select</span>
+						<span class="px-2 py-1 text-xs bg-secondary/50 text-secondary-foreground rounded" role="listitem">Checkbox</span>
 					</div>
 					<a 
 						href="/form-showcase" 
 						class="inline-flex items-center text-primary hover:text-primary/80 font-medium"
+						aria-label="Explore form components with validation, contact forms, and business examples"
 					>
 						Explore Forms →
 					</a>
 				</div>
 
 				<!-- Navigation & Feedback Showcase -->
-				<div class="p-6 rounded-lg border bg-card text-card-foreground hover:bg-accent/50 transition-colors">
+				<div class="p-6 rounded-lg border bg-card text-card-foreground hover:bg-accent/50 transition-colors" role="listitem">
 					<div class="flex items-center mb-4">
-						<span class="text-3xl mr-4">🧭</span>
+						<span class="text-3xl mr-4" aria-hidden="true">🧭</span>
 						<div>
 							<h3 class="text-xl font-semibold">Navigation & Feedback</h3>
 							<p class="text-sm text-muted-foreground">Sprint 2 - Complete</p>
@@ -228,15 +236,16 @@ import DarkModeToggle from '../components/islands/DarkModeToggle.tsx';
 						Professional navigation and user feedback systems. 
 						Breadcrumbs, tabs, alerts, and badges for e-commerce and business sites.
 					</p>
-					<div class="flex flex-wrap gap-2 mb-4">
-						<span class="px-2 py-1 text-xs bg-secondary/50 text-secondary-foreground rounded">Breadcrumb</span>
-						<span class="px-2 py-1 text-xs bg-secondary/50 text-secondary-foreground rounded">Tabs</span>
-						<span class="px-2 py-1 text-xs bg-secondary/50 text-secondary-foreground rounded">Alert</span>
-						<span class="px-2 py-1 text-xs bg-secondary/50 text-secondary-foreground rounded">Badge</span>
+					<div class="flex flex-wrap gap-2 mb-4" role="list" aria-label="Navigation component types">
+						<span class="px-2 py-1 text-xs bg-secondary/50 text-secondary-foreground rounded" role="listitem">Breadcrumb</span>
+						<span class="px-2 py-1 text-xs bg-secondary/50 text-secondary-foreground rounded" role="listitem">Tabs</span>
+						<span class="px-2 py-1 text-xs bg-secondary/50 text-secondary-foreground rounded" role="listitem">Alert</span>
+						<span class="px-2 py-1 text-xs bg-secondary/50 text-secondary-foreground rounded" role="listitem">Badge</span>
 					</div>
 					<a 
 						href="/navigation-showcase" 
 						class="inline-flex items-center text-primary hover:text-primary/80 font-medium"
+						aria-label="View navigation components including breadcrumbs, tabs, alerts for e-commerce sites"
 					>
 						View Navigation →
 					</a>
@@ -248,6 +257,7 @@ import DarkModeToggle from '../components/islands/DarkModeToggle.tsx';
 				<a 
 					href="/components-showcase" 
 					class="inline-flex items-center px-6 py-3 border border-input text-base font-medium rounded-md text-foreground bg-background hover:bg-accent hover:text-accent-foreground transition-colors"
+					aria-label="View complete component library with all 26 shadcn/ui components and interactive examples"
 				>
 					🧩 View Complete Component Library →
 				</a>
@@ -255,17 +265,17 @@ import DarkModeToggle from '../components/islands/DarkModeToggle.tsx';
 		</section>
 
 		<!-- Dark Mode Section -->
-		<section class="container mx-auto px-4 py-16">
+		<section class="container mx-auto px-4 py-16" role="region" aria-labelledby="darkmode-title">
 			<div class="max-w-4xl mx-auto text-center">
-				<h2 class="text-3xl font-bold mb-6">🌙 Dark Mode Ready</h2>
+				<h2 id="darkmode-title" class="text-3xl font-bold mb-6">🌙 Dark Mode Ready</h2>
 				<p class="text-xl text-muted-foreground mb-8">
 					Perfect dark mode integration with system preference detection and manual toggle. 
 					All components adapt seamlessly to both light and dark themes.
 				</p>
 				
 				<!-- Dark Mode Toggle Demo -->
-				<div class="inline-block p-1 border rounded-lg bg-muted/50">
-					<div id="dark-mode-toggle"></div>
+				<div class="inline-block p-1 border rounded-lg bg-muted/50" role="group" aria-label="Dark mode toggle demonstration">
+					<div id="dark-mode-toggle" aria-label="Interactive dark mode toggle"></div>
 				</div>
 				
 				<p class="text-sm text-muted-foreground mt-4">
@@ -275,11 +285,11 @@ import DarkModeToggle from '../components/islands/DarkModeToggle.tsx';
 		</section>
 
 		<!-- Quick Start -->
-		<section class="container mx-auto px-4 py-16">
+		<section class="container mx-auto px-4 py-16" role="region" aria-labelledby="quickstart-title">
 			<div class="max-w-3xl mx-auto text-center">
-				<h2 class="text-3xl font-bold mb-6">🚀 Quick Start</h2>
-				<div class="bg-muted/50 rounded-lg p-6 text-left">
-					<pre class="text-sm overflow-x-auto"><code># Clone and install
+				<h2 id="quickstart-title" class="text-3xl font-bold mb-6">🚀 Quick Start</h2>
+				<div class="bg-muted/50 rounded-lg p-6 text-left" role="region" aria-label="Installation code block">
+					<pre class="text-sm overflow-x-auto" role="code" aria-label="Commands to clone, install and start the Astro starter project"><code># Clone and install
 git clone https://github.com/XCUDA/astro-starter.git
 cd astro-starter
 npm install
@@ -288,15 +298,15 @@ npm install
 npm run dev</code></pre>
 				</div>
 				<p class="text-muted-foreground mt-4">
-					Visit <code class="bg-muted px-2 py-1 rounded text-sm">localhost:4321</code> to see your starter in action.
+					Visit <code class="bg-muted px-2 py-1 rounded text-sm" role="code" aria-label="Local development URL">localhost:4321</code> to see your starter in action.
 				</p>
 			</div>
 		</section>
 
 		<!-- Final Progress Badge -->
-		<section class="container mx-auto px-4 py-8 text-center">
-			<div class="inline-block p-4 rounded-lg border bg-gradient-to-r from-green-50 to-violet-50 dark:from-green-950/20 dark:to-violet-950/20">
-				<div class="text-2xl font-bold text-violet-600 dark:text-violet-400 mb-2">🏆 85% Complete</div>
+		<section class="container mx-auto px-4 py-8 text-center" role="region" aria-labelledby="progress-title">
+			<div class="inline-block p-4 rounded-lg border bg-gradient-to-r from-green-50 to-violet-50 dark:from-green-950/20 dark:to-violet-950/20" role="status" aria-live="polite">
+				<div id="progress-title" class="text-2xl font-bold text-violet-600 dark:text-violet-400 mb-2" aria-label="Project completion status">🏆 85% Complete</div>
 				<div class="text-sm text-muted-foreground">
 					Sprint 1 (Forms) + Sprint 2 (Navigation) + Sprint 3 (Data Display) + Sprint 4 (Advanced) = <strong>Quadruple Sprint Mastery</strong>
 				</div>
@@ -310,9 +320,12 @@ npm run dev</code></pre>
 	import { createElement } from 'react';
 	import { createRoot } from 'react-dom/client';
 
-	// Mount Dark Mode Toggle
+	// Mount Dark Mode Toggle with accessibility verification
 	const toggleContainer = document.getElementById('dark-mode-toggle');
 	if (toggleContainer) {
+		// Ensure container is focusable and has proper ARIA
+		toggleContainer.setAttribute('tabindex', '0');
+		
 		const root = createRoot(toggleContainer);
 		root.render(createElement(DarkModeToggle));
 	}

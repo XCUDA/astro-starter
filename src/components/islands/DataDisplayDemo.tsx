@@ -151,11 +151,16 @@ export default function DataDisplayDemo() {
     <TooltipProvider>
       <div className="space-y-12">
         
-        {/* Feedback Messages */}
+        {/* Feedback Messages - ARIA Live Region */}
         {feedbackMessages.length > 0 && (
-          <div className="bg-muted/50 border rounded-lg p-4">
-            <h4 className="font-semibold mb-2">📊 Actions Data Display :</h4>
-            <ul className="text-sm space-y-1">
+          <div 
+            className="bg-muted/50 border rounded-lg p-4"
+            role="status"
+            aria-live="polite"
+            aria-label="Data display actions feedback"
+          >
+            <h4 id="feedback-heading" className="font-semibold mb-2">📊 Actions Data Display :</h4>
+            <ul className="text-sm space-y-1" aria-labelledby="feedback-heading">
               {feedbackMessages.map((message, index) => (
                 <li key={index} className="text-muted-foreground">• {message}</li>
               ))}
@@ -164,10 +169,10 @@ export default function DataDisplayDemo() {
         )}
 
         {/* Table Component Demo - Business Dashboard */}
-        <section>
+        <section aria-labelledby="table-demo-heading">
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
+              <CardTitle id="table-demo-heading" className="flex items-center gap-2">
                 📊 Table Component - Dashboard Business
               </CardTitle>
               <CardDescription>
@@ -177,12 +182,14 @@ export default function DataDisplayDemo() {
             <CardContent className="space-y-4">
               
               {/* Filters */}
-              <div className="flex gap-4 items-center">
+              <div className="flex gap-4 items-center" role="group" aria-label="Table filters">
                 <div className="flex gap-2">
                   <Button 
                     variant={filterStatus === 'all' ? 'default' : 'outline'} 
                     size="sm"
                     onClick={() => handleFilter('all')}
+                    aria-pressed={filterStatus === 'all'}
+                    aria-label={`Show all orders (${ordersData.length} total)`}
                   >
                     Tous ({ordersData.length})
                   </Button>
@@ -190,6 +197,8 @@ export default function DataDisplayDemo() {
                     variant={filterStatus === 'completed' ? 'default' : 'outline'} 
                     size="sm"
                     onClick={() => handleFilter('completed')}
+                    aria-pressed={filterStatus === 'completed'}
+                    aria-label={`Show completed orders only (${ordersData.filter(o => o.status === 'completed').length} orders)`}
                   >
                     Terminés ({ordersData.filter(o => o.status === 'completed').length})
                   </Button>
@@ -197,6 +206,8 @@ export default function DataDisplayDemo() {
                     variant={filterStatus === 'in-progress' ? 'default' : 'outline'} 
                     size="sm"
                     onClick={() => handleFilter('in-progress')}
+                    aria-pressed={filterStatus === 'in-progress'}
+                    aria-label={`Show in-progress orders only (${ordersData.filter(o => o.status === 'in-progress').length} orders)`}
                   >
                     En cours ({ordersData.filter(o => o.status === 'in-progress').length})
                   </Button>
@@ -205,32 +216,93 @@ export default function DataDisplayDemo() {
 
               {/* Orders Table */}
               <div className="rounded-md border">
-                <Table>
+                <Table role="table" aria-label="Orders management table">
+                  <caption className="sr-only">
+                    Table of customer orders with sorting and filtering capabilities. 
+                    Currently showing {filteredOrders.length} of {ordersData.length} orders.
+                    {sortField && ` Sorted by ${sortField} in ${sortDirection}ending order.`}
+                  </caption>
                   <TableHeader>
-                    <TableRow>
+                    <TableRow role="row">
                       <TableHead 
                         className="cursor-pointer hover:bg-muted/50 select-none"
                         onClick={() => handleSort('id')}
+                        role="columnheader"
+                        aria-sort={
+                          sortField === 'id' 
+                            ? (sortDirection === 'asc' ? 'ascending' : 'descending')
+                            : 'none'
+                        }
+                        aria-label={`Sort by order ID ${sortField === 'id' ? (sortDirection === 'asc' ? 'descending' : 'ascending') : 'ascending'}`}
+                        tabIndex={0}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            handleSort('id');
+                          }
+                        }}
                       >
                         Commande {sortField === 'id' && (sortDirection === 'asc' ? '↑' : '↓')}
                       </TableHead>
                       <TableHead 
                         className="cursor-pointer hover:bg-muted/50 select-none"
                         onClick={() => handleSort('customer')}
+                        role="columnheader"
+                        aria-sort={
+                          sortField === 'customer' 
+                            ? (sortDirection === 'asc' ? 'ascending' : 'descending')
+                            : 'none'
+                        }
+                        aria-label={`Sort by customer name ${sortField === 'customer' ? (sortDirection === 'asc' ? 'descending' : 'ascending') : 'ascending'}`}
+                        tabIndex={0}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            handleSort('customer');
+                          }
+                        }}
                       >
                         Client {sortField === 'customer' && (sortDirection === 'asc' ? '↑' : '↓')}
                       </TableHead>
-                      <TableHead>Produit</TableHead>
+                      <TableHead role="columnheader">Produit</TableHead>
                       <TableHead 
                         className="cursor-pointer hover:bg-muted/50 select-none text-right"
                         onClick={() => handleSort('amount')}
+                        role="columnheader"
+                        aria-sort={
+                          sortField === 'amount' 
+                            ? (sortDirection === 'asc' ? 'ascending' : 'descending')
+                            : 'none'
+                        }
+                        aria-label={`Sort by amount ${sortField === 'amount' ? (sortDirection === 'asc' ? 'descending' : 'ascending') : 'ascending'}`}
+                        tabIndex={0}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            handleSort('amount');
+                          }
+                        }}
                       >
                         Montant {sortField === 'amount' && (sortDirection === 'asc' ? '↑' : '↓')}
                       </TableHead>
-                      <TableHead>Statut</TableHead>
+                      <TableHead role="columnheader">Statut</TableHead>
                       <TableHead 
                         className="cursor-pointer hover:bg-muted/50 select-none"
                         onClick={() => handleSort('date')}
+                        role="columnheader"
+                        aria-sort={
+                          sortField === 'date' 
+                            ? (sortDirection === 'asc' ? 'ascending' : 'descending')
+                            : 'none'
+                        }
+                        aria-label={`Sort by date ${sortField === 'date' ? (sortDirection === 'asc' ? 'descending' : 'ascending') : 'ascending'}`}
+                        tabIndex={0}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            handleSort('date');
+                          }
+                        }}
                       >
                         Date {sortField === 'date' && (sortDirection === 'asc' ? '↑' : '↓')}
                       </TableHead>
@@ -238,15 +310,17 @@ export default function DataDisplayDemo() {
                   </TableHeader>
                   <TableBody>
                     {filteredOrders.map((order) => (
-                      <TableRow key={order.id} className="hover:bg-muted/50">
-                        <TableCell className="font-medium">{order.id}</TableCell>
-                        <TableCell>{order.customer}</TableCell>
-                        <TableCell className="text-muted-foreground">{order.product}</TableCell>
-                        <TableCell className="text-right font-semibold">
-                          €{order.amount.toLocaleString()}
+                      <TableRow key={order.id} className="hover:bg-muted/50" role="row">
+                        <TableCell className="font-medium" role="cell">{order.id}</TableCell>
+                        <TableCell role="cell">{order.customer}</TableCell>
+                        <TableCell className="text-muted-foreground" role="cell">{order.product}</TableCell>
+                        <TableCell className="text-right font-semibold" role="cell">
+                          <span aria-label={`${order.amount} euros`}>
+                            €{order.amount.toLocaleString()}
+                          </span>
                         </TableCell>
-                        <TableCell>{getStatusBadge(order.status)}</TableCell>
-                        <TableCell className="text-muted-foreground">{order.date}</TableCell>
+                        <TableCell role="cell">{getStatusBadge(order.status)}</TableCell>
+                        <TableCell className="text-muted-foreground" role="cell">{order.date}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
@@ -261,10 +335,10 @@ export default function DataDisplayDemo() {
         </section>
 
         {/* Avatar Component Demo - Team & Testimonials */}
-        <section>
+        <section aria-labelledby="avatar-demo-heading">
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
+              <CardTitle id="avatar-demo-heading" className="flex items-center gap-2">
                 👥 Avatar Component - Équipe & Témoignages
               </CardTitle>
               <CardDescription>
@@ -276,18 +350,22 @@ export default function DataDisplayDemo() {
               {/* Team Section */}
               <div>
                 <h3 className="text-lg font-semibold mb-4">🏢 Notre Équipe</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4" role="list" aria-label="Team members">
                   {teamMembers.map((member, index) => (
-                    <div key={index} className="flex items-center space-x-3 p-3 rounded-lg border hover:bg-muted/50">
+                    <div key={index} className="flex items-center space-x-3 p-3 rounded-lg border hover:bg-muted/50" role="listitem">
                       <div className="relative">
                         <Avatar>
-                          <AvatarImage src={member.avatar} alt={member.name} />
+                          <AvatarImage src={member.avatar} alt={`${member.name} avatar`} />
                           <AvatarFallback className="bg-primary text-primary-foreground">
                             {member.initials}
                           </AvatarFallback>
                         </Avatar>
                         {/* Status indicator */}
-                        <div className={`absolute -bottom-1 -right-1 w-3 h-3 rounded-full border-2 border-background ${getStatusIndicator(member.status)}`} />
+                        <div 
+                          className={`absolute -bottom-1 -right-1 w-3 h-3 rounded-full border-2 border-background ${getStatusIndicator(member.status)}`} 
+                          aria-label={`Status: ${member.status}`}
+                          role="img"
+                        />
                       </div>
                       <div className="flex-1 min-w-0">
                         <p className="font-medium truncate">{member.name}</p>
@@ -301,18 +379,18 @@ export default function DataDisplayDemo() {
               {/* Testimonials Section */}
               <div>
                 <h3 className="text-lg font-semibold mb-4">💬 Témoignages Clients</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4" role="list" aria-label="Customer testimonials">
                   {testimonials.map((testimonial, index) => (
-                    <div key={index} className="p-4 rounded-lg border bg-muted/30">
+                    <div key={index} className="p-4 rounded-lg border bg-muted/30" role="listitem">
                       <div className="flex items-start space-x-3">
                         <Avatar className="mt-1">
-                          <AvatarImage src={testimonial.avatar} alt={testimonial.name} />
+                          <AvatarImage src={testimonial.avatar} alt={`${testimonial.name} avatar`} />
                           <AvatarFallback className="bg-secondary text-secondary-foreground">
                             {testimonial.initials}
                           </AvatarFallback>
                         </Avatar>
                         <div className="flex-1">
-                          <p className="text-sm mb-2 italic">"{testimonial.text}"</p>
+                          <blockquote className="text-sm mb-2 italic">"{testimonial.text}"</blockquote>
                           <div>
                             <p className="font-medium text-sm">{testimonial.name}</p>
                             <p className="text-xs text-muted-foreground">{testimonial.company}</p>
@@ -327,20 +405,20 @@ export default function DataDisplayDemo() {
               {/* Avatar Sizes Demo */}
               <div>
                 <h3 className="text-lg font-semibold mb-4">📏 Tailles d'Avatars</h3>
-                <div className="flex items-center space-x-4">
-                  <Avatar className="w-8 h-8">
+                <div className="flex items-center space-x-4" role="group" aria-label="Avatar size examples">
+                  <Avatar className="w-8 h-8" aria-label="Extra small avatar">
                     <AvatarFallback className="text-xs">XS</AvatarFallback>
                   </Avatar>
-                  <Avatar className="w-10 h-10">
+                  <Avatar className="w-10 h-10" aria-label="Small avatar">
                     <AvatarFallback className="text-sm">SM</AvatarFallback>
                   </Avatar>
-                  <Avatar>
+                  <Avatar aria-label="Medium avatar">
                     <AvatarFallback>MD</AvatarFallback>
                   </Avatar>
-                  <Avatar className="w-12 h-12">
+                  <Avatar className="w-12 h-12" aria-label="Large avatar">
                     <AvatarFallback>LG</AvatarFallback>
                   </Avatar>
-                  <Avatar className="w-16 h-16">
+                  <Avatar className="w-16 h-16" aria-label="Extra large avatar">
                     <AvatarFallback className="text-lg">XL</AvatarFallback>
                   </Avatar>
                 </div>
@@ -354,10 +432,10 @@ export default function DataDisplayDemo() {
         </section>
 
         {/* Tooltip Component Demo - Business Metrics Help */}
-        <section>
+        <section aria-labelledby="tooltip-demo-heading">
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
+              <CardTitle id="tooltip-demo-heading" className="flex items-center gap-2">
                 💡 Tooltip Component - Aide Contextuelle Business
               </CardTitle>
               <CardDescription>
@@ -369,20 +447,24 @@ export default function DataDisplayDemo() {
               {/* Business Metrics with Tooltips */}
               <div>
                 <h3 className="text-lg font-semibold mb-4">📈 Métriques Business</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4" role="list" aria-label="Business metrics">
                   {businessMetrics.map((metric, index) => (
                     <Tooltip key={index}>
                       <TooltipTrigger asChild>
-                        <div className="p-4 rounded-lg border hover:bg-muted/50 cursor-help transition-colors">
+                        <div 
+                          className="p-4 rounded-lg border hover:bg-muted/50 cursor-help transition-colors"
+                          role="listitem"
+                          aria-describedby={`metric-tooltip-${index}`}
+                        >
                           <div className="flex items-center justify-between mb-2">
                             <p className="text-sm text-muted-foreground">{metric.label}</p>
-                            <span className="text-xs text-blue-600">?</span>
+                            <span className="text-xs text-blue-600" aria-hidden="true">?</span>
                           </div>
                           <p className="text-2xl font-bold">{metric.value}</p>
                           <p className="text-sm text-green-600">{metric.trend}</p>
                         </div>
                       </TooltipTrigger>
-                      <TooltipContent className="max-w-xs">
+                      <TooltipContent className="max-w-xs" id={`metric-tooltip-${index}`}>
                         <p className="font-medium mb-1">{metric.label}</p>
                         <p className="text-sm">
                           {index === 0 && "Chiffre d'affaires mensuel récurrent. Calculé sur les 30 derniers jours avec projections."}
@@ -399,44 +481,64 @@ export default function DataDisplayDemo() {
               {/* Help Form with Tooltips */}
               <div>
                 <h3 className="text-lg font-semibold mb-4">📋 Formulaire avec Aide</h3>
-                <div className="max-w-md space-y-4">
+                <form className="max-w-md space-y-4" aria-labelledby="help-form-heading">
+                  <h4 id="help-form-heading" className="sr-only">Project quote form with contextual help</h4>
                   <div>
-                    <label className="text-sm font-medium mb-2 flex items-center gap-2">
+                    <label htmlFor="budget-input" className="text-sm font-medium mb-2 flex items-center gap-2">
                       Budget projet
                       <Tooltip>
                         <TooltipTrigger asChild>
-                          <span className="text-blue-600 cursor-help">ⓘ</span>
+                          <span className="text-blue-600 cursor-help" aria-label="Help about budget">ⓘ</span>
                         </TooltipTrigger>
                         <TooltipContent>
                           <p>Budget total incluant développement, design et maintenance première année</p>
                         </TooltipContent>
                       </Tooltip>
                     </label>
-                    <Input placeholder="Ex: 5000 €" />
+                    <Input 
+                      id="budget-input"
+                      placeholder="Ex: 5000 €" 
+                      aria-describedby="budget-help"
+                    />
+                    <span id="budget-help" className="sr-only">
+                      Enter your total project budget including development, design and first year maintenance
+                    </span>
                   </div>
                   
                   <div>
-                    <label className="text-sm font-medium mb-2 flex items-center gap-2">
+                    <label htmlFor="deadline-input" className="text-sm font-medium mb-2 flex items-center gap-2">
                       Délai souhaité
                       <Tooltip>
                         <TooltipTrigger asChild>
-                          <span className="text-blue-600 cursor-help">ⓘ</span>
+                          <span className="text-blue-600 cursor-help" aria-label="Help about deadline">ⓘ</span>
                         </TooltipTrigger>
                         <TooltipContent>
                           <p>Délai de livraison souhaité. Projets standards: 2-4 semaines</p>
                         </TooltipContent>
                       </Tooltip>
                     </label>
-                    <Input placeholder="Ex: 3 semaines" />
+                    <Input 
+                      id="deadline-input"
+                      placeholder="Ex: 3 semaines" 
+                      aria-describedby="deadline-help"
+                    />
+                    <span id="deadline-help" className="sr-only">
+                      Enter your desired delivery deadline. Standard projects take 2-4 weeks
+                    </span>
                   </div>
                   
                   <Button 
+                    type="button"
                     className="w-full"
                     onClick={() => addFeedbackMessage('Formulaire avec tooltips d\'aide soumis')}
+                    aria-describedby="submit-button-help"
                   >
                     Demander un devis
                   </Button>
-                </div>
+                  <span id="submit-button-help" className="sr-only">
+                    Click to submit your quote request with the provided information
+                  </span>
+                </form>
               </div>
 
               <div className="text-sm text-muted-foreground">
@@ -447,10 +549,10 @@ export default function DataDisplayDemo() {
         </section>
 
         {/* Accordion Component Demo - FAQ & Documentation */}
-        <section>
+        <section aria-labelledby="accordion-demo-heading">
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
+              <CardTitle id="accordion-demo-heading" className="flex items-center gap-2">
                 📚 Accordion Component - FAQ & Documentation
               </CardTitle>
               <CardDescription>
@@ -560,10 +662,10 @@ export default function DataDisplayDemo() {
         </section>
 
         {/* Sprint 3 Summary */}
-        <section>
+        <section aria-labelledby="sprint-summary-heading">
           <Card className="border-green-200 bg-green-50 dark:border-green-800 dark:bg-green-950/20">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-green-800 dark:text-green-200">
+              <CardTitle id="sprint-summary-heading" className="flex items-center gap-2 text-green-800 dark:text-green-200">
                 🎊 Sprint 3 Data Display - Completed!
               </CardTitle>
               <CardDescription className="text-green-700 dark:text-green-300">
@@ -574,20 +676,20 @@ export default function DataDisplayDemo() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                 <div>
                   <h4 className="font-semibold mb-2 text-green-800 dark:text-green-200">✅ Composants ajoutés:</h4>
-                  <ul className="space-y-1 text-green-700 dark:text-green-300">
-                    <li>• <strong>Table:</strong> Dashboard analytics + gestion commandes</li>
-                    <li>• <strong>Avatar:</strong> Équipe avec statuts + témoignages</li>
-                    <li>• <strong>Tooltip:</strong> Métriques business + aide contextuelle</li>
-                    <li>• <strong>Accordion:</strong> FAQ clients + documentation</li>
+                  <ul className="space-y-1 text-green-700 dark:text-green-300" role="list">
+                    <li role="listitem">• <strong>Table:</strong> Dashboard analytics + gestion commandes</li>
+                    <li role="listitem">• <strong>Avatar:</strong> Équipe avec statuts + témoignages</li>
+                    <li role="listitem">• <strong>Tooltip:</strong> Métriques business + aide contextuelle</li>
+                    <li role="listitem">• <strong>Accordion:</strong> FAQ clients + documentation</li>
                   </ul>
                 </div>
                 <div>
                   <h4 className="font-semibold mb-2 text-green-800 dark:text-green-200">🎯 Capacités business:</h4>
-                  <ul className="space-y-1 text-green-700 dark:text-green-300">
-                    <li>• Dashboards professionnels complets</li>
-                    <li>• Pages équipe avec statuts en temps réel</li>
-                    <li>• Aide contextuelle sans encombrement</li>
-                    <li>• FAQ et documentation structurée</li>
+                  <ul className="space-y-1 text-green-700 dark:text-green-300" role="list">
+                    <li role="listitem">• Dashboards professionnels complets</li>
+                    <li role="listitem">• Pages équipe avec statuts en temps réel</li>
+                    <li role="listitem">• Aide contextuelle sans encombrement</li>
+                    <li role="listitem">• FAQ et documentation structurée</li>
                   </ul>
                 </div>
               </div>

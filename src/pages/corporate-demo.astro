@@ -23,7 +23,7 @@ import { Button } from '../components/ui/button';
 >
   
   <!-- Hero Corporate -->
-  <section class="bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 py-20">
+  <section class="bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 py-20" role="banner" aria-labelledby="hero-title">
     <div class="container mx-auto px-4">
       <div class="max-w-4xl mx-auto text-center">
         
@@ -31,7 +31,7 @@ import { Button } from '../components/ui/button';
           Expertise depuis 1995
         </Badge>
         
-        <h1 class="text-4xl lg:text-6xl font-bold text-foreground mb-6">
+        <h1 id="hero-title" class="text-4xl lg:text-6xl font-bold text-foreground mb-6">
           Cabinet Expertise
           <span class="text-primary">& Conseil</span>
         </h1>
@@ -41,29 +41,29 @@ import { Button } from '../components/ui/button';
           <strong>Plus de 500 entreprises</strong> nous font confiance.
         </p>
 
-        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-          <Button size="lg" className="text-lg px-8">
-            <span class="mr-2">📞</span>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12" role="group" aria-label="Primary action buttons">
+          <Button size="lg" className="text-lg px-8" aria-label="Schedule an appointment with our accounting experts">
+            <span class="mr-2" aria-hidden="true">📞</span>
             Prendre Rendez-vous
           </Button>
-          <Button variant="outline" size="lg" className="text-lg px-8">
-            <span class="mr-2">📄</span>
+          <Button variant="outline" size="lg" className="text-lg px-8" aria-label="Learn about our accounting, audit and fiscal services">
+            <span class="mr-2" aria-hidden="true">📄</span>
             Nos Services
           </Button>
         </div>
 
         <!-- Stats Corporate -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
-          <div class="text-center">
-            <div class="text-3xl font-bold text-primary mb-2">500+</div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16" role="list" aria-label="Company statistics and credentials">
+          <div class="text-center" role="listitem">
+            <div class="text-3xl font-bold text-primary mb-2" role="status" aria-label="Number of client companies: 500 plus">500+</div>
             <div class="text-sm text-muted-foreground">Entreprises clientes</div>
           </div>
-          <div class="text-center">
-            <div class="text-3xl font-bold text-primary mb-2">25+</div>
+          <div class="text-center" role="listitem">
+            <div class="text-3xl font-bold text-primary mb-2" role="status" aria-label="Years of experience: 25 plus">25+</div>
             <div class="text-sm text-muted-foreground">Années d'expérience</div>
           </div>
-          <div class="text-center">
-            <div class="text-3xl font-bold text-primary mb-2">98%</div>
+          <div class="text-center" role="listitem">
+            <div class="text-3xl font-bold text-primary mb-2" role="status" aria-label="Client satisfaction rate: 98 percent">98%</div>
             <div class="text-sm text-muted-foreground">Satisfaction client</div>
           </div>
         </div>
@@ -72,63 +72,63 @@ import { Button } from '../components/ui/button';
   </section>
 
   <!-- Services -->
-  <section class="py-16">
+  <section class="py-16" role="region" aria-labelledby="services-title">
     <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold text-center mb-12">Nos Expertises</h2>
+      <h2 id="services-title" class="text-3xl font-bold text-center mb-12">Nos Expertises</h2>
       
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <Card>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8" role="list" aria-label="Professional accounting services">
+        <Card role="listitem">
           <CardHeader>
-            <div class="text-3xl mb-4">📊</div>
+            <div class="text-3xl mb-4" aria-hidden="true">📊</div>
             <CardTitle>Expertise Comptable</CardTitle>
             <CardDescription>Tenue de comptabilité et établissement des comptes</CardDescription>
           </CardHeader>
           <CardContent>
-            <ul class="space-y-2 text-sm text-muted-foreground">
-              <li>• Comptabilité générale</li>
-              <li>• Établissement des comptes annuels</li>
-              <li>• Liasse fiscale</li>
-              <li>• Déclarations TVA</li>
+            <ul class="space-y-2 text-sm text-muted-foreground" role="list" aria-label="Accounting services details">
+              <li role="listitem">• Comptabilité générale</li>
+              <li role="listitem">• Établissement des comptes annuels</li>
+              <li role="listitem">• Liasse fiscale</li>
+              <li role="listitem">• Déclarations TVA</li>
             </ul>
-            <Button variant="outline" className="mt-4 w-full">
+            <Button variant="outline" className="mt-4 w-full" aria-label="Learn more about accounting services and annual reports">
               En savoir plus
             </Button>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card role="listitem">
           <CardHeader>
-            <div class="text-3xl mb-4">🔍</div>
+            <div class="text-3xl mb-4" aria-hidden="true">🔍</div>
             <CardTitle>Audit & Contrôle</CardTitle>
             <CardDescription>Audit légal et contractuel</CardDescription>
           </CardHeader>
           <CardContent>
-            <ul class="space-y-2 text-sm text-muted-foreground">
-              <li>• Commissariat aux comptes</li>
-              <li>• Audit contractuel</li>
-              <li>• Due diligence</li>
-              <li>• Audit social</li>
+            <ul class="space-y-2 text-sm text-muted-foreground" role="list" aria-label="Audit services details">
+              <li role="listitem">• Commissariat aux comptes</li>
+              <li role="listitem">• Audit contractuel</li>
+              <li role="listitem">• Due diligence</li>
+              <li role="listitem">• Audit social</li>
             </ul>
-            <Button variant="outline" className="mt-4 w-full">
+            <Button variant="outline" className="mt-4 w-full" aria-label="Learn more about audit services and legal compliance">
               En savoir plus
             </Button>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card role="listitem">
           <CardHeader>
-            <div class="text-3xl mb-4">⚖️</div>
+            <div class="text-3xl mb-4" aria-hidden="true">⚖️</div>
             <CardTitle>Conseil Fiscal</CardTitle>
             <CardDescription>Optimisation fiscale et juridique</CardDescription>
           </CardHeader>
           <CardContent>
-            <ul class="space-y-2 text-sm text-muted-foreground">
-              <li>• Optimisation fiscale</li>
-              <li>• Conseil en création</li>
-              <li>• Transmission d'entreprise</li>
-              <li>• Fiscalité internationale</li>
+            <ul class="space-y-2 text-sm text-muted-foreground" role="list" aria-label="Fiscal consulting services details">
+              <li role="listitem">• Optimisation fiscale</li>
+              <li role="listitem">• Conseil en création</li>
+              <li role="listitem">• Transmission d'entreprise</li>
+              <li role="listitem">• Fiscalité internationale</li>
             </ul>
-            <Button variant="outline" className="mt-4 w-full">
+            <Button variant="outline" className="mt-4 w-full" aria-label="Learn more about fiscal optimization and business consulting">
               En savoir plus
             </Button>
           </CardContent>
@@ -138,18 +138,18 @@ import { Button } from '../components/ui/button';
   </section>
 
   <!-- Demo Info -->
-  <section class="py-16 bg-muted/30">
+  <section class="py-16 bg-muted/30" role="region" aria-labelledby="demo-config-title">
     <div class="container mx-auto px-4">
       <div class="max-w-4xl mx-auto">
         <div class="bg-card border border-border rounded-xl p-8">
-          <h3 class="text-2xl font-bold mb-6 text-center">
+          <h3 id="demo-config-title" class="text-2xl font-bold mb-6 text-center">
             🔍 Configuration Corporate Layout
           </h3>
           
           <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div>
               <h3 class="font-semibold mb-4">Layout Configuration :</h3>
-              <div class="bg-muted/50 rounded-lg p-4 font-mono text-sm space-y-1">
+              <div class="bg-muted/50 rounded-lg p-4 font-mono text-sm space-y-1" role="code" aria-label="Corporate layout configuration code">
                 <div>headerVariant="business"</div>
                 <div>footerVariant="business"</div>
                 <div>showHeaderCTA={`{true}`}</div>
@@ -160,42 +160,42 @@ import { Button } from '../components/ui/button';
             
             <div>
               <h3 class="font-semibold mb-4">Features Activées :</h3>
-              <ul class="space-y-2 text-sm">
-                <li class="flex items-center space-x-2">
-                  <span class="text-green-500">✓</span>
+              <ul class="space-y-2 text-sm" role="list" aria-label="Activated features in corporate layout">
+                <li class="flex items-center space-x-2" role="listitem">
+                  <span class="text-green-500" aria-hidden="true">✓</span>
                   <span>Header business avec CTA "Prendre RDV"</span>
                 </li>
-                <li class="flex items-center space-x-2">
-                  <span class="text-green-500">✓</span>
+                <li class="flex items-center space-x-2" role="listitem">
+                  <span class="text-green-500" aria-hidden="true">✓</span>
                   <span>Footer avec informations de contact</span>
                 </li>
-                <li class="flex items-center space-x-2">
-                  <span class="text-green-500">✓</span>
+                <li class="flex items-center space-x-2" role="listitem">
+                  <span class="text-green-500" aria-hidden="true">✓</span>
                   <span>Breadcrumbs pour navigation hiérarchique</span>
                 </li>
-                <li class="flex items-center space-x-2">
-                  <span class="text-green-500">✓</span>
+                <li class="flex items-center space-x-2" role="listitem">
+                  <span class="text-green-500" aria-hidden="true">✓</span>
                   <span>Design professionnel sobre et crédible</span>
                 </li>
-                <li class="flex items-center space-x-2">
-                  <span class="text-green-500">✓</span>
+                <li class="flex items-center space-x-2" role="listitem">
+                  <span class="text-green-500" aria-hidden="true">✓</span>
                   <span>Dark mode adapté au secteur</span>
                 </li>
               </ul>
             </div>
           </div>
 
-          <div class="mt-8 flex flex-wrap justify-center gap-4">
-            <Button variant="outline" size="sm">
+          <div class="mt-8 flex flex-wrap justify-center gap-4" role="group" aria-label="Navigate to other demo pages">
+            <Button variant="outline" size="sm" aria-label="View startup demo with modern landing page design">
               <a href="/startup-demo">🚀 Voir Startup Demo</a>
             </Button>
-            <Button variant="outline" size="sm">
+            <Button variant="outline" size="sm" aria-label="View e-commerce demo with comprehensive shopping features">
               <a href="/ecommerce-demo">🛒 Voir E-commerce Demo</a>
             </Button>
-            <Button variant="outline" size="sm">
+            <Button variant="outline" size="sm" aria-label="View portfolio demo with creative minimal design">
               <a href="/portfolio-demo">🎨 Voir Portfolio Demo</a>
             </Button>
-            <Button size="sm">
+            <Button size="sm" aria-label="Return to main business demo overview page">
               <a href="/business-demo">← Retour Business Demo</a>
             </Button>
           </div>

@@ -8,171 +8,198 @@ import Navigation from '../components/layouts/Navigation.astro';
 ---
 
 <Layout title="Advanced Components Showcase - shadcn/ui Advanced">
-  <section class="py-20 min-h-screen">
-    <div class="container mx-auto px-4 max-w-6xl">
-      
-      <!-- Header avec dark mode toggle -->
-      <div class="flex justify-between items-center mb-12">
-        <div>
-          <h1 class="text-4xl font-bold text-foreground mb-4">
-            🔮 Advanced Components Showcase
-          </h1>
-          <p class="text-lg text-muted-foreground">
-            Sprint 4 - Advanced Components : Calendar, Date Picker, Combobox, Command, Sonner, Popover
-          </p>
-        </div>
-        <DarkModeToggle client:load />
-      </div>
+  <main role="main">
+    <section class="py-20 min-h-screen" aria-labelledby="main-heading">
+      <div class="container mx-auto px-4 max-w-6xl">
+        
+        <!-- Header avec dark mode toggle -->
+        <header class="flex justify-between items-center mb-12">
+          <div>
+            <h1 id="main-heading" class="text-4xl font-bold text-foreground mb-4">
+              🔮 Advanced Components Showcase
+            </h1>
+            <p class="text-lg text-muted-foreground">
+              Sprint 4 - Advanced Components : Calendar, Date Picker, Combobox, Command, Sonner, Popover
+            </p>
+          </div>
+          <DarkModeToggle client:load />
+        </header>
 
-      <!-- Progress Sprint 4 -->
-      <div class="bg-card border border-border rounded-lg p-6 mb-12">
-        <h2 class="text-xl font-semibold text-card-foreground mb-4">
-          🎯 Sprint 4 Progress - Advanced Components
-        </h2>
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-          <div class="flex items-center gap-2">
-            <span class="w-3 h-3 bg-green-500 rounded-full"></span>
-            <span class="font-medium">Calendar</span>
-            <span class="text-xs text-muted-foreground">✅ Installé</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="w-3 h-3 bg-green-500 rounded-full"></span>
-            <span class="font-medium">Date Picker</span>
-            <span class="text-xs text-muted-foreground">✅ Créé</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="w-3 h-3 bg-green-500 rounded-full"></span>
-            <span class="font-medium">Combobox</span>
-            <span class="text-xs text-muted-foreground">✅ Créé</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="w-3 h-3 bg-green-500 rounded-full"></span>
-            <span class="font-medium">Command</span>
-            <span class="text-xs text-muted-foreground">✅ Installé</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="w-3 h-3 bg-green-500 rounded-full"></span>
-            <span class="font-medium">Sonner</span>
-            <span class="text-xs text-muted-foreground">✅ Installé</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="w-3 h-3 bg-green-500 rounded-full"></span>
-            <span class="font-medium">Popover</span>
-            <span class="text-xs text-muted-foreground">✅ Installé</span>
-          </div>
-        </div>
-        <div class="mt-4 bg-violet-50 dark:bg-violet-950 border border-violet-200 dark:border-violet-800 rounded p-3">
-          <p class="text-sm text-violet-700 dark:text-violet-300">
-            <strong>🔮 Sprint 4 Objectif :</strong> Composants avancés pour interfaces riches et applications complexes
-          </p>
-        </div>
-      </div>
-
-      <!-- Démonstration interactive des composants Advanced -->
-      <AdvancedDemo client:load />
-
-      <!-- Business Value Section -->
-      <div class="mt-12 bg-violet-50 dark:bg-violet-950 border border-violet-200 dark:border-violet-800 rounded-lg p-6">
-        <h3 class="text-lg font-semibold text-violet-800 dark:text-violet-200 mb-4">
-          💼 Valeur Business - Advanced Components
-        </h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <h4 class="font-semibold text-violet-700 dark:text-violet-300 mb-2">Composants avancés :</h4>
-            <ul class="text-sm text-violet-600 dark:text-violet-400 space-y-1">
-              <li>• <strong>Calendar :</strong> Sélection dates complexes et événements</li>
-              <li>• <strong>Date Picker :</strong> Formulaires avec dates professionnelles</li>
-              <li>• <strong>Combobox :</strong> Recherche et sélection avancées</li>
-              <li>• <strong>Command :</strong> Palette de commandes et navigation</li>
-              <li>• <strong>Sonner :</strong> Notifications toast modernes</li>
-              <li>• <strong>Popover :</strong> Contenus flottants contextuels</li>
-            </ul>
-          </div>
-          <div>
-            <h4 class="font-semibold text-violet-700 dark:text-violet-300 mb-2">Use Cases Business :</h4>
-            <ul class="text-sm text-violet-600 dark:text-violet-400 space-y-1">
-              <li>• <strong>SaaS Applications :</strong> Command palette + notifications</li>
-              <li>• <strong>E-commerce :</strong> Date picker livraison + combobox produits</li>
-              <li>• <strong>Booking Systems :</strong> Calendar réservations avancées</li>
-              <li>• <strong>Dashboards :</strong> Popovers aide + command navigation</li>
-              <li>• <strong>CRM :</strong> Date picker rendez-vous + notifications sonner</li>
-              <li>• <strong>Admin Panels :</strong> Toutes fonctionnalités avancées</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- Sprint Progress Complete Overview -->
-      <div class="mt-8 bg-gradient-to-r from-violet-50 to-purple-50 dark:from-violet-950 dark:to-purple-950 border border-violet-200 dark:border-violet-800 rounded-lg p-6">
-        <h3 class="text-lg font-semibold text-foreground mb-4">
-          🏗️ Complete Sprint Progress Overview
-        </h3>
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-          <div>
-            <h4 class="font-semibold text-green-700 dark:text-green-300 mb-2">✅ Sprint 1 :</h4>
-            <ul class="text-sm space-y-1 text-green-600 dark:text-green-400">
-              <li>• Form Components complets</li>
-              <li>• Business Forms ready</li>
-            </ul>
-          </div>
-          <div>
-            <h4 class="font-semibold text-blue-700 dark:text-blue-300 mb-2">✅ Sprint 2 :</h4>
-            <ul class="text-sm space-y-1 text-blue-600 dark:text-blue-400">
-              <li>• Navigation systèmes</li>
-              <li>• Feedback utilisateur</li>
-            </ul>
-          </div>
-          <div>
-            <h4 class="font-semibold text-indigo-700 dark:text-indigo-300 mb-2">✅ Sprint 3 :</h4>
-            <ul class="text-sm space-y-1 text-indigo-600 dark:text-indigo-400">
-              <li>• Data Display complets</li>
-              <li>• Dashboard components</li>
-            </ul>
-          </div>
-          <div>
-            <h4 class="font-semibold text-violet-700 dark:text-violet-300 mb-2">🎯 Sprint 4 :</h4>
-            <ul class="text-sm space-y-1 text-violet-600 dark:text-violet-400">
-              <li>• Advanced Components</li>
-              <li>• Rich interfaces ready</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- Achievement Section -->
-      <div class="mt-8 bg-gradient-to-r from-green-50 to-violet-50 dark:from-green-950/20 dark:to-violet-950/20 border border-violet-200 dark:border-violet-800 rounded-lg p-6">
-        <h3 class="text-lg font-semibold text-foreground mb-4">
-          🏆 Major Achievement - Sprint 4 Complete
-        </h3>
-        <div class="text-center">
-          <div class="text-3xl font-bold text-violet-600 dark:text-violet-400 mb-2">🎊 85% Project Complete</div>
-          <div class="text-lg text-muted-foreground mb-4">
-            Sprint 1 + Sprint 2 + Sprint 3 + Sprint 4 = <strong>Quadruple Sprint Mastery</strong>
-          </div>
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-            <div class="bg-green-100 dark:bg-green-900/30 rounded p-2">
-              <strong>26 Components</strong><br/>
-              <span class="text-muted-foreground">shadcn/ui library</span>
+        <!-- Progress Sprint 4 -->
+        <section 
+          class="bg-card border border-border rounded-lg p-6 mb-12"
+          aria-labelledby="progress-heading"
+          role="region"
+        >
+          <h2 id="progress-heading" class="text-xl font-semibold text-card-foreground mb-4">
+            🎯 Sprint 4 Progress - Advanced Components
+          </h2>
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-4" role="list" aria-label="Advanced components status">
+            <div class="flex items-center gap-2" role="listitem">
+              <span class="w-3 h-3 bg-green-500 rounded-full" aria-hidden="true"></span>
+              <span class="font-medium">Calendar</span>
+              <span class="text-xs text-muted-foreground">✅ Installé</span>
             </div>
-            <div class="bg-blue-100 dark:bg-blue-900/30 rounded p-2">
-              <strong>4 Showcase Pages</strong><br/>
-              <span class="text-muted-foreground">Interactive demos</span>
+            <div class="flex items-center gap-2" role="listitem">
+              <span class="w-3 h-3 bg-green-500 rounded-full" aria-hidden="true"></span>
+              <span class="font-medium">Date Picker</span>
+              <span class="text-xs text-muted-foreground">✅ Créé</span>
             </div>
-            <div class="bg-indigo-100 dark:bg-indigo-900/30 rounded p-2">
-              <strong>Production Ready</strong><br/>
-              <span class="text-muted-foreground">Business systems</span>
+            <div class="flex items-center gap-2" role="listitem">
+              <span class="w-3 h-3 bg-green-500 rounded-full" aria-hidden="true"></span>
+              <span class="font-medium">Combobox</span>
+              <span class="text-xs text-muted-foreground">✅ Créé</span>
             </div>
-            <div class="bg-violet-100 dark:bg-violet-900/30 rounded p-2">
-              <strong>Advanced UI</strong><br/>
-              <span class="text-muted-foreground">Rich interfaces</span>
+            <div class="flex items-center gap-2" role="listitem">
+              <span class="w-3 h-3 bg-green-500 rounded-full" aria-hidden="true"></span>
+              <span class="font-medium">Command</span>
+              <span class="text-xs text-muted-foreground">✅ Installé</span>
+            </div>
+            <div class="flex items-center gap-2" role="listitem">
+              <span class="w-3 h-3 bg-green-500 rounded-full" aria-hidden="true"></span>
+              <span class="font-medium">Sonner</span>
+              <span class="text-xs text-muted-foreground">✅ Installé</span>
+            </div>
+            <div class="flex items-center gap-2" role="listitem">
+              <span class="w-3 h-3 bg-green-500 rounded-full" aria-hidden="true"></span>
+              <span class="font-medium">Popover</span>
+              <span class="text-xs text-muted-foreground">✅ Installé</span>
             </div>
           </div>
-        </div>
+          <div 
+            class="mt-4 bg-violet-50 dark:bg-violet-950 border border-violet-200 dark:border-violet-800 rounded p-3"
+            role="note"
+            aria-labelledby="objective-text"
+          >
+            <p id="objective-text" class="text-sm text-violet-700 dark:text-violet-300">
+              <strong>🔮 Sprint 4 Objectif :</strong> Composants avancés pour interfaces riches et applications complexes
+            </p>
+          </div>
+        </section>
+
+        <!-- Démonstration interactive des composants Advanced -->
+        <section aria-labelledby="demo-heading" role="region">
+          <h2 id="demo-heading" class="sr-only">Interactive Advanced Components Demonstration</h2>
+          <AdvancedDemo client:load />
+        </section>
+
+        <!-- Business Value Section -->
+        <section 
+          class="mt-12 bg-violet-50 dark:bg-violet-950 border border-violet-200 dark:border-violet-800 rounded-lg p-6"
+          aria-labelledby="business-value-heading"
+          role="region"
+        >
+          <h3 id="business-value-heading" class="text-lg font-semibold text-violet-800 dark:text-violet-200 mb-4">
+            💼 Valeur Business - Advanced Components
+          </h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <h4 class="font-semibold text-violet-700 dark:text-violet-300 mb-2">Composants avancés :</h4>
+              <ul class="text-sm text-violet-600 dark:text-violet-400 space-y-1" role="list">
+                <li role="listitem">• <strong>Calendar :</strong> Sélection dates complexes et événements</li>
+                <li role="listitem">• <strong>Date Picker :</strong> Formulaires avec dates professionnelles</li>
+                <li role="listitem">• <strong>Combobox :</strong> Recherche et sélection avancées</li>
+                <li role="listitem">• <strong>Command :</strong> Palette de commandes et navigation</li>
+                <li role="listitem">• <strong>Sonner :</strong> Notifications toast modernes</li>
+                <li role="listitem">• <strong>Popover :</strong> Contenus flottants contextuels</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-semibold text-violet-700 dark:text-violet-300 mb-2">Use Cases Business :</h4>
+              <ul class="text-sm text-violet-600 dark:text-violet-400 space-y-1" role="list">
+                <li role="listitem">• <strong>SaaS Applications :</strong> Command palette + notifications</li>
+                <li role="listitem">• <strong>E-commerce :</strong> Date picker livraison + combobox produits</li>
+                <li role="listitem">• <strong>Booking Systems :</strong> Calendar réservations avancées</li>
+                <li role="listitem">• <strong>Dashboards :</strong> Popovers aide + command navigation</li>
+                <li role="listitem">• <strong>CRM :</strong> Date picker rendez-vous + notifications sonner</li>
+                <li role="listitem">• <strong>Admin Panels :</strong> Toutes fonctionnalités avancées</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Sprint Progress Complete Overview -->
+        <section 
+          class="mt-8 bg-gradient-to-r from-violet-50 to-purple-50 dark:from-violet-950 dark:to-purple-950 border border-violet-200 dark:border-violet-800 rounded-lg p-6"
+          aria-labelledby="complete-progress-heading"
+          role="region"
+        >
+          <h3 id="complete-progress-heading" class="text-lg font-semibold text-foreground mb-4">
+            🏗️ Complete Sprint Progress Overview
+          </h3>
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div>
+              <h4 class="font-semibold text-green-700 dark:text-green-300 mb-2">✅ Sprint 1 :</h4>
+              <ul class="text-sm space-y-1 text-green-600 dark:text-green-400" role="list">
+                <li role="listitem">• Form Components complets</li>
+                <li role="listitem">• Business Forms ready</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-semibold text-blue-700 dark:text-blue-300 mb-2">✅ Sprint 2 :</h4>
+              <ul class="text-sm space-y-1 text-blue-600 dark:text-blue-400" role="list">
+                <li role="listitem">• Navigation systèmes</li>
+                <li role="listitem">• Feedback utilisateur</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-semibold text-indigo-700 dark:text-indigo-300 mb-2">✅ Sprint 3 :</h4>
+              <ul class="text-sm space-y-1 text-indigo-600 dark:text-indigo-400" role="list">
+                <li role="listitem">• Data Display complets</li>
+                <li role="listitem">• Dashboard components</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-semibold text-violet-700 dark:text-violet-300 mb-2">🎯 Sprint 4 :</h4>
+              <ul class="text-sm space-y-1 text-violet-600 dark:text-violet-400" role="list">
+                <li role="listitem">• Advanced Components</li>
+                <li role="listitem">• Rich interfaces ready</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Achievement Section -->
+        <section 
+          class="mt-8 bg-gradient-to-r from-green-50 to-violet-50 dark:from-green-950/20 dark:to-violet-950/20 border border-violet-200 dark:border-violet-800 rounded-lg p-6"
+          aria-labelledby="achievement-heading"
+          role="region"
+        >
+          <h3 id="achievement-heading" class="text-lg font-semibold text-foreground mb-4">
+            🏆 Major Achievement - Sprint 4 Complete
+          </h3>
+          <div class="text-center">
+            <div class="text-3xl font-bold text-violet-600 dark:text-violet-400 mb-2" aria-label="85 percent project complete">🎊 85% Project Complete</div>
+            <div class="text-lg text-muted-foreground mb-4">
+              Sprint 1 + Sprint 2 + Sprint 3 + Sprint 4 = <strong>Quadruple Sprint Mastery</strong>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm" role="list" aria-label="Project statistics">
+              <div class="bg-green-100 dark:bg-green-900/30 rounded p-2" role="listitem">
+                <strong>26 Components</strong><br/>
+                <span class="text-muted-foreground">shadcn/ui library</span>
+              </div>
+              <div class="bg-blue-100 dark:bg-blue-900/30 rounded p-2" role="listitem">
+                <strong>4 Showcase Pages</strong><br/>
+                <span class="text-muted-foreground">Interactive demos</span>
+              </div>
+              <div class="bg-indigo-100 dark:bg-indigo-900/30 rounded p-2" role="listitem">
+                <strong>Production Ready</strong><br/>
+                <span class="text-muted-foreground">Business systems</span>
+              </div>
+              <div class="bg-violet-100 dark:bg-violet-900/30 rounded p-2" role="listitem">
+                <strong>Advanced UI</strong><br/>
+                <span class="text-muted-foreground">Rich interfaces</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Navigation -->
+        <nav aria-label="Showcase navigation" role="navigation">
+          <Navigation currentPage="advanced" />
+        </nav>
+
       </div>
-
-      <!-- Centralized Navigation Component -->
-      <Navigation currentPage="advanced" />
-
-    </div>
-  </section>
+    </section>
+  </main>
 </Layout>

@@ -8,13 +8,13 @@ import Navigation from '../components/layouts/Navigation.astro';
 ---
 
 <Layout title="Navigation & Feedback Showcase - shadcn/ui Navigation">
-  <section class="py-20 min-h-screen">
+  <section class="py-20 min-h-screen" role="main">
     <div class="container mx-auto px-4 max-w-6xl">
       
       <!-- Header avec dark mode toggle -->
-      <div class="flex justify-between items-center mb-12">
+      <div class="flex justify-between items-center mb-12" role="banner" aria-labelledby="page-title">
         <div>
-          <h1 class="text-4xl font-bold text-foreground mb-4">
+          <h1 id="page-title" class="text-4xl font-bold text-foreground mb-4">
             🧭 Navigation & Feedback Showcase
           </h1>
           <p class="text-lg text-muted-foreground">
@@ -25,33 +25,33 @@ import Navigation from '../components/layouts/Navigation.astro';
       </div>
 
       <!-- Progress Sprint 2 -->
-      <div class="bg-card border border-border rounded-lg p-6 mb-12">
-        <h2 class="text-xl font-semibold text-card-foreground mb-4">
+      <div class="bg-card border border-border rounded-lg p-6 mb-12" role="region" aria-labelledby="sprint-progress">
+        <h2 id="sprint-progress" class="text-xl font-semibold text-card-foreground mb-4">
           🎯 Sprint 2 Progress - Navigation & Feedback Components
         </h2>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div class="flex items-center gap-2">
-            <span class="w-3 h-3 bg-green-500 rounded-full"></span>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4" role="list" aria-label="Completed components in Sprint 2">
+          <div class="flex items-center gap-2" role="listitem">
+            <span class="w-3 h-3 bg-green-500 rounded-full" aria-hidden="true"></span>
             <span class="font-medium">Breadcrumb</span>
-            <span class="text-xs text-muted-foreground">✅ Installé</span>
+            <span class="text-xs text-muted-foreground" role="status" aria-label="Component status: installed">✅ Installé</span>
           </div>
-          <div class="flex items-center gap-2">
-            <span class="w-3 h-3 bg-green-500 rounded-full"></span>
+          <div class="flex items-center gap-2" role="listitem">
+            <span class="w-3 h-3 bg-green-500 rounded-full" aria-hidden="true"></span>
             <span class="font-medium">Tabs</span>
-            <span class="text-xs text-muted-foreground">✅ Installé</span>
+            <span class="text-xs text-muted-foreground" role="status" aria-label="Component status: installed">✅ Installé</span>
           </div>
-          <div class="flex items-center gap-2">
-            <span class="w-3 h-3 bg-green-500 rounded-full"></span>
+          <div class="flex items-center gap-2" role="listitem">
+            <span class="w-3 h-3 bg-green-500 rounded-full" aria-hidden="true"></span>
             <span class="font-medium">Alert</span>
-            <span class="text-xs text-muted-foreground">✅ Installé</span>
+            <span class="text-xs text-muted-foreground" role="status" aria-label="Component status: installed">✅ Installé</span>
           </div>
-          <div class="flex items-center gap-2">
-            <span class="w-3 h-3 bg-green-500 rounded-full"></span>
+          <div class="flex items-center gap-2" role="listitem">
+            <span class="w-3 h-3 bg-green-500 rounded-full" aria-hidden="true"></span>
             <span class="font-medium">Badge</span>
-            <span class="text-xs text-muted-foreground">✅ Installé</span>
+            <span class="text-xs text-muted-foreground" role="status" aria-label="Component status: installed">✅ Installé</span>
           </div>
         </div>
-        <div class="mt-4 bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800 rounded p-3">
+        <div class="mt-4 bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800 rounded p-3" role="complementary">
           <p class="text-sm text-blue-700 dark:text-blue-300">
             <strong>🎊 Sprint 2 Objectif :</strong> Navigation professionnelle et feedback utilisateur moderne pour sites vitrine
           </p>
@@ -59,62 +59,67 @@ import Navigation from '../components/layouts/Navigation.astro';
       </div>
 
       <!-- Démonstration interactive des composants Navigation & Feedback -->
-      <NavigationDemo client:load />
+      <div role="region" aria-labelledby="interactive-demo">
+        <h2 id="interactive-demo" class="sr-only">Interactive Navigation and Feedback Components Demo</h2>
+        <NavigationDemo client:load aria-label="Interactive demonstration of navigation and feedback components including breadcrumbs, tabs, alerts, and badges" />
+      </div>
 
       <!-- Business Value Section -->
-      <div class="mt-12 bg-purple-50 dark:bg-purple-950 border border-purple-200 dark:border-purple-800 rounded-lg p-6">
-        <h3 class="text-lg font-semibold text-purple-800 dark:text-purple-200 mb-4">
+      <div class="mt-12 bg-purple-50 dark:bg-purple-950 border border-purple-200 dark:border-purple-800 rounded-lg p-6" role="region" aria-labelledby="business-value">
+        <h3 id="business-value" class="text-lg font-semibold text-purple-800 dark:text-purple-200 mb-4">
           💼 Valeur Business - Navigation & Feedback
         </h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <h4 class="font-semibold text-purple-700 dark:text-purple-300 mb-2">Navigation Components :</h4>
-            <ul class="text-sm text-purple-600 dark:text-purple-400 space-y-1">
-              <li>• <strong>Breadcrumb :</strong> Navigation hiérarchique e-commerce</li>
-              <li>• <strong>Tabs :</strong> Organisation contenu (Services, Portfolio)</li>
-              <li>• <strong>UX :</strong> Navigation intuitive et professionnelle</li>
-              <li>• <strong>SEO :</strong> Structure claire pour moteurs de recherche</li>
+          <div role="group" aria-labelledby="navigation-components">
+            <h4 id="navigation-components" class="font-semibold text-purple-700 dark:text-purple-300 mb-2">Navigation Components :</h4>
+            <ul class="text-sm text-purple-600 dark:text-purple-400 space-y-1" role="list" aria-label="Navigation components business benefits">
+              <li role="listitem">• <strong>Breadcrumb :</strong> Navigation hiérarchique e-commerce</li>
+              <li role="listitem">• <strong>Tabs :</strong> Organisation contenu (Services, Portfolio)</li>
+              <li role="listitem">• <strong>UX :</strong> Navigation intuitive et professionnelle</li>
+              <li role="listitem">• <strong>SEO :</strong> Structure claire pour moteurs de recherche</li>
             </ul>
           </div>
-          <div>
-            <h4 class="font-semibold text-purple-700 dark:text-purple-300 mb-2">Feedback Components :</h4>
-            <ul class="text-sm text-purple-600 dark:text-purple-400 space-y-1">
-              <li>• <strong>Alert :</strong> Messages système et notifications</li>
-              <li>• <strong>Badge :</strong> Statuts produits et étiquettes</li>
-              <li>• <strong>Engagement :</strong> Feedback visuel immédiat</li>
-              <li>• <strong>Conversion :</strong> Call-to-action avec badges</li>
+          <div role="group" aria-labelledby="feedback-components">
+            <h4 id="feedback-components" class="font-semibold text-purple-700 dark:text-purple-300 mb-2">Feedback Components :</h4>
+            <ul class="text-sm text-purple-600 dark:text-purple-400 space-y-1" role="list" aria-label="Feedback components business benefits">
+              <li role="listitem">• <strong>Alert :</strong> Messages système et notifications</li>
+              <li role="listitem">• <strong>Badge :</strong> Statuts produits et étiquettes</li>
+              <li role="listitem">• <strong>Engagement :</strong> Feedback visuel immédiat</li>
+              <li role="listitem">• <strong>Conversion :</strong> Call-to-action avec badges</li>
             </ul>
           </div>
         </div>
       </div>
 
       <!-- Sprint Progress Overview -->
-      <div class="mt-8 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950 dark:to-purple-950 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
-        <h3 class="text-lg font-semibold text-foreground mb-4">
+      <div class="mt-8 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950 dark:to-purple-950 border border-blue-200 dark:border-blue-800 rounded-lg p-6" role="region" aria-labelledby="sprint-overview">
+        <h3 id="sprint-overview" class="text-lg font-semibold text-foreground mb-4">
           🏗️ Sprint Progress Overview
         </h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <h4 class="font-semibold text-muted-foreground mb-2">✅ Sprint 1 Complété :</h4>
-            <ul class="text-sm space-y-1">
-              <li>• <strong>Form Components :</strong> Label, Textarea, Select, Checkbox</li>
-              <li>• <strong>Business Forms :</strong> Contact, Newsletter, Devis, Inscription</li>
-              <li>• <strong>Validation :</strong> États loading/success/error</li>
+          <div role="group" aria-labelledby="sprint-1-complete">
+            <h4 id="sprint-1-complete" class="font-semibold text-muted-foreground mb-2">✅ Sprint 1 Complété :</h4>
+            <ul class="text-sm space-y-1" role="list" aria-label="Sprint 1 completed components">
+              <li role="listitem">• <strong>Form Components :</strong> Label, Textarea, Select, Checkbox</li>
+              <li role="listitem">• <strong>Business Forms :</strong> Contact, Newsletter, Devis, Inscription</li>
+              <li role="listitem">• <strong>Validation :</strong> États loading/success/error</li>
             </ul>
           </div>
-          <div>
-            <h4 class="font-semibold text-blue-700 dark:text-blue-300 mb-2">🎯 Sprint 2 En cours :</h4>
-            <ul class="text-sm space-y-1 text-blue-600 dark:text-blue-400">
-              <li>• <strong>Navigation :</strong> Breadcrumb, Tabs</li>
-              <li>• <strong>Feedback :</strong> Alert, Badge</li>
-              <li>• <strong>UX :</strong> Navigation professionnelle</li>
+          <div role="group" aria-labelledby="sprint-2-current">
+            <h4 id="sprint-2-current" class="font-semibold text-blue-700 dark:text-blue-300 mb-2">🎯 Sprint 2 En cours :</h4>
+            <ul class="text-sm space-y-1 text-blue-600 dark:text-blue-400" role="list" aria-label="Sprint 2 current components">
+              <li role="listitem">• <strong>Navigation :</strong> Breadcrumb, Tabs</li>
+              <li role="listitem">• <strong>Feedback :</strong> Alert, Badge</li>
+              <li role="listitem">• <strong>UX :</strong> Navigation professionnelle</li>
             </ul>
           </div>
         </div>
       </div>
 
       <!-- Centralized Navigation Component -->
-      <Navigation currentPage="navigation" />
+      <div role="region" aria-label="Centralized navigation component demonstration">
+        <Navigation currentPage="navigation" />
+      </div>
 
     </div>
   </section>

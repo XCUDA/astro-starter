@@ -23,637 +23,707 @@ import { Button } from '../components/ui/button';
   ctaHref="/try-layout"
   keywords={["layout system, navigation, touch gestures, responsive design"]}
 >
-  <!-- Hero Section -->
-  <section class="bg-gradient-to-br from-primary/5 via-background to-secondary/5 py-16">
-    <div class="container mx-auto px-4">
-      <div class="max-w-4xl mx-auto text-center">
-        <div class="flex items-center justify-center space-x-2 mb-6">
-          <span class="text-4xl">🏗️</span>
-          <Badge variant="secondary" className="text-sm font-medium">
-            Sprint 6 Complete
-          </Badge>
-        </div>
-        
-        <h1 class="text-4xl lg:text-5xl font-bold text-foreground mb-6">
-          Layout System Showcase
-        </h1>
-        
-        <p class="text-xl text-muted-foreground mb-8 leading-relaxed">
-          Comprehensive demo of our adaptive layout system featuring responsive navigation, 
-          mega menus, breadcrumbs, and advanced touch gestures for modern web applications.
-        </p>
-        
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button size="lg" className="text-lg px-8">
-            <span class="mr-2">📱</span>
-            Try Touch Gestures
-          </Button>
-          <Button variant="outline" size="lg" className="text-lg px-8">
-            <span class="mr-2">🧭</span>
-            Explore Navigation
-          </Button>
+  <main role="main">
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-br from-primary/5 via-background to-secondary/5 py-16" aria-labelledby="hero-heading">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto text-center">
+          <div class="flex items-center justify-center space-x-2 mb-6">
+            <span class="text-4xl" aria-hidden="true">🏗️</span>
+            <Badge variant="secondary" className="text-sm font-medium">
+              Sprint 6 Complete
+            </Badge>
+          </div>
+          
+          <h1 id="hero-heading" class="text-4xl lg:text-5xl font-bold text-foreground mb-6">
+            Layout System Showcase
+          </h1>
+          
+          <p class="text-xl text-muted-foreground mb-8 leading-relaxed">
+            Comprehensive demo of our adaptive layout system featuring responsive navigation, 
+            mega menus, breadcrumbs, and advanced touch gestures for modern web applications.
+          </p>
+          
+          <div class="flex flex-col sm:flex-row gap-4 justify-center" role="group" aria-label="Main action buttons">
+            <Button size="lg" className="text-lg px-8" aria-label="Try touch gestures demonstration">
+              <span class="mr-2" aria-hidden="true">📱</span>
+              Try Touch Gestures
+            </Button>
+            <Button variant="outline" size="lg" className="text-lg px-8" aria-label="Explore navigation components">
+              <span class="mr-2" aria-hidden="true">🧭</span>
+              Explore Navigation
+            </Button>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Breadcrumbs Demo -->
-  <section class="py-4 bg-muted/30">
-    <div class="container mx-auto px-4">
-      <h2 class="text-lg font-semibold text-foreground mb-4">
-        📍 Breadcrumbs Component (Active Above)
-      </h2>
-      <Breadcrumbs 
-        variant="business"
-        showHome={true}
-        showIcons={true}
-        currentPageTitle="Layout System Showcase"
-      />
-    </div>
-  </section>
-
-  <!-- Main Content -->
-  <main class="py-12">
-    <div class="container mx-auto px-4">
-      
-      <!-- Components Overview -->
-      <section class="mb-16">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl font-bold text-foreground mb-4">
-            Layout System Components
-          </h2>
-          <p class="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Professional-grade layout components designed for modern business websites. 
-            Each component is modular, accessible, and optimized for performance.
-          </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <!-- Header/Footer Card -->
-          <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105">
-            <CardHeader className="text-center">
-              <div class="text-3xl mb-2">🏠</div>
-              <CardTitle className="text-lg">Header & Footer</CardTitle>
-              <CardDescription>
-                Adaptive header and footer with 4 business variants each
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <ul class="text-sm space-y-2 text-muted-foreground">
-                <li>• 8 total configurations</li>
-                <li>• Business-ready variants</li>
-                <li>• CTA integration</li>
-                <li>• Dark mode support</li>
-              </ul>
-            </CardContent>
-          </Card>
-
-          <!-- Navigation Card -->
-          <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105">
-            <CardHeader className="text-center">
-              <div class="text-3xl mb-2">🧭</div>
-              <CardTitle className="text-lg">Responsive Navigation</CardTitle>
-              <CardDescription>
-                Advanced navigation with animations and touch gestures
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <ul class="text-sm space-y-2 text-muted-foreground">
-                <li>• Mobile drawer with swipe</li>
-                <li>• Dropdown menus</li>
-                <li>• Keyboard navigation</li>
-                <li>• Touch optimized</li>
-              </ul>
-            </CardContent>
-          </Card>
-
-          <!-- Mega Menu Card -->
-          <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105">
-            <CardHeader className="text-center">
-              <div class="text-3xl mb-2">📋</div>
-              <CardTitle className="text-lg">Mega Menu</CardTitle>
-              <CardDescription>
-                Multi-column navigation for complex business sites
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <ul class="text-sm space-y-2 text-muted-foreground">
-                <li>• Multi-column layout</li>
-                <li>• Featured sections</li>
-                <li>• Category organization</li>
-                <li>• Business variants</li>
-              </ul>
-            </CardContent>
-          </Card>
-
-          <!-- Touch Navigation Card -->
-          <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105">
-            <CardHeader className="text-center">
-              <div class="text-3xl mb-2">📱</div>
-              <CardTitle className="text-lg">Touch Navigation</CardTitle>
-              <CardDescription>
-                Advanced mobile gestures and interactions
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <ul class="text-sm space-y-2 text-muted-foreground">
-                <li>• Swipe gestures</li>
-                <li>• Pull to refresh</li>
-                <li>• FAB navigation</li>
-                <li>• Bottom navigation</li>
-              </ul>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
-
-      <!-- Interactive Demos -->
-      <section class="mb-16">
-        <h2 class="text-3xl font-bold text-foreground text-center mb-12">
-          Interactive Demonstrations
+    <!-- Breadcrumbs Demo -->
+    <section class="py-4 bg-muted/30" aria-labelledby="breadcrumbs-demo-heading">
+      <div class="container mx-auto px-4">
+        <h2 id="breadcrumbs-demo-heading" class="text-lg font-semibold text-foreground mb-4">
+          📍 Breadcrumbs Component (Active Above)
         </h2>
+        <Breadcrumbs 
+          variant="business"
+          showHome={true}
+          showIcons={true}
+          currentPageTitle="Layout System Showcase"
+        />
+      </div>
+    </section>
 
-        <!-- Custom Tab Navigation -->
-        <div class="w-full">
-          <div class="flex border-b border-border mb-8">
-            <button 
-              class="tab-button active px-6 py-3 text-sm font-medium transition-colors border-b-2 border-primary text-primary"
-              data-tab="navigation"
-              onclick="showTab('navigation')"
-            >
-              Navigation
-            </button>
-            <button 
-              class="tab-button px-6 py-3 text-sm font-medium transition-colors border-b-2 border-transparent text-muted-foreground hover:text-foreground"
-              data-tab="megamenu"
-              onclick="showTab('megamenu')"
-            >
-              Mega Menu
-            </button>
-            <button 
-              class="tab-button px-6 py-3 text-sm font-medium transition-colors border-b-2 border-transparent text-muted-foreground hover:text-foreground"
-              data-tab="breadcrumbs"
-              onclick="showTab('breadcrumbs')"
-            >
-              Breadcrumbs
-            </button>
-            <button 
-              class="tab-button px-6 py-3 text-sm font-medium transition-colors border-b-2 border-transparent text-muted-foreground hover:text-foreground"
-              data-tab="touch"
-              onclick="showTab('touch')"
-            >
-              Touch
-            </button>
+    <!-- Main Content -->
+    <div class="py-12">
+      <div class="container mx-auto px-4">
+        
+        <!-- Components Overview -->
+        <section class="mb-16" aria-labelledby="components-overview-heading">
+          <div class="text-center mb-12">
+            <h2 id="components-overview-heading" class="text-3xl font-bold text-foreground mb-4">
+              Layout System Components
+            </h2>
+            <p class="text-lg text-muted-foreground max-w-3xl mx-auto">
+              Professional-grade layout components designed for modern business websites. 
+              Each component is modular, accessible, and optimized for performance.
+            </p>
           </div>
 
-          <!-- Navigation Demo -->
-          <div id="tab-navigation" class="tab-content space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center space-x-2">
-                  <span>🧭</span>
-                  <span>Responsive Navigation Component</span>
-                </CardTitle>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" role="list" aria-label="Layout system components">
+            <!-- Header/Footer Card -->
+            <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105" role="listitem">
+              <CardHeader className="text-center">
+                <div class="text-3xl mb-2" aria-hidden="true">🏠</div>
+                <CardTitle className="text-lg">Header & Footer</CardTitle>
                 <CardDescription>
-                  Standard navigation with dropdown menus and mobile drawer
+                  Adaptive header and footer with 4 business variants each
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <div class="border border-border rounded-lg overflow-hidden">
-                  <!-- Static Navigation Demo (no scripts conflicts) -->
-                  <nav class="w-full border-b bg-background/80 backdrop-blur-sm">
-                    <div class="container mx-auto px-4">
-                      <div class="flex items-center justify-between h-16">
-                        <!-- Logo -->
-                        <a href="/" class="flex items-center space-x-3 text-lg font-semibold">
-                          <div class="w-8 h-8 bg-gradient-to-br from-primary to-primary/70 rounded-lg flex items-center justify-center text-primary-foreground font-bold">
-                            ⚡
-                          </div>
-                          <span class="hidden sm:block">Demo Navigation</span>
-                        </a>
+                <ul class="text-sm space-y-2 text-muted-foreground" role="list">
+                  <li role="listitem">• 8 total configurations</li>
+                  <li role="listitem">• Business-ready variants</li>
+                  <li role="listitem">• CTA integration</li>
+                  <li role="listitem">• Dark mode support</li>
+                </ul>
+              </CardContent>
+            </Card>
 
-                        <!-- Desktop Links -->
-                        <div class="hidden lg:flex items-center space-x-1">
-                          <a href="#" class="px-4 py-2 rounded-lg text-sm font-medium bg-primary text-primary-foreground">
-                            🏠 Home
-                          </a>
-                          <div class="relative group">
-                            <button class="px-4 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground">
-                              🧩 Components ▼
-                            </button>
-                            <div class="absolute top-full left-0 mt-2 w-64 bg-card border border-border rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
-                              <div class="p-3 space-y-2">
-                                <a href="#" class="block p-2 rounded hover:bg-muted/50">📝 Forms</a>
-                                <a href="#" class="block p-2 rounded hover:bg-muted/50">🧭 Navigation</a>
-                                <a href="#" class="block p-2 rounded hover:bg-muted/50">📊 Data Display</a>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+            <!-- Navigation Card -->
+            <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105" role="listitem">
+              <CardHeader className="text-center">
+                <div class="text-3xl mb-2" aria-hidden="true">🧭</div>
+                <CardTitle className="text-lg">Responsive Navigation</CardTitle>
+                <CardDescription>
+                  Advanced navigation with animations and touch gestures
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ul class="text-sm space-y-2 text-muted-foreground" role="list">
+                  <li role="listitem">• Mobile drawer with swipe</li>
+                  <li role="listitem">• Dropdown menus</li>
+                  <li role="listitem">• Keyboard navigation</li>
+                  <li role="listitem">• Touch optimized</li>
+                </ul>
+              </CardContent>
+            </Card>
 
-                        <!-- Mobile Menu Button -->
-                        <button 
-                          class="lg:hidden p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/50"
-                          onclick="toggleDemoMenu()"
-                        >
-                          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                          </svg>
-                        </button>
-                      </div>
+            <!-- Mega Menu Card -->
+            <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105" role="listitem">
+              <CardHeader className="text-center">
+                <div class="text-3xl mb-2" aria-hidden="true">📋</div>
+                <CardTitle className="text-lg">Mega Menu</CardTitle>
+                <CardDescription>
+                  Multi-column navigation for complex business sites
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ul class="text-sm space-y-2 text-muted-foreground" role="list">
+                  <li role="listitem">• Multi-column layout</li>
+                  <li role="listitem">• Featured sections</li>
+                  <li role="listitem">• Category organization</li>
+                  <li role="listitem">• Business variants</li>
+                </ul>
+              </CardContent>
+            </Card>
 
-                      <!-- Mobile Menu -->
-                      <div id="demo-mobile-menu" class="lg:hidden hidden border-t py-4">
-                        <div class="space-y-2">
-                          <a href="#" class="block p-3 rounded-lg bg-primary text-primary-foreground">🏠 Home</a>
-                          <a href="#" class="block p-3 rounded-lg text-muted-foreground hover:bg-muted/50">📝 Forms</a>
-                          <a href="#" class="block p-3 rounded-lg text-muted-foreground hover:bg-muted/50">🧭 Navigation</a>
-                          <a href="#" class="block p-3 rounded-lg text-muted-foreground hover:bg-muted/50">📊 Data Display</a>
-                        </div>
-                      </div>
-                    </div>
-                  </nav>
-                </div>
-                <div class="mt-4 text-sm text-muted-foreground space-y-2">
-                  <p><strong>Features:</strong></p>
-                  <ul class="list-disc list-inside space-y-1">
-                    <li>Dropdown menus with hover animations</li>
-                    <li>Mobile drawer with swipe-to-close</li>
-                    <li>Current page highlighting</li>
-                    <li>Keyboard navigation support</li>
-                  </ul>
-                </div>
+            <!-- Touch Navigation Card -->
+            <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105" role="listitem">
+              <CardHeader className="text-center">
+                <div class="text-3xl mb-2" aria-hidden="true">📱</div>
+                <CardTitle className="text-lg">Touch Navigation</CardTitle>
+                <CardDescription>
+                  Advanced mobile gestures and interactions
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ul class="text-sm space-y-2 text-muted-foreground" role="list">
+                  <li role="listitem">• Swipe gestures</li>
+                  <li role="listitem">• Pull to refresh</li>
+                  <li role="listitem">• FAB navigation</li>
+                  <li role="listitem">• Bottom navigation</li>
+                </ul>
               </CardContent>
             </Card>
           </div>
+        </section>
 
-          <!-- Mega Menu Demo -->
-          <div id="tab-megamenu" class="tab-content space-y-6 hidden">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center space-x-2">
-                  <span>📋</span>
-                  <span>Mega Menu Component</span>
-                </CardTitle>
-                <CardDescription>
-                  Multi-column navigation for complex business websites
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div class="border border-border rounded-lg overflow-hidden">
-                  <!-- Static Mega Menu Demo -->
-                  <nav class="w-full border-b bg-background/80 backdrop-blur-sm">
-                    <!-- Promo Bar -->
-                    <div class="border-b border-border bg-primary/5">
-                      <div class="flex items-center justify-center py-2 px-4">
-                        <span class="text-sm text-primary">✨ New: Layout System Available! →</span>
+        <!-- Interactive Demos -->
+        <section class="mb-16" aria-labelledby="interactive-demos-heading">
+          <h2 id="interactive-demos-heading" class="text-3xl font-bold text-foreground text-center mb-12">
+            Interactive Demonstrations
+          </h2>
+
+          <!-- ARIA Compliant Tab Navigation -->
+          <div class="w-full">
+            <div 
+              class="flex border-b border-border mb-8" 
+              role="tablist" 
+              aria-labelledby="interactive-demos-heading"
+            >
+              <button 
+                class="tab-button active px-6 py-3 text-sm font-medium transition-colors border-b-2 border-primary text-primary"
+                role="tab"
+                aria-selected="true"
+                aria-controls="tab-navigation"
+                id="tab-navigation-button"
+                data-tab="navigation"
+                onclick="showTab('navigation')"
+                onkeydown="handleTabKeydown(event)"
+              >
+                Navigation
+              </button>
+              <button 
+                class="tab-button px-6 py-3 text-sm font-medium transition-colors border-b-2 border-transparent text-muted-foreground hover:text-foreground"
+                role="tab"
+                aria-selected="false"
+                aria-controls="tab-megamenu"
+                id="tab-megamenu-button"
+                data-tab="megamenu"
+                onclick="showTab('megamenu')"
+                onkeydown="handleTabKeydown(event)"
+                tabindex="-1"
+              >
+                Mega Menu
+              </button>
+              <button 
+                class="tab-button px-6 py-3 text-sm font-medium transition-colors border-b-2 border-transparent text-muted-foreground hover:text-foreground"
+                role="tab"
+                aria-selected="false"
+                aria-controls="tab-breadcrumbs"
+                id="tab-breadcrumbs-button"
+                data-tab="breadcrumbs"
+                onclick="showTab('breadcrumbs')"
+                onkeydown="handleTabKeydown(event)"
+                tabindex="-1"
+              >
+                Breadcrumbs
+              </button>
+              <button 
+                class="tab-button px-6 py-3 text-sm font-medium transition-colors border-b-2 border-transparent text-muted-foreground hover:text-foreground"
+                role="tab"
+                aria-selected="false"
+                aria-controls="tab-touch"
+                id="tab-touch-button"
+                data-tab="touch"
+                onclick="showTab('touch')"
+                onkeydown="handleTabKeydown(event)"
+                tabindex="-1"
+              >
+                Touch
+              </button>
+            </div>
+
+            <!-- Navigation Demo -->
+            <div 
+              id="tab-navigation" 
+              class="tab-content space-y-6" 
+              role="tabpanel" 
+              aria-labelledby="tab-navigation-button"
+            >
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center space-x-2">
+                    <span aria-hidden="true">🧭</span>
+                    <span>Responsive Navigation Component</span>
+                  </CardTitle>
+                  <CardDescription>
+                    Standard navigation with dropdown menus and mobile drawer
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div class="border border-border rounded-lg overflow-hidden">
+                    <!-- Static Navigation Demo (no scripts conflicts) -->
+                    <nav class="w-full border-b bg-background/80 backdrop-blur-sm" role="navigation" aria-label="Demo navigation">
+                      <div class="container mx-auto px-4">
+                        <div class="flex items-center justify-between h-16">
+                          <!-- Logo -->
+                          <a href="/" class="flex items-center space-x-3 text-lg font-semibold" aria-label="Demo Navigation Homepage">
+                            <div class="w-8 h-8 bg-gradient-to-br from-primary to-primary/70 rounded-lg flex items-center justify-center text-primary-foreground font-bold" aria-hidden="true">
+                              ⚡
+                            </div>
+                            <span class="hidden sm:block">Demo Navigation</span>
+                          </a>
+
+                          <!-- Desktop Links -->
+                          <div class="hidden lg:flex items-center space-x-1" role="menubar" aria-label="Desktop navigation">
+                            <a href="#" class="px-4 py-2 rounded-lg text-sm font-medium bg-primary text-primary-foreground" role="menuitem" aria-current="page">
+                              🏠 Home
+                            </a>
+                            <div class="relative group">
+                              <button 
+                                class="px-4 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground" 
+                                role="menuitem" 
+                                aria-haspopup="true" 
+                                aria-expanded="false"
+                                aria-label="Components submenu"
+                              >
+                                🧩 Components ▼
+                              </button>
+                              <div class="absolute top-full left-0 mt-2 w-64 bg-card border border-border rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300" role="menu" aria-label="Components submenu">
+                                <div class="p-3 space-y-2">
+                                  <a href="#" class="block p-2 rounded hover:bg-muted/50" role="menuitem">📝 Forms</a>
+                                  <a href="#" class="block p-2 rounded hover:bg-muted/50" role="menuitem">🧭 Navigation</a>
+                                  <a href="#" class="block p-2 rounded hover:bg-muted/50" role="menuitem">📊 Data Display</a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <!-- Mobile Menu Button -->
+                          <button 
+                            class="lg:hidden p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                            onclick="toggleDemoMenu()"
+                            aria-label="Toggle mobile navigation menu"
+                            aria-expanded="false"
+                            aria-controls="demo-mobile-menu"
+                          >
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                          </button>
+                        </div>
+
+                        <!-- Mobile Menu -->
+                        <div id="demo-mobile-menu" class="lg:hidden hidden border-t py-4" role="menu" aria-label="Mobile navigation menu">
+                          <div class="space-y-2">
+                            <a href="#" class="block p-3 rounded-lg bg-primary text-primary-foreground" role="menuitem" aria-current="page">🏠 Home</a>
+                            <a href="#" class="block p-3 rounded-lg text-muted-foreground hover:bg-muted/50" role="menuitem">📝 Forms</a>
+                            <a href="#" class="block p-3 rounded-lg text-muted-foreground hover:bg-muted/50" role="menuitem">🧭 Navigation</a>
+                            <a href="#" class="block p-3 rounded-lg text-muted-foreground hover:bg-muted/50" role="menuitem">📊 Data Display</a>
+                          </div>
+                        </div>
+                      </div>
+                    </nav>
+                  </div>
+                  <div class="mt-4 text-sm text-muted-foreground space-y-2">
+                    <p><strong>Features:</strong></p>
+                    <ul class="list-disc list-inside space-y-1" role="list">
+                      <li role="listitem">Dropdown menus with hover animations</li>
+                      <li role="listitem">Mobile drawer with swipe-to-close</li>
+                      <li role="listitem">Current page highlighting</li>
+                      <li role="listitem">Keyboard navigation support</li>
+                    </ul>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            <!-- Mega Menu Demo -->
+            <div 
+              id="tab-megamenu" 
+              class="tab-content space-y-6 hidden" 
+              role="tabpanel" 
+              aria-labelledby="tab-megamenu-button"
+            >
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center space-x-2">
+                    <span aria-hidden="true">📋</span>
+                    <span>Mega Menu Component</span>
+                  </CardTitle>
+                  <CardDescription>
+                    Multi-column navigation for complex business websites
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div class="border border-border rounded-lg overflow-hidden">
+                    <!-- Static Mega Menu Demo -->
+                    <nav class="w-full border-b bg-background/80 backdrop-blur-sm" role="navigation" aria-label="Mega menu demo">
+                      <!-- Promo Bar -->
+                      <div class="border-b border-border bg-primary/5">
+                        <div class="flex items-center justify-center py-2 px-4">
+                          <span class="text-sm text-primary" role="banner">✨ New: Layout System Available! →</span>
+                        </div>
+                      </div>
+                      
+                      <div class="container mx-auto px-4">
+                        <div class="flex items-center justify-between h-16">
+                          <!-- Logo -->
+                          <a href="#" class="flex items-center space-x-3 text-lg font-semibold" aria-label="Business Name Homepage">
+                            <div class="w-8 h-8 bg-gradient-to-br from-primary to-primary/70 rounded-lg flex items-center justify-center text-primary-foreground font-bold" aria-hidden="true">
+                              ⚡
+                            </div>
+                            <span class="hidden sm:block">Business Name</span>
+                          </a>
+
+                          <!-- Desktop Mega Menu -->
+                          <div class="hidden lg:flex items-center space-x-1" role="menubar" aria-label="Mega menu navigation">
+                            <a href="#" class="px-4 py-2 rounded-lg text-sm font-medium bg-primary text-primary-foreground" role="menuitem" aria-current="page">
+                              Home
+                            </a>
+                            
+                            <div class="relative group">
+                              <button 
+                                class="px-4 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground" 
+                                role="menuitem" 
+                                aria-haspopup="true" 
+                                aria-expanded="false"
+                                aria-label="Products and Services mega menu"
+                              >
+                                💼 Products & Services ▼
+                              </button>
+                              <div class="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-screen max-w-4xl bg-card border border-border rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300" role="menu" aria-label="Products and Services mega menu">
+                                <div class="p-6 grid grid-cols-4 gap-6">
+                                  <div role="group" aria-labelledby="web-dev-heading">
+                                    <h3 id="web-dev-heading" class="font-semibold text-sm mb-3">Web Development</h3>
+                                    <ul class="space-y-2 text-sm text-muted-foreground" role="list">
+                                      <li role="listitem">Custom Websites</li>
+                                      <li role="listitem">E-commerce</li>
+                                      <li role="listitem">Web Applications</li>
+                                    </ul>
+                                  </div>
+                                  <div role="group" aria-labelledby="design-services-heading">
+                                    <h3 id="design-services-heading" class="font-semibold text-sm mb-3">Design Services</h3>
+                                    <ul class="space-y-2 text-sm text-muted-foreground" role="list">
+                                      <li role="listitem">UI/UX Design</li>
+                                      <li role="listitem">Branding</li>
+                                      <li role="listitem">Prototyping</li>
+                                    </ul>
+                                  </div>
+                                  <div role="group" aria-labelledby="solutions-heading">
+                                    <h3 id="solutions-heading" class="font-semibold text-sm mb-3">Solutions</h3>
+                                    <ul class="space-y-2 text-sm text-muted-foreground" role="list">
+                                      <li role="listitem">Startup Package</li>
+                                      <li role="listitem">Enterprise</li>
+                                      <li role="listitem">Non-Profit</li>
+                                    </ul>
+                                  </div>
+                                  <div class="bg-primary/5 rounded-lg p-4" role="complementary" aria-labelledby="featured-heading">
+                                    <div class="text-2xl mb-2" aria-hidden="true">🚀</div>
+                                    <div class="text-xs text-primary mb-1">FEATURED</div>
+                                    <h4 id="featured-heading" class="font-semibold text-sm mb-2">Complete Package</h4>
+                                    <p class="text-xs text-muted-foreground mb-3">Everything you need to get started</p>
+                                    <a href="#" class="text-xs text-primary" aria-label="Learn more about Complete Package">Learn more →</a>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <!-- Mobile Menu Button -->
+                          <button class="lg:hidden p-2 rounded-lg text-muted-foreground hover:text-foreground" aria-label="Toggle mobile mega menu">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                          </button>
+                        </div>
+                      </div>
+                    </nav>
+                  </div>
+                  <div class="mt-4 text-sm text-muted-foreground space-y-2">
+                    <p><strong>Business Applications:</strong></p>
+                    <ul class="list-disc list-inside space-y-1" role="list">
+                      <li role="listitem">E-commerce sites with product categories</li>
+                      <li role="listitem">Corporate websites with multiple services</li>
+                      <li role="listitem">SaaS platforms with feature sections</li>
+                      <li role="listitem">Educational sites with course organization</li>
+                    </ul>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            <!-- Breadcrumbs Demo -->
+            <div 
+              id="tab-breadcrumbs" 
+              class="tab-content space-y-6 hidden" 
+              role="tabpanel" 
+              aria-labelledby="tab-breadcrumbs-button"
+            >
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center space-x-2">
+                    <span aria-hidden="true">📍</span>
+                    <span>Breadcrumbs Component</span>
+                  </CardTitle>
+                  <CardDescription>
+                    Automatic hierarchical navigation with SEO optimization
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div class="space-y-4">
+                    <!-- Default Variant -->
+                    <div class="border border-border rounded-lg p-4">
+                      <h3 class="font-medium mb-2">Default Variant</h3>
+                      <Breadcrumbs 
+                        variant="default"
+                        showHome={true}
+                        showIcons={true}
+                        currentPageTitle="Layout System Showcase"
+                      />
+                    </div>
+                    
+                    <!-- Business Variant -->
+                    <div class="border border-border rounded-lg p-4">
+                      <h3 class="font-medium mb-2">Business Variant</h3>
+                      <Breadcrumbs 
+                        variant="business"
+                        showHome={true}
+                        showIcons={true}
+                        currentPageTitle="Layout System Showcase"
+                      />
+                    </div>
+                    
+                    <!-- E-commerce Variant -->
+                    <div class="border border-border rounded-lg p-4">
+                      <h3 class="font-medium mb-2">E-commerce Variant</h3>
+                      <Breadcrumbs 
+                        variant="ecommerce"
+                        showHome={true}
+                        showIcons={true}
+                        currentPageTitle="Layout System Showcase"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div class="mt-4 text-sm text-muted-foreground space-y-2">
+                    <p><strong>SEO Benefits:</strong></p>
+                    <ul class="list-disc list-inside space-y-1" role="list">
+                      <li role="listitem">Automatic JSON-LD structured data</li>
+                      <li role="listitem">Improved search engine understanding</li>
+                      <li role="listitem">Better user navigation experience</li>
+                      <li role="listitem">Accessible keyboard navigation</li>
+                    </ul>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            <!-- Touch Navigation Demo -->
+            <div 
+              id="tab-touch" 
+              class="tab-content space-y-6 hidden" 
+              role="tabpanel" 
+              aria-labelledby="tab-touch-button"
+            >
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center space-x-2">
+                    <span aria-hidden="true">📱</span>
+                    <span>Touch Navigation Component</span>
+                  </CardTitle>
+                  <CardDescription>
+                    Advanced mobile gestures and touch interactions
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Floating FAB Demo -->
+                    <div class="relative border border-border rounded-lg p-6 h-64 bg-muted/30" role="img" aria-labelledby="fab-demo-heading">
+                      <h4 id="fab-demo-heading" class="font-medium mb-4">Floating Action Button</h4>
+                      <div class="flex items-center justify-center h-full">
+                        <div class="text-center text-muted-foreground">
+                          <div class="w-14 h-14 bg-primary text-primary-foreground rounded-full shadow-lg flex items-center justify-center mx-auto mb-4" aria-hidden="true">
+                            📱
+                          </div>
+                          <p class="text-sm">Touch component demo</p>
+                          <p class="text-xs mt-2">Available with client:load</p>
+                        </div>
                       </div>
                     </div>
                     
-                    <div class="container mx-auto px-4">
-                      <div class="flex items-center justify-between h-16">
-                        <!-- Logo -->
-                        <a href="#" class="flex items-center space-x-3 text-lg font-semibold">
-                          <div class="w-8 h-8 bg-gradient-to-br from-primary to-primary/70 rounded-lg flex items-center justify-center text-primary-foreground font-bold">
-                            ⚡
+                    <!-- Bottom Navigation Demo -->
+                    <div class="relative border border-border rounded-lg p-6 h-64 bg-muted/30" role="img" aria-labelledby="bottom-nav-demo-heading">
+                      <h4 id="bottom-nav-demo-heading" class="font-medium mb-4">Bottom Navigation</h4>
+                      <div class="flex items-center justify-center h-full">
+                        <div class="text-center text-muted-foreground">
+                          <div class="w-full h-12 bg-card border-t border-border rounded-lg flex items-center justify-around" role="tablist" aria-label="Bottom navigation demo">
+                            <span role="tab" aria-selected="true" aria-label="Home tab">🏠</span>
+                            <span role="tab" aria-selected="false" aria-label="Mobile tab">📱</span>
+                            <span role="tab" aria-selected="false" aria-label="Forms tab">📝</span>
+                            <span role="tab" aria-selected="false" aria-label="Advanced tab">🔮</span>
                           </div>
-                          <span class="hidden sm:block">Business Name</span>
-                        </a>
-
-                        <!-- Desktop Mega Menu -->
-                        <div class="hidden lg:flex items-center space-x-1">
-                          <a href="#" class="px-4 py-2 rounded-lg text-sm font-medium bg-primary text-primary-foreground">
-                            Home
-                          </a>
-                          
-                          <div class="relative group">
-                            <button class="px-4 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground">
-                              💼 Products & Services ▼
-                            </button>
-                            <div class="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-screen max-w-4xl bg-card border border-border rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
-                              <div class="p-6 grid grid-cols-4 gap-6">
-                                <div>
-                                  <h3 class="font-semibold text-sm mb-3">Web Development</h3>
-                                  <ul class="space-y-2 text-sm text-muted-foreground">
-                                    <li>Custom Websites</li>
-                                    <li>E-commerce</li>
-                                    <li>Web Applications</li>
-                                  </ul>
-                                </div>
-                                <div>
-                                  <h3 class="font-semibold text-sm mb-3">Design Services</h3>
-                                  <ul class="space-y-2 text-sm text-muted-foreground">
-                                    <li>UI/UX Design</li>
-                                    <li>Branding</li>
-                                    <li>Prototyping</li>
-                                  </ul>
-                                </div>
-                                <div>
-                                  <h3 class="font-semibold text-sm mb-3">Solutions</h3>
-                                  <ul class="space-y-2 text-sm text-muted-foreground">
-                                    <li>Startup Package</li>
-                                    <li>Enterprise</li>
-                                    <li>Non-Profit</li>
-                                  </ul>
-                                </div>
-                                <div class="bg-primary/5 rounded-lg p-4">
-                                  <div class="text-2xl mb-2">🚀</div>
-                                  <div class="text-xs text-primary mb-1">FEATURED</div>
-                                  <h4 class="font-semibold text-sm mb-2">Complete Package</h4>
-                                  <p class="text-xs text-muted-foreground mb-3">Everything you need to get started</p>
-                                  <a href="#" class="text-xs text-primary">Learn more →</a>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+                          <p class="text-sm mt-4">Bottom navigation layout</p>
                         </div>
-
-                        <!-- Mobile Menu Button -->
-                        <button class="lg:hidden p-2 rounded-lg text-muted-foreground hover:text-foreground">
-                          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                          </svg>
-                        </button>
                       </div>
                     </div>
-                  </nav>
-                </div>
-                <div class="mt-4 text-sm text-muted-foreground space-y-2">
-                  <p><strong>Business Applications:</strong></p>
-                  <ul class="list-disc list-inside space-y-1">
-                    <li>E-commerce sites with product categories</li>
-                    <li>Corporate websites with multiple services</li>
-                    <li>SaaS platforms with feature sections</li>
-                    <li>Educational sites with course organization</li>
-                  </ul>
-                </div>
-              </CardContent>
-            </Card>
+                  </div>
+                  
+                  <div class="mt-4 text-sm text-muted-foreground space-y-2">
+                    <p><strong>Mobile Gestures Supported:</strong></p>
+                    <ul class="list-disc list-inside space-y-1" role="list">
+                      <li role="listitem">Swipe from left edge to open navigation drawer</li>
+                      <li role="listitem">Swipe left/right to navigate between pages</li>
+                      <li role="listitem">Pull down from top to refresh (where enabled)</li>
+                      <li role="listitem">Touch and drag for interactive feedback</li>
+                    </ul>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
           </div>
+        </section>
 
-          <!-- Breadcrumbs Demo -->
-          <div id="tab-breadcrumbs" class="tab-content space-y-6 hidden">
-            <Card>
+        <!-- Business Use Cases -->
+        <section class="mb-16" aria-labelledby="business-use-cases-heading">
+          <h2 id="business-use-cases-heading" class="text-3xl font-bold text-foreground text-center mb-12">
+            Business Use Cases
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8" role="list" aria-label="Business use cases examples">
+            <!-- Corporate Website -->
+            <Card className="hover:shadow-lg transition-all duration-200" role="listitem">
               <CardHeader>
                 <CardTitle className="flex items-center space-x-2">
-                  <span>📍</span>
-                  <span>Breadcrumbs Component</span>
+                  <span aria-hidden="true">🏢</span>
+                  <span>Corporate Website</span>
                 </CardTitle>
-                <CardDescription>
-                  Automatic hierarchical navigation with SEO optimization
-                </CardDescription>
               </CardHeader>
               <CardContent>
-                <div class="space-y-4">
-                  <!-- Default Variant -->
-                  <div class="border border-border rounded-lg p-4">
-                    <h3 class="font-medium mb-2">Default Variant</h3>
-                    <Breadcrumbs 
-                      variant="default"
-                      showHome={true}
-                      showIcons={true}
-                      currentPageTitle="Layout System Showcase"
-                    />
-                  </div>
-                  
-                  <!-- Business Variant -->
-                  <div class="border border-border rounded-lg p-4">
-                    <h3 class="font-medium mb-2">Business Variant</h3>
-                    <Breadcrumbs 
-                      variant="business"
-                      showHome={true}
-                      showIcons={true}
-                      currentPageTitle="Layout System Showcase"
-                    />
-                  </div>
-                  
-                  <!-- E-commerce Variant -->
-                  <div class="border border-border rounded-lg p-4">
-                    <h3 class="font-medium mb-2">E-commerce Variant</h3>
-                    <Breadcrumbs 
-                      variant="ecommerce"
-                      showHome={true}
-                      showIcons={true}
-                      currentPageTitle="Layout System Showcase"
-                    />
-                  </div>
-                </div>
-                
-                <div class="mt-4 text-sm text-muted-foreground space-y-2">
-                  <p><strong>SEO Benefits:</strong></p>
-                  <ul class="list-disc list-inside space-y-1">
-                    <li>Automatic JSON-LD structured data</li>
-                    <li>Improved search engine understanding</li>
-                    <li>Better user navigation experience</li>
-                    <li>Accessible keyboard navigation</li>
-                  </ul>
+                <div class="space-y-3 text-sm">
+                  <div><strong>Header:</strong> Business variant with CTA</div>
+                  <div><strong>Navigation:</strong> Standard with dropdown menus</div>
+                  <div><strong>Footer:</strong> Business variant with contact info</div>
+                  <div><strong>Breadcrumbs:</strong> For page hierarchy</div>
                 </div>
               </CardContent>
             </Card>
-          </div>
 
-          <!-- Touch Navigation Demo -->
-          <div id="tab-touch" class="tab-content space-y-6 hidden">
-            <Card>
+            <!-- E-commerce Platform -->
+            <Card className="hover:shadow-lg transition-all duration-200" role="listitem">
               <CardHeader>
                 <CardTitle className="flex items-center space-x-2">
-                  <span>📱</span>
-                  <span>Touch Navigation Component</span>
+                  <span aria-hidden="true">🛒</span>
+                  <span>E-commerce Platform</span>
                 </CardTitle>
-                <CardDescription>
-                  Advanced mobile gestures and touch interactions
-                </CardDescription>
               </CardHeader>
               <CardContent>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <!-- Floating FAB Demo -->
-                  <div class="relative border border-border rounded-lg p-6 h-64 bg-muted/30">
-                    <h4 class="font-medium mb-4">Floating Action Button</h4>
-                    <div class="flex items-center justify-center h-full">
-                      <div class="text-center text-muted-foreground">
-                        <div class="w-14 h-14 bg-primary text-primary-foreground rounded-full shadow-lg flex items-center justify-center mx-auto mb-4">
-                          📱
-                        </div>
-                        <p class="text-sm">Touch component demo</p>
-                        <p class="text-xs mt-2">Available with client:load</p>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <!-- Bottom Navigation Demo -->
-                  <div class="relative border border-border rounded-lg p-6 h-64 bg-muted/30">
-                    <h4 class="font-medium mb-4">Bottom Navigation</h4>
-                    <div class="flex items-center justify-center h-full">
-                      <div class="text-center text-muted-foreground">
-                        <div class="w-full h-12 bg-card border-t border-border rounded-lg flex items-center justify-around">
-                          <span>🏠</span>
-                          <span>📱</span>
-                          <span>📝</span>
-                          <span>🔮</span>
-                        </div>
-                        <p class="text-sm mt-4">Bottom navigation layout</p>
-                      </div>
-                    </div>
-                  </div>
+                <div class="space-y-3 text-sm">
+                  <div><strong>Header:</strong> Business variant with search</div>
+                  <div><strong>Navigation:</strong> Mega menu with categories</div>
+                  <div><strong>Footer:</strong> Comprehensive with links</div>
+                  <div><strong>Mobile:</strong> Bottom nav + touch gestures</div>
                 </div>
-                
-                <div class="mt-4 text-sm text-muted-foreground space-y-2">
-                  <p><strong>Mobile Gestures Supported:</strong></p>
-                  <ul class="list-disc list-inside space-y-1">
-                    <li>Swipe from left edge to open navigation drawer</li>
-                    <li>Swipe left/right to navigate between pages</li>
-                    <li>Pull down from top to refresh (where enabled)</li>
-                    <li>Touch and drag for interactive feedback</li>
-                  </ul>
+              </CardContent>
+            </Card>
+
+            <!-- SaaS Application -->
+            <Card className="hover:shadow-lg transition-all duration-200" role="listitem">
+              <CardHeader>
+                <CardTitle className="flex items-center space-x-2">
+                  <span aria-hidden="true">⚡</span>
+                  <span>SaaS Application</span>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div class="space-y-3 text-sm">
+                  <div><strong>Header:</strong> Landing variant with pricing CTA</div>
+                  <div><strong>Navigation:</strong> Mega menu with feature sections</div>
+                  <div><strong>Footer:</strong> Startup variant with newsletter</div>
+                  <div><strong>Mobile:</strong> Floating FAB for quick actions</div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <!-- Portfolio Site -->
+            <Card className="hover:shadow-lg transition-all duration-200" role="listitem">
+              <CardHeader>
+                <CardTitle className="flex items-center space-x-2">
+                  <span aria-hidden="true">🎨</span>
+                  <span>Portfolio Site</span>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div class="space-y-3 text-sm">
+                  <div><strong>Header:</strong> Minimal variant, clean design</div>
+                  <div><strong>Navigation:</strong> Simple with smooth transitions</div>
+                  <div><strong>Footer:</strong> Minimal variant, focus on content</div>
+                  <div><strong>Mobile:</strong> Gesture navigation for galleries</div>
                 </div>
               </CardContent>
             </Card>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <!-- Business Use Cases -->
-      <section class="mb-16">
-        <h2 class="text-3xl font-bold text-foreground text-center mb-12">
-          Business Use Cases
-        </h2>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <!-- Corporate Website -->
-          <Card className="hover:shadow-lg transition-all duration-200">
+        <!-- Implementation Guide -->
+        <section class="mb-16" aria-labelledby="implementation-guide-heading">
+          <Card>
             <CardHeader>
-              <CardTitle className="flex items-center space-x-2">
-                <span>🏢</span>
-                <span>Corporate Website</span>
-              </CardTitle>
+              <CardTitle id="implementation-guide-heading" className="text-2xl">🚀 Quick Implementation Guide</CardTitle>
+              <CardDescription>
+                Get started with the layout system in your project
+              </CardDescription>
             </CardHeader>
             <CardContent>
-              <div class="space-y-3 text-sm">
-                <div><strong>Header:</strong> Business variant with CTA</div>
-                <div><strong>Navigation:</strong> Standard with dropdown menus</div>
-                <div><strong>Footer:</strong> Business variant with contact info</div>
-                <div><strong>Breadcrumbs:</strong> For page hierarchy</div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <!-- E-commerce Platform -->
-          <Card className="hover:shadow-lg transition-all duration-200">
-            <CardHeader>
-              <CardTitle className="flex items-center space-x-2">
-                <span>🛒</span>
-                <span>E-commerce Platform</span>
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div class="space-y-3 text-sm">
-                <div><strong>Header:</strong> Business variant with search</div>
-                <div><strong>Navigation:</strong> Mega menu with categories</div>
-                <div><strong>Footer:</strong> Comprehensive with links</div>
-                <div><strong>Mobile:</strong> Bottom nav + touch gestures</div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <!-- SaaS Application -->
-          <Card className="hover:shadow-lg transition-all duration-200">
-            <CardHeader>
-              <CardTitle className="flex items-center space-x-2">
-                <span>⚡</span>
-                <span>SaaS Application</span>
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div class="space-y-3 text-sm">
-                <div><strong>Header:</strong> Landing variant with pricing CTA</div>
-                <div><strong>Navigation:</strong> Mega menu with feature sections</div>
-                <div><strong>Footer:</strong> Startup variant with newsletter</div>
-                <div><strong>Mobile:</strong> Floating FAB for quick actions</div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <!-- Portfolio Site -->
-          <Card className="hover:shadow-lg transition-all duration-200">
-            <CardHeader>
-              <CardTitle className="flex items-center space-x-2">
-                <span>🎨</span>
-                <span>Portfolio Site</span>
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div class="space-y-3 text-sm">
-                <div><strong>Header:</strong> Minimal variant, clean design</div>
-                <div><strong>Navigation:</strong> Simple with smooth transitions</div>
-                <div><strong>Footer:</strong> Minimal variant, focus on content</div>
-                <div><strong>Mobile:</strong> Gesture navigation for galleries</div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
-
-      <!-- Implementation Guide -->
-      <section class="mb-16">
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-2xl">🚀 Quick Implementation Guide</CardTitle>
-            <CardDescription>
-              Get started with the layout system in your project
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div>
-                <h3 class="font-semibold mb-3">1. Basic Setup</h3>
-                <div class="bg-muted p-4 rounded-lg text-sm font-mono">
-                  {`<Layout 
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                  <h3 class="font-semibold mb-3">1. Basic Setup</h3>
+                  <div class="bg-muted p-4 rounded-lg text-sm font-mono" role="code" aria-label="Basic setup code example">
+                    {`<Layout 
   headerVariant="business"
   footerVariant="business"
   showNavigation={true}
   showHeaderCTA={true}
 />`}
+                  </div>
                 </div>
-              </div>
-              
-              <div>
-                <h3 class="font-semibold mb-3">2. Add Touch Navigation</h3>
-                <div class="bg-muted p-4 rounded-lg text-sm font-mono">
-                  {`<TouchNavigation 
+                
+                <div>
+                  <h3 class="font-semibold mb-3">2. Add Touch Navigation</h3>
+                  <div class="bg-muted p-4 rounded-lg text-sm font-mono" role="code" aria-label="Touch navigation code example">
+                    {`<TouchNavigation 
   variant="floating-fab"
   enableSwipeNavigation={true}
   client:load
 />`}
+                  </div>
                 </div>
-              </div>
-              
-              <div>
-                <h3 class="font-semibold mb-3">3. Enable Breadcrumbs</h3>
-                <div class="bg-muted p-4 rounded-lg text-sm font-mono">
-                  {`<Breadcrumbs 
+                
+                <div>
+                  <h3 class="font-semibold mb-3">3. Enable Breadcrumbs</h3>
+                  <div class="bg-muted p-4 rounded-lg text-sm font-mono" role="code" aria-label="Breadcrumbs code example">
+                    {`<Breadcrumbs 
   variant="business"
   showHome={true}
   showIcons={true}
 />`}
+                  </div>
                 </div>
-              </div>
-              
-              <div>
-                <h3 class="font-semibold mb-3">4. Complex Sites</h3>
-                <div class="bg-muted p-4 rounded-lg text-sm font-mono">
-                  {`<MegaMenu 
+                
+                <div>
+                  <h3 class="font-semibold mb-3">4. Complex Sites</h3>
+                  <div class="bg-muted p-4 rounded-lg text-sm font-mono" role="code" aria-label="Mega menu code example">
+                    {`<MegaMenu 
   variant="business"
   showPromo={true}
   currentPage="..."
 />`}
+                  </div>
                 </div>
               </div>
-            </div>
-          </CardContent>
-        </Card>
-      </section>
+            </CardContent>
+          </Card>
+        </section>
 
+      </div>
     </div>
+
+    <!-- Navigation -->
+    <nav aria-label="Showcase navigation" role="navigation">
+      <Navigation currentPage="layout" />
+    </nav>
+
   </main>
 
 </Layout>
@@ -664,20 +734,23 @@ import { Button } from '../components/ui/button';
     interface Window {
       showTab: (tabName: string) => void;
       toggleDemoMenu: () => void;
+      handleTabKeydown: (event: KeyboardEvent) => void;
     }
   }
 
-  // Custom Tab Management for Layout Showcase
+  // ARIA Compliant Tab Management for Layout Showcase
   function showTab(tabName: string): void {
     // Hide all tab contents
     document.querySelectorAll('.tab-content').forEach((content) => {
       content.classList.add('hidden');
     });
     
-    // Remove active state from all tab buttons
-    document.querySelectorAll('.tab-button').forEach((button) => {
+    // Remove active state and set tabindex for all tab buttons
+    document.querySelectorAll('[role="tab"]').forEach((button) => {
       button.classList.remove('active', 'border-primary', 'text-primary');
       button.classList.add('border-transparent', 'text-muted-foreground');
+      button.setAttribute('aria-selected', 'false');
+      button.setAttribute('tabindex', '-1');
     });
     
     // Show selected tab content
@@ -691,14 +764,74 @@ import { Button } from '../components/ui/button';
     if (selectedButton) {
       selectedButton.classList.add('active', 'border-primary', 'text-primary');
       selectedButton.classList.remove('border-transparent', 'text-muted-foreground');
+      selectedButton.setAttribute('aria-selected', 'true');
+      selectedButton.setAttribute('tabindex', '0');
+      (selectedButton as HTMLElement).focus();
+    }
+  }
+
+  // ARIA Compliant Keyboard Navigation for Tabs
+  function handleTabKeydown(event: KeyboardEvent): void {
+    const tabs = Array.from(document.querySelectorAll('[role="tab"]')) as HTMLElement[];
+    const currentTab = event.target as HTMLElement;
+    const currentIndex = tabs.indexOf(currentTab);
+    
+    switch (event.key) {
+      case 'ArrowLeft':
+        event.preventDefault();
+        const prevIndex = currentIndex === 0 ? tabs.length - 1 : currentIndex - 1;
+        const prevTab = tabs[prevIndex];
+        const prevTabName = prevTab.getAttribute('data-tab');
+        if (prevTabName) {
+          showTab(prevTabName);
+        }
+        break;
+        
+      case 'ArrowRight':
+        event.preventDefault();
+        const nextIndex = (currentIndex + 1) % tabs.length;
+        const nextTab = tabs[nextIndex];
+        const nextTabName = nextTab.getAttribute('data-tab');
+        if (nextTabName) {
+          showTab(nextTabName);
+        }
+        break;
+        
+      case 'Home':
+        event.preventDefault();
+        const firstTab = tabs[0];
+        const firstTabName = firstTab.getAttribute('data-tab');
+        if (firstTabName) {
+          showTab(firstTabName);
+        }
+        break;
+        
+      case 'End':
+        event.preventDefault();
+        const lastTab = tabs[tabs.length - 1];
+        const lastTabName = lastTab.getAttribute('data-tab');
+        if (lastTabName) {
+          showTab(lastTabName);
+        }
+        break;
     }
   }
 
   // Demo Navigation Menu Toggle - separate from main header
   function toggleDemoMenu(): void {
     const menu = document.getElementById('demo-mobile-menu');
-    if (menu) {
-      menu.classList.toggle('hidden');
+    const button = document.querySelector('[aria-controls="demo-mobile-menu"]') as HTMLElement;
+    
+    if (menu && button) {
+      const isHidden = menu.classList.contains('hidden');
+      
+      if (isHidden) {
+        menu.classList.remove('hidden');
+        button.setAttribute('aria-expanded', 'true');
+      } else {
+        menu.classList.add('hidden');
+        button.setAttribute('aria-expanded', 'false');
+      }
     }
   }
 
@@ -706,6 +839,7 @@ import { Button } from '../components/ui/button';
   if (typeof window !== 'undefined') {
     window.showTab = showTab;
     window.toggleDemoMenu = toggleDemoMenu;
+    window.handleTabKeydown = handleTabKeydown;
   }
 
   // Initialize first tab as active when page loads
@@ -733,6 +867,12 @@ import { Button } from '../components/ui/button';
   /* Tab content transitions */
   .tab-content {
     animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  /* Enhanced focus styles for tab navigation */
+  [role="tab"]:focus {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 2px;
   }
   
   @keyframes fadeIn {

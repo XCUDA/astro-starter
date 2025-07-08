@@ -473,7 +473,7 @@ export default function ComponentsDemo() {
         </div>
       </section>
 
-      {/* Résumé des tests */}
+      {/* Résumé des tests  */}
       <section 
         className="bg-card border border-border rounded-lg p-6"
         aria-labelledby="summary-heading"

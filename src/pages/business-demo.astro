@@ -24,18 +24,18 @@ import { Button } from '../components/ui/button';
 >
   
   <!-- Hero Section with Business Context -->
-  <section class="bg-gradient-to-br from-primary/10 via-background to-secondary/10 py-20">
+  <section class="bg-gradient-to-br from-primary/10 via-background to-secondary/10 py-20" role="banner" aria-labelledby="hero-title">
     <div class="container mx-auto px-4">
       <div class="max-w-4xl mx-auto text-center">
         
         <div class="flex items-center justify-center space-x-2 mb-6">
-          <span class="text-4xl">🚀</span>
+          <span class="text-4xl" aria-hidden="true">🚀</span>
           <Badge variant="default" className="text-sm font-medium bg-primary text-primary-foreground">
             Business Ready
           </Badge>
         </div>
         
-        <h1 class="text-4xl lg:text-6xl font-bold text-foreground mb-6">
+        <h1 id="hero-title" class="text-4xl lg:text-6xl font-bold text-foreground mb-6">
           Business Potential
           <span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
             Showcase
@@ -47,30 +47,30 @@ import { Button } from '../components/ui/button';
           transforment vos idées en sites web professionnels.
         </p>
 
-        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-          <Button size="lg" className="text-lg px-8">
-            <span class="mr-2">👀</span>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12" role="group" aria-label="Main action buttons">
+          <Button size="lg" className="text-lg px-8" aria-label="View all layout variants and business configurations">
+            <span class="mr-2" aria-hidden="true">👀</span>
             Voir les Variants
           </Button>
-          <Button variant="outline" size="lg" className="text-lg px-8">
-            <span class="mr-2">💼</span>
+          <Button variant="outline" size="lg" className="text-lg px-8" aria-label="Explore business use cases and client examples">
+            <span class="mr-2" aria-hidden="true">💼</span>
             Business Cases
           </Button>
         </div>
 
         <!-- Current Demo Info -->
-        <div class="bg-card/50 backdrop-blur-sm border border-border rounded-xl p-6">
-          <h3 class="text-lg font-semibold mb-4">🔍 Cette page utilise :</h3>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-            <div class="bg-primary/10 rounded-lg p-3">
+        <div class="bg-card/50 backdrop-blur-sm border border-border rounded-xl p-6" role="region" aria-labelledby="demo-config">
+          <h3 id="demo-config" class="text-lg font-semibold mb-4">🔍 Cette page utilise :</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm" role="list" aria-label="Current page configuration details">
+            <div class="bg-primary/10 rounded-lg p-3" role="listitem">
               <strong>Header:</strong> Business variant<br/>
               <span class="text-muted-foreground">avec CTA "Get Started"</span>
             </div>
-            <div class="bg-primary/10 rounded-lg p-3">
+            <div class="bg-primary/10 rounded-lg p-3" role="listitem">
               <strong>Footer:</strong> Comprehensive<br/>
               <span class="text-muted-foreground">avec newsletter + business info</span>
             </div>
-            <div class="bg-primary/10 rounded-lg p-3">
+            <div class="bg-primary/10 rounded-lg p-3" role="listitem">
               <strong>Navigation:</strong> Responsive<br/>
               <span class="text-muted-foreground">avec breadcrumbs activés</span>
             </div>
@@ -81,19 +81,19 @@ import { Button } from '../components/ui/button';
   </section>
 
   <!-- Business Layout Variants Demo -->
-  <section class="py-16">
+  <section class="py-16" role="region" aria-labelledby="layout-variants-title">
     <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold text-center mb-12">
+      <h2 id="layout-variants-title" class="text-3xl font-bold text-center mb-12">
         🏗️ Layout Variants Business
       </h2>
 
-      <div class="space-y-12">
+      <div class="space-y-12" role="list" aria-label="Available business layout configurations">
         
         <!-- Corporate Layout -->
-        <Card className="overflow-hidden">
+        <Card className="overflow-hidden" role="listitem">
           <CardHeader className="bg-gradient-to-r from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
             <div class="flex items-center space-x-3">
-              <span class="text-3xl">🏢</span>
+              <span class="text-3xl" aria-hidden="true">🏢</span>
               <div>
                 <CardTitle className="text-xl">Corporate / Finance</CardTitle>
                 <CardDescription>Header: business + Footer: business + CTA prominent</CardDescription>
@@ -105,7 +105,7 @@ import { Button } from '../components/ui/button';
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <h3 class="font-semibold mb-3">Configuration :</h3>
-                <div class="bg-muted/50 rounded-lg p-4 font-mono text-sm">
+                <div class="bg-muted/50 rounded-lg p-4 font-mono text-sm" role="code" aria-label="Corporate layout configuration code">
                   headerVariant="business"<br/>
                   footerVariant="business"<br/>
                   showHeaderCTA={`{true}`}<br/>
@@ -114,16 +114,16 @@ import { Button } from '../components/ui/button';
               </div>
               <div>
                 <h3 class="font-semibold mb-3">Cas d'usage :</h3>
-                <ul class="space-y-2 text-sm text-muted-foreground">
-                  <li>• Cabinet comptable, banque, assurance</li>
-                  <li>• Entreprise B2B, consulting</li>
-                  <li>• Cabinet juridique, expertise</li>
-                  <li>• Services financiers professionnels</li>
+                <ul class="space-y-2 text-sm text-muted-foreground" role="list" aria-label="Corporate layout use cases">
+                  <li role="listitem">• Cabinet comptable, banque, assurance</li>
+                  <li role="listitem">• Entreprise B2B, consulting</li>
+                  <li role="listitem">• Cabinet juridique, expertise</li>
+                  <li role="listitem">• Services financiers professionnels</li>
                 </ul>
               </div>
             </div>
             <div class="mt-6 flex gap-3">
-              <Button variant="outline" size="sm">
+              <Button variant="outline" size="sm" aria-label="View corporate demo page with business header and footer configuration">
                 <a href="/corporate-demo" class="flex items-center">
                   👀 Voir la démo → 
                 </a>
@@ -133,10 +133,10 @@ import { Button } from '../components/ui/button';
         </Card>
 
         <!-- Startup/Landing Layout -->
-        <Card className="overflow-hidden">
+        <Card className="overflow-hidden" role="listitem">
           <CardHeader className="bg-gradient-to-r from-green-50 to-emerald-100 dark:from-green-950 dark:to-emerald-900">
             <div class="flex items-center space-x-3">
-              <span class="text-3xl">🚀</span>
+              <span class="text-3xl" aria-hidden="true">🚀</span>
               <div>
                 <CardTitle className="text-xl">Startup / Landing Page</CardTitle>
                 <CardDescription>Header: landing + Footer: startup + Newsletter active</CardDescription>
@@ -148,7 +148,7 @@ import { Button } from '../components/ui/button';
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <h4 class="font-semibold mb-3">Configuration :</h4>
-                <div class="bg-muted/50 rounded-lg p-4 font-mono text-sm">
+                <div class="bg-muted/50 rounded-lg p-4 font-mono text-sm" role="code" aria-label="Startup layout configuration code">
                   headerVariant="landing"<br/>
                   footerVariant="startup"<br/>
                   showNewsletter={`{true}`}<br/>
@@ -157,16 +157,16 @@ import { Button } from '../components/ui/button';
               </div>
               <div>
                 <h4 class="font-semibold mb-3">Cas d'usage :</h4>
-                <ul class="space-y-2 text-sm text-muted-foreground">
-                  <li>• SaaS, application web</li>
-                  <li>• Startup tech, produit digital</li>
-                  <li>• Landing page conversion</li>
-                  <li>• Freemium, trial gratuit</li>
+                <ul class="space-y-2 text-sm text-muted-foreground" role="list" aria-label="Startup layout use cases">
+                  <li role="listitem">• SaaS, application web</li>
+                  <li role="listitem">• Startup tech, produit digital</li>
+                  <li role="listitem">• Landing page conversion</li>
+                  <li role="listitem">• Freemium, trial gratuit</li>
                 </ul>
               </div>
             </div>
             <div class="mt-6 flex gap-3">
-              <Button variant="outline" size="sm">
+              <Button variant="outline" size="sm" aria-label="View startup demo page with landing header and newsletter signup">
                 <a href="/startup-demo" class="flex items-center">
                   🚀 Voir la démo →
                 </a>
@@ -176,10 +176,10 @@ import { Button } from '../components/ui/button';
         </Card>
 
         <!-- E-commerce Layout -->
-        <Card className="overflow-hidden">
+        <Card className="overflow-hidden" role="listitem">
           <CardHeader className="bg-gradient-to-r from-orange-50 to-amber-100 dark:from-orange-950 dark:to-amber-900">
             <div class="flex items-center space-x-3">
-              <span class="text-3xl">🛒</span>
+              <span class="text-3xl" aria-hidden="true">🛒</span>
               <div>
                 <CardTitle className="text-xl">E-commerce / Boutique</CardTitle>
                 <CardDescription>Header: business + MegaMenu + Footer: comprehensive</CardDescription>
@@ -191,7 +191,7 @@ import { Button } from '../components/ui/button';
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <h4 class="font-semibold mb-3">Configuration :</h4>
-                <div class="bg-muted/50 rounded-lg p-4 font-mono text-sm">
+                <div class="bg-muted/50 rounded-lg p-4 font-mono text-sm" role="code" aria-label="E-commerce layout configuration code">
                   headerVariant="business"<br/>
                   footerVariant="comprehensive"<br/>
                   MegaMenu avec catégories<br/>
@@ -200,16 +200,16 @@ import { Button } from '../components/ui/button';
               </div>
               <div>
                 <h4 class="font-semibold mb-3">Cas d'usage :</h4>
-                <ul class="space-y-2 text-sm text-muted-foreground">
-                  <li>• Boutique en ligne, marketplace</li>
-                  <li>• Catalogue produits complexe</li>
-                  <li>• Navigation par catégories</li>
-                  <li>• Mobile shopping optimisé</li>
+                <ul class="space-y-2 text-sm text-muted-foreground" role="list" aria-label="E-commerce layout use cases">
+                  <li role="listitem">• Boutique en ligne, marketplace</li>
+                  <li role="listitem">• Catalogue produits complexe</li>
+                  <li role="listitem">• Navigation par catégories</li>
+                  <li role="listitem">• Mobile shopping optimisé</li>
                 </ul>
               </div>
             </div>
             <div class="mt-6 flex gap-3">
-              <Button variant="outline" size="sm">
+              <Button variant="outline" size="sm" aria-label="View e-commerce demo page with comprehensive navigation and mobile shopping features">
                 <a href="/ecommerce-demo" class="flex items-center">
                   🛒 Voir la démo →
                 </a>
@@ -219,10 +219,10 @@ import { Button } from '../components/ui/button';
         </Card>
 
         <!-- Portfolio/Minimal Layout -->
-        <Card className="overflow-hidden">
+        <Card className="overflow-hidden" role="listitem">
           <CardHeader className="bg-gradient-to-r from-purple-50 to-pink-100 dark:from-purple-950 dark:to-pink-900">
             <div class="flex items-center space-x-3">
-              <span class="text-3xl">🎨</span>
+              <span class="text-3xl" aria-hidden="true">🎨</span>
               <div>
                 <CardTitle className="text-xl">Portfolio / Créatif</CardTitle>
                 <CardDescription>Header: minimal + Footer: minimal + Focus contenu</CardDescription>
@@ -234,7 +234,7 @@ import { Button } from '../components/ui/button';
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <h4 class="font-semibold mb-3">Configuration :</h4>
-                <div class="bg-muted/50 rounded-lg p-4 font-mono text-sm">
+                <div class="bg-muted/50 rounded-lg p-4 font-mono text-sm" role="code" aria-label="Portfolio layout configuration code">
                   headerVariant="minimal"<br/>
                   footerVariant="minimal"<br/>
                   Navigation simple<br/>
@@ -243,38 +243,38 @@ import { Button } from '../components/ui/button';
               </div>
               <div>
                 <h4 class="font-semibold mb-3">Cas d'usage :</h4>
-                <ul class="space-y-2 text-sm text-muted-foreground">
-                  <li>• Portfolio designer, photographe</li>
-                  <li>• Artiste, créatif, freelance</li>
-                  <li>• Blog personnel, writing</li>
-                  <li>• Focus sur le contenu visuel</li>
+                <ul class="space-y-2 text-sm text-muted-foreground" role="list" aria-label="Portfolio layout use cases">
+                  <li role="listitem">• Portfolio designer, photographe</li>
+                  <li role="listitem">• Artiste, créatif, freelance</li>
+                  <li role="listitem">• Blog personnel, writing</li>
+                  <li role="listitem">• Focus sur le contenu visuel</li>
                 </ul>
               </div>
             </div>
             <div class="mt-6 flex gap-3">
-              <Button variant="outline" size="sm">
+              <Button variant="outline" size="sm" aria-label="View portfolio demo page with minimal design and content focus">
                 <a href="/portfolio-demo" class="flex items-center">
                   🎨 Voir la démo →
                 </a>
               </Button>
             </div>
           </CardContent>
-        </div>
+        </Card>
       </div>
     </div>
   </section>
 
   <!-- Touch Navigation Demo Live -->
-  <section class="py-16 bg-muted/30">
+  <section class="py-16 bg-muted/30" role="region" aria-labelledby="touch-nav-title">
     <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold text-center mb-12">
+      <h2 id="touch-nav-title" class="text-3xl font-bold text-center mb-12">
         📱 Touch Navigation en Action
       </h2>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" role="list" aria-label="Interactive touch navigation examples">
         
         <!-- Floating FAB -->
-        <Card className="relative overflow-hidden h-64">
+        <Card className="relative overflow-hidden h-64" role="listitem">
           <CardHeader className="pb-3">
             <CardTitle className="text-lg">Floating FAB</CardTitle>
             <CardDescription>SaaS / Applications</CardDescription>
@@ -285,15 +285,16 @@ import { Button } from '../components/ui/button';
               showBackToTop={true}
               currentPage="business-demo"
               client:load
+              aria-label="Floating action button navigation for SaaS applications"
             />
-            <div class="absolute bottom-4 left-4 text-xs text-muted-foreground">
+            <div class="absolute bottom-4 left-4 text-xs text-muted-foreground" aria-hidden="true">
               → Cliquez le bouton flottant
             </div>
           </CardContent>
         </Card>
 
         <!-- Bottom Navigation -->
-        <Card className="relative overflow-hidden h-64">
+        <Card className="relative overflow-hidden h-64" role="listitem">
           <CardHeader className="pb-3">
             <CardTitle className="text-lg">Bottom Nav</CardTitle>
             <CardDescription>E-commerce / Mobile</CardDescription>
@@ -303,15 +304,16 @@ import { Button } from '../components/ui/button';
               variant="bottom-nav"
               currentPage="business-demo"
               client:load
+              aria-label="Bottom navigation bar for mobile e-commerce applications"
             />
-            <div class="absolute bottom-16 left-4 text-xs text-muted-foreground">
+            <div class="absolute bottom-16 left-4 text-xs text-muted-foreground" aria-hidden="true">
               ↓ Navigation fixe en bas
             </div>
           </CardContent>
         </Card>
 
         <!-- Swipe Drawer -->
-        <Card className="relative overflow-hidden h-64">
+        <Card className="relative overflow-hidden h-64" role="listitem">
           <CardHeader className="pb-3">
             <CardTitle className="text-lg">Swipe Drawer</CardTitle>
             <CardDescription>Mobile First</CardDescription>
@@ -322,15 +324,16 @@ import { Button } from '../components/ui/button';
               enableSwipeToClose={true}
               currentPage="business-demo"
               client:load
+              aria-label="Swipe drawer navigation for mobile-first applications"
             />
-            <div class="absolute top-20 left-4 text-xs text-muted-foreground">
+            <div class="absolute top-20 left-4 text-xs text-muted-foreground" aria-hidden="true">
               ← Swipe depuis le bord gauche
             </div>
           </CardContent>
         </Card>
 
         <!-- Gesture Panel -->
-        <Card className="relative overflow-hidden h-64">
+        <Card className="relative overflow-hidden h-64" role="listitem">
           <CardHeader className="pb-3">
             <CardTitle className="text-lg">Gesture Panel</CardTitle>
             <CardDescription>Navigation Gestuelle</CardDescription>
@@ -342,8 +345,9 @@ import { Button } from '../components/ui/button';
               enablePullToRefresh={true}
               currentPage="business-demo"
               client:load
+              aria-label="Gesture-based navigation panel with swipe and pull-to-refresh features"
             />
-            <div class="absolute top-20 left-4 text-xs text-muted-foreground max-w-32">
+            <div class="absolute top-20 left-4 text-xs text-muted-foreground max-w-32" aria-hidden="true">
               Swipe horizontal pour naviguer entre pages
             </div>
           </CardContent>
@@ -351,25 +355,25 @@ import { Button } from '../components/ui/button';
       </div>
 
       <div class="mt-8 text-center">
-        <div class="bg-card border border-border rounded-lg p-6 max-w-4xl mx-auto">
-          <h3 class="font-semibold mb-4">💡 Comment tester les Touch Gestures :</h3>
+        <div class="bg-card border border-border rounded-lg p-6 max-w-4xl mx-auto" role="region" aria-labelledby="touch-test-guide">
+          <h3 id="touch-test-guide" class="font-semibold mb-4">💡 Comment tester les Touch Gestures :</h3>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-left">
-            <div>
-              <strong>Mobile / Tactile :</strong>
-              <ul class="mt-2 space-y-1 text-muted-foreground">
-                <li>• Swipe depuis bord gauche → ouvre drawer</li>
-                <li>• Swipe left/right → navigation pages</li>
-                <li>• Pull down depuis le top → refresh</li>
-                <li>• Long press → actions contextuelles</li>
+            <div role="group" aria-labelledby="mobile-instructions">
+              <strong id="mobile-instructions">Mobile / Tactile :</strong>
+              <ul class="mt-2 space-y-1 text-muted-foreground" role="list" aria-label="Mobile touch gesture instructions">
+                <li role="listitem">• Swipe depuis bord gauche → ouvre drawer</li>
+                <li role="listitem">• Swipe left/right → navigation pages</li>
+                <li role="listitem">• Pull down depuis le top → refresh</li>
+                <li role="listitem">• Long press → actions contextuelles</li>
               </ul>
             </div>
-            <div>
-              <strong>Desktop :</strong>
-              <ul class="mt-2 space-y-1 text-muted-foreground">
-                <li>• Click FAB → menu rapide</li>
-                <li>• Hover sur navigation → dropdowns</li>
-                <li>• Keyboard ESC → ferme menus</li>
-                <li>• Focus navigation → accessible</li>
+            <div role="group" aria-labelledby="desktop-instructions">
+              <strong id="desktop-instructions">Desktop :</strong>
+              <ul class="mt-2 space-y-1 text-muted-foreground" role="list" aria-label="Desktop interaction instructions">
+                <li role="listitem">• Click FAB → menu rapide</li>
+                <li role="listitem">• Hover sur navigation → dropdowns</li>
+                <li role="listitem">• Keyboard ESC → ferme menus</li>
+                <li role="listitem">• Focus navigation → accessible</li>
               </ul>
             </div>
           </div>
@@ -379,50 +383,50 @@ import { Button } from '../components/ui/button';
   </section>
 
   <!-- Business ROI Section -->
-  <section class="py-16">
+  <section class="py-16" role="region" aria-labelledby="roi-title">
     <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold text-center mb-12">
+      <h2 id="roi-title" class="text-3xl font-bold text-center mb-12">
         💰 ROI Business & Gain de Temps
       </h2>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8" role="list" aria-label="Business return on investment metrics">
         
-        <Card className="text-center">
+        <Card className="text-center" role="listitem">
           <CardHeader>
-            <div class="text-4xl mb-4">⚡</div>
+            <div class="text-4xl mb-4" aria-hidden="true">⚡</div>
             <CardTitle>10x Plus Rapide</CardTitle>
             <CardDescription>Développement sites professionnels</CardDescription>
           </CardHeader>
           <CardContent>
-            <div class="text-2xl font-bold text-primary mb-2">2-3 jours</div>
+            <div class="text-2xl font-bold text-primary mb-2" role="status" aria-label="Development time: 2 to 3 days">2-3 jours</div>
             <p class="text-sm text-muted-foreground">
               au lieu de 2-3 semaines pour un site complet avec tous les composants
             </p>
           </CardContent>
         </Card>
 
-        <Card className="text-center">
+        <Card className="text-center" role="listitem">
           <CardHeader>
-            <div class="text-4xl mb-4">🎯</div>
+            <div class="text-4xl mb-4" aria-hidden="true">🎯</div>
             <CardTitle>29 Composants</CardTitle>
             <CardDescription>Prêts pour production</CardDescription>
           </CardHeader>
           <CardContent>
-            <div class="text-2xl font-bold text-primary mb-2">100%</div>
+            <div class="text-2xl font-bold text-primary mb-2" role="status" aria-label="Component coverage: 100 percent">100%</div>
             <p class="text-sm text-muted-foreground">
               Composants testés, accessibles, dark mode, TypeScript, responsive
             </p>
           </CardContent>
         </Card>
 
-        <Card className="text-center">
+        <Card className="text-center" role="listitem">
           <CardHeader>
-            <div class="text-4xl mb-4">🏆</div>
+            <div class="text-4xl mb-4" aria-hidden="true">🏆</div>
             <CardTitle>Business Ready</CardTitle>
             <CardDescription>Configuration client instantanée</CardDescription>
           </CardHeader>
           <CardContent>
-            <div class="text-2xl font-bold text-primary mb-2">8 variants</div>
+            <div class="text-2xl font-bold text-primary mb-2" role="status" aria-label="Layout variants: 8 options">8 variants</div>
             <p class="text-sm text-muted-foreground">
               Header/Footer pour corporate, startup, e-commerce, portfolio
             </p>
@@ -433,23 +437,23 @@ import { Button } from '../components/ui/button';
       <!-- Action Buttons -->
       <div class="mt-12 text-center space-y-4">
         <h3 class="text-xl font-semibold">🚀 Prêt à tester tous les variants ?</h3>
-        <div class="flex flex-wrap justify-center gap-4">
-          <Button size="lg">
+        <div class="flex flex-wrap justify-center gap-4" role="group" aria-label="Demo page navigation buttons">
+          <Button size="lg" aria-label="View corporate demo with business professional layout">
             <a href="/corporate-demo" class="flex items-center">
               🏢 Corporate Demo
             </a>
           </Button>
-          <Button variant="outline" size="lg">
+          <Button variant="outline" size="lg" aria-label="View startup demo with modern landing page design">
             <a href="/startup-demo" class="flex items-center">  
               🚀 Startup Demo
             </a>
           </Button>
-          <Button variant="outline" size="lg">
+          <Button variant="outline" size="lg" aria-label="View e-commerce demo with comprehensive navigation">
             <a href="/ecommerce-demo" class="flex items-center">
               🛒 E-commerce Demo
             </a>
           </Button>
-          <Button variant="outline" size="lg">
+          <Button variant="outline" size="lg" aria-label="View portfolio demo with minimal creative design">
             <a href="/portfolio-demo" class="flex items-center">
               🎨 Portfolio Demo
             </a>
