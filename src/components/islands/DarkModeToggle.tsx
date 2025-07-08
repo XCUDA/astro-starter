@@ -64,9 +64,15 @@ export default function DarkModeToggle() {
         size="sm"
         disabled
         className="w-9 h-9 p-0"
+        role="switch"
+        aria-checked={false}
         aria-label="Loading theme toggle"
+        aria-describedby="theme-loading-description"
       >
         <div className="w-4 h-4 animate-pulse bg-muted-foreground/30 rounded-full" />
+        <span id="theme-loading-description" className="sr-only">
+          Theme toggle is loading, please wait
+        </span>
       </Button>
     );
   }
@@ -77,8 +83,11 @@ export default function DarkModeToggle() {
       size="sm"
       onClick={toggleTheme}
       className="w-9 h-9 p-0 hover:scale-105 transition-all duration-200"
-      aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-      title={isDark ? 'Light mode' : 'Dark mode'}
+      role="switch"
+      aria-checked={isDark}
+      aria-label={`Theme toggle: currently ${isDark ? 'dark' : 'light'} mode`}
+      aria-describedby="theme-toggle-description"
+      title={`Switch to ${isDark ? 'light' : 'dark'} mode`}
     >
       {isDark ? (
         // Sun icon (switch to light)
@@ -113,6 +122,11 @@ export default function DarkModeToggle() {
           />
         </svg>
       )}
+      
+      {/* Hidden description for screen readers */}
+      <span id="theme-toggle-description" className="sr-only">
+        Press to toggle between dark and light theme modes
+      </span>
     </Button>
   );
 }
