@@ -31,7 +31,6 @@ export default function StickyHeader({
   // Hydratation
   useEffect(() => {
     setIsClient(true);
-    console.log('🚀 StickyHeader: Hydraté côté client !', { behavior, variant });
   }, []);
 
   // Scroll Logic CORRIGÉE
@@ -56,7 +55,6 @@ export default function StickyHeader({
           
         case 'always-visible':
           setIsVisible(true); // 🔧 TOUJOURS visible !
-          console.log('📌 Always-visible: header should ALWAYS be visible');
           break;
           
         case 'scroll-up-show':
@@ -65,7 +63,6 @@ export default function StickyHeader({
           } else {
             const scrollingUp = scrollY < lastScrollY.current;
             setIsVisible(scrollingUp);
-            console.log('📜 Scroll-up-show:', { scrollY, scrollingUp, visible: scrollingUp });
           }
           break;
           
