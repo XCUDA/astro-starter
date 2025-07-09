@@ -344,7 +344,7 @@
 - [x] **Layout showcase** page dédiée variants Header/Footer
 - [x] **Grid showcase** page dédiée Grid System complet
 - [x] **Sidebar showcase** page dédiée Sidebar Navigation système
-- [x] **Sticky header demo** page dédiée comportements sticky intelligents
+- [x] **Sticky header showcase** page dédiée comportements sticky intelligents
 - [x] **FAB showcase** page dédiée Floating Action Buttons système
 - [x] **Scroll indicators showcase** page dédiée système scroll tracking complet
 - [x] **Smooth transitions showcase** page dédiée système animations complet
