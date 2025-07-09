@@ -1,548 +1,405 @@
-import React, { useState } from 'react';
+// NavigationDemo.tsx - Navigation & Feedback Components Demo (Sprint 2)
+// Path: src/components/islands/NavigationDemo.tsx
+
+import { useState } from 'react';
+import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { 
-  Breadcrumb, 
-  BreadcrumbItem, 
-  BreadcrumbLink, 
-  BreadcrumbList, 
-  BreadcrumbPage, 
-  BreadcrumbSeparator 
-} from '@/components/ui/breadcrumb';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from '@/components/ui/breadcrumb';
 
-type AlertType = 'default' | 'destructive';
-
-interface AlertMessage {
-  id: number;
-  type: AlertType;
-  title: string;
-  message: string;
-}
-
+// Demo Component for Navigation & Feedback
 export default function NavigationDemo() {
-  // Navigation state
-  const [currentSection, setCurrentSection] = useState('accueil');
-  const [cartItems, setCartItems] = useState(0);
-  const [notifications, setNotifications] = useState(3);
-  const [messages, setMessages] = useState(2);
+  const [activeAlert, setActiveAlert] = useState<string | null>(null);
+  const [currentPage, setCurrentPage] = useState('services');
 
-  // Alert system (legitimate persistent alerts)
-  const [activeAlerts, setActiveAlerts] = useState<AlertMessage[]>([]);
-  const [alertCounter, setAlertCounter] = useState(1);
-
-  // Navigation paths for breadcrumb demo
-  const navigationPaths = {
-    'accueil': ['Accueil'],
-    'produits': ['Accueil', 'Produits'],
-    'smartphones': ['Accueil', 'Produits', 'Smartphones'],
-    'iphone': ['Accueil', 'Produits', 'Smartphones', 'iPhone 15 Pro'],
-    'panier': ['Accueil', 'Mon Panier']
-  };
-
-  // Alert management
-  const addAlert = (type: AlertType, title: string, message: string) => {
-    const newAlert: AlertMessage = {
-      id: alertCounter,
-      type,
-      title,
-      message
-    };
-    setActiveAlerts(prev => [...prev, newAlert]);
-    setAlertCounter(prev => prev + 1);
-
-    // Auto-remove after 5 seconds
-    setTimeout(() => {
-      setActiveAlerts(prev => prev.filter(alert => alert.id !== newAlert.id));
-    }, 5000);
-  };
-
-  // Navigation actions
-  const navigateTo = (section: string) => {
-    setCurrentSection(section);
-  };
-
-  const addToCart = () => {
-    setCartItems(prev => prev + 1);
-    addAlert('default', '✅ Succès', 'Produit ajouté au panier !');
-  };
-
-  const removeFromCart = () => {
-    if (cartItems > 0) {
-      setCartItems(prev => prev - 1);
-      addAlert('default', 'ℹ️ Info', 'Article retiré du panier');
-    }
-  };
-
-  const addMessage = () => {
-    setMessages(prev => prev + 1);
-    setNotifications(prev => prev + 1);
-    addAlert('default', '📩 Message', 'Nouveau message reçu !');
-  };
-
-  const readMessage = () => {
-    if (messages > 0) {
-      setMessages(prev => prev - 1);
-      if (notifications > 0) {
-        setNotifications(prev => prev - 1);
-      }
-      addAlert('default', '👀 Lu', 'Message marqué comme lu');
-    }
+  const showAlert = (type: string) => {
+    setActiveAlert(type);
+    // Auto-hide after 3 seconds
+    setTimeout(() => setActiveAlert(null), 3000);
   };
 
   return (
-    <div className="space-y-12">
+    <div className="space-y-8" role="region" aria-label="Navigation and Feedback Components Demo">
       
-      {/* Active Alerts Display */}
-      {activeAlerts.length > 0 && (
+      {/* Breadcrumb Demo */}
+      <div className="bg-card border border-border rounded-lg p-6" role="region" aria-labelledby="breadcrumb-demo">
+        <h3 id="breadcrumb-demo" className="text-lg font-semibold text-card-foreground mb-4">
+          🧭 Breadcrumb Navigation
+        </h3>
         <div className="space-y-4">
-          <h3 className="text-lg font-semibold">🔔 Alertes actives :</h3>
-          {activeAlerts.map((alert) => (
-            <Alert key={alert.id} variant={alert.type}>
-              <AlertTitle>{alert.title}</AlertTitle>
-              <AlertDescription>{alert.message}</AlertDescription>
-            </Alert>
-          ))}
+          <Breadcrumb aria-label="Business website navigation breadcrumb">
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <BreadcrumbLink 
+                  href="/" 
+                  className="hover:text-primary transition-colors"
+                  aria-label="Navigate to home page"
+                >
+                  Accueil
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbLink 
+                  href="/services" 
+                  className="hover:text-primary transition-colors"
+                  aria-label="Navigate to services page"
+                >
+                  Services
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbPage aria-current="page">
+                  Consultation Marketing
+                </BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4" role="list" aria-label="Breadcrumb navigation examples">
+            <Button 
+              variant="outline" 
+              size="sm"
+              onClick={() => setCurrentPage('home')}
+              className="text-sm"
+              aria-label="Change breadcrumb to home page example"
+              role="listitem"
+            >
+              📍 Page d&apos;accueil
+            </Button>
+            <Button 
+              variant="outline" 
+              size="sm"
+              onClick={() => setCurrentPage('services')}
+              className="text-sm"
+              aria-label="Change breadcrumb to services page example"
+              role="listitem"
+            >
+              🏢 Page Services
+            </Button>
+            <Button 
+              variant="outline" 
+              size="sm"
+              onClick={() => setCurrentPage('portfolio')}
+              className="text-sm"
+              aria-label="Change breadcrumb to portfolio page example"
+              role="listitem"
+            >
+              💼 Portfolio Client
+            </Button>
+          </div>
         </div>
-      )}
+      </div>
 
-      {/* Breadcrumb Component Demo */}
-      <section>
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              🧭 Breadcrumb Component - Navigation Hiérarchique
-            </CardTitle>
-            <CardDescription>
-              Navigation par fil d'Ariane pour sites e-commerce et applications. Améliore l'UX et aide au référencement.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            
-            {/* Current Breadcrumb */}
-            <div>
-              <h3 className="text-lg font-semibold mb-4">📍 Position actuelle</h3>
-              <div className="p-4 border rounded-lg bg-muted/30">
-                <Breadcrumb>
-                  <BreadcrumbList>
-                    {navigationPaths[currentSection as keyof typeof navigationPaths]?.map((item, index, array) => (
-                      <React.Fragment key={index}>
-                        <BreadcrumbItem>
-                          {index === array.length - 1 ? (
-                            <BreadcrumbPage className="font-semibold">{item}</BreadcrumbPage>
-                          ) : (
-                            <BreadcrumbLink 
-                              href="#"
-                              className="hover:text-primary transition-colors"
-                              onClick={(e) => {
-                                e.preventDefault();
-                                if (index === 0) navigateTo('accueil');
-                                if (index === 1 && array.length > 2) navigateTo('produits');
-                                if (index === 2 && array.length > 3) navigateTo('smartphones');
-                              }}
-                            >
-                              {item}
-                            </BreadcrumbLink>
-                          )}
-                        </BreadcrumbItem>
-                        {index < array.length - 1 && <BreadcrumbSeparator />}
-                      </React.Fragment>
-                    ))}
-                  </BreadcrumbList>
-                </Breadcrumb>
-              </div>
-            </div>
-
-            {/* Navigation Simulation */}
-            <div>
-              <h3 className="text-lg font-semibold mb-4">🛍️ Simuler navigation e-commerce</h3>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                <Button 
-                  variant="outline" 
-                  size="sm"
-                  onClick={() => navigateTo('accueil')}
-                  className={currentSection === 'accueil' ? 'bg-primary text-primary-foreground' : ''}
-                >
-                  🏠 Accueil
-                </Button>
-                <Button 
-                  variant="outline" 
-                  size="sm"
-                  onClick={() => navigateTo('produits')}
-                  className={currentSection === 'produits' ? 'bg-primary text-primary-foreground' : ''}
-                >
-                  📱 Produits
-                </Button>
-                <Button 
-                  variant="outline" 
-                  size="sm"
-                  onClick={() => navigateTo('smartphones')}
-                  className={currentSection === 'smartphones' ? 'bg-primary text-primary-foreground' : ''}
-                >
-                  📲 Smartphones
-                </Button>
-                <Button 
-                  variant="outline" 
-                  size="sm"
-                  onClick={() => navigateTo('iphone')}
-                  className={currentSection === 'iphone' ? 'bg-primary text-primary-foreground' : ''}
-                >
-                  🍎 iPhone 15 Pro
-                </Button>
-                <Button 
-                  variant="outline" 
-                  size="sm"
-                  onClick={() => navigateTo('panier')}
-                  className={currentSection === 'panier' ? 'bg-primary text-primary-foreground' : ''}
-                >
-                  🛒 Mon Panier
-                </Button>
-              </div>
-            </div>
-
-            <div className="text-sm text-muted-foreground">
-              💡 Cliquez sur les boutons pour naviguer et voir le breadcrumb s'adapter. Les liens sont cliquables pour remonter.
-            </div>
-          </CardContent>
-        </Card>
-      </section>
-
-      {/* Tabs Component Demo */}
-      <section>
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              📑 Tabs Component - Organisation de Contenu
-            </CardTitle>
-            <CardDescription>
-              Organisation par onglets pour sites vitrine, portfolios et documentation. Structure claire et navigation intuitive.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Tabs defaultValue="about" className="w-full">
-              <TabsList className="grid w-full grid-cols-4">
-                <TabsTrigger value="about">À Propos</TabsTrigger>
-                <TabsTrigger value="services">Services</TabsTrigger>
-                <TabsTrigger value="portfolio">Portfolio</TabsTrigger>
-                <TabsTrigger value="team">Équipe</TabsTrigger>
-              </TabsList>
-              
-              <TabsContent value="about" className="mt-6 space-y-4">
-                <h3 className="text-lg font-semibold">🏢 À Propos de Notre Agence</h3>
-                <p className="text-muted-foreground">
-                  Agence web spécialisée dans la création de sites professionnels avec Astro, React et TailwindCSS. 
-                  Nous accompagnons TPE, PME et startups dans leur transformation digitale avec des solutions 
-                  modernes, performantes et adaptées à leurs besoins métier.
+      {/* Tabs Demo */}
+      <div className="bg-card border border-border rounded-lg p-6" role="region" aria-labelledby="tabs-demo">
+        <h3 id="tabs-demo" className="text-lg font-semibold text-card-foreground mb-4">
+          📂 Tabs Organization
+        </h3>
+        <Tabs defaultValue="about" className="w-full">
+          <TabsList className="grid w-full grid-cols-4" role="tablist" aria-label="Company information tabs">
+            <TabsTrigger value="about" aria-controls="about-panel" aria-label="About company tab">À Propos</TabsTrigger>
+            <TabsTrigger value="services" aria-controls="services-panel" aria-label="Services offered tab">Services</TabsTrigger>
+            <TabsTrigger value="portfolio" aria-controls="portfolio-panel" aria-label="Portfolio showcase tab">Portfolio</TabsTrigger>
+            <TabsTrigger value="team" aria-controls="team-panel" aria-label="Team members tab">Équipe</TabsTrigger>
+          </TabsList>
+          
+          <TabsContent 
+            value="about" 
+            id="about-panel"
+            role="tabpanel"
+            aria-labelledby="about-tab"
+            className="space-y-4 mt-4"
+          >
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="bg-muted/50 p-4 rounded-lg">
+                <h4 className="font-semibold text-foreground mb-2">Notre Mission</h4>
+                <p className="text-sm text-muted-foreground">
+                  Accompagner nos clients dans leur transformation digitale avec des solutions sur-mesure.
                 </p>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-                  <div className="p-3 border rounded-lg text-center">
-                    <div className="text-2xl font-bold text-primary">50+</div>
-                    <div className="text-sm text-muted-foreground">Projets livrés</div>
-                  </div>
-                  <div className="p-3 border rounded-lg text-center">
-                    <div className="text-2xl font-bold text-primary">5 ans</div>
-                    <div className="text-sm text-muted-foreground">D'expérience</div>
-                  </div>
-                  <div className="p-3 border rounded-lg text-center">
-                    <div className="text-2xl font-bold text-primary">100%</div>
-                    <div className="text-sm text-muted-foreground">Satisfaction</div>
-                  </div>
-                </div>
-              </TabsContent>
-              
-              <TabsContent value="services" className="mt-6 space-y-4">
-                <h3 className="text-lg font-semibold">🛠️ Nos Services</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="p-4 border rounded-lg">
-                    <h4 className="font-semibold mb-2">🌐 Sites Vitrine</h4>
-                    <p className="text-sm text-muted-foreground mb-2">
-                      Sites professionnels responsives avec CMS intégré
-                    </p>
-                    <div className="text-sm font-medium text-primary">À partir de 1200€</div>
-                  </div>
-                  <div className="p-4 border rounded-lg">
-                    <h4 className="font-semibold mb-2">🛒 E-commerce</h4>
-                    <p className="text-sm text-muted-foreground mb-2">
-                      Boutiques en ligne avec paiement sécurisé
-                    </p>
-                    <div className="text-sm font-medium text-primary">À partir de 3500€</div>
-                  </div>
-                  <div className="p-4 border rounded-lg">
-                    <h4 className="font-semibold mb-2">📱 Applications Web</h4>
-                    <p className="text-sm text-muted-foreground mb-2">
-                      SaaS et plateformes métier sur mesure
-                    </p>
-                    <div className="text-sm font-medium text-primary">Sur devis</div>
-                  </div>
-                  <div className="p-4 border rounded-lg">
-                    <h4 className="font-semibold mb-2">🔧 Maintenance</h4>
-                    <p className="text-sm text-muted-foreground mb-2">
-                      Support technique et évolutions
-                    </p>
-                    <div className="text-sm font-medium text-primary">50€/mois</div>
-                  </div>
-                </div>
-              </TabsContent>
-              
-              <TabsContent value="portfolio" className="mt-6 space-y-4">
-                <h3 className="text-lg font-semibold">🎨 Portfolio Projets</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {[
-                    { name: 'Restaurant Le Gourmet', type: 'Site Vitrine', tech: 'Astro + React' },
-                    { name: 'Boutique Mode', type: 'E-commerce', tech: 'Next.js + Stripe' },
-                    { name: 'Cabinet Médical', type: 'Site Pro', tech: 'Astro + CMS' },
-                    { name: 'Startup FinTech', type: 'Application', tech: 'React + Node.js' },
-                    { name: 'Artisan Local', type: 'Site Vitrine', tech: 'Astro + Tailwind' },
-                    { name: 'SaaS Analytics', type: 'Dashboard', tech: 'React + Charts' }
-                  ].map((project, index) => (
-                    <div key={index} className="p-4 border rounded-lg hover:bg-muted/50 transition-colors">
-                      <h4 className="font-semibold mb-1">{project.name}</h4>
-                      <Badge variant="secondary" className="text-xs mb-2">{project.type}</Badge>
-                      <p className="text-xs text-muted-foreground">{project.tech}</p>
-                    </div>
-                  ))}
-                </div>
-              </TabsContent>
-              
-              <TabsContent value="team" className="mt-6 space-y-4">
-                <h3 className="text-lg font-semibold">👥 Notre Équipe</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {[
-                    { 
-                      name: 'Angelo Bedoni', 
-                      role: 'Lead Developer', 
-                      skills: 'Astro, React, TypeScript, Node.js',
-                      bio: 'Passionné par les technologies modernes et l\'architecture web performante.'
-                    },
-                    { 
-                      name: 'Sarah Chen', 
-                      role: 'UX/UI Designer', 
-                      skills: 'Figma, Design System, User Research',
-                      bio: 'Créatrice d\'expériences utilisateur intuitives et accessibles.'
-                    },
-                    { 
-                      name: 'Marc Dubois', 
-                      role: 'Project Manager', 
-                      skills: 'Agile, Scrum, Customer Success',
-                      bio: 'Garant de la qualité et du respect des délais projets.'
-                    },
-                    { 
-                      name: 'Lisa Rodriguez', 
-                      role: 'Content Strategist', 
-                      skills: 'SEO, Copywriting, Analytics',
-                      bio: 'Experte en contenu optimisé pour conversion et référencement.'
-                    }
-                  ].map((member, index) => (
-                    <div key={index} className="p-4 border rounded-lg">
-                      <h4 className="font-semibold">{member.name}</h4>
-                      <Badge variant="outline" className="text-xs my-2">{member.role}</Badge>
-                      <p className="text-sm text-muted-foreground mb-2">{member.bio}</p>
-                      <p className="text-xs font-medium">Compétences: {member.skills}</p>
-                    </div>
-                  ))}
-                </div>
-              </TabsContent>
-            </Tabs>
-
-            <div className="text-sm text-muted-foreground mt-6">
-              💡 Navigation par onglets idéale pour organiser information sans surcharge. Contenu riche pour sites vitrine.
-            </div>
-          </CardContent>
-        </Card>
-      </section>
-
-      {/* Badge Component Demo */}
-      <section>
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              🏷️ Badge Component - Statuts et Notifications
-            </CardTitle>
-            <CardDescription>
-              Badges pour statuts produits, promotions, compteurs de notifications. Essentiels pour e-commerce et dashboards.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            
-            {/* Interactive Badges */}
-            <div>
-              <h3 className="text-lg font-semibold mb-4">📊 Badges Interactifs</h3>
-              <div className="flex flex-wrap gap-4 items-center">
-                <div className="flex items-center gap-2">
-                  <span className="text-sm">Panier:</span>
-                  <Badge variant="default" className="relative">
-                    🛒 {cartItems}
-                  </Badge>
-                </div>
-                
-                <div className="flex items-center gap-2">
-                  <span className="text-sm">Notifications:</span>
-                  <Badge variant="destructive" className="relative">
-                    🔔 {notifications}
-                  </Badge>
-                </div>
-                
-                <div className="flex items-center gap-2">
-                  <span className="text-sm">Messages:</span>
-                  <Badge variant="secondary" className="relative">
-                    📩 {messages}
-                  </Badge>
-                </div>
               </div>
-              
-              {/* Badge Controls */}
-              <div className="flex flex-wrap gap-2 mt-4">
-                <Button size="sm" onClick={addToCart}>+ Ajouter au panier</Button>
-                <Button size="sm" variant="outline" onClick={removeFromCart}>- Retirer du panier</Button>
-                <Button size="sm" onClick={addMessage}>+ Nouveau message</Button>
-                <Button size="sm" variant="outline" onClick={readMessage}>Lire message</Button>
+              <div className="bg-muted/50 p-4 rounded-lg">
+                <h4 className="font-semibold text-foreground mb-2">Nos Valeurs</h4>
+                <p className="text-sm text-muted-foreground">
+                  Innovation, qualité, proximité client et excellence technique au service de vos projets.
+                </p>
               </div>
             </div>
-
-            {/* Badge Variants Demo */}
-            <div>
-              <h3 className="text-lg font-semibold mb-4">🎨 Variants de Badges</h3>
-              <div className="flex flex-wrap gap-3">
-                <Badge variant="default">Nouveau</Badge>
-                <Badge variant="secondary">En stock</Badge>
-                <Badge variant="destructive">Rupture</Badge>
-                <Badge variant="outline">Promo -20%</Badge>
-                <Badge className="bg-green-100 text-green-800 hover:bg-green-200">Livraison gratuite</Badge>
-                <Badge className="bg-blue-100 text-blue-800 hover:bg-blue-200">Best seller</Badge>
-                <Badge className="bg-purple-100 text-purple-800 hover:bg-purple-200">Exclusif</Badge>
+          </TabsContent>
+          
+          <TabsContent 
+            value="services" 
+            id="services-panel"
+            role="tabpanel"
+            aria-labelledby="services-tab"
+            className="space-y-4 mt-4"
+          >
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4" role="list" aria-label="Services offered">
+              <div className="bg-primary/5 p-4 rounded-lg border border-primary/20" role="listitem">
+                <h4 className="font-semibold text-primary mb-2">🌐 Développement Web</h4>
+                <p className="text-sm text-muted-foreground">Sites vitrine, e-commerce, applications web</p>
+              </div>
+              <div className="bg-secondary/5 p-4 rounded-lg border border-secondary/20" role="listitem">
+                <h4 className="font-semibold text-secondary-foreground mb-2">📱 Applications Mobiles</h4>
+                <p className="text-sm text-muted-foreground">Apps natives et hybrides pour iOS/Android</p>
+              </div>
+              <div className="bg-accent/5 p-4 rounded-lg border border-accent/20" role="listitem">
+                <h4 className="font-semibold text-accent-foreground mb-2">🎨 Design UX/UI</h4>
+                <p className="text-sm text-muted-foreground">Interfaces modernes et user-friendly</p>
               </div>
             </div>
-
-            <div className="text-sm text-muted-foreground">
-              💡 Utilisez les boutons pour voir les compteurs s'incrémenter. Parfait pour e-commerce et notifications.
-            </div>
-          </CardContent>
-        </Card>
-      </section>
-
-      {/* Alert Component Demo */}
-      <section>
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              ⚠️ Alert Component - Messages Système
-            </CardTitle>
-            <CardDescription>
-              Alertes persistantes pour informations importantes, erreurs système et confirmations d'actions.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            
-            {/* Alert Generator */}
-            <div>
-              <h3 className="text-lg font-semibold mb-4">🔔 Générateur d'Alertes</h3>
-              <p className="text-sm text-muted-foreground mb-4">
-                Testez les alertes interactives
-              </p>
-              
-              <div className="grid grid-cols-2 gap-2">
-                <Button 
-                  variant="outline" 
-                  size="sm"
-                  onClick={() => addAlert('default', '✅ Succès', 'Action réalisée avec succès !')}
-                >
-                  Succès
-                </Button>
-                <Button 
-                  variant="outline" 
-                  size="sm"
-                  onClick={() => addAlert('default', 'ℹ️ Info', 'Nouvelle fonctionnalité disponible')}
-                >
-                  Info
-                </Button>
-                <Button 
-                  variant="outline" 
-                  size="sm"
-                  onClick={() => addAlert('destructive', '❌ Erreur', 'Une erreur est survenue')}
-                >
-                  Erreur
-                </Button>
-                <Button 
-                  variant="outline" 
-                  size="sm"
-                  onClick={() => addAlert('destructive', '⚠️ Warning', 'Action potentiellement destructive')}
-                >
-                  Warning
-                </Button>
+          </TabsContent>
+          
+          <TabsContent 
+            value="portfolio" 
+            id="portfolio-panel"
+            role="tabpanel"
+            aria-labelledby="portfolio-tab"
+            className="space-y-4 mt-4"
+          >
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6" role="list" aria-label="Portfolio projects">
+              <div className="bg-card border border-border rounded-lg overflow-hidden" role="listitem">
+                <div className="bg-gradient-to-r from-blue-500 to-purple-600 h-32 flex items-center justify-center">
+                  <span className="text-white font-semibold">E-commerce Fashion</span>
+                </div>
+                <div className="p-4">
+                  <h4 className="font-semibold mb-2">Boutique Mode Premium</h4>
+                  <p className="text-sm text-muted-foreground">Site e-commerce complet avec paiement sécurisé</p>
+                </div>
               </div>
-              
-              <p className="text-sm text-muted-foreground mt-4">
-                💡 Les alertes apparaissent en haut et disparaissent automatiquement après 5 secondes.
-              </p>
-            </div>
-
-            {/* Alert Examples */}
-            <div>
-              <h3 className="text-lg font-semibold mb-4">📋 Exemples d'Alertes</h3>
-              <div className="space-y-3">
-                <Alert>
-                  <AlertTitle>Information importante</AlertTitle>
-                  <AlertDescription>
-                    Maintenance programmée le dimanche 15 janvier de 2h à 4h du matin. 
-                    Les services peuvent être temporairement indisponibles.
-                  </AlertDescription>
-                </Alert>
-                
-                <Alert variant="destructive">
-                  <AlertTitle>Erreur de connexion</AlertTitle>
-                  <AlertDescription>
-                    Impossible de se connecter au serveur. Vérifiez votre connexion internet 
-                    et réessayez dans quelques minutes.
-                  </AlertDescription>
-                </Alert>
+              <div className="bg-card border border-border rounded-lg overflow-hidden" role="listitem">
+                <div className="bg-gradient-to-r from-green-500 to-teal-600 h-32 flex items-center justify-center">
+                  <span className="text-white font-semibold">SaaS Dashboard</span>
+                </div>
+                <div className="p-4">
+                  <h4 className="font-semibold mb-2">Plateforme Analytics</h4>
+                  <p className="text-sm text-muted-foreground">Dashboard temps réel avec visualisations</p>
+                </div>
               </div>
             </div>
-
-            <div className="text-sm text-muted-foreground">
-              💡 Alertes persistantes vs notifications temporaires. Deux systèmes complémentaires pour UX optimale.
-            </div>
-          </CardContent>
-        </Card>
-      </section>
-
-      {/* Sprint 2 Summary */}
-      <section>
-        <Card className="border-blue-200 bg-blue-50 dark:border-blue-800 dark:bg-blue-950/20">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-blue-800 dark:text-blue-200">
-              🎊 Sprint 2 Navigation & Feedback - Completed!
-            </CardTitle>
-            <CardDescription className="text-blue-700 dark:text-blue-300">
-              Système complet de navigation et feedback utilisateur avec cas d'usage business réalistes.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-              <div>
-                <h4 className="font-semibold mb-2 text-blue-800 dark:text-blue-200">✅ Composants ajoutés:</h4>
-                <ul className="space-y-1 text-blue-700 dark:text-blue-300">
-                  <li>• <strong>Breadcrumb:</strong> Navigation hiérarchique e-commerce</li>
-                  <li>• <strong>Tabs:</strong> Organisation contenu site vitrine</li>
-                  <li>• <strong>Alert:</strong> Messages système persistants</li>
-                  <li>• <strong>Badge:</strong> Statuts et compteurs notifications</li>
-                </ul>
+          </TabsContent>
+          
+          <TabsContent 
+            value="team" 
+            id="team-panel"
+            role="tabpanel"
+            aria-labelledby="team-tab"
+            className="space-y-4 mt-4"
+          >
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4" role="list" aria-label="Team members">
+              <div className="text-center" role="listitem">
+                <div className="w-16 h-16 bg-primary/20 rounded-full mx-auto mb-3 flex items-center justify-center">
+                  <span className="text-2xl" aria-hidden="true">👨‍💻</span>
+                </div>
+                <h4 className="font-semibold">Jean Dupont</h4>
+                <p className="text-sm text-muted-foreground">Lead Developer</p>
               </div>
-              <div>
-                <h4 className="font-semibold mb-2 text-blue-800 dark:text-blue-200">🎯 Capacités business:</h4>
-                <ul className="space-y-1 text-blue-700 dark:text-blue-300">
-                  <li>• Navigation e-commerce complète</li>
-                  <li>• Sites vitrine avec organisation par onglets</li>
-                  <li>• Système d'alertes et notifications</li>
-                  <li>• Badges dynamiques pour engagement</li>
-                </ul>
+              <div className="text-center" role="listitem">
+                <div className="w-16 h-16 bg-secondary/20 rounded-full mx-auto mb-3 flex items-center justify-center">
+                  <span className="text-2xl" aria-hidden="true">🎨</span>
+                </div>
+                <h4 className="font-semibold">Marie Martin</h4>
+                <p className="text-sm text-muted-foreground">UI/UX Designer</p>
+              </div>
+              <div className="text-center" role="listitem">
+                <div className="w-16 h-16 bg-accent/20 rounded-full mx-auto mb-3 flex items-center justify-center">
+                  <span className="text-2xl" aria-hidden="true">📊</span>
+                </div>
+                <h4 className="font-semibold">Paul Dubois</h4>
+                <p className="text-sm text-muted-foreground">Project Manager</p>
               </div>
             </div>
-          </CardContent>
-        </Card>
-      </section>
+          </TabsContent>
+        </Tabs>
+      </div>
 
+      {/* Alert Demo */}
+      <div className="bg-card border border-border rounded-lg p-6" role="region" aria-labelledby="alert-demo">
+        <h3 id="alert-demo" className="text-lg font-semibold text-card-foreground mb-4">
+          ⚠️ Alert System
+        </h3>
+        
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4" role="group" aria-labelledby="alert-triggers">
+          <span id="alert-triggers" className="sr-only">Alert trigger buttons</span>
+          <Button 
+            variant="outline" 
+            size="sm"
+            onClick={() => showAlert('info')}
+            className="text-blue-600 border-blue-200 hover:bg-blue-50"
+            aria-label="Show information alert"
+          >
+            📢 Info
+          </Button>
+          <Button 
+            variant="outline" 
+            size="sm"
+            onClick={() => showAlert('success')}
+            className="text-green-600 border-green-200 hover:bg-green-50"
+            aria-label="Show success alert"
+          >
+            ✅ Succès
+          </Button>
+          <Button 
+            variant="outline" 
+            size="sm"
+            onClick={() => showAlert('warning')}
+            className="text-orange-600 border-orange-200 hover:bg-orange-50"
+            aria-label="Show warning alert"
+          >
+            ⚠️ Warning
+          </Button>
+          <Button 
+            variant="outline" 
+            size="sm"
+            onClick={() => showAlert('error')}
+            className="text-red-600 border-red-200 hover:bg-red-50"
+            aria-label="Show error alert"
+          >
+            ❌ Erreur
+          </Button>
+        </div>
+
+        {activeAlert && (
+          <div 
+            className="transition-all duration-300 ease-in-out"
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+          >
+            {activeAlert === 'info' && (
+              <Alert className="border-blue-200 bg-blue-50 dark:bg-blue-950 dark:border-blue-800">
+                <AlertDescription className="text-blue-700 dark:text-blue-300">
+                  📢 <strong>Information :</strong> Votre demande a été prise en compte et sera traitée sous 24h.
+                </AlertDescription>
+              </Alert>
+            )}
+            {activeAlert === 'success' && (
+              <Alert className="border-green-200 bg-green-50 dark:bg-green-950 dark:border-green-800">
+                <AlertDescription className="text-green-700 dark:text-green-300">
+                  ✅ <strong>Succès :</strong> Votre commande a été confirmée ! Numéro de suivi : #CMD2024-001
+                </AlertDescription>
+              </Alert>
+            )}
+            {activeAlert === 'warning' && (
+              <Alert className="border-orange-200 bg-orange-50 dark:bg-orange-950 dark:border-orange-800">
+                <AlertDescription className="text-orange-700 dark:text-orange-300">
+                  ⚠️ <strong>Attention :</strong> Stock limité - Il ne reste que 3 exemplaires de ce produit.
+                </AlertDescription>
+              </Alert>
+            )}
+            {activeAlert === 'error' && (
+              <Alert className="border-red-200 bg-red-50 dark:bg-red-950 dark:border-red-800">
+                <AlertDescription className="text-red-700 dark:text-red-300">
+                  ❌ <strong>Erreur :</strong> Échec du paiement. Veuillez vérifier vos informations bancaires.
+                </AlertDescription>
+              </Alert>
+            )}
+          </div>
+        )}
+      </div>
+
+      {/* Badge Demo */}
+      <div className="bg-card border border-border rounded-lg p-6" role="region" aria-labelledby="badge-demo">
+        <h3 id="badge-demo" className="text-lg font-semibold text-card-foreground mb-4">
+          🏷️ Badge System
+        </h3>
+        
+        <div className="space-y-6">
+          {/* Product Status Badges */}
+          <div role="group" aria-labelledby="product-status">
+            <h4 id="product-status" className="font-medium text-foreground mb-3">Statuts Produits :</h4>
+            <div className="flex flex-wrap gap-3" role="list" aria-label="Product status badges">
+              <Badge variant="default" className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200" role="listitem">
+                ✅ En Stock
+              </Badge>
+              <Badge variant="secondary" className="bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200" role="listitem">
+                ⏳ Stock Limité
+              </Badge>
+              <Badge variant="destructive" role="listitem">
+                ❌ Rupture
+              </Badge>
+              <Badge variant="outline" className="border-blue-300 text-blue-700 dark:border-blue-600 dark:text-blue-300" role="listitem">
+                🔄 Précommande
+              </Badge>
+            </div>
+          </div>
+
+          {/* Priority Badges */}
+          <div role="group" aria-labelledby="priority-badges">
+            <h4 id="priority-badges" className="font-medium text-foreground mb-3">Priorités Business :</h4>
+            <div className="flex flex-wrap gap-3" role="list" aria-label="Priority level badges">
+              <Badge variant="destructive" className="animate-pulse" role="listitem">
+                🔥 Urgent
+              </Badge>
+              <Badge variant="default" className="bg-orange-500 text-white dark:bg-orange-600" role="listitem">
+                ⚡ Haute
+              </Badge>
+              <Badge variant="secondary" role="listitem">
+                📋 Normale
+              </Badge>
+              <Badge variant="outline" role="listitem">
+                💭 Basse
+              </Badge>
+            </div>
+          </div>
+
+          {/* Marketing Badges */}
+          <div role="group" aria-labelledby="marketing-badges">
+            <h4 id="marketing-badges" className="font-medium text-foreground mb-3">Marketing & Promotions :</h4>
+            <div className="flex flex-wrap gap-3" role="list" aria-label="Marketing promotion badges">
+              <Badge variant="default" className="bg-gradient-to-r from-pink-500 to-purple-600 text-white animate-pulse" role="listitem">
+                🎉 Nouveau
+              </Badge>
+              <Badge variant="default" className="bg-red-500 text-white" role="listitem">
+                💥 -50%
+              </Badge>
+              <Badge variant="outline" className="border-yellow-400 text-yellow-600 dark:text-yellow-400" role="listitem">
+                ⭐ Populaire
+              </Badge>
+              <Badge variant="secondary" className="bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200" role="listitem">
+                👑 Premium
+              </Badge>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Business Use Cases */}
+      <div className="bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-950 dark:to-blue-950 border border-purple-200 dark:border-purple-800 rounded-lg p-6" role="region" aria-labelledby="business-cases">
+        <h3 id="business-cases" className="text-lg font-semibold text-purple-800 dark:text-purple-200 mb-4">
+          💼 Cas d&apos;Usage Business
+        </h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div role="group" aria-labelledby="navigation-cases">
+            <h4 id="navigation-cases" className="font-semibold text-purple-700 dark:text-purple-300 mb-2">Navigation :</h4>
+            <ul className="text-sm text-purple-600 dark:text-purple-400 space-y-1" role="list" aria-label="Navigation use cases">
+              <li role="listitem">• <strong>E-commerce :</strong> Breadcrumb catégories produits</li>
+              <li role="listitem">• <strong>Corporate :</strong> Tabs services/portfolio</li>
+              <li role="listitem">• <strong>SaaS :</strong> Navigation dashboard modulaire</li>
+              <li role="listitem">• <strong>Portfolio :</strong> Organisation projets par tabs</li>
+            </ul>
+          </div>
+          <div role="group" aria-labelledby="feedback-cases">
+            <h4 id="feedback-cases" className="font-semibold text-purple-700 dark:text-purple-300 mb-2">Feedback :</h4>
+            <ul className="text-sm text-purple-600 dark:text-purple-400 space-y-1" role="list" aria-label="Feedback use cases">
+              <li role="listitem">• <strong>Alerts :</strong> Notifications système en temps réel</li>
+              <li role="listitem">• <strong>Badges :</strong> Statuts commandes et produits</li>
+              <li role="listitem">• <strong>UX :</strong> Feedback visuel immédiat</li>
+              <li role="listitem">• <strong>Conversion :</strong> Call-to-action avec badges</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

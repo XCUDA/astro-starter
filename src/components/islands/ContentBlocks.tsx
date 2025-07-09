@@ -46,30 +46,44 @@ export function FeatureTabs() {
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto">
+    <div className="w-full max-w-4xl mx-auto" role="region" aria-label="Interactive feature demonstration with tabbed content">
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList className="grid w-full grid-cols-3 mb-8">
+        <TabsList className="grid w-full grid-cols-3 mb-8" role="tablist" aria-label="Feature categories">
           {Object.entries(features).map(([key, feature]) => (
-            <TabsTrigger key={key} value={key} className="flex items-center space-x-2">
-              <span>{feature.icon}</span>
+            <TabsTrigger 
+              key={key} 
+              value={key} 
+              className="flex items-center space-x-2"
+              aria-label={`View ${feature.title} details: ${feature.description}`}
+              aria-selected={activeTab === key}
+            >
+              <span aria-hidden="true">{feature.icon}</span>
               <span className="hidden sm:inline">{feature.title}</span>
             </TabsTrigger>
           ))}
         </TabsList>
 
         {Object.entries(features).map(([key, feature]) => (
-          <TabsContent key={key} value={key} className="mt-0">
-            <Card>
+          <TabsContent 
+            key={key} 
+            value={key} 
+            className="mt-0"
+            role="tabpanel"
+            aria-label={`${feature.title} details and metrics`}
+          >
+            <Card role="region" aria-label={`${feature.title} feature showcase`}>
               <CardHeader className="text-center">
-                <div className="text-4xl mb-2">{feature.icon}</div>
+                <div className="text-4xl mb-2" aria-hidden="true">{feature.icon}</div>
                 <CardTitle className="text-2xl">{feature.title}</CardTitle>
                 <CardDescription className="text-lg">{feature.description}</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="grid grid-cols-3 gap-6 text-center">
+                <div className="grid grid-cols-3 gap-6 text-center" role="list" aria-label={`${feature.title} performance metrics`}>
                   {feature.metrics.map((metric, index) => (
-                    <div key={index} className="space-y-2">
-                      <div className={`text-2xl font-bold ${metric.color}`}>{metric.value}</div>
+                    <div key={index} className="space-y-2" role="listitem">
+                      <div className={`text-2xl font-bold ${metric.color}`} aria-label={`${metric.label}: ${metric.value}`}>
+                        {metric.value}
+                      </div>
                       <div className="text-sm text-muted-foreground">{metric.label}</div>
                     </div>
                   ))}
@@ -125,10 +139,14 @@ export function InteractivePricing() {
   };
 
   return (
-    <div className="w-full max-w-6xl mx-auto">
+    <div className="w-full max-w-6xl mx-auto" role="region" aria-label="Interactive pricing plans with billing options">
       {/* Billing Toggle */}
       <div className="text-center mb-8">
-        <div className="inline-flex items-center space-x-4 bg-muted p-1 rounded-lg">
+        <div 
+          className="inline-flex items-center space-x-4 bg-muted p-1 rounded-lg"
+          role="group"
+          aria-label="Billing period selection"
+        >
           <button
             onClick={() => setBillingPeriod('monthly')}
             className={`px-4 py-2 rounded-md transition-all duration-200 ${
@@ -136,6 +154,8 @@ export function InteractivePricing() {
                 ? 'bg-background text-foreground shadow-sm' 
                 : 'text-muted-foreground hover:text-foreground'
             }`}
+            aria-pressed={billingPeriod === 'monthly'}
+            aria-label="Select monthly billing period"
           >
             Monthly
           </button>
@@ -146,15 +166,17 @@ export function InteractivePricing() {
                 ? 'bg-background text-foreground shadow-sm' 
                 : 'text-muted-foreground hover:text-foreground'
             }`}
+            aria-pressed={billingPeriod === 'yearly'}
+            aria-label="Select yearly billing period with 20% discount"
           >
             <span>Yearly</span>
-            <Badge variant="secondary" className="text-xs">Save 20%</Badge>
+            <Badge variant="secondary" className="text-xs" aria-label="Save 20% with yearly billing">Save 20%</Badge>
           </button>
         </div>
       </div>
 
       {/* Pricing Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6" role="group" aria-label="Pricing plan options">
         {Object.entries(plans).map(([key, plan]) => (
           <Card 
             key={key}
@@ -164,10 +186,20 @@ export function InteractivePricing() {
               selectedPlan === key ? 'ring-2 ring-primary' : ''
             }`}
             onClick={() => setSelectedPlan(key)}
+            role="button"
+            tabIndex={0}
+            aria-pressed={selectedPlan === key}
+            aria-label={`Select ${plan.name} plan: ${plan.description} - ${plan[billingPeriod] === 0 ? 'Free' : `$${plan[billingPeriod]} per ${billingPeriod === 'monthly' ? 'month' : 'year'}`}`}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                setSelectedPlan(key);
+              }
+            }}
           >
             {plan.popular && (
               <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                <Badge className="bg-primary text-primary-foreground">Most Popular</Badge>
+                <Badge className="bg-primary text-primary-foreground" aria-label="Most popular plan">Most Popular</Badge>
               </div>
             )}
             
@@ -176,7 +208,7 @@ export function InteractivePricing() {
               <CardDescription>{plan.description}</CardDescription>
               
               <div className="mt-4">
-                <div className="text-3xl font-bold text-primary">
+                <div className="text-3xl font-bold text-primary" aria-label={`Price: ${plan[billingPeriod] === 0 ? 'Free' : `$${plan[billingPeriod]} per ${billingPeriod === 'monthly' ? 'month' : 'year'}`}`}>
                   {plan[billingPeriod] === 0 ? 'Free' : `$${plan[billingPeriod]}`}
                   {plan[billingPeriod] > 0 && (
                     <span className="text-sm text-muted-foreground font-normal">
@@ -186,7 +218,7 @@ export function InteractivePricing() {
                 </div>
                 
                 {billingPeriod === 'yearly' && plan.monthly > 0 && (
-                  <div className="text-sm text-green-600 mt-1">
+                  <div className="text-sm text-green-600 mt-1" role="status" aria-live="polite">
                     Save {yearlyDiscount(key)}% vs monthly
                   </div>
                 )}
@@ -194,10 +226,10 @@ export function InteractivePricing() {
             </CardHeader>
             
             <CardContent>
-              <ul className="space-y-3 text-sm mb-6">
+              <ul className="space-y-3 text-sm mb-6" role="list" aria-label={`${plan.name} plan features`}>
                 {plan.features.map((feature, index) => (
-                  <li key={index} className="flex items-center space-x-2">
-                    <span className="text-green-500">✓</span>
+                  <li key={index} className="flex items-center space-x-2" role="listitem">
+                    <span className="text-green-500" aria-hidden="true">✓</span>
                     <span>{feature}</span>
                   </li>
                 ))}
@@ -206,6 +238,7 @@ export function InteractivePricing() {
               <Button 
                 className="w-full" 
                 variant={plan.popular ? 'default' : 'outline'}
+                aria-label={`${plan.cta} with ${plan.name} plan`}
               >
                 {plan.cta}
               </Button>
@@ -257,7 +290,7 @@ export function AnimatedStats() {
     }
   ];
 
-  const AnimatedNumber = ({ value, suffix, color }: { value: number; suffix: string; color: string }) => {
+  const AnimatedNumber = ({ value, suffix, color, label }: { value: number; suffix: string; color: string; label: string }) => {
     const [current, setCurrent] = useState(0);
     
     useEffect(() => {
@@ -279,22 +312,33 @@ export function AnimatedStats() {
     }, [isVisible, value]);
 
     return (
-      <span className={`text-4xl font-bold ${color} transition-all duration-1000`}>
+      <span 
+        className={`text-4xl font-bold ${color} transition-all duration-1000`}
+        aria-label={`${label}: ${Math.round(current)}${suffix}`}
+        role="status"
+        aria-live="polite"
+      >
         {Math.round(current)}{suffix}
       </span>
     );
   };
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-6" role="region" aria-label="Animated business statistics and metrics">
       {stats.map((stat, index) => (
-        <Card key={index} className="text-center hover:scale-105 transition-all duration-300">
+        <Card 
+          key={index} 
+          className="text-center hover:scale-105 transition-all duration-300"
+          role="region"
+          aria-label={`${stat.label} statistic: ${stat.description}`}
+        >
           <CardContent className="pt-6">
             <div className="mb-2">
               <AnimatedNumber 
                 value={stat.value} 
                 suffix={stat.suffix} 
                 color={stat.color}
+                label={stat.label}
               />
             </div>
             <div className="font-medium text-foreground mb-1">{stat.label}</div>
@@ -353,7 +397,7 @@ export function ProcessSteps() {
   }, [autoPlay, steps.length]);
 
   return (
-    <div className="w-full max-w-4xl mx-auto">
+    <div className="w-full max-w-4xl mx-auto" role="region" aria-label="Interactive step-by-step process demonstration">
       {/* Auto-play Control */}
       <div className="text-center mb-8">
         <Button
@@ -361,6 +405,8 @@ export function ProcessSteps() {
           size="sm"
           onClick={() => setAutoPlay(!autoPlay)}
           className="text-sm"
+          aria-label={`${autoPlay ? 'Pause' : 'Resume'} automatic step progression`}
+          aria-pressed={autoPlay}
         >
           {autoPlay ? '⏸️ Pause' : '▶️ Play'} Auto Demo
         </Button>
@@ -368,7 +414,7 @@ export function ProcessSteps() {
 
       {/* Step Navigation */}
       <div className="flex justify-center mb-8">
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-4" role="group" aria-label="Process step navigation">
           {steps.map((step, index) => (
             <React.Fragment key={index}>
               <button
@@ -383,13 +429,18 @@ export function ProcessSteps() {
                     ? 'border-green-500 bg-green-500 text-white'
                     : 'border-muted text-muted-foreground hover:border-primary'
                 }`}
+                aria-current={index === currentStep ? 'step' : undefined}
+                aria-label={`${index < currentStep ? 'Completed step' : index === currentStep ? 'Current step' : 'Future step'} ${step.number}: ${step.title}`}
               >
                 {index < currentStep ? '✓' : step.number}
               </button>
               {index < steps.length - 1 && (
-                <div className={`w-12 h-0.5 transition-all duration-500 ${
-                  index < currentStep ? 'bg-green-500' : 'bg-muted'
-                }`} />
+                <div 
+                  className={`w-12 h-0.5 transition-all duration-500 ${
+                    index < currentStep ? 'bg-green-500' : 'bg-muted'
+                  }`} 
+                  aria-hidden="true"
+                />
               )}
             </React.Fragment>
           ))}
@@ -397,9 +448,9 @@ export function ProcessSteps() {
       </div>
 
       {/* Current Step Content */}
-      <Card className="transition-all duration-500">
+      <Card className="transition-all duration-500" role="region" aria-label={`Step ${steps[currentStep].number} details`}>
         <CardHeader className="text-center">
-          <div className="text-4xl mb-2">{steps[currentStep].icon}</div>
+          <div className="text-4xl mb-2" aria-hidden="true">{steps[currentStep].icon}</div>
           <CardTitle className="text-2xl">
             Step {steps[currentStep].number}: {steps[currentStep].title}
           </CardTitle>
@@ -409,7 +460,11 @@ export function ProcessSteps() {
         </CardHeader>
         <CardContent>
           <div className="bg-muted p-4 rounded-lg">
-            <code className="text-sm font-mono text-foreground">
+            <code 
+              className="text-sm font-mono text-foreground"
+              role="code"
+              aria-label={`Command for ${steps[currentStep].title}: ${steps[currentStep].code}`}
+            >
               {steps[currentStep].code}
             </code>
           </div>

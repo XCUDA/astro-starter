@@ -25,6 +25,7 @@ export default function StickyHeader({
   const [isVisible, setIsVisible] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isClient, setIsClient] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const lastScrollY = useRef(0);
 
   // Hydratation
@@ -39,7 +40,13 @@ export default function StickyHeader({
 
     const handleScroll = () => {
       const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      const maxScroll = documentHeight - windowHeight;
+      const progress = maxScroll > 0 ? Math.min((scrollY / maxScroll) * 100, 100) : 0;
+      
       setIsScrolled(scrollY > 10);
+      setScrollProgress(progress);
 
       // 🎯 LOGIQUE CORRIGÉE
       switch (behavior) {
@@ -106,10 +113,25 @@ export default function StickyHeader({
     return classes;
   };
 
+  const getBehaviorDescription = () => {
+    const descriptions = {
+      'always-visible': 'Header always visible during scroll',
+      'hide-on-scroll': `Header ${isVisible ? 'visible' : 'hidden'} based on scroll position`,
+      'scroll-up-show': `Header ${isVisible ? 'visible' : 'hidden'} - shows when scrolling up`,
+      'auto-hide': `Header ${isVisible ? 'visible' : 'hidden'} with auto-hide behavior`,
+      'static': 'Header with static positioning'
+    };
+    return descriptions[behavior];
+  };
+
   // Mode SSR
   if (!isClient) {
     return (
-      <header className="sticky top-0 z-[9998] w-full bg-background/80 backdrop-blur-sm border-b border-border">
+      <header 
+        className="sticky top-0 z-[9998] w-full bg-background/80 backdrop-blur-sm border-b border-border"
+        role="banner"
+        aria-label="Main navigation header"
+      >
         {children}
       </header>
     );
@@ -117,11 +139,22 @@ export default function StickyHeader({
 
   return (
     <>
+      {/* Live region for screen reader announcements */}
+      <div 
+        className="sr-only" 
+        role="status" 
+        aria-live="polite" 
+        aria-atomic="true"
+      >
+        {getBehaviorDescription()}
+        {showScrollIndicator && `, Page scroll progress: ${Math.round(scrollProgress)}%`}
+      </div>
+
       <header 
         className={getHeaderClasses()} 
         role="banner"
         id="main-navigation"
-        aria-label="Main navigation"
+        aria-label={`Main navigation header - ${getBehaviorDescription()}`}
         data-sticky-header="dynamic"
         data-behavior={behavior}
         data-visible={isVisible}
@@ -130,9 +163,18 @@ export default function StickyHeader({
         {children}
         
         {showScrollIndicator && isScrolled && (
-          <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary/20">
-            <div className="h-full bg-primary transition-all duration-300 ease-out" 
-                 style={{ width: '33%' }} />
+          <div 
+            className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary/20"
+            role="progressbar"
+            aria-valuenow={Math.round(scrollProgress)}
+            aria-valuemin={0}
+            aria-valuemax={100}
+            aria-label={`Page reading progress: ${Math.round(scrollProgress)}% complete`}
+          >
+            <div 
+              className="h-full bg-primary transition-all duration-300 ease-out" 
+              style={{ width: `${scrollProgress}%` }}
+            />
           </div>
         )}
       </header>
@@ -146,15 +188,23 @@ export default function StickyHeader({
 export function useStickyHeaderState() {
   const [isVisible, setIsVisible] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
+      const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      const maxScroll = documentHeight - windowHeight;
+      const progress = maxScroll > 0 ? Math.min((scrollY / maxScroll) * 100, 100) : 0;
+      
+      setIsScrolled(scrollY > 10);
+      setScrollProgress(progress);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  return { isVisible, isScrolled, scrollProgress: 0 };
+  return { isVisible, isScrolled, scrollProgress };
 }

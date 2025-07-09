@@ -24,12 +24,14 @@ export interface PageTransitionProps {
   children: React.ReactNode;
   className?: string;
   config?: AnimationConfig;
+  ariaLabel?: string;
 }
 
 export function PageTransition({ 
   children, 
   className, 
-  config = { duration: 300, easing: 'ease-out', direction: 'fade' } 
+  config = { duration: 300, easing: 'ease-out', direction: 'fade' },
+  ariaLabel
 }: PageTransitionProps) {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -58,7 +60,11 @@ export function PageTransition({
   };
 
   return (
-    <div className={cn(getTransitionClasses(), className)}>
+    <div 
+      className={cn(getTransitionClasses(), className)}
+      aria-label={ariaLabel}
+      role={ariaLabel ? "region" : undefined}
+    >
       {children}
     </div>
   );
@@ -102,12 +108,14 @@ export interface ScrollRevealProps {
   children: React.ReactNode;
   className?: string;
   config?: ScrollRevealConfig;
+  ariaLabel?: string;
 }
 
 export function ScrollReveal({ 
   children, 
   className, 
-  config = { direction: 'up', duration: 600, threshold: 0.1, triggerOnce: true }
+  config = { direction: 'up', duration: 600, threshold: 0.1, triggerOnce: true },
+  ariaLabel
 }: ScrollRevealProps) {
   const { isVisible, elementRef } = useScrollReveal(config);
 
@@ -130,7 +138,12 @@ export function ScrollReveal({
   };
 
   return (
-    <div ref={elementRef} className={cn(getAnimationClasses(), className)}>
+    <div 
+      ref={elementRef} 
+      className={cn(getAnimationClasses(), className)}
+      aria-label={ariaLabel}
+      role={ariaLabel ? "region" : undefined}
+    >
       {children}
     </div>
   );
@@ -142,19 +155,25 @@ export interface StaggeredAnimationProps {
   staggerDelay?: number;
   className?: string;
   config?: AnimationConfig;
+  ariaLabel?: string;
 }
 
 export function StaggeredAnimation({ 
   children, 
   staggerDelay = 100, 
   className,
-  config = { direction: 'up', duration: 400 }
+  config = { direction: 'up', duration: 400 },
+  ariaLabel
 }: StaggeredAnimationProps) {
   // Convert children to array to handle both single and multiple children
   const childrenArray = React.Children.toArray(children);
   
   return (
-    <div className={className}>
+    <div 
+      className={className}
+      aria-label={ariaLabel}
+      role={ariaLabel ? "group" : undefined}
+    >
       {childrenArray.map((child, index) => (
         <PageTransition
           key={index}
@@ -162,6 +181,7 @@ export function StaggeredAnimation({
             ...config,
             delay: index * staggerDelay
           }}
+          ariaLabel={`Animation item ${index + 1} of ${childrenArray.length}`}
         >
           {child}
         </PageTransition>
@@ -177,6 +197,7 @@ export interface SkeletonProps {
   width?: string | number;
   height?: string | number;
   animate?: boolean;
+  ariaLabel?: string;
 }
 
 export function Skeleton({ 
@@ -184,7 +205,8 @@ export function Skeleton({
   variant = 'rectangular',
   width,
   height,
-  animate = true
+  animate = true,
+  ariaLabel = 'Loading content'
 }: SkeletonProps) {
   const variantClasses = {
     text: 'h-4 rounded',
@@ -207,6 +229,9 @@ export function Skeleton({
         width: typeof width === 'number' ? `${width}px` : width,
         height: typeof height === 'number' ? `${height}px` : height
       }}
+      role="status"
+      aria-label={ariaLabel}
+      aria-live="polite"
     />
   );
 }
@@ -218,6 +243,7 @@ export interface LoadingStateProps {
   skeleton?: React.ReactNode;
   className?: string;
   fadeTransition?: boolean;
+  loadingLabel?: string;
 }
 
 export function LoadingState({ 
@@ -225,13 +251,14 @@ export function LoadingState({
   children, 
   skeleton,
   className,
-  fadeTransition = true
+  fadeTransition = true,
+  loadingLabel = 'Content is loading'
 }: LoadingStateProps) {
   const defaultSkeleton = (
-    <div className="space-y-4">
-      <Skeleton variant="text" className="w-3/4" />
-      <Skeleton variant="text" className="w-1/2" />
-      <Skeleton variant="rectangular" height={200} className="w-full" />
+    <div className="space-y-4" role="status" aria-label={loadingLabel}>
+      <Skeleton variant="text" className="w-3/4" ariaLabel="Loading title" />
+      <Skeleton variant="text" className="w-1/2" ariaLabel="Loading subtitle" />
+      <Skeleton variant="rectangular" height={200} className="w-full" ariaLabel="Loading main content" />
     </div>
   );
 
@@ -242,13 +269,22 @@ export function LoadingState({
       <PageTransition 
         className={className}
         config={{ direction: 'fade', duration: 300 }}
+        ariaLabel={isLoading ? loadingLabel : 'Content loaded'}
       >
         {content}
       </PageTransition>
     );
   }
 
-  return <div className={className}>{content}</div>;
+  return (
+    <div 
+      className={className}
+      aria-live="polite"
+      aria-busy={isLoading}
+    >
+      {content}
+    </div>
+  );
 }
 
 // Micro-interaction Button Component
@@ -260,6 +296,7 @@ export interface AnimatedButtonProps {
   animation?: 'scale' | 'bounce' | 'shake' | 'pulse' | 'rotate';
   className?: string;
   disabled?: boolean;
+  ariaLabel?: string;
 }
 
 export function AnimatedButton({
@@ -269,7 +306,8 @@ export function AnimatedButton({
   size = 'md',
   animation = 'scale',
   className,
-  disabled = false
+  disabled = false,
+  ariaLabel
 }: AnimatedButtonProps) {
   const [isAnimating, setIsAnimating] = useState(false);
 
@@ -319,6 +357,8 @@ export function AnimatedButton({
     <button
       onClick={handleClick}
       disabled={disabled}
+      aria-disabled={disabled}
+      aria-label={ariaLabel || (typeof children === 'string' ? children : 'Animated button')}
       className={cn(
         'inline-flex items-center justify-center rounded-md font-medium',
         'transition-all duration-200 ease-in-out',
@@ -343,6 +383,7 @@ export interface HoverCardProps {
   className?: string;
   hoverScale?: number;
   shadow?: boolean;
+  ariaLabel?: string;
 }
 
 export function HoverCard({ 
@@ -350,7 +391,8 @@ export function HoverCard({
   hoverContent,
   className,
   hoverScale = 1.02,
-  shadow = true
+  shadow = true,
+  ariaLabel
 }: HoverCardProps) {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -367,10 +409,15 @@ export function HoverCard({
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      role="region"
+      aria-label={ariaLabel || 'Interactive hover card'}
     >
       {children}
       {hoverContent && isHovered && (
-        <div className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-300">
+        <div 
+          className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-300"
+          aria-hidden="true"
+        >
           {hoverContent}
         </div>
       )}
@@ -383,9 +430,15 @@ export interface ParallaxProps {
   children: React.ReactNode;
   speed?: number;
   className?: string;
+  ariaLabel?: string;
 }
 
-export function ParallaxScroll({ children, speed = 0.5, className }: ParallaxProps) {
+export function ParallaxScroll({ 
+  children, 
+  speed = 0.5, 
+  className,
+  ariaLabel
+}: ParallaxProps) {
   const [offsetY, setOffsetY] = useState(0);
   const elementRef = useRef<HTMLDivElement>(null);
 
@@ -404,7 +457,12 @@ export function ParallaxScroll({ children, speed = 0.5, className }: ParallaxPro
   }, [speed]);
 
   return (
-    <div ref={elementRef} className={className}>
+    <div 
+      ref={elementRef} 
+      className={className}
+      role="region"
+      aria-label={ariaLabel || 'Parallax scroll content'}
+    >
       <div
         style={{
           transform: `translateY(${offsetY}px)`,
@@ -425,6 +483,7 @@ export interface CounterProps {
   prefix?: string;
   suffix?: string;
   className?: string;
+  ariaLabel?: string;
 }
 
 export function AnimatedCounter({ 
@@ -433,7 +492,8 @@ export function AnimatedCounter({
   duration = 2000,
   prefix = '',
   suffix = '',
-  className 
+  className,
+  ariaLabel
 }: CounterProps) {
   const [count, setCount] = useState(start);
   const countRef = useRef(start);
@@ -463,7 +523,12 @@ export function AnimatedCounter({
   }, [end, start, duration]);
 
   return (
-    <span className={className}>
+    <span 
+      className={className}
+      role="status"
+      aria-live="polite"
+      aria-label={ariaLabel || `Counter animating from ${start} to ${end}, current value: ${count}`}
+    >
       {prefix}{count.toLocaleString()}{suffix}
     </span>
   );
@@ -476,6 +541,7 @@ export interface TypewriterProps {
   delay?: number;
   className?: string;
   showCursor?: boolean;
+  ariaLabel?: string;
 }
 
 export function TypewriterEffect({ 
@@ -483,7 +549,8 @@ export function TypewriterEffect({
   speed = 50, 
   delay = 0,
   className,
-  showCursor = true 
+  showCursor = true,
+  ariaLabel
 }: TypewriterProps) {
   const [displayText, setDisplayText] = useState('');
   const [isComplete, setIsComplete] = useState(false);
@@ -508,10 +575,15 @@ export function TypewriterEffect({
   }, [text, speed, delay]);
 
   return (
-    <span className={className}>
+    <span 
+      className={className}
+      role="status"
+      aria-live="polite"
+      aria-label={ariaLabel || `Typewriter effect: ${isComplete ? text : `Typing: ${displayText}`}`}
+    >
       {displayText}
       {showCursor && !isComplete && (
-        <span className="animate-pulse">|</span>
+        <span className="animate-pulse" aria-hidden="true">|</span>
       )}
     </span>
   );
@@ -526,6 +598,7 @@ export interface AnimatedProgressProps {
   color?: string;
   height?: number;
   animationDuration?: number;
+  ariaLabel?: string;
 }
 
 export function AnimatedProgress({ 
@@ -535,7 +608,8 @@ export function AnimatedProgress({
   showLabel = false,
   color = 'hsl(var(--primary))',
   height = 8,
-  animationDuration = 1000
+  animationDuration = 1000,
+  ariaLabel
 }: AnimatedProgressProps) {
   const [animatedValue, setAnimatedValue] = useState(0);
   const percentage = Math.min((value / max) * 100, 100);
@@ -559,6 +633,11 @@ export function AnimatedProgress({
       <div 
         className="w-full bg-muted rounded-full overflow-hidden"
         style={{ height: `${height}px` }}
+        role="progressbar"
+        aria-valuenow={Math.round(animatedValue)}
+        aria-valuemin={0}
+        aria-valuemax={max}
+        aria-label={ariaLabel || `Progress: ${Math.round(animatedValue)}% complete`}
       >
         <div
           className="h-full rounded-full transition-all ease-out"
@@ -579,13 +658,15 @@ export interface ModalTransitionProps {
   onClose: () => void;
   children: React.ReactNode;
   className?: string;
+  ariaLabel?: string;
 }
 
 export function ModalTransition({ 
   isOpen, 
   onClose, 
   children, 
-  className 
+  className,
+  ariaLabel = 'Modal dialog'
 }: ModalTransitionProps) {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -598,10 +679,22 @@ export function ModalTransition({
     }
   }, [isOpen]);
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Escape') {
+      onClose();
+    }
+  };
+
   if (!isVisible) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
+    <div 
+      className="fixed inset-0 z-50 flex items-center justify-center"
+      onKeyDown={handleKeyDown}
+      role="dialog"
+      aria-modal="true"
+      aria-label={ariaLabel}
+    >
       {/* Backdrop */}
       <div
         className={cn(
@@ -609,6 +702,7 @@ export function ModalTransition({
           isOpen ? 'opacity-100' : 'opacity-0'
         )}
         onClick={onClose}
+        aria-hidden="true"
       />
       
       {/* Modal Content */}
@@ -621,6 +715,7 @@ export function ModalTransition({
             : 'opacity-0 scale-95 translate-y-4',
           className
         )}
+        role="document"
       >
         {children}
       </div>

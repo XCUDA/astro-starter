@@ -92,6 +92,7 @@ export interface ReadingProgressProps {
   showPercentage?: boolean;
   color?: 'primary' | 'secondary' | 'accent' | 'custom';
   customColor?: string;
+  ariaLabel?: string;
 }
 
 export function ReadingProgress({
@@ -100,7 +101,8 @@ export function ReadingProgress({
   className,
   showPercentage = false,
   color = 'primary',
-  customColor
+  customColor,
+  ariaLabel = 'Reading progress'
 }: ReadingProgressProps) {
   const { percentage } = useScrollProgress();
 
@@ -122,7 +124,14 @@ export function ReadingProgress({
   };
 
   return (
-    <div className={cn('w-full bg-muted/30', getPositionClasses(), className)}>
+    <div 
+      className={cn('w-full bg-muted/30', getPositionClasses(), className)}
+      role="progressbar"
+      aria-valuenow={percentage}
+      aria-valuemin={0}
+      aria-valuemax={100}
+      aria-label={`${ariaLabel}: ${percentage}% complete`}
+    >
       <div
         className={cn(
           'transition-all duration-300 ease-out',
@@ -152,6 +161,7 @@ export interface ScrollProgressRingProps {
   className?: string;
   color?: string;
   backgroundColor?: string;
+  ariaLabel?: string;
 }
 
 export function ScrollProgressRing({
@@ -161,7 +171,8 @@ export function ScrollProgressRing({
   showPercentage = true,
   className,
   color = 'hsl(var(--primary))',
-  backgroundColor = 'hsl(var(--muted))'
+  backgroundColor = 'hsl(var(--muted))',
+  ariaLabel = 'Reading progress'
 }: ScrollProgressRingProps) {
   const { percentage } = useScrollProgress();
   
@@ -182,11 +193,19 @@ export function ScrollProgressRing({
 
   return (
     <div className={cn(getPositionClasses(), className)}>
-      <div className="relative">
+      <div 
+        className="relative"
+        role="progressbar"
+        aria-valuenow={percentage}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-label={`${ariaLabel}: ${percentage}% complete`}
+      >
         <svg
           width={size}
           height={size}
           className="transform -rotate-90"
+          aria-hidden="true"
         >
           {/* Background circle */}
           <circle
@@ -213,7 +232,7 @@ export function ScrollProgressRing({
         </svg>
         {showPercentage && (
           <div className="absolute inset-0 flex items-center justify-center">
-            <span className="text-xs font-medium text-foreground">
+            <span className="text-xs font-medium text-foreground" aria-hidden="true">
               {percentage}%
             </span>
           </div>
@@ -239,7 +258,7 @@ export function TableOfContents({
   showProgress = true,
   maxLevel = 3
 }: TableOfContentsProps) {
-  const { currentSection, visibleSections } = useScrollProgress(sections);
+  const { currentSection, visibleSections, percentage } = useScrollProgress(sections);
 
   const handleSectionClick = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -248,6 +267,13 @@ export function TableOfContents({
         behavior: 'smooth',
         block: 'start'
       });
+    }
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent, sectionId: string) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      handleSectionClick(sectionId);
     }
   };
 
@@ -265,28 +291,33 @@ export function TableOfContents({
   );
 
   return (
-    <nav className={cn(getPositionClasses(), className)} aria-label="Table of contents">
+    <nav className={cn(getPositionClasses(), className)} aria-label="Table of contents navigation">
       <div className="bg-card/95 backdrop-blur-sm border border-border rounded-lg p-4 shadow-lg max-w-xs">
         <h3 className="text-sm font-semibold text-foreground mb-3">
           Table of Contents
         </h3>
         
         {showProgress && (
-          <div className="mb-3 text-xs text-muted-foreground">
-            Progress: {useScrollProgress().percentage}%
+          <div 
+            className="mb-3 text-xs text-muted-foreground"
+            role="status"
+            aria-live="polite"
+          >
+            Progress: {percentage}%
           </div>
         )}
         
-        <ul className="space-y-1 max-h-96 overflow-y-auto">
-          {filteredSections.map((section) => {
+        <ul className="space-y-1 max-h-96 overflow-y-auto" role="list">
+          {filteredSections.map((section, index) => {
             const isActive = currentSection?.id === section.id;
             const isVisible = visibleSections.some(s => s.id === section.id);
             const indentLevel = (section.level || 1) - 1;
             
             return (
-              <li key={section.id} style={{ marginLeft: `${indentLevel * 12}px` }}>
+              <li key={section.id} style={{ marginLeft: `${indentLevel * 12}px` }} role="listitem">
                 <button
                   onClick={() => handleSectionClick(section.id)}
+                  onKeyDown={(e) => handleKeyDown(e, section.id)}
                   className={cn(
                     'block w-full text-left text-sm py-1.5 px-2 rounded transition-all duration-200',
                     'hover:bg-accent hover:text-accent-foreground',
@@ -295,6 +326,9 @@ export function TableOfContents({
                     isVisible && !isActive && 'text-foreground',
                     !isVisible && 'text-muted-foreground'
                   )}
+                  aria-current={isActive ? 'location' : undefined}
+                  aria-label={`Navigate to ${section.title} ${isActive ? '(current section)' : ''}`}
+                  tabIndex={0}
                 >
                   <span className="flex items-center space-x-2">
                     <span 
@@ -303,6 +337,7 @@ export function TableOfContents({
                         isActive ? 'bg-primary-foreground' : 
                         isVisible ? 'bg-primary' : 'bg-muted-foreground'
                       )}
+                      aria-hidden="true"
                     />
                     <span className="truncate">{section.title}</span>
                   </span>
@@ -342,6 +377,13 @@ export function SectionNavigator({
     }
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent, sectionId: string) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      handleSectionClick(sectionId);
+    }
+  };
+
   const getPositionClasses = () => {
     return position === 'left'
       ? 'fixed left-6 top-1/2 transform -translate-y-1/2 z-40'
@@ -349,15 +391,16 @@ export function SectionNavigator({
   };
 
   return (
-    <nav className={cn(getPositionClasses(), className)} aria-label="Section navigator">
-      <div className="space-y-4">
-        {sections.map((section) => {
+    <nav className={cn(getPositionClasses(), className)} aria-label="Section navigation dots">
+      <div className="space-y-4" role="list">
+        {sections.map((section, index) => {
           const isActive = currentSection?.id === section.id;
           
           return (
-            <div key={section.id} className="relative group">
+            <div key={section.id} className="relative group" role="listitem">
               <button
                 onClick={() => handleSectionClick(section.id)}
+                onKeyDown={(e) => handleKeyDown(e, section.id)}
                 className={cn(
                   'w-3 h-3 rounded-full border-2 transition-all duration-300',
                   'hover:scale-125 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2',
@@ -365,16 +408,18 @@ export function SectionNavigator({
                     ? 'bg-primary border-primary scale-125' 
                     : 'bg-background border-muted-foreground hover:border-primary'
                 )}
-                aria-label={`Go to ${section.title}`}
+                aria-current={isActive ? 'location' : undefined}
+                aria-label={`Navigate to section ${index + 1}: ${section.title} ${isActive ? '(current)' : ''}`}
+                tabIndex={0}
               />
               
               {showLabels && (
                 <div className={cn(
                   'absolute top-1/2 transform -translate-y-1/2 whitespace-nowrap',
-                  'opacity-0 group-hover:opacity-100 transition-opacity duration-200',
-                  'bg-card border border-border rounded px-2 py-1 text-xs shadow-lg',
+                  'opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-200',
+                  'bg-card border border-border rounded px-2 py-1 text-xs shadow-lg pointer-events-none',
                   position === 'left' ? 'right-6' : 'left-6'
-                )}>
+                )} role="tooltip">
                   {section.title}
                 </div>
               )}
@@ -392,13 +437,15 @@ export interface PageProgressBarProps {
   style?: 'gradient' | 'solid' | 'animated';
   position?: 'top' | 'bottom';
   className?: string;
+  ariaLabel?: string;
 }
 
 export function PageProgressBar({
   thickness = 'medium',
   style = 'gradient',
   position = 'top',
-  className
+  className,
+  ariaLabel = 'Page reading progress'
 }: PageProgressBarProps) {
   const { percentage } = useScrollProgress();
 
@@ -427,7 +474,14 @@ export function PageProgressBar({
   };
 
   return (
-    <div className={cn('w-full bg-muted/20', getPositionClasses(), className)}>
+    <div 
+      className={cn('w-full bg-muted/20', getPositionClasses(), className)}
+      role="progressbar"
+      aria-valuenow={percentage}
+      aria-valuemin={0}
+      aria-valuemax={100}
+      aria-label={`${ariaLabel}: ${percentage}% complete`}
+    >
       <div
         className={cn(
           'transition-all duration-500 ease-out',
@@ -508,6 +562,13 @@ export function ScrollToTop({
     });
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      scrollToTop();
+    }
+  };
+
   const getPositionClasses = () => {
     const positions = {
       'bottom-right': 'bottom-6 right-6',
@@ -531,6 +592,7 @@ export function ScrollToTop({
   return (
     <button
       onClick={scrollToTop}
+      onKeyDown={handleKeyDown}
       className={cn(
         getPositionClasses(),
         getVariantClasses(),
@@ -541,17 +603,18 @@ export function ScrollToTop({
         isVisible && 'opacity-100',
         className
       )}
-      aria-label="Scroll to top"
+      aria-label={`Scroll to top of page${showProgress ? ` (currently at ${percentage}%)` : ''}`}
+      tabIndex={0}
     >
       {variant === 'button' ? (
         <span className="flex items-center space-x-2">
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
           </svg>
-          {showProgress && <span className="text-sm">{percentage}%</span>}
+          {showProgress && <span className="text-sm" aria-hidden="true">{percentage}%</span>}
         </span>
       ) : (
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
         </svg>
       )}

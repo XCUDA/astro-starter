@@ -5,7 +5,7 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 
-// Extend window for theme state (set by Layout.astro) 
+// Extend window for theme state (set by Layout.astro)  
 declare global {
   interface Window {
     __THEME__?: 'dark' | 'light';

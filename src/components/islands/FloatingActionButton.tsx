@@ -58,10 +58,13 @@ export default function FloatingActionButton({
   const [isExpanded, setIsExpanded] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [focusedActionIndex, setFocusedActionIndex] = useState(-1);
   
   const lastScrollY = useRef(0);
   const autoCloseTimeout = useRef<NodeJS.Timeout | null>(null);
   const ticking = useRef(false);
+  const mainButtonRef = useRef<HTMLButtonElement>(null);
+  const secondaryButtonsRef = useRef<(HTMLButtonElement | null)[]>([]);
 
   // Handle scroll behavior
   useEffect(() => {
@@ -113,6 +116,7 @@ export default function FloatingActionButton({
       const target = event.target as Element;
       if (!target.closest('.fab-container')) {
         setIsExpanded(false);
+        setFocusedActionIndex(-1);
       }
     };
 
@@ -121,6 +125,75 @@ export default function FloatingActionButton({
       return () => document.removeEventListener('click', handleClickOutside);
     }
   }, [isExpanded]);
+
+  // Keyboard navigation support
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (!isExpanded || secondaryActions.length === 0) return;
+
+      switch (event.key) {
+        case 'Escape':
+          event.preventDefault();
+          setIsExpanded(false);
+          setFocusedActionIndex(-1);
+          mainButtonRef.current?.focus();
+          break;
+        
+        case 'ArrowUp':
+        case 'ArrowDown':
+          event.preventDefault();
+          const direction = event.key === 'ArrowUp' ? -1 : 1;
+          const newIndex = focusedActionIndex + direction;
+          
+          if (newIndex >= 0 && newIndex < secondaryActions.length) {
+            setFocusedActionIndex(newIndex);
+            secondaryButtonsRef.current[newIndex]?.focus();
+          } else if (newIndex < 0) {
+            setFocusedActionIndex(-1);
+            mainButtonRef.current?.focus();
+          }
+          break;
+        
+        case 'Tab':
+          // Allow natural tab navigation but close on tab out
+          if (event.shiftKey && focusedActionIndex === 0) {
+            setIsExpanded(false);
+            setFocusedActionIndex(-1);
+          } else if (!event.shiftKey && focusedActionIndex === secondaryActions.length - 1) {
+            setIsExpanded(false);
+            setFocusedActionIndex(-1);
+          }
+          break;
+        
+        case 'Enter':
+        case ' ':
+          if (focusedActionIndex >= 0) {
+            event.preventDefault();
+            const action = secondaryActions[focusedActionIndex];
+            handleSecondaryClick(action);
+          }
+          break;
+      }
+    };
+
+    if (isExpanded) {
+      document.addEventListener('keydown', handleKeyDown);
+      return () => document.removeEventListener('keydown', handleKeyDown);
+    }
+  }, [isExpanded, focusedActionIndex, secondaryActions]);
+
+  // Focus management when expanding
+  useEffect(() => {
+    if (isExpanded && secondaryActions.length > 0) {
+      // Focus first secondary action when expanded
+      setTimeout(() => {
+        secondaryButtonsRef.current[0]?.focus();
+        setFocusedActionIndex(0);
+      }, 150); // Wait for animation
+    } else {
+      setFocusedActionIndex(-1);
+    }
+  }, [isExpanded, secondaryActions.length]);
 
   // Handle main action click
   const handleMainClick = () => {
@@ -141,6 +214,7 @@ export default function FloatingActionButton({
       window.location.href = action.href;
     }
     setIsExpanded(false);
+    setFocusedActionIndex(-1);
   };
 
   // Position classes
@@ -242,6 +316,11 @@ export default function FloatingActionButton({
     if (!isMobile) return null;
   }
 
+  const hasSecondaryActions = secondaryActions.length > 0;
+  const fabDescription = hasSecondaryActions 
+    ? `${mainAction.title} with ${secondaryActions.length} quick actions`
+    : mainAction.title;
+
   return (
     <div 
       className={cn(
@@ -250,43 +329,72 @@ export default function FloatingActionButton({
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16 pointer-events-none',
         showOnlyOnMobile && 'md:hidden'
       )}
-      role="complementary"
-      aria-label={ariaLabel || "Floating action buttons"}
+      role="region"
+      aria-label={ariaLabel || fabDescription}
     >
       
+      {/* Live region for screen reader announcements */}
+      <div 
+        className="sr-only" 
+        role="status" 
+        aria-live="polite" 
+        aria-atomic="true"
+      >
+        {isExpanded && hasSecondaryActions && `${secondaryActions.length} quick actions expanded. Use arrow keys to navigate, Escape to close.`}
+        {!isExpanded && hasSecondaryActions && "Quick actions collapsed."}
+      </div>
+
       {/* Secondary Actions */}
-      {secondaryActions.map((action, index) => (
-        <button
-          key={action.id}
-          onClick={() => handleSecondaryClick(action)}
-          disabled={action.disabled}
+      {hasSecondaryActions && (
+        <div
+          role="menu"
+          aria-label={`${mainAction.title} quick actions menu`}
+          aria-expanded={isExpanded}
           className={cn(
-            'absolute rounded-full shadow-lg transition-all duration-300 ease-out',
-            'flex items-center justify-center font-medium',
-            'focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2',
-            'transform-gpu will-change-transform',
-            getSizeClasses(),
-            getVariantClasses(action.variant),
-            isExpanded 
-              ? 'opacity-100 scale-100 pointer-events-auto' 
-              : 'opacity-0 scale-75 pointer-events-none',
-            action.disabled && 'opacity-50 cursor-not-allowed'
+            'absolute',
+            isExpanded ? 'pointer-events-auto' : 'pointer-events-none'
           )}
-          style={{
-            ...getSecondaryActionPosition(index),
-            transitionDelay: isExpanded ? `${index * 50}ms` : '0ms'
-          }}
-          aria-label={action.title}
-          title={showTooltip ? action.title : undefined}
         >
-          <span className="select-none">{action.icon}</span>
-        </button>
-      ))}
+          {secondaryActions.map((action, index) => (
+            <button
+              key={action.id}
+              ref={(el) => { secondaryButtonsRef.current[index] = el; }}
+              onClick={() => handleSecondaryClick(action)}
+              disabled={action.disabled}
+              aria-disabled={action.disabled}
+              className={cn(
+                'absolute rounded-full shadow-lg transition-all duration-300 ease-out',
+                'flex items-center justify-center font-medium',
+                'focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2',
+                'transform-gpu will-change-transform',
+                getSizeClasses(),
+                getVariantClasses(action.variant),
+                isExpanded 
+                  ? 'opacity-100 scale-100 pointer-events-auto' 
+                  : 'opacity-0 scale-75 pointer-events-none',
+                action.disabled && 'opacity-50 cursor-not-allowed'
+              )}
+              style={{
+                ...getSecondaryActionPosition(index),
+                transitionDelay: isExpanded ? `${index * 50}ms` : '0ms'
+              }}
+              aria-label={`${action.title} - quick action ${index + 1} of ${secondaryActions.length}`}
+              title={showTooltip ? action.title : undefined}
+              role="menuitem"
+              tabIndex={isExpanded ? 0 : -1}
+            >
+              <span className="select-none" aria-hidden="true">{action.icon}</span>
+            </button>
+          ))}
+        </div>
+      )}
 
       {/* Main Action Button */}
       <button
+        ref={mainButtonRef}
         onClick={handleMainClick}
         disabled={mainAction.disabled}
+        aria-disabled={mainAction.disabled}
         className={cn(
           'relative rounded-full shadow-lg transition-all duration-300 ease-in-out',
           'flex items-center justify-center font-medium',
@@ -298,16 +406,21 @@ export default function FloatingActionButton({
           isScrolled && 'shadow-xl',
           mainAction.disabled && 'opacity-50 cursor-not-allowed'
         )}
-        aria-label={mainAction.title}
-        aria-expanded={secondaryActions.length > 0 ? isExpanded : undefined}
+        aria-label={hasSecondaryActions 
+          ? `${mainAction.title} - press to ${isExpanded ? 'collapse' : 'expand'} ${secondaryActions.length} quick actions`
+          : mainAction.title
+        }
+        aria-expanded={hasSecondaryActions ? isExpanded : undefined}
+        aria-haspopup={hasSecondaryActions ? "menu" : undefined}
         title={showTooltip ? mainAction.title : undefined}
       >
         {/* Main Icon with rotation animation */}
         <span 
           className={cn(
             'select-none transition-transform duration-300',
-            isExpanded && secondaryActions.length > 0 && 'rotate-45'
+            isExpanded && hasSecondaryActions && 'rotate-45'
           )}
+          aria-hidden="true"
         >
           {mainAction.icon}
         </span>
@@ -323,14 +436,18 @@ export default function FloatingActionButton({
           style={{
             animation: isExpanded ? 'ripple 0.6s ease-out' : 'none'
           }}
+          aria-hidden="true"
         />
       </button>
 
       {/* Background overlay when expanded */}
-      {isExpanded && secondaryActions.length > 0 && (
+      {isExpanded && hasSecondaryActions && (
         <div 
           className="fixed inset-0 bg-background/20 backdrop-blur-[2px] -z-10"
-          onClick={() => setIsExpanded(false)}
+          onClick={() => {
+            setIsExpanded(false);
+            setFocusedActionIndex(-1);
+          }}
           aria-hidden="true"
         />
       )}
@@ -343,7 +460,7 @@ export const BusinessFAB = (props: Partial<FloatingActionButtonProps>) => (
   <FloatingActionButton
     mainAction={{
       id: 'main',
-      title: 'Quick Actions',
+      title: 'Business Quick Actions',
       icon: '➕',
       variant: 'primary'
     }}
@@ -370,6 +487,7 @@ export const BusinessFAB = (props: Partial<FloatingActionButtonProps>) => (
         variant: 'secondary'
       }
     ]}
+    ariaLabel="Business management quick actions"
     {...props}
   />
 );
@@ -378,7 +496,7 @@ export const SupportFAB = (props: Partial<FloatingActionButtonProps>) => (
   <FloatingActionButton
     mainAction={{
       id: 'support',
-      title: 'Get Help',
+      title: 'Customer Support',
       icon: '❓',
       variant: 'ghost'
     }}
@@ -407,6 +525,7 @@ export const SupportFAB = (props: Partial<FloatingActionButtonProps>) => (
     ]}
     expandDirection="up"
     position="bottom-left"
+    ariaLabel="Customer support and help options"
     {...props}
   />
 );
@@ -415,7 +534,7 @@ export const EcommerceFAB = (props: Partial<FloatingActionButtonProps>) => (
   <FloatingActionButton
     mainAction={{
       id: 'cart',
-      title: 'Shopping Cart',
+      title: 'Shopping Cart Actions',
       icon: '🛒',
       variant: 'primary'
     }}
@@ -429,14 +548,14 @@ export const EcommerceFAB = (props: Partial<FloatingActionButtonProps>) => (
       },
       {
         id: 'compare',
-        title: 'Compare',
+        title: 'Compare Products',
         icon: '⚖️',
         href: '/compare',
         variant: 'secondary'
       },
       {
         id: 'search',
-        title: 'Search',
+        title: 'Search Products',
         icon: '🔍',
         onClick: () => {
           const searchInput = document.querySelector('input[type="search"]') as HTMLInputElement;
@@ -446,6 +565,7 @@ export const EcommerceFAB = (props: Partial<FloatingActionButtonProps>) => (
       }
     ]}
     expandDirection="radial"
+    ariaLabel="E-commerce shopping quick actions"
     {...props}
   />
 );

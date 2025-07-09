@@ -226,12 +226,27 @@ export default function TouchNavigation({
     case 'swipe-drawer':
       return (
         <div className="fixed inset-0 pointer-events-none z-50">
+          {/* Live region for gesture feedback */}
+          <div 
+            className="sr-only" 
+            role="status" 
+            aria-live="polite" 
+            aria-atomic="true"
+          >
+            {isDrawerOpen && "Navigation drawer opened"}
+            {!isDrawerOpen && touchState.isDragging && touchState.direction === 'horizontal' && touchState.deltaX > 50 && "Swipe right to open navigation"}
+            {isDrawerOpen && touchState.isDragging && touchState.direction === 'horizontal' && touchState.deltaX < -50 && "Swipe left to close navigation"}
+          </div>
+
           {/* Touch area for opening drawer */}
           <div 
             className="absolute left-0 top-0 w-6 h-full pointer-events-auto"
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
+            role="button"
+            aria-label="Swipe right from left edge to open navigation drawer"
+            tabIndex={0}
           />
           
           {/* Drawer */}
@@ -244,6 +259,9 @@ export default function TouchNavigation({
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
+            role="navigation"
+            aria-label="Main navigation drawer"
+            aria-hidden={!isDrawerOpen}
           >
             {/* Drawer Header */}
             <div className="flex items-center justify-between p-6 border-b border-border">
@@ -251,14 +269,14 @@ export default function TouchNavigation({
               <button
                 onClick={toggleDrawer}
                 className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
-                aria-label="Close navigation"
+                aria-label="Close navigation drawer"
               >
                 <X size={20} />
               </button>
             </div>
             
             {/* Navigation Items */}
-            <div className="p-4 space-y-2">
+            <div className="p-4 space-y-2" role="list">
               {navigationItems.map((item, index) => (
                 <a
                   key={index}
@@ -269,11 +287,17 @@ export default function TouchNavigation({
                       : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
                   }`}
                   onClick={() => setIsDrawerOpen(false)}
+                  aria-current={isCurrentPage(item.href) ? 'page' : undefined}
+                  aria-label={`${item.name}${isCurrentPage(item.href) ? ' - current page' : ''}`}
+                  role="listitem"
                 >
-                  {item.icon}
+                  <span aria-hidden="true">{item.icon}</span>
                   <span className="font-medium">{item.name}</span>
                   {item.badge && (
-                    <span className="ml-auto text-xs bg-primary text-primary-foreground px-2 py-1 rounded">
+                    <span 
+                      className="ml-auto text-xs bg-primary text-primary-foreground px-2 py-1 rounded"
+                      aria-label={`${item.badge} notifications`}
+                    >
                       {item.badge}
                     </span>
                   )}
@@ -287,6 +311,7 @@ export default function TouchNavigation({
             <div
               className="absolute inset-0 bg-background/50 backdrop-blur-sm pointer-events-auto"
               onClick={() => setIsDrawerOpen(false)}
+              aria-hidden="true"
             />
           )}
         </div>
@@ -294,29 +319,39 @@ export default function TouchNavigation({
 
     case 'bottom-nav':
       return (
-        <div className="fixed bottom-0 left-0 right-0 z-50 bg-card/95 backdrop-blur-sm border-t border-border">
-          <div className="flex items-center justify-around py-2">
+        <nav 
+          className="fixed bottom-0 left-0 right-0 z-50 bg-card/95 backdrop-blur-sm border-t border-border"
+          role="navigation"
+          aria-label="Bottom navigation bar"
+        >
+          <div className="flex items-center justify-around py-2" role="list">
             {navigationItems.slice(0, 5).map((item, index) => (
               <a
                 key={index}
                 href={item.href}
-                className={`flex flex-col items-center space-y-1 p-2 rounded-lg transition-all duration-200 ${
+                className={`flex flex-col items-center space-y-1 p-2 rounded-lg transition-all duration-200 relative ${
                   isCurrentPage(item.href)
                     ? 'text-primary'
                     : 'text-muted-foreground hover:text-foreground'
                 }`}
+                aria-current={isCurrentPage(item.href) ? 'page' : undefined}
+                aria-label={`${item.name}${isCurrentPage(item.href) ? ' - current page' : ''}`}
+                role="listitem"
               >
-                {item.icon}
+                <span aria-hidden="true">{item.icon}</span>
                 <span className="text-xs font-medium">{item.name}</span>
                 {item.badge && (
-                  <span className="absolute -top-1 -right-1 text-xs bg-destructive text-destructive-foreground w-5 h-5 rounded-full flex items-center justify-center">
+                  <span 
+                    className="absolute -top-1 -right-1 text-xs bg-destructive text-destructive-foreground w-5 h-5 rounded-full flex items-center justify-center"
+                    aria-label={`${item.badge} notifications`}
+                  >
                     {item.badge}
                   </span>
                 )}
               </a>
             ))}
           </div>
-        </div>
+        </nav>
       );
 
     case 'floating-fab':
@@ -326,14 +361,30 @@ export default function TouchNavigation({
           <button
             onClick={toggleDrawer}
             className="w-14 h-14 bg-primary text-primary-foreground rounded-full shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-110 flex items-center justify-center"
-            aria-label="Open navigation menu"
+            aria-label={`${isDrawerOpen ? 'Close' : 'Open'} floating navigation menu`}
+            aria-expanded={isDrawerOpen}
+            aria-haspopup="menu"
           >
             {isDrawerOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
           
+          {/* Live region for FAB state changes */}
+          <div 
+            className="sr-only" 
+            role="status" 
+            aria-live="polite"
+          >
+            {isDrawerOpen && `Navigation menu expanded with ${navigationItems.slice(0, 4).length} options`}
+            {!isDrawerOpen && "Navigation menu collapsed"}
+          </div>
+          
           {/* FAB Menu */}
           {isDrawerOpen && (
-            <div className="absolute bottom-16 right-0 space-y-3">
+            <div 
+              className="absolute bottom-16 right-0 space-y-3"
+              role="menu"
+              aria-label="Floating navigation options"
+            >
               {navigationItems.slice(0, 4).map((item, index) => (
                 <a
                   key={index}
@@ -345,8 +396,11 @@ export default function TouchNavigation({
                     transitionDelay: `${index * 50}ms`
                   }}
                   onClick={() => setIsDrawerOpen(false)}
+                  aria-current={isCurrentPage(item.href) ? 'page' : undefined}
+                  aria-label={`${item.name}${isCurrentPage(item.href) ? ' - current page' : ''}`}
+                  role="menuitem"
                 >
-                  {item.icon}
+                  <span aria-hidden="true">{item.icon}</span>
                 </a>
               ))}
             </div>
@@ -357,7 +411,7 @@ export default function TouchNavigation({
             <button
               onClick={scrollToTop}
               className="absolute -top-16 right-0 w-12 h-12 bg-muted text-foreground rounded-full shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-110 flex items-center justify-center"
-              aria-label="Scroll to top"
+              aria-label="Scroll to top of page"
             >
               <ArrowUp size={20} />
             </button>
@@ -372,10 +426,26 @@ export default function TouchNavigation({
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
+          role="region"
+          aria-label="Touch gesture area for navigation"
         >
+          {/* Live region for gesture feedback */}
+          <div 
+            className="sr-only" 
+            role="status" 
+            aria-live="polite"
+          >
+            {enablePullToRefresh && isRefreshing && "Page is refreshing"}
+            {enableSwipeNavigation && touchState.isDragging && touchState.direction === 'horizontal' && "Swipe gesture detected for page navigation"}
+          </div>
+
           {/* Pull to Refresh Indicator */}
           {enablePullToRefresh && isRefreshing && (
-            <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-card text-foreground px-4 py-2 rounded-full shadow-lg border border-border">
+            <div 
+              className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-card text-foreground px-4 py-2 rounded-full shadow-lg border border-border"
+              role="status"
+              aria-live="polite"
+            >
               <div className="flex items-center space-x-2">
                 <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin" />
                 <span className="text-sm">Refreshing...</span>
@@ -385,17 +455,21 @@ export default function TouchNavigation({
           
           {/* Swipe Navigation Hints */}
           {enableSwipeNavigation && touchState.isDragging && touchState.direction === 'horizontal' && (
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-card/90 text-foreground px-6 py-3 rounded-lg shadow-lg border border-border">
+            <div 
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-card/90 text-foreground px-6 py-3 rounded-lg shadow-lg border border-border"
+              role="status"
+              aria-live="polite"
+            >
               <div className="flex items-center space-x-3">
                 {touchState.deltaX > 0 ? (
                   <>
-                    <ChevronLeft size={20} />
+                    <ChevronLeft size={20} aria-hidden="true" />
                     <span className="text-sm">Previous page</span>
                   </>
                 ) : (
                   <>
                     <span className="text-sm">Next page</span>
-                    <ChevronRight size={20} />
+                    <ChevronRight size={20} aria-hidden="true" />
                   </>
                 )}
               </div>

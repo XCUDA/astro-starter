@@ -25,7 +25,7 @@ import {
 } from '@/components/ui/accordion';
 import { Input } from '@/components/ui/input';
 
-// Business data for realistic demos
+// Business data for realistic demos 
 const ordersData = [
   { id: '#ORD-001', customer: 'Sophie Martin', product: 'Site Vitrine Premium', amount: 2800, status: 'completed', date: '2025-01-15' },
   { id: '#ORD-002', customer: 'Tech Solutions SA', product: 'E-commerce Platform', amount: 5200, status: 'in-progress', date: '2025-01-12' },
