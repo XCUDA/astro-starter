@@ -2,10 +2,22 @@
 import Layout from '../components/layouts/Layout.astro';
 ---
 
-<Layout title="Astro Professional Starter">
+<Layout 
+	title="Astro Professional Starter"
+	description="Astro Professional Starter - Modern web development foundation with Astro 5, TailwindCSS 4, and shadcn/ui."
+  	currentPage="index"
+  	headerVariant="default"
+  	footerVariant="business"
+	
+	stickyBehavior="always-visible"
+	showScrollIndicator={false}
+	scrollThreshold={50}
+
+	keywords={["Astro Starter", "Astro 5", "TailwindCSS 4", "shadcn/ui", "web development", "modern web design", "responsive design", "accessible components", "performance optimization", "Astro components", "Astro layout system", "Astro design system", "Astro UI components", "Astro starter template", "Astro professional website", "Astro web architecture", "Astro 5 features", "Astro 5 components", "Astro 5 design system"]}
+>
 	<main class="min-h-screen bg-background" role="main">
 		
-		<!-- Hero Section - Base Technique -->
+		<!-- Hero Section - Base Technique  -->
 		<section class="container mx-auto px-4 py-20 text-center" role="banner" aria-labelledby="hero-title">
 			<h1 id="hero-title" class="text-4xl md:text-6xl font-bold tracking-tight mb-6">
 				⚡ Astro Starter

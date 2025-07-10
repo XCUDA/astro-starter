@@ -5,6 +5,7 @@
 import Navigation from './Navigation.astro';
 import DarkModeToggle from '../islands/DarkModeToggle';
 import StickyHeader from '../islands/StickyHeader'; // 🎯 RETOUR StickyHeader
+import { tr } from 'date-fns/locale';
 
 export interface Props {
   variant?: 'default' | 'minimal' | 'business' | 'landing';

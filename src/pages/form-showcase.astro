@@ -1,28 +1,74 @@
 ---
-// form-showcase.astro - Showcase dédié aux composants Form Business
+// form-showcase.astro - FULLY ACCESSIBLE with WCAG 2.1 AA compliance
 // Path: /src/pages/form-showcase.astro
+// ✅ Skip links, enhanced focus styles, screen reader optimizations
+
 import Layout from '../components/layouts/Layout.astro';
 import FormShowcaseDemo from '../components/islands/FormShowcaseDemo.tsx';
 import DarkModeToggle from '../components/islands/DarkModeToggle.tsx';
 import Navigation from '../components/layouts/Navigation.astro';
 ---
 
-<Layout title="Form Components - Business-Ready Forms">
-  <main role="main">
+<Layout 
+  title="Form Components - Business-Ready Forms"
+	description="Explore our complete form component system for business websites, including contact forms, newsletters, quotes, and more. Built with accessibility and UX in mind."
+  currentPage="form-showcase"
+  headerVariant="default"
+  footerVariant="business"
+	
+	stickyBehavior="always-visible"
+	showScrollIndicator={false}
+	scrollThreshold={50}
+
+	keywords={[
+    'form components',
+    'business forms',
+    'contact form',
+    'newsletter signup',
+    'quote request',
+    'form validation',
+    'accessible forms',
+    'Astro UI components'
+  ]}
+>
+  <!-- Accessibility: Skip Links -->
+  <a 
+    href="#main-content" 
+    class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 z-[100] bg-primary text-primary-foreground px-4 py-2 rounded-md font-medium focus:outline-none focus:ring-2 focus:ring-primary-foreground focus:ring-offset-2 focus:ring-offset-primary"
+  >
+    Skip to main content
+  </a>
+  <a 
+    href="#form-components-status" 
+    class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-40 z-[100] bg-primary text-primary-foreground px-4 py-2 rounded-md font-medium focus:outline-none focus:ring-2 focus:ring-primary-foreground focus:ring-offset-2 focus:ring-offset-primary"
+  >
+    Skip to components status
+  </a>
+  <a 
+    href="#interactive-demos" 
+    class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-80 z-[100] bg-primary text-primary-foreground px-4 py-2 rounded-md font-medium focus:outline-none focus:ring-2 focus:ring-primary-foreground focus:ring-offset-2 focus:ring-offset-primary"
+  >
+    Skip to interactive demos
+  </a>
+
+  <main role="main" id="main-content">
     <section class="py-20 min-h-screen" aria-labelledby="main-heading">
       <div class="container mx-auto px-4 max-w-6xl">
         
         <!-- Header avec dark mode toggle -->
-        <header class="flex justify-between items-center mb-12">
-          <div>
+        <header class="flex justify-between items-start mb-12">
+          <div class="flex-1">
             <h1 id="main-heading" class="text-4xl font-bold text-foreground mb-4">
-              📝 Form Components Showcase
+              <span aria-hidden="true">📝</span> Form Components Showcase
             </h1>
-            <p class="text-lg text-muted-foreground">
-              Complete form system for professional websites - 7 core components
+            <p class="text-lg text-muted-foreground max-w-3xl">
+              Complete form system for professional websites featuring 7 core components 
+              with full accessibility support, validation, and business-ready functionality.
             </p>
           </div>
-          <DarkModeToggle client:load />
+          <div class="ml-4 flex-shrink-0">
+            <DarkModeToggle client:load />
+          </div>
         </header>
 
         <!-- Form Components Overview -->
@@ -30,45 +76,53 @@ import Navigation from '../components/layouts/Navigation.astro';
           class="bg-card border border-border rounded-lg p-6 mb-12"
           aria-labelledby="components-heading"
           role="region"
+          id="form-components-status"
         >
           <h2 id="components-heading" class="text-xl font-semibold text-card-foreground mb-4">
-            🧩 Form Component System - Complete Integration
+            <span aria-hidden="true">🧩</span> Form Component System - Complete Integration
           </h2>
-          <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4" role="list" aria-label="Form components status">
+          <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4" role="list" aria-label="Form components installation status">
             <div class="flex items-center gap-2" role="listitem">
               <span class="w-3 h-3 bg-green-500 rounded-full" aria-hidden="true"></span>
               <span class="font-medium text-sm">Button</span>
-              <span class="text-xs text-muted-foreground">✅</span>
+              <span class="sr-only">installed and ready for use</span>
+              <span class="text-xs text-muted-foreground" aria-hidden="true">✅</span>
             </div>
             <div class="flex items-center gap-2" role="listitem">
               <span class="w-3 h-3 bg-green-500 rounded-full" aria-hidden="true"></span>
               <span class="font-medium text-sm">Input</span>
-              <span class="text-xs text-muted-foreground">✅</span>
+              <span class="sr-only">installed and ready for use</span>
+              <span class="text-xs text-muted-foreground" aria-hidden="true">✅</span>
             </div>
             <div class="flex items-center gap-2" role="listitem">
               <span class="w-3 h-3 bg-green-500 rounded-full" aria-hidden="true"></span>
               <span class="font-medium text-sm">Label</span>
-              <span class="text-xs text-muted-foreground">✅</span>
+              <span class="sr-only">installed and ready for use</span>
+              <span class="text-xs text-muted-foreground" aria-hidden="true">✅</span>
             </div>
             <div class="flex items-center gap-2" role="listitem">
               <span class="w-3 h-3 bg-green-500 rounded-full" aria-hidden="true"></span>
               <span class="font-medium text-sm">Textarea</span>
-              <span class="text-xs text-muted-foreground">✅</span>
+              <span class="sr-only">installed and ready for use</span>
+              <span class="text-xs text-muted-foreground" aria-hidden="true">✅</span>
             </div>
             <div class="flex items-center gap-2" role="listitem">
               <span class="w-3 h-3 bg-green-500 rounded-full" aria-hidden="true"></span>
               <span class="font-medium text-sm">Select</span>
-              <span class="text-xs text-muted-foreground">✅</span>
+              <span class="sr-only">installed and ready for use</span>
+              <span class="text-xs text-muted-foreground" aria-hidden="true">✅</span>
             </div>
             <div class="flex items-center gap-2" role="listitem">
               <span class="w-3 h-3 bg-green-500 rounded-full" aria-hidden="true"></span>
               <span class="font-medium text-sm">Checkbox</span>
-              <span class="text-xs text-muted-foreground">✅</span>
+              <span class="sr-only">installed and ready for use</span>
+              <span class="text-xs text-muted-foreground" aria-hidden="true">✅</span>
             </div>
             <div class="flex items-center gap-2" role="listitem">
               <span class="w-3 h-3 bg-green-500 rounded-full" aria-hidden="true"></span>
               <span class="font-medium text-sm">Dialog</span>
-              <span class="text-xs text-muted-foreground">✅</span>
+              <span class="sr-only">installed and ready for use</span>
+              <span class="text-xs text-muted-foreground" aria-hidden="true">✅</span>
             </div>
           </div>
           <div 
@@ -77,7 +131,8 @@ import Navigation from '../components/layouts/Navigation.astro';
             aria-labelledby="objective-text"
           >
             <p id="objective-text" class="text-sm text-green-700 dark:text-green-300">
-              <strong>✅ Complete Form System :</strong> 7 components intégrés pour créer tous types de formulaires business (contact, newsletter, devis, inscription)
+              <strong>✅ Complete Form System:</strong> 7 components intégrés pour créer tous types de formulaires business (contact, newsletter, devis, inscription) 
+              avec support d'accessibilité WCAG 2.1 AA complet.
             </p>
           </div>
         </section>
@@ -91,64 +146,64 @@ import Navigation from '../components/layouts/Navigation.astro';
           <h2 id="use-cases-heading" class="sr-only">Business use cases for form components</h2>
           
           <!-- Contact Forms -->
-          <div class="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/20 dark:to-indigo-950/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
-            <div class="flex items-center mb-3">
+          <article class="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/20 dark:to-indigo-950/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+            <header class="flex items-center mb-3">
               <span class="text-2xl mr-3" aria-hidden="true">📬</span>
               <h3 class="text-lg font-semibold text-blue-800 dark:text-blue-200">Contact Forms</h3>
-            </div>
+            </header>
             <p class="text-sm text-blue-600 dark:text-blue-400 mb-3">
-              Essential pour 100% des sites vitrine
+              Essential pour 100% des sites vitrine avec accessibilité complète
             </p>
             <ul class="text-xs text-blue-600 dark:text-blue-400 space-y-1" role="list">
-              <li role="listitem">• Input (nom, email, téléphone)</li>
-              <li role="listitem">• Textarea (message)</li>
-              <li role="listitem">• Select (sujet du message)</li>
-              <li role="listitem">• Checkbox (RGPD consent)</li>
-              <li role="listitem">• Button (envoi)</li>
+              <li role="listitem">• Input (nom, email, téléphone) avec validation</li>
+              <li role="listitem">• Textarea (message) avec compteur caractères</li>
+              <li role="listitem">• Select (sujet du message) avec keyboard navigation</li>
+              <li role="listitem">• Checkbox (RGPD consent) avec descriptions</li>
+              <li role="listitem">• Button (envoi) avec états de chargement</li>
             </ul>
-          </div>
+          </article>
 
           <!-- Newsletter & Lead Generation -->
-          <div class="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/20 dark:to-emerald-950/20 border border-green-200 dark:border-green-800 rounded-lg p-4">
-            <div class="flex items-center mb-3">
+          <article class="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/20 dark:to-emerald-950/20 border border-green-200 dark:border-green-800 rounded-lg p-4">
+            <header class="flex items-center mb-3">
               <span class="text-2xl mr-3" aria-hidden="true">📧</span>
               <h3 class="text-lg font-semibold text-green-800 dark:text-green-200">Newsletter & Leads</h3>
-            </div>
+            </header>
             <p class="text-sm text-green-600 dark:text-green-400 mb-3">
-              Marketing automation et lead generation
+              Marketing automation et lead generation avec screen reader support
             </p>
             <ul class="text-xs text-green-600 dark:text-green-400 space-y-1" role="list">
-              <li role="listitem">• Input (email principal)</li>
-              <li role="listitem">• Select (intérêts/catégories)</li>
-              <li role="listitem">• Checkbox (opt-in marketing)</li>
-              <li role="listitem">• Dialog (confirmation inscription)</li>
-              <li role="listitem">• Button (s'abonner)</li>
+              <li role="listitem">• Input (email principal) avec validation temps réel</li>
+              <li role="listitem">• Select (intérêts/catégories) avec ARIA labels</li>
+              <li role="listitem">• Checkbox (opt-in marketing) groupés par fieldset</li>
+              <li role="listitem">• Dialog (confirmation inscription) avec focus management</li>
+              <li role="listitem">• Button (s'abonner) avec annonces vocales</li>
             </ul>
-          </div>
+          </article>
 
           <!-- Quote & Business Forms -->
-          <div class="bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-950/20 dark:to-red-950/20 border border-orange-200 dark:border-orange-800 rounded-lg p-4">
-            <div class="flex items-center mb-3">
+          <article class="bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-950/20 dark:to-red-950/20 border border-orange-200 dark:border-orange-800 rounded-lg p-4">
+            <header class="flex items-center mb-3">
               <span class="text-2xl mr-3" aria-hidden="true">💰</span>
               <h3 class="text-lg font-semibold text-orange-800 dark:text-orange-200">Devis & Business</h3>
-            </div>
+            </header>
             <p class="text-sm text-orange-600 dark:text-orange-400 mb-3">
-              Conversion business directe
+              Conversion business directe avec formulaires accessibles
             </p>
             <ul class="text-xs text-orange-600 dark:text-orange-400 space-y-1" role="list">
-              <li role="listitem">• Input (informations client)</li>
-              <li role="listitem">• Select (services souhaités)</li>
-              <li role="listitem">• Textarea (description projet)</li>
-              <li role="listitem">• Checkbox (budget approximatif)</li>
-              <li role="listitem">• Dialog (récapitulatif devis)</li>
+              <li role="listitem">• Input (informations client) avec hints contextuelles</li>
+              <li role="listitem">• Select (services souhaités) avec descriptions</li>
+              <li role="listitem">• Textarea (description projet) avec limites caractères</li>
+              <li role="listitem">• Checkbox (budget approximatif) avec labels explicites</li>
+              <li role="listitem">• Dialog (récapitulatif devis) avec navigation clavier</li>
             </ul>
-          </div>
+          </article>
         </section>
 
         <!-- Démonstration interactive des formulaires -->
-        <section aria-labelledby="demo-heading" role="region" class="mb-12">
+        <section aria-labelledby="demo-heading" role="region" class="mb-12" id="interactive-demos">
           <h2 id="demo-heading" class="text-2xl font-semibold text-foreground mb-6">
-            ⚡ Interactive Form Demonstrations
+            <span aria-hidden="true">⚡</span> Interactive Form Demonstrations
           </h2>
           <FormShowcaseDemo client:load />
         </section>
@@ -160,48 +215,48 @@ import Navigation from '../components/layouts/Navigation.astro';
           role="region"
         >
           <h3 id="features-heading" class="text-xl font-semibold text-foreground mb-6">
-            🔧 Technical Features & Implementation
+            <span aria-hidden="true">🔧</span> Technical Features & Implementation
           </h3>
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div>
+            <article>
               <h4 class="font-semibold text-foreground mb-3 flex items-center">
                 <span class="text-lg mr-2" aria-hidden="true">✅</span>
                 Validation System
               </h4>
               <ul class="text-sm text-muted-foreground space-y-1" role="list">
-                <li role="listitem">• Real-time validation feedback</li>
-                <li role="listitem">• Custom error messages</li>
-                <li role="listitem">• Required field indicators</li>
-                <li role="listitem">• Email format validation</li>
-                <li role="listitem">• Character count for textarea</li>
+                <li role="listitem">• Real-time validation feedback with screen reader announcements</li>
+                <li role="listitem">• Custom error messages with ARIA live regions</li>
+                <li role="listitem">• Required field indicators with proper labeling</li>
+                <li role="listitem">• Email format validation with accessible error states</li>
+                <li role="listitem">• Character count for textarea with live updates</li>
               </ul>
-            </div>
-            <div>
+            </article>
+            <article>
               <h4 class="font-semibold text-foreground mb-3 flex items-center">
                 <span class="text-lg mr-2" aria-hidden="true">♿</span>
                 Accessibility First
               </h4>
               <ul class="text-sm text-muted-foreground space-y-1" role="list">
-                <li role="listitem">• Semantic HTML structure</li>
-                <li role="listitem">• ARIA labels and descriptions</li>
-                <li role="listitem">• Keyboard navigation support</li>
-                <li role="listitem">• Screen reader optimization</li>
-                <li role="listitem">• Focus management</li>
+                <li role="listitem">• Semantic HTML structure with fieldsets and legends</li>
+                <li role="listitem">• Comprehensive ARIA labels and descriptions</li>
+                <li role="listitem">• Full keyboard navigation support</li>
+                <li role="listitem">• Screen reader optimization with live regions</li>
+                <li role="listitem">• Advanced focus management and visual indicators</li>
               </ul>
-            </div>
-            <div>
+            </article>
+            <article>
               <h4 class="font-semibold text-foreground mb-3 flex items-center">
                 <span class="text-lg mr-2" aria-hidden="true">🎨</span>
                 UX Excellence
               </h4>
               <ul class="text-sm text-muted-foreground space-y-1" role="list">
-                <li role="listitem">• Visual state indicators</li>
-                <li role="listitem">• Smooth animations</li>
-                <li role="listitem">• Dark mode adaptation</li>
-                <li role="listitem">• Loading states</li>
-                <li role="listitem">• Success confirmations</li>
+                <li role="listitem">• Visual state indicators with alternative text</li>
+                <li role="listitem">• Smooth animations with reduced motion support</li>
+                <li role="listitem">• Dark mode adaptation with high contrast options</li>
+                <li role="listitem">• Loading states with accessible progress indicators</li>
+                <li role="listitem">• Success confirmations with screen reader announcements</li>
               </ul>
-            </div>
+            </article>
           </div>
         </section>
 
@@ -212,31 +267,35 @@ import Navigation from '../components/layouts/Navigation.astro';
           role="region"
         >
           <h3 id="integration-heading" class="text-xl font-semibold text-card-foreground mb-6">
-            🔗 Component Integration Patterns
+            <span aria-hidden="true">🔗</span> Component Integration Patterns
           </h3>
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <div>
-              <h4 class="font-semibold text-foreground mb-3">Basic Contact Form :</h4>
-              <div class="bg-muted/50 rounded p-3 text-sm font-mono">
-                <div class="text-muted-foreground">// Minimal contact form</div>
-                <div>&lt;Label&gt; + &lt;Input&gt; (name)</div>
-                <div>&lt;Label&gt; + &lt;Input&gt; (email)</div>
-                <div>&lt;Label&gt; + &lt;Textarea&gt; (message)</div>
-                <div>&lt;Checkbox&gt; (RGPD consent)</div>
-                <div>&lt;Button&gt; (submit)</div>
+            <article>
+              <h4 class="font-semibold text-foreground mb-3">Basic Contact Form:</h4>
+              <div class="bg-muted/50 rounded p-3 text-sm font-mono" role="group" aria-label="Basic contact form code structure">
+                <div class="text-muted-foreground">// Minimal accessible contact form</div>
+                <div>&lt;fieldset&gt;</div>
+                <div>&nbsp;&nbsp;&lt;Label&gt; + &lt;Input&gt; (name, aria-required)</div>
+                <div>&nbsp;&nbsp;&lt;Label&gt; + &lt;Input&gt; (email, validation)</div>
+                <div>&nbsp;&nbsp;&lt;Label&gt; + &lt;Textarea&gt; (message, describedby)</div>
+                <div>&nbsp;&nbsp;&lt;Checkbox&gt; (RGPD consent, required)</div>
+                <div>&nbsp;&nbsp;&lt;Button&gt; (submit, loading states)</div>
+                <div>&lt;/fieldset&gt;</div>
               </div>
-            </div>
-            <div>
-              <h4 class="font-semibold text-foreground mb-3">Advanced Business Form :</h4>
-              <div class="bg-muted/50 rounded p-3 text-sm font-mono">
-                <div class="text-muted-foreground">// Complex business workflow</div>
-                <div>&lt;Select&gt; (service type)</div>
-                <div>&lt;Input&gt; (contact details)</div>
-                <div>&lt;Textarea&gt; (project description)</div>
-                <div>&lt;Dialog&gt; (confirmation modal)</div>
-                <div>&lt;Button&gt; variants (save/submit)</div>
+            </article>
+            <article>
+              <h4 class="font-semibold text-foreground mb-3">Advanced Business Form:</h4>
+              <div class="bg-muted/50 rounded p-3 text-sm font-mono" role="group" aria-label="Advanced business form code structure">
+                <div class="text-muted-foreground">// Complex accessible business workflow</div>
+                <div>&lt;form role="form" aria-label="..."&gt;</div>
+                <div>&nbsp;&nbsp;&lt;Select&gt; (service type, describedby)</div>
+                <div>&nbsp;&nbsp;&lt;Input&gt; (contact details, validation)</div>
+                <div>&nbsp;&nbsp;&lt;Textarea&gt; (project, live character count)</div>
+                <div>&nbsp;&nbsp;&lt;Dialog&gt; (confirmation, focus management)</div>
+                <div>&nbsp;&nbsp;&lt;Button&gt; variants (save/submit, aria-describedby)</div>
+                <div>&lt;/form&gt;</div>
               </div>
-            </div>
+            </article>
           </div>
         </section>
 
@@ -247,29 +306,29 @@ import Navigation from '../components/layouts/Navigation.astro';
           role="region"
         >
           <h3 id="business-value-heading" class="text-lg font-semibold text-blue-800 dark:text-blue-200 mb-4">
-            💼 Valeur Business - Form Components System
+            <span aria-hidden="true">💼</span> Valeur Business - Form Components System
           </h3>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <h4 class="font-semibold text-blue-700 dark:text-blue-300 mb-2">ROI Client Direct :</h4>
+            <article>
+              <h4 class="font-semibold text-blue-700 dark:text-blue-300 mb-2">ROI Client Direct:</h4>
               <ul class="text-sm text-blue-600 dark:text-blue-400 space-y-1" role="list">
-                <li role="listitem">• <strong>Contact :</strong> Lead generation 24/7</li>
-                <li role="listitem">• <strong>Newsletter :</strong> Base marketing automatisée</li>
-                <li role="listitem">• <strong>Devis :</strong> Qualification prospects</li>
-                <li role="listitem">• <strong>Validation :</strong> Réduction erreurs saisie</li>
-                <li role="listitem">• <strong>UX :</strong> Taux conversion amélioré</li>
+                <li role="listitem">• <strong>Contact:</strong> Lead generation 24/7 avec accessibilité complète</li>
+                <li role="listitem">• <strong>Newsletter:</strong> Base marketing automatisée RGPD-compliant</li>
+                <li role="listitem">• <strong>Devis:</strong> Qualification prospects avec formulaires accessibles</li>
+                <li role="listitem">• <strong>Validation:</strong> Réduction erreurs saisie + feedback vocal</li>
+                <li role="listitem">• <strong>UX:</strong> Taux conversion amélioré + inclusion utilisateurs</li>
               </ul>
-            </div>
-            <div>
-              <h4 class="font-semibold text-blue-700 dark:text-blue-300 mb-2">Avantages Techniques :</h4>
+            </article>
+            <article>
+              <h4 class="font-semibold text-blue-700 dark:text-blue-300 mb-2">Avantages Techniques:</h4>
               <ul class="text-sm text-blue-600 dark:text-blue-400 space-y-1" role="list">
-                <li role="listitem">• <strong>Production-ready :</strong> Zéro config supplémentaire</li>
-                <li role="listitem">• <strong>Accessibilité :</strong> Conformité WCAG 2.1 AA</li>
-                <li role="listitem">• <strong>Maintenabilité :</strong> Code standardisé</li>
-                <li role="listitem">• <strong>Évolutivité :</strong> Patterns réutilisables</li>
-                <li role="listitem">• <strong>Performance :</strong> Optimisé pour Core Web Vitals</li>
+                <li role="listitem">• <strong>Production-ready:</strong> Zéro config supplémentaire</li>
+                <li role="listitem">• <strong>Accessibilité:</strong> Conformité WCAG 2.1 AA complète</li>
+                <li role="listitem">• <strong>Maintenabilité:</strong> Code standardisé et documenté</li>
+                <li role="listitem">• <strong>Évolutivité:</strong> Patterns réutilisables et modulaires</li>
+                <li role="listitem">• <strong>Performance:</strong> Optimisé Core Web Vitals + a11y</li>
               </ul>
-            </div>
+            </article>
           </div>
         </section>
 
@@ -280,58 +339,60 @@ import Navigation from '../components/layouts/Navigation.astro';
           role="region"
         >
           <h3 id="related-heading" class="text-xl font-semibold text-foreground mb-4">
-            🔗 Related Component Showcases
+            <span aria-hidden="true">🔗</span> Related Component Showcases
           </h3>
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <a 
-              href="/components-showcase" 
-              class="flex items-center p-3 rounded-lg border bg-card hover:bg-accent/50 transition-colors group"
-              aria-label="View all components overview"
-            >
-              <span class="text-xl mr-3" aria-hidden="true">🧩</span>
-              <div>
-                <div class="font-medium group-hover:text-primary transition-colors">All Components</div>
-                <div class="text-xs text-muted-foreground">Complete overview</div>
-              </div>
-            </a>
-            <a 
-              href="/navigation-showcase" 
-              class="flex items-center p-3 rounded-lg border bg-card hover:bg-accent/50 transition-colors group"
-              aria-label="Explore navigation and feedback components"
-            >
-              <span class="text-xl mr-3" aria-hidden="true">🧭</span>
-              <div>
-                <div class="font-medium group-hover:text-primary transition-colors">Navigation</div>
-                <div class="text-xs text-muted-foreground">Breadcrumbs, tabs, alerts</div>
-              </div>
-            </a>
-            <a 
-              href="/data-display-showcase" 
-              class="flex items-center p-3 rounded-lg border bg-card hover:bg-accent/50 transition-colors group"
-              aria-label="Explore data display components"
-            >
-              <span class="text-xl mr-3" aria-hidden="true">📊</span>
-              <div>
-                <div class="font-medium group-hover:text-primary transition-colors">Data Display</div>
-                <div class="text-xs text-muted-foreground">Tables, avatars, tooltips</div>
-              </div>
-            </a>
-            <a 
-              href="/advanced-showcase" 
-              class="flex items-center p-3 rounded-lg border bg-card hover:bg-accent/50 transition-colors group"
-              aria-label="Explore advanced components"
-            >
-              <span class="text-xl mr-3" aria-hidden="true">🔮</span>
-              <div>
-                <div class="font-medium group-hover:text-primary transition-colors">Advanced</div>
-                <div class="text-xs text-muted-foreground">Calendar, command, sonner</div>
-              </div>
-            </a>
-          </div>
+          <nav aria-label="Related component showcases">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <a 
+                href="/components-showcase" 
+                class="flex items-center p-3 rounded-lg border bg-card hover:bg-accent/50 transition-colors group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                aria-describedby="all-components-description"
+              >
+                <span class="text-xl mr-3" aria-hidden="true">🧩</span>
+                <div>
+                  <div class="font-medium group-hover:text-primary transition-colors">All Components</div>
+                  <div id="all-components-description" class="text-xs text-muted-foreground">Complete overview</div>
+                </div>
+              </a>
+              <a 
+                href="/navigation-showcase" 
+                class="flex items-center p-3 rounded-lg border bg-card hover:bg-accent/50 transition-colors group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                aria-describedby="navigation-showcase-description"
+              >
+                <span class="text-xl mr-3" aria-hidden="true">🧭</span>
+                <div>
+                  <div class="font-medium group-hover:text-primary transition-colors">Navigation</div>
+                  <div id="navigation-showcase-description" class="text-xs text-muted-foreground">Breadcrumbs, tabs, alerts</div>
+                </div>
+              </a>
+              <a 
+                href="/data-display-showcase" 
+                class="flex items-center p-3 rounded-lg border bg-card hover:bg-accent/50 transition-colors group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                aria-describedby="data-display-showcase-description"
+              >
+                <span class="text-xl mr-3" aria-hidden="true">📊</span>
+                <div>
+                  <div class="font-medium group-hover:text-primary transition-colors">Data Display</div>
+                  <div id="data-display-showcase-description" class="text-xs text-muted-foreground">Tables, avatars, tooltips</div>
+                </div>
+              </a>
+              <a 
+                href="/advanced-showcase" 
+                class="flex items-center p-3 rounded-lg border bg-card hover:bg-accent/50 transition-colors group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                aria-describedby="advanced-showcase-description"
+              >
+                <span class="text-xl mr-3" aria-hidden="true">🔮</span>
+                <div>
+                  <div class="font-medium group-hover:text-primary transition-colors">Advanced</div>
+                  <div id="advanced-showcase-description" class="text-xs text-muted-foreground">Calendar, command, sonner</div>
+                </div>
+              </a>
+            </div>
+          </nav>
         </section>
 
         <!-- Navigation  -->
-        <nav aria-label="Showcase navigation" role="navigation">
+        <nav aria-label="Site navigation" role="navigation">
           <Navigation currentPage="form-showcase" />
         </nav>
 
@@ -339,3 +400,81 @@ import Navigation from '../components/layouts/Navigation.astro';
     </section>
   </main>
 </Layout>
+
+<style>
+  /* Enhanced focus styles for better accessibility */
+  .skip-link {
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .skip-link:focus {
+    transform: translateY(0);
+  }
+
+  /* Ensure all interactive elements have proper focus styles */
+  a:focus-visible,
+  button:focus-visible {
+    outline: 2px solid hsl(var(--primary)) !important;
+    outline-offset: 2px !important;
+    border-radius: 4px !important;
+  }
+
+  /* Enhanced hover and focus states for component cards */
+  article:hover {
+    transform: translateY(-2px);
+  }
+
+  article:focus-within {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 2px;
+    border-radius: 8px;
+  }
+
+  /* Screen reader only content */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .sr-only:focus,
+  .sr-only:active {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: inherit;
+    margin: inherit;
+    overflow: visible;
+    clip: auto;
+    white-space: inherit;
+  }
+
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    article {
+      border-width: 2px;
+    }
+    
+    .skip-link:focus {
+      border: 3px solid;
+    }
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    article,
+    .skip-link {
+      transition: none !important;
+    }
+    
+    article:hover {
+      transform: none;
+    }
+  }
+</style>
