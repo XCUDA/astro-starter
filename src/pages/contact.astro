@@ -1,0 +1,430 @@
+---
+// contact.astro - Business Contact Page
+// Professional contact page with form and business information
+// Path: src/pages/contact.astro
+
+import Layout from '../components/layouts/Layout.astro';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
+import { Badge } from '../components/ui/badge';
+import { Button } from '../components/ui/button';
+import { Input } from '../components/ui/input';
+import { Label } from '../components/ui/label';
+import { Textarea } from '../components/ui/textarea';
+import { Alert, AlertDescription } from '../components/ui/alert';
+---
+
+<Layout 
+  title="Contact Us - Astro Starter"
+  description="Get in touch with our team for support, questions, or to discuss your website needs"
+  currentPage="contact"
+  headerVariant="business"
+  footerVariant="business"
+  showBusinessInfo={true}
+>
+  <div class="container mx-auto px-4 py-12 lg:py-20">
+    
+    <!-- Hero Section -->
+    <div class="text-center mb-16">
+      <div class="flex justify-center items-center space-x-3 mb-6">
+        <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-xl flex items-center justify-center text-white font-bold text-2xl">
+          💬
+        </div>
+        <Badge variant="outline" className="text-sm">
+          Get in Touch
+        </Badge>
+      </div>
+      
+      <h1 class="text-4xl lg:text-6xl font-bold text-foreground mb-6">
+        Contact Us
+      </h1>
+      
+      <p class="text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+        We're here to help you get the most out of your website. 
+        Reach out with questions, feedback, or support requests.
+      </p>
+    </div>
+
+      <!-- Contact Methods -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+      
+      <!-- Email -->
+      <Card className="text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+        <CardHeader>
+          <div class="w-12 h-12 bg-blue-500/10 rounded-xl flex items-center justify-center mx-auto mb-4">
+            <span class="text-2xl">✉️</span>
+          </div>
+          <CardTitle>Email Support</CardTitle>
+          <CardDescription>
+            Send us a detailed message and we'll get back to you quickly
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <p class="text-sm text-muted-foreground mb-4">
+            Response time: Within 24 hours
+          </p>
+          <Button asChild variant="outline" className="w-full">
+            <a href="mailto:support@yourcompany.com">
+              support@yourcompany.com
+            </a>
+          </Button>
+        </CardContent>
+      </Card>
+
+      <!-- Phone -->
+      <Card className="text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+        <CardHeader>
+          <div class="w-12 h-12 bg-green-500/10 rounded-xl flex items-center justify-center mx-auto mb-4">
+            <span class="text-2xl">📞</span>
+          </div>
+          <CardTitle>Phone Support</CardTitle>
+          <CardDescription>
+            Speak directly with our team for immediate assistance
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <p class="text-sm text-muted-foreground mb-4">
+            Available: Mon-Fri, 9AM-6PM
+          </p>
+          <Button asChild variant="outline" className="w-full">
+            <a href="tel:+1-555-123-4567">
+              +1 (555) 123-4567
+            </a>
+          </Button>
+        </CardContent>
+      </Card>
+
+      <!-- Live Chat -->
+      <Card className="text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+        <CardHeader>
+          <div class="w-12 h-12 bg-purple-500/10 rounded-xl flex items-center justify-center mx-auto mb-4">
+            <span class="text-2xl">💬</span>
+          </div>
+          <CardTitle>Live Chat</CardTitle>
+          <CardDescription>
+            Real-time support for urgent questions and quick help
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <p class="text-sm text-muted-foreground mb-4">
+            Available: Mon-Fri, 9AM-6PM
+          </p>
+          <Button variant="outline" className="w-full" disabled>
+            Coming Soon
+          </Button>
+        </CardContent>
+      </Card>
+
+    </div>
+
+    <!-- Contact Form -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      
+      <!-- Form -->
+      <div class="space-y-6">
+        
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center space-x-2">
+              <span class="text-xl">📝</span>
+              <span>Send us a Message</span>
+            </CardTitle>
+            <CardDescription>
+              Fill out the form below and we'll get back to you as soon as possible
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            
+            <Alert className="mb-6 border-blue-200 bg-blue-50 dark:border-blue-800 dark:bg-blue-950/50">
+              <span class="text-blue-600 dark:text-blue-400">ℹ️</span>
+              <AlertDescription className="text-blue-800 dark:text-blue-200">
+                <strong>Note:</strong> This is a demo form. In a real implementation, 
+                form submissions would be handled by your backend service or email provider.
+              </AlertDescription>
+            </Alert>
+
+            <form class="space-y-6" id="contact-form">
+              
+              <!-- Name -->
+              <div class="space-y-2">
+                <Label htmlFor="name">Full Name *</Label>
+                <Input 
+                  id="name" 
+                  name="name" 
+                  placeholder="Enter your full name"
+                  required
+                />
+              </div>
+
+              <!-- Email -->
+              <div class="space-y-2">
+                <Label htmlFor="email">Email Address *</Label>
+                <Input 
+                  id="email" 
+                  name="email" 
+                  type="email"
+                  placeholder="Enter your email address"
+                  required
+                />
+              </div>
+
+              <!-- Phone -->
+              <div class="space-y-2">
+                <Label htmlFor="phone">Phone Number</Label>
+                <Input 
+                  id="phone" 
+                  name="phone" 
+                  type="tel"
+                  placeholder="Enter your phone number (optional)"
+                />
+              </div>
+
+              <!-- Subject -->
+              <div class="space-y-2">
+                <Label htmlFor="subject">Subject *</Label>
+                <select 
+                  id="subject"
+                  name="subject" 
+                  required
+                  class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                >
+                  <option value="">Select a subject</option>
+                  <option value="general">General Question</option>
+                  <option value="support">Technical Support</option>
+                  <option value="customization">Website Customization</option>
+                  <option value="hosting">Hosting & Deployment</option>
+                  <option value="feedback">Feedback & Suggestions</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              <!-- Message -->
+              <div class="space-y-2">
+                <Label htmlFor="message">Message *</Label>
+                <Textarea 
+                  id="message" 
+                  name="message" 
+                  placeholder="Tell us how we can help you..."
+                  rows={5}
+                  required
+                />
+              </div>
+
+              <!-- Priority -->
+              <div class="space-y-2">
+                <Label htmlFor="priority">Priority Level</Label>
+                <select 
+                  id="priority"
+                  name="priority"
+                  class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                >
+                  <option value="">Select priority level</option>
+                  <option value="low">Low - General inquiry</option>
+                  <option value="medium">Medium - Need help within a few days</option>
+                  <option value="high">High - Urgent issue</option>
+                </select>
+              </div>
+
+              <!-- Submit Button -->
+              <div class="pt-4">
+                <Button type="submit" className="w-full" size="lg">
+                  Send Message
+                </Button>
+                <p class="text-xs text-muted-foreground mt-2 text-center">
+                  We'll respond within 24 hours during business days
+                </p>
+              </div>
+
+            </form>
+          </CardContent>
+        </Card>
+      </div>
+
+      <!-- Contact Information -->
+      <div class="space-y-6">
+        
+        <!-- Business Information -->
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center space-x-2">
+              <span class="text-xl">🏢</span>
+              <span>Business Information</span>
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div class="space-y-4">
+              <div class="flex items-start space-x-3">
+                <div class="w-6 h-6 bg-blue-500/10 rounded-full flex items-center justify-center mt-1">
+                  <span class="text-sm">📍</span>
+                </div>
+                <div>
+                  <h4 class="font-medium text-foreground">Office Address</h4>
+                  <p class="text-sm text-muted-foreground">
+                    123 Business Street<br>
+                    Suite 100<br>
+                    City, State 12345<br>
+                    Country
+                  </p>
+                </div>
+              </div>
+              
+              <div class="flex items-start space-x-3">
+                <div class="w-6 h-6 bg-green-500/10 rounded-full flex items-center justify-center mt-1">
+                  <span class="text-sm">🕒</span>
+                </div>
+                <div>
+                  <h4 class="font-medium text-foreground">Business Hours</h4>
+                  <p class="text-sm text-muted-foreground">
+                    Monday - Friday: 9:00 AM - 6:00 PM<br>
+                    Saturday: 10:00 AM - 4:00 PM<br>
+                    Sunday: Closed
+                  </p>
+                </div>
+              </div>
+              
+              <div class="flex items-start space-x-3">
+                <div class="w-6 h-6 bg-purple-500/10 rounded-full flex items-center justify-center mt-1">
+                  <span class="text-sm">⏰</span>
+                </div>
+                <div>
+                  <h4 class="font-medium text-foreground">Response Time</h4>
+                  <p class="text-sm text-muted-foreground">
+                    Email: Within 24 hours<br>
+                    Phone: Immediate during business hours<br>
+                    Urgent issues: Within 4 hours
+                  </p>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <!-- FAQ Quick Links -->
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center space-x-2">
+              <span class="text-xl">❓</span>
+              <span>Common Questions</span>
+            </CardTitle>
+            <CardDescription>
+              Quick answers to frequently asked questions
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div class="space-y-3">
+              <div class="p-3 bg-muted/30 rounded-lg">
+                <h4 class="font-medium text-foreground text-sm mb-1">How do I update my content?</h4>
+                <p class="text-xs text-muted-foreground">
+                  Check our <a href="/quick-start" class="text-primary underline">Quick Start Guide</a> for step-by-step instructions.
+                </p>
+              </div>
+              
+              <div class="p-3 bg-muted/30 rounded-lg">
+                <h4 class="font-medium text-foreground text-sm mb-1">Can I customize colors and design?</h4>
+                <p class="text-xs text-muted-foreground">
+                  Yes! Your site supports full customization. See our <a href="/docs" class="text-primary underline">documentation</a> for details.
+                </p>
+              </div>
+              
+              <div class="p-3 bg-muted/30 rounded-lg">
+                <h4 class="font-medium text-foreground text-sm mb-1">What hosting do you recommend?</h4>
+                <p class="text-xs text-muted-foreground">
+                  Your site works with any modern hosting provider. We can help you choose the best option.
+                </p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <!-- Emergency Contact -->
+        <Card className="border-amber-200 bg-amber-50 dark:border-amber-800 dark:bg-amber-950/50">
+          <CardHeader>
+            <CardTitle className="flex items-center space-x-2 text-amber-800 dark:text-amber-200">
+              <span class="text-xl">🚨</span>
+              <span>Emergency Support</span>
+            </CardTitle>
+            <CardDescription className="text-amber-700 dark:text-amber-300">
+              For urgent technical issues affecting your live website
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div class="space-y-3">
+              <Button asChild variant="outline" className="w-full border-amber-300 text-amber-800 hover:bg-amber-100 dark:border-amber-700 dark:text-amber-200 dark:hover:bg-amber-950/50">
+                <a href="tel:+41-00-000-0000">
+                  Emergency Line: +41 00 000 0000
+                </a>
+              </Button>
+              <p class="text-xs text-amber-700 dark:text-amber-300 text-center">
+                Available 24/7 for critical site issues
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+
+      </div>
+
+    </div>
+
+  </div>
+</Layout>
+
+<script>
+  // Contact form handling with proper TypeScript types
+  const contactForm = document.getElementById('contact-form') as HTMLFormElement;
+  
+  if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      // Get form data
+      const formData = new FormData(contactForm);
+      const formObject = Object.fromEntries(formData.entries());
+      
+      // In a real implementation, you would send this to your backend
+      console.log('Form submission:', formObject);
+      
+      // Show success message (demo)
+      const button = contactForm.querySelector('button[type="submit"]') as HTMLButtonElement;
+      if (button) {
+        const originalText = button.textContent;
+        button.textContent = 'Message Sent! ✓';
+        button.disabled = true;
+        
+        // Reset form after 3 seconds
+        setTimeout(() => {
+          button.textContent = originalText;
+          button.disabled = false;
+          contactForm.reset();
+        }, 3000);
+      }
+    });
+  }
+</script>
+
+<style>
+  /* Enhanced form styling */
+  #contact-form input:focus,
+  #contact-form textarea:focus,
+  #contact-form select:focus {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 2px;
+  }
+  
+  /* Form validation states */
+  #contact-form input:invalid:not(:placeholder-shown),
+  #contact-form textarea:invalid:not(:placeholder-shown) {
+    border-color: hsl(var(--destructive));
+  }
+  
+  #contact-form input:valid:not(:placeholder-shown),
+  #contact-form textarea:valid:not(:placeholder-shown) {
+    border-color: hsl(var(--primary));
+  }
+  
+  /* Smooth transitions */
+  #contact-form input,
+  #contact-form textarea,
+  #contact-form select,
+  #contact-form button {
+    transition: all 0.2s ease-in-out;
+  }
+</style>

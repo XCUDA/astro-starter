@@ -1,0 +1,286 @@
+---
+// docs.astro - Public Documentation Hub
+// User-facing documentation vs internal /docs/ folder
+// Path: src/pages/docs.astro
+
+import Layout from '../components/layouts/Layout.astro';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
+import { Badge } from '../components/ui/badge';
+import { Button } from '../components/ui/button';
+---
+
+<Layout 
+  title="Documentation - Astro Starter"
+  description="Complete documentation and guides for using your Astro website built with modern technologies"
+  currentPage="documentation"
+  headerVariant="business"
+  showCTA={true}
+  ctaText="Get Support"
+  ctaHref="/contact"
+>
+  <div class="container mx-auto px-4 py-12 lg:py-20">
+    
+    <!-- Hero Section -->
+    <div class="text-center mb-16">
+      <div class="flex justify-center items-center space-x-3 mb-6">
+        <div class="w-12 h-12 bg-gradient-to-br from-primary to-primary/70 rounded-xl flex items-center justify-center text-primary-foreground font-bold text-2xl">
+          📚
+        </div>
+        <Badge variant="outline" className="text-sm">
+          Documentation Hub
+        </Badge>
+      </div>
+      
+      <h1 class="text-4xl lg:text-6xl font-bold text-foreground mb-6">
+        Documentation
+      </h1>
+      
+      <p class="text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+        Everything you need to know about your new website built with 
+        <span class="text-primary font-medium">Astro 5</span>, 
+        <span class="text-primary font-medium">TailwindCSS 4</span>, and 
+        <span class="text-primary font-medium">shadcn/ui</span>
+      </p>
+    </div>
+
+    <!-- Quick Navigation -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+      
+      <!-- Quick Start -->
+      <Card className="hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+        <CardHeader>
+          <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 bg-green-500/10 rounded-lg flex items-center justify-center">
+              <span class="text-2xl">⚡</span>
+            </div>
+            <div>
+              <CardTitle>Quick Start Guide</CardTitle>
+              <CardDescription>Get your site running in minutes</CardDescription>
+            </div>
+          </div>
+        </CardHeader>
+        <CardContent>
+          <p class="text-sm text-muted-foreground mb-4">
+            Step-by-step instructions to customize your website, add content, and make it your own.
+          </p>
+          <Button asChild variant="outline" className="w-full">
+            <a href="/quick-start">
+              Start Here →
+            </a>
+          </Button>
+        </CardContent>
+      </Card>
+
+      <!-- Component Showcase -->
+      <Card className="hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+        <CardHeader>
+          <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 bg-blue-500/10 rounded-lg flex items-center justify-center">
+              <span class="text-2xl">🧩</span>
+            </div>
+            <div>
+              <CardTitle>Components</CardTitle>
+              <CardDescription>Interactive component library</CardDescription>
+            </div>
+          </div>
+        </CardHeader>
+        <CardContent>
+          <p class="text-sm text-muted-foreground mb-4">
+            Explore all available components and see how they work in your site.
+          </p>
+          <Button asChild variant="outline" className="w-full">
+            <a href="/components-showcase">
+              View Components →
+            </a>
+          </Button>
+        </CardContent>
+      </Card>
+
+      <!-- Get Help -->
+      <Card className="hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+        <CardHeader>
+          <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 bg-purple-500/10 rounded-lg flex items-center justify-center">
+              <span class="text-2xl">🆘</span>
+            </div>
+            <div>
+              <CardTitle>Get Help</CardTitle>
+              <CardDescription>Support and contact options</CardDescription>
+            </div>
+          </div>
+        </CardHeader>
+        <CardContent>
+          <p class="text-sm text-muted-foreground mb-4">
+            Need assistance? Contact us or browse frequently asked questions.
+          </p>
+          <Button asChild variant="outline" className="w-full">
+            <a href="/contact">
+              Contact Support →
+            </a>
+          </Button>
+        </CardContent>
+      </Card>
+
+    </div>
+
+    <!-- Main Documentation Sections -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+      
+      <!-- Getting Started -->
+      <div class="space-y-6">
+        <div class="flex items-center space-x-3 mb-6">
+          <div class="w-8 h-8 bg-green-500/10 rounded-lg flex items-center justify-center">
+            <span class="text-lg">🚀</span>
+          </div>
+          <h2 class="text-2xl font-bold text-foreground">Getting Started</h2>
+        </div>
+        
+        <div class="space-y-4">
+          <div class="flex items-start space-x-3 p-4 rounded-lg bg-muted/30">
+            <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center text-white text-sm font-bold">
+              1
+            </div>
+            <div>
+              <h3 class="font-medium text-foreground">Quick Start</h3>
+              <p class="text-sm text-muted-foreground">Basic setup and customization</p>
+            </div>
+          </div>
+          
+          <div class="flex items-start space-x-3 p-4 rounded-lg bg-muted/30">
+            <div class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm font-bold">
+              2
+            </div>
+            <div>
+              <h3 class="font-medium text-foreground">Content Management</h3>
+              <p class="text-sm text-muted-foreground">Adding and editing your content</p>
+            </div>
+          </div>
+          
+          <div class="flex items-start space-x-3 p-4 rounded-lg bg-muted/30">
+            <div class="w-6 h-6 bg-purple-500 rounded-full flex items-center justify-center text-white text-sm font-bold">
+              3
+            </div>
+            <div>
+              <h3 class="font-medium text-foreground">Customization</h3>
+              <p class="text-sm text-muted-foreground">Colors, fonts, and styling</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Features & Components -->
+      <div class="space-y-6">
+        <div class="flex items-center space-x-3 mb-6">
+          <div class="w-8 h-8 bg-blue-500/10 rounded-lg flex items-center justify-center">
+            <span class="text-lg">⚙️</span>
+          </div>
+          <h2 class="text-2xl font-bold text-foreground">Features & Components</h2>
+        </div>
+        
+        <div class="grid grid-cols-1 gap-3">
+          <a href="/form-showcase" class="flex items-center justify-between p-3 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors">
+            <div class="flex items-center space-x-3">
+              <span class="text-lg">📝</span>
+              <span class="font-medium text-foreground">Forms</span>
+            </div>
+            <span class="text-sm text-muted-foreground">→</span>
+          </a>
+          
+          <a href="/navigation-showcase" class="flex items-center justify-between p-3 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors">
+            <div class="flex items-center space-x-3">
+              <span class="text-lg">🧭</span>
+              <span class="font-medium text-foreground">Navigation</span>
+            </div>
+            <span class="text-sm text-muted-foreground">→</span>
+          </a>
+          
+          <a href="/data-display-showcase" class="flex items-center justify-between p-3 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors">
+            <div class="flex items-center space-x-3">
+              <span class="text-lg">📊</span>
+              <span class="font-medium text-foreground">Data Display</span>
+            </div>
+            <span class="text-sm text-muted-foreground">→</span>
+          </a>
+          
+          <a href="/advanced-showcase" class="flex items-center justify-between p-3 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors">
+            <div class="flex items-center space-x-3">
+              <span class="text-lg">🔮</span>
+              <span class="font-medium text-foreground">Advanced</span>
+            </div>
+            <span class="text-sm text-muted-foreground">→</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Technical Information -->
+    <div class="border-t border-border pt-16">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-foreground mb-4">Technical Details</h2>
+        <p class="text-muted-foreground max-w-2xl mx-auto">
+          Your website is built with modern, industry-standard technologies for optimal performance and maintainability.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <!-- Astro 5 -->
+        <div class="text-center p-6 rounded-lg bg-muted/30">
+          <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-xl flex items-center justify-center mx-auto mb-4">
+            <span class="text-2xl text-white">🚀</span>
+          </div>
+          <h3 class="text-xl font-bold text-foreground mb-2">Astro 5</h3>
+          <p class="text-sm text-muted-foreground">
+            Modern web framework delivering lightning-fast performance with minimal JavaScript.
+          </p>
+        </div>
+
+        <!-- TailwindCSS 4 -->
+        <div class="text-center p-6 rounded-lg bg-muted/30">
+          <div class="w-16 h-16 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-xl flex items-center justify-center mx-auto mb-4">
+            <span class="text-2xl text-white">🎨</span>
+          </div>
+          <h3 class="text-xl font-bold text-foreground mb-2">TailwindCSS 4</h3>
+          <p class="text-sm text-muted-foreground">
+            Utility-first CSS framework providing consistent, customizable styling.
+          </p>
+        </div>
+
+        <!-- shadcn/ui -->
+        <div class="text-center p-6 rounded-lg bg-muted/30">
+          <div class="w-16 h-16 bg-gradient-to-br from-violet-500 to-purple-500 rounded-xl flex items-center justify-center mx-auto mb-4">
+            <span class="text-2xl text-white">🧩</span>
+          </div>
+          <h3 class="text-xl font-bold text-foreground mb-2">shadcn/ui</h3>
+          <p class="text-sm text-muted-foreground">
+            Beautiful, accessible components built with Radix UI and Tailwind CSS.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="text-center mt-16 p-8 rounded-xl bg-primary/5 border border-primary/10">
+      <h2 class="text-2xl font-bold text-foreground mb-4">Need More Help?</h2>
+      <p class="text-muted-foreground mb-6 max-w-xl mx-auto">
+        Our team is here to help you get the most out of your new website. 
+        Don't hesitate to reach out with any questions.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <Button asChild size="lg">
+          <a href="/contact">
+            Contact Support
+          </a>
+        </Button>
+        <Button asChild variant="outline" size="lg">
+          <a href="/quick-start">
+            Quick Start Guide
+          </a>
+        </Button>
+      </div>
+    </div>
+
+  </div>
+</Layout>
