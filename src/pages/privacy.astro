@@ -1,0 +1,383 @@
+---
+// privacy.astro - Privacy Policy Page
+// GDPR compliant privacy policy template
+// Path: src/pages/privacy.astro
+
+import Layout from '../components/layouts/Layout.astro';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
+import { Badge } from '../components/ui/badge';
+import { Alert, AlertDescription } from '../components/ui/alert';
+---
+
+<Layout 
+  title="Privacy Policy - Astro Starter"
+  description="Our privacy policy explains how we collect, use, and protect your personal information"
+  currentPage="privacy"
+  headerVariant="business"
+  footerVariant="business"
+>
+  <div class="container mx-auto px-4 py-12 lg:py-20 max-w-4xl">
+    
+    <!-- Hero Section -->
+    <div class="text-center mb-16">
+      <div class="flex justify-center items-center space-x-3 mb-6">
+        <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-green-500 rounded-xl flex items-center justify-center text-white font-bold text-2xl">
+          🛡️
+        </div>
+        <Badge variant="outline" className="text-sm">
+          Privacy Policy
+        </Badge>
+      </div>
+      
+      <h1 class="text-4xl lg:text-5xl font-bold text-foreground mb-6">
+        Privacy Policy
+      </h1>
+      
+      <p class="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+        We value your privacy and are committed to protecting your personal information. 
+        This policy explains how we collect, use, and safeguard your data.
+      </p>
+      
+      <div class="mt-6 text-sm text-muted-foreground">
+        <strong>Last updated:</strong> January 2025
+      </div>
+    </div>
+
+    <!-- Important Notice -->
+    <Alert className="mb-12 border-blue-200 bg-blue-50 dark:border-blue-800 dark:bg-blue-950/50">
+      <span class="text-blue-600 dark:text-blue-400">ℹ️</span>
+      <AlertDescription className="text-blue-800 dark:text-blue-200">
+        <strong>Template Notice:</strong> This is a template privacy policy. 
+        Please customize it with your specific business information, data practices, 
+        and legal requirements for your jurisdiction.
+      </AlertDescription>
+    </Alert>
+
+    <!-- Privacy Policy Content -->
+    <div class="space-y-12">
+      
+      <!-- Overview -->
+      <section>
+        <h2 class="text-2xl font-bold text-foreground mb-6">1. Overview</h2>
+        <Card>
+          <CardContent className="pt-6">
+            <p class="text-muted-foreground leading-relaxed mb-4">
+              This Privacy Policy describes how [Your Company Name] ("we," "our," or "us") 
+              collects, uses, and shares information about you when you visit our website 
+              or use our services.
+            </p>
+            <p class="text-muted-foreground leading-relaxed">
+              By using our website, you agree to the collection and use of information 
+              in accordance with this policy. We are committed to protecting your privacy 
+              and ensuring transparency about our data practices.
+            </p>
+          </CardContent>
+        </Card>
+      </section>
+
+      <!-- Information We Collect -->
+      <section>
+        <h2 class="text-2xl font-bold text-foreground mb-6">2. Information We Collect</h2>
+        
+        <div class="space-y-6">
+          
+          <!-- Personal Information -->
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2">
+                <span class="text-xl">👤</span>
+                <span>Personal Information</span>
+              </CardTitle>
+              <CardDescription>
+                Information you provide directly to us
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ul class="space-y-2 text-muted-foreground">
+                <li class="flex items-start space-x-2">
+                  <span class="text-blue-500 mt-1">•</span>
+                  <span>Contact information (name, email address, phone number)</span>
+                </li>
+                <li class="flex items-start space-x-2">
+                  <span class="text-blue-500 mt-1">•</span>
+                  <span>Business information (company name, job title)</span>
+                </li>
+                <li class="flex items-start space-x-2">
+                  <span class="text-blue-500 mt-1">•</span>
+                  <span>Messages and correspondence sent through contact forms</span>
+                </li>
+                <li class="flex items-start space-x-2">
+                  <span class="text-blue-500 mt-1">•</span>
+                  <span>Any other information you choose to provide</span>
+                </li>
+              </ul>
+            </CardContent>
+          </Card>
+
+          <!-- Technical Information -->
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2">
+                <span class="text-xl">📱</span>
+                <span>Technical Information</span>
+              </CardTitle>
+              <CardDescription>
+                Information collected automatically when you visit our website
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ul class="space-y-2 text-muted-foreground">
+                <li class="flex items-start space-x-2">
+                  <span class="text-green-500 mt-1">•</span>
+                  <span>IP address and browser information</span>
+                </li>
+                <li class="flex items-start space-x-2">
+                  <span class="text-green-500 mt-1">•</span>
+                  <span>Device type and operating system</span>
+                </li>
+                <li class="flex items-start space-x-2">
+                  <span class="text-green-500 mt-1">•</span>
+                  <span>Pages visited and time spent on our website</span>
+                </li>
+                <li class="flex items-start space-x-2">
+                  <span class="text-green-500 mt-1">•</span>
+                  <span>Referring website and search terms used</span>
+                </li>
+              </ul>
+            </CardContent>
+          </Card>
+
+        </div>
+      </section>
+
+      <!-- How We Use Information -->
+      <section>
+        <h2 class="text-2xl font-bold text-foreground mb-6">3. How We Use Your Information</h2>
+        <Card>
+          <CardContent className="pt-6">
+            <p class="text-muted-foreground leading-relaxed mb-4">
+              We use the information we collect for the following purposes:
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="p-4 bg-muted/30 rounded-lg">
+                <h4 class="font-medium text-foreground mb-2">Communication</h4>
+                <p class="text-sm text-muted-foreground">
+                  To respond to your inquiries and provide customer support
+                </p>
+              </div>
+              <div class="p-4 bg-muted/30 rounded-lg">
+                <h4 class="font-medium text-foreground mb-2">Service Delivery</h4>
+                <p class="text-sm text-muted-foreground">
+                  To provide and improve our services and website functionality
+                </p>
+              </div>
+              <div class="p-4 bg-muted/30 rounded-lg">
+                <h4 class="font-medium text-foreground mb-2">Analytics</h4>
+                <p class="text-sm text-muted-foreground">
+                  To understand how our website is used and improve user experience
+                </p>
+              </div>
+              <div class="p-4 bg-muted/30 rounded-lg">
+                <h4 class="font-medium text-foreground mb-2">Legal Compliance</h4>
+                <p class="text-sm text-muted-foreground">
+                  To comply with legal obligations and protect our rights
+                </p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </section>
+
+      <!-- Information Sharing -->
+      <section>
+        <h2 class="text-2xl font-bold text-foreground mb-6">4. Information Sharing</h2>
+        <Card>
+          <CardContent className="pt-6">
+            <p class="text-muted-foreground leading-relaxed mb-4">
+              We do not sell, trade, or otherwise transfer your personal information to third parties, 
+              except in the following circumstances:
+            </p>
+            <ul class="space-y-3 text-muted-foreground">
+              <li class="flex items-start space-x-3">
+                <span class="text-orange-500 mt-1">⚠️</span>
+                <div>
+                  <strong class="text-foreground">Service Providers:</strong> 
+                  <span class="ml-1">We may share information with trusted third-party service providers who assist us in operating our website or conducting business.</span>
+                </div>
+              </li>
+              <li class="flex items-start space-x-3">
+                <span class="text-red-500 mt-1">⚖️</span>
+                <div>
+                  <strong class="text-foreground">Legal Requirements:</strong> 
+                  <span class="ml-1">We may disclose information when required by law or to protect our rights, safety, or property.</span>
+                </div>
+              </li>
+              <li class="flex items-start space-x-3">
+                <span class="text-blue-500 mt-1">🔄</span>
+                <div>
+                  <strong class="text-foreground">Business Transfers:</strong> 
+                  <span class="ml-1">In the event of a merger, acquisition, or sale of assets, your information may be transferred.</span>
+                </div>
+              </li>
+            </ul>
+          </CardContent>
+        </Card>
+      </section>
+
+      <!-- Data Security -->
+      <section>
+        <h2 class="text-2xl font-bold text-foreground mb-6">5. Data Security</h2>
+        <Card>
+          <CardContent className="pt-6">
+            <p class="text-muted-foreground leading-relaxed mb-6">
+              We implement appropriate security measures to protect your personal information against 
+              unauthorized access, alteration, disclosure, or destruction.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div class="text-center p-4 bg-green-50 dark:bg-green-950/20 rounded-lg border border-green-200 dark:border-green-800">
+                <div class="w-8 h-8 bg-green-500/10 rounded-lg flex items-center justify-center mx-auto mb-3">
+                  <span class="text-lg">🔒</span>
+                </div>
+                <h4 class="font-medium text-foreground mb-2">Encryption</h4>
+                <p class="text-xs text-muted-foreground">SSL/TLS encryption for data transmission</p>
+              </div>
+              <div class="text-center p-4 bg-blue-50 dark:bg-blue-950/20 rounded-lg border border-blue-200 dark:border-blue-800">
+                <div class="w-8 h-8 bg-blue-500/10 rounded-lg flex items-center justify-center mx-auto mb-3">
+                  <span class="text-lg">🛡️</span>
+                </div>
+                <h4 class="font-medium text-foreground mb-2">Access Control</h4>
+                <p class="text-xs text-muted-foreground">Limited access to authorized personnel only</p>
+              </div>
+              <div class="text-center p-4 bg-purple-50 dark:bg-purple-950/20 rounded-lg border border-purple-200 dark:border-purple-800">
+                <div class="w-8 h-8 bg-purple-500/10 rounded-lg flex items-center justify-center mx-auto mb-3">
+                  <span class="text-lg">🔄</span>
+                </div>
+                <h4 class="font-medium text-foreground mb-2">Regular Updates</h4>
+                <p class="text-xs text-muted-foreground">Security measures are regularly reviewed and updated</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </section>
+
+      <!-- Your Rights -->
+      <section>
+        <h2 class="text-2xl font-bold text-foreground mb-6">6. Your Rights</h2>
+        <Card>
+          <CardContent className="pt-6">
+            <p class="text-muted-foreground leading-relaxed mb-4">
+              Depending on your location, you may have the following rights regarding your personal information:
+            </p>
+            <div class="space-y-3">
+              <div class="flex items-start space-x-3 p-3 bg-muted/30 rounded-lg">
+                <span class="text-blue-500 mt-1">📋</span>
+                <div>
+                  <strong class="text-foreground">Access:</strong> 
+                  <span class="text-muted-foreground ml-1">Request access to your personal information we hold</span>
+                </div>
+              </div>
+              <div class="flex items-start space-x-3 p-3 bg-muted/30 rounded-lg">
+                <span class="text-green-500 mt-1">✏️</span>
+                <div>
+                  <strong class="text-foreground">Correction:</strong> 
+                  <span class="text-muted-foreground ml-1">Request correction of inaccurate information</span>
+                </div>
+              </div>
+              <div class="flex items-start space-x-3 p-3 bg-muted/30 rounded-lg">
+                <span class="text-red-500 mt-1">🗑️</span>
+                <div>
+                  <strong class="text-foreground">Deletion:</strong> 
+                  <span class="text-muted-foreground ml-1">Request deletion of your personal information</span>
+                </div>
+              </div>
+              <div class="flex items-start space-x-3 p-3 bg-muted/30 rounded-lg">
+                <span class="text-purple-500 mt-1">📤</span>
+                <div>
+                  <strong class="text-foreground">Portability:</strong> 
+                  <span class="text-muted-foreground ml-1">Request a copy of your information in a portable format</span>
+                </div>
+              </div>
+            </div>
+            <p class="text-sm text-muted-foreground mt-4">
+              To exercise these rights, please <a href="/contact" class="text-primary underline hover:text-primary/80">contact us</a> 
+              with your request and proof of identity.
+            </p>
+          </CardContent>
+        </Card>
+      </section>
+
+      <!-- Cookies -->
+      <section>
+        <h2 class="text-2xl font-bold text-foreground mb-6">7. Cookies and Tracking</h2>
+        <Card>
+          <CardContent className="pt-6">
+            <p class="text-muted-foreground leading-relaxed mb-4">
+              Our website may use cookies and similar technologies to enhance your experience. 
+              For detailed information about our cookie usage, please see our 
+              <a href="/cookies" class="text-primary underline hover:text-primary/80">Cookie Policy</a>.
+            </p>
+            <div class="p-4 bg-muted/30 rounded-lg">
+              <h4 class="font-medium text-foreground mb-2">Cookie Types We Use:</h4>
+              <ul class="text-sm text-muted-foreground space-y-1">
+                <li>• Essential cookies for website functionality</li>
+                <li>• Analytics cookies to understand website usage</li>
+                <li>• Preference cookies to remember your settings</li>
+              </ul>
+            </div>
+          </CardContent>
+        </Card>
+      </section>
+
+      <!-- Changes to Policy -->
+      <section>
+        <h2 class="text-2xl font-bold text-foreground mb-6">8. Changes to This Policy</h2>
+        <Card>
+          <CardContent className="pt-6">
+            <p class="text-muted-foreground leading-relaxed">
+              We may update this Privacy Policy from time to time. We will notify you of any changes 
+              by posting the new Privacy Policy on this page and updating the "Last updated" date. 
+              We encourage you to review this Privacy Policy periodically for any changes.
+            </p>
+          </CardContent>
+        </Card>
+      </section>
+
+      <!-- Contact Information -->
+      <section>
+        <h2 class="text-2xl font-bold text-foreground mb-6">9. Contact Us</h2>
+        <Card>
+          <CardContent className="pt-6">
+            <p class="text-muted-foreground leading-relaxed mb-4">
+              If you have any questions about this Privacy Policy or our data practices, 
+              please don't hesitate to contact us:
+            </p>
+            <div class="space-y-3">
+              <div class="flex items-center space-x-3">
+                <span class="text-blue-500">📧</span>
+                <span class="text-muted-foreground">Email: <a href="mailto:privacy@yourcompany.com" class="text-primary underline hover:text-primary/80">privacy@yourcompany.com</a></span>
+              </div>
+              <div class="flex items-center space-x-3">
+                <span class="text-green-500">📞</span>
+                <span class="text-muted-foreground">Phone: <a href="tel:+1-555-123-4567" class="text-primary underline hover:text-primary/80">+1 (555) 123-4567</a></span>
+              </div>
+              <div class="flex items-start space-x-3">
+                <span class="text-purple-500 mt-1">📍</span>
+                <div class="text-muted-foreground">
+                  <div>Address:</div>
+                  <div class="ml-0">
+                    [Your Company Name]<br>
+                    123 Business Street<br>
+                    City, State 12345<br>
+                    Country
+                  </div>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </section>
+
+    </div>
+
+  </div>
+</Layout>
