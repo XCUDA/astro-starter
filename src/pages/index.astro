@@ -1,332 +1,457 @@
 ---
 import Layout from '../components/layouts/Layout.astro';
-import DarkModeToggle from '../components/islands/DarkModeToggle.tsx';
 ---
 
-<Layout title="Astro Starter">
+<Layout title="Astro Professional Starter">
 	<main class="min-h-screen bg-background" role="main">
-		<!-- Hero Section -->
-		<section class="container mx-auto px-4 py-16 text-center" role="banner" aria-labelledby="hero-title">
+		
+		<!-- Hero Section - Base Technique -->
+		<section class="container mx-auto px-4 py-20 text-center" role="banner" aria-labelledby="hero-title">
 			<h1 id="hero-title" class="text-4xl md:text-6xl font-bold tracking-tight mb-6">
 				⚡ Astro Starter
 			</h1>
-			<p class="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-				A modern, production-ready starter with <strong>Astro 5</strong>, <strong>TailwindCSS 4</strong>, 
-				and <strong>shadcn/ui</strong>. Optimized for performance, accessibility, and professional workflows.
+			<p class="text-xl md:text-2xl text-muted-foreground mb-12 max-w-4xl mx-auto leading-relaxed">
+				Professional modern web development foundation built with <strong>Astro 5</strong>, <strong>TailwindCSS 4</strong>, 
+				and <strong>shadcn/ui</strong>. Production-ready architecture for professional websites 
+				with 59 components and complete layout system.
 			</p>
-			
-			<!-- CTA Buttons -->
-			<div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12" role="group" aria-label="Main navigation to component showcases">
-				<a 
-					href="/advanced-showcase" 
-					class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary-foreground bg-primary hover:bg-primary/90 transition-colors"
-					aria-label="View advanced components showcase including calendar, command palette, and date picker"
-				>
-					🔮 Try Advanced Components
-				</a>
-				<a 
-					href="/data-display-showcase" 
-					class="inline-flex items-center px-6 py-3 border border-input text-base font-medium rounded-md text-foreground bg-background hover:bg-accent hover:text-accent-foreground transition-colors"
-					aria-label="View data display components including tables, avatars, and tooltips"
-				>
-					📊 Data Display
-				</a>
-				<a 
-					href="/form-showcase" 
-					class="inline-flex items-center px-6 py-3 border border-input text-base font-medium rounded-md text-foreground bg-background hover:bg-accent hover:text-accent-foreground transition-colors"
-					aria-label="View form components including inputs, selects, and validation examples"
-				>
-					📝 Forms
-				</a>
-				<a 
-					href="/navigation-showcase" 
-					class="inline-flex items-center px-6 py-3 border border-input text-base font-medium rounded-md text-foreground bg-background hover:bg-accent hover:text-accent-foreground transition-colors"
-					aria-label="View navigation components including breadcrumbs, tabs, and alerts"
-				>
-					🧭 Navigation
-				</a>
-				<a 
-					href="/components-showcase" 
-					class="inline-flex items-center px-6 py-3 border border-input text-base font-medium rounded-md text-foreground bg-background hover:bg-accent hover:text-accent-foreground transition-colors"
-					aria-label="View complete component library with all available shadcn/ui components"
-				>
-					🧩 All Components
-				</a>
-				<DarkModeToggle client:load />
+			<!-- Built-in Excellence intégrée -->
+			<div class="text-center mb-6">
+				<h3 class="text-xl font-semibold mb-8">✨ Built-in Excellence</h3>
+			</div>
+			<div class="grid grid-cols-2 md:grid-cols-4 gap-6" role="list" aria-label="Built-in quality features">
+				
+				<div class="text-center p-4" role="listitem">
+					<div class="text-2xl mb-2" aria-hidden="true">🌙</div>
+					<h4 class="font-semibold text-sm">Dark Mode</h4>
+					<p class="text-xs text-muted-foreground mt-1">
+						System preference detection with manual toggle
+					</p>
+				</div>
+
+				<div class="text-center p-4" role="listitem">
+					<div class="text-2xl mb-2" aria-hidden="true">📱</div>
+					<h4 class="font-semibold text-sm">Responsive</h4>
+					<p class="text-xs text-muted-foreground mt-1">
+						Mobile-first design with touch interactions
+					</p>
+				</div>
+
+				<div class="text-center p-4" role="listitem">
+					<div class="text-2xl mb-2" aria-hidden="true">⚡</div>
+					<h4 class="font-semibold text-sm">Performance</h4>
+					<p class="text-xs text-muted-foreground mt-1">
+						100/100 Lighthouse with Core Web Vitals
+					</p>
+				</div>
+
+				<div class="text-center p-4" role="listitem">
+					<div class="text-2xl mb-2" aria-hidden="true">♿</div>
+					<h4 class="font-semibold text-sm">Accessible</h4>
+					<p class="text-xs text-muted-foreground mt-1">
+						WCAG 2.1 AA with keyboard navigation
+					</p>
+				</div>
 			</div>
 		</section>
 
-		<!-- Features Grid -->
-		<section class="container mx-auto px-4 py-16" role="region" aria-labelledby="features-title">
-			<h2 id="features-title" class="text-3xl font-bold text-center mb-12">✨ Production-Ready Features</h2>
-			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" role="list" aria-label="Technology stack features">
+		<!-- Stack Technique Détaillé -->
+		<section class="container mx-auto px-4 py-12" role="region" aria-labelledby="stack-title">
+			<h2 id="stack-title" class="text-3xl font-bold text-center mb-12">🏗️ Modern Technology Stack</h2>
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12" role="list" aria-label="Detailed technology stack features">
+				
 				<!-- Astro 5 -->
-				<div class="p-6 rounded-lg border bg-card text-card-foreground" role="listitem">
+				<div class="group p-6 rounded-xl border bg-gradient-to-br from-orange-50 to-purple-50 dark:from-orange-950/20 dark:to-purple-950/20 hover:shadow-lg transition-all duration-300" role="listitem">
 					<div class="flex items-center mb-4">
-						<span class="text-2xl mr-3" aria-hidden="true">🚀</span>
-						<h3 class="text-xl font-semibold">Astro 5</h3>
+						<span class="text-3xl mr-3" aria-hidden="true">🚀</span>
+						<h3 class="text-lg font-semibold">Astro 5</h3>
 					</div>
-					<p class="text-muted-foreground">
-						Latest performance optimizations with Islands architecture. 
-						Static-first with selective hydration for optimal loading speeds.
+					<p class="text-sm text-muted-foreground leading-relaxed">
+						Islands architecture with selective hydration. 
+						Static-first performance with modern developer experience.
 					</p>
 				</div>
 
 				<!-- TailwindCSS 4 -->
-				<div class="p-6 rounded-lg border bg-card text-card-foreground" role="listitem">
+				<div class="group p-6 rounded-xl border bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-950/20 dark:to-cyan-950/20 hover:shadow-lg transition-all duration-300" role="listitem">
 					<div class="flex items-center mb-4">
-						<span class="text-2xl mr-3" aria-hidden="true">🎨</span>
-						<h3 class="text-xl font-semibold">TailwindCSS 4</h3>
+						<span class="text-3xl mr-3" aria-hidden="true">🎨</span>
+						<h3 class="text-lg font-semibold">TailwindCSS 4</h3>
 					</div>
-					<p class="text-muted-foreground">
-						New high-performance engine with CSS-first configuration. 
-						Faster builds and improved developer experience.
+					<p class="text-sm text-muted-foreground leading-relaxed">
+						Performance engine with CSS-first configuration. 
+						Faster builds and responsive design system.
 					</p>
 				</div>
 
 				<!-- shadcn/ui -->
-				<div class="p-6 rounded-lg border bg-card text-card-foreground" role="listitem">
+				<div class="group p-6 rounded-xl border bg-gradient-to-br from-violet-50 to-purple-50 dark:from-violet-950/20 dark:to-purple-950/20 hover:shadow-lg transition-all duration-300" role="listitem">
 					<div class="flex items-center mb-4">
-						<span class="text-2xl mr-3" aria-hidden="true">🧩</span>
-						<h3 class="text-xl font-semibold">shadcn/ui</h3>
+						<span class="text-3xl mr-3" aria-hidden="true">🧩</span>
+						<h3 class="text-lg font-semibold">shadcn/ui</h3>
 					</div>
-					<p class="text-muted-foreground">
+					<p class="text-sm text-muted-foreground leading-relaxed">
 						Beautiful, accessible components with full code ownership. 
-						Copy/paste components you control and customize.
+						Copy, paste, and customize without limitations.
 					</p>
 				</div>
 
 				<!-- TypeScript -->
-				<div class="p-6 rounded-lg border bg-card text-card-foreground" role="listitem">
+				<div class="group p-6 rounded-xl border bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/20 dark:to-indigo-950/20 hover:shadow-lg transition-all duration-300" role="listitem">
 					<div class="flex items-center mb-4">
-						<span class="text-2xl mr-3" aria-hidden="true">📘</span>
-						<h3 class="text-xl font-semibold">TypeScript</h3>
+						<span class="text-3xl mr-3" aria-hidden="true">📘</span>
+						<h3 class="text-lg font-semibold">TypeScript</h3>
 					</div>
-					<p class="text-muted-foreground">
-						Full type safety with modern JSX transformation. 
-						Better DX with IntelliSense and compile-time error catching.
+					<p class="text-sm text-muted-foreground leading-relaxed">
+						Strict type safety with modern JSX transformation. 
+						Enhanced DX with IntelliSense and error prevention.
 					</p>
 				</div>
+			</div>
+		</section>
 
-				<!-- Performance -->
-				<div class="p-6 rounded-lg border bg-card text-card-foreground" role="listitem">
+		<!-- Système Complet - 59 Composants -->
+		<section class="container mx-auto px-4 py-12" role="region" aria-labelledby="system-title">
+			<div class="text-center mb-12">
+				<h2 id="system-title" class="text-3xl font-bold mb-4">🎯 Complete Component System</h2>
+				<p class="text-lg text-muted-foreground max-w-3xl mx-auto">
+					59 production-ready components organized in a cohesive design system. 
+					From basic UI elements to complex interactive features.
+				</p>
+			</div>
+
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" role="list" aria-label="Component system categories">
+				
+				<!-- Core UI Components -->
+				<div class="p-6 rounded-xl border bg-card hover:shadow-md transition-all duration-300" role="listitem">
+					<div class="flex items-center mb-4">
+						<span class="text-2xl mr-3" aria-hidden="true">🧩</span>
+						<h3 class="text-xl font-semibold">Core UI Components</h3>
+					</div>
+					<p class="text-muted-foreground mb-4 text-sm">
+						Essential shadcn/ui building blocks (26 components)
+					</p>
+					<div class="flex flex-wrap gap-1.5">
+						<span class="px-2 py-1 text-xs bg-primary/10 text-primary rounded">Button</span>
+						<span class="px-2 py-1 text-xs bg-primary/10 text-primary rounded">Input</span>
+						<span class="px-2 py-1 text-xs bg-primary/10 text-primary rounded">Card</span>
+						<span class="px-2 py-1 text-xs bg-primary/10 text-primary rounded">Dialog</span>
+						<span class="px-2 py-1 text-xs bg-primary/10 text-primary rounded">Label</span>
+						<span class="px-2 py-1 text-xs bg-primary/10 text-primary rounded">Textarea</span>
+						<span class="px-2 py-1 text-xs bg-primary/10 text-primary rounded">Select</span>
+						<span class="px-2 py-1 text-xs bg-primary/10 text-primary rounded">Checkbox</span>
+						<span class="px-2 py-1 text-xs bg-primary/10 text-primary rounded">Table</span>
+						<span class="px-2 py-1 text-xs bg-primary/10 text-primary rounded">Avatar</span>
+						<span class="px-2 py-1 text-xs bg-primary/10 text-primary rounded">Tooltip</span>
+						<span class="px-2 py-1 text-xs bg-primary/10 text-primary rounded">Accordion</span>
+						<span class="px-2 py-1 text-xs bg-primary/10 text-primary rounded">Breadcrumb</span>
+						<span class="px-2 py-1 text-xs bg-primary/10 text-primary rounded">Tabs</span>
+						<span class="px-2 py-1 text-xs bg-primary/10 text-primary rounded">Alert</span>
+						<span class="px-2 py-1 text-xs bg-primary/10 text-primary rounded">Badge</span>
+						<span class="px-2 py-1 text-xs bg-primary/10 text-primary rounded">Calendar</span>
+						<span class="px-2 py-1 text-xs bg-primary/10 text-primary rounded">Date Picker</span>
+						<span class="px-2 py-1 text-xs bg-primary/10 text-primary rounded">Combobox</span>
+						<span class="px-2 py-1 text-xs bg-primary/10 text-primary rounded">Command</span>
+						<span class="px-2 py-1 text-xs bg-primary/10 text-primary rounded">Sonner</span>
+						<span class="px-2 py-1 text-xs bg-primary/10 text-primary rounded">Popover</span>
+					</div>
+				</div>
+
+				<!-- Layout Architecture -->
+				<div class="p-6 rounded-xl border bg-card hover:shadow-md transition-all duration-300" role="listitem">
+					<div class="flex items-center mb-4">
+						<span class="text-2xl mr-3" aria-hidden="true">🏗️</span>
+						<h3 class="text-xl font-semibold">Layout Architecture</h3>
+					</div>
+					<p class="text-muted-foreground mb-4 text-sm">
+						Complete responsive layout system (15 components)
+					</p>
+					<div class="flex flex-wrap gap-1.5">
+						<span class="px-2 py-1 text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded">Header</span>
+						<span class="px-2 py-1 text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded">Footer</span>
+						<span class="px-2 py-1 text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded">Navigation</span>
+						<span class="px-2 py-1 text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded">MegaMenu</span>
+						<span class="px-2 py-1 text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded">Sidebar</span>
+						<span class="px-2 py-1 text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded">GridContainer</span>
+						<span class="px-2 py-1 text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded">SectionTemplates</span>
+						<span class="px-2 py-1 text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded">ContentBlocks</span>
+						<span class="px-2 py-1 text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded">LayoutComposer</span>
+					</div>
+				</div>
+
+				<!-- Interactive Features -->
+				<div class="p-6 rounded-xl border bg-card hover:shadow-md transition-all duration-300" role="listitem">
 					<div class="flex items-center mb-4">
 						<span class="text-2xl mr-3" aria-hidden="true">⚡</span>
-						<h3 class="text-xl font-semibold">Performance</h3>
+						<h3 class="text-xl font-semibold">Interactive Features</h3>
 					</div>
-					<p class="text-muted-foreground">
-						100/100 Lighthouse scores with Core Web Vitals optimization. 
-						Minimal JavaScript footprint and fast loading times.
+					<p class="text-muted-foreground mb-4 text-sm">
+						Modern interactions and smooth animations (18 components)
 					</p>
+					<div class="flex flex-wrap gap-1.5">
+						<span class="px-2 py-1 text-xs bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded">TouchNavigation</span>
+						<span class="px-2 py-1 text-xs bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded">StickyHeader</span>
+						<span class="px-2 py-1 text-xs bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded">FloatingActionButton</span>
+						<span class="px-2 py-1 text-xs bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded">ScrollIndicators</span>
+						<span class="px-2 py-1 text-xs bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded">SmoothTransitions</span>
+						<span class="px-2 py-1 text-xs bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded">PageTransition</span>
+						<span class="px-2 py-1 text-xs bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded">ScrollReveal</span>
+						<span class="px-2 py-1 text-xs bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded">AnimatedButton</span>
+						<span class="px-2 py-1 text-xs bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded">HoverCard</span>
+						<span class="px-2 py-1 text-xs bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded">ParallaxScroll</span>
+						<span class="px-2 py-1 text-xs bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded">AnimatedCounter</span>
+						<span class="px-2 py-1 text-xs bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded">TypewriterEffect</span>
+						<span class="px-2 py-1 text-xs bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded">ModalTransition</span>
+					</div>
 				</div>
 
-				<!-- Accessibility -->
-				<div class="p-6 rounded-lg border bg-card text-card-foreground" role="listitem">
+				<!-- Advanced Components (restauré) -->
+				<div class="p-6 rounded-xl border bg-card hover:shadow-md transition-all duration-300" role="listitem">
 					<div class="flex items-center mb-4">
-						<span class="text-2xl mr-3" aria-hidden="true">♿</span>
-						<h3 class="text-xl font-semibold">Accessibility</h3>
+						<span class="text-2xl mr-3" aria-hidden="true">🔮</span>
+						<h3 class="text-xl font-semibold">Advanced Components</h3>
 					</div>
-					<p class="text-muted-foreground">
-						WCAG 2.1 AA compliant structure and navigation. 
-						Semantic HTML with proper ARIA labels and keyboard support.
+					<p class="text-muted-foreground mb-4 text-sm">
+						Rich interface elements for SaaS and complex applications
 					</p>
+					<div class="flex flex-wrap gap-1.5">
+						<span class="px-2 py-1 text-xs bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 rounded">Calendar</span>
+						<span class="px-2 py-1 text-xs bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 rounded">Command</span>
+						<span class="px-2 py-1 text-xs bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 rounded">Date Picker</span>
+						<span class="px-2 py-1 text-xs bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 rounded">Combobox</span>
+						<span class="px-2 py-1 text-xs bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 rounded">Sonner</span>
+						<span class="px-2 py-1 text-xs bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 rounded">Popover</span>
+					</div>
+				</div>
+
+				<!-- Data Display (restauré) -->
+				<div class="p-6 rounded-xl border bg-card hover:shadow-md transition-all duration-300" role="listitem">
+					<div class="flex items-center mb-4">
+						<span class="text-2xl mr-3" aria-hidden="true">📊</span>
+						<h3 class="text-xl font-semibold">Data Display</h3>
+					</div>
+					<p class="text-muted-foreground mb-4 text-sm">
+						Professional data presentation and dashboard components
+					</p>
+					<div class="flex flex-wrap gap-1.5">
+						<span class="px-2 py-1 text-xs bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 rounded">Table</span>
+						<span class="px-2 py-1 text-xs bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 rounded">Avatar</span>
+						<span class="px-2 py-1 text-xs bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 rounded">Tooltip</span>
+						<span class="px-2 py-1 text-xs bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 rounded">Accordion</span>
+						<span class="px-2 py-1 text-xs bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 rounded">Breadcrumb</span>
+						<span class="px-2 py-1 text-xs bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 rounded">Tabs</span>
+						<span class="px-2 py-1 text-xs bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 rounded">Alert</span>
+						<span class="px-2 py-1 text-xs bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 rounded">Badge</span>
+					</div>
+				</div>
+
+				<!-- Business Ready (restauré) -->
+				<div class="p-6 rounded-xl border bg-card hover:shadow-md transition-all duration-300" role="listitem">
+					<div class="flex items-center mb-4">
+						<span class="text-2xl mr-3" aria-hidden="true">💼</span>
+						<h3 class="text-xl font-semibold">Business Ready</h3>
+					</div>
+					<p class="text-muted-foreground mb-4 text-sm">
+						Pre-configured variants for different business types
+					</p>
+					<div class="flex flex-wrap gap-1.5">
+						<span class="px-2 py-1 text-xs bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded">Corporate</span>
+						<span class="px-2 py-1 text-xs bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded">Startup</span>
+						<span class="px-2 py-1 text-xs bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded">E-commerce</span>
+						<span class="px-2 py-1 text-xs bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded">Portfolio</span>
+						<span class="px-2 py-1 text-xs bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded">Landing</span>
+						<span class="px-2 py-1 text-xs bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded">Minimal</span>
+						<span class="px-2 py-1 text-xs bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded">Admin</span>
+						<span class="px-2 py-1 text-xs bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded">Dashboard</span>
+					</div>
 				</div>
 			</div>
 		</section>
 
-		<!-- Component Showcases -->
-		<section class="container mx-auto px-4 py-16" role="region" aria-labelledby="showcases-title">
-			<h2 id="showcases-title" class="text-3xl font-bold text-center mb-12">🎯 Component Showcases</h2>
-			<div class="grid grid-cols-1 md:grid-cols-2 gap-8" role="list" aria-label="Available component showcase pages">
-				
-				<!-- Advanced Components Showcase - NEW Sprint 4 -->
-				<div class="p-6 rounded-lg border bg-card text-card-foreground hover:bg-accent/50 transition-colors" role="listitem">
-					<div class="flex items-center mb-4">
-						<span class="text-3xl mr-4" aria-hidden="true">🔮</span>
-						<div>
-							<h3 class="text-xl font-semibold">Advanced Components</h3>
-							<p class="text-sm text-muted-foreground">Sprint 4 - Latest Addition</p>
-						</div>
-					</div>
-					<p class="text-muted-foreground mb-4">
-						Rich interface components with Calendar, Command palette, Date picker, Combobox, Sonner toasts, and Popover.
-						Professional tools for SaaS applications and complex user interfaces.
-					</p>
-					<div class="flex flex-wrap gap-2 mb-4" role="list" aria-label="Advanced component types">
-						<span class="px-2 py-1 text-xs bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 rounded" role="listitem">Calendar</span>
-						<span class="px-2 py-1 text-xs bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 rounded" role="listitem">Command</span>
-						<span class="px-2 py-1 text-xs bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 rounded" role="listitem">Sonner</span>
-						<span class="px-2 py-1 text-xs bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 rounded" role="listitem">Popover</span>
-					</div>
-					<a 
-						href="/advanced-showcase" 
-						class="inline-flex items-center text-primary hover:text-primary/80 font-medium"
-						aria-label="Explore advanced components showcase with calendar, command palette, and other rich UI elements"
-					>
-						Explore Advanced →
-					</a>
-				</div>
-
-				<!-- Data Display Showcase -->
-				<div class="p-6 rounded-lg border bg-card text-card-foreground hover:bg-accent/50 transition-colors" role="listitem">
-					<div class="flex items-center mb-4">
-						<span class="text-3xl mr-4" aria-hidden="true">📊</span>
-						<div>
-							<h3 class="text-xl font-semibold">Data Display Components</h3>
-							<p class="text-sm text-muted-foreground">Sprint 3 - Complete</p>
-						</div>
-					</div>
-					<p class="text-muted-foreground mb-4">
-						Professional data presentation with Table, Avatar, Tooltip, and Accordion components. 
-						Interactive demos for dashboards, team pages, and business analytics.
-					</p>
-					<div class="flex flex-wrap gap-2 mb-4" role="list" aria-label="Data display component types">
-						<span class="px-2 py-1 text-xs bg-primary/10 text-primary rounded" role="listitem">Table</span>
-						<span class="px-2 py-1 text-xs bg-primary/10 text-primary rounded" role="listitem">Avatar</span>
-						<span class="px-2 py-1 text-xs bg-primary/10 text-primary rounded" role="listitem">Tooltip</span>
-						<span class="px-2 py-1 text-xs bg-primary/10 text-primary rounded" role="listitem">Accordion</span>
-					</div>
-					<a 
-						href="/data-display-showcase" 
-						class="inline-flex items-center text-primary hover:text-primary/80 font-medium"
-						aria-label="View data display components including interactive tables, avatars, and business analytics"
-					>
-						View Data Display →
-					</a>
-				</div>
-
-				<!-- Form Components Showcase -->
-				<div class="p-6 rounded-lg border bg-card text-card-foreground hover:bg-accent/50 transition-colors" role="listitem">
-					<div class="flex items-center mb-4">
-						<span class="text-3xl mr-4" aria-hidden="true">📝</span>
-						<div>
-							<h3 class="text-xl font-semibold">Form Components</h3>
-							<p class="text-sm text-muted-foreground">Sprint 1 - Complete</p>
-						</div>
-					</div>
-					<p class="text-muted-foreground mb-4">
-						Complete form system with validation states and business-ready examples. 
-						Contact forms, newsletters, quotes, and registration forms.
-					</p>
-					<div class="flex flex-wrap gap-2 mb-4" role="list" aria-label="Form component types">
-						<span class="px-2 py-1 text-xs bg-secondary/50 text-secondary-foreground rounded" role="listitem">Input</span>
-						<span class="px-2 py-1 text-xs bg-secondary/50 text-secondary-foreground rounded" role="listitem">Textarea</span>
-						<span class="px-2 py-1 text-xs bg-secondary/50 text-secondary-foreground rounded" role="listitem">Select</span>
-						<span class="px-2 py-1 text-xs bg-secondary/50 text-secondary-foreground rounded" role="listitem">Checkbox</span>
-					</div>
-					<a 
-						href="/form-showcase" 
-						class="inline-flex items-center text-primary hover:text-primary/80 font-medium"
-						aria-label="Explore form components with validation, contact forms, and business examples"
-					>
-						Explore Forms →
-					</a>
-				</div>
-
-				<!-- Navigation & Feedback Showcase -->
-				<div class="p-6 rounded-lg border bg-card text-card-foreground hover:bg-accent/50 transition-colors" role="listitem">
-					<div class="flex items-center mb-4">
-						<span class="text-3xl mr-4" aria-hidden="true">🧭</span>
-						<div>
-							<h3 class="text-xl font-semibold">Navigation & Feedback</h3>
-							<p class="text-sm text-muted-foreground">Sprint 2 - Complete</p>
-						</div>
-					</div>
-					<p class="text-muted-foreground mb-4">
-						Professional navigation and user feedback systems. 
-						Breadcrumbs, tabs, alerts, and badges for e-commerce and business sites.
-					</p>
-					<div class="flex flex-wrap gap-2 mb-4" role="list" aria-label="Navigation component types">
-						<span class="px-2 py-1 text-xs bg-secondary/50 text-secondary-foreground rounded" role="listitem">Breadcrumb</span>
-						<span class="px-2 py-1 text-xs bg-secondary/50 text-secondary-foreground rounded" role="listitem">Tabs</span>
-						<span class="px-2 py-1 text-xs bg-secondary/50 text-secondary-foreground rounded" role="listitem">Alert</span>
-						<span class="px-2 py-1 text-xs bg-secondary/50 text-secondary-foreground rounded" role="listitem">Badge</span>
-					</div>
-					<a 
-						href="/navigation-showcase" 
-						class="inline-flex items-center text-primary hover:text-primary/80 font-medium"
-						aria-label="View navigation components including breadcrumbs, tabs, alerts for e-commerce sites"
-					>
-						View Navigation →
-					</a>
-				</div>
-			</div>
-
-			<!-- All Components Link -->
-			<div class="text-center mt-8">
-				<a 
-					href="/components-showcase" 
-					class="inline-flex items-center px-6 py-3 border border-input text-base font-medium rounded-md text-foreground bg-background hover:bg-accent hover:text-accent-foreground transition-colors"
-					aria-label="View complete component library with all 26 shadcn/ui components and interactive examples"
-				>
-					🧩 View Complete Component Library →
-				</a>
-			</div>
-		</section>
-
-		<!-- Dark Mode Section -->
-		<section class="container mx-auto px-4 py-16" role="region" aria-labelledby="darkmode-title">
-			<div class="max-w-4xl mx-auto text-center">
-				<h2 id="darkmode-title" class="text-3xl font-bold mb-6">🌙 Dark Mode Ready</h2>
-				<p class="text-xl text-muted-foreground mb-8">
-					Perfect dark mode integration with system preference detection and manual toggle. 
-					All components adapt seamlessly to both light and dark themes.
-				</p>
-				
-				<!-- Dark Mode Toggle Demo -->
-				<div class="inline-block p-1 border rounded-lg bg-muted/50" role="group" aria-label="Dark mode toggle demonstration">
-					<div id="dark-mode-toggle" aria-label="Interactive dark mode toggle"></div>
-				</div>
-				
-				<p class="text-sm text-muted-foreground mt-4">
-					Toggle above to test dark mode across all components
+		<!-- Showcase Categories -->
+		<section class="container mx-auto px-4 py-16 bg-muted/30" role="region" aria-labelledby="showcases-title">
+			<div class="text-center mb-12">
+				<h2 id="showcases-title" class="text-3xl font-bold mb-4">📚 Component Showcases</h2>
+				<p class="text-lg text-muted-foreground max-w-3xl mx-auto">
+					Interactive demonstrations organized by functionality. 
+					Explore implementation examples and configuration options.
 				</p>
 			</div>
+
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" role="list" aria-label="Showcase categories">
+				
+				<!-- Component Library -->
+				<div class="p-6 rounded-xl border bg-card hover:bg-accent/50 transition-all duration-300" role="listitem">
+					<div class="text-center mb-4">
+						<span class="text-3xl" aria-hidden="true">🧩</span>
+						<h3 class="text-lg font-semibold mt-2">Component Library</h3>
+					</div>
+					<p class="text-sm text-muted-foreground mb-4 text-center">
+						Core shadcn/ui components with interactive examples
+					</p>
+					<div class="space-y-2">
+						<a href="/components-showcase" class="block text-sm text-primary hover:text-primary/80 transition-colors">
+							→ All Components
+						</a>
+						<a href="/form-showcase" class="block text-sm text-primary hover:text-primary/80 transition-colors">
+							→ Form System
+						</a>
+						<a href="/navigation-showcase" class="block text-sm text-primary hover:text-primary/80 transition-colors">
+							→ Navigation
+						</a>
+						<a href="/data-display-showcase" class="block text-sm text-primary hover:text-primary/80 transition-colors">
+							→ Data Display
+						</a>
+						<a href="/advanced-showcase" class="block text-sm text-primary hover:text-primary/80 transition-colors">
+							→ Advanced
+						</a>
+					</div>
+				</div>
+
+				<!-- Layout & Architecture -->
+				<div class="p-6 rounded-xl border bg-card hover:bg-accent/50 transition-all duration-300" role="listitem">
+					<div class="text-center mb-4">
+						<span class="text-3xl" aria-hidden="true">🏗️</span>
+						<h3 class="text-lg font-semibold mt-2">Layout & Architecture</h3>
+					</div>
+					<p class="text-sm text-muted-foreground mb-4 text-center">
+						Complete layout system and responsive grid
+					</p>
+					<div class="space-y-2">
+						<a href="/layout-showcase" class="block text-sm text-primary hover:text-primary/80 transition-colors">
+							→ Layout System
+						</a>
+						<a href="/grid-showcase" class="block text-sm text-primary hover:text-primary/80 transition-colors">
+							→ Grid System
+						</a>
+						<a href="/sidebar-showcase" class="block text-sm text-primary hover:text-primary/80 transition-colors">
+							→ Sidebar Navigation
+						</a>
+					</div>
+				</div>
+
+				<!-- Interactive Features -->
+				<div class="p-6 rounded-xl border bg-card hover:bg-accent/50 transition-all duration-300" role="listitem">
+					<div class="text-center mb-4">
+						<span class="text-3xl" aria-hidden="true">⚡</span>
+						<h3 class="text-lg font-semibold mt-2">Interactive Features</h3>
+					</div>
+					<p class="text-sm text-muted-foreground mb-4 text-center">
+						Modern interactions and smooth animations
+					</p>
+					<div class="space-y-2">
+						<a href="/fab-showcase" class="block text-sm text-primary hover:text-primary/80 transition-colors">
+							→ Floating Actions
+						</a>
+						<a href="/scroll-showcase" class="block text-sm text-primary hover:text-primary/80 transition-colors">
+							→ Scroll Indicators
+						</a>
+						<a href="/transitions-showcase" class="block text-sm text-primary hover:text-primary/80 transition-colors">
+							→ Smooth Transitions
+						</a>
+						<a href="/sticky-header-showcase" class="block text-sm text-primary hover:text-primary/80 transition-colors">
+							→ Sticky Header
+						</a>
+					</div>
+				</div>
+
+				<!-- Business Examples -->
+				<div class="p-6 rounded-xl border bg-card hover:bg-accent/50 transition-all duration-300" role="listitem">
+					<div class="text-center mb-4">
+						<span class="text-3xl" aria-hidden="true">💼</span>
+						<h3 class="text-lg font-semibold mt-2">Business Examples</h3>
+					</div>
+					<p class="text-sm text-muted-foreground mb-4 text-center">
+						Real-world implementations for different industries
+					</p>
+					<div class="space-y-2">
+						<a href="/business-demo" class="block text-sm text-primary hover:text-primary/80 transition-colors">
+							→ Business Overview
+						</a>
+						<a href="/corporate-demo" class="block text-sm text-primary hover:text-primary/80 transition-colors">
+							→ Corporate Site
+						</a>
+						<a href="/startup-demo" class="block text-sm text-primary hover:text-primary/80 transition-colors">
+							→ Startup Landing
+						</a>
+					</div>
+				</div>
+			</div>
 		</section>
 
-		<!-- Quick Start -->
-		<section class="container mx-auto px-4 py-16" role="region" aria-labelledby="quickstart-title">
-			<div class="max-w-3xl mx-auto text-center">
-				<h2 id="quickstart-title" class="text-3xl font-bold mb-6">🚀 Quick Start</h2>
-				<div class="bg-muted/50 rounded-lg p-6 text-left" role="region" aria-label="Installation code block">
-					<pre class="text-sm overflow-x-auto" role="code" aria-label="Commands to clone, install and start the Astro starter project"><code># Clone and install
+		<!-- Documentation & Quick Start -->
+		<section class="container mx-auto px-4 py-16" role="region" aria-labelledby="docs-title">
+			<div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+				
+				<!-- Documentation Hub -->
+				<div>
+					<h2 id="docs-title" class="text-3xl font-bold mb-6">📖 Documentation</h2>
+					<p class="text-lg text-muted-foreground mb-8">
+						Complete guides for setup, customization, and implementation.
+					</p>
+					<div class="grid grid-cols-1 sm:grid-cols-2 gap-4" role="list" aria-label="Documentation sections">
+						<a 
+							href="/docs" 
+							class="p-4 rounded-lg border bg-card hover:bg-accent/50 transition-colors group" 
+							role="listitem"
+							aria-label="Access complete documentation with setup guides and examples"
+						>
+							<div class="font-semibold mb-2 group-hover:text-primary transition-colors">📚 Complete Docs</div>
+							<div class="text-sm text-muted-foreground">Setup, configuration, and examples</div>
+						</a>
+						<a 
+							href="/docs/quick-start" 
+							class="p-4 rounded-lg border bg-card hover:bg-accent/50 transition-colors group" 
+							role="listitem"
+							aria-label="Quick start guide for immediate project setup"
+						>
+							<div class="font-semibold mb-2 group-hover:text-primary transition-colors">🚀 Quick Start</div>
+							<div class="text-sm text-muted-foreground">Get started in 5 minutes</div>
+						</a>
+						<a 
+							href="/docs/implementation" 
+							class="p-4 rounded-lg border bg-card hover:bg-accent/50 transition-colors group" 
+							role="listitem"
+							aria-label="Implementation examples for real-world usage"
+						>
+							<div class="font-semibold mb-2 group-hover:text-primary transition-colors">🎯 Implementation</div>
+							<div class="text-sm text-muted-foreground">Real-world usage examples</div>
+						</a>
+						<a 
+							href="/docs/customization" 
+							class="p-4 rounded-lg border bg-card hover:bg-accent/50 transition-colors group" 
+							role="listitem"
+							aria-label="Customization guide for brand adaptation"
+						>
+							<div class="font-semibold mb-2 group-hover:text-primary transition-colors">🔧 Customization</div>
+							<div class="text-sm text-muted-foreground">Branding and theming guide</div>
+						</a>
+					</div>
+				</div>
+
+				<!-- Quick Start -->
+				<div>
+					<h2 class="text-3xl font-bold mb-6">🚀 Quick Start</h2>
+					<p class="text-lg text-muted-foreground mb-6">
+						Get up and running with the professional starter in minutes.
+					</p>
+					<div class="bg-muted/50 rounded-lg p-6 mb-6" role="region" aria-label="Installation commands">
+						<pre class="text-sm overflow-x-auto" role="code" aria-label="Terminal commands to clone, install and start the project"><code># Clone and install
 git clone https://github.com/XCUDA/astro-starter.git
 cd astro-starter
 npm install
 
 # Start development
 npm run dev</code></pre>
+					</div>
+					<div class="flex items-center gap-4 text-sm text-muted-foreground">
+						<span>Visit</span>
+						<code class="bg-muted px-2 py-1 rounded text-xs font-mono" role="code">localhost:4321</code>
+						<span>to see your starter in action</span>
+					</div>
 				</div>
-				<p class="text-muted-foreground mt-4">
-					Visit <code class="bg-muted px-2 py-1 rounded text-sm" role="code" aria-label="Local development URL">localhost:4321</code> to see your starter in action.
-				</p>
 			</div>
 		</section>
 
-		<!-- Final Progress Badge -->
-		<section class="container mx-auto px-4 py-8 text-center" role="region" aria-labelledby="progress-title">
-			<div class="inline-block p-4 rounded-lg border bg-gradient-to-r from-green-50 to-violet-50 dark:from-green-950/20 dark:to-violet-950/20" role="status" aria-live="polite">
-				<div id="progress-title" class="text-2xl font-bold text-violet-600 dark:text-violet-400 mb-2" aria-label="Project completion status">🏆 85% Complete</div>
-				<div class="text-sm text-muted-foreground">
-					Sprint 1 (Forms) + Sprint 2 (Navigation) + Sprint 3 (Data Display) + Sprint 4 (Advanced) = <strong>Quadruple Sprint Mastery</strong>
-				</div>
-			</div>
-		</section>
 	</main>
 </Layout>
-
-<script>
-	import DarkModeToggle from '../components/islands/DarkModeToggle.tsx';
-	import { createElement } from 'react';
-	import { createRoot } from 'react-dom/client';
-
-	// Mount Dark Mode Toggle with accessibility verification
-	const toggleContainer = document.getElementById('dark-mode-toggle');
-	if (toggleContainer) {
-		// Ensure container is focusable and has proper ARIA
-		toggleContainer.setAttribute('tabindex', '0');
-		
-		const root = createRoot(toggleContainer);
-		root.render(createElement(DarkModeToggle));
-	}
-</script>
