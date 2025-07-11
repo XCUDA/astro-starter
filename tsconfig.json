@@ -12,9 +12,9 @@
     "jsxImportSource": "react",
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+      "@/*": ["./src/*"],
+      "@/components/islands/*": ["src/components/islands/*"],
+      "@/types/*": ["src/types/*"]
     },
   }
 }
