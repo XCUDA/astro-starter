@@ -1,7 +1,7 @@
 {
   "name": "astro-starter",
   "type": "module",
-  "version": "1.8.2",
+  "version": "1.8.3",
   "description": "A modern, production-ready Astro 5 starter with TailwindCSS 4, shadcn/ui, and TypeScript. Complete layout system with responsive navigation, mega menus, breadcrumbs, touch gestures, flexible grid system with templates and page compositions, comprehensive sidebar navigation for admin dashboards, intelligent sticky headers with scroll behaviors, fixed sidebar with scroll indicators, professional floating action buttons with boundary detection, complete scroll tracking system with reading progress and table of contents, and smooth transitions with micro-interactions and loading states. PHASE 2 COMPLETE - 100% Achievement with 59 professional components and 14 interactive showcase pages.",
   "scripts": {
     "dev": "astro dev",
