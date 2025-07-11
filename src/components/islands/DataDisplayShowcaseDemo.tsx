@@ -1,7 +1,7 @@
 // DataDisplayShowcaseDemo.tsx - Interactive demo for Data Display components
 // Path: /src/components/islands/DataDisplayShowcaseDemo.tsx
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   Table,
   TableBody,
@@ -64,6 +64,10 @@ export default function DataDisplayShowcaseDemo() {
   const [activeDemo, setActiveDemo] = useState<DemoType>('combined');
   const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
   const [tableView, setTableView] = useState<'team' | 'products'>('team');
+  
+  // Accessibility state management
+  const announceRef = useRef<HTMLDivElement>(null);
+  const [announcement, setAnnouncement] = useState('');
 
   const demoTabs = [
     { id: 'combined' as DemoType, label: 'All Combined', icon: '📊' },
@@ -72,6 +76,62 @@ export default function DataDisplayShowcaseDemo() {
     { id: 'tooltip' as DemoType, label: 'Tooltip', icon: '💬' },
     { id: 'accordion' as DemoType, label: 'Accordion', icon: '📁' }
   ];
+
+  // Accessibility: Announce changes to screen readers
+  const announceChange = (message: string) => {
+    setAnnouncement(message);
+    if (announceRef.current) {
+      announceRef.current.textContent = message;
+    }
+  };
+
+  // Accessibility: Handle keyboard navigation for demo selector
+  const handleDemoKeydown = (event: React.KeyboardEvent, currentIndex: number) => {
+    let newIndex = currentIndex;
+    
+    switch (event.key) {
+      case 'ArrowLeft':
+        event.preventDefault();
+        newIndex = currentIndex > 0 ? currentIndex - 1 : demoTabs.length - 1;
+        break;
+      case 'ArrowRight':
+        event.preventDefault();
+        newIndex = currentIndex < demoTabs.length - 1 ? currentIndex + 1 : 0;
+        break;
+      case 'Home':
+        event.preventDefault();
+        newIndex = 0;
+        break;
+      case 'End':
+        event.preventDefault();
+        newIndex = demoTabs.length - 1;
+        break;
+      case '1':
+      case '2':
+      case '3':
+      case '4':
+      case '5':
+        event.preventDefault();
+        const shortcutIndex = parseInt(event.key) - 1;
+        if (shortcutIndex < demoTabs.length) {
+          newIndex = shortcutIndex;
+        }
+        break;
+      default:
+        return;
+    }
+    
+    if (newIndex !== currentIndex) {
+      setActiveDemo(demoTabs[newIndex].id);
+      announceChange(`${demoTabs[newIndex].label} demo selected`);
+    }
+  };
+
+  // Accessibility: Handle demo change
+  const handleDemoChange = (demoId: DemoType, demoLabel: string) => {
+    setActiveDemo(demoId);
+    announceChange(`${demoLabel} demo activated`);
+  };
 
   const teamMembers: TeamMember[] = [
     {
@@ -175,19 +235,19 @@ export default function DataDisplayShowcaseDemo() {
   const getStatusBadge = (status: string) => {
     switch (status) {
       case 'active':
-        return <Badge variant="default">Active</Badge>;
+        return <Badge variant="default" aria-label={`Status: ${status}`}>Active</Badge>;
       case 'away':
-        return <Badge variant="secondary">Away</Badge>;
+        return <Badge variant="secondary" aria-label={`Status: ${status}`}>Away</Badge>;
       case 'offline':
-        return <Badge variant="outline">Offline</Badge>;
+        return <Badge variant="outline" aria-label={`Status: ${status}`}>Offline</Badge>;
       case 'available':
-        return <Badge variant="default">Available</Badge>;
+        return <Badge variant="default" aria-label={`Status: ${status}`}>Available</Badge>;
       case 'low_stock':
-        return <Badge variant="destructive">Low Stock</Badge>;
+        return <Badge variant="destructive" aria-label={`Status: ${status}`}>Low Stock</Badge>;
       case 'out_of_stock':
-        return <Badge variant="outline">Out of Stock</Badge>;
+        return <Badge variant="outline" aria-label={`Status: ${status}`}>Out of Stock</Badge>;
       default:
-        return <Badge variant="outline">{status}</Badge>;
+        return <Badge variant="outline" aria-label={`Status: ${status}`}>{status}</Badge>;
     }
   };
 
@@ -195,7 +255,7 @@ export default function DataDisplayShowcaseDemo() {
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <span>📋</span>
+          <span aria-hidden="true">📋</span>
           Data Table Component
         </CardTitle>
         <CardDescription>
@@ -205,38 +265,51 @@ export default function DataDisplayShowcaseDemo() {
       <CardContent className="space-y-6">
         
         {/* Table Type Selector */}
-        <div className="flex gap-2">
+        <div className="flex gap-2" role="group" aria-label="Table view selection">
           <Button 
             size="sm" 
             variant={tableView === 'team' ? 'default' : 'outline'}
-            onClick={() => setTableView('team')}
+            onClick={() => {
+              setTableView('team');
+              announceChange('Team management table view selected');
+            }}
+            aria-pressed={tableView === 'team'}
+            aria-describedby="team-table-desc"
           >
             Team Management
           </Button>
           <Button 
             size="sm" 
             variant={tableView === 'products' ? 'default' : 'outline'}
-            onClick={() => setTableView('products')}
+            onClick={() => {
+              setTableView('products');
+              announceChange('Product inventory table view selected');
+            }}
+            aria-pressed={tableView === 'products'}
+            aria-describedby="product-table-desc"
           >
             Product Inventory
           </Button>
         </div>
 
+        <div className="sr-only" id="team-table-desc">Display team members with roles and status</div>
+        <div className="sr-only" id="product-table-desc">Display product catalog with inventory levels</div>
+
         {/* Team Table */}
         {tableView === 'team' && (
           <div>
-            <h4 className="font-semibold mb-3">Team Management Table:</h4>
+            <h4 className="font-semibold mb-3" id="team-table-heading">Team Management Table:</h4>
             <div className="rounded-md border">
-              <Table>
+              <Table role="table" aria-labelledby="team-table-heading">
                 <TableCaption>Team members and their current status</TableCaption>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Member</TableHead>
-                    <TableHead>Role</TableHead>
-                    <TableHead>Department</TableHead>
-                    <TableHead>Status</TableHead>
-                    <TableHead>Projects</TableHead>
-                    <TableHead className="text-right">Actions</TableHead>
+                    <TableHead scope="col">Member</TableHead>
+                    <TableHead scope="col">Role</TableHead>
+                    <TableHead scope="col">Department</TableHead>
+                    <TableHead scope="col">Status</TableHead>
+                    <TableHead scope="col">Projects</TableHead>
+                    <TableHead scope="col" className="text-right">Actions</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -245,8 +318,11 @@ export default function DataDisplayShowcaseDemo() {
                       <TableCell className="font-medium">
                         <div className="flex items-center gap-3">
                           <Avatar className="h-8 w-8">
-                            <AvatarImage src={member.avatar} alt={member.name} />
-                            <AvatarFallback>
+                            <AvatarImage 
+                              src={member.avatar} 
+                              alt={`Profile picture of ${member.name}`} 
+                            />
+                            <AvatarFallback aria-label={`${member.name} initials`}>
                               {member.name.split(' ').map(n => n[0]).join('')}
                             </AvatarFallback>
                           </Avatar>
@@ -263,10 +339,16 @@ export default function DataDisplayShowcaseDemo() {
                         <TooltipProvider>
                           <Tooltip>
                             <TooltipTrigger asChild>
-                              <span className="cursor-help">{member.projects}</span>
+                              <span 
+                                className="cursor-help"
+                                tabIndex={0}
+                                aria-describedby={`projects-tooltip-${member.id}`}
+                              >
+                                {member.projects}
+                              </span>
                             </TooltipTrigger>
-                            <TooltipContent>
-                              <p>Active projects assigned</p>
+                            <TooltipContent id={`projects-tooltip-${member.id}`}>
+                              <p>Active projects assigned to {member.name}</p>
                             </TooltipContent>
                           </Tooltip>
                         </TooltipProvider>
@@ -275,10 +357,17 @@ export default function DataDisplayShowcaseDemo() {
                         <Button 
                           variant="ghost" 
                           size="sm"
-                          onClick={() => setSelectedMember(member)}
+                          onClick={() => {
+                            setSelectedMember(member);
+                            announceChange(`Viewing details for ${member.name}`);
+                          }}
+                          aria-describedby={`member-details-${member.id}`}
                         >
                           View Details
                         </Button>
+                        <div className="sr-only" id={`member-details-${member.id}`}>
+                          View detailed information for {member.name}
+                        </div>
                       </TableCell>
                     </TableRow>
                   ))}
@@ -291,18 +380,18 @@ export default function DataDisplayShowcaseDemo() {
         {/* Products Table */}
         {tableView === 'products' && (
           <div>
-            <h4 className="font-semibold mb-3">Product Inventory Table:</h4>
+            <h4 className="font-semibold mb-3" id="product-table-heading">Product Inventory Table:</h4>
             <div className="rounded-md border">
-              <Table>
+              <Table role="table" aria-labelledby="product-table-heading">
                 <TableCaption>Current product inventory and availability</TableCaption>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Product</TableHead>
-                    <TableHead>Category</TableHead>
-                    <TableHead>Price</TableHead>
-                    <TableHead>Stock</TableHead>
-                    <TableHead>Status</TableHead>
-                    <TableHead className="text-right">Actions</TableHead>
+                    <TableHead scope="col">Product</TableHead>
+                    <TableHead scope="col">Category</TableHead>
+                    <TableHead scope="col">Price</TableHead>
+                    <TableHead scope="col">Stock</TableHead>
+                    <TableHead scope="col">Status</TableHead>
+                    <TableHead scope="col" className="text-right">Actions</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -311,8 +400,14 @@ export default function DataDisplayShowcaseDemo() {
                       <TableCell className="font-medium">
                         <div className="flex items-center gap-3">
                           <Avatar className="h-8 w-8 rounded-md">
-                            <AvatarImage src="/api/placeholder/32/32" alt={product.name} />
-                            <AvatarFallback className="rounded-md">
+                            <AvatarImage 
+                              src="/api/placeholder/32/32" 
+                              alt={`Product image for ${product.name}`} 
+                            />
+                            <AvatarFallback 
+                              className="rounded-md"
+                              aria-label={`${product.name} initials`}
+                            >
                               {product.name.substring(0, 2)}
                             </AvatarFallback>
                           </Avatar>
@@ -328,21 +423,37 @@ export default function DataDisplayShowcaseDemo() {
                         <TooltipProvider>
                           <Tooltip>
                             <TooltipTrigger asChild>
-                              <span className={`cursor-help ${product.stock <= 5 ? 'text-destructive font-medium' : ''}`}>
+                              <span 
+                                className={`cursor-help ${product.stock <= 5 ? 'text-destructive font-medium' : ''}`}
+                                tabIndex={0}
+                                aria-describedby={`stock-tooltip-${product.id}`}
+                              >
                                 {product.stock} units
                               </span>
                             </TooltipTrigger>
-                            <TooltipContent>
-                              <p>{product.stock <= 5 ? 'Low stock - reorder soon' : 'Stock level healthy'}</p>
+                            <TooltipContent id={`stock-tooltip-${product.id}`}>
+                              <p>
+                                {product.stock <= 5 
+                                  ? `Low stock alert: Only ${product.stock} units remaining. Reorder soon.` 
+                                  : `Stock level healthy: ${product.stock} units available`
+                                }
+                              </p>
                             </TooltipContent>
                           </Tooltip>
                         </TooltipProvider>
                       </TableCell>
                       <TableCell>{getStatusBadge(product.status)}</TableCell>
                       <TableCell className="text-right">
-                        <Button variant="ghost" size="sm">
+                        <Button 
+                          variant="ghost" 
+                          size="sm"
+                          aria-describedby={`edit-product-${product.id}`}
+                        >
                           Edit
                         </Button>
+                        <div className="sr-only" id={`edit-product-${product.id}`}>
+                          Edit product details for {product.name}
+                        </div>
                       </TableCell>
                     </TableRow>
                   ))}
@@ -354,8 +465,14 @@ export default function DataDisplayShowcaseDemo() {
 
         {/* Selected Member Details */}
         {selectedMember && (
-          <div className="bg-muted/30 p-4 rounded-lg">
-            <h4 className="font-semibold mb-2">Selected Team Member:</h4>
+          <div 
+            className="bg-muted/30 p-4 rounded-lg"
+            role="region"
+            aria-labelledby="selected-member-heading"
+          >
+            <h4 id="selected-member-heading" className="font-semibold mb-2">
+              Selected Team Member: {selectedMember.name}
+            </h4>
             <div className="grid grid-cols-2 gap-4 text-sm">
               <div><strong>Name:</strong> {selectedMember.name}</div>
               <div><strong>Role:</strong> {selectedMember.role}</div>
@@ -369,10 +486,17 @@ export default function DataDisplayShowcaseDemo() {
               variant="outline" 
               size="sm" 
               className="mt-3"
-              onClick={() => setSelectedMember(null)}
+              onClick={() => {
+                setSelectedMember(null);
+                announceChange('Member details closed');
+              }}
+              aria-describedby="close-details-desc"
             >
-              Close
+              Close Details
             </Button>
+            <div className="sr-only" id="close-details-desc">
+              Close the detailed view for {selectedMember.name}
+            </div>
           </div>
         )}
       </CardContent>
@@ -383,7 +507,7 @@ export default function DataDisplayShowcaseDemo() {
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <span>👤</span>
+          <span aria-hidden="true">👤</span>
           Avatar Component
         </CardTitle>
         <CardDescription>
@@ -395,39 +519,39 @@ export default function DataDisplayShowcaseDemo() {
         {/* Avatar Sizes */}
         <div>
           <h4 className="font-semibold mb-3">Avatar Sizes:</h4>
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-6" role="group" aria-label="Avatar size examples">
             <div className="text-center">
               <Avatar className="h-6 w-6">
-                <AvatarImage src="/api/placeholder/24/24" />
-                <AvatarFallback>XS</AvatarFallback>
+                <AvatarImage src="/api/placeholder/24/24" alt="Extra small avatar example" />
+                <AvatarFallback aria-label="Extra small avatar">XS</AvatarFallback>
               </Avatar>
               <p className="text-xs mt-2">Extra Small</p>
             </div>
             <div className="text-center">
               <Avatar className="h-8 w-8">
-                <AvatarImage src="/api/placeholder/32/32" />
-                <AvatarFallback>SM</AvatarFallback>
+                <AvatarImage src="/api/placeholder/32/32" alt="Small avatar example" />
+                <AvatarFallback aria-label="Small avatar">SM</AvatarFallback>
               </Avatar>
               <p className="text-xs mt-2">Small</p>
             </div>
             <div className="text-center">
               <Avatar className="h-10 w-10">
-                <AvatarImage src="/api/placeholder/40/40" />
-                <AvatarFallback>MD</AvatarFallback>
+                <AvatarImage src="/api/placeholder/40/40" alt="Medium avatar example" />
+                <AvatarFallback aria-label="Medium avatar">MD</AvatarFallback>
               </Avatar>
               <p className="text-xs mt-2">Medium</p>
             </div>
             <div className="text-center">
               <Avatar className="h-12 w-12">
-                <AvatarImage src="/api/placeholder/48/48" />
-                <AvatarFallback>LG</AvatarFallback>
+                <AvatarImage src="/api/placeholder/48/48" alt="Large avatar example" />
+                <AvatarFallback aria-label="Large avatar">LG</AvatarFallback>
               </Avatar>
               <p className="text-xs mt-2">Large</p>
             </div>
             <div className="text-center">
               <Avatar className="h-16 w-16">
-                <AvatarImage src="/api/placeholder/64/64" />
-                <AvatarFallback>XL</AvatarFallback>
+                <AvatarImage src="/api/placeholder/64/64" alt="Extra large avatar example" />
+                <AvatarFallback aria-label="Extra large avatar">XL</AvatarFallback>
               </Avatar>
               <p className="text-xs mt-2">Extra Large</p>
             </div>
@@ -437,44 +561,60 @@ export default function DataDisplayShowcaseDemo() {
         {/* Avatar with Status Indicators */}
         <div>
           <h4 className="font-semibold mb-3">Status Indicators:</h4>
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-6" role="group" aria-label="Avatar status indicator examples">
             <div className="text-center">
               <div className="relative">
                 <Avatar className="h-12 w-12">
-                  <AvatarImage src="/api/placeholder/48/48" />
-                  <AvatarFallback>SJ</AvatarFallback>
+                  <AvatarImage src="/api/placeholder/48/48" alt="Sarah Johnson profile picture" />
+                  <AvatarFallback aria-label="Sarah Johnson initials">SJ</AvatarFallback>
                 </Avatar>
-                <div className="absolute -bottom-1 -right-1 h-4 w-4 bg-green-500 border-2 border-background rounded-full"></div>
+                <div 
+                  className="absolute -bottom-1 -right-1 h-4 w-4 bg-green-500 border-2 border-background rounded-full"
+                  aria-hidden="true"
+                ></div>
+                <span className="sr-only">Online status</span>
               </div>
               <p className="text-xs mt-2">Online</p>
             </div>
             <div className="text-center">
               <div className="relative">
                 <Avatar className="h-12 w-12">
-                  <AvatarImage src="/api/placeholder/48/48" />
-                  <AvatarFallback>MC</AvatarFallback>
+                  <AvatarImage src="/api/placeholder/48/48" alt="Michael Chen profile picture" />
+                  <AvatarFallback aria-label="Michael Chen initials">MC</AvatarFallback>
                 </Avatar>
-                <div className="absolute -bottom-1 -right-1 h-4 w-4 bg-yellow-500 border-2 border-background rounded-full"></div>
+                <div 
+                  className="absolute -bottom-1 -right-1 h-4 w-4 bg-yellow-500 border-2 border-background rounded-full"
+                  aria-hidden="true"
+                ></div>
+                <span className="sr-only">Away status</span>
               </div>
               <p className="text-xs mt-2">Away</p>
             </div>
             <div className="text-center">
               <div className="relative">
                 <Avatar className="h-12 w-12">
-                  <AvatarImage src="/api/placeholder/48/48" />
-                  <AvatarFallback>ED</AvatarFallback>
+                  <AvatarImage src="/api/placeholder/48/48" alt="Emma Davis profile picture" />
+                  <AvatarFallback aria-label="Emma Davis initials">ED</AvatarFallback>
                 </Avatar>
-                <div className="absolute -bottom-1 -right-1 h-4 w-4 bg-red-500 border-2 border-background rounded-full"></div>
+                <div 
+                  className="absolute -bottom-1 -right-1 h-4 w-4 bg-red-500 border-2 border-background rounded-full"
+                  aria-hidden="true"
+                ></div>
+                <span className="sr-only">Busy status</span>
               </div>
               <p className="text-xs mt-2">Busy</p>
             </div>
             <div className="text-center">
               <div className="relative">
                 <Avatar className="h-12 w-12">
-                  <AvatarImage src="/api/placeholder/48/48" />
-                  <AvatarFallback>AR</AvatarFallback>
+                  <AvatarImage src="/api/placeholder/48/48" alt="Alex Rodriguez profile picture" />
+                  <AvatarFallback aria-label="Alex Rodriguez initials">AR</AvatarFallback>
                 </Avatar>
-                <div className="absolute -bottom-1 -right-1 h-4 w-4 bg-gray-400 border-2 border-background rounded-full"></div>
+                <div 
+                  className="absolute -bottom-1 -right-1 h-4 w-4 bg-gray-400 border-2 border-background rounded-full"
+                  aria-hidden="true"
+                ></div>
+                <span className="sr-only">Offline status</span>
               </div>
               <p className="text-xs mt-2">Offline</p>
             </div>
@@ -487,33 +627,33 @@ export default function DataDisplayShowcaseDemo() {
           <div className="space-y-4">
             <div>
               <p className="text-sm text-muted-foreground mb-2">Project Team (overlapping):</p>
-              <div className="flex -space-x-2">
+              <div className="flex -space-x-2" role="group" aria-label="Project team members">
                 <Avatar className="h-8 w-8 border-2 border-background">
-                  <AvatarImage src="/api/placeholder/32/32" />
-                  <AvatarFallback>SJ</AvatarFallback>
+                  <AvatarImage src="/api/placeholder/32/32" alt="Sarah Johnson" />
+                  <AvatarFallback aria-label="Sarah Johnson">SJ</AvatarFallback>
                 </Avatar>
                 <Avatar className="h-8 w-8 border-2 border-background">
-                  <AvatarImage src="/api/placeholder/32/32" />
-                  <AvatarFallback>MC</AvatarFallback>
+                  <AvatarImage src="/api/placeholder/32/32" alt="Michael Chen" />
+                  <AvatarFallback aria-label="Michael Chen">MC</AvatarFallback>
                 </Avatar>
                 <Avatar className="h-8 w-8 border-2 border-background">
-                  <AvatarImage src="/api/placeholder/32/32" />
-                  <AvatarFallback>ED</AvatarFallback>
+                  <AvatarImage src="/api/placeholder/32/32" alt="Emma Davis" />
+                  <AvatarFallback aria-label="Emma Davis">ED</AvatarFallback>
                 </Avatar>
                 <Avatar className="h-8 w-8 border-2 border-background">
-                  <AvatarFallback>+3</AvatarFallback>
+                  <AvatarFallback aria-label="3 additional team members">+3</AvatarFallback>
                 </Avatar>
               </div>
             </div>
             <div>
               <p className="text-sm text-muted-foreground mb-2">Department Leads:</p>
-              <div className="flex gap-2">
+              <div className="flex gap-2" role="group" aria-label="Department leaders">
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <Avatar className="h-10 w-10 cursor-help">
-                        <AvatarImage src="/api/placeholder/40/40" />
-                        <AvatarFallback>SJ</AvatarFallback>
+                      <Avatar className="h-10 w-10 cursor-help" tabIndex={0}>
+                        <AvatarImage src="/api/placeholder/40/40" alt="Sarah Johnson" />
+                        <AvatarFallback aria-label="Sarah Johnson">SJ</AvatarFallback>
                       </Avatar>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -524,9 +664,9 @@ export default function DataDisplayShowcaseDemo() {
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <Avatar className="h-10 w-10 cursor-help">
-                        <AvatarImage src="/api/placeholder/40/40" />
-                        <AvatarFallback>MC</AvatarFallback>
+                      <Avatar className="h-10 w-10 cursor-help" tabIndex={0}>
+                        <AvatarImage src="/api/placeholder/40/40" alt="Michael Chen" />
+                        <AvatarFallback aria-label="Michael Chen">MC</AvatarFallback>
                       </Avatar>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -537,9 +677,9 @@ export default function DataDisplayShowcaseDemo() {
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <Avatar className="h-10 w-10 cursor-help">
-                        <AvatarImage src="/api/placeholder/40/40" />
-                        <AvatarFallback>ED</AvatarFallback>
+                      <Avatar className="h-10 w-10 cursor-help" tabIndex={0}>
+                        <AvatarImage src="/api/placeholder/40/40" alt="Emma Davis" />
+                        <AvatarFallback aria-label="Emma Davis">ED</AvatarFallback>
                       </Avatar>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -555,25 +695,30 @@ export default function DataDisplayShowcaseDemo() {
         {/* Fallback Examples */}
         <div>
           <h4 className="font-semibold mb-3">Fallback Examples:</h4>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4" role="group" aria-label="Avatar fallback examples">
             <div className="text-center">
               <Avatar className="h-10 w-10">
-                <AvatarImage src="/broken-link.jpg" />
-                <AvatarFallback>JD</AvatarFallback>
+                <AvatarImage src="/broken-link.jpg" alt="John Doe" />
+                <AvatarFallback aria-label="John Doe initials">JD</AvatarFallback>
               </Avatar>
               <p className="text-xs mt-2">Initials Fallback</p>
             </div>
             <div className="text-center">
               <Avatar className="h-10 w-10">
-                <AvatarImage src="/broken-link.jpg" />
-                <AvatarFallback>👤</AvatarFallback>
+                <AvatarImage src="/broken-link.jpg" alt="Generic user" />
+                <AvatarFallback aria-label="Generic user icon">👤</AvatarFallback>
               </Avatar>
               <p className="text-xs mt-2">Icon Fallback</p>
             </div>
             <div className="text-center">
               <Avatar className="h-10 w-10">
-                <AvatarImage src="/broken-link.jpg" />
-                <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-500 text-white">AB</AvatarFallback>
+                <AvatarImage src="/broken-link.jpg" alt="Anonymous user" />
+                <AvatarFallback 
+                  className="bg-gradient-to-br from-blue-500 to-purple-500 text-white"
+                  aria-label="Anonymous user with gradient background"
+                >
+                  AB
+                </AvatarFallback>
               </Avatar>
               <p className="text-xs mt-2">Gradient Fallback</p>
             </div>
@@ -587,7 +732,7 @@ export default function DataDisplayShowcaseDemo() {
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <span>💬</span>
+          <span aria-hidden="true">💬</span>
           Tooltip Component
         </CardTitle>
         <CardDescription>
@@ -599,7 +744,7 @@ export default function DataDisplayShowcaseDemo() {
         {/* Basic Tooltips */}
         <div>
           <h4 className="font-semibold mb-3">Basic Tooltips:</h4>
-          <div className="flex gap-4 flex-wrap">
+          <div className="flex gap-4 flex-wrap" role="group" aria-label="Basic tooltip examples">
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
@@ -656,7 +801,12 @@ export default function DataDisplayShowcaseDemo() {
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <Button variant="ghost" size="sm" className="h-4 w-4 p-0 text-muted-foreground">
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      className="h-4 w-4 p-0 text-muted-foreground"
+                      aria-label="Account balance information"
+                    >
                       ℹ️
                     </Button>
                   </TooltipTrigger>
@@ -670,11 +820,16 @@ export default function DataDisplayShowcaseDemo() {
             {/* Form Field Help */}
             <div className="space-y-2">
               <div className="flex items-center gap-2">
-                <label className="text-sm font-medium">API Key</label>
+                <label htmlFor="api-key-input" className="text-sm font-medium">API Key</label>
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <Button variant="ghost" size="sm" className="h-4 w-4 p-0 text-muted-foreground">
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        className="h-4 w-4 p-0 text-muted-foreground"
+                        aria-label="API key help information"
+                      >
                         ?
                       </Button>
                     </TooltipTrigger>
@@ -689,22 +844,31 @@ export default function DataDisplayShowcaseDemo() {
                 </TooltipProvider>
               </div>
               <input 
+                id="api-key-input"
                 type="password" 
                 placeholder="sk-..." 
                 className="w-full px-3 py-2 border border-border rounded-md bg-background"
+                aria-describedby="api-key-help"
               />
+              <div className="sr-only" id="api-key-help">
+                Enter your API key found in Settings API Management. Keep this secret and secure.
+              </div>
             </div>
 
             {/* Status Indicators with Tooltips */}
             <div className="space-y-2">
               <p className="text-sm font-medium">System Status:</p>
-              <div className="flex gap-4">
+              <div className="flex gap-4" role="group" aria-label="System status indicators">
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <div className="flex items-center gap-2 cursor-help">
-                        <div className="h-2 w-2 bg-green-500 rounded-full"></div>
+                      <div className="flex items-center gap-2 cursor-help" tabIndex={0}>
+                        <div 
+                          className="h-2 w-2 bg-green-500 rounded-full"
+                          aria-hidden="true"
+                        ></div>
                         <span className="text-sm">API</span>
+                        <span className="sr-only">Status: Operational</span>
                       </div>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -720,9 +884,13 @@ export default function DataDisplayShowcaseDemo() {
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <div className="flex items-center gap-2 cursor-help">
-                        <div className="h-2 w-2 bg-yellow-500 rounded-full"></div>
+                      <div className="flex items-center gap-2 cursor-help" tabIndex={0}>
+                        <div 
+                          className="h-2 w-2 bg-yellow-500 rounded-full"
+                          aria-hidden="true"
+                        ></div>
                         <span className="text-sm">Database</span>
+                        <span className="sr-only">Status: Degraded</span>
                       </div>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -738,9 +906,13 @@ export default function DataDisplayShowcaseDemo() {
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <div className="flex items-center gap-2 cursor-help">
-                        <div className="h-2 w-2 bg-green-500 rounded-full"></div>
+                      <div className="flex items-center gap-2 cursor-help" tabIndex={0}>
+                        <div 
+                          className="h-2 w-2 bg-green-500 rounded-full"
+                          aria-hidden="true"
+                        ></div>
                         <span className="text-sm">CDN</span>
+                        <span className="sr-only">Status: Operational</span>
                       </div>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -763,12 +935,12 @@ export default function DataDisplayShowcaseDemo() {
           <div className="grid grid-cols-2 gap-4 text-sm">
             <div className="space-y-2">
               <p className="font-medium">User Actions:</p>
-              <div className="space-y-1">
+              <div className="space-y-1" role="group" aria-label="User action buttons">
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger asChild>
                       <Button variant="ghost" size="sm" className="text-left w-full justify-start">
-                        <span className="mr-2">📧</span> Send Email
+                        <span className="mr-2" aria-hidden="true">📧</span> Send Email
                       </Button>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -781,7 +953,7 @@ export default function DataDisplayShowcaseDemo() {
                   <Tooltip>
                     <TooltipTrigger asChild>
                       <Button variant="ghost" size="sm" className="text-left w-full justify-start">
-                        <span className="mr-2">🔒</span> Lock Account
+                        <span className="mr-2" aria-hidden="true">🔒</span> Lock Account
                       </Button>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -802,7 +974,7 @@ export default function DataDisplayShowcaseDemo() {
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <div className="p-2 border rounded cursor-help">
+                      <div className="p-2 border rounded cursor-help" tabIndex={0}>
                         <div className="font-semibold">1,247</div>
                         <div className="text-xs text-muted-foreground">Active Users</div>
                       </div>
@@ -829,7 +1001,7 @@ export default function DataDisplayShowcaseDemo() {
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <span>📁</span>
+          <span aria-hidden="true">📁</span>
           Accordion Component
         </CardTitle>
         <CardDescription>
@@ -847,12 +1019,12 @@ export default function DataDisplayShowcaseDemo() {
               <AccordionContent>
                 <div className="space-y-2 text-sm">
                   <p>The basic plan includes:</p>
-                  <ul className="list-disc list-inside space-y-1 text-muted-foreground">
-                    <li>Up to 10 team members</li>
-                    <li>5GB storage per user</li>
-                    <li>Basic integrations</li>
-                    <li>Email support</li>
-                    <li>Mobile apps access</li>
+                  <ul className="list-disc list-inside space-y-1 text-muted-foreground" role="list">
+                    <li role="listitem">Up to 10 team members</li>
+                    <li role="listitem">5GB storage per user</li>
+                    <li role="listitem">Basic integrations</li>
+                    <li role="listitem">Email support</li>
+                    <li role="listitem">Mobile apps access</li>
                   </ul>
                 </div>
               </AccordionContent>
@@ -862,11 +1034,11 @@ export default function DataDisplayShowcaseDemo() {
               <AccordionContent>
                 <div className="space-y-2 text-sm">
                   <p>To upgrade your plan:</p>
-                  <ol className="list-decimal list-inside space-y-1 text-muted-foreground">
-                    <li>Go to Settings → Billing</li>
-                    <li>Click "Upgrade Plan"</li>
-                    <li>Select your desired plan</li>
-                    <li>Complete payment process</li>
+                  <ol className="list-decimal list-inside space-y-1 text-muted-foreground" role="list">
+                    <li role="listitem">Go to Settings → Billing</li>
+                    <li role="listitem">Click "Upgrade Plan"</li>
+                    <li role="listitem">Select your desired plan</li>
+                    <li role="listitem">Complete payment process</li>
                   </ol>
                   <p className="text-xs text-muted-foreground mt-2">
                     Changes take effect immediately. You'll be prorated for the current billing period.
@@ -879,8 +1051,12 @@ export default function DataDisplayShowcaseDemo() {
               <AccordionContent>
                 <div className="space-y-2 text-sm">
                   <p>Yes, you can cancel your subscription at any time from the billing settings.</p>
-                  <div className="bg-muted p-3 rounded text-xs">
-                    <p className="font-medium">Note:</p>
+                  <div 
+                    className="bg-muted p-3 rounded text-xs"
+                    role="note"
+                    aria-labelledby="cancellation-note"
+                  >
+                    <p id="cancellation-note" className="font-medium">Note:</p>
                     <p>Your account will remain active until the end of the current billing period. 
                     All data will be preserved for 30 days after cancellation.</p>
                   </div>
@@ -897,25 +1073,25 @@ export default function DataDisplayShowcaseDemo() {
             <AccordionItem value="specs-1">
               <AccordionTrigger>
                 <div className="flex items-center gap-2">
-                  <span>💻</span>
+                  <span aria-hidden="true">💻</span>
                   Technical Specifications
                 </div>
               </AccordionTrigger>
               <AccordionContent>
-                <div className="grid grid-cols-2 gap-3 text-sm">
-                  <div>
+                <div className="grid grid-cols-2 gap-3 text-sm" role="list" aria-label="Technical specifications">
+                  <div role="listitem">
                     <p className="font-medium">Processor</p>
                     <p className="text-muted-foreground">Apple M3 Pro chip</p>
                   </div>
-                  <div>
+                  <div role="listitem">
                     <p className="font-medium">Memory</p>
                     <p className="text-muted-foreground">18GB Unified Memory</p>
                   </div>
-                  <div>
+                  <div role="listitem">
                     <p className="font-medium">Storage</p>
                     <p className="text-muted-foreground">512GB SSD</p>
                   </div>
-                  <div>
+                  <div role="listitem">
                     <p className="font-medium">Display</p>
                     <p className="text-muted-foreground">16.2" Liquid Retina XDR</p>
                   </div>
@@ -925,18 +1101,18 @@ export default function DataDisplayShowcaseDemo() {
             <AccordionItem value="specs-2">
               <AccordionTrigger>
                 <div className="flex items-center gap-2">
-                  <span>📐</span>
+                  <span aria-hidden="true">📐</span>
                   Dimensions & Weight
                 </div>
               </AccordionTrigger>
               <AccordionContent>
                 <div className="space-y-2 text-sm">
-                  <div className="grid grid-cols-2 gap-3">
-                    <div>
+                  <div className="grid grid-cols-2 gap-3" role="list" aria-label="Physical specifications">
+                    <div role="listitem">
                       <p className="font-medium">Dimensions</p>
                       <p className="text-muted-foreground">35.79 × 24.59 × 1.68 cm</p>
                     </div>
-                    <div>
+                    <div role="listitem">
                       <p className="font-medium">Weight</p>
                       <p className="text-muted-foreground">2.15 kg</p>
                     </div>
@@ -947,18 +1123,18 @@ export default function DataDisplayShowcaseDemo() {
             <AccordionItem value="specs-3">
               <AccordionTrigger>
                 <div className="flex items-center gap-2">
-                  <span>🔌</span>
+                  <span aria-hidden="true">🔌</span>
                   Connectivity & Ports
                 </div>
               </AccordionTrigger>
               <AccordionContent>
                 <div className="space-y-2 text-sm">
-                  <ul className="space-y-1 text-muted-foreground">
-                    <li>• 3 × Thunderbolt 4 (USB-C) ports</li>
-                    <li>• HDMI port</li>
-                    <li>• SDXC card slot</li>
-                    <li>• 3.5mm headphone jack</li>
-                    <li>• MagSafe 3 charging port</li>
+                  <ul className="space-y-1 text-muted-foreground" role="list" aria-label="Connectivity options">
+                    <li role="listitem">• 3 × Thunderbolt 4 (USB-C) ports</li>
+                    <li role="listitem">• HDMI port</li>
+                    <li role="listitem">• SDXC card slot</li>
+                    <li role="listitem">• 3.5mm headphone jack</li>
+                    <li role="listitem">• MagSafe 3 charging port</li>
                   </ul>
                 </div>
               </AccordionContent>
@@ -1001,18 +1177,18 @@ export default function DataDisplayShowcaseDemo() {
                 <div className="space-y-3 text-sm">
                   <div>
                     <h5 className="font-medium">Login Problems</h5>
-                    <ul className="text-muted-foreground list-disc list-inside space-y-1">
-                      <li>Clear browser cache and cookies</li>
-                      <li>Try incognito/private browsing mode</li>
-                      <li>Reset password if necessary</li>
+                    <ul className="text-muted-foreground list-disc list-inside space-y-1" role="list">
+                      <li role="listitem">Clear browser cache and cookies</li>
+                      <li role="listitem">Try incognito/private browsing mode</li>
+                      <li role="listitem">Reset password if necessary</li>
                     </ul>
                   </div>
                   <div>
                     <h5 className="font-medium">Sync Issues</h5>
-                    <ul className="text-muted-foreground list-disc list-inside space-y-1">
-                      <li>Check internet connection</li>
-                      <li>Force refresh the application</li>
-                      <li>Contact support if issues persist</li>
+                    <ul className="text-muted-foreground list-disc list-inside space-y-1" role="list">
+                      <li role="listitem">Check internet connection</li>
+                      <li role="listitem">Force refresh the application</li>
+                      <li role="listitem">Contact support if issues persist</li>
                     </ul>
                   </div>
                 </div>
@@ -1031,7 +1207,7 @@ export default function DataDisplayShowcaseDemo() {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <span>👥</span>
+            <span aria-hidden="true">👥</span>
             Customer Management System
           </CardTitle>
           <CardDescription>
@@ -1042,17 +1218,17 @@ export default function DataDisplayShowcaseDemo() {
           
           {/* Customer Table */}
           <div>
-            <h4 className="font-semibold mb-3">Customer Database:</h4>
+            <h4 className="font-semibold mb-3" id="customer-table-heading">Customer Database:</h4>
             <div className="rounded-md border">
-              <Table>
+              <Table role="table" aria-labelledby="customer-table-heading">
                 <TableCaption>Active customers and their account status</TableCaption>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Customer</TableHead>
-                    <TableHead>Plan</TableHead>
-                    <TableHead>Status</TableHead>
-                    <TableHead>Last Activity</TableHead>
-                    <TableHead className="text-right">Actions</TableHead>
+                    <TableHead scope="col">Customer</TableHead>
+                    <TableHead scope="col">Plan</TableHead>
+                    <TableHead scope="col">Status</TableHead>
+                    <TableHead scope="col">Last Activity</TableHead>
+                    <TableHead scope="col" className="text-right">Actions</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -1060,8 +1236,8 @@ export default function DataDisplayShowcaseDemo() {
                     <TableCell className="font-medium">
                       <div className="flex items-center gap-3">
                         <Avatar className="h-8 w-8">
-                          <AvatarImage src="/api/placeholder/32/32" />
-                          <AvatarFallback>TC</AvatarFallback>
+                          <AvatarImage src="/api/placeholder/32/32" alt="TechCorp Inc. company logo" />
+                          <AvatarFallback aria-label="TechCorp Inc.">TC</AvatarFallback>
                         </Avatar>
                         <div>
                           <div className="font-medium">TechCorp Inc.</div>
@@ -1070,15 +1246,19 @@ export default function DataDisplayShowcaseDemo() {
                       </div>
                     </TableCell>
                     <TableCell>
-                      <Badge variant="default">Enterprise</Badge>
+                      <Badge variant="default" aria-label="Plan: Enterprise">Enterprise</Badge>
                     </TableCell>
                     <TableCell>
                       <TooltipProvider>
                         <Tooltip>
                           <TooltipTrigger asChild>
-                            <div className="flex items-center gap-2 cursor-help">
-                              <div className="h-2 w-2 bg-green-500 rounded-full"></div>
+                            <div className="flex items-center gap-2 cursor-help" tabIndex={0}>
+                              <div 
+                                className="h-2 w-2 bg-green-500 rounded-full"
+                                aria-hidden="true"
+                              ></div>
                               <span>Active</span>
+                              <span className="sr-only">Account status: Active</span>
                             </div>
                           </TooltipTrigger>
                           <TooltipContent>
@@ -1093,15 +1273,24 @@ export default function DataDisplayShowcaseDemo() {
                     </TableCell>
                     <TableCell>2 hours ago</TableCell>
                     <TableCell className="text-right">
-                      <Button variant="ghost" size="sm">View</Button>
+                      <Button 
+                        variant="ghost" 
+                        size="sm"
+                        aria-describedby="techcorp-view-desc"
+                      >
+                        View
+                      </Button>
+                      <div className="sr-only" id="techcorp-view-desc">
+                        View details for TechCorp Inc.
+                      </div>
                     </TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell className="font-medium">
                       <div className="flex items-center gap-3">
                         <Avatar className="h-8 w-8">
-                          <AvatarImage src="/api/placeholder/32/32" />
-                          <AvatarFallback>DS</AvatarFallback>
+                          <AvatarImage src="/api/placeholder/32/32" alt="DesignStudio Ltd. company logo" />
+                          <AvatarFallback aria-label="DesignStudio Ltd.">DS</AvatarFallback>
                         </Avatar>
                         <div>
                           <div className="font-medium">DesignStudio Ltd.</div>
@@ -1110,15 +1299,19 @@ export default function DataDisplayShowcaseDemo() {
                       </div>
                     </TableCell>
                     <TableCell>
-                      <Badge variant="secondary">Professional</Badge>
+                      <Badge variant="secondary" aria-label="Plan: Professional">Professional</Badge>
                     </TableCell>
                     <TableCell>
                       <TooltipProvider>
                         <Tooltip>
                           <TooltipTrigger asChild>
-                            <div className="flex items-center gap-2 cursor-help">
-                              <div className="h-2 w-2 bg-yellow-500 rounded-full"></div>
+                            <div className="flex items-center gap-2 cursor-help" tabIndex={0}>
+                              <div 
+                                className="h-2 w-2 bg-yellow-500 rounded-full"
+                                aria-hidden="true"
+                              ></div>
                               <span>Payment Due</span>
+                              <span className="sr-only">Account status: Payment Due</span>
                             </div>
                           </TooltipTrigger>
                           <TooltipContent>
@@ -1133,7 +1326,16 @@ export default function DataDisplayShowcaseDemo() {
                     </TableCell>
                     <TableCell>1 day ago</TableCell>
                     <TableCell className="text-right">
-                      <Button variant="ghost" size="sm">View</Button>
+                      <Button 
+                        variant="ghost" 
+                        size="sm"
+                        aria-describedby="designstudio-view-desc"
+                      >
+                        View
+                      </Button>
+                      <div className="sr-only" id="designstudio-view-desc">
+                        View details for DesignStudio Ltd.
+                      </div>
                     </TableCell>
                   </TableRow>
                 </TableBody>
@@ -1149,7 +1351,7 @@ export default function DataDisplayShowcaseDemo() {
                 <AccordionTrigger>
                   <div className="flex items-center gap-3">
                     <Avatar className="h-6 w-6">
-                      <AvatarFallback>TC</AvatarFallback>
+                      <AvatarFallback aria-label="TechCorp">TC</AvatarFallback>
                     </Avatar>
                     TechCorp Inc. - Account Overview
                   </div>
@@ -1158,20 +1360,20 @@ export default function DataDisplayShowcaseDemo() {
                   <div className="grid grid-cols-2 gap-6">
                     <div>
                       <h5 className="font-medium mb-2">Account Information</h5>
-                      <div className="space-y-1 text-sm">
-                        <div className="flex justify-between">
+                      <div className="space-y-1 text-sm" role="list" aria-label="Account information">
+                        <div className="flex justify-between" role="listitem">
                           <span>Plan:</span>
                           <Badge variant="default">Enterprise</Badge>
                         </div>
-                        <div className="flex justify-between">
+                        <div className="flex justify-between" role="listitem">
                           <span>Users:</span>
                           <span>45/100</span>
                         </div>
-                        <div className="flex justify-between">
+                        <div className="flex justify-between" role="listitem">
                           <span>Storage:</span>
                           <span>2.3TB/5TB</span>
                         </div>
-                        <div className="flex justify-between">
+                        <div className="flex justify-between" role="listitem">
                           <span>Next Billing:</span>
                           <span>March 15, 2024</span>
                         </div>
@@ -1179,17 +1381,26 @@ export default function DataDisplayShowcaseDemo() {
                     </div>
                     <div>
                       <h5 className="font-medium mb-2">Recent Activity</h5>
-                      <div className="space-y-2 text-sm">
-                        <div className="flex items-center gap-2">
-                          <div className="h-2 w-2 bg-green-500 rounded-full"></div>
+                      <div className="space-y-2 text-sm" role="list" aria-label="Recent activity">
+                        <div className="flex items-center gap-2" role="listitem">
+                          <div 
+                            className="h-2 w-2 bg-green-500 rounded-full"
+                            aria-hidden="true"
+                          ></div>
                           <span>User login - 2 hours ago</span>
                         </div>
-                        <div className="flex items-center gap-2">
-                          <div className="h-2 w-2 bg-blue-500 rounded-full"></div>
+                        <div className="flex items-center gap-2" role="listitem">
+                          <div 
+                            className="h-2 w-2 bg-blue-500 rounded-full"
+                            aria-hidden="true"
+                          ></div>
                           <span>File uploaded - 4 hours ago</span>
                         </div>
-                        <div className="flex items-center gap-2">
-                          <div className="h-2 w-2 bg-purple-500 rounded-full"></div>
+                        <div className="flex items-center gap-2" role="listitem">
+                          <div 
+                            className="h-2 w-2 bg-purple-500 rounded-full"
+                            aria-hidden="true"
+                          ></div>
                           <span>Settings updated - 1 day ago</span>
                         </div>
                       </div>
@@ -1201,7 +1412,7 @@ export default function DataDisplayShowcaseDemo() {
                 <AccordionTrigger>
                   <div className="flex items-center gap-3">
                     <Avatar className="h-6 w-6">
-                      <AvatarFallback>DS</AvatarFallback>
+                      <AvatarFallback aria-label="DesignStudio">DS</AvatarFallback>
                     </Avatar>
                     DesignStudio Ltd. - Account Overview
                     <Badge variant="destructive" className="ml-auto">Payment Due</Badge>
@@ -1211,20 +1422,20 @@ export default function DataDisplayShowcaseDemo() {
                   <div className="grid grid-cols-2 gap-6">
                     <div>
                       <h5 className="font-medium mb-2">Account Information</h5>
-                      <div className="space-y-1 text-sm">
-                        <div className="flex justify-between">
+                      <div className="space-y-1 text-sm" role="list" aria-label="Account information">
+                        <div className="flex justify-between" role="listitem">
                           <span>Plan:</span>
                           <Badge variant="secondary">Professional</Badge>
                         </div>
-                        <div className="flex justify-between">
+                        <div className="flex justify-between" role="listitem">
                           <span>Users:</span>
                           <span>8/25</span>
                         </div>
-                        <div className="flex justify-between">
+                        <div className="flex justify-between" role="listitem">
                           <span>Storage:</span>
                           <span>156GB/1TB</span>
                         </div>
-                        <div className="flex justify-between">
+                        <div className="flex justify-between" role="listitem">
                           <span>Next Billing:</span>
                           <span className="text-destructive">Overdue (3 days)</span>
                         </div>
@@ -1233,14 +1444,26 @@ export default function DataDisplayShowcaseDemo() {
                     <div>
                       <h5 className="font-medium mb-2">Payment Status</h5>
                       <div className="space-y-2 text-sm">
-                        <div className="p-2 bg-destructive/10 border border-destructive/20 rounded">
-                          <p className="font-medium text-destructive">Payment Required</p>
+                        <div 
+                          className="p-2 bg-destructive/10 border border-destructive/20 rounded"
+                          role="alert"
+                          aria-labelledby="payment-alert"
+                        >
+                          <p id="payment-alert" className="font-medium text-destructive">Payment Required</p>
                           <p className="text-xs">Invoice #INV-2024-0089</p>
                           <p className="text-xs">Amount: €299.00</p>
                         </div>
-                        <Button variant="destructive" size="sm" className="w-full">
+                        <Button 
+                          variant="destructive" 
+                          size="sm" 
+                          className="w-full"
+                          aria-describedby="payment-reminder-desc"
+                        >
                           Send Payment Reminder
                         </Button>
+                        <div className="sr-only" id="payment-reminder-desc">
+                          Send payment reminder email to DesignStudio Ltd.
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -1255,7 +1478,7 @@ export default function DataDisplayShowcaseDemo() {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <span>🛍️</span>
+            <span aria-hidden="true">🛍️</span>
             Product Catalog Management
           </CardTitle>
           <CardDescription>
@@ -1264,16 +1487,16 @@ export default function DataDisplayShowcaseDemo() {
         </CardHeader>
         <CardContent>
           <div className="rounded-md border">
-            <Table>
-              <TableCaption>Product inventory with detailed specifications</TableCaption>
+            <Table role="table" aria-labelledby="catalog-heading">
+              <TableCaption id="catalog-heading">Product inventory with detailed specifications</TableCaption>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Product</TableHead>
-                  <TableHead>Category</TableHead>
-                  <TableHead>Price</TableHead>
-                  <TableHead>Stock</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead className="text-right">Actions</TableHead>
+                  <TableHead scope="col">Product</TableHead>
+                  <TableHead scope="col">Category</TableHead>
+                  <TableHead scope="col">Price</TableHead>
+                  <TableHead scope="col">Stock</TableHead>
+                  <TableHead scope="col">Status</TableHead>
+                  <TableHead scope="col" className="text-right">Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -1282,8 +1505,14 @@ export default function DataDisplayShowcaseDemo() {
                     <TableCell className="font-medium">
                       <div className="flex items-center gap-3">
                         <Avatar className="h-10 w-10 rounded-md">
-                          <AvatarImage src="/api/placeholder/40/40" />
-                          <AvatarFallback className="rounded-md">
+                          <AvatarImage 
+                            src="/api/placeholder/40/40" 
+                            alt={`Product image for ${product.name}`} 
+                          />
+                          <AvatarFallback 
+                            className="rounded-md"
+                            aria-label={`${product.name} product`}
+                          >
                             {product.name.substring(0, 2)}
                           </AvatarFallback>
                         </Avatar>
@@ -1299,16 +1528,23 @@ export default function DataDisplayShowcaseDemo() {
                       <TooltipProvider>
                         <Tooltip>
                           <TooltipTrigger asChild>
-                            <span className={`cursor-help ${product.stock <= 5 ? 'text-destructive font-medium' : ''}`}>
+                            <span 
+                              className={`cursor-help ${product.stock <= 5 ? 'text-destructive font-medium' : ''}`}
+                              tabIndex={0}
+                              aria-describedby={`catalog-stock-tooltip-${product.id}`}
+                            >
                               {product.stock} units
                             </span>
                           </TooltipTrigger>
-                          <TooltipContent>
+                          <TooltipContent id={`catalog-stock-tooltip-${product.id}`}>
                             <div>
                               <p className="font-semibold">Stock Details</p>
                               <p className="text-xs">Available: {product.stock}</p>
                               <p className="text-xs">Reserved: 2</p>
                               <p className="text-xs">Reorder level: 5</p>
+                              {product.stock <= 5 && (
+                                <p className="text-xs text-destructive">⚠️ Low stock - reorder recommended</p>
+                              )}
                             </div>
                           </TooltipContent>
                         </Tooltip>
@@ -1316,7 +1552,16 @@ export default function DataDisplayShowcaseDemo() {
                     </TableCell>
                     <TableCell>{getStatusBadge(product.status)}</TableCell>
                     <TableCell className="text-right">
-                      <Button variant="ghost" size="sm">Manage</Button>
+                      <Button 
+                        variant="ghost" 
+                        size="sm"
+                        aria-describedby={`manage-product-${product.id}`}
+                      >
+                        Manage
+                      </Button>
+                      <div className="sr-only" id={`manage-product-${product.id}`}>
+                        Manage product settings for {product.name}
+                      </div>
                     </TableCell>
                   </TableRow>
                 ))}
@@ -1346,24 +1591,64 @@ export default function DataDisplayShowcaseDemo() {
   return (
     <div className="space-y-6">
       
-      {/* Demo Selector */}
-      <div className="flex flex-wrap gap-2 p-4 bg-muted/30 rounded-lg">
-        {demoTabs.map((demo) => (
+      {/* Live Region for Screen Reader Announcements */}
+      <div 
+        ref={announceRef} 
+        className="sr-only" 
+        aria-live="polite" 
+        aria-atomic="true"
+        role="status"
+      >
+        {announcement}
+      </div>
+
+      {/* Demo Selector with Accessibility */}
+      <div 
+        className="flex flex-wrap gap-2 p-4 bg-muted/30 rounded-lg"
+        role="tablist"
+        aria-label="Data display component demonstrations"
+      >
+        {demoTabs.map((demo, index) => (
           <Button
             key={demo.id}
+            role="tab"
             variant={activeDemo === demo.id ? 'default' : 'outline'}
             size="sm"
-            onClick={() => setActiveDemo(demo.id)}
+            onClick={() => handleDemoChange(demo.id, demo.label)}
+            onKeyDown={(e) => handleDemoKeydown(e, index)}
             className="flex items-center gap-2"
+            tabIndex={activeDemo === demo.id ? 0 : -1}
+            aria-selected={activeDemo === demo.id}
+            aria-current={activeDemo === demo.id ? 'page' : undefined}
+            aria-describedby={`demo-${demo.id}-description`}
           >
-            <span>{demo.icon}</span>
+            <span aria-hidden="true">{demo.icon}</span>
             <span className="hidden sm:inline">{demo.label}</span>
           </Button>
         ))}
       </div>
 
+      {/* Hidden descriptions for screen readers */}
+      <div className="sr-only">
+        <div id="demo-combined-description">All data display components working together in business scenarios</div>
+        <div id="demo-table-description">Data tables with sorting, filtering, and responsive design</div>
+        <div id="demo-avatar-description">User profile images with fallbacks and status indicators</div>
+        <div id="demo-tooltip-description">Contextual help and information on hover or focus</div>
+        <div id="demo-accordion-description">Collapsible content sections for organized information</div>
+      </div>
+
+      {/* Instructions for keyboard users */}
+      <div className="sr-only">
+        <p>Use arrow keys to navigate between demo tabs, Home and End keys to jump to first or last tab, or number keys 1-5 for direct selection.</p>
+      </div>
+
       {/* Demo Content */}
-      <div className="min-h-[400px]">
+      <div 
+        className="min-h-[400px]"
+        role="tabpanel"
+        aria-labelledby={`demo-${activeDemo}`}
+        id={`panel-${activeDemo}`}
+      >
         {renderDemo()}
       </div>
 
@@ -1377,24 +1662,28 @@ export default function DataDisplayShowcaseDemo() {
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
-            <div>
-              <h4 className="font-semibold mb-2">CRM & Customer Management:</h4>
-              <ul className="space-y-1 text-muted-foreground">
-                <li>• <strong>Table:</strong> Customer lists with filtering</li>
-                <li>• <strong>Avatar:</strong> Customer profile identification</li>
-                <li>• <strong>Tooltip:</strong> Quick account status details</li>
-                <li>• <strong>Accordion:</strong> Expandable customer history</li>
+            <article>
+              <header>
+                <h4 className="font-semibold mb-2">CRM & Customer Management:</h4>
+              </header>
+              <ul className="space-y-1 text-muted-foreground" role="list">
+                <li role="listitem">• <strong>Table:</strong> Customer lists with filtering</li>
+                <li role="listitem">• <strong>Avatar:</strong> Customer profile identification</li>
+                <li role="listitem">• <strong>Tooltip:</strong> Quick account status details</li>
+                <li role="listitem">• <strong>Accordion:</strong> Expandable customer history</li>
               </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-2">Product & Inventory:</h4>
-              <ul className="space-y-1 text-muted-foreground">
-                <li>• <strong>Table:</strong> Product catalog with stock levels</li>
-                <li>• <strong>Avatar:</strong> Product thumbnails & images</li>
-                <li>• <strong>Tooltip:</strong> Stock alerts & specifications</li>
-                <li>• <strong>Accordion:</strong> Detailed product information</li>
+            </article>
+            <article>
+              <header>
+                <h4 className="font-semibold mb-2">Product & Inventory:</h4>
+              </header>
+              <ul className="space-y-1 text-muted-foreground" role="list">
+                <li role="listitem">• <strong>Table:</strong> Product catalog with stock levels</li>
+                <li role="listitem">• <strong>Avatar:</strong> Product thumbnails & images</li>
+                <li role="listitem">• <strong>Tooltip:</strong> Stock alerts & specifications</li>
+                <li role="listitem">• <strong>Accordion:</strong> Detailed product information</li>
               </ul>
-            </div>
+            </article>
           </div>
         </CardContent>
       </Card>

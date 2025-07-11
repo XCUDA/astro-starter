@@ -7,8 +7,38 @@ import DarkModeToggle from '../components/islands/DarkModeToggle.tsx';
 import Navigation from '../components/layouts/Navigation.astro';
 ---
 
-<Layout title="Advanced Components - Rich Interactive Elements">
-  <main role="main">
+<Layout 
+  title="Advanced Components - Rich Interactive Elements"
+	description="Explore advanced components for complex applications, including Calendar, Date Picker, Combobox, Command, Sonner, and Popover. Perfect for building rich user interfaces and sophisticated interactions."
+  currentPage="advanced-showcase"
+  headerVariant="default"
+  footerVariant="business"
+	
+	stickyBehavior="always-visible"
+	showScrollIndicator={false}
+	scrollThreshold={50}
+
+	keywords={[
+    'advanced components',
+    'rich user interfaces',
+    'calendar component',
+    'date picker component',
+    'combobox component',
+    'command palette',
+    'sonner notifications',
+    'popover component',
+    'astro showcase'
+  ]}
+>
+  <!-- Skip Links for Accessibility -->
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-md focus:shadow-lg">
+    Skip to main content
+  </a>
+  <a href="#interactive-demos" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-32 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-md focus:shadow-lg">
+    Skip to interactive demos
+  </a>
+
+  <main role="main" id="main-content">
     <section class="py-20 min-h-screen" aria-labelledby="main-heading">
       <div class="container mx-auto px-4 max-w-6xl">
         
@@ -26,47 +56,61 @@ import Navigation from '../components/layouts/Navigation.astro';
         </header>
 
         <!-- Advanced Components Overview -->
-        <section 
+        <article 
           class="bg-card border border-border rounded-lg p-6 mb-12"
           aria-labelledby="components-heading"
           role="region"
         >
-          <h2 id="components-heading" class="text-xl font-semibold text-card-foreground mb-4">
-            🔮 Advanced Component System - Complex Interactions
-          </h2>
+          <header>
+            <h2 id="components-heading" class="text-xl font-semibold text-card-foreground mb-4">
+              🔮 Advanced Component System - Complex Interactions
+            </h2>
+          </header>
           <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4" role="list" aria-label="Advanced components status">
             <div class="flex items-center gap-2" role="listitem">
               <span class="w-3 h-3 bg-green-500 rounded-full" aria-hidden="true"></span>
+              <span class="sr-only">Calendar component: </span>
               <span class="font-medium text-sm">Calendar</span>
               <span class="text-xs text-muted-foreground">✅</span>
+              <span class="sr-only">installed and ready for use</span>
             </div>
             <div class="flex items-center gap-2" role="listitem">
               <span class="w-3 h-3 bg-green-500 rounded-full" aria-hidden="true"></span>
+              <span class="sr-only">Date Picker component: </span>
               <span class="font-medium text-sm">Date Picker</span>
               <span class="text-xs text-muted-foreground">✅</span>
+              <span class="sr-only">installed and ready for use</span>
             </div>
             <div class="flex items-center gap-2" role="listitem">
               <span class="w-3 h-3 bg-green-500 rounded-full" aria-hidden="true"></span>
+              <span class="sr-only">Combobox component: </span>
               <span class="font-medium text-sm">Combobox</span>
               <span class="text-xs text-muted-foreground">✅</span>
+              <span class="sr-only">installed and ready for use</span>
             </div>
             <div class="flex items-center gap-2" role="listitem">
               <span class="w-3 h-3 bg-green-500 rounded-full" aria-hidden="true"></span>
+              <span class="sr-only">Command component: </span>
               <span class="font-medium text-sm">Command</span>
               <span class="text-xs text-muted-foreground">✅</span>
+              <span class="sr-only">installed and ready for use</span>
             </div>
             <div class="flex items-center gap-2" role="listitem">
               <span class="w-3 h-3 bg-green-500 rounded-full" aria-hidden="true"></span>
+              <span class="sr-only">Sonner component: </span>
               <span class="font-medium text-sm">Sonner</span>
               <span class="text-xs text-muted-foreground">✅</span>
+              <span class="sr-only">installed and ready for use</span>
             </div>
             <div class="flex items-center gap-2" role="listitem">
               <span class="w-3 h-3 bg-green-500 rounded-full" aria-hidden="true"></span>
+              <span class="sr-only">Popover component: </span>
               <span class="font-medium text-sm">Popover</span>
               <span class="text-xs text-muted-foreground">✅</span>
+              <span class="sr-only">installed and ready for use</span>
             </div>
           </div>
-          <div 
+          <footer 
             class="mt-4 bg-green-50 dark:bg-green-950 border border-green-200 dark:border-green-800 rounded p-3"
             role="note"
             aria-labelledby="objective-text"
@@ -74,8 +118,8 @@ import Navigation from '../components/layouts/Navigation.astro';
             <p id="objective-text" class="text-sm text-green-700 dark:text-green-300">
               <strong>✅ Complete Advanced System :</strong> 6 composants sophistiqués pour créer des interfaces riches et des interactions complexes
             </p>
-          </div>
-        </section>
+          </footer>
+        </article>
 
         <!-- Business Use Cases Overview -->
         <section 
@@ -86,11 +130,11 @@ import Navigation from '../components/layouts/Navigation.astro';
           <h2 id="use-cases-heading" class="sr-only">Business use cases for advanced components</h2>
           
           <!-- Rich User Interfaces -->
-          <div class="bg-gradient-to-br from-purple-50 to-violet-50 dark:from-purple-950/20 dark:to-violet-950/20 border border-purple-200 dark:border-purple-800 rounded-lg p-4">
-            <div class="flex items-center mb-3">
+          <article class="bg-gradient-to-br from-purple-50 to-violet-50 dark:from-purple-950/20 dark:to-violet-950/20 border border-purple-200 dark:border-purple-800 rounded-lg p-4">
+            <header class="flex items-center mb-3">
               <span class="text-2xl mr-3" aria-hidden="true">🎯</span>
               <h3 class="text-lg font-semibold text-purple-800 dark:text-purple-200">Rich User Interfaces</h3>
-            </div>
+            </header>
             <p class="text-sm text-purple-600 dark:text-purple-400 mb-3">
               Interfaces sophistiquées pour applications professionnelles
             </p>
@@ -99,14 +143,14 @@ import Navigation from '../components/layouts/Navigation.astro';
               <li role="listitem">• <strong>Date Picker :</strong> Sélection dates précises, plages</li>
               <li role="listitem">• <strong>Command :</strong> Navigation rapide, recherche globale</li>
             </ul>
-          </div>
+          </article>
 
           <!-- Data Selection & Search -->
-          <div class="bg-gradient-to-br from-indigo-50 to-blue-50 dark:from-indigo-950/20 dark:to-blue-950/20 border border-indigo-200 dark:border-indigo-800 rounded-lg p-4">
-            <div class="flex items-center mb-3">
+          <article class="bg-gradient-to-br from-indigo-50 to-blue-50 dark:from-indigo-950/20 dark:to-blue-950/20 border border-indigo-200 dark:border-indigo-800 rounded-lg p-4">
+            <header class="flex items-center mb-3">
               <span class="text-2xl mr-3" aria-hidden="true">🔍</span>
               <h3 class="text-lg font-semibold text-indigo-800 dark:text-indigo-200">Data Selection & Search</h3>
-            </div>
+            </header>
             <p class="text-sm text-indigo-600 dark:text-indigo-400 mb-3">
               Sélection avancée et recherche intelligente
             </p>
@@ -115,11 +159,11 @@ import Navigation from '../components/layouts/Navigation.astro';
               <li role="listitem">• <strong>Popover :</strong> Infos contextuelles, menus avancés</li>
               <li role="listitem">• <strong>Sonner :</strong> Notifications intelligentes, feedback</li>
             </ul>
-          </div>
+          </article>
         </section>
 
         <!-- Démonstration interactive des composants advanced -->
-        <section aria-labelledby="demo-heading" role="region" class="mb-12">
+        <section aria-labelledby="demo-heading" role="region" class="mb-12" id="interactive-demos">
           <h2 id="demo-heading" class="text-2xl font-semibold text-foreground mb-6">
             ⚡ Interactive Advanced Demonstrations
           </h2>
@@ -138,11 +182,13 @@ import Navigation from '../components/layouts/Navigation.astro';
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             
             <!-- SaaS Dashboard -->
-            <div>
-              <h4 class="font-semibold text-foreground mb-3 flex items-center">
-                <span class="text-lg mr-2" aria-hidden="true">📊</span>
-                SaaS Dashboard & Analytics
-              </h4>
+            <article>
+              <header>
+                <h4 class="font-semibold text-foreground mb-3 flex items-center">
+                  <span class="text-lg mr-2" aria-hidden="true">📊</span>
+                  SaaS Dashboard & Analytics
+                </h4>
+              </header>
               <div class="bg-card border rounded p-3 text-sm font-mono mb-3">
                 <div class="text-muted-foreground">// Advanced SaaS interface</div>
                 <div>&lt;Calendar&gt; Event scheduling system</div>
@@ -160,14 +206,16 @@ import Navigation from '../components/layouts/Navigation.astro';
                 <li role="listitem">• Notifications temps réel</li>
                 <li role="listitem">• Menus contextuels riches</li>
               </ul>
-            </div>
+            </article>
 
             <!-- E-commerce Admin -->
-            <div>
-              <h4 class="font-semibold text-foreground mb-3 flex items-center">
-                <span class="text-lg mr-2" aria-hidden="true">🛒</span>
-                E-commerce Administration
-              </h4>
+            <article>
+              <header>
+                <h4 class="font-semibold text-foreground mb-3 flex items-center">
+                  <span class="text-lg mr-2" aria-hidden="true">🛒</span>
+                  E-commerce Administration
+                </h4>
+              </header>
               <div class="bg-card border rounded p-3 text-sm font-mono mb-3">
                 <div class="text-muted-foreground">// E-commerce management</div>
                 <div>&lt;Calendar&gt; Promotion scheduling</div>
@@ -185,14 +233,16 @@ import Navigation from '../components/layouts/Navigation.astro';
                 <li role="listitem">• Alertes commandes en temps réel</li>
                 <li role="listitem">• Édition rapide produits</li>
               </ul>
-            </div>
+            </article>
 
             <!-- Project Management -->
-            <div>
-              <h4 class="font-semibold text-foreground mb-3 flex items-center">
-                <span class="text-lg mr-2" aria-hidden="true">📋</span>
-                Project Management Suite
-              </h4>
+            <article>
+              <header>
+                <h4 class="font-semibold text-foreground mb-3 flex items-center">
+                  <span class="text-lg mr-2" aria-hidden="true">📋</span>
+                  Project Management Suite
+                </h4>
+              </header>
               <div class="bg-card border rounded p-3 text-sm font-mono mb-3">
                 <div class="text-muted-foreground">// Project management interface</div>
                 <div>&lt;Calendar&gt; Timeline & milestones</div>
@@ -210,14 +260,16 @@ import Navigation from '../components/layouts/Navigation.astro';
                 <li role="listitem">• Notifications tâches et updates</li>
                 <li role="listitem">• Actions rapides sur tâches</li>
               </ul>
-            </div>
+            </article>
 
             <!-- CRM & Customer Management -->
-            <div>
-              <h4 class="font-semibold text-foreground mb-3 flex items-center">
-                <span class="text-lg mr-2" aria-hidden="true">👥</span>
-                CRM & Customer Relations
-              </h4>
+            <article>
+              <header>
+                <h4 class="font-semibold text-foreground mb-3 flex items-center">
+                  <span class="text-lg mr-2" aria-hidden="true">👥</span>
+                  CRM & Customer Relations
+                </h4>
+              </header>
               <div class="bg-card border rounded p-3 text-sm font-mono mb-3">
                 <div class="text-muted-foreground">// CRM advanced features</div>
                 <div>&lt;Calendar&gt; Meeting scheduling</div>
@@ -235,7 +287,7 @@ import Navigation from '../components/layouts/Navigation.astro';
                 <li role="listitem">• Alertes nouveaux leads</li>
                 <li role="listitem">• Preview contacts instantané</li>
               </ul>
-            </div>
+            </article>
           </div>
         </section>
 
@@ -249,11 +301,13 @@ import Navigation from '../components/layouts/Navigation.astro';
             🔧 Technical Complexity & Performance Considerations
           </h3>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div>
-              <h4 class="font-semibold text-foreground mb-3 flex items-center">
-                <span class="text-lg mr-2" aria-hidden="true">⚡</span>
-                Performance Optimization
-              </h4>
+            <article>
+              <header>
+                <h4 class="font-semibold text-foreground mb-3 flex items-center">
+                  <span class="text-lg mr-2" aria-hidden="true">⚡</span>
+                  Performance Optimization
+                </h4>
+              </header>
               <ul class="text-sm text-muted-foreground space-y-1" role="list">
                 <li role="listitem">• <strong>Calendar :</strong> Virtual scrolling for large datasets</li>
                 <li role="listitem">• <strong>Combobox :</strong> Debounced search, lazy loading</li>
@@ -262,12 +316,14 @@ import Navigation from '../components/layouts/Navigation.astro';
                 <li role="listitem">• <strong>Sonner :</strong> Queue management, batching</li>
                 <li role="listitem">• <strong>Popover :</strong> Portal rendering, positioning</li>
               </ul>
-            </div>
-            <div>
-              <h4 class="font-semibold text-foreground mb-3 flex items-center">
-                <span class="text-lg mr-2" aria-hidden="true">♿</span>
-                Accessibility Excellence
-              </h4>
+            </article>
+            <article>
+              <header>
+                <h4 class="font-semibold text-foreground mb-3 flex items-center">
+                  <span class="text-lg mr-2" aria-hidden="true">♿</span>
+                  Accessibility Excellence
+                </h4>
+              </header>
               <ul class="text-sm text-muted-foreground space-y-1" role="list">
                 <li role="listitem">• <strong>ARIA compliance :</strong> Full screen reader support</li>
                 <li role="listitem">• <strong>Keyboard navigation :</strong> Complex focus management</li>
@@ -276,12 +332,14 @@ import Navigation from '../components/layouts/Navigation.astro';
                 <li role="listitem">• <strong>Voice control :</strong> Voice navigation ready</li>
                 <li role="listitem">• <strong>Touch targets :</strong> Mobile accessibility</li>
               </ul>
-            </div>
-            <div>
-              <h4 class="font-semibold text-foreground mb-3 flex items-center">
-                <span class="text-lg mr-2" aria-hidden="true">🔒</span>
-                Enterprise Features
-              </h4>
+            </article>
+            <article>
+              <header>
+                <h4 class="font-semibold text-foreground mb-3 flex items-center">
+                  <span class="text-lg mr-2" aria-hidden="true">🔒</span>
+                  Enterprise Features
+                </h4>
+              </header>
               <ul class="text-sm text-muted-foreground space-y-1" role="list">
                 <li role="listitem">• <strong>Internationalization :</strong> Multi-language support</li>
                 <li role="listitem">• <strong>Time zones :</strong> Global calendar support</li>
@@ -290,7 +348,7 @@ import Navigation from '../components/layouts/Navigation.astro';
                 <li role="listitem">• <strong>Customization :</strong> Theme system integration</li>
                 <li role="listitem">• <strong>Analytics :</strong> Interaction tracking ready</li>
               </ul>
-            </div>
+            </article>
           </div>
         </section>
 
@@ -304,8 +362,10 @@ import Navigation from '../components/layouts/Navigation.astro';
             🔗 Component Integration Matrix
           </h3>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <h4 class="font-semibold text-purple-700 dark:text-purple-300 mb-3">Common Integration Patterns :</h4>
+            <article>
+              <header>
+                <h4 class="font-semibold text-purple-700 dark:text-purple-300 mb-3">Common Integration Patterns :</h4>
+              </header>
               <div class="space-y-3 text-sm">
                 <div>
                   <div class="font-medium text-purple-800 dark:text-purple-200">Calendar + Date Picker :</div>
@@ -326,9 +386,11 @@ import Navigation from '../components/layouts/Navigation.astro';
                   </p>
                 </div>
               </div>
-            </div>
-            <div>
-              <h4 class="font-semibold text-purple-700 dark:text-purple-300 mb-3">Advanced Workflows :</h4>
+            </article>
+            <article>
+              <header>
+                <h4 class="font-semibold text-purple-700 dark:text-purple-300 mb-3">Advanced Workflows :</h4>
+              </header>
               <div class="space-y-3 text-sm">
                 <div>
                   <div class="font-medium text-purple-800 dark:text-purple-200">Booking System :</div>
@@ -349,7 +411,7 @@ import Navigation from '../components/layouts/Navigation.astro';
                   </p>
                 </div>
               </div>
-            </div>
+            </article>
           </div>
         </section>
 
@@ -363,8 +425,10 @@ import Navigation from '../components/layouts/Navigation.astro';
             💼 Valeur Business - Advanced Components System
           </h3>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <h4 class="font-semibold text-blue-700 dark:text-blue-300 mb-2">Impact Utilisateur Premium :</h4>
+            <article>
+              <header>
+                <h4 class="font-semibold text-blue-700 dark:text-blue-300 mb-2">Impact Utilisateur Premium :</h4>
+              </header>
               <ul class="text-sm text-blue-600 dark:text-blue-400 space-y-1" role="list">
                 <li role="listitem">• <strong>Productivité :</strong> +75% avec Command palette (⌘K)</li>
                 <li role="listitem">• <strong>Précision :</strong> +90% sélection dates complexes</li>
@@ -372,9 +436,11 @@ import Navigation from '../components/layouts/Navigation.astro';
                 <li role="listitem">• <strong>Engagement :</strong> +45% rétention utilisateurs</li>
                 <li role="listitem">• <strong>Satisfaction :</strong> +85% expérience premium</li>
               </ul>
-            </div>
-            <div>
-              <h4 class="font-semibold text-blue-700 dark:text-blue-300 mb-2">ROI Enterprise :</h4>
+            </article>
+            <article>
+              <header>
+                <h4 class="font-semibold text-blue-700 dark:text-blue-300 mb-2">ROI Enterprise :</h4>
+              </header>
               <ul class="text-sm text-blue-600 dark:text-blue-400 space-y-1" role="list">
                 <li role="listitem">• <strong>Compétitivité :</strong> Interface niveau SaaS premium</li>
                 <li role="listitem">• <strong>Différenciation :</strong> UX supérieure concurrence</li>
@@ -382,7 +448,7 @@ import Navigation from '../components/layouts/Navigation.astro';
                 <li role="listitem">• <strong>Formation :</strong> -70% temps apprentissage</li>
                 <li role="listitem">• <strong>Support :</strong> -50% tickets complexité interface</li>
               </ul>
-            </div>
+            </article>
           </div>
         </section>
 
@@ -395,52 +461,54 @@ import Navigation from '../components/layouts/Navigation.astro';
           <h3 id="related-heading" class="text-xl font-semibold text-foreground mb-4">
             🔗 Related Component Showcases
           </h3>
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <a 
-              href="/components-showcase" 
-              class="flex items-center p-3 rounded-lg border bg-card hover:bg-accent/50 transition-colors group"
-              aria-label="View all components overview"
-            >
-              <span class="text-xl mr-3" aria-hidden="true">🧩</span>
-              <div>
-                <div class="font-medium group-hover:text-primary transition-colors">All Components</div>
-                <div class="text-xs text-muted-foreground">Complete overview</div>
-              </div>
-            </a>
-            <a 
-              href="/form-showcase" 
-              class="flex items-center p-3 rounded-lg border bg-card hover:bg-accent/50 transition-colors group"
-              aria-label="Explore form components"
-            >
-              <span class="text-xl mr-3" aria-hidden="true">📝</span>
-              <div>
-                <div class="font-medium group-hover:text-primary transition-colors">Form Components</div>
-                <div class="text-xs text-muted-foreground">Business forms</div>
-              </div>
-            </a>
-            <a 
-              href="/navigation-showcase" 
-              class="flex items-center p-3 rounded-lg border bg-card hover:bg-accent/50 transition-colors group"
-              aria-label="Explore navigation components"
-            >
-              <span class="text-xl mr-3" aria-hidden="true">🧭</span>
-              <div>
-                <div class="font-medium group-hover:text-primary transition-colors">Navigation</div>
-                <div class="text-xs text-muted-foreground">User guidance systems</div>
-              </div>
-            </a>
-            <a 
-              href="/data-display-showcase" 
-              class="flex items-center p-3 rounded-lg border bg-card hover:bg-accent/50 transition-colors group"
-              aria-label="Explore data display components"
-            >
-              <span class="text-xl mr-3" aria-hidden="true">📊</span>
-              <div>
-                <div class="font-medium group-hover:text-primary transition-colors">Data Display</div>
-                <div class="text-xs text-muted-foreground">Tables, avatars, tooltips</div>
-              </div>
-            </a>
-          </div>
+          <nav aria-label="Related component showcases">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <a 
+                href="/components-showcase" 
+                class="flex items-center p-3 rounded-lg border bg-card hover:bg-accent/50 transition-colors group"
+                aria-describedby="all-components-desc"
+              >
+                <span class="text-xl mr-3" aria-hidden="true">🧩</span>
+                <div>
+                  <div class="font-medium group-hover:text-primary transition-colors">All Components</div>
+                  <div id="all-components-desc" class="text-xs text-muted-foreground">Complete overview</div>
+                </div>
+              </a>
+              <a 
+                href="/form-showcase" 
+                class="flex items-center p-3 rounded-lg border bg-card hover:bg-accent/50 transition-colors group"
+                aria-describedby="form-components-desc"
+              >
+                <span class="text-xl mr-3" aria-hidden="true">📝</span>
+                <div>
+                  <div class="font-medium group-hover:text-primary transition-colors">Form Components</div>
+                  <div id="form-components-desc" class="text-xs text-muted-foreground">Business forms</div>
+                </div>
+              </a>
+              <a 
+                href="/navigation-showcase" 
+                class="flex items-center p-3 rounded-lg border bg-card hover:bg-accent/50 transition-colors group"
+                aria-describedby="navigation-desc"
+              >
+                <span class="text-xl mr-3" aria-hidden="true">🧭</span>
+                <div>
+                  <div class="font-medium group-hover:text-primary transition-colors">Navigation</div>
+                  <div id="navigation-desc" class="text-xs text-muted-foreground">User guidance systems</div>
+                </div>
+              </a>
+              <a 
+                href="/data-display-showcase" 
+                class="flex items-center p-3 rounded-lg border bg-card hover:bg-accent/50 transition-colors group"
+                aria-describedby="data-display-desc"
+              >
+                <span class="text-xl mr-3" aria-hidden="true">📊</span>
+                <div>
+                  <div class="font-medium group-hover:text-primary transition-colors">Data Display</div>
+                  <div id="data-display-desc" class="text-xs text-muted-foreground">Tables, avatars, tooltips</div>
+                </div>
+              </a>
+            </div>
+          </nav>
         </section>
 
         <!-- Navigation  -->

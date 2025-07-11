@@ -7,8 +7,35 @@ import DarkModeToggle from '../components/islands/DarkModeToggle.tsx';
 import Navigation from '../components/layouts/Navigation.astro';
 ---
 
-<Layout title="Data Display - Professional Information Presentation">
-  <main role="main">
+<Layout 
+  title="Data Display - Professional Information Presentation"
+	description="Explore our data display components for professional information architecture. Includes tables, avatars, tooltips, and accordions for modern web design."
+  currentPage="data-display-showcase"
+  headerVariant="default"
+  footerVariant="business"
+	
+	stickyBehavior="always-visible"
+	showScrollIndicator={false}
+	scrollThreshold={50}
+
+	keywords={[
+    'data display components',
+    'information architecture',
+    'professional web design',
+    'data presentation',
+    'web components',
+    'UI components'
+  ]}
+>
+  <!-- Skip Links for Accessibility -->
+  <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-md focus:shadow-lg">
+    Skip to main content
+  </a>
+  <a href="#interactive-demos" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-32 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-md focus:shadow-lg">
+    Skip to interactive demos
+  </a>
+
+  <main role="main" id="main-content">
     <section class="py-20 min-h-screen" aria-labelledby="main-heading">
       <div class="container mx-auto px-4 max-w-6xl">
         
@@ -26,37 +53,47 @@ import Navigation from '../components/layouts/Navigation.astro';
         </header>
 
         <!-- Data Display Components Overview -->
-        <section 
+        <article 
           class="bg-card border border-border rounded-lg p-6 mb-12"
           aria-labelledby="components-heading"
           role="region"
         >
-          <h2 id="components-heading" class="text-xl font-semibold text-card-foreground mb-4">
-            📊 Data Display Component System - Information Architecture
-          </h2>
+          <header>
+            <h2 id="components-heading" class="text-xl font-semibold text-card-foreground mb-4">
+              📊 Data Display Component System - Information Architecture
+            </h2>
+          </header>
           <div class="grid grid-cols-2 md:grid-cols-4 gap-4" role="list" aria-label="Data display components status">
             <div class="flex items-center gap-2" role="listitem">
               <span class="w-3 h-3 bg-green-500 rounded-full" aria-hidden="true"></span>
+              <span class="sr-only">Table component: </span>
               <span class="font-medium text-sm">Table</span>
               <span class="text-xs text-muted-foreground">✅</span>
+              <span class="sr-only">installed and ready for use</span>
             </div>
             <div class="flex items-center gap-2" role="listitem">
               <span class="w-3 h-3 bg-green-500 rounded-full" aria-hidden="true"></span>
+              <span class="sr-only">Avatar component: </span>
               <span class="font-medium text-sm">Avatar</span>
               <span class="text-xs text-muted-foreground">✅</span>
+              <span class="sr-only">installed and ready for use</span>
             </div>
             <div class="flex items-center gap-2" role="listitem">
               <span class="w-3 h-3 bg-green-500 rounded-full" aria-hidden="true"></span>
+              <span class="sr-only">Tooltip component: </span>
               <span class="font-medium text-sm">Tooltip</span>
               <span class="text-xs text-muted-foreground">✅</span>
+              <span class="sr-only">installed and ready for use</span>
             </div>
             <div class="flex items-center gap-2" role="listitem">
               <span class="w-3 h-3 bg-green-500 rounded-full" aria-hidden="true"></span>
+              <span class="sr-only">Accordion component: </span>
               <span class="font-medium text-sm">Accordion</span>
               <span class="text-xs text-muted-foreground">✅</span>
+              <span class="sr-only">installed and ready for use</span>
             </div>
           </div>
-          <div 
+          <footer 
             class="mt-4 bg-green-50 dark:bg-green-950 border border-green-200 dark:border-green-800 rounded p-3"
             role="note"
             aria-labelledby="objective-text"
@@ -64,8 +101,8 @@ import Navigation from '../components/layouts/Navigation.astro';
             <p id="objective-text" class="text-sm text-green-700 dark:text-green-300">
               <strong>✅ Complete Data Display System :</strong> 4 components intégrés pour présenter l'information de manière professionnelle et accessible
             </p>
-          </div>
-        </section>
+          </footer>
+        </article>
 
         <!-- Business Use Cases Overview -->
         <section 
@@ -76,11 +113,11 @@ import Navigation from '../components/layouts/Navigation.astro';
           <h2 id="use-cases-heading" class="sr-only">Business use cases for data display components</h2>
           
           <!-- Structured Data Presentation -->
-          <div class="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/20 dark:to-indigo-950/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
-            <div class="flex items-center mb-3">
+          <article class="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/20 dark:to-indigo-950/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+            <header class="flex items-center mb-3">
               <span class="text-2xl mr-3" aria-hidden="true">📋</span>
               <h3 class="text-lg font-semibold text-blue-800 dark:text-blue-200">Structured Data</h3>
-            </div>
+            </header>
             <p class="text-sm text-blue-600 dark:text-blue-400 mb-3">
               Présentation organisée de données complexes
             </p>
@@ -89,14 +126,14 @@ import Navigation from '../components/layouts/Navigation.astro';
               <li role="listitem">• <strong>Avatar :</strong> Profils utilisateurs, équipes</li>
               <li role="listitem">• <strong>Tooltip :</strong> Infos détaillées au survol</li>
             </ul>
-          </div>
+          </article>
 
           <!-- Information Architecture -->
-          <div class="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/20 dark:to-emerald-950/20 border border-green-200 dark:border-green-800 rounded-lg p-4">
-            <div class="flex items-center mb-3">
+          <article class="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/20 dark:to-emerald-950/20 border border-green-200 dark:border-green-800 rounded-lg p-4">
+            <header class="flex items-center mb-3">
               <span class="text-2xl mr-3" aria-hidden="true">🗂️</span>
               <h3 class="text-lg font-semibold text-green-800 dark:text-green-200">Content Organization</h3>
-            </div>
+            </header>
             <p class="text-sm text-green-600 dark:text-green-400 mb-3">
               Organisation hiérarchique du contenu
             </p>
@@ -105,11 +142,11 @@ import Navigation from '../components/layouts/Navigation.astro';
               <li role="listitem">• <strong>Table :</strong> Comparaisons, dashboards, rapports</li>
               <li role="listitem">• <strong>Tooltip :</strong> Aide contextuelle, définitions</li>
             </ul>
-          </div>
+          </article>
         </section>
 
         <!-- Démonstration interactive des composants data display -->
-        <section aria-labelledby="demo-heading" role="region" class="mb-12">
+        <section aria-labelledby="demo-heading" role="region" class="mb-12" id="interactive-demos">
           <h2 id="demo-heading" class="text-2xl font-semibold text-foreground mb-6">
             ⚡ Interactive Data Display Demonstrations
           </h2>
@@ -128,11 +165,13 @@ import Navigation from '../components/layouts/Navigation.astro';
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             
             <!-- Customer Management System -->
-            <div>
-              <h4 class="font-semibold text-foreground mb-3 flex items-center">
-                <span class="text-lg mr-2" aria-hidden="true">👥</span>
-                Customer Management (CRM)
-              </h4>
+            <article>
+              <header>
+                <h4 class="font-semibold text-foreground mb-3 flex items-center">
+                  <span class="text-lg mr-2" aria-hidden="true">👥</span>
+                  Customer Management (CRM)
+                </h4>
+              </header>
               <div class="bg-card border rounded p-3 text-sm font-mono mb-3">
                 <div class="text-muted-foreground">// CRM customer list interface</div>
                 <div>&lt;Table&gt; Customer data with actions</div>
@@ -146,14 +185,16 @@ import Navigation from '../components/layouts/Navigation.astro';
                 <li role="listitem">• Tooltips pour détails contact</li>
                 <li role="listitem">• Accordéons pour historique achats</li>
               </ul>
-            </div>
+            </article>
 
             <!-- Product Catalog -->
-            <div>
-              <h4 class="font-semibold text-foreground mb-3 flex items-center">
-                <span class="text-lg mr-2" aria-hidden="true">🛍️</span>
-                Product Catalog & Inventory
-              </h4>
+            <article>
+              <header>
+                <h4 class="font-semibold text-foreground mb-3 flex items-center">
+                  <span class="text-lg mr-2" aria-hidden="true">🛍️</span>
+                  Product Catalog & Inventory
+                </h4>
+              </header>
               <div class="bg-card border rounded p-3 text-sm font-mono mb-3">
                 <div class="text-muted-foreground">// E-commerce product management</div>
                 <div>&lt;Table&gt; Product list with stock levels</div>
@@ -167,14 +208,16 @@ import Navigation from '../components/layouts/Navigation.astro';
                 <li role="listitem">• Spécifications au survol</li>
                 <li role="listitem">• Descriptions complètes pliables</li>
               </ul>
-            </div>
+            </article>
 
             <!-- Knowledge Base -->
-            <div>
-              <h4 class="font-semibold text-foreground mb-3 flex items-center">
-                <span class="text-lg mr-2" aria-hidden="true">📚</span>
-                Knowledge Base & Support
-              </h4>
+            <article>
+              <header>
+                <h4 class="font-semibold text-foreground mb-3 flex items-center">
+                  <span class="text-lg mr-2" aria-hidden="true">📚</span>
+                  Knowledge Base & Support
+                </h4>
+              </header>
               <div class="bg-card border rounded p-3 text-sm font-mono mb-3">
                 <div class="text-muted-foreground">// Help center organization</div>
                 <div>&lt;Accordion&gt; FAQ categories</div>
@@ -188,14 +231,16 @@ import Navigation from '../components/layouts/Navigation.astro';
                 <li role="listitem">• Profils auteurs expertise</li>
                 <li role="listitem">• Notes et feedback au survol</li>
               </ul>
-            </div>
+            </article>
 
             <!-- Team Management -->
-            <div>
-              <h4 class="font-semibold text-foreground mb-3 flex items-center">
-                <span class="text-lg mr-2" aria-hidden="true">🏢</span>
-                Team & Project Management
-              </h4>
+            <article>
+              <header>
+                <h4 class="font-semibold text-foreground mb-3 flex items-center">
+                  <span class="text-lg mr-2" aria-hidden="true">🏢</span>
+                  Team & Project Management
+                </h4>
+              </header>
               <div class="bg-card border rounded p-3 text-sm font-mono mb-3">
                 <div class="text-muted-foreground">// Project dashboard interface</div>
                 <div>&lt;Table&gt; Task list with assignments</div>
@@ -209,7 +254,7 @@ import Navigation from '../components/layouts/Navigation.astro';
                 <li role="listitem">• Détails tâches en preview</li>
                 <li role="listitem">• Phases projet organisées</li>
               </ul>
-            </div>
+            </article>
           </div>
         </section>
 
@@ -223,11 +268,13 @@ import Navigation from '../components/layouts/Navigation.astro';
             🎯 Data Table Best Practices for Business
           </h3>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div>
-              <h4 class="font-semibold text-foreground mb-3 flex items-center">
-                <span class="text-lg mr-2" aria-hidden="true">⚡</span>
-                Performance
-              </h4>
+            <article>
+              <header>
+                <h4 class="font-semibold text-foreground mb-3 flex items-center">
+                  <span class="text-lg mr-2" aria-hidden="true">⚡</span>
+                  Performance
+                </h4>
+              </header>
               <ul class="text-sm text-muted-foreground space-y-1" role="list">
                 <li role="listitem">• <strong>Pagination :</strong> Limite 50-100 lignes par page</li>
                 <li role="listitem">• <strong>Virtual scroll :</strong> Pour très grandes listes</li>
@@ -235,12 +282,14 @@ import Navigation from '../components/layouts/Navigation.astro';
                 <li role="listitem">• <strong>Search :</strong> Filtrage côté serveur</li>
                 <li role="listitem">• <strong>Sorting :</strong> Colonnes triables essentielles</li>
               </ul>
-            </div>
-            <div>
-              <h4 class="font-semibold text-foreground mb-3 flex items-center">
-                <span class="text-lg mr-2" aria-hidden="true">♿</span>
-                Accessibility
-              </h4>
+            </article>
+            <article>
+              <header>
+                <h4 class="font-semibold text-foreground mb-3 flex items-center">
+                  <span class="text-lg mr-2" aria-hidden="true">♿</span>
+                  Accessibility
+                </h4>
+              </header>
               <ul class="text-sm text-muted-foreground space-y-1" role="list">
                 <li role="listitem">• <strong>Semantic HTML :</strong> Structure table proper</li>
                 <li role="listitem">• <strong>ARIA labels :</strong> Description colonnes</li>
@@ -248,12 +297,14 @@ import Navigation from '../components/layouts/Navigation.astro';
                 <li role="listitem">• <strong>Screen readers :</strong> Row/column headers</li>
                 <li role="listitem">• <strong>Focus visible :</strong> Navigation claire</li>
               </ul>
-            </div>
-            <div>
-              <h4 class="font-semibold text-foreground mb-3 flex items-center">
-                <span class="text-lg mr-2" aria-hidden="true">📱</span>
-                Responsive Design
-              </h4>
+            </article>
+            <article>
+              <header>
+                <h4 class="font-semibold text-foreground mb-3 flex items-center">
+                  <span class="text-lg mr-2" aria-hidden="true">📱</span>
+                  Responsive Design
+                </h4>
+              </header>
               <ul class="text-sm text-muted-foreground space-y-1" role="list">
                 <li role="listitem">• <strong>Mobile first :</strong> Colonnes prioritaires visible</li>
                 <li role="listitem">• <strong>Card layout :</strong> Tables devient cards mobile</li>
@@ -261,7 +312,7 @@ import Navigation from '../components/layouts/Navigation.astro';
                 <li role="listitem">• <strong>Sticky headers :</strong> Orientation maintenue</li>
                 <li role="listitem">• <strong>Compact mode :</strong> Espacement adaptatif</li>
               </ul>
-            </div>
+            </article>
           </div>
         </section>
 
@@ -275,8 +326,10 @@ import Navigation from '../components/layouts/Navigation.astro';
             🔧 Technical Implementation & Features
           </h3>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <h4 class="font-semibold text-orange-700 dark:text-orange-300 mb-3">Component Features :</h4>
+            <article>
+              <header>
+                <h4 class="font-semibold text-orange-700 dark:text-orange-300 mb-3">Component Features :</h4>
+              </header>
               <div class="space-y-3 text-sm">
                 <div>
                   <div class="font-medium text-orange-800 dark:text-orange-200">Table Component :</div>
@@ -297,9 +350,11 @@ import Navigation from '../components/layouts/Navigation.astro';
                   </ul>
                 </div>
               </div>
-            </div>
-            <div>
-              <h4 class="font-semibold text-orange-700 dark:text-orange-300 mb-3">Advanced Features :</h4>
+            </article>
+            <article>
+              <header>
+                <h4 class="font-semibold text-orange-700 dark:text-orange-300 mb-3">Advanced Features :</h4>
+              </header>
               <div class="space-y-3 text-sm">
                 <div>
                   <div class="font-medium text-orange-800 dark:text-orange-200">Tooltip Component :</div>
@@ -320,7 +375,7 @@ import Navigation from '../components/layouts/Navigation.astro';
                   </ul>
                 </div>
               </div>
-            </div>
+            </article>
           </div>
         </section>
 
@@ -334,8 +389,10 @@ import Navigation from '../components/layouts/Navigation.astro';
             💼 Valeur Business - Data Display System
           </h3>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <h4 class="font-semibold text-blue-700 dark:text-blue-300 mb-2">Impact Utilisateur :</h4>
+            <article>
+              <header>
+                <h4 class="font-semibold text-blue-700 dark:text-blue-300 mb-2">Impact Utilisateur :</h4>
+              </header>
               <ul class="text-sm text-blue-600 dark:text-blue-400 space-y-1" role="list">
                 <li role="listitem">• <strong>Lisibilité :</strong> +60% information trouvée rapidement</li>
                 <li role="listitem">• <strong>Navigation :</strong> +45% efficacité tâches complexes</li>
@@ -343,9 +400,11 @@ import Navigation from '../components/layouts/Navigation.astro';
                 <li role="listitem">• <strong>Erreurs :</strong> -50% grâce aux tooltips contextuels</li>
                 <li role="listitem">• <strong>Temps tâche :</strong> -40% avec organisation claire</li>
               </ul>
-            </div>
-            <div>
-              <h4 class="font-semibold text-blue-700 dark:text-blue-300 mb-2">ROI Développement :</h4>
+            </article>
+            <article>
+              <header>
+                <h4 class="font-semibold text-blue-700 dark:text-blue-300 mb-2">ROI Développement :</h4>
+              </header>
               <ul class="text-sm text-blue-600 dark:text-blue-400 space-y-1" role="list">
                 <li role="listitem">• <strong>Templates :</strong> Interfaces data ready-to-use</li>
                 <li role="listitem">• <strong>Consistency :</strong> Design system uniforme</li>
@@ -353,7 +412,7 @@ import Navigation from '../components/layouts/Navigation.astro';
                 <li role="listitem">• <strong>Évolutivité :</strong> Composants modulaires</li>
                 <li role="listitem">• <strong>Performance :</strong> Optimisations intégrées</li>
               </ul>
-            </div>
+            </article>
           </div>
         </section>
 
@@ -366,52 +425,54 @@ import Navigation from '../components/layouts/Navigation.astro';
           <h3 id="related-heading" class="text-xl font-semibold text-foreground mb-4">
             🔗 Related Component Showcases
           </h3>
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <a 
-              href="/components-showcase" 
-              class="flex items-center p-3 rounded-lg border bg-card hover:bg-accent/50 transition-colors group"
-              aria-label="View all components overview"
-            >
-              <span class="text-xl mr-3" aria-hidden="true">🧩</span>
-              <div>
-                <div class="font-medium group-hover:text-primary transition-colors">All Components</div>
-                <div class="text-xs text-muted-foreground">Complete overview</div>
-              </div>
-            </a>
-            <a 
-              href="/form-showcase" 
-              class="flex items-center p-3 rounded-lg border bg-card hover:bg-accent/50 transition-colors group"
-              aria-label="Explore form components"
-            >
-              <span class="text-xl mr-3" aria-hidden="true">📝</span>
-              <div>
-                <div class="font-medium group-hover:text-primary transition-colors">Form Components</div>
-                <div class="text-xs text-muted-foreground">Business forms</div>
-              </div>
-            </a>
-            <a 
-              href="/navigation-showcase" 
-              class="flex items-center p-3 rounded-lg border bg-card hover:bg-accent/50 transition-colors group"
-              aria-label="Explore navigation components"
-            >
-              <span class="text-xl mr-3" aria-hidden="true">🧭</span>
-              <div>
-                <div class="font-medium group-hover:text-primary transition-colors">Navigation</div>
-                <div class="text-xs text-muted-foreground">User guidance systems</div>
-              </div>
-            </a>
-            <a 
-              href="/advanced-showcase" 
-              class="flex items-center p-3 rounded-lg border bg-card hover:bg-accent/50 transition-colors group"
-              aria-label="Explore advanced components"
-            >
-              <span class="text-xl mr-3" aria-hidden="true">🔮</span>
-              <div>
-                <div class="font-medium group-hover:text-primary transition-colors">Advanced</div>
-                <div class="text-xs text-muted-foreground">Calendar, command, sonner</div>
-              </div>
-            </a>
-          </div>
+          <nav aria-label="Related component showcases">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <a 
+                href="/components-showcase" 
+                class="flex items-center p-3 rounded-lg border bg-card hover:bg-accent/50 transition-colors group"
+                aria-describedby="all-components-desc"
+              >
+                <span class="text-xl mr-3" aria-hidden="true">🧩</span>
+                <div>
+                  <div class="font-medium group-hover:text-primary transition-colors">All Components</div>
+                  <div id="all-components-desc" class="text-xs text-muted-foreground">Complete overview</div>
+                </div>
+              </a>
+              <a 
+                href="/form-showcase" 
+                class="flex items-center p-3 rounded-lg border bg-card hover:bg-accent/50 transition-colors group"
+                aria-describedby="form-components-desc"
+              >
+                <span class="text-xl mr-3" aria-hidden="true">📝</span>
+                <div>
+                  <div class="font-medium group-hover:text-primary transition-colors">Form Components</div>
+                  <div id="form-components-desc" class="text-xs text-muted-foreground">Business forms</div>
+                </div>
+              </a>
+              <a 
+                href="/navigation-showcase" 
+                class="flex items-center p-3 rounded-lg border bg-card hover:bg-accent/50 transition-colors group"
+                aria-describedby="navigation-desc"
+              >
+                <span class="text-xl mr-3" aria-hidden="true">🧭</span>
+                <div>
+                  <div class="font-medium group-hover:text-primary transition-colors">Navigation</div>
+                  <div id="navigation-desc" class="text-xs text-muted-foreground">User guidance systems</div>
+                </div>
+              </a>
+              <a 
+                href="/advanced-showcase" 
+                class="flex items-center p-3 rounded-lg border bg-card hover:bg-accent/50 transition-colors group"
+                aria-describedby="advanced-desc"
+              >
+                <span class="text-xl mr-3" aria-hidden="true">🔮</span>
+                <div>
+                  <div class="font-medium group-hover:text-primary transition-colors">Advanced</div>
+                  <div id="advanced-desc" class="text-xs text-muted-foreground">Calendar, command, sonner</div>
+                </div>
+              </a>
+            </div>
+          </nav>
         </section>
 
         <!-- Navigation  -->
