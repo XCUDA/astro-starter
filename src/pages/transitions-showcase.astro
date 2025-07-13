@@ -1,7 +1,7 @@
 ---
-// Smooth Transitions Showcase Page - Sprint 9 Step 5 Demo
-// Complete demonstration of animation system and micro-interactions
-// Path: src/pages/smooth-transitions-showcase.astro
+// Smooth Transitions Showcase Page - Professional Animation Demonstrations
+// Complete showcase of animation system and micro-interactions for modern web applications
+// Path: src/pages/transitions-showcase.astro
 
 import Layout from '../components/layouts/Layout.astro';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
@@ -12,25 +12,36 @@ import {
   ScrollReveal, 
   StaggeredAnimation,
   Skeleton,
-  LoadingState,
   AnimatedButton,
   HoverCard,
   ParallaxScroll,
   AnimatedCounter,
   TypewriterEffect,
-  AnimatedProgress,
-  ModalTransition
+  AnimatedProgress
 } from '../components/islands/SmoothTransitions';
+import { 
+  AnimationPlayground,
+  TypewriterPlayground,
+  CounterPlayground
+} from '../components/islands/InteractiveControls';
 ---
 
 <Layout 
-  title="Smooth Transitions Showcase - Sprint 9"
-  description="Complete demonstration of smooth animations, micro-interactions, and loading states"
+  title="Smooth Transitions Showcase"
+  description="Professional animation system demonstrations with micro-interactions and smooth transitions"
   currentPage="transitions-showcase"
   headerVariant="business"
   footerVariant="business"
   keywords={["smooth transitions, animations, micro-interactions, loading states, scroll animations"]}
 >
+  {/* Skip Links - WCAG 2.1 AA */}
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 z-50 px-4 py-2 bg-primary text-primary-foreground rounded-md">
+    Skip to main content
+  </a>
+  <a href="#interactive-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-20 z-50 px-4 py-2 bg-primary text-primary-foreground rounded-md">
+    Skip to interactive demos
+  </a>
+
   {/* <!-- Hero Section with Page Transition --> */}
   <section class="bg-gradient-to-br from-violet-500/10 via-background to-blue-500/10 py-16" role="banner" aria-labelledby="hero-title">
     <div class="container mx-auto px-4">
@@ -39,7 +50,7 @@ import {
           <div class="flex items-center justify-center space-x-2 mb-6">
             <span class="text-4xl" aria-hidden="true">✨</span>
             <Badge variant="secondary" className="text-sm font-medium">
-              Sprint 9 - Step 5 FINAL
+              Professional Animation System
             </Badge>
           </div>
           
@@ -53,8 +64,8 @@ import {
           </h1>
           
           <p class="text-xl text-muted-foreground mb-8 leading-relaxed">
-            Professional animation system with micro-interactions, loading states, 
-            and smooth transitions for modern web applications.
+            Experience our complete animation system featuring micro-interactions, loading states, 
+            and smooth transitions designed for modern web applications.
           </p>
           
           <div class="flex flex-col sm:flex-row gap-4 justify-center" role="group" aria-label="Animation exploration actions">
@@ -86,356 +97,403 @@ import {
     </div>
   </section>
 
-  <!-- Phase 2 Completion Celebration -->
-  <section class="py-8 bg-gradient-to-r from-green-500/10 to-blue-500/10" role="region" aria-labelledby="phase-completion">
+  <!-- Main Content -->
+  <main id="main-content" role="main" tabindex="-1">
+
+    <!-- Animation System Overview -->
+    <section class="py-8 bg-gradient-to-r from-primary/5 to-violet-500/5" role="region" aria-labelledby="system-overview">
+      <div class="container mx-auto px-4">
+        <ScrollReveal client:load config={{ direction: 'scale', threshold: 0.3 }}>
+          <Card className="border-primary/20 bg-card/95 backdrop-blur-sm">
+            <CardHeader>
+              <CardTitle id="system-overview" className="flex items-center space-x-2 text-primary">
+                <span aria-hidden="true">🎯</span>
+                <span>Professional Animation System</span>
+              </CardTitle>
+              <CardDescription className="text-muted-foreground text-lg">
+                A comprehensive collection of smooth transitions and interactive elements
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm" role="list" aria-label="Animation system statistics">
+                <div class="text-center" role="listitem">
+                  <AnimatedCounter client:load end={12} duration={2000} className="text-3xl font-bold text-primary mb-2" />
+                  <div class="text-muted-foreground">Animation Components</div>
+                </div>
+                <div class="text-center" role="listitem">
+                  <AnimatedCounter client:load end={25} suffix="+" duration={1500} className="text-3xl font-bold text-primary mb-2" />
+                  <div class="text-muted-foreground">Configuration Options</div>
+                </div>
+                <div class="text-center" role="listitem">
+                  <AnimatedCounter client:load end={100} suffix="%" duration={2500} className="text-3xl font-bold text-primary mb-2" />
+                  <div class="text-muted-foreground">WCAG 2.1 AA Compliant</div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </ScrollReveal>
+      </div>
+    </section>
+
+    <!-- Animation Components Grid -->
+    <section class="py-16" role="region" aria-labelledby="components-title">
+      <div class="container mx-auto px-4">
+        <ScrollReveal client:load config={{ direction: 'up', threshold: 0.2 }}>
+          <div class="text-center mb-12">
+            <h2 id="components-title" class="text-3xl font-bold text-foreground mb-4">
+              Animation Components
+            </h2>
+            <p class="text-lg text-muted-foreground max-w-3xl mx-auto">
+              Professional animation system designed for modern web applications
+              with performance optimization and accessibility in mind.
+            </p>
+          </div>
+        </ScrollReveal>
+
+        <StaggeredAnimation client:load staggerDelay={150}>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" role="list" aria-label="Available animation component types">
+            
+            <!-- Page Transitions -->
+            <div role="listitem">
+              <HoverCard client:load hoverScale={1.05} shadow={true}>
+                <Card className="hover:shadow-lg transition-all duration-300">
+                  <CardHeader className="text-center">
+                    <div class="text-3xl mb-2" aria-hidden="true">🔄</div>
+                    <CardTitle className="text-lg">Page Transitions</CardTitle>
+                    <CardDescription>
+                      Smooth entrance animations for components
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <ul class="text-sm space-y-2 text-muted-foreground" role="list" aria-label="Page transition features">
+                      <li role="listitem">• <strong>Directions:</strong> Fade, up, down, left, right, scale, rotate</li>
+                      <li role="listitem">• <strong>Timing:</strong> Configurable duration and delay</li>
+                      <li role="listitem">• <strong>Easing:</strong> Multiple easing functions</li>
+                      <li role="listitem">• <strong>Use case:</strong> Component entrances, page loads</li>
+                    </ul>
+                  </CardContent>
+                </Card>
+              </HoverCard>
+            </div>
+
+            <!-- Scroll Reveal -->
+            <div role="listitem">
+              <HoverCard client:load hoverScale={1.05} shadow={true}>
+                <Card className="hover:shadow-lg transition-all duration-300">
+                  <CardHeader className="text-center">
+                    <div class="text-3xl mb-2" aria-hidden="true">📜</div>
+                    <CardTitle className="text-lg">Scroll Reveal</CardTitle>
+                    <CardDescription>
+                      IntersectionObserver-based scroll animations
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <ul class="text-sm space-y-2 text-muted-foreground" role="list" aria-label="Scroll reveal features">
+                      <li role="listitem">• <strong>Trigger:</strong> Based on viewport intersection</li>
+                      <li role="listitem">• <strong>Threshold:</strong> Configurable visibility percentage</li>
+                      <li role="listitem">• <strong>Performance:</strong> Native API optimization</li>
+                      <li role="listitem">• <strong>Use case:</strong> Content reveals, landing pages</li>
+                    </ul>
+                  </CardContent>
+                </Card>
+              </HoverCard>
+            </div>
+
+            <!-- Loading States -->
+            <div role="listitem">
+              <HoverCard client:load hoverScale={1.05} shadow={true}>
+                <Card className="hover:shadow-lg transition-all duration-300">
+                  <CardHeader className="text-center">
+                    <div class="text-3xl mb-2" aria-hidden="true">⏳</div>
+                    <CardTitle className="text-lg">Loading States</CardTitle>
+                    <CardDescription>
+                      Skeleton screens and loading transitions
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <ul class="text-sm space-y-2 text-muted-foreground" role="list" aria-label="Loading states features">
+                      <li role="listitem">• <strong>Skeletons:</strong> Text, circular, rectangular variants</li>
+                      <li role="listitem">• <strong>Transitions:</strong> Smooth loading → content</li>
+                      <li role="listitem">• <strong>Customizable:</strong> Size, shape, animation speed</li>
+                      <li role="listitem">• <strong>Use case:</strong> Data loading, image loading</li>
+                    </ul>
+                  </CardContent>
+                </Card>
+              </HoverCard>
+            </div>
+
+            <!-- Micro-interactions -->
+            <div role="listitem">
+              <HoverCard client:load hoverScale={1.05} shadow={true}>
+                <Card className="hover:shadow-lg transition-all duration-300">
+                  <CardHeader className="text-center">
+                    <div class="text-3xl mb-2" aria-hidden="true">🎯</div>
+                    <CardTitle className="text-lg">Micro-interactions</CardTitle>
+                    <CardDescription>
+                      Animated buttons and interactive elements
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <ul class="text-sm space-y-2 text-muted-foreground" role="list" aria-label="Micro-interactions features">
+                      <li role="listitem">• <strong>Animations:</strong> Scale, bounce, shake, pulse, rotate</li>
+                      <li role="listitem">• <strong>Feedback:</strong> Visual confirmation of actions</li>
+                      <li role="listitem">• <strong>Hover effects:</strong> Scale and shadow transitions</li>
+                      <li role="listitem">• <strong>Use case:</strong> Buttons, cards, interactive elements</li>
+                    </ul>
+                  </CardContent>
+                </Card>
+              </HoverCard>
+            </div>
+
+            <!-- Scroll Effects -->
+            <div role="listitem">
+              <HoverCard client:load hoverScale={1.05} shadow={true}>
+                <Card className="hover:shadow-lg transition-all duration-300">
+                  <CardHeader className="text-center">
+                    <div class="text-3xl mb-2" aria-hidden="true">🌊</div>
+                    <CardTitle className="text-lg">Scroll Effects</CardTitle>
+                    <CardDescription>
+                      Parallax and scroll-driven animations
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <ul class="text-sm space-y-2 text-muted-foreground" role="list" aria-label="Scroll effects features">
+                      <li role="listitem">• <strong>Parallax:</strong> Configurable speed and direction</li>
+                      <li role="listitem">• <strong>Performance:</strong> RAF-optimized scroll handling</li>
+                      <li role="listitem">• <strong>Smooth:</strong> Transform-based animations</li>
+                      <li role="listitem">• <strong>Use case:</strong> Hero sections, backgrounds</li>
+                    </ul>
+                  </CardContent>
+                </Card>
+              </HoverCard>
+            </div>
+
+            <!-- Advanced Animations -->
+            <div role="listitem">
+              <HoverCard client:load hoverScale={1.05} shadow={true}>
+                <Card className="hover:shadow-lg transition-all duration-300">
+                  <CardHeader className="text-center">
+                    <div class="text-3xl mb-2" aria-hidden="true">🚀</div>
+                    <CardTitle className="text-lg">Advanced Animations</CardTitle>
+                    <CardDescription>
+                      Counters, typewriter, progress bars
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <ul class="text-sm space-y-2 text-muted-foreground" role="list" aria-label="Advanced animations features">
+                      <li role="listitem">• <strong>Counters:</strong> Animated number counting with easing</li>
+                      <li role="listitem">• <strong>Typewriter:</strong> Text typing effect with cursor</li>
+                      <li role="listitem">• <strong>Progress:</strong> Smooth progress bar animations</li>
+                      <li role="listitem">• <strong>Use case:</strong> Statistics, loading, text reveals</li>
+                    </ul>
+                  </CardContent>
+                </Card>
+              </HoverCard>
+            </div>
+
+          </div>
+        </StaggeredAnimation>
+      </div>
+    </section>
+  </main>
+
+  <!-- Interactive Demo Section -->
+  <section id="interactive-content" class="py-16 bg-muted/30" role="region" aria-labelledby="interactive-demo-title">
     <div class="container mx-auto px-4">
       <ScrollReveal client:load config={{ direction: 'scale', threshold: 0.3 }}>
-        <Card className="border-green-200 bg-green-50 dark:border-green-800 dark:bg-green-950/20">
-          <CardHeader>
-            <CardTitle id="phase-completion" className="flex items-center space-x-2 text-green-700 dark:text-green-300">
-              <span aria-hidden="true">🎉</span>
-              <span>Phase 2 - 100% COMPLETE!</span>
-            </CardTitle>
-            <CardDescription className="text-green-600 dark:text-green-400">
-              Sprint 9 Step 5 marks the completion of the entire Layout System phase
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm" role="list" aria-label="Project completion statistics">
-              <div class="text-center" role="listitem">
-                <AnimatedCounter client:load end={48} duration={2000} className="text-2xl font-bold text-green-700 dark:text-green-300" />
-                <div class="text-green-600 dark:text-green-400">Total Components</div>
-              </div>
-              <div class="text-center" role="listitem">
-                <AnimatedCounter client:load end={14} duration={1500} className="text-2xl font-bold text-green-700 dark:text-green-300" />
-                <div class="text-green-600 dark:text-green-400">Showcase Pages</div>
-              </div>
-              <div class="text-center" role="listitem">
-                <AnimatedCounter client:load end={100} suffix="%" duration={2500} className="text-2xl font-bold text-green-700 dark:text-green-300" />
-                <div class="text-green-600 dark:text-green-400">Phase 2 Progress</div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </ScrollReveal>
-    </div>
-  </section>
-
-  <!-- Animation Components Grid -->
-  <section class="py-16" role="region" aria-labelledby="components-title">
-    <div class="container mx-auto px-4">
-      <ScrollReveal client:load config={{ direction: 'up', threshold: 0.2 }}>
         <div class="text-center mb-12">
-          <h2 id="components-title" class="text-3xl font-bold text-foreground mb-4">
-            Animation Components
+          <h2 id="interactive-demo-title" class="text-3xl font-bold text-foreground mb-4">
+            Interactive Animation Studios
           </h2>
           <p class="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Professional animation system designed for modern web applications
-            with performance optimization and accessibility in mind.
+            Experiment with our animation system in real-time. Adjust parameters, preview changes, 
+            and copy the generated code for your projects.
           </p>
+          <Badge variant="secondary" className="mt-4">
+            <span class="mr-2" aria-hidden="true">🎮</span>
+            Live Playground
+          </Badge>
         </div>
       </ScrollReveal>
 
-      <StaggeredAnimation client:load staggerDelay={150}>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" role="list" aria-label="Available animation component types">
+      <div class="grid grid-cols-1 gap-12" role="list" aria-label="Interactive animation studios">
+        
+        <!-- Animation Playground -->
+        <div role="listitem">
+          <ScrollReveal client:load config={{ direction: 'up', threshold: 0.2 }}>
+            <AnimationPlayground client:load ariaLabel="Interactive animation configuration playground" />
+          </ScrollReveal>
+        </div>
+
+        <!-- Typewriter Studio -->
+        <div role="listitem">
+          <ScrollReveal client:load config={{ direction: 'up', threshold: 0.2 }}>
+            <TypewriterPlayground client:load />
+          </ScrollReveal>
+        </div>
+
+        <!-- Counter Studio -->
+        <div role="listitem">
+          <ScrollReveal client:load config={{ direction: 'up', threshold: 0.2 }}>
+            <CounterPlayground client:load />
+          </ScrollReveal>
+        </div>
+
+      </div>
+
+      <!-- Quick Demo Section -->
+      <div class="mt-16">
+        <ScrollReveal client:load config={{ direction: 'scale', threshold: 0.3 }}>
+          <h3 class="text-2xl font-bold text-foreground text-center mb-8">
+            Quick Demonstrations
+          </h3>
+        </ScrollReveal>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8" role="list" aria-label="Quick animation demonstrations">
           
-          <!-- Page Transitions -->
+          <!-- Animated Buttons Demo -->
           <div role="listitem">
-            <HoverCard client:load hoverScale={1.05} shadow={true}>
-              <Card className="hover:shadow-lg transition-all duration-300">
-                <CardHeader className="text-center">
-                  <div class="text-3xl mb-2" aria-hidden="true">🔄</div>
-                  <CardTitle className="text-lg">Page Transitions</CardTitle>
+            <ScrollReveal client:load config={{ direction: 'left', threshold: 0.3 }}>
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center space-x-2">
+                    <span aria-hidden="true">🎯</span>
+                    <span>Micro-interactions</span>
+                  </CardTitle>
                   <CardDescription>
-                    Smooth entrance animations for components
+                    Click to experience different button animations
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <ul class="text-sm space-y-2 text-muted-foreground" role="list" aria-label="Page transition features">
-                    <li role="listitem">• <strong>Directions:</strong> Fade, up, down, left, right, scale, rotate</li>
-                    <li role="listitem">• <strong>Timing:</strong> Configurable duration and delay</li>
-                    <li role="listitem">• <strong>Easing:</strong> Multiple easing functions</li>
-                    <li role="listitem">• <strong>Use case:</strong> Component entrances, page loads</li>
-                  </ul>
+                  <div class="space-y-4">
+                    <div class="flex flex-wrap gap-3" role="group" aria-label="Animated button examples">
+                      <AnimatedButton client:load variant="primary" animation="scale" aria-label="Primary button with scale animation effect">
+                        Scale Effect
+                      </AnimatedButton>
+                      <AnimatedButton client:load variant="secondary" animation="bounce" aria-label="Secondary button with bounce animation effect">
+                        Bounce Effect
+                      </AnimatedButton>
+                      <AnimatedButton client:load variant="destructive" animation="shake" aria-label="Destructive button with shake animation effect">
+                        Shake Effect
+                      </AnimatedButton>
+                      <AnimatedButton client:load variant="ghost" animation="pulse" aria-label="Ghost button with pulse animation effect">
+                        Pulse Effect
+                      </AnimatedButton>
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
-            </HoverCard>
+            </ScrollReveal>
           </div>
 
-          <!-- Scroll Reveal -->
+          <!-- Loading States Demo -->
           <div role="listitem">
-            <HoverCard client:load hoverScale={1.05} shadow={true}>
-              <Card className="hover:shadow-lg transition-all duration-300">
-                <CardHeader className="text-center">
-                  <div class="text-3xl mb-2" aria-hidden="true">📜</div>
-                  <CardTitle className="text-lg">Scroll Reveal</CardTitle>
-                  <CardDescription>
-                    IntersectionObserver-based scroll animations
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <ul class="text-sm space-y-2 text-muted-foreground" role="list" aria-label="Scroll reveal features">
-                    <li role="listitem">• <strong>Trigger:</strong> Based on viewport intersection</li>
-                    <li role="listitem">• <strong>Threshold:</strong> Configurable visibility percentage</li>
-                    <li role="listitem">• <strong>Performance:</strong> Native API optimization</li>
-                    <li role="listitem">• <strong>Use case:</strong> Content reveals, landing pages</li>
-                  </ul>
-                </CardContent>
-              </Card>
-            </HoverCard>
-          </div>
-
-          <!-- Loading States -->
-          <div role="listitem">
-            <HoverCard client:load hoverScale={1.05} shadow={true}>
-              <Card className="hover:shadow-lg transition-all duration-300">
-                <CardHeader className="text-center">
-                  <div class="text-3xl mb-2" aria-hidden="true">⏳</div>
-                  <CardTitle className="text-lg">Loading States</CardTitle>
+            <ScrollReveal client:load config={{ direction: 'right', threshold: 0.3 }}>
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center space-x-2">
+                    <span aria-hidden="true">⏳</span>
+                    <span>Loading States</span>
+                  </CardTitle>
                   <CardDescription>
                     Skeleton screens and loading transitions
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <ul class="text-sm space-y-2 text-muted-foreground" role="list" aria-label="Loading states features">
-                    <li role="listitem">• <strong>Skeletons:</strong> Text, circular, rectangular variants</li>
-                    <li role="listitem">• <strong>Transitions:</strong> Smooth loading → content</li>
-                    <li role="listitem">• <strong>Customizable:</strong> Size, shape, animation speed</li>
-                    <li role="listitem">• <strong>Use case:</strong> Data loading, image loading</li>
-                  </ul>
-                </CardContent>
-              </Card>
-            </HoverCard>
-          </div>
-
-          <!-- Micro-interactions -->
-          <div role="listitem">
-            <HoverCard client:load hoverScale={1.05} shadow={true}>
-              <Card className="hover:shadow-lg transition-all duration-300">
-                <CardHeader className="text-center">
-                  <div class="text-3xl mb-2" aria-hidden="true">🎯</div>
-                  <CardTitle className="text-lg">Micro-interactions</CardTitle>
-                  <CardDescription>
-                    Animated buttons and interactive elements
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <ul class="text-sm space-y-2 text-muted-foreground" role="list" aria-label="Micro-interactions features">
-                    <li role="listitem">• <strong>Animations:</strong> Scale, bounce, shake, pulse, rotate</li>
-                    <li role="listitem">• <strong>Feedback:</strong> Visual confirmation of actions</li>
-                    <li role="listitem">• <strong>Hover effects:</strong> Scale and shadow transitions</li>
-                    <li role="listitem">• <strong>Use case:</strong> Buttons, cards, interactive elements</li>
-                  </ul>
-                </CardContent>
-              </Card>
-            </HoverCard>
-          </div>
-
-          <!-- Scroll Effects -->
-          <div role="listitem">
-            <HoverCard client:load hoverScale={1.05} shadow={true}>
-              <Card className="hover:shadow-lg transition-all duration-300">
-                <CardHeader className="text-center">
-                  <div class="text-3xl mb-2" aria-hidden="true">🌊</div>
-                  <CardTitle className="text-lg">Scroll Effects</CardTitle>
-                  <CardDescription>
-                    Parallax and scroll-driven animations
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <ul class="text-sm space-y-2 text-muted-foreground" role="list" aria-label="Scroll effects features">
-                    <li role="listitem">• <strong>Parallax:</strong> Configurable speed and direction</li>
-                    <li role="listitem">• <strong>Performance:</strong> RAF-optimized scroll handling</li>
-                    <li role="listitem">• <strong>Smooth:</strong> Transform-based animations</li>
-                    <li role="listitem">• <strong>Use case:</strong> Hero sections, backgrounds</li>
-                  </ul>
-                </CardContent>
-              </Card>
-            </HoverCard>
-          </div>
-
-          <!-- Advanced Animations -->
-          <div role="listitem">
-            <HoverCard client:load hoverScale={1.05} shadow={true}>
-              <Card className="hover:shadow-lg transition-all duration-300">
-                <CardHeader className="text-center">
-                  <div class="text-3xl mb-2" aria-hidden="true">🚀</div>
-                  <CardTitle className="text-lg">Advanced Animations</CardTitle>
-                  <CardDescription>
-                    Counters, typewriter, progress bars
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <ul class="text-sm space-y-2 text-muted-foreground" role="list" aria-label="Advanced animations features">
-                    <li role="listitem">• <strong>Counters:</strong> Animated number counting with easing</li>
-                    <li role="listitem">• <strong>Typewriter:</strong> Text typing effect with cursor</li>
-                    <li role="listitem">• <strong>Progress:</strong> Smooth progress bar animations</li>
-                    <li role="listitem">• <strong>Use case:</strong> Statistics, loading, text reveals</li>
-                  </ul>
-                </CardContent>
-              </Card>
-            </HoverCard>
-          </div>
-
-        </div>
-      </StaggeredAnimation>
-    </div>
-  </section>
-
-  <!-- Interactive Demo Section -->
-  <section class="py-16 bg-muted/30" role="region" aria-labelledby="interactive-demo-title">
-    <div class="container mx-auto px-4">
-      <ScrollReveal client:load config={{ direction: 'scale', threshold: 0.3 }}>
-        <h2 id="interactive-demo-title" class="text-3xl font-bold text-foreground text-center mb-12">
-          Interactive Demonstrations
-        </h2>
-      </ScrollReveal>
-
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8" role="list" aria-label="Interactive animation demonstrations">
-        
-        <!-- Animated Buttons Demo -->
-        <div role="listitem">
-          <ScrollReveal client:load config={{ direction: 'left', threshold: 0.3 }}>
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center space-x-2">
-                  <span aria-hidden="true">🎯</span>
-                  <span>Animated Buttons</span>
-                </CardTitle>
-                <CardDescription>
-                  Click to experience different animation types
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div class="space-y-4">
-                  <div class="flex flex-wrap gap-3" role="group" aria-label="Animated button examples">
-                    <AnimatedButton client:load variant="primary" animation="scale" aria-label="Primary button with scale animation effect">
-                      Scale Effect
-                    </AnimatedButton>
-                    <AnimatedButton client:load variant="secondary" animation="bounce" aria-label="Secondary button with bounce animation effect">
-                      Bounce Effect
-                    </AnimatedButton>
-                    <AnimatedButton client:load variant="destructive" animation="shake" aria-label="Destructive button with shake animation effect">
-                      Shake Effect
-                    </AnimatedButton>
-                    <AnimatedButton client:load variant="ghost" animation="pulse" aria-label="Ghost button with pulse animation effect">
-                      Pulse Effect
-                    </AnimatedButton>
+                  <div class="space-y-4" role="region" aria-label="Loading skeleton examples">
+                    <div class="space-y-2">
+                      <Skeleton client:load variant="text" className="w-3/4 h-4" />
+                      <Skeleton client:load variant="text" className="w-1/2 h-4" />
+                      <Skeleton client:load variant="rectangular" className="w-full h-32" />
+                    </div>
                   </div>
-                </div>
-              </CardContent>
-            </Card>
-          </ScrollReveal>
-        </div>
+                </CardContent>
+              </Card>
+            </ScrollReveal>
+          </div>
 
-        <!-- Loading States Demo -->
-        <div role="listitem">
-          <ScrollReveal client:load config={{ direction: 'right', threshold: 0.3 }}>
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center space-x-2">
-                  <span aria-hidden="true">⏳</span>
-                  <span>Loading States</span>
-                </CardTitle>
-                <CardDescription>
-                  Skeleton screens and loading transitions
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div class="space-y-4" role="region" aria-label="Loading skeleton examples">
-                  <div class="space-y-2">
-                    <Skeleton client:load variant="text" className="w-3/4 h-4" />
-                    <Skeleton client:load variant="text" className="w-1/2 h-4" />
-                    <Skeleton client:load variant="rectangular" className="w-full h-32" />
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </ScrollReveal>
-        </div>
-
-        <!-- Progress Bars Demo -->
-        <div role="listitem">
-          <ScrollReveal client:load config={{ direction: 'up', threshold: 0.3 }}>
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center space-x-2">
-                  <span aria-hidden="true">📊</span>
-                  <span>Animated Progress</span>
-                </CardTitle>
-                <CardDescription>
-                  Smooth progress bar animations
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div class="space-y-6" role="region" aria-label="Animated progress bar examples">
-                  <AnimatedProgress 
-                    client:load 
-                    value={85} 
-                    showLabel={true}
-                    color="hsl(var(--primary))"
-                    animationDuration={2000}
-                    aria-label="Progress bar showing 85% completion"
-                  />
-                  <AnimatedProgress 
-                    client:load 
-                    value={65} 
-                    showLabel={true}
-                    color="hsl(142, 76%, 36%)"
-                    animationDuration={1500}
-                    aria-label="Progress bar showing 65% completion"
-                  />
-                  <AnimatedProgress 
-                    client:load 
-                    value={92} 
-                    showLabel={true}
-                    color="hsl(221, 83%, 53%)"
-                    animationDuration={2500}
-                    aria-label="Progress bar showing 92% completion"
-                  />
-                </div>
-              </CardContent>
-            </Card>
-          </ScrollReveal>
-        </div>
-
-        <!-- Typewriter Demo -->
-        <div role="listitem">
-          <ScrollReveal client:load config={{ direction: 'up', threshold: 0.3 }}>
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center space-x-2">
-                  <span aria-hidden="true">⌨️</span>
-                  <span>Typewriter Effect</span>
-                </CardTitle>
-                <CardDescription>
-                  Animated text typing with cursor
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div class="space-y-4" role="region" aria-label="Typewriter text animation examples">
-                  <div class="text-lg font-medium">
-                    <TypewriterEffect 
-                      client:load
-                      text="Modern web applications deserve smooth animations..."
-                      speed={60}
-                      delay={1000}
+          <!-- Progress Bars Demo -->
+          <div role="listitem">
+            <ScrollReveal client:load config={{ direction: 'up', threshold: 0.3 }}>
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center space-x-2">
+                    <span aria-hidden="true">📊</span>
+                    <span>Animated Progress</span>
+                  </CardTitle>
+                  <CardDescription>
+                    Smooth progress bar animations
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div class="space-y-6" role="region" aria-label="Animated progress bar examples">
+                    <AnimatedProgress 
+                      client:load 
+                      value={85} 
+                      showLabel={true}
+                      color="hsl(var(--primary))"
+                      animationDuration={2000}
+                      aria-label="Progress bar showing 85% completion"
+                    />
+                    <AnimatedProgress 
+                      client:load 
+                      value={65} 
+                      showLabel={true}
+                      color="hsl(142, 76%, 36%)"
+                      animationDuration={1500}
+                      aria-label="Progress bar showing 65% completion"
+                    />
+                    <AnimatedProgress 
+                      client:load 
+                      value={92} 
+                      showLabel={true}
+                      color="hsl(221, 83%, 53%)"
+                      animationDuration={2500}
+                      aria-label="Progress bar showing 92% completion"
                     />
                   </div>
-                  <div class="text-base text-muted-foreground">
-                    <TypewriterEffect 
-                      client:load
-                      text="...that enhance user experience without compromising performance."
-                      speed={40}
-                      delay={4000}
-                    />
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </ScrollReveal>
-        </div>
+                </CardContent>
+              </Card>
+            </ScrollReveal>
+          </div>
 
+          <!-- Scroll Animation Demo -->
+          <div role="listitem">
+            <ScrollReveal client:load config={{ direction: 'up', threshold: 0.3 }}>
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center space-x-2">
+                    <span aria-hidden="true">📜</span>
+                    <span>Scroll Reveals</span>
+                  </CardTitle>
+                  <CardDescription>
+                    Elements animate as they enter the viewport
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div class="space-y-4" role="region" aria-label="Scroll reveal animation examples">
+                    <ScrollReveal client:load config={{ direction: 'left', threshold: 0.8 }}>
+                      <div class="p-4 bg-primary/10 rounded-lg border">
+                        <p class="text-sm font-medium">Slides in from left</p>
+                      </div>
+                    </ScrollReveal>
+                    <ScrollReveal client:load config={{ direction: 'right', threshold: 0.8, delay: 100 }}>
+                      <div class="p-4 bg-violet-500/10 rounded-lg border">
+                        <p class="text-sm font-medium">Slides in from right</p>
+                      </div>
+                    </ScrollReveal>
+                    <ScrollReveal client:load config={{ direction: 'scale', threshold: 0.8, delay: 200 }}>
+                      <div class="p-4 bg-green-500/10 rounded-lg border">
+                        <p class="text-sm font-medium">Scales in smoothly</p>
+                      </div>
+                    </ScrollReveal>
+                  </div>
+                </CardContent>
+              </Card>
+            </ScrollReveal>
+          </div>
+
+        </div>
       </div>
     </div>
   </section>
@@ -621,28 +679,33 @@ import {
           </ScrollReveal>
         </div>
 
-        <!-- Loading State -->
+        <!-- Advanced Usage -->
         <div role="listitem">
           <ScrollReveal client:load config={{ direction: 'up', threshold: 0.3 }}>
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center space-x-2">
-                  <span aria-hidden="true">⏳</span>
-                  <span>Loading State</span>
+                  <span aria-hidden="true">🚀</span>
+                  <span>Advanced Usage</span>
                 </CardTitle>
                 <CardDescription>
-                  Smooth loading transitions
+                  Complex animation combinations
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <div class="bg-muted p-4 rounded-lg text-sm font-mono" role="code" aria-label="Loading state implementation code example">
-                  {`<LoadingState
-  isLoading={isLoading}
-  skeleton={<CustomSkeleton />}
-  fadeTransition={true}
->
-  <DataContent />
-</LoadingState>`}
+                <div class="bg-muted p-4 rounded-lg text-sm font-mono" role="code" aria-label="Advanced animation implementation code example">
+                  {`<AnimatedCounter
+  end={1000}
+  duration={2000}
+  prefix="$"
+  suffix="+"
+/>
+
+<TypewriterEffect
+  text="Your success story..."
+  speed={50}
+  delay={1000}
+/>`}
                 </div>
               </CardContent>
             </Card>
@@ -650,62 +713,6 @@ import {
         </div>
 
       </div>
-    </div>
-  </section>
-
-  <!-- Final Achievement Banner -->
-  <section class="py-16" role="region" aria-labelledby="final-achievement">
-    <div class="container mx-auto px-4">
-      <ScrollReveal client:load config={{ direction: 'scale', threshold: 0.1, duration: 1000 }}>
-        <Card className="border-primary/20 bg-gradient-to-r from-primary/5 to-violet-500/5">
-          <CardHeader>
-            <CardTitle id="final-achievement" className="text-3xl text-center">🎊 Phase 2 Complete - 100% Achievement!</CardTitle>
-            <CardDescription className="text-center text-lg">
-              Sprint 9 Step 5 marks the completion of the entire Layout System phase
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div class="text-center space-y-4">
-              <div class="grid grid-cols-1 md:grid-cols-4 gap-6" role="list" aria-label="Final project achievement statistics">
-                <div class="text-center" role="listitem">
-                  <div class="text-4xl font-bold text-primary mb-2">
-                    <AnimatedCounter client:load end={9} duration={1500} />
-                  </div>
-                  <div class="text-sm text-muted-foreground">Completed Sprints</div>
-                </div>
-                <div class="text-center" role="listitem">
-                  <div class="text-4xl font-bold text-primary mb-2">
-                    <AnimatedCounter client:load end={48} duration={2000} />
-                  </div>
-                  <div class="text-sm text-muted-foreground">Total Components</div>
-                </div>
-                <div class="text-center" role="listitem">
-                  <div class="text-4xl font-bold text-primary mb-2">
-                    <AnimatedCounter client:load end={14} duration={1800} />
-                  </div>
-                  <div class="text-sm text-muted-foreground">Showcase Pages</div>
-                </div>
-                <div class="text-center" role="listitem">
-                  <div class="text-4xl font-bold text-primary mb-2">
-                    <AnimatedCounter client:load end={100} suffix="%" duration={2500} />
-                  </div>
-                  <div class="text-sm text-muted-foreground">Phase 2 Complete</div>
-                </div>
-              </div>
-              
-              <div class="pt-6">
-                <TypewriterEffect 
-                  client:load
-                  text="Ready for Phase 3: Advanced Features & Beyond! 🚀"
-                  speed={60}
-                  delay={3000}
-                  className="text-xl font-medium text-primary"
-                />
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </ScrollReveal>
     </div>
   </section>
 

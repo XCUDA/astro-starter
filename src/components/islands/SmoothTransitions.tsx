@@ -1,4 +1,4 @@
-// SmoothTransitions.tsx - Professional Animation System (Sprint 9 - Step 5)
+// SmoothTransitions.tsx - Professional Animation System (Sprint 9 - Step 5) - PHASE 6+ STANDARDS
 // Provides smooth transitions, micro-interactions, and loading states for modern applications
 // Path: src/components/islands/SmoothTransitions.tsx
 
@@ -19,7 +19,60 @@ export interface ScrollRevealConfig extends AnimationConfig {
   triggerOnce?: boolean;
 }
 
-// Page Transition Component
+// ===== PHASE 6+ ACCESSIBILITY HOOKS =====
+
+// Live region announcer hook for screen readers
+function useAnnouncer() {
+  const announceRef = useRef<HTMLDivElement>(null);
+
+  const announceChange = useCallback((message: string, priority: 'polite' | 'assertive' = 'polite') => {
+    if (announceRef.current) {
+      announceRef.current.setAttribute('aria-live', priority);
+      announceRef.current.textContent = message;
+      
+      // Clear after announcement to allow repeat announcements
+      setTimeout(() => {
+        if (announceRef.current) {
+          announceRef.current.textContent = '';
+        }
+      }, 1000);
+    }
+  }, []);
+
+  return { announceRef, announceChange };
+}
+
+// Keyboard navigation hook for interactive components
+function useKeyboardNavigation(onKeyDown?: (e: React.KeyboardEvent) => void) {
+  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
+    // Standard navigation shortcuts
+    switch (e.key) {
+      case 'Enter':
+      case ' ':
+        e.preventDefault();
+        if (e.currentTarget instanceof HTMLElement) {
+          e.currentTarget.click();
+        }
+        break;
+      case 'Escape':
+        if (e.currentTarget instanceof HTMLElement) {
+          e.currentTarget.blur();
+        }
+        break;
+      default:
+        // Custom handler for component-specific navigation
+        if (onKeyDown) {
+          onKeyDown(e);
+        }
+        break;
+    }
+  }, [onKeyDown]);
+
+  return { handleKeyDown };
+}
+
+// ===== PAGE TRANSITION COMPONENT =====
+
 export interface PageTransitionProps {
   children: React.ReactNode;
   className?: string;
@@ -34,12 +87,16 @@ export function PageTransition({
   ariaLabel
 }: PageTransitionProps) {
   const [isVisible, setIsVisible] = useState(false);
+  const { announceRef, announceChange } = useAnnouncer();
 
   useEffect(() => {
     // Trigger entrance animation
-    const timer = setTimeout(() => setIsVisible(true), config.delay || 0);
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+      announceChange(`Page section loaded with ${config.direction} animation`);
+    }, config.delay || 0);
     return () => clearTimeout(timer);
-  }, [config.delay]);
+  }, [config.delay, config.direction, announceChange]);
 
   const getTransitionClasses = () => {
     const { duration = 300, easing = 'ease-out', direction = 'fade' } = config;
@@ -60,20 +117,27 @@ export function PageTransition({
   };
 
   return (
-    <div 
-      className={cn(getTransitionClasses(), className)}
-      aria-label={ariaLabel}
-      role={ariaLabel ? "region" : undefined}
-    >
-      {children}
-    </div>
+    <>
+      {/* PHASE 6+ STANDARD: Live region for screen reader announcements */}
+      <div ref={announceRef} className="sr-only" aria-live="polite" />
+      
+      <div 
+        className={cn(getTransitionClasses(), className)}
+        aria-label={ariaLabel}
+        role={ariaLabel ? "region" : undefined}
+      >
+        {children}
+      </div>
+    </>
   );
 }
 
-// Scroll Reveal Animation Hook - FIXED: Changed HTMLElement to HTMLDivElement
+// ===== SCROLL REVEAL ANIMATION HOOK =====
+
 export function useScrollReveal(config: ScrollRevealConfig = {}) {
   const [isVisible, setIsVisible] = useState(false);
-  const elementRef = useRef<HTMLDivElement>(null); // ✅ FIXED: HTMLDivElement instead of HTMLElement
+  const elementRef = useRef<HTMLDivElement>(null);
+  const { announceChange } = useAnnouncer();
 
   useEffect(() => {
     const element = elementRef.current;
@@ -83,6 +147,8 @@ export function useScrollReveal(config: ScrollRevealConfig = {}) {
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
+          announceChange(`Content revealed with ${config.direction || 'fade'} animation`);
+          
           if (config.triggerOnce !== false) {
             observer.unobserve(element);
           }
@@ -98,12 +164,13 @@ export function useScrollReveal(config: ScrollRevealConfig = {}) {
 
     observer.observe(element);
     return () => observer.disconnect();
-  }, [config]);
+  }, [config, announceChange]);
 
   return { isVisible, elementRef };
 }
 
-// Scroll Reveal Component
+// ===== SCROLL REVEAL COMPONENT =====
+
 export interface ScrollRevealProps {
   children: React.ReactNode;
   className?: string;
@@ -118,6 +185,7 @@ export function ScrollReveal({
   ariaLabel
 }: ScrollRevealProps) {
   const { isVisible, elementRef } = useScrollReveal(config);
+  const { announceRef, announceChange } = useAnnouncer();
 
   const getAnimationClasses = () => {
     const { direction = 'up', duration = 600, easing = 'ease-out' } = config;
@@ -138,18 +206,24 @@ export function ScrollReveal({
   };
 
   return (
-    <div 
-      ref={elementRef} 
-      className={cn(getAnimationClasses(), className)}
-      aria-label={ariaLabel}
-      role={ariaLabel ? "region" : undefined}
-    >
-      {children}
-    </div>
+    <>
+      {/* PHASE 6+ STANDARD: Live region for screen reader announcements */}
+      <div ref={announceRef} className="sr-only" aria-live="polite" />
+      
+      <div 
+        ref={elementRef} 
+        className={cn(getAnimationClasses(), className)}
+        aria-label={ariaLabel}
+        role={ariaLabel ? "region" : undefined}
+      >
+        {children}
+      </div>
+    </>
   );
 }
 
-// Staggered Animation Container
+// ===== STAGGERED ANIMATION CONTAINER =====
+
 export interface StaggeredAnimationProps {
   children: React.ReactNode;
   staggerDelay?: number;
@@ -165,32 +239,50 @@ export function StaggeredAnimation({
   config = { direction: 'up', duration: 400 },
   ariaLabel
 }: StaggeredAnimationProps) {
+  const { announceRef, announceChange } = useAnnouncer();
+  const { handleKeyDown } = useKeyboardNavigation();
+  
   // Convert children to array to handle both single and multiple children
   const childrenArray = React.Children.toArray(children);
   
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      announceChange(`Staggered animation started for ${childrenArray.length} items`);
+    }, 500);
+    return () => clearTimeout(timer);
+  }, [childrenArray.length, announceChange]);
+  
   return (
-    <div 
-      className={className}
-      aria-label={ariaLabel}
-      role={ariaLabel ? "group" : undefined}
-    >
-      {childrenArray.map((child, index) => (
-        <PageTransition
-          key={index}
-          config={{
-            ...config,
-            delay: index * staggerDelay
-          }}
-          ariaLabel={`Animation item ${index + 1} of ${childrenArray.length}`}
-        >
-          {child}
-        </PageTransition>
-      ))}
-    </div>
+    <>
+      {/* PHASE 6+ STANDARD: Live region for screen reader announcements */}
+      <div ref={announceRef} className="sr-only" aria-live="polite" />
+      
+      <div 
+        className={className}
+        aria-label={ariaLabel}
+        role={ariaLabel ? "group" : undefined}
+        onKeyDown={handleKeyDown}
+        tabIndex={0}
+      >
+        {childrenArray.map((child, index) => (
+          <PageTransition
+            key={index}
+            config={{
+              ...config,
+              delay: index * staggerDelay
+            }}
+            ariaLabel={`Animation item ${index + 1} of ${childrenArray.length}`}
+          >
+            {child}
+          </PageTransition>
+        ))}
+      </div>
+    </>
   );
 }
 
-// Loading Skeleton Component
+// ===== LOADING SKELETON COMPONENT =====
+
 export interface SkeletonProps {
   className?: string;
   variant?: 'text' | 'circular' | 'rectangular' | 'rounded';
@@ -223,6 +315,8 @@ export function Skeleton({
         'bg-muted',
         variantClasses[variant],
         animationClass,
+        // PHASE 6+ STANDARD: Enhanced focus indicators
+        'focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2',
         className
       )}
       style={{
@@ -232,62 +326,13 @@ export function Skeleton({
       role="status"
       aria-label={ariaLabel}
       aria-live="polite"
+      tabIndex={0}
     />
   );
 }
 
-// Loading State Component
-export interface LoadingStateProps {
-  isLoading: boolean;
-  children: React.ReactNode;
-  skeleton?: React.ReactNode;
-  className?: string;
-  fadeTransition?: boolean;
-  loadingLabel?: string;
-}
+// ===== ANIMATED BUTTON COMPONENT WITH PHASE 6+ STANDARDS =====
 
-export function LoadingState({ 
-  isLoading, 
-  children, 
-  skeleton,
-  className,
-  fadeTransition = true,
-  loadingLabel = 'Content is loading'
-}: LoadingStateProps) {
-  const defaultSkeleton = (
-    <div className="space-y-4" role="status" aria-label={loadingLabel}>
-      <Skeleton variant="text" className="w-3/4" ariaLabel="Loading title" />
-      <Skeleton variant="text" className="w-1/2" ariaLabel="Loading subtitle" />
-      <Skeleton variant="rectangular" height={200} className="w-full" ariaLabel="Loading main content" />
-    </div>
-  );
-
-  const content = isLoading ? (skeleton || defaultSkeleton) : children;
-
-  if (fadeTransition) {
-    return (
-      <PageTransition 
-        className={className}
-        config={{ direction: 'fade', duration: 300 }}
-        ariaLabel={isLoading ? loadingLabel : 'Content loaded'}
-      >
-        {content}
-      </PageTransition>
-    );
-  }
-
-  return (
-    <div 
-      className={className}
-      aria-live="polite"
-      aria-busy={isLoading}
-    >
-      {content}
-    </div>
-  );
-}
-
-// Micro-interaction Button Component
 export interface AnimatedButtonProps {
   children: React.ReactNode;
   onClick?: () => void;
@@ -310,15 +355,31 @@ export function AnimatedButton({
   ariaLabel
 }: AnimatedButtonProps) {
   const [isAnimating, setIsAnimating] = useState(false);
+  const [focusVisible, setFocusVisible] = useState(false);
+  const { announceRef, announceChange } = useAnnouncer();
+  const { handleKeyDown } = useKeyboardNavigation();
 
   const handleClick = () => {
     if (disabled) return;
     
     setIsAnimating(true);
+    announceChange(`${animation} animation triggered`, 'assertive');
+    
     setTimeout(() => setIsAnimating(false), 200);
     
     if (onClick) onClick();
   };
+
+  // PHASE 6+ STANDARD: Enhanced keyboard support
+  const handleButtonKeyDown = useCallback((e: React.KeyboardEvent) => {
+    handleKeyDown(e);
+    
+    // Animation shortcuts
+    if ((e.key === 'Enter' || e.key === ' ') && !disabled) {
+      e.preventDefault();
+      handleClick();
+    }
+  }, [handleKeyDown, disabled]);
 
   const getVariantClasses = () => {
     const variants = {
@@ -354,29 +415,47 @@ export function AnimatedButton({
   };
 
   return (
-    <button
-      onClick={handleClick}
-      disabled={disabled}
-      aria-disabled={disabled}
-      aria-label={ariaLabel || (typeof children === 'string' ? children : 'Animated button')}
-      className={cn(
-        'inline-flex items-center justify-center rounded-md font-medium',
-        'transition-all duration-200 ease-in-out',
-        'hover:scale-105 active:scale-95',
-        'focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2',
-        'disabled:opacity-50 disabled:cursor-not-allowed',
-        getVariantClasses(),
-        getSizeClasses(),
-        getAnimationClasses(),
-        className
-      )}
-    >
-      {children}
-    </button>
+    <>
+      {/* PHASE 6+ STANDARD: Live region for screen reader announcements */}
+      <div ref={announceRef} className="sr-only" aria-live="assertive" />
+      
+      <button
+        onClick={handleClick}
+        onKeyDown={handleButtonKeyDown}
+        onFocus={() => setFocusVisible(true)}
+        onBlur={() => setFocusVisible(false)}
+        disabled={disabled}
+        aria-disabled={disabled}
+        aria-label={ariaLabel || (typeof children === 'string' ? children : 'Animated button')}
+        aria-describedby="button-animation-help"
+        className={cn(
+          'inline-flex items-center justify-center rounded-md font-medium',
+          'transition-all duration-200 ease-in-out',
+          'hover:scale-105 active:scale-95',
+          // PHASE 6+ STANDARD: Enhanced focus management
+          'focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2',
+          'focus-visible:ring-2 focus-visible:ring-primary',
+          focusVisible && 'ring-2 ring-primary ring-offset-2',
+          'disabled:opacity-50 disabled:cursor-not-allowed',
+          getVariantClasses(),
+          getSizeClasses(),
+          getAnimationClasses(),
+          className
+        )}
+      >
+        {children}
+      </button>
+      
+      {/* PHASE 6+ STANDARD: Screen reader help text */}
+      <div id="button-animation-help" className="sr-only">
+        Press Enter or Space to activate {animation} animation effect
+      </div>
+    </>
   );
 }
 
-// Hover Card Component with Smooth Transitions
+// ===== HOVER CARD COMPONENT =====
+
 export interface HoverCardProps {
   children: React.ReactNode;
   hoverContent?: React.ReactNode;
@@ -395,37 +474,61 @@ export function HoverCard({
   ariaLabel
 }: HoverCardProps) {
   const [isHovered, setIsHovered] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
+  const { announceRef, announceChange } = useAnnouncer();
+  const { handleKeyDown } = useKeyboardNavigation();
+
+  const isActive = isHovered || isFocused;
+
+  useEffect(() => {
+    if (isActive) {
+      announceChange('Interactive card activated');
+    }
+  }, [isActive, announceChange]);
 
   return (
-    <div
-      className={cn(
-        'transition-all duration-300 ease-in-out',
-        'transform-gpu will-change-transform',
-        shadow && 'hover:shadow-lg',
-        className
-      )}
-      style={{
-        transform: isHovered ? `scale(${hoverScale})` : 'scale(1)'
-      }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      role="region"
-      aria-label={ariaLabel || 'Interactive hover card'}
-    >
-      {children}
-      {hoverContent && isHovered && (
-        <div 
-          className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-300"
-          aria-hidden="true"
-        >
-          {hoverContent}
-        </div>
-      )}
-    </div>
+    <>
+      {/* PHASE 6+ STANDARD: Live region for screen reader announcements */}
+      <div ref={announceRef} className="sr-only" aria-live="polite" />
+      
+      <div
+        className={cn(
+          'transition-all duration-300 ease-in-out',
+          'transform-gpu will-change-transform',
+          // PHASE 6+ STANDARD: Enhanced focus indicators
+          'focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2',
+          'focus-visible:ring-2 focus-visible:ring-primary',
+          shadow && 'hover:shadow-lg',
+          className
+        )}
+        style={{
+          transform: isActive ? `scale(${hoverScale})` : 'scale(1)'
+        }}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
+        onKeyDown={handleKeyDown}
+        role="region"
+        aria-label={ariaLabel || 'Interactive hover card'}
+        tabIndex={0}
+      >
+        {children}
+        {hoverContent && isActive && (
+          <div 
+            className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-300"
+            aria-hidden="true"
+          >
+            {hoverContent}
+          </div>
+        )}
+      </div>
+    </>
   );
 }
 
-// Parallax Scroll Component
+// ===== PARALLAX SCROLL COMPONENT =====
+
 export interface ParallaxProps {
   children: React.ReactNode;
   speed?: number;
@@ -440,11 +543,23 @@ export function ParallaxScroll({
   ariaLabel
 }: ParallaxProps) {
   const [offsetY, setOffsetY] = useState(0);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const elementRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // ASTRO SSR FIX: Vérifier que nous sommes côté client
+    if (typeof window === 'undefined') return;
+
+    // Check for reduced motion preference
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setPrefersReducedMotion(mediaQuery.matches);
+
+    const handleMediaQueryChange = (e: MediaQueryListEvent) => {
+      setPrefersReducedMotion(e.matches);
+    };
+
     const handleScroll = () => {
-      if (elementRef.current) {
+      if (elementRef.current && !prefersReducedMotion) {
         const rect = elementRef.current.getBoundingClientRect();
         const scrolled = window.scrollY;
         const rate = scrolled * -speed;
@@ -452,9 +567,19 @@ export function ParallaxScroll({
       }
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [speed]);
+    // Listen for reduced motion changes
+    mediaQuery.addEventListener('change', handleMediaQueryChange);
+    
+    // Listen for scroll events only if motion is allowed
+    if (!prefersReducedMotion) {
+      window.addEventListener('scroll', handleScroll, { passive: true });
+    }
+
+    return () => {
+      mediaQuery.removeEventListener('change', handleMediaQueryChange);
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [speed, prefersReducedMotion]);
 
   return (
     <div 
@@ -462,20 +587,23 @@ export function ParallaxScroll({
       className={className}
       role="region"
       aria-label={ariaLabel || 'Parallax scroll content'}
+      // PHASE 6+ STANDARD: Respect reduced motion preference (SSR safe)
+      style={{
+        transform: prefersReducedMotion 
+          ? 'translateY(0px)' 
+          : `translateY(${offsetY}px)`,
+        willChange: prefersReducedMotion ? 'auto' : 'transform'
+      }}
     >
-      <div
-        style={{
-          transform: `translateY(${offsetY}px)`,
-          willChange: 'transform'
-        }}
-      >
+      <div>
         {children}
       </div>
     </div>
   );
 }
 
-// Smooth Counter Animation
+// ===== ANIMATED COUNTER WITH PHASE 6+ STANDARDS =====
+
 export interface CounterProps {
   end: number;
   start?: number;
@@ -496,11 +624,14 @@ export function AnimatedCounter({
   ariaLabel
 }: CounterProps) {
   const [count, setCount] = useState(start);
+  const { announceRef, announceChange } = useAnnouncer();
   const countRef = useRef(start);
 
   useEffect(() => {
     const startTime = Date.now();
     const difference = end - start;
+
+    announceChange(`Counter animation starting from ${start} to ${end}`);
 
     const updateCount = () => {
       const now = Date.now();
@@ -514,27 +645,39 @@ export function AnimatedCounter({
       setCount(currentCount);
       countRef.current = currentCount;
 
-      if (progress < 1) {
+      if (progress >= 1) {
+        announceChange(`Counter animation completed at ${end}${suffix}`);
+      } else {
         requestAnimationFrame(updateCount);
       }
     };
 
     requestAnimationFrame(updateCount);
-  }, [end, start, duration]);
+  }, [end, start, duration, suffix, announceChange]);
 
   return (
-    <span 
-      className={className}
-      role="status"
-      aria-live="polite"
-      aria-label={ariaLabel || `Counter animating from ${start} to ${end}, current value: ${count}`}
-    >
-      {prefix}{count.toLocaleString()}{suffix}
-    </span>
+    <>
+      {/* PHASE 6+ STANDARD: Live region for screen reader announcements */}
+      <div ref={announceRef} className="sr-only" aria-live="polite" />
+      
+      <span 
+        className={cn(
+          'tabindex-0 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 rounded',
+          className
+        )}
+        role="status"
+        aria-live="polite"
+        aria-label={ariaLabel || `Counter animating from ${start} to ${end}, current value: ${count}`}
+        tabIndex={0}
+      >
+        {prefix}{count.toLocaleString()}{suffix}
+      </span>
+    </>
   );
 }
 
-// Typewriter Effect Component
+// ===== TYPEWRITER EFFECT WITH PHASE 6+ STANDARDS =====
+
 export interface TypewriterProps {
   text: string;
   speed?: number;
@@ -554,8 +697,11 @@ export function TypewriterEffect({
 }: TypewriterProps) {
   const [displayText, setDisplayText] = useState('');
   const [isComplete, setIsComplete] = useState(false);
+  const { announceRef, announceChange } = useAnnouncer();
 
   useEffect(() => {
+    announceChange('Typewriter animation starting');
+    
     const timer = setTimeout(() => {
       let index = 0;
       const typeInterval = setInterval(() => {
@@ -564,6 +710,7 @@ export function TypewriterEffect({
           index++;
         } else {
           setIsComplete(true);
+          announceChange(`Typewriter animation completed: ${text}`);
           clearInterval(typeInterval);
         }
       }, speed);
@@ -572,24 +719,34 @@ export function TypewriterEffect({
     }, delay);
 
     return () => clearTimeout(timer);
-  }, [text, speed, delay]);
+  }, [text, speed, delay, announceChange]);
 
   return (
-    <span 
-      className={className}
-      role="status"
-      aria-live="polite"
-      aria-label={ariaLabel || `Typewriter effect: ${isComplete ? text : `Typing: ${displayText}`}`}
-    >
-      {displayText}
-      {showCursor && !isComplete && (
-        <span className="animate-pulse" aria-hidden="true">|</span>
-      )}
-    </span>
+    <>
+      {/* PHASE 6+ STANDARD: Live region for screen reader announcements */}
+      <div ref={announceRef} className="sr-only" aria-live="polite" />
+      
+      <span 
+        className={cn(
+          'focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 rounded',
+          className
+        )}
+        role="status"
+        aria-live="polite"
+        aria-label={ariaLabel || `Typewriter effect: ${isComplete ? text : `Typing: ${displayText}`}`}
+        tabIndex={0}
+      >
+        {displayText}
+        {showCursor && !isComplete && (
+          <span className="animate-pulse" aria-hidden="true">|</span>
+        )}
+      </span>
+    </>
   );
 }
 
-// Progress Bar with Smooth Animation
+// ===== ANIMATED PROGRESS WITH PHASE 6+ STANDARDS =====
+
 export interface AnimatedProgressProps {
   value: number;
   max?: number;
@@ -612,113 +769,60 @@ export function AnimatedProgress({
   ariaLabel
 }: AnimatedProgressProps) {
   const [animatedValue, setAnimatedValue] = useState(0);
+  const { announceRef, announceChange } = useAnnouncer();
   const percentage = Math.min((value / max) * 100, 100);
 
   useEffect(() => {
+    announceChange(`Progress bar animation starting to ${percentage}%`);
+    
     const timer = setTimeout(() => {
       setAnimatedValue(percentage);
+      
+      // Announce completion
+      setTimeout(() => {
+        announceChange(`Progress updated to ${Math.round(percentage)}%`);
+      }, animationDuration);
     }, 100);
 
     return () => clearTimeout(timer);
-  }, [percentage]);
+  }, [percentage, animationDuration, announceChange]);
 
   return (
-    <div className={cn('w-full', className)}>
-      {showLabel && (
-        <div className="flex justify-between text-sm text-muted-foreground mb-2">
-          <span>Progress</span>
-          <span>{Math.round(animatedValue)}%</span>
-        </div>
-      )}
-      <div 
-        className="w-full bg-muted rounded-full overflow-hidden"
-        style={{ height: `${height}px` }}
-        role="progressbar"
-        aria-valuenow={Math.round(animatedValue)}
-        aria-valuemin={0}
-        aria-valuemax={max}
-        aria-label={ariaLabel || `Progress: ${Math.round(animatedValue)}% complete`}
-      >
-        <div
-          className="h-full rounded-full transition-all ease-out"
-          style={{
-            width: `${animatedValue}%`,
-            backgroundColor: color,
-            transitionDuration: `${animationDuration}ms`
-          }}
-        />
-      </div>
-    </div>
-  );
-}
-
-// Smooth Modal/Dialog Transition
-export interface ModalTransitionProps {
-  isOpen: boolean;
-  onClose: () => void;
-  children: React.ReactNode;
-  className?: string;
-  ariaLabel?: string;
-}
-
-export function ModalTransition({ 
-  isOpen, 
-  onClose, 
-  children, 
-  className,
-  ariaLabel = 'Modal dialog'
-}: ModalTransitionProps) {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    if (isOpen) {
-      setIsVisible(true);
-    } else {
-      const timer = setTimeout(() => setIsVisible(false), 300);
-      return () => clearTimeout(timer);
-    }
-  }, [isOpen]);
-
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Escape') {
-      onClose();
-    }
-  };
-
-  if (!isVisible) return null;
-
-  return (
-    <div 
-      className="fixed inset-0 z-50 flex items-center justify-center"
-      onKeyDown={handleKeyDown}
-      role="dialog"
-      aria-modal="true"
-      aria-label={ariaLabel}
-    >
-      {/* Backdrop */}
-      <div
-        className={cn(
-          'absolute inset-0 bg-background/80 backdrop-blur-sm transition-opacity duration-300',
-          isOpen ? 'opacity-100' : 'opacity-0'
-        )}
-        onClick={onClose}
-        aria-hidden="true"
-      />
+    <>
+      {/* PHASE 6+ STANDARD: Live region for screen reader announcements */}
+      <div ref={announceRef} className="sr-only" aria-live="polite" />
       
-      {/* Modal Content */}
-      <div
-        className={cn(
-          'relative bg-card border border-border rounded-lg shadow-lg p-6',
-          'transition-all duration-300 ease-out',
-          isOpen 
-            ? 'opacity-100 scale-100 translate-y-0' 
-            : 'opacity-0 scale-95 translate-y-4',
-          className
+      <div className={cn('w-full', className)}>
+        {showLabel && (
+          <div className="flex justify-between text-sm text-muted-foreground mb-2">
+            <span>Progress</span>
+            <span>{Math.round(animatedValue)}%</span>
+          </div>
         )}
-        role="document"
-      >
-        {children}
+        <div 
+          className={cn(
+            'w-full bg-muted rounded-full overflow-hidden',
+            // PHASE 6+ STANDARD: Enhanced focus indicators
+            'focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2'
+          )}
+          style={{ height: `${height}px` }}
+          role="progressbar"
+          aria-valuenow={Math.round(animatedValue)}
+          aria-valuemin={0}
+          aria-valuemax={max}
+          aria-label={ariaLabel || `Progress: ${Math.round(animatedValue)}% complete`}
+          tabIndex={0}
+        >
+          <div
+            className="h-full rounded-full transition-all ease-out"
+            style={{
+              width: `${animatedValue}%`,
+              backgroundColor: color,
+              transitionDuration: `${animationDuration}ms`
+            }}
+          />
+        </div>
       </div>
-    </div>
+    </>
   );
 }
