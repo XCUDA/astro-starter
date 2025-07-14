@@ -1,0 +1,276 @@
+---
+// Portfolio Demo Page - Creative Showcase Layout
+// Production-ready portfolio design for creatives and freelancers
+// Path: src/pages/portfolio-demo.astro
+
+import Layout from '../components/layouts/Layout.astro';
+import TouchNavigation from '../components/islands/TouchNavigation';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
+import { Badge } from '../components/ui/badge';
+import { Button } from '../components/ui/button';
+---
+
+<Layout 
+  title="Maya Chen - Visual Designer & Creative Director | Portfolio Showcase"
+  description="Award-winning visual design and creative direction for brands, digital experiences, and visual storytelling"
+  currentPage="portfolio-demo"
+  headerVariant="minimal"
+  footerVariant="minimal"
+  showCTA={true}
+  ctaText="View Work"
+  ctaHref="/portfolio"
+  showSocials={true}
+  companyName="Maya Chen Design"
+  siteDescription="Visual designer and creative director specializing in brand identity and digital experiences"
+>
+  
+  <!-- Skip Links for Accessibility -->
+  <div class="sr-only">
+    <a href="#main-content" class="focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-primary-foreground px-4 py-2 rounded">
+      Skip to main content
+    </a>
+    <a href="#interactive-content" class="focus:not-sr-only focus:absolute focus:top-4 focus:left-20 bg-primary text-primary-foreground px-4 py-2 rounded">
+      Skip to portfolio showcase
+    </a>
+  </div>
+
+  <!-- Page Entry Animation -->
+  <div class="animate-fade-in-up">
+
+  <!-- Portfolio Hero -->
+  <section class="bg-gradient-to-br from-purple-50 to-pink-100 dark:from-purple-950 dark:to-pink-900 py-24" role="banner" aria-labelledby="hero-title">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center animate-fade-in-up">
+        
+        <div class="flex items-center justify-center space-x-2 mb-6">
+          <span class="text-4xl" aria-hidden="true">🎨</span>
+          <Badge variant="outline" className="bg-gradient-to-r from-purple-500 to-pink-500 text-white border-none animate-pulse">
+            Award-Winning Designer
+          </Badge>
+        </div>
+        
+        <h1 id="hero-title" class="text-5xl lg:text-7xl font-bold mb-6">
+          <span class="text-foreground">Maya</span>
+          <span class="bg-gradient-to-r from-purple-500 via-pink-500 to-purple-600 bg-clip-text text-transparent">
+            Chen
+          </span>
+        </h1>
+        
+        <p class="text-2xl text-muted-foreground mb-8 leading-relaxed max-w-3xl mx-auto">
+          Visual Designer & Creative Director crafting <strong>memorable brand experiences</strong> 
+          that connect, inspire, and drive results for forward-thinking companies.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12" role="group" aria-label="Primary portfolio actions">
+          <Button size="lg" className="text-xl px-12 py-4 bg-gradient-to-r from-purple-500 to-pink-500 hover:scale-105 transition-transform duration-300" aria-label="View complete design portfolio and case studies">
+            <span class="mr-2" aria-hidden="true">👁️</span>
+            View Portfolio
+          </Button>
+          <Button variant="outline" size="lg" className="text-xl px-8 py-4 hover:scale-105 transition-transform" aria-label="Get in touch for creative projects and collaborations">
+            <span class="mr-2" aria-hidden="true">💬</span>
+            Let's Collaborate
+          </Button>
+        </div>
+
+        <!-- Creative Credentials -->
+        <div class="flex items-center justify-center space-x-8 mb-16 text-muted-foreground animate-fade-in-up" role="list" aria-label="Professional credentials and achievements">
+          <div class="flex items-center space-x-2 hover:scale-105 transition-transform" role="listitem">
+            <span class="text-yellow-500" aria-hidden="true">🏆</span>
+            <span class="font-medium" role="status" aria-label="Awwwards Site of the Day winner">Awwwards</span>
+            <span>SOTD</span>
+          </div>
+          <div class="flex items-center space-x-2 hover:scale-105 transition-transform" role="listitem">
+            <span class="text-purple-500" aria-hidden="true">🎯</span>
+            <span class="font-medium" role="status" aria-label="8 years of design experience">8 Years</span>
+            <span>Experience</span>
+          </div>
+          <div class="flex items-center space-x-2 hover:scale-105 transition-transform" role="listitem">
+            <span class="text-pink-500" aria-hidden="true">💼</span>
+            <span class="font-medium" role="status" aria-label="50+ successful projects completed">50+</span>
+            <span>Projects</span>
+          </div>
+        </div>
+
+        <!-- Featured Work Preview -->
+        <div class="relative animate-fade-in-up" role="region" aria-labelledby="work-preview">
+          <div class="bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-2xl p-8 backdrop-blur-sm border border-purple-500/20 hover:scale-[1.02] transition-transform duration-500">
+            <div class="bg-card rounded-xl p-6 shadow-2xl">
+              <div id="work-preview" class="text-lg font-semibold mb-6">Featured Work</div>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left" role="region" aria-label="Portfolio work samples showcase">
+                <div class="space-y-3 hover:bg-purple-50 dark:hover:bg-purple-950/20 p-4 rounded transition-colors group" role="group" aria-labelledby="branding-work">
+                  <div class="w-full h-32 bg-gradient-to-br from-purple-200 to-purple-300 dark:from-purple-800 dark:to-purple-700 rounded-lg group-hover:scale-105 transition-transform flex items-center justify-center">
+                    <span class="text-2xl" aria-hidden="true">🏢</span>
+                  </div>
+                  <div id="branding-work" class="text-sm font-medium">Brand Identity</div>
+                  <div class="text-xs text-muted-foreground">Complete rebrand for tech startup</div>
+                  <div class="text-xs text-purple-600">• Logo design • Visual system • Guidelines</div>
+                </div>
+                <div class="space-y-3 hover:bg-pink-50 dark:hover:bg-pink-950/20 p-4 rounded transition-colors group" role="group" aria-labelledby="web-work">
+                  <div class="w-full h-32 bg-gradient-to-br from-pink-200 to-pink-300 dark:from-pink-800 dark:to-pink-700 rounded-lg group-hover:scale-105 transition-transform flex items-center justify-center">
+                    <span class="text-2xl" aria-hidden="true">💻</span>
+                  </div>
+                  <div id="web-work" class="text-sm font-medium">Web Design</div>
+                  <div class="text-xs text-muted-foreground">E-commerce platform redesign</div>
+                  <div class="text-xs text-pink-600">• UX/UI design • Prototyping • User testing</div>
+                </div>
+                <div class="space-y-3 hover:bg-purple-50 dark:hover:bg-purple-950/20 p-4 rounded transition-colors group" role="group" aria-labelledby="campaign-work">
+                  <div class="w-full h-32 bg-gradient-to-br from-purple-200 to-pink-200 dark:from-purple-800 dark:to-pink-800 rounded-lg group-hover:scale-105 transition-transform flex items-center justify-center">
+                    <span class="text-2xl" aria-hidden="true">📱</span>
+                  </div>
+                  <div id="campaign-work" class="text-sm font-medium">Digital Campaign</div>
+                  <div class="text-xs text-muted-foreground">Multi-platform brand campaign</div>
+                  <div class="text-xs text-purple-600">• Creative direction • Visual assets • Animation</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main id="main-content" role="main">
+
+    <!-- Design Services -->
+    <section class="py-20" role="region" aria-labelledby="services-title">
+      <div class="container mx-auto px-4">
+        <h2 id="services-title" class="text-4xl font-bold text-center mb-16 animate-fade-in-left">
+          Creative Services
+        </h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8" role="list" aria-label="Creative design services offered">
+          <Card className="border-purple-500/20 hover:shadow-lg transition-all duration-300 hover:scale-105 animate-fade-in-up" role="listitem">
+            <CardHeader>
+              <div class="text-4xl mb-4" aria-hidden="true">🎨</div>
+              <CardTitle className="text-xl">Brand Identity</CardTitle>
+              <CardDescription>Complete visual identity systems that tell your story</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ul class="space-y-2 text-sm text-muted-foreground" role="list" aria-label="Brand identity services">
+                <li class="hover:text-foreground transition-colors" role="listitem">• Logo design and visual marks</li>
+                <li class="hover:text-foreground transition-colors" role="listitem">• Brand guidelines and systems</li>
+                <li class="hover:text-foreground transition-colors" role="listitem">• Typography and color palettes</li>
+                <li class="hover:text-foreground transition-colors" role="listitem">• Print and digital applications</li>
+              </ul>
+            </CardContent>
+          </Card>
+
+          <Card className="border-pink-500/20 hover:shadow-lg transition-all duration-300 hover:scale-105 animate-fade-in-up" role="listitem">
+            <CardHeader>
+              <div class="text-4xl mb-4" aria-hidden="true">💻</div>
+              <CardTitle className="text-xl">Digital Design</CardTitle>
+              <CardDescription>User-centered digital experiences that convert</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ul class="space-y-2 text-sm text-muted-foreground" role="list" aria-label="Digital design services">
+                <li class="hover:text-foreground transition-colors" role="listitem">• Website and app UI/UX design</li>
+                <li class="hover:text-foreground transition-colors" role="listitem">• Interactive prototypes</li>
+                <li class="hover:text-foreground transition-colors" role="listitem">• User research and testing</li>
+                <li class="hover:text-foreground transition-colors" role="listitem">• Design system creation</li>
+              </ul>
+            </CardContent>
+          </Card>
+
+          <Card className="border-purple-400/20 hover:shadow-lg transition-all duration-300 hover:scale-105 animate-fade-in-up" role="listitem">
+            <CardHeader>
+              <div class="text-4xl mb-4" aria-hidden="true">🎬</div>
+              <CardTitle className="text-xl">Creative Direction</CardTitle>
+              <CardDescription>Strategic creative leadership for campaigns and projects</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ul class="space-y-2 text-sm text-muted-foreground" role="list" aria-label="Creative direction services">
+                <li class="hover:text-foreground transition-colors" role="listitem">• Campaign concept development</li>
+                <li class="hover:text-foreground transition-colors" role="listitem">• Art direction and photography</li>
+                <li class="hover:text-foreground transition-colors" role="listitem">• Motion graphics and animation</li>
+                <li class="hover:text-foreground transition-colors" role="listitem">• Multi-platform content strategy</li>
+              </ul>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Content -->
+    <section id="interactive-content" class="py-16 bg-gradient-to-r from-purple-500/5 to-pink-500/5" role="region" aria-labelledby="demo-config-title">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto">
+          <div class="bg-card/80 backdrop-blur-sm border border-purple-500/20 rounded-xl p-8 animate-fade-in-right">
+            <h3 id="demo-config-title" class="text-2xl font-bold mb-6 text-center">
+              🎨 Portfolio Layout Configuration
+            </h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div>
+                <h3 class="font-semibold mb-4">Layout Configuration:</h3>
+                <div class="bg-muted/50 rounded-lg p-4 font-mono text-sm space-y-1 hover:bg-muted/70 transition-colors" role="code" aria-label="Portfolio layout configuration code">
+                  <div>headerVariant="minimal"</div>
+                  <div>footerVariant="minimal"</div>
+                  <div>showHeaderCTA={`{true}`}</div>
+                  <div>headerCTAText="View Work"</div>
+                  <div>showSocials={`{true}`}</div>
+                  <div>contentFocus={`{true}`}</div>
+                </div>
+              </div>
+              
+              <div>
+                <h3 class="font-semibold mb-4">Portfolio Features:</h3>
+                <ul class="space-y-2 text-sm" role="list" aria-label="Activated portfolio layout features">
+                  <li class="flex items-center space-x-2 hover:bg-purple-50 dark:hover:bg-purple-950/20 p-1 rounded transition-colors" role="listitem">
+                    <span class="text-green-500" aria-hidden="true">✓</span>
+                    <span>Minimal header focusing on portfolio content</span>
+                  </li>
+                  <li class="flex items-center space-x-2 hover:bg-purple-50 dark:hover:bg-purple-950/20 p-1 rounded transition-colors" role="listitem">
+                    <span class="text-green-500" aria-hidden="true">✓</span>
+                    <span>Clean footer with social media integration</span>
+                  </li>
+                  <li class="flex items-center space-x-2 hover:bg-purple-50 dark:hover:bg-purple-950/20 p-1 rounded transition-colors" role="listitem">
+                    <span class="text-green-500" aria-hidden="true">✓</span>
+                    <span>Creative gradient designs and animations</span>
+                  </li>
+                  <li class="flex items-center space-x-2 hover:bg-purple-50 dark:hover:bg-purple-950/20 p-1 rounded transition-colors" role="listitem">
+                    <span class="text-green-500" aria-hidden="true">✓</span>
+                    <span>Visual-first layout for showcasing work</span>
+                  </li>
+                  <li class="flex items-center space-x-2 hover:bg-purple-50 dark:hover:bg-purple-950/20 p-1 rounded transition-colors" role="listitem">
+                    <span class="text-green-500" aria-hidden="true">✓</span>
+                    <span>Gesture navigation for creative browsing</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="mt-8 flex flex-wrap justify-center gap-4" role="group" aria-label="Navigate to other business demo pages">
+              <Button variant="outline" size="sm" className="hover:scale-105 transition-transform" aria-label="View corporate demo with professional business design">
+                <a href="/corporate-demo">🏢 View Corporate Demo</a>
+              </Button>
+              <Button variant="outline" size="sm" className="hover:scale-105 transition-transform" aria-label="View startup demo with modern SaaS design">
+                <a href="/startup-demo">🚀 View Startup Demo</a>
+              </Button>
+              <Button variant="outline" size="sm" className="hover:scale-105 transition-transform" aria-label="View e-commerce demo with shopping features">
+                <a href="/ecommerce-demo">🛒 View E-commerce Demo</a>
+              </Button>
+              <Button size="sm" className="hover:scale-105 transition-transform" aria-label="Return to main business demo overview page">
+                <a href="/business-demo">← Return to Business Demo</a>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Touch Navigation for Creative Browsing -->
+  <TouchNavigation 
+    variant="gesture-panel"
+    enableSwipeNavigation={true}
+    enablePullToRefresh={true}
+    currentPage="portfolio-demo"
+    client:load
+    aria-label="Gesture-based navigation panel optimized for creative portfolio browsing"
+  />
+
+  </div>
+
+</Layout>

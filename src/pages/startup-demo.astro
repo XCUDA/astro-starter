@@ -1,5 +1,6 @@
 ---
 // Startup Demo Page - Modern Landing Page Layout
+// Production-ready startup design for SaaS and tech companies
 // Path: src/pages/startup-demo.astro
 
 import Layout from '../components/layouts/Layout.astro';
@@ -10,8 +11,8 @@ import { Button } from '../components/ui/button';
 ---
 
 <Layout 
-  title="TaskFlow AI - Productivity Redefined | Demo Startup"
-  description="Revolutionary AI-powered task management that adapts to your workflow"
+  title="TaskFlow AI - Productivity Redefined | Modern SaaS Platform"
+  description="Revolutionary AI-powered task management that adapts to your workflow - boost productivity by 40%"
   currentPage="startup-demo"
   headerVariant="landing"
   footerVariant="startup"
@@ -24,12 +25,25 @@ import { Button } from '../components/ui/button';
   siteDescription="AI-powered productivity platform trusted by 10,000+ teams"
 >
   
+  <!-- Skip Links for Accessibility -->
+  <div class="sr-only">
+    <a href="#main-content" class="focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-primary-foreground px-4 py-2 rounded">
+      Skip to main content
+    </a>
+    <a href="#interactive-content" class="focus:not-sr-only focus:absolute focus:top-4 focus:left-20 bg-primary text-primary-foreground px-4 py-2 rounded">
+      Skip to interactive features
+    </a>
+  </div>
+
+  <!-- Page Entry Animation -->
+  <div class="animate-fade-in-up">
+
   <!-- Hero Startup -->
   <section class="bg-gradient-to-br from-primary/10 via-background to-secondary/20 py-24" role="banner" aria-labelledby="hero-title">
     <div class="container mx-auto px-4">
-      <div class="max-w-5xl mx-auto text-center">
+      <div class="max-w-5xl mx-auto text-center animate-fade-in-up">
         
-        <Badge variant="default" className="mb-6 bg-gradient-to-r from-primary to-secondary text-white" role="status" aria-label="Company funding and accelerator status">
+        <Badge variant="default" className="mb-6 bg-gradient-to-r from-primary to-secondary text-white animate-pulse" role="status" aria-label="Company funding and accelerator status">
           🚀 YC S23 • $2M Seed Round
         </Badge>
         
@@ -46,29 +60,29 @@ import { Button } from '../components/ui/button';
         </p>
 
         <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12" role="group" aria-label="Primary conversion actions">
-          <Button size="lg" className="text-xl px-12 py-4 bg-gradient-to-r from-primary to-secondary hover:scale-105 transition-transform" aria-label="Start free trial of TaskFlow AI productivity platform">
+          <Button size="lg" className="text-xl px-12 py-4 bg-gradient-to-r from-primary to-secondary hover:scale-105 transition-transform duration-300" aria-label="Start free trial of TaskFlow AI productivity platform">
             <span class="mr-2" aria-hidden="true">⚡</span>
             Start Free Trial
           </Button>
-          <Button variant="outline" size="lg" className="text-xl px-8 py-4" aria-label="Watch 2-minute product demonstration video">
+          <Button variant="outline" size="lg" className="text-xl px-8 py-4 hover:scale-105 transition-transform" aria-label="Watch 2-minute product demonstration video">
             <span class="mr-2" aria-hidden="true">▶️</span>
             Watch Demo (2 min)
           </Button>
         </div>
 
         <!-- Social Proof -->
-        <div class="flex items-center justify-center space-x-8 mb-16 text-muted-foreground" role="list" aria-label="Company credentials and social proof">
-          <div class="flex items-center space-x-2" role="listitem">
+        <div class="flex items-center justify-center space-x-8 mb-16 text-muted-foreground animate-fade-in-up" role="list" aria-label="Company credentials and social proof">
+          <div class="flex items-center space-x-2 hover:scale-105 transition-transform" role="listitem">
             <span class="text-yellow-500" aria-hidden="true">⭐</span>
             <span class="font-medium" role="status" aria-label="Product Hunt rating: 4.9 out of 5">4.9/5</span>
             <span>Product Hunt</span>
           </div>
-          <div class="flex items-center space-x-2" role="listitem">
+          <div class="flex items-center space-x-2 hover:scale-105 transition-transform" role="listitem">
             <span class="text-green-500" aria-hidden="true">✓</span>
             <span class="font-medium" role="status" aria-label="SOC 2 security compliance certified">SOC 2</span>
             <span>Compliant</span>
           </div>
-          <div class="flex items-center space-x-2" role="listitem">
+          <div class="flex items-center space-x-2 hover:scale-105 transition-transform" role="listitem">
             <span class="text-blue-500" aria-hidden="true">🔒</span>
             <span class="font-medium" role="status" aria-label="GDPR privacy regulation ready">GDPR</span>
             <span>Ready</span>
@@ -76,8 +90,8 @@ import { Button } from '../components/ui/button';
         </div>
 
         <!-- Product Preview -->
-        <div class="relative" role="region" aria-labelledby="product-preview">
-          <div class="bg-gradient-to-r from-primary/20 to-secondary/20 rounded-2xl p-8 backdrop-blur-sm border border-primary/20">
+        <div class="relative animate-fade-in-up" role="region" aria-labelledby="product-preview">
+          <div class="bg-gradient-to-r from-primary/20 to-secondary/20 rounded-2xl p-8 backdrop-blur-sm border border-primary/20 hover:scale-[1.02] transition-transform duration-500">
             <div class="bg-card rounded-xl p-6 shadow-2xl">
               <div class="flex items-center space-x-2 mb-4">
                 <div class="w-3 h-3 rounded-full bg-red-500" aria-hidden="true"></div>
@@ -86,19 +100,19 @@ import { Button } from '../components/ui/button';
                 <div id="product-preview" class="ml-4 text-sm text-muted-foreground">TaskFlow AI Dashboard</div>
               </div>
               <div class="grid grid-cols-3 gap-4 text-left" role="region" aria-label="Dashboard feature preview">
-                <div class="space-y-2" role="group" aria-labelledby="todays-focus">
+                <div class="space-y-2 hover:bg-muted/50 p-2 rounded transition-colors" role="group" aria-labelledby="todays-focus">
                   <div id="todays-focus" class="text-sm font-medium">📋 Today's Focus</div>
                   <div class="text-xs text-muted-foreground">• Complete user research</div>
                   <div class="text-xs text-muted-foreground">• Review pull requests</div>
                   <div class="text-xs text-muted-foreground">• Team standup at 2pm</div>
                 </div>
-                <div class="space-y-2" role="group" aria-labelledby="ai-suggestions">
+                <div class="space-y-2 hover:bg-primary/5 p-2 rounded transition-colors" role="group" aria-labelledby="ai-suggestions">
                   <div id="ai-suggestions" class="text-sm font-medium">🤖 AI Suggestions</div>
                   <div class="text-xs text-primary">• Block calendar for deep work</div>
                   <div class="text-xs text-primary">• Delegate review tasks</div>
                   <div class="text-xs text-primary">• Schedule follow-up</div>
                 </div>
-                <div class="space-y-2" role="group" aria-labelledby="productivity-stats">
+                <div class="space-y-2 hover:bg-green-50 dark:hover:bg-green-950/20 p-2 rounded transition-colors" role="group" aria-labelledby="productivity-stats">
                   <div id="productivity-stats" class="text-sm font-medium">📊 Productivity</div>
                   <div class="text-xs text-green-600" role="status" aria-label="Productivity increase: 40 percent this week">+40% this week</div>
                   <div class="text-xs text-muted-foreground" role="status" aria-label="Peak productivity time: 10 to 12 AM">Peak: 10-12am</div>
@@ -112,132 +126,137 @@ import { Button } from '../components/ui/button';
     </div>
   </section>
 
-  <!-- Features -->
-  <section class="py-20" role="region" aria-labelledby="features-title">
-    <div class="container mx-auto px-4">
-      <h2 id="features-title" class="text-4xl font-bold text-center mb-16">
-        Built for Modern Teams
-      </h2>
-      
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8" role="list" aria-label="Product features and capabilities">
-        <Card className="border-primary/20 hover:shadow-lg transition-all duration-300 hover:scale-105" role="listitem">
-          <CardHeader>
-            <div class="text-4xl mb-4" aria-hidden="true">🧠</div>
-            <CardTitle className="text-xl">AI-Powered Intelligence</CardTitle>
-            <CardDescription>Learns your patterns and optimizes automatically</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <ul class="space-y-2 text-sm text-muted-foreground" role="list" aria-label="AI intelligence features">
-              <li role="listitem">• Smart task prioritization</li>
-              <li role="listitem">• Automatic time blocking</li>
-              <li role="listitem">• Predictive scheduling</li>
-              <li role="listitem">• Context-aware suggestions</li>
-            </ul>
-          </CardContent>
-        </Card>
+  <!-- Main Content -->
+  <main id="main-content" role="main">
 
-        <Card className="border-secondary/20 hover:shadow-lg transition-all duration-300 hover:scale-105" role="listitem">
-          <CardHeader>
-            <div class="text-4xl mb-4" aria-hidden="true">⚡</div>
-            <CardTitle className="text-xl">Lightning Fast</CardTitle>
-            <CardDescription>Built for speed with modern technology</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <ul class="space-y-2 text-sm text-muted-foreground" role="list" aria-label="Performance features">
-              <li role="listitem">• Sub-100ms response times</li>
-              <li role="listitem">• Offline-first architecture</li>
-              <li role="listitem">• Real-time collaboration</li>
-              <li role="listitem">• Instant sync across devices</li>
-            </ul>
-          </CardContent>
-        </Card>
+    <!-- Features -->
+    <section class="py-20" role="region" aria-labelledby="features-title">
+      <div class="container mx-auto px-4">
+        <h2 id="features-title" class="text-4xl font-bold text-center mb-16 animate-fade-in-left">
+          Built for Modern Teams
+        </h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8" role="list" aria-label="Product features and capabilities">
+          <Card className="border-primary/20 hover:shadow-lg transition-all duration-300 hover:scale-105 animate-fade-in-up" role="listitem">
+            <CardHeader>
+              <div class="text-4xl mb-4" aria-hidden="true">🧠</div>
+              <CardTitle className="text-xl">AI-Powered Intelligence</CardTitle>
+              <CardDescription>Learns your patterns and optimizes automatically</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ul class="space-y-2 text-sm text-muted-foreground" role="list" aria-label="AI intelligence features">
+                <li role="listitem">• Smart task prioritization</li>
+                <li role="listitem">• Automatic time blocking</li>
+                <li role="listitem">• Predictive scheduling</li>
+                <li role="listitem">• Context-aware suggestions</li>
+              </ul>
+            </CardContent>
+          </Card>
 
-        <Card className="border-purple-500/20 hover:shadow-lg transition-all duration-300 hover:scale-105" role="listitem">
-          <CardHeader>
-            <div class="text-4xl mb-4" aria-hidden="true">🔗</div>
-            <CardTitle className="text-xl">Deep Integrations</CardTitle>
-            <CardDescription>Works with your existing workflow</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <ul class="space-y-2 text-sm text-muted-foreground" role="list" aria-label="Integration capabilities">
-              <li role="listitem">• Slack, Teams, Discord</li>
-              <li role="listitem">• GitHub, Linear, Jira</li>
-              <li role="listitem">• Calendar sync (Google, Outlook)</li>
-              <li role="listitem">• 50+ app integrations</li>
-            </ul>
-          </CardContent>
-        </Card>
+          <Card className="border-secondary/20 hover:shadow-lg transition-all duration-300 hover:scale-105 animate-fade-in-up" role="listitem">
+            <CardHeader>
+              <div class="text-4xl mb-4" aria-hidden="true">⚡</div>
+              <CardTitle className="text-xl">Lightning Fast</CardTitle>
+              <CardDescription>Built for speed with modern technology</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ul class="space-y-2 text-sm text-muted-foreground" role="list" aria-label="Performance features">
+                <li role="listitem">• Sub-100ms response times</li>
+                <li role="listitem">• Offline-first architecture</li>
+                <li role="listitem">• Real-time collaboration</li>
+                <li role="listitem">• Instant sync across devices</li>
+              </ul>
+            </CardContent>
+          </Card>
+
+          <Card className="border-purple-500/20 hover:shadow-lg transition-all duration-300 hover:scale-105 animate-fade-in-up" role="listitem">
+            <CardHeader>
+              <div class="text-4xl mb-4" aria-hidden="true">🔗</div>
+              <CardTitle className="text-xl">Deep Integrations</CardTitle>
+              <CardDescription>Works with your existing workflow</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ul class="space-y-2 text-sm text-muted-foreground" role="list" aria-label="Integration capabilities">
+                <li role="listitem">• Slack, Teams, Discord</li>
+                <li role="listitem">• GitHub, Linear, Jira</li>
+                <li role="listitem">• Calendar sync (Google, Outlook)</li>
+                <li role="listitem">• 50+ app integrations</li>
+              </ul>
+            </CardContent>
+          </Card>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Demo Info -->
-  <section class="py-16 bg-gradient-to-r from-primary/5 to-secondary/5" role="region" aria-labelledby="demo-config-title">
-    <div class="container mx-auto px-4">
-      <div class="max-w-4xl mx-auto">
-        <div class="bg-card/80 backdrop-blur-sm border border-primary/20 rounded-xl p-8">
-          <h3 id="demo-config-title" class="text-2xl font-bold mb-6 text-center">
-            🚀 Configuration Startup Layout
-          </h3>
-          
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div>
-              <h3 class="font-semibold mb-4">Layout Configuration :</h3>
-              <div class="bg-muted/50 rounded-lg p-4 font-mono text-sm space-y-1" role="code" aria-label="Startup layout configuration code">
-                <div>headerVariant="landing"</div>
-                <div>footerVariant="startup"</div>
-                <div>showHeaderCTA={`{true}`}</div>
-                <div>headerCTAText="Try Free"</div>
-                <div>showNewsletter={`{true}`}</div>
-                <div>showSocials={`{true}`}</div>
+    <!-- Interactive Content -->
+    <section id="interactive-content" class="py-16 bg-gradient-to-r from-primary/5 to-secondary/5" role="region" aria-labelledby="demo-config-title">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto">
+          <div class="bg-card/80 backdrop-blur-sm border border-primary/20 rounded-xl p-8 animate-fade-in-right">
+            <h3 id="demo-config-title" class="text-2xl font-bold mb-6 text-center">
+              🚀 Startup Layout Configuration
+            </h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div>
+                <h3 class="font-semibold mb-4">Layout Configuration:</h3>
+                <div class="bg-muted/50 rounded-lg p-4 font-mono text-sm space-y-1 hover:bg-muted/70 transition-colors" role="code" aria-label="Startup layout configuration code">
+                  <div>headerVariant="landing"</div>
+                  <div>footerVariant="startup"</div>
+                  <div>showHeaderCTA={`{true}`}</div>
+                  <div>headerCTAText="Try Free"</div>
+                  <div>showNewsletter={`{true}`}</div>
+                  <div>showSocials={`{true}`}</div>
+                </div>
+              </div>
+              
+              <div>
+                <h3 class="font-semibold mb-4">Startup Features:</h3>
+                <ul class="space-y-2 text-sm" role="list" aria-label="Activated startup layout features">
+                  <li class="flex items-center space-x-2 hover:bg-green-50 dark:hover:bg-green-950/20 p-1 rounded transition-colors" role="listitem">
+                    <span class="text-green-500" aria-hidden="true">✓</span>
+                    <span>Landing header with conversion CTA</span>
+                  </li>
+                  <li class="flex items-center space-x-2 hover:bg-green-50 dark:hover:bg-green-950/20 p-1 rounded transition-colors" role="listitem">
+                    <span class="text-green-500" aria-hidden="true">✓</span>
+                    <span>Startup footer with newsletter signup</span>
+                  </li>
+                  <li class="flex items-center space-x-2 hover:bg-green-50 dark:hover:bg-green-950/20 p-1 rounded transition-colors" role="listitem">
+                    <span class="text-green-500" aria-hidden="true">✓</span>
+                    <span>Social proof and credibility badges</span>
+                  </li>
+                  <li class="flex items-center space-x-2 hover:bg-green-50 dark:hover:bg-green-950/20 p-1 rounded transition-colors" role="listitem">
+                    <span class="text-green-500" aria-hidden="true">✓</span>
+                    <span>Modern design with gradients and animations</span>
+                  </li>
+                  <li class="flex items-center space-x-2 hover:bg-green-50 dark:hover:bg-green-950/20 p-1 rounded transition-colors" role="listitem">
+                    <span class="text-green-500" aria-hidden="true">✓</span>
+                    <span>Touch navigation for mobile users</span>
+                  </li>
+                </ul>
               </div>
             </div>
-            
-            <div>
-              <h3 class="font-semibold mb-4">Startup Features :</h3>
-              <ul class="space-y-2 text-sm" role="list" aria-label="Activated startup layout features">
-                <li class="flex items-center space-x-2" role="listitem">
-                  <span class="text-green-500" aria-hidden="true">✓</span>
-                  <span>Header gradient landing avec CTA conversion</span>
-                </li>
-                <li class="flex items-center space-x-2" role="listitem">
-                  <span class="text-green-500" aria-hidden="true">✓</span>
-                  <span>Footer startup avec newsletter signup</span>
-                </li>
-                <li class="flex items-center space-x-2" role="listitem">
-                  <span class="text-green-500" aria-hidden="true">✓</span>
-                  <span>Social proof et badges credibilité</span>
-                </li>
-                <li class="flex items-center space-x-2" role="listitem">
-                  <span class="text-green-500" aria-hidden="true">✓</span>
-                  <span>Design moderne avec gradients et animations</span>
-                </li>
-                <li class="flex items-center space-x-2" role="listitem">
-                  <span class="text-green-500" aria-hidden="true">✓</span>
-                  <span>Touch navigation pour mobile users</span>
-                </li>
-              </ul>
-            </div>
-          </div>
 
-          <div class="mt-8 flex flex-wrap justify-center gap-4" role="group" aria-label="Navigate to other demo pages">
-            <Button variant="outline" size="sm" aria-label="View corporate demo with professional business design">
-              <a href="/corporate-demo">🏢 Voir Corporate Demo</a>
-            </Button>
-            <Button variant="outline" size="sm" aria-label="View e-commerce demo with shopping and catalog features">
-              <a href="/ecommerce-demo">🛒 Voir E-commerce Demo</a>
-            </Button>
-            <Button variant="outline" size="sm" aria-label="View portfolio demo with creative minimal layout">
-              <a href="/portfolio-demo">🎨 Voir Portfolio Demo</a>
-            </Button>
-            <Button size="sm" aria-label="Return to main business demo overview page">
-              <a href="/business-demo">← Retour Business Demo</a>
-            </Button>
+            <div class="mt-8 flex flex-wrap justify-center gap-4" role="group" aria-label="Navigate to other demo pages">
+              <Button variant="outline" size="sm" className="hover:scale-105 transition-transform" aria-label="View corporate demo with professional business design">
+                <a href="/corporate-demo">🏢 View Corporate Demo</a>
+              </Button>
+              <Button variant="outline" size="sm" className="hover:scale-105 transition-transform" aria-label="View e-commerce demo with shopping and catalog features">
+                <a href="/ecommerce-demo">🛒 View E-commerce Demo</a>
+              </Button>
+              <Button variant="outline" size="sm" className="hover:scale-105 transition-transform" aria-label="View portfolio demo with creative minimal layout">
+                <a href="/portfolio-demo">🎨 View Portfolio Demo</a>
+              </Button>
+              <Button size="sm" className="hover:scale-105 transition-transform" aria-label="Return to main business demo overview page">
+                <a href="/business-demo">← Return to Business Demo</a>
+              </Button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+  </main>
 
   <!-- Touch Navigation for Mobile Experience -->
   <TouchNavigation 
@@ -247,5 +266,7 @@ import { Button } from '../components/ui/button';
     client:load
     aria-label="Floating action button for quick navigation and back to top functionality"
   />
+
+  </div>
 
 </Layout>

@@ -1,0 +1,274 @@
+---
+// E-commerce Demo Page - Online Store Layout
+// Production-ready e-commerce design for online retail businesses
+// Path: src/pages/ecommerce-demo.astro
+
+import Layout from '../components/layouts/Layout.astro';
+import TouchNavigation from '../components/islands/TouchNavigation';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
+import { Badge } from '../components/ui/badge';
+import { Button } from '../components/ui/button';
+---
+
+<Layout 
+  title="TechGear Pro - Premium Electronics Store | E-commerce Demo"
+  description="Premium electronics and tech accessories with fast shipping and expert support"
+  currentPage="ecommerce-demo"
+  headerVariant="business"
+  footerVariant="comprehensive"
+  showCTA={true}
+  ctaText="Shop Now"
+  ctaHref="/shop"
+  showBusinessInfo={true}
+  showNewsletter={true}
+  companyName="TechGear Pro"
+  siteDescription="Premium electronics and tech accessories store since 2018"
+>
+  
+  <!-- Skip Links for Accessibility -->
+  <div class="sr-only">
+    <a href="#main-content" class="focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-primary-foreground px-4 py-2 rounded">
+      Skip to main content
+    </a>
+    <a href="#interactive-content" class="focus:not-sr-only focus:absolute focus:top-4 focus:left-20 bg-primary text-primary-foreground px-4 py-2 rounded">
+      Skip to product categories
+    </a>
+  </div>
+
+  <!-- Page Entry Animation -->
+  <div class="animate-fade-in-up">
+
+  <!-- E-commerce Hero -->
+  <section class="bg-gradient-to-br from-orange-50 to-amber-100 dark:from-orange-950 dark:to-amber-900 py-20" role="banner" aria-labelledby="hero-title">
+    <div class="container mx-auto px-4">
+      <div class="max-w-5xl mx-auto text-center animate-fade-in-up">
+        
+        <div class="flex items-center justify-center space-x-2 mb-6">
+          <span class="text-4xl" aria-hidden="true">🛒</span>
+          <Badge variant="default" className="bg-gradient-to-r from-orange-500 to-amber-500 text-white animate-pulse">
+            Fast Shipping • Expert Support
+          </Badge>
+        </div>
+        
+        <h1 id="hero-title" class="text-5xl lg:text-7xl font-bold text-foreground mb-6">
+          <span class="bg-gradient-to-r from-orange-500 to-amber-500 bg-clip-text text-transparent">
+            TechGear Pro
+          </span>
+        </h1>
+        
+        <p class="text-2xl text-muted-foreground mb-8 leading-relaxed max-w-3xl mx-auto">
+          Premium electronics and tech accessories with <strong>free 2-day shipping</strong>. 
+          Join <strong>50,000+ customers</strong> who trust our expertise.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12" role="group" aria-label="Primary shopping actions">
+          <Button size="lg" className="text-xl px-12 py-4 bg-gradient-to-r from-orange-500 to-amber-500 hover:scale-105 transition-transform duration-300" aria-label="Browse our premium electronics catalog">
+            <span class="mr-2" aria-hidden="true">🛍️</span>
+            Shop Premium Tech
+          </Button>
+          <Button variant="outline" size="lg" className="text-xl px-8 py-4 hover:scale-105 transition-transform" aria-label="View current deals and special offers">
+            <span class="mr-2" aria-hidden="true">⚡</span>
+            View Deals
+          </Button>
+        </div>
+
+        <!-- E-commerce Features -->
+        <div class="flex items-center justify-center space-x-8 mb-16 text-muted-foreground animate-fade-in-up" role="list" aria-label="Store features and guarantees">
+          <div class="flex items-center space-x-2 hover:scale-105 transition-transform" role="listitem">
+            <span class="text-green-500" aria-hidden="true">🚚</span>
+            <span class="font-medium" role="status" aria-label="Free shipping on orders over 50 dollars">Free Shipping</span>
+            <span>$50+</span>
+          </div>
+          <div class="flex items-center space-x-2 hover:scale-105 transition-transform" role="listitem">
+            <span class="text-blue-500" aria-hidden="true">🔒</span>
+            <span class="font-medium" role="status" aria-label="30-day return guarantee">30-Day</span>
+            <span>Returns</span>
+          </div>
+          <div class="flex items-center space-x-2 hover:scale-105 transition-transform" role="listitem">
+            <span class="text-orange-500" aria-hidden="true">⭐</span>
+            <span class="font-medium" role="status" aria-label="Customer rating: 4.8 out of 5 stars">4.8/5</span>
+            <span>Reviews</span>
+          </div>
+        </div>
+
+        <!-- Product Categories Preview -->
+        <div class="relative animate-fade-in-up" role="region" aria-labelledby="categories-preview">
+          <div class="bg-gradient-to-r from-orange-500/20 to-amber-500/20 rounded-2xl p-8 backdrop-blur-sm border border-orange-500/20 hover:scale-[1.02] transition-transform duration-500">
+            <div class="bg-card rounded-xl p-6 shadow-2xl">
+              <div id="categories-preview" class="text-lg font-semibold mb-6">Popular Categories</div>
+              <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-left" role="region" aria-label="Product categories showcase">
+                <div class="space-y-2 hover:bg-orange-50 dark:hover:bg-orange-950/20 p-3 rounded transition-colors" role="group" aria-labelledby="smartphones">
+                  <div id="smartphones" class="text-sm font-medium">📱 Smartphones</div>
+                  <div class="text-xs text-muted-foreground">• iPhone 15 Series</div>
+                  <div class="text-xs text-muted-foreground">• Samsung Galaxy S24</div>
+                  <div class="text-xs text-primary">From $699</div>
+                </div>
+                <div class="space-y-2 hover:bg-orange-50 dark:hover:bg-orange-950/20 p-3 rounded transition-colors" role="group" aria-labelledby="laptops">
+                  <div id="laptops" class="text-sm font-medium">💻 Laptops</div>
+                  <div class="text-xs text-muted-foreground">• MacBook Pro M3</div>
+                  <div class="text-xs text-muted-foreground">• Dell XPS 15</div>
+                  <div class="text-xs text-primary">From $1,299</div>
+                </div>
+                <div class="space-y-2 hover:bg-orange-50 dark:hover:bg-orange-950/20 p-3 rounded transition-colors" role="group" aria-labelledby="accessories">
+                  <div id="accessories" class="text-sm font-medium">🎧 Audio</div>
+                  <div class="text-xs text-muted-foreground">• AirPods Pro 2</div>
+                  <div class="text-xs text-muted-foreground">• Sony WH-1000XM5</div>
+                  <div class="text-xs text-primary">From $249</div>
+                </div>
+                <div class="space-y-2 hover:bg-orange-50 dark:hover:bg-orange-950/20 p-3 rounded transition-colors" role="group" aria-labelledby="gaming">
+                  <div id="gaming" class="text-sm font-medium">🎮 Gaming</div>
+                  <div class="text-xs text-muted-foreground">• PlayStation 5</div>
+                  <div class="text-xs text-muted-foreground">• Steam Deck</div>
+                  <div class="text-xs text-primary">From $399</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main id="main-content" role="main">
+
+    <!-- E-commerce Features -->
+    <section class="py-20" role="region" aria-labelledby="features-title">
+      <div class="container mx-auto px-4">
+        <h2 id="features-title" class="text-4xl font-bold text-center mb-16 animate-fade-in-left">
+          Why Shop With Us
+        </h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8" role="list" aria-label="E-commerce store benefits and features">
+          <Card className="border-orange-500/20 hover:shadow-lg transition-all duration-300 hover:scale-105 animate-fade-in-up" role="listitem">
+            <CardHeader>
+              <div class="text-4xl mb-4" aria-hidden="true">🚚</div>
+              <CardTitle className="text-xl">Fast & Free Shipping</CardTitle>
+              <CardDescription>Free 2-day shipping on orders over $50</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ul class="space-y-2 text-sm text-muted-foreground" role="list" aria-label="Shipping benefits">
+                <li class="hover:text-foreground transition-colors" role="listitem">• Free shipping on $50+ orders</li>
+                <li class="hover:text-foreground transition-colors" role="listitem">• 2-day delivery in major cities</li>
+                <li class="hover:text-foreground transition-colors" role="listitem">• Express overnight available</li>
+                <li class="hover:text-foreground transition-colors" role="listitem">• Real-time tracking</li>
+              </ul>
+            </CardContent>
+          </Card>
+
+          <Card className="border-amber-500/20 hover:shadow-lg transition-all duration-300 hover:scale-105 animate-fade-in-up" role="listitem">
+            <CardHeader>
+              <div class="text-4xl mb-4" aria-hidden="true">🛡️</div>
+              <CardTitle className="text-xl">Expert Support</CardTitle>
+              <CardDescription>Professional tech advice and warranty service</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ul class="space-y-2 text-sm text-muted-foreground" role="list" aria-label="Support services">
+                <li class="hover:text-foreground transition-colors" role="listitem">• Live chat with tech experts</li>
+                <li class="hover:text-foreground transition-colors" role="listitem">• Extended warranty options</li>
+                <li class="hover:text-foreground transition-colors" role="listitem">• Setup and installation help</li>
+                <li class="hover:text-foreground transition-colors" role="listitem">• 30-day easy returns</li>
+              </ul>
+            </CardContent>
+          </Card>
+
+          <Card className="border-green-500/20 hover:shadow-lg transition-all duration-300 hover:scale-105 animate-fade-in-up" role="listitem">
+            <CardHeader>
+              <div class="text-4xl mb-4" aria-hidden="true">💎</div>
+              <CardTitle className="text-xl">Premium Quality</CardTitle>
+              <CardDescription>Curated selection of top-tier tech products</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ul class="space-y-2 text-sm text-muted-foreground" role="list" aria-label="Quality guarantees">
+                <li class="hover:text-foreground transition-colors" role="listitem">• Only authorized dealers</li>
+                <li class="hover:text-foreground transition-colors" role="listitem">• Latest models and releases</li>
+                <li class="hover:text-foreground transition-colors" role="listitem">• Quality tested before shipping</li>
+                <li class="hover:text-foreground transition-colors" role="listitem">• Competitive price matching</li>
+              </ul>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Content -->
+    <section id="interactive-content" class="py-16 bg-gradient-to-r from-orange-500/5 to-amber-500/5" role="region" aria-labelledby="demo-config-title">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto">
+          <div class="bg-card/80 backdrop-blur-sm border border-orange-500/20 rounded-xl p-8 animate-fade-in-right">
+            <h3 id="demo-config-title" class="text-2xl font-bold mb-6 text-center">
+              🛒 E-commerce Layout Configuration
+            </h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div>
+                <h3 class="font-semibold mb-4">Layout Configuration:</h3>
+                <div class="bg-muted/50 rounded-lg p-4 font-mono text-sm space-y-1 hover:bg-muted/70 transition-colors" role="code" aria-label="E-commerce layout configuration code">
+                  <div>headerVariant="business"</div>
+                  <div>footerVariant="comprehensive"</div>
+                  <div>showHeaderCTA={`{true}`}</div>
+                  <div>headerCTAText="Shop Now"</div>
+                  <div>showBusinessInfo={`{true}`}</div>
+                  <div>showNewsletter={`{true}`}</div>
+                </div>
+              </div>
+              
+              <div>
+                <h3 class="font-semibold mb-4">E-commerce Features:</h3>
+                <ul class="space-y-2 text-sm" role="list" aria-label="Activated e-commerce layout features">
+                  <li class="flex items-center space-x-2 hover:bg-orange-50 dark:hover:bg-orange-950/20 p-1 rounded transition-colors" role="listitem">
+                    <span class="text-green-500" aria-hidden="true">✓</span>
+                    <span>Business header with prominent shopping CTA</span>
+                  </li>
+                  <li class="flex items-center space-x-2 hover:bg-orange-50 dark:hover:bg-orange-950/20 p-1 rounded transition-colors" role="listitem">
+                    <span class="text-green-500" aria-hidden="true">✓</span>
+                    <span>Comprehensive footer with business info</span>
+                  </li>
+                  <li class="flex items-center space-x-2 hover:bg-orange-50 dark:hover:bg-orange-950/20 p-1 rounded transition-colors" role="listitem">
+                    <span class="text-green-500" aria-hidden="true">✓</span>
+                    <span>Newsletter signup for promotional offers</span>
+                  </li>
+                  <li class="flex items-center space-x-2 hover:bg-orange-50 dark:hover:bg-orange-950/20 p-1 rounded transition-colors" role="listitem">
+                    <span class="text-green-500" aria-hidden="true">✓</span>
+                    <span>Mobile-optimized shopping experience</span>
+                  </li>
+                  <li class="flex items-center space-x-2 hover:bg-orange-50 dark:hover:bg-orange-950/20 p-1 rounded transition-colors" role="listitem">
+                    <span class="text-green-500" aria-hidden="true">✓</span>
+                    <span>Touch navigation for mobile commerce</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="mt-8 flex flex-wrap justify-center gap-4" role="group" aria-label="Navigate to other business demo pages">
+              <Button variant="outline" size="sm" className="hover:scale-105 transition-transform" aria-label="View corporate demo with professional business design">
+                <a href="/corporate-demo">🏢 View Corporate Demo</a>
+              </Button>
+              <Button variant="outline" size="sm" className="hover:scale-105 transition-transform" aria-label="View startup demo with modern landing page design">
+                <a href="/startup-demo">🚀 View Startup Demo</a>
+              </Button>
+              <Button variant="outline" size="sm" className="hover:scale-105 transition-transform" aria-label="View portfolio demo with creative minimal layout">
+                <a href="/portfolio-demo">🎨 View Portfolio Demo</a>
+              </Button>
+              <Button size="sm" className="hover:scale-105 transition-transform" aria-label="Return to main business demo overview page">
+                <a href="/business-demo">← Return to Business Demo</a>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Touch Navigation for Mobile Shopping -->
+  <TouchNavigation 
+    variant="bottom-nav"
+    currentPage="ecommerce-demo"
+    client:load
+    aria-label="Bottom navigation bar optimized for mobile shopping experience"
+  />
+
+  </div>
+
+</Layout>

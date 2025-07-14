@@ -1,5 +1,6 @@
 ---
-// Corporate Demo Page - Business Professional Layout
+// Corporate Demo Page - Professional Business Layout
+// Production-ready corporate design for professional services
 // Path: src/pages/corporate-demo.astro
 
 import Layout from '../components/layouts/Layout.astro';
@@ -9,199 +10,221 @@ import { Button } from '../components/ui/button';
 ---
 
 <Layout 
-  title="Cabinet Expertise Comptable | Demo Corporate"
-  description="Cabinet d'expertise comptable professionnel - Audit, conseil, fiscalité"
+  title="Expert Accounting & Advisory Services | Professional Corporate Website"
+  description="Trusted accounting expertise, audit and fiscal consulting since 1995 - serving 500+ professional clients"
   currentPage="corporate-demo"
   headerVariant="business"
   footerVariant="business"
   showCTA={true}
-  ctaText="Prendre RDV"
+  ctaText="Schedule Consultation"
   ctaHref="/contact"
   showBusinessInfo={true}
-  companyName="Cabinet Expertise & Conseil"
-  siteDescription="Expertise comptable, audit et conseil fiscal depuis 1995"
+  companyName="Expert Accounting & Advisory"
+  siteDescription="Professional accounting expertise, audit and fiscal consulting since 1995"
 >
   
-  <!-- Hero Corporate -->
+  <!-- Skip Links for Accessibility -->
+  <div class="sr-only">
+    <a href="#main-content" class="focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-primary-foreground px-4 py-2 rounded">
+      Skip to main content
+    </a>
+    <a href="#interactive-content" class="focus:not-sr-only focus:absolute focus:top-4 focus:left-20 bg-primary text-primary-foreground px-4 py-2 rounded">
+      Skip to interactive services
+    </a>
+  </div>
+
+  <!-- Page Entry Animation -->
+  <div class="animate-fade-in-up">
+
+  <!-- Corporate Hero -->
   <section class="bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 py-20" role="banner" aria-labelledby="hero-title">
     <div class="container mx-auto px-4">
-      <div class="max-w-4xl mx-auto text-center">
+      <div class="max-w-4xl mx-auto text-center animate-fade-in-up">
         
-        <Badge variant="outline" className="mb-6">
-          Expertise depuis 1995
+        <Badge variant="outline" className="mb-6 hover:scale-105 transition-transform">
+          Professional Expertise Since 1995
         </Badge>
         
         <h1 id="hero-title" class="text-4xl lg:text-6xl font-bold text-foreground mb-6">
-          Cabinet Expertise
-          <span class="text-primary">& Conseil</span>
+          Expert Accounting
+          <span class="text-primary">& Advisory</span>
         </h1>
         
         <p class="text-xl text-muted-foreground mb-8 leading-relaxed">
-          Votre partenaire de confiance pour l'expertise comptable, l'audit et le conseil fiscal. 
-          <strong>Plus de 500 entreprises</strong> nous font confiance.
+          Your trusted partner for accounting expertise, audit and fiscal consulting. 
+          <strong>Over 500 businesses</strong> rely on our professional services.
         </p>
 
-        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12" role="group" aria-label="Primary action buttons">
-          <Button size="lg" className="text-lg px-8" aria-label="Schedule an appointment with our accounting experts">
+        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12" role="group" aria-label="Primary service contact actions">
+          <Button size="lg" className="text-lg px-8 hover:scale-105 transition-transform" aria-label="Schedule consultation with our accounting experts">
             <span class="mr-2" aria-hidden="true">📞</span>
-            Prendre Rendez-vous
+            Schedule Consultation
           </Button>
-          <Button variant="outline" size="lg" className="text-lg px-8" aria-label="Learn about our accounting, audit and fiscal services">
+          <Button variant="outline" size="lg" className="text-lg px-8 hover:scale-105 transition-transform" aria-label="Learn about our accounting, audit and fiscal services">
             <span class="mr-2" aria-hidden="true">📄</span>
-            Nos Services
+            Our Services
           </Button>
         </div>
 
-        <!-- Stats Corporate -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16" role="list" aria-label="Company statistics and credentials">
-          <div class="text-center" role="listitem">
+        <!-- Corporate Statistics -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 animate-fade-in-up" role="list" aria-label="Company statistics and professional credentials">
+          <div class="text-center hover:scale-105 transition-transform" role="listitem">
             <div class="text-3xl font-bold text-primary mb-2" role="status" aria-label="Number of client companies: 500 plus">500+</div>
-            <div class="text-sm text-muted-foreground">Entreprises clientes</div>
+            <div class="text-sm text-muted-foreground">Business Clients</div>
           </div>
-          <div class="text-center" role="listitem">
-            <div class="text-3xl font-bold text-primary mb-2" role="status" aria-label="Years of experience: 25 plus">25+</div>
-            <div class="text-sm text-muted-foreground">Années d'expérience</div>
+          <div class="text-center hover:scale-105 transition-transform" role="listitem">
+            <div class="text-3xl font-bold text-primary mb-2" role="status" aria-label="Years of professional experience: 25 plus">25+</div>
+            <div class="text-sm text-muted-foreground">Years of Experience</div>
           </div>
-          <div class="text-center" role="listitem">
+          <div class="text-center hover:scale-105 transition-transform" role="listitem">
             <div class="text-3xl font-bold text-primary mb-2" role="status" aria-label="Client satisfaction rate: 98 percent">98%</div>
-            <div class="text-sm text-muted-foreground">Satisfaction client</div>
+            <div class="text-sm text-muted-foreground">Client Satisfaction</div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Services -->
-  <section class="py-16" role="region" aria-labelledby="services-title">
-    <div class="container mx-auto px-4">
-      <h2 id="services-title" class="text-3xl font-bold text-center mb-12">Nos Expertises</h2>
-      
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8" role="list" aria-label="Professional accounting services">
-        <Card role="listitem">
-          <CardHeader>
-            <div class="text-3xl mb-4" aria-hidden="true">📊</div>
-            <CardTitle>Expertise Comptable</CardTitle>
-            <CardDescription>Tenue de comptabilité et établissement des comptes</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <ul class="space-y-2 text-sm text-muted-foreground" role="list" aria-label="Accounting services details">
-              <li role="listitem">• Comptabilité générale</li>
-              <li role="listitem">• Établissement des comptes annuels</li>
-              <li role="listitem">• Liasse fiscale</li>
-              <li role="listitem">• Déclarations TVA</li>
-            </ul>
-            <Button variant="outline" className="mt-4 w-full" aria-label="Learn more about accounting services and annual reports">
-              En savoir plus
-            </Button>
-          </CardContent>
-        </Card>
+  <!-- Main Content -->
+  <main id="main-content" role="main">
 
-        <Card role="listitem">
-          <CardHeader>
-            <div class="text-3xl mb-4" aria-hidden="true">🔍</div>
-            <CardTitle>Audit & Contrôle</CardTitle>
-            <CardDescription>Audit légal et contractuel</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <ul class="space-y-2 text-sm text-muted-foreground" role="list" aria-label="Audit services details">
-              <li role="listitem">• Commissariat aux comptes</li>
-              <li role="listitem">• Audit contractuel</li>
-              <li role="listitem">• Due diligence</li>
-              <li role="listitem">• Audit social</li>
-            </ul>
-            <Button variant="outline" className="mt-4 w-full" aria-label="Learn more about audit services and legal compliance">
-              En savoir plus
-            </Button>
-          </CardContent>
-        </Card>
+    <!-- Professional Services -->
+    <section id="interactive-content" class="py-16" role="region" aria-labelledby="services-title">
+      <div class="container mx-auto px-4">
+        <h2 id="services-title" class="text-3xl font-bold text-center mb-12 animate-fade-in-left">
+          Our Professional Expertise
+        </h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8" role="list" aria-label="Professional accounting and consulting services">
+          <Card className="hover:shadow-lg transition-all duration-300 hover:scale-105 animate-fade-in-up" role="listitem">
+            <CardHeader>
+              <div class="text-3xl mb-4" aria-hidden="true">📊</div>
+              <CardTitle>Accounting Expertise</CardTitle>
+              <CardDescription>Comprehensive bookkeeping and financial statement preparation</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ul class="space-y-2 text-sm text-muted-foreground" role="list" aria-label="Accounting services details">
+                <li class="hover:text-foreground transition-colors" role="listitem">• General accounting management</li>
+                <li class="hover:text-foreground transition-colors" role="listitem">• Annual financial statements</li>
+                <li class="hover:text-foreground transition-colors" role="listitem">• Tax return preparation</li>
+                <li class="hover:text-foreground transition-colors" role="listitem">• VAT declarations</li>
+              </ul>
+              <Button variant="outline" className="mt-4 w-full hover:scale-105 transition-transform" aria-label="Learn more about accounting services and annual financial reporting">
+                Learn More
+              </Button>
+            </CardContent>
+          </Card>
 
-        <Card role="listitem">
-          <CardHeader>
-            <div class="text-3xl mb-4" aria-hidden="true">⚖️</div>
-            <CardTitle>Conseil Fiscal</CardTitle>
-            <CardDescription>Optimisation fiscale et juridique</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <ul class="space-y-2 text-sm text-muted-foreground" role="list" aria-label="Fiscal consulting services details">
-              <li role="listitem">• Optimisation fiscale</li>
-              <li role="listitem">• Conseil en création</li>
-              <li role="listitem">• Transmission d'entreprise</li>
-              <li role="listitem">• Fiscalité internationale</li>
-            </ul>
-            <Button variant="outline" className="mt-4 w-full" aria-label="Learn more about fiscal optimization and business consulting">
-              En savoir plus
-            </Button>
-          </CardContent>
-        </Card>
+          <Card className="hover:shadow-lg transition-all duration-300 hover:scale-105 animate-fade-in-up" role="listitem">
+            <CardHeader>
+              <div class="text-3xl mb-4" aria-hidden="true">🔍</div>
+              <CardTitle>Audit & Control</CardTitle>
+              <CardDescription>Legal and contractual audit services</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ul class="space-y-2 text-sm text-muted-foreground" role="list" aria-label="Audit services details">
+                <li class="hover:text-foreground transition-colors" role="listitem">• Statutory audit services</li>
+                <li class="hover:text-foreground transition-colors" role="listitem">• Contractual audit</li>
+                <li class="hover:text-foreground transition-colors" role="listitem">• Due diligence</li>
+                <li class="hover:text-foreground transition-colors" role="listitem">• Social audit</li>
+              </ul>
+              <Button variant="outline" className="mt-4 w-full hover:scale-105 transition-transform" aria-label="Learn more about audit services and legal compliance">
+                Learn More
+              </Button>
+            </CardContent>
+          </Card>
+
+          <Card className="hover:shadow-lg transition-all duration-300 hover:scale-105 animate-fade-in-up" role="listitem">
+            <CardHeader>
+              <div class="text-3xl mb-4" aria-hidden="true">⚖️</div>
+              <CardTitle>Fiscal Consulting</CardTitle>
+              <CardDescription>Tax optimization and legal advisory</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ul class="space-y-2 text-sm text-muted-foreground" role="list" aria-label="Fiscal consulting services details">
+                <li class="hover:text-foreground transition-colors" role="listitem">• Tax optimization strategies</li>
+                <li class="hover:text-foreground transition-colors" role="listitem">• Business formation consulting</li>
+                <li class="hover:text-foreground transition-colors" role="listitem">• Business succession planning</li>
+                <li class="hover:text-foreground transition-colors" role="listitem">• International taxation</li>
+              </ul>
+              <Button variant="outline" className="mt-4 w-full hover:scale-105 transition-transform" aria-label="Learn more about fiscal optimization and business consulting">
+                Learn More
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Demo Info -->
-  <section class="py-16 bg-muted/30" role="region" aria-labelledby="demo-config-title">
-    <div class="container mx-auto px-4">
-      <div class="max-w-4xl mx-auto">
-        <div class="bg-card border border-border rounded-xl p-8">
-          <h3 id="demo-config-title" class="text-2xl font-bold mb-6 text-center">
-            🔍 Configuration Corporate Layout
-          </h3>
-          
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div>
-              <h3 class="font-semibold mb-4">Layout Configuration :</h3>
-              <div class="bg-muted/50 rounded-lg p-4 font-mono text-sm space-y-1" role="code" aria-label="Corporate layout configuration code">
-                <div>headerVariant="business"</div>
-                <div>footerVariant="business"</div>
-                <div>showHeaderCTA={`{true}`}</div>
-                <div>showBusinessInfo={`{true}`}</div>
-                <div>showBreadcrumbs={`{true}`}</div>
+    <!-- Layout Configuration Info -->
+    <section class="py-16 bg-muted/30" role="region" aria-labelledby="demo-config-title">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto">
+          <div class="bg-card border border-border rounded-xl p-8 animate-fade-in-right">
+            <h3 id="demo-config-title" class="text-2xl font-bold mb-6 text-center">
+              🔍 Corporate Layout Configuration
+            </h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div>
+                <h3 class="font-semibold mb-4">Layout Configuration:</h3>
+                <div class="bg-muted/50 rounded-lg p-4 font-mono text-sm space-y-1 hover:bg-muted/70 transition-colors" role="code" aria-label="Corporate layout configuration code">
+                  <div>headerVariant="business"</div>
+                  <div>footerVariant="business"</div>
+                  <div>showHeaderCTA={`{true}`}</div>
+                  <div>showBusinessInfo={`{true}`}</div>
+                  <div>showBreadcrumbs={`{true}`}</div>
+                </div>
+              </div>
+              
+              <div>
+                <h3 class="font-semibold mb-4">Corporate Features:</h3>
+                <ul class="space-y-2 text-sm" role="list" aria-label="Activated features in corporate layout">
+                  <li class="flex items-center space-x-2 hover:bg-green-50 dark:hover:bg-green-950/20 p-1 rounded transition-colors" role="listitem">
+                    <span class="text-green-500" aria-hidden="true">✓</span>
+                    <span>Professional business header with consultation CTA</span>
+                  </li>
+                  <li class="flex items-center space-x-2 hover:bg-green-50 dark:hover:bg-green-950/20 p-1 rounded transition-colors" role="listitem">
+                    <span class="text-green-500" aria-hidden="true">✓</span>
+                    <span>Business footer with contact information</span>
+                  </li>
+                  <li class="flex items-center space-x-2 hover:bg-green-50 dark:hover:bg-green-950/20 p-1 rounded transition-colors" role="listitem">
+                    <span class="text-green-500" aria-hidden="true">✓</span>
+                    <span>Hierarchical breadcrumb navigation</span>
+                  </li>
+                  <li class="flex items-center space-x-2 hover:bg-green-50 dark:hover:bg-green-950/20 p-1 rounded transition-colors" role="listitem">
+                    <span class="text-green-500" aria-hidden="true">✓</span>
+                    <span>Clean professional design and credible branding</span>
+                  </li>
+                  <li class="flex items-center space-x-2 hover:bg-green-50 dark:hover:bg-green-950/20 p-1 rounded transition-colors" role="listitem">
+                    <span class="text-green-500" aria-hidden="true">✓</span>
+                    <span>Dark mode adaptation for professional sector</span>
+                  </li>
+                </ul>
               </div>
             </div>
-            
-            <div>
-              <h3 class="font-semibold mb-4">Features Activées :</h3>
-              <ul class="space-y-2 text-sm" role="list" aria-label="Activated features in corporate layout">
-                <li class="flex items-center space-x-2" role="listitem">
-                  <span class="text-green-500" aria-hidden="true">✓</span>
-                  <span>Header business avec CTA "Prendre RDV"</span>
-                </li>
-                <li class="flex items-center space-x-2" role="listitem">
-                  <span class="text-green-500" aria-hidden="true">✓</span>
-                  <span>Footer avec informations de contact</span>
-                </li>
-                <li class="flex items-center space-x-2" role="listitem">
-                  <span class="text-green-500" aria-hidden="true">✓</span>
-                  <span>Breadcrumbs pour navigation hiérarchique</span>
-                </li>
-                <li class="flex items-center space-x-2" role="listitem">
-                  <span class="text-green-500" aria-hidden="true">✓</span>
-                  <span>Design professionnel sobre et crédible</span>
-                </li>
-                <li class="flex items-center space-x-2" role="listitem">
-                  <span class="text-green-500" aria-hidden="true">✓</span>
-                  <span>Dark mode adapté au secteur</span>
-                </li>
-              </ul>
-            </div>
-          </div>
 
-          <div class="mt-8 flex flex-wrap justify-center gap-4" role="group" aria-label="Navigate to other demo pages">
-            <Button variant="outline" size="sm" aria-label="View startup demo with modern landing page design">
-              <a href="/startup-demo">🚀 Voir Startup Demo</a>
-            </Button>
-            <Button variant="outline" size="sm" aria-label="View e-commerce demo with comprehensive shopping features">
-              <a href="/ecommerce-demo">🛒 Voir E-commerce Demo</a>
-            </Button>
-            <Button variant="outline" size="sm" aria-label="View portfolio demo with creative minimal design">
-              <a href="/portfolio-demo">🎨 Voir Portfolio Demo</a>
-            </Button>
-            <Button size="sm" aria-label="Return to main business demo overview page">
-              <a href="/business-demo">← Retour Business Demo</a>
-            </Button>
+            <div class="mt-8 flex flex-wrap justify-center gap-4" role="group" aria-label="Navigate to other business demo pages">
+              <Button variant="outline" size="sm" className="hover:scale-105 transition-transform" aria-label="View startup demo with modern landing page design">
+                <a href="/startup-demo">🚀 View Startup Demo</a>
+              </Button>
+              <Button variant="outline" size="sm" className="hover:scale-105 transition-transform" aria-label="View e-commerce demo with comprehensive shopping features">
+                <a href="/ecommerce-demo">🛒 View E-commerce Demo</a>
+              </Button>
+              <Button variant="outline" size="sm" className="hover:scale-105 transition-transform" aria-label="View portfolio demo with creative minimal design">
+                <a href="/portfolio-demo">🎨 View Portfolio Demo</a>
+              </Button>
+              <Button size="sm" className="hover:scale-105 transition-transform" aria-label="Return to main business demo overview page">
+                <a href="/business-demo">← Return to Business Demo</a>
+              </Button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+  </main>
+
+  </div>
 
 </Layout>
