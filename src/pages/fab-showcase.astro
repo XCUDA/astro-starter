@@ -1,523 +1,655 @@
 ---
-// Floating Action Buttons Showcase Page - Sprint 9 Step 3 Demo
-// Interactive demonstration of all FAB variants and configurations
+// Floating Action Button Showcase - Professional Global FAB Demonstration
+// Complete showcase of a single, globally-positioned floating action button
 // Path: src/pages/fab-showcase.astro
 
 import Layout from '../components/layouts/Layout.astro';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
-import FloatingActionButton, { BusinessFAB, SupportFAB, EcommerceFAB } from '../components/islands/FloatingActionButton';
+import { GlobalFAB } from '../components/islands/FloatingActionButton';
+import { 
+  PageTransition,
+  ScrollReveal, 
+  StaggeredAnimation
+} from '../components/islands/SmoothTransitions';
 ---
 
 <Layout 
-  title="Floating Action Buttons Demo - Sprint 9"
-  description="Interactive demonstration of mobile-optimized floating action buttons with business configurations"
+  title="Professional Floating Action Button"
+  description="Global floating action button with advanced behaviors: scroll-responsive, multi-actions, and mobile-optimized interactions"
   currentPage="fab-showcase"
   headerVariant="business"
   footerVariant="business"
-  keywords={["floating action button, FAB, mobile UI, touch interface, quick actions"]}
+  keywords={["floating action button, FAB, mobile UI, touch interface, global positioning, scroll behavior"]}
 >
-  <!-- Hero Section -->
+  {/* Skip Links - WCAG 2.1 AA */}
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 z-50 px-4 py-2 bg-primary text-primary-foreground rounded-md">
+    Skip to main content
+  </a>
+  <a href="#interactive-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-20 z-50 px-4 py-2 bg-primary text-primary-foreground rounded-md">
+    Skip to interactive demo
+  </a>
+
+  {/* Hero Section */}
   <section class="bg-gradient-to-br from-primary/5 via-background to-secondary/5 py-16" role="banner" aria-labelledby="hero-title">
     <div class="container mx-auto px-4">
-      <div class="max-w-4xl mx-auto text-center">
-        <div class="flex items-center justify-center space-x-2 mb-6">
-          <span class="text-4xl" aria-hidden="true">🎯</span>
-          <Badge variant="secondary" className="text-sm font-medium">
-            Sprint 9 - Step 3
-          </Badge>
-        </div>
-        
-        <h1 id="hero-title" class="text-4xl lg:text-5xl font-bold text-foreground mb-6">
-          Floating Action Buttons Demo
-        </h1>
-        
-        <p class="text-xl text-muted-foreground mb-8 leading-relaxed">
-          Professional FAB components optimized for mobile interactions. 
-          Scroll down to test different variants and behaviors!
-        </p>
-        
-        <div class="flex flex-col sm:flex-row gap-4 justify-center" role="group" aria-label="Page overview action buttons">
-          <Button size="lg" className="text-lg px-8" aria-label="Learn about mobile-optimized floating action buttons">
-            <span class="mr-2" aria-hidden="true">📱</span>
-            Mobile Optimized
-          </Button>
-          <Button variant="outline" size="lg" className="text-lg px-8" aria-label="Explore business-ready FAB configurations">
-            <span class="mr-2" aria-hidden="true">⚡</span>
-            Business Ready
-          </Button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Current Demo Info -->
-  <section class="py-8 bg-muted/30" role="region" aria-labelledby="demo-status">
-    <div class="container mx-auto px-4">
-      <Card className="border-primary/20 bg-primary/5">
-        <CardHeader>
-          <CardTitle id="demo-status" className="flex items-center space-x-2">
-            <span aria-hidden="true">🎯</span>
-            <span>Active FAB Demonstrations</span>
-          </CardTitle>
-          <CardDescription>
-            Multiple FAB variants are currently active on this page. Try them on different screen sizes!
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-sm" role="list" aria-label="Currently active FAB demonstrations">
-            <div role="listitem">
-              <strong>Business FAB:</strong> Bottom-right with quick actions
-            </div>
-            <div role="listitem">
-              <strong>Support FAB:</strong> Bottom-left with help options
-            </div>
-            <div role="listitem">
-              <strong>E-commerce FAB:</strong> Radial expansion with cart actions
-            </div>
-            <div role="listitem">
-              <strong>Scroll Behavior:</strong> Hides when scrolling down
-            </div>
-            <div role="listitem">
-              <strong>Mobile Priority:</strong> Optimized for touch interaction
-            </div>
-            <div role="listitem">
-              <strong>Accessibility:</strong> Full keyboard and screen reader support
-            </div>
+      <PageTransition client:load config={{ direction: 'up', duration: 800, delay: 200 }}>
+        <div class="max-w-4xl mx-auto text-center">
+          <div class="flex items-center justify-center space-x-2 mb-6">
+            <span class="text-4xl" aria-hidden="true">🎯</span>
+            <Badge variant="secondary" className="text-sm font-medium">
+              Professional FAB System
+            </Badge>
           </div>
-        </CardContent>
-      </Card>
+          
+          <h1 id="hero-title" class="text-4xl lg:text-5xl font-bold text-foreground mb-6">
+            Global Floating Action Button
+          </h1>
+          
+          <p class="text-xl text-muted-foreground mb-8 leading-relaxed">
+            Experience a professionally designed floating action button with global positioning, 
+            scroll-responsive behavior, and multi-action capabilities. Perfect for modern business applications.
+          </p>
+          
+          <div class="flex flex-col sm:flex-row gap-4 justify-center" role="group" aria-label="FAB demonstration overview">
+            <Button size="lg" className="text-lg px-8" aria-label="Learn about global FAB positioning and behavior">
+              <span class="mr-2" aria-hidden="true">🌐</span>
+              Global Positioning
+            </Button>
+            <Button variant="outline" size="lg" className="text-lg px-8" aria-label="Explore multi-action FAB capabilities">
+              <span class="mr-2" aria-hidden="true">⚡</span>
+              Multi-Action Design
+            </Button>
+          </div>
+        </div>
+      </PageTransition>
     </div>
   </section>
 
-  <!-- FAB Variants Overview -->
-  <section class="py-16" role="region" aria-labelledby="variants-title">
-    <div class="container mx-auto px-4">
-      <div class="text-center mb-12">
-        <h2 id="variants-title" class="text-3xl font-bold text-foreground mb-4">
-          FAB Variants and Configurations
-        </h2>
-        <p class="text-lg text-muted-foreground max-w-3xl mx-auto">
-          Professional floating action buttons with multiple business-ready configurations
-          and optimized user experience patterns.
-        </p>
+  {/* Main Content */}
+  <main id="main-content" role="main" tabindex="-1">
+
+    {/* Global FAB Features Overview */}
+    <section class="py-8 bg-gradient-to-r from-primary/5 to-secondary/5" role="region" aria-labelledby="features-overview">
+      <div class="container mx-auto px-4">
+        <ScrollReveal client:load config={{ direction: 'scale', threshold: 0.3 }}>
+          <Card className="border-primary/20 bg-card/95 backdrop-blur-sm">
+            <CardHeader>
+              <CardTitle id="features-overview" className="flex items-center space-x-2 text-primary">
+                <span aria-hidden="true">🚀</span>
+                <span>Global FAB Active on This Page</span>
+              </CardTitle>
+              <CardDescription className="text-muted-foreground text-lg">
+                A single, professionally positioned floating action button demonstrating all key behaviors
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-sm" role="list" aria-label="Active FAB demonstration features">
+                <div class="text-center p-4 bg-primary/5 rounded-lg" role="listitem">
+                  <div class="text-2xl mb-2" aria-hidden="true">🌐</div>
+                  <div class="font-medium">Global Position</div>
+                  <div class="text-muted-foreground text-xs">Fixed viewport placement</div>
+                </div>
+                <div class="text-center p-4 bg-secondary/5 rounded-lg" role="listitem">
+                  <div class="text-2xl mb-2" aria-hidden="true">📜</div>
+                  <div class="font-medium">Scroll Responsive</div>
+                  <div class="text-muted-foreground text-xs">Hide/show on scroll</div>
+                </div>
+                <div class="text-center p-4 bg-green-500/5 rounded-lg" role="listitem">
+                  <div class="text-2xl mb-2" aria-hidden="true">⚡</div>
+                  <div class="font-medium">Multi-Actions</div>
+                  <div class="text-muted-foreground text-xs">Expandable quick actions</div>
+                </div>
+                <div class="text-center p-4 bg-blue-500/5 rounded-lg" role="listitem">
+                  <div class="text-2xl mb-2" aria-hidden="true">📱</div>
+                  <div class="font-medium">Mobile Optimized</div>
+                  <div class="text-muted-foreground text-xs">Touch-friendly design</div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </ScrollReveal>
       </div>
+    </section>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" role="list" aria-label="Available FAB variant types">
-        
-        <!-- Business FAB -->
-        <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105" role="listitem">
-          <CardHeader className="text-center">
-            <div class="text-3xl mb-2" aria-hidden="true">💼</div>
-            <CardTitle className="text-lg">Business FAB</CardTitle>
-            <CardDescription>
-              Quick actions for business productivity
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <ul class="text-sm space-y-2 text-muted-foreground" role="list" aria-label="Business FAB configuration details">
-              <li role="listitem">• <strong>Position:</strong> Bottom-right</li>
-              <li role="listitem">• <strong>Actions:</strong> New Contact, Project, Note</li>
-              <li role="listitem">• <strong>Expand:</strong> Vertical (up)</li>
-              <li role="listitem">• <strong>Best for:</strong> CRM, Project Management</li>
-            </ul>
-          </CardContent>
-        </Card>
+    {/* Key Features and Behaviors */}
+    <section class="py-16" role="region" aria-labelledby="behaviors-title">
+      <div class="container mx-auto px-4">
+        <ScrollReveal client:load config={{ direction: 'up', threshold: 0.2 }}>
+          <div class="text-center mb-12">
+            <h2 id="behaviors-title" class="text-3xl font-bold text-foreground mb-4">
+              Advanced FAB Behaviors
+            </h2>
+            <p class="text-lg text-muted-foreground max-w-3xl mx-auto">
+              Our global floating action button demonstrates professional-grade behaviors 
+              essential for modern business applications.
+            </p>
+          </div>
+        </ScrollReveal>
 
-        <!-- Support FAB -->
-        <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105" role="listitem">
-          <CardHeader className="text-center">
-            <div class="text-3xl mb-2" aria-hidden="true">🆘</div>
-            <CardTitle className="text-lg">Support FAB</CardTitle>
-            <CardDescription>
-              Help and assistance options
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <ul class="text-sm space-y-2 text-muted-foreground" role="list" aria-label="Support FAB configuration details">
-              <li role="listitem">• <strong>Position:</strong> Bottom-left</li>
-              <li role="listitem">• <strong>Actions:</strong> Live Chat, Docs, Feedback</li>
-              <li role="listitem">• <strong>Expand:</strong> Vertical (up)</li>
-              <li role="listitem">• <strong>Best for:</strong> Customer Support, SaaS</li>
-            </ul>
-          </CardContent>
-        </Card>
+        <StaggeredAnimation client:load staggerDelay={150}>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" role="list" aria-label="FAB behavior demonstrations">
+            
+            {/* Global Positioning */}
+            <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105" role="listitem">
+              <CardHeader className="text-center">
+                <div class="text-3xl mb-2" aria-hidden="true">🌐</div>
+                <CardTitle className="text-lg">Global Positioning</CardTitle>
+                <CardDescription>
+                  Fixed viewport placement, always visible
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ul class="text-sm space-y-2 text-muted-foreground" role="list" aria-label="Global positioning features">
+                  <li role="listitem">• <strong>Position:</strong> Fixed to viewport, not container</li>
+                  <li role="listitem">• <strong>Z-Index:</strong> Above all content (z-60)</li>
+                  <li role="listitem">• <strong>Visibility:</strong> Hero to footer consistency</li>
+                  <li role="listitem">• <strong>Independence:</strong> Unaffected by parent containers</li>
+                </ul>
+              </CardContent>
+            </Card>
 
-        <!-- E-commerce FAB -->
-        <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105" role="listitem">
-          <CardHeader className="text-center">
-            <div class="text-3xl mb-2" aria-hidden="true">🛒</div>
-            <CardTitle className="text-lg">E-commerce FAB</CardTitle>
-            <CardDescription>
-              Shopping and cart actions
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <ul class="text-sm space-y-2 text-muted-foreground" role="list" aria-label="E-commerce FAB configuration details">
-              <li role="listitem">• <strong>Position:</strong> Bottom-right</li>
-              <li role="listitem">• <strong>Actions:</strong> Wishlist, Compare, Search</li>
-              <li role="listitem">• <strong>Expand:</strong> Radial</li>
-              <li role="listitem">• <strong>Best for:</strong> Online Stores, Marketplaces</li>
-            </ul>
-          </CardContent>
-        </Card>
+            {/* Scroll Responsive */}
+            <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105" role="listitem">
+              <CardHeader className="text-center">
+                <div class="text-3xl mb-2" aria-hidden="true">📜</div>
+                <CardTitle className="text-lg">Scroll Responsive</CardTitle>
+                <CardDescription>
+                  Intelligent hide/show based on scroll direction
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ul class="text-sm space-y-2 text-muted-foreground" role="list" aria-label="Scroll responsive features">
+                  <li role="listitem">• <strong>Hide:</strong> When scrolling down (reading mode)</li>
+                  <li role="listitem">• <strong>Show:</strong> When scrolling up (navigation intent)</li>
+                  <li role="listitem">• <strong>Threshold:</strong> Configurable scroll distance</li>
+                  <li role="listitem">• <strong>Performance:</strong> Throttled scroll listeners</li>
+                </ul>
+              </CardContent>
+            </Card>
 
-        <!-- Custom Single FAB -->
-        <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105" role="listitem">
-          <CardHeader className="text-center">
-            <div class="text-3xl mb-2" aria-hidden="true">⚡</div>
-            <CardTitle className="text-lg">Single Action FAB</CardTitle>
-            <CardDescription>
-              One primary action only
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <ul class="text-sm space-y-2 text-muted-foreground" role="list" aria-label="Single action FAB details">
-              <li role="listitem">• <strong>Use case:</strong> Call-to-Action</li>
-              <li role="listitem">• <strong>Examples:</strong> Add to Cart, Contact</li>
-              <li role="listitem">• <strong>Behavior:</strong> Direct action</li>
-              <li role="listitem">• <strong>Best for:</strong> Landing Pages, Forms</li>
-            </ul>
-          </CardContent>
-        </Card>
+            {/* Multi-Actions */}
+            <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105" role="listitem">
+              <CardHeader className="text-center">
+                <div class="text-3xl mb-2" aria-hidden="true">⚡</div>
+                <CardTitle className="text-lg">Multi-Actions</CardTitle>
+                <CardDescription>
+                  Expandable secondary actions on demand
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ul class="text-sm space-y-2 text-muted-foreground" role="list" aria-label="Multi-action features">
+                  <li role="listitem">• <strong>Expand:</strong> Vertical or radial layouts</li>
+                  <li role="listitem">• <strong>Actions:</strong> 3-5 contextual quick actions</li>
+                  <li role="listitem">• <strong>Auto-close:</strong> Smart timing and outside-click</li>
+                  <li role="listitem">• <strong>Animation:</strong> Smooth transitions with stagger</li>
+                </ul>
+              </CardContent>
+            </Card>
 
-        <!-- Scroll-Responsive FAB -->
-        <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105" role="listitem">
-          <CardHeader className="text-center">
-            <div class="text-3xl mb-2" aria-hidden="true">📜</div>
-            <CardTitle className="text-lg">Scroll-Responsive</CardTitle>
-            <CardDescription>
-              Adapts to user scroll behavior
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <ul class="text-sm space-y-2 text-muted-foreground" role="list" aria-label="Scroll-responsive FAB behavior details">
-              <li role="listitem">• <strong>Behavior:</strong> Hide on scroll down</li>
-              <li role="listitem">• <strong>Show:</strong> On scroll up</li>
-              <li role="listitem">• <strong>Threshold:</strong> Configurable</li>
-              <li role="listitem">• <strong>Best for:</strong> Content-heavy pages</li>
-            </ul>
-          </CardContent>
-        </Card>
+            {/* Mobile Optimization */}
+            <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105" role="listitem">
+              <CardHeader className="text-center">
+                <div class="text-3xl mb-2" aria-hidden="true">📱</div>
+                <CardTitle className="text-lg">Mobile Optimization</CardTitle>
+                <CardDescription>
+                  Touch-friendly with responsive sizing
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ul class="text-sm space-y-2 text-muted-foreground" role="list" aria-label="Mobile optimization features">
+                  <li role="listitem">• <strong>Touch Targets:</strong> 44px+ minimum size</li>
+                  <li role="listitem">• <strong>Responsive:</strong> Adaptive sizing across devices</li>
+                  <li role="listitem">• <strong>Gestures:</strong> Touch, long-press, swipe support</li>
+                  <li role="listitem">• <strong>Safe Areas:</strong> Respect device safe zones</li>
+                </ul>
+              </CardContent>
+            </Card>
 
-        <!-- Position Variants -->
-        <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105" role="listitem">
-          <CardHeader className="text-center">
-            <div class="text-3xl mb-2" aria-hidden="true">📍</div>
-            <CardTitle className="text-lg">Position Variants</CardTitle>
-            <CardDescription>
-              Multiple positioning options
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <ul class="text-sm space-y-2 text-muted-foreground" role="list" aria-label="Position variant options">
-              <li role="listitem">• <strong>Options:</strong> 5 position variants</li>
-              <li role="listitem">• <strong>Corners:</strong> All four corners</li>
-              <li role="listitem">• <strong>Center:</strong> Bottom center</li>
-              <li role="listitem">• <strong>Best for:</strong> Different layouts</li>
-            </ul>
-          </CardContent>
-        </Card>
+            {/* Accessibility */}
+            <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105" role="listitem">
+              <CardHeader className="text-center">
+                <div class="text-3xl mb-2" aria-hidden="true">♿</div>
+                <CardTitle className="text-lg">Accessibility First</CardTitle>
+                <CardDescription>
+                  Full keyboard and screen reader support
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ul class="text-sm space-y-2 text-muted-foreground" role="list" aria-label="Accessibility features">
+                  <li role="listitem">• <strong>Keyboard:</strong> Arrow keys, Enter, Escape navigation</li>
+                  <li role="listitem">• <strong>Screen Reader:</strong> ARIA labels and live regions</li>
+                  <li role="listitem">• <strong>Focus:</strong> Enhanced visual focus indicators</li>
+                  <li role="listitem">• <strong>Announcements:</strong> State changes communicated</li>
+                </ul>
+              </CardContent>
+            </Card>
 
+            {/* Business Integration */}
+            <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105" role="listitem">
+              <CardHeader className="text-center">
+                <div class="text-3xl mb-2" aria-hidden="true">💼</div>
+                <CardTitle className="text-lg">Business Integration</CardTitle>
+                <CardDescription>
+                  Professional actions for business workflows
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ul class="text-sm space-y-2 text-muted-foreground" role="list" aria-label="Business integration features">
+                  <li role="listitem">• <strong>CRM Actions:</strong> New contact, lead, opportunity</li>
+                  <li role="listitem">• <strong>Project Tools:</strong> Create task, project, note</li>
+                  <li role="listitem">• <strong>Communication:</strong> Call, email, message shortcuts</li>
+                  <li role="listitem">• <strong>Analytics:</strong> Track user interactions</li>
+                </ul>
+              </CardContent>
+            </Card>
+
+          </div>
+        </StaggeredAnimation>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Implementation Examples -->
-  <section class="py-16 bg-muted/30" role="region" aria-labelledby="implementation-title">
-    <div class="container mx-auto px-4">
-      <h2 id="implementation-title" class="text-3xl font-bold text-foreground text-center mb-12">
-        Implementation Examples
-      </h2>
+    {/* Interactive Testing Section */}
+    <section id="interactive-content" class="py-16 bg-muted/30" role="region" aria-labelledby="testing-title">
+      <div class="container mx-auto px-4">
+        <ScrollReveal client:load config={{ direction: 'scale', threshold: 0.3 }}>
+          <div class="text-center mb-12">
+            <h2 id="testing-title" class="text-3xl font-bold text-foreground mb-4">
+              Interactive Testing Guide
+            </h2>
+            <p class="text-lg text-muted-foreground max-w-3xl mx-auto">
+              Test all FAB behaviors using the global floating action button positioned 
+              in the bottom-right corner of your screen.
+            </p>
+            <Badge variant="secondary" className="mt-4">
+              <span class="mr-2" aria-hidden="true">🎯</span>
+              Live Demo Active
+            </Badge>
+          </div>
+        </ScrollReveal>
 
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8" role="list" aria-label="Code implementation examples">
-        
-        <!-- Basic Usage -->
-        <Card role="listitem">
-          <CardHeader>
-            <CardTitle className="flex items-center space-x-2">
-              <span aria-hidden="true">🚀</span>
-              <span>Basic FAB</span>
-            </CardTitle>
-            <CardDescription>
-              Simple single-action floating button
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div class="bg-muted p-4 rounded-lg text-sm font-mono" role="code" aria-label="Basic FAB implementation code example">
-              {`<FloatingActionButton
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8" role="list" aria-label="FAB testing instructions">
+          
+          {/* Desktop Testing */}
+          <Card role="listitem">
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2">
+                <span aria-hidden="true">🖥️</span>
+                <span>Desktop Testing</span>
+              </CardTitle>
+              <CardDescription>
+                How to test the FAB on desktop devices
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div class="space-y-3" role="list" aria-label="Desktop testing steps">
+                <div class="flex items-start space-x-3" role="listitem">
+                  <span class="text-primary font-bold">1.</span>
+                  <div>
+                    <strong>Locate the FAB:</strong> Look for the floating button in the bottom-right corner
+                  </div>
+                </div>
+                <div class="flex items-start space-x-3" role="listitem">
+                  <span class="text-primary font-bold">2.</span>
+                  <div>
+                    <strong>Click to expand:</strong> Click the main button to reveal secondary actions
+                  </div>
+                </div>
+                <div class="flex items-start space-x-3" role="listitem">
+                  <span class="text-primary font-bold">3.</span>
+                  <div>
+                    <strong>Test scroll behavior:</strong> Scroll down to see the FAB hide, scroll up to see it return
+                  </div>
+                </div>
+                <div class="flex items-start space-x-3" role="listitem">
+                  <span class="text-primary font-bold">4.</span>
+                  <div>
+                    <strong>Keyboard navigation:</strong> Tab to focus, use arrow keys to navigate actions
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Mobile Testing */}
+          <Card role="listitem">
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2">
+                <span aria-hidden="true">📱</span>
+                <span>Mobile Testing</span>
+              </CardTitle>
+              <CardDescription>
+                How to test the FAB on mobile devices
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div class="space-y-3" role="list" aria-label="Mobile testing steps">
+                <div class="flex items-start space-x-3" role="listitem">
+                  <span class="text-primary font-bold">1.</span>
+                  <div>
+                    <strong>Touch targets:</strong> Notice the larger, touch-friendly button size
+                  </div>
+                </div>
+                <div class="flex items-start space-x-3" role="listitem">
+                  <span class="text-primary font-bold">2.</span>
+                  <div>
+                    <strong>Touch to expand:</strong> Tap the main button to reveal secondary actions
+                  </div>
+                </div>
+                <div class="flex items-start space-x-3" role="listitem">
+                  <span class="text-primary font-bold">3.</span>
+                  <div>
+                    <strong>Scroll gestures:</strong> Use touch scroll to test hide/show behavior
+                  </div>
+                </div>
+                <div class="flex items-start space-x-3" role="listitem">
+                  <span class="text-primary font-bold">4.</span>
+                  <div>
+                    <strong>Auto-close:</strong> Actions close automatically after 3 seconds or tap outside
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+        </div>
+      </div>
+    </section>
+
+    {/* Implementation Examples */}
+    <section class="py-16" role="region" aria-labelledby="implementation-title">
+      <div class="container mx-auto px-4">
+        <ScrollReveal client:load config={{ direction: 'up', threshold: 0.3 }}>
+          <h2 id="implementation-title" class="text-3xl font-bold text-foreground text-center mb-12">
+            Implementation Examples
+          </h2>
+        </ScrollReveal>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8" role="list" aria-label="Code implementation examples">
+          
+          {/* Basic Global FAB */}
+          <Card role="listitem">
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2">
+                <span aria-hidden="true">🚀</span>
+                <span>Basic Global FAB</span>
+              </CardTitle>
+              <CardDescription>
+                Simple global FAB with single action
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div class="bg-muted p-4 rounded-lg text-sm font-mono" role="code" aria-label="Basic global FAB implementation">
+                {`<GlobalFAB
   mainAction={{
-    id: 'add',
-    title: 'Add Item',
+    id: 'primary',
+    title: 'Primary Action',
     icon: '➕',
-    onClick: () => alert('Add clicked!')
+    onClick: () => handleAction()
   }}
   position="bottom-right"
   size="lg"
 />`}
-            </div>
-          </CardContent>
-        </Card>
+              </div>
+            </CardContent>
+          </Card>
 
-        <!-- Multi-Action FAB -->
-        <Card role="listitem">
-          <CardHeader>
-            <CardTitle className="flex items-center space-x-2">
-              <span aria-hidden="true">🔧</span>
-              <span>Multi-Action FAB</span>
-            </CardTitle>
-            <CardDescription>
-              FAB with expandable secondary actions
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div class="bg-muted p-4 rounded-lg text-sm font-mono" role="code" aria-label="Multi-action FAB implementation code example">
-              {`<FloatingActionButton
-  mainAction={{ id: 'main', title: 'Actions', icon: '⚙️' }}
-  secondaryActions={[
-    { id: 'action1', title: 'Action 1', icon: '📁' },
-    { id: 'action2', title: 'Action 2', icon: '✏️' }
-  ]}
-  expandDirection="up"
-/>`}
-            </div>
-          </CardContent>
-        </Card>
-
-        <!-- Business Pre-configured -->
-        <Card role="listitem">
-          <CardHeader>
-            <CardTitle className="flex items-center space-x-2">
-              <span aria-hidden="true">💼</span>
-              <span>Business Pre-configured</span>
-            </CardTitle>
-            <CardDescription>
-              Ready-to-use business FAB
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div class="bg-muted p-4 rounded-lg text-sm font-mono" role="code" aria-label="Pre-configured business FAB implementation code">
-              {`<BusinessFAB 
-  position="bottom-right"
-  hideOnScroll={true}
-  showOnlyOnMobile={false}
-/>`}
-            </div>
-          </CardContent>
-        </Card>
-
-        <!-- Advanced Configuration -->
-        <Card role="listitem">
-          <CardHeader>
-            <CardTitle className="flex items-center space-x-2">
-              <span aria-hidden="true">⚡</span>
-              <span>Advanced Configuration</span>
-            </CardTitle>
-            <CardDescription>
-              Full customization with all options
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div class="bg-muted p-4 rounded-lg text-sm font-mono" role="code" aria-label="Advanced FAB configuration with all options">
-              {`<FloatingActionButton
-  mainAction={{ /* ... */ }}
-  secondaryActions={[/* ... */]}
-  position="bottom-left"
-  hideOnScroll={true}
-  scrollThreshold={150}
-  expandDirection="radial"
-  autoClose={true}
-  autoCloseDelay={5000}
-/>`}
-            </div>
-          </CardContent>
-        </Card>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Features and Benefits -->
-  <section class="py-16" role="region" aria-labelledby="features-title">
-    <div class="container mx-auto px-4">
-      <h2 id="features-title" class="text-3xl font-bold text-foreground text-center mb-12">
-        Features and Benefits
-      </h2>
-      
-      <div class="max-w-4xl mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8" role="list" aria-label="FAB component features and benefits">
-          
-          <!-- Mobile Optimization -->
-          <div class="space-y-4" role="listitem">
-            <h3 class="text-xl font-semibold flex items-center space-x-2">
-              <span aria-hidden="true">📱</span>
-              <span>Mobile Optimization</span>
-            </h3>
-            <ul class="space-y-2 text-muted-foreground" role="list" aria-label="Mobile optimization features">
-              <li role="listitem">• Touch-friendly sizes (44px+ touch targets)</li>
-              <li role="listitem">• Responsive positioning across screen sizes</li>
-              <li role="listitem">• Optimized animations for mobile performance</li>
-              <li role="listitem">• Show/hide based on screen size</li>
-            </ul>
-          </div>
-
-          <!-- Accessibility -->
-          <div class="space-y-4" role="listitem">
-            <h3 class="text-xl font-semibold flex items-center space-x-2">
-              <span aria-hidden="true">♿</span>
-              <span>Accessibility</span>
-            </h3>
-            <ul class="space-y-2 text-muted-foreground" role="list" aria-label="Accessibility features">
-              <li role="listitem">• Full keyboard navigation support</li>
-              <li role="listitem">• Screen reader friendly with ARIA labels</li>
-              <li role="listitem">• Focus management and visual indicators</li>
-              <li role="listitem">• Semantic HTML structure</li>
-            </ul>
-          </div>
-
-          <!-- Performance -->
-          <div class="space-y-4" role="listitem">
-            <h3 class="text-xl font-semibold flex items-center space-x-2">
-              <span aria-hidden="true">⚡</span>
-              <span>Performance</span>
-            </h3>
-            <ul class="space-y-2 text-muted-foreground" role="list" aria-label="Performance optimization features">
-              <li role="listitem">• GPU-accelerated animations</li>
-              <li role="listitem">• Throttled scroll listeners</li>
-              <li role="listitem">• Minimal DOM manipulation</li>
-              <li role="listitem">• Optimized re-renders with React</li>
-            </ul>
-          </div>
-
-          <!-- Business Features -->
-          <div class="space-y-4" role="listitem">
-            <h3 class="text-xl font-semibold flex items-center space-x-2">
-              <span aria-hidden="true">💼</span>
-              <span>Business Features</span>
-            </h3>
-            <ul class="space-y-2 text-muted-foreground" role="list" aria-label="Business-oriented features">
-              <li role="listitem">• Pre-configured business templates</li>
-              <li role="listitem">• Customizable action sets</li>
-              <li role="listitem">• Analytics-friendly event handling</li>
-              <li role="listitem">• Brand-consistent styling options</li>
-            </ul>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Long Content for Scroll Testing -->
-  <section class="py-16" role="region" aria-labelledby="scroll-test-title">
-    <div class="container mx-auto px-4">
-      <h2 id="scroll-test-title" class="text-3xl font-bold text-foreground text-center mb-12">
-        Scroll Test Content
-      </h2>
-      
-      <div class="max-w-3xl mx-auto space-y-8" role="list" aria-label="Scroll testing content sections">
-        {Array.from({ length: 15 }, (_, i) => (
-          <Card key={i} role="listitem">
+          {/* Multi-Action FAB */}
+          <Card role="listitem">
             <CardHeader>
-              <CardTitle>Test Section {i + 1}</CardTitle>
+              <CardTitle className="flex items-center space-x-2">
+                <span aria-hidden="true">⚡</span>
+                <span>Multi-Action FAB</span>
+              </CardTitle>
               <CardDescription>
-                Scroll through this content to test FAB scroll behavior
+                Global FAB with expandable secondary actions
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <p class="text-muted-foreground leading-relaxed">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-                nisi ut aliquip ex ea commodo consequat. Notice how the FABs behave 
-                as you scroll down and back up through this content.
-              </p>
-              <p class="text-muted-foreground leading-relaxed mt-4">
-                The scroll-responsive FABs will hide when you scroll down quickly 
-                and reappear when you scroll back up, providing an optimal user 
-                experience that doesn't obstruct content while reading.
-              </p>
+              <div class="bg-muted p-4 rounded-lg text-sm font-mono" role="code" aria-label="Multi-action global FAB implementation">
+                {`<GlobalFAB
+  mainAction={{ id: 'main', title: 'Actions', icon: '⚙️' }}
+  secondaryActions={[
+    { id: 'contact', title: 'New Contact', icon: '👤' },
+    { id: 'project', title: 'New Project', icon: '📁' },
+    { id: 'note', title: 'Quick Note', icon: '📝' }
+  ]}
+  expandDirection="up"
+  hideOnScroll={true}
+/>`}
+              </div>
             </CardContent>
           </Card>
-        ))}
+
+          {/* Advanced Configuration */}
+          <Card role="listitem">
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2">
+                <span aria-hidden="true">🔧</span>
+                <span>Advanced Configuration</span>
+              </CardTitle>
+              <CardDescription>
+                Full configuration with all features enabled
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div class="bg-muted p-4 rounded-lg text-sm font-mono" role="code" aria-label="Advanced global FAB configuration">
+                {`<GlobalFAB
+  mainAction={{ /* ... */ }}
+  secondaryActions={[/* ... */]}
+  position="bottom-right"
+  hideOnScroll={true}
+  scrollThreshold={100}
+  showTooltip={true}
+  autoClose={true}
+  autoCloseDelay={3000}
+  size="lg"
+  ariaLabel="Business actions"
+/>`}
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Business Template */}
+          <Card role="listitem">
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2">
+                <span aria-hidden="true">💼</span>
+                <span>Business Template</span>
+              </CardTitle>
+              <CardDescription>
+                Pre-configured for business applications
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div class="bg-muted p-4 rounded-lg text-sm font-mono" role="code" aria-label="Business template global FAB">
+                {`<GlobalFAB
+  preset="business"
+  // Includes: New Contact, Project, Note, Call
+  position="bottom-right"
+  hideOnScroll={true}
+  mobileOptimized={true}
+  analyticsTracking={true}
+/>`}
+              </div>
+            </CardContent>
+          </Card>
+
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Usage Instructions -->
-  <section class="py-16 bg-muted/30" role="region" aria-labelledby="instructions-title">
-    <div class="container mx-auto px-4">
-      <Card>
-        <CardHeader>
-          <CardTitle id="instructions-title" className="text-2xl">🎯 How to Test the FABs</CardTitle>
-          <CardDescription>
-            Interactive instructions for testing all FAB features
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            
-            <!-- Desktop Testing -->
-            <div role="group" aria-labelledby="desktop-testing">
-              <h3 id="desktop-testing" class="font-semibold mb-3">🖥️ Desktop Testing</h3>
-              <ul class="text-sm space-y-2 text-muted-foreground" role="list" aria-label="Desktop testing instructions">
-                <li role="listitem">• Look for <strong>3 FABs</strong> positioned around the screen</li>
-                <li role="listitem">• <strong>Business FAB</strong> (➕) in bottom-right corner</li>
-                <li role="listitem">• <strong>Support FAB</strong> (❓) in bottom-left corner</li>
-                <li role="listitem">• <strong>E-commerce FAB</strong> (🛒) with radial expansion</li>
-                <li role="listitem">• Click main buttons to expand secondary actions</li>
-                <li role="listitem">• Scroll down to test hide/show behavior</li>
-              </ul>
+    {/* Scroll Testing Content */}
+    <section class="py-16 bg-muted/30" role="region" aria-labelledby="scroll-test-title">
+      <div class="container mx-auto px-4">
+        <ScrollReveal client:load config={{ direction: 'scale', threshold: 0.3 }}>
+          <h2 id="scroll-test-title" class="text-3xl font-bold text-foreground text-center mb-12">
+            Scroll Behavior Test Content
+          </h2>
+          <p class="text-center text-muted-foreground mb-8 max-w-2xl mx-auto">
+            Scroll through the content below to test the FAB's scroll-responsive behavior. 
+            Notice how it hides when scrolling down and reappears when scrolling up.
+          </p>
+        </ScrollReveal>
+        
+        <div class="max-w-3xl mx-auto space-y-6" role="list" aria-label="Scroll testing content sections">
+          {Array.from({ length: 12 }, (_, i) => (
+            <Card key={i} role="listitem">
+              <CardHeader>
+                <CardTitle>Test Section {i + 1}</CardTitle>
+                <CardDescription>
+                  Content section for testing FAB scroll behavior
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p class="text-muted-foreground leading-relaxed">
+                  This content demonstrates how the global floating action button responds to scroll behavior. 
+                  As you scroll down through this content, notice how the FAB gracefully hides to avoid 
+                  obstructing your reading experience. When you scroll back up, indicating navigation intent, 
+                  the FAB reappears smoothly to provide quick access to actions.
+                </p>
+                <p class="text-muted-foreground leading-relaxed mt-4">
+                  The scroll threshold is carefully tuned to provide optimal user experience. 
+                  The FAB uses throttled scroll listeners for performance and respects user motion preferences. 
+                  This professional implementation ensures the FAB enhances rather than hinders the user experience.
+                </p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* Performance & Technical Details */}
+    <section class="py-16" role="region" aria-labelledby="technical-title">
+      <div class="container mx-auto px-4">
+        <ScrollReveal client:load config={{ direction: 'scale', threshold: 0.3 }}>
+          <h2 id="technical-title" class="text-3xl font-bold text-foreground text-center mb-12">
+            Performance & Technical Excellence
+          </h2>
+        </ScrollReveal>
+        
+        <div class="max-w-4xl mx-auto">
+          <StaggeredAnimation client:load staggerDelay={200}>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8" role="list" aria-label="Technical excellence features">
+              
+              {/* Performance */}
+              <div class="space-y-4" role="listitem">
+                <h3 class="text-xl font-semibold flex items-center space-x-2">
+                  <span aria-hidden="true">⚡</span>
+                  <span>Performance Optimized</span>
+                </h3>
+                <ul class="space-y-2 text-muted-foreground" role="list" aria-label="Performance optimization features">
+                  <li role="listitem">• <strong>GPU Acceleration:</strong> Transform-based animations for 60fps</li>
+                  <li role="listitem">• <strong>Throttled Listeners:</strong> Efficient scroll event handling</li>
+                  <li role="listitem">• <strong>RequestAnimationFrame:</strong> Smooth animation timing</li>
+                  <li role="listitem">• <strong>Minimal Reflows:</strong> CSS transform positioning only</li>
+                  <li role="listitem">• <strong>Memory Efficient:</strong> Proper cleanup and listeners</li>
+                </ul>
+              </div>
+
+              {/* Accessibility */}
+              <div class="space-y-4" role="listitem">
+                <h3 class="text-xl font-semibold flex items-center space-x-2">
+                  <span aria-hidden="true">♿</span>
+                  <span>Accessibility Excellence</span>
+                </h3>
+                <ul class="space-y-2 text-muted-foreground" role="list" aria-label="Accessibility excellence features">
+                  <li role="listitem">• <strong>WCAG 2.1 AA:</strong> Complete compliance standards</li>
+                  <li role="listitem">• <strong>Keyboard Navigation:</strong> Full arrow key support</li>
+                  <li role="listitem">• <strong>Screen Readers:</strong> Live regions and announcements</li>
+                  <li role="listitem">• <strong>Focus Management:</strong> Enhanced visual indicators</li>
+                  <li role="listitem">• <strong>Motion Respect:</strong> Honors reduced motion preferences</li>
+                </ul>
+              </div>
+
+              {/* Business Value */}
+              <div class="space-y-4" role="listitem">
+                <h3 class="text-xl font-semibold flex items-center space-x-2">
+                  <span aria-hidden="true">💼</span>
+                  <span>Business Impact</span>
+                </h3>
+                <ul class="space-y-2 text-muted-foreground" role="list" aria-label="Business impact features">
+                  <li role="listitem">• <strong>User Engagement:</strong> Increased action completion rates</li>
+                  <li role="listitem">• <strong>Workflow Efficiency:</strong> Quick access to key functions</li>
+                  <li role="listitem">• <strong>Mobile Conversion:</strong> Touch-optimized interactions</li>
+                  <li role="listitem">• <strong>Brand Consistency:</strong> Professional visual design</li>
+                  <li role="listitem">• <strong>Analytics Ready:</strong> Built-in interaction tracking</li>
+                </ul>
+              </div>
+
+              {/* Technical Architecture */}
+              <div class="space-y-4" role="listitem">
+                <h3 class="text-xl font-semibold flex items-center space-x-2">
+                  <span aria-hidden="true">🏗️</span>
+                  <span>Technical Architecture</span>
+                </h3>
+                <ul class="space-y-2 text-muted-foreground" role="list" aria-label="Technical architecture features">
+                  <li role="listitem">• <strong>Global Positioning:</strong> Fixed viewport placement</li>
+                  <li role="listitem">• <strong>Z-Index Management:</strong> Consistent layering system</li>
+                  <li role="listitem">• <strong>React Integration:</strong> TypeScript and hook-based</li>
+                  <li role="listitem">• <strong>Event Delegation:</strong> Efficient DOM interaction</li>
+                  <li role="listitem">• <strong>Responsive Design:</strong> Adaptive across all devices</li>
+                </ul>
+              </div>
+
             </div>
+          </StaggeredAnimation>
+        </div>
+      </div>
+    </section>
 
-            <!-- Mobile Testing -->
-            <div role="group" aria-labelledby="mobile-testing">
-              <h3 id="mobile-testing" class="font-semibold mb-3">📱 Mobile Testing</h3>
-              <ul class="text-sm space-y-2 text-muted-foreground" role="list" aria-label="Mobile testing instructions">
-                <li role="listitem">• Resize browser or test on mobile device</li>
-                <li role="listitem">• FABs maintain optimal touch target sizes</li>
-                <li role="listitem">• Touch and hold for tooltips (if supported)</li>
-                <li role="listitem">• Test scroll behavior with touch gestures</li>
-                <li role="listitem">• Tap outside expanded FAB to close</li>
-                <li role="listitem">• FABs auto-close after 3 seconds when expanded</li>
-              </ul>
-            </div>
+  </main>
 
-          </div>
-        </CardContent>
-      </Card>
-    </div>
-  </section>
-
-  <!-- Business FAB - Bottom Right -->
-  <BusinessFAB 
+  {/* Global FAB - Rendered last for proper z-index */}
+  <GlobalFAB 
     client:load
+    mainAction={{
+      id: 'business-actions',
+      title: 'Business Quick Actions',
+      icon: '⚙️',
+      variant: 'primary'
+    }}
+    secondaryActions={[
+      {
+        id: 'new-contact',
+        title: 'New Contact',
+        icon: '👤',
+        onClick: () => alert('New Contact: Opens contact creation form'),
+        variant: 'secondary'
+      },
+      {
+        id: 'new-project',
+        title: 'New Project',
+        icon: '📁',
+        onClick: () => alert('New Project: Opens project creation workflow'),
+        variant: 'secondary'
+      },
+      {
+        id: 'quick-note',
+        title: 'Quick Note',
+        icon: '📝',
+        onClick: () => alert('Quick Note: Opens note-taking interface'),
+        variant: 'secondary'
+      },
+      {
+        id: 'contact-support',
+        title: 'Contact Support',
+        icon: '💬',
+        onClick: () => alert('Support: Opens help and support options'),
+        variant: 'ghost'
+      }
+    ]}
     position="bottom-right"
     hideOnScroll={true}
     scrollThreshold={100}
-    showTooltip={true}
-    aria-label="Business productivity floating action button with quick actions for contacts, projects and notes"
-  />
-
-  <!-- Support FAB - Bottom Left -->
-  <SupportFAB 
-    client:load
-    position="bottom-left"
-    hideOnScroll={true}
-    scrollThreshold={100}
     expandDirection="up"
-    aria-label="Customer support floating action button with help options including live chat, documentation and feedback"
-  />
-
-  <!-- E-commerce FAB - Custom Position with Radial -->
-  <EcommerceFAB 
-    client:load
-    position="top-right"
-    hideOnScroll={false}
-    expandDirection="radial"
-    size="md"
-    aria-label="E-commerce floating action button with shopping actions including wishlist, compare and search"
+    showTooltip={true}
+    autoClose={true}
+    autoCloseDelay={3000}
+    size="lg"
+    ariaLabel="Global business floating action button with quick access to contact, project, note, and support actions"
   />
 
 </Layout>

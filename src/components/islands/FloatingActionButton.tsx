@@ -1,9 +1,11 @@
-// FloatingActionButton.tsx - Professional Floating Action Button Component (Sprint 9 - Step 3)
-// Provides mobile-optimized floating action buttons with business-ready configurations
+// GlobalFAB.tsx - Professional Global Floating Action Button with Phase 6+ Standards
+// Single FAB component with global viewport positioning and advanced behaviors
 // Path: src/components/islands/FloatingActionButton.tsx
 
-import { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { cn } from '@/lib/utils';
+
+// ===== PHASE 6+ TYPES AND INTERFACES =====
 
 export interface FABAction {
   id: string;
@@ -15,7 +17,7 @@ export interface FABAction {
   disabled?: boolean;
 }
 
-export interface FloatingActionButtonProps {
+export interface GlobalFABProps {
   // Main action (always visible)
   mainAction: FABAction;
   
@@ -26,107 +28,53 @@ export interface FloatingActionButtonProps {
   position?: 'bottom-right' | 'bottom-left' | 'bottom-center' | 'top-right' | 'top-left';
   hideOnScroll?: boolean;
   scrollThreshold?: number;
-  showOnlyOnMobile?: boolean;
   
   // Visual variants
-  size?: 'sm' | 'md' | 'lg' | 'xl';
-  expandDirection?: 'up' | 'down' | 'left' | 'right' | 'radial';
-  
-  // Accessibility
-  ariaLabel?: string;
+  size?: 'md' | 'lg' | 'xl';
+  expandDirection?: 'up' | 'down' | 'radial';
   
   // Advanced features
   showTooltip?: boolean;
   autoClose?: boolean;
   autoCloseDelay?: number;
+  
+  // Accessibility (Phase 6+ Standards)
+  ariaLabel?: string;
 }
 
-export default function FloatingActionButton({
-  mainAction,
-  secondaryActions = [],
-  position = 'bottom-right',
-  hideOnScroll = false,
-  scrollThreshold = 100,
-  showOnlyOnMobile = false,
-  size = 'lg',
-  expandDirection = 'up',
-  ariaLabel,
-  showTooltip = true,
-  autoClose = true,
-  autoCloseDelay = 3000
-}: FloatingActionButtonProps) {
-  const [isExpanded, setIsExpanded] = useState(false);
-  const [isVisible, setIsVisible] = useState(true);
-  const [isScrolled, setIsScrolled] = useState(false);
+// ===== PHASE 6+ ACCESSIBILITY HOOKS =====
+
+// Live region announcer hook for screen readers
+function useAnnouncer() {
+  const announceRef = useRef<HTMLDivElement>(null);
+
+  const announceChange = useCallback((message: string, priority: 'polite' | 'assertive' = 'polite') => {
+    if (announceRef.current) {
+      announceRef.current.setAttribute('aria-live', priority);
+      announceRef.current.textContent = message;
+      
+      // Clear after announcement to allow repeat announcements
+      setTimeout(() => {
+        if (announceRef.current) {
+          announceRef.current.textContent = '';
+        }
+      }, 1000);
+    }
+  }, []);
+
+  return { announceRef, announceChange };
+}
+
+// Enhanced keyboard navigation hook
+function useKeyboardNavigation(
+  isExpanded: boolean,
+  secondaryActions: FABAction[],
+  setIsExpanded: (expanded: boolean) => void,
+  mainButtonRef: React.RefObject<HTMLButtonElement | null>,
+  secondaryButtonsRef: React.MutableRefObject<(HTMLButtonElement | null)[]>
+) {
   const [focusedActionIndex, setFocusedActionIndex] = useState(-1);
-  
-  const lastScrollY = useRef(0);
-  const autoCloseTimeout = useRef<NodeJS.Timeout | null>(null);
-  const ticking = useRef(false);
-  const mainButtonRef = useRef<HTMLButtonElement>(null);
-  const secondaryButtonsRef = useRef<(HTMLButtonElement | null)[]>([]);
 
-  // Handle scroll behavior
-  useEffect(() => {
-    if (!hideOnScroll) return;
-
-    const handleScroll = () => {
-      if (!ticking.current) {
-        requestAnimationFrame(() => {
-          const currentScrollY = window.scrollY;
-          const isScrollingDown = currentScrollY > lastScrollY.current;
-          
-          setIsScrolled(currentScrollY > 10);
-          
-          if (currentScrollY > scrollThreshold) {
-            setIsVisible(!isScrollingDown);
-          } else {
-            setIsVisible(true);
-          }
-          
-          lastScrollY.current = currentScrollY;
-          ticking.current = false;
-        });
-        ticking.current = true;
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [hideOnScroll, scrollThreshold]);
-
-  // Auto-close expanded FAB
-  useEffect(() => {
-    if (isExpanded && autoClose) {
-      autoCloseTimeout.current = setTimeout(() => {
-        setIsExpanded(false);
-      }, autoCloseDelay);
-    }
-
-    return () => {
-      if (autoCloseTimeout.current) {
-        clearTimeout(autoCloseTimeout.current);
-      }
-    };
-  }, [isExpanded, autoClose, autoCloseDelay]);
-
-  // Close expanded FAB on outside click
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      const target = event.target as Element;
-      if (!target.closest('.fab-container')) {
-        setIsExpanded(false);
-        setFocusedActionIndex(-1);
-      }
-    };
-
-    if (isExpanded) {
-      document.addEventListener('click', handleClickOutside);
-      return () => document.removeEventListener('click', handleClickOutside);
-    }
-  }, [isExpanded]);
-
-  // Keyboard navigation support
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (!isExpanded || secondaryActions.length === 0) return;
@@ -143,26 +91,23 @@ export default function FloatingActionButton({
         case 'ArrowDown':
           event.preventDefault();
           const direction = event.key === 'ArrowUp' ? -1 : 1;
-          const newIndex = focusedActionIndex + direction;
+          const newIndex = Math.max(0, Math.min(secondaryActions.length - 1, focusedActionIndex + direction));
           
-          if (newIndex >= 0 && newIndex < secondaryActions.length) {
-            setFocusedActionIndex(newIndex);
-            secondaryButtonsRef.current[newIndex]?.focus();
-          } else if (newIndex < 0) {
-            setFocusedActionIndex(-1);
-            mainButtonRef.current?.focus();
-          }
+          setFocusedActionIndex(newIndex);
+          secondaryButtonsRef.current[newIndex]?.focus();
           break;
         
-        case 'Tab':
-          // Allow natural tab navigation but close on tab out
-          if (event.shiftKey && focusedActionIndex === 0) {
-            setIsExpanded(false);
-            setFocusedActionIndex(-1);
-          } else if (!event.shiftKey && focusedActionIndex === secondaryActions.length - 1) {
-            setIsExpanded(false);
-            setFocusedActionIndex(-1);
-          }
+        case 'Home':
+          event.preventDefault();
+          setFocusedActionIndex(0);
+          secondaryButtonsRef.current[0]?.focus();
+          break;
+        
+        case 'End':
+          event.preventDefault();
+          const lastIndex = secondaryActions.length - 1;
+          setFocusedActionIndex(lastIndex);
+          secondaryButtonsRef.current[lastIndex]?.focus();
           break;
         
         case 'Enter':
@@ -170,7 +115,9 @@ export default function FloatingActionButton({
           if (focusedActionIndex >= 0) {
             event.preventDefault();
             const action = secondaryActions[focusedActionIndex];
-            handleSecondaryClick(action);
+            if (action.onClick) action.onClick();
+            else if (action.href) window.location.href = action.href;
+            setIsExpanded(false);
           }
           break;
       }
@@ -180,9 +127,125 @@ export default function FloatingActionButton({
       document.addEventListener('keydown', handleKeyDown);
       return () => document.removeEventListener('keydown', handleKeyDown);
     }
-  }, [isExpanded, focusedActionIndex, secondaryActions]);
+  }, [isExpanded, focusedActionIndex, secondaryActions, setIsExpanded, mainButtonRef, secondaryButtonsRef]);
 
-  // Focus management when expanding
+  return { focusedActionIndex, setFocusedActionIndex };
+}
+
+// ===== GLOBAL FAB MAIN COMPONENT WITH PHASE 6+ STANDARDS =====
+
+export function GlobalFAB({
+  mainAction,
+  secondaryActions = [],
+  position = 'bottom-right',
+  hideOnScroll = true,
+  scrollThreshold = 100,
+  size = 'lg',
+  expandDirection = 'up',
+  showTooltip = true,
+  autoClose = true,
+  autoCloseDelay = 3000,
+  ariaLabel
+}: GlobalFABProps) {
+  // ===== STATE MANAGEMENT =====
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [isScrolled, setIsScrolled] = useState(false);
+  
+  // ===== REFS FOR DOM MANAGEMENT =====
+  const lastScrollY = useRef(0);
+  const autoCloseTimeout = useRef<NodeJS.Timeout | null>(null);
+  const ticking = useRef(false);
+  const mainButtonRef = useRef<HTMLButtonElement>(null);
+  const secondaryButtonsRef = useRef<(HTMLButtonElement | null)[]>([]);
+
+  // ===== PHASE 6+ ACCESSIBILITY HOOKS =====
+  const { announceRef, announceChange } = useAnnouncer();
+  const { focusedActionIndex, setFocusedActionIndex } = useKeyboardNavigation(
+    isExpanded,
+    secondaryActions,
+    setIsExpanded,
+    mainButtonRef,
+    secondaryButtonsRef
+  );
+
+  // ===== SCROLL BEHAVIOR WITH PERFORMANCE OPTIMIZATION =====
+  useEffect(() => {
+    if (!hideOnScroll) return;
+
+    const handleScroll = () => {
+      if (!ticking.current) {
+        requestAnimationFrame(() => {
+          const currentScrollY = window.scrollY;
+          const isScrollingDown = currentScrollY > lastScrollY.current;
+          
+          setIsScrolled(currentScrollY > 10);
+          
+          if (currentScrollY > scrollThreshold) {
+            const shouldBeVisible = !isScrollingDown;
+            if (isVisible !== shouldBeVisible) {
+              setIsVisible(shouldBeVisible);
+              announceChange(
+                shouldBeVisible 
+                  ? 'Floating action button shown' 
+                  : 'Floating action button hidden'
+              );
+            }
+          } else {
+            if (!isVisible) {
+              setIsVisible(true);
+              announceChange('Floating action button shown');
+            }
+          }
+          
+          lastScrollY.current = currentScrollY;
+          ticking.current = false;
+        });
+        ticking.current = true;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [hideOnScroll, scrollThreshold, isVisible, announceChange]);
+
+  // ===== AUTO-CLOSE BEHAVIOR =====
+  useEffect(() => {
+    if (isExpanded && autoClose && secondaryActions.length > 0) {
+      autoCloseTimeout.current = setTimeout(() => {
+        setIsExpanded(false);
+        setFocusedActionIndex(-1);
+        announceChange('Actions menu auto-closed');
+      }, autoCloseDelay);
+    }
+
+    return () => {
+      if (autoCloseTimeout.current) {
+        clearTimeout(autoCloseTimeout.current);
+      }
+    };
+  }, [isExpanded, autoClose, autoCloseDelay, secondaryActions.length, announceChange, setFocusedActionIndex]);
+
+  // ===== OUTSIDE CLICK HANDLING =====
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Element;
+      if (!target.closest('.global-fab-container')) {
+        if (isExpanded) {
+          setIsExpanded(false);
+          setFocusedActionIndex(-1);
+          announceChange('Actions menu closed');
+        }
+      }
+    };
+
+    if (isExpanded) {
+      document.addEventListener('click', handleClickOutside);
+      return () => document.removeEventListener('click', handleClickOutside);
+    }
+  }, [isExpanded, announceChange, setFocusedActionIndex]);
+
+  // ===== FOCUS MANAGEMENT FOR EXPANSION =====
   useEffect(() => {
     if (isExpanded && secondaryActions.length > 0) {
       // Focus first secondary action when expanded
@@ -190,23 +253,30 @@ export default function FloatingActionButton({
         secondaryButtonsRef.current[0]?.focus();
         setFocusedActionIndex(0);
       }, 150); // Wait for animation
-    } else {
+    } else if (!isExpanded) {
       setFocusedActionIndex(-1);
     }
-  }, [isExpanded, secondaryActions.length]);
+  }, [isExpanded, secondaryActions.length, setFocusedActionIndex]);
 
-  // Handle main action click
+  // ===== ACTION HANDLERS =====
   const handleMainClick = () => {
     if (secondaryActions.length > 0) {
-      setIsExpanded(!isExpanded);
+      const newExpanded = !isExpanded;
+      setIsExpanded(newExpanded);
+      announceChange(
+        newExpanded 
+          ? `${secondaryActions.length} quick actions expanded. Use arrow keys to navigate.`
+          : 'Actions menu collapsed',
+        'assertive'
+      );
     } else if (mainAction.onClick) {
       mainAction.onClick();
+      announceChange(`${mainAction.title} activated`);
     } else if (mainAction.href) {
       window.location.href = mainAction.href;
     }
   };
 
-  // Handle secondary action click
   const handleSecondaryClick = (action: FABAction) => {
     if (action.onClick) {
       action.onClick();
@@ -215,9 +285,10 @@ export default function FloatingActionButton({
     }
     setIsExpanded(false);
     setFocusedActionIndex(-1);
+    announceChange(`${action.title} activated`);
   };
 
-  // Position classes
+  // ===== STYLING UTILITIES =====
   const getPositionClasses = () => {
     const positions = {
       'bottom-right': 'bottom-6 right-6',
@@ -229,10 +300,8 @@ export default function FloatingActionButton({
     return positions[position];
   };
 
-  // Size classes
   const getSizeClasses = () => {
     const sizes = {
-      sm: 'w-12 h-12 text-lg',
       md: 'w-14 h-14 text-xl',
       lg: 'w-16 h-16 text-2xl',
       xl: 'w-20 h-20 text-3xl'
@@ -240,7 +309,6 @@ export default function FloatingActionButton({
     return sizes[size];
   };
 
-  // Variant classes
   const getVariantClasses = (variant: FABAction['variant'] = 'primary') => {
     const variants = {
       default: 'bg-background text-foreground border border-border hover:bg-accent',
@@ -252,51 +320,19 @@ export default function FloatingActionButton({
     return variants[variant];
   };
 
-  // Secondary action position calculation with boundary detection
+  // ===== SECONDARY ACTION POSITIONING =====
   const getSecondaryActionPosition = (index: number) => {
-    const spacing = size === 'xl' ? 80 : size === 'lg' ? 70 : size === 'md' ? 60 : 50;
+    const spacing = size === 'xl' ? 80 : size === 'lg' ? 70 : 60;
     const offset = (index + 1) * spacing;
 
-    // Smart direction adjustment based on position and screen boundaries
-    let adjustedDirection = expandDirection;
-    
-    if (typeof window !== 'undefined') {
-      const screenWidth = window.innerWidth;
-      const screenHeight = window.innerHeight;
-      
-      // Auto-adjust direction based on position to prevent overflow
-      if (position === 'top-right' && expandDirection === 'radial') {
-        adjustedDirection = 'down'; // Prevent radial overflow at top-right
-      } else if (position === 'top-left' && expandDirection === 'radial') {
-        adjustedDirection = 'down'; // Prevent radial overflow at top-left
-      } else if (position === 'bottom-right' && expandDirection === 'right') {
-        adjustedDirection = 'up'; // Prevent horizontal overflow at bottom-right
-      } else if (position === 'bottom-left' && expandDirection === 'left') {
-        adjustedDirection = 'up'; // Prevent horizontal overflow at bottom-left
-      }
-    }
-
-    switch (adjustedDirection) {
+    switch (expandDirection) {
       case 'up':
         return { bottom: `${offset + 24}px`, transform: 'translateX(0)' };
       case 'down':
         return { top: `${offset + 24}px`, transform: 'translateX(0)' };
-      case 'left':
-        return { right: `${offset + 24}px`, transform: 'translateY(0)' };
-      case 'right':
-        return { left: `${offset + 24}px`, transform: 'translateY(0)' };
       case 'radial':
-        // Smart radial positioning based on screen position
-        let startAngle = -90; // Default: start from top
-        
-        // Adjust start angle based on position to keep actions on screen
-        if (position.includes('top')) {
-          startAngle = 45; // Start from bottom-right for top positions
-        } else if (position.includes('bottom')) {
-          startAngle = -135; // Start from top-left for bottom positions
-        }
-        
-        const angle = startAngle + (index * 45); // Spread 45° each
+        const startAngle = position.includes('top') ? 45 : -135;
+        const angle = startAngle + (index * 45);
         const radius = spacing;
         const x = Math.cos((angle * Math.PI) / 180) * radius;
         const y = Math.sin((angle * Math.PI) / 180) * radius;
@@ -310,41 +346,34 @@ export default function FloatingActionButton({
     }
   };
 
-  // Don't render on desktop if showOnlyOnMobile is true
-  if (showOnlyOnMobile && typeof window !== 'undefined') {
-    const isMobile = window.innerWidth < 768;
-    if (!isMobile) return null;
-  }
-
+  // ===== COMPONENT DESCRIPTION FOR ACCESSIBILITY =====
   const hasSecondaryActions = secondaryActions.length > 0;
   const fabDescription = hasSecondaryActions 
     ? `${mainAction.title} with ${secondaryActions.length} quick actions`
     : mainAction.title;
 
+  // ===== RENDER COMPONENT =====
   return (
     <div 
       className={cn(
-        'fab-container fixed z-50 transition-all duration-300 ease-in-out',
+        'global-fab-container fixed z-60 transition-all duration-300 ease-in-out',
         getPositionClasses(),
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16 pointer-events-none',
-        showOnlyOnMobile && 'md:hidden'
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16 pointer-events-none'
       )}
       role="region"
       aria-label={ariaLabel || fabDescription}
     >
       
-      {/* Live region for screen reader announcements */}
+      {/* PHASE 6+ STANDARD: Live region for screen reader announcements */}
       <div 
+        ref={announceRef}
         className="sr-only" 
         role="status" 
         aria-live="polite" 
         aria-atomic="true"
-      >
-        {isExpanded && hasSecondaryActions && `${secondaryActions.length} quick actions expanded. Use arrow keys to navigate, Escape to close.`}
-        {!isExpanded && hasSecondaryActions && "Quick actions collapsed."}
-      </div>
+      />
 
-      {/* Secondary Actions */}
+      {/* Secondary Actions Container */}
       {hasSecondaryActions && (
         <div
           role="menu"
@@ -365,14 +394,18 @@ export default function FloatingActionButton({
               className={cn(
                 'absolute rounded-full shadow-lg transition-all duration-300 ease-out',
                 'flex items-center justify-center font-medium',
+                // PHASE 6+ STANDARD: Enhanced focus indicators
                 'focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2',
+                'focus-visible:ring-2 focus-visible:ring-primary',
                 'transform-gpu will-change-transform',
                 getSizeClasses(),
                 getVariantClasses(action.variant),
                 isExpanded 
                   ? 'opacity-100 scale-100 pointer-events-auto' 
                   : 'opacity-0 scale-75 pointer-events-none',
-                action.disabled && 'opacity-50 cursor-not-allowed'
+                action.disabled && 'opacity-50 cursor-not-allowed',
+                // PHASE 6+ STANDARD: Focus state management
+                focusedActionIndex === index && 'ring-2 ring-primary ring-offset-2'
               )}
               style={{
                 ...getSecondaryActionPosition(index),
@@ -398,7 +431,9 @@ export default function FloatingActionButton({
         className={cn(
           'relative rounded-full shadow-lg transition-all duration-300 ease-in-out',
           'flex items-center justify-center font-medium',
+          // PHASE 6+ STANDARD: Enhanced focus management
           'focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2',
+          'focus-visible:ring-2 focus-visible:ring-primary',
           'hover:scale-110 active:scale-95',
           'transform-gpu will-change-transform',
           getSizeClasses(),
@@ -413,6 +448,7 @@ export default function FloatingActionButton({
         aria-expanded={hasSecondaryActions ? isExpanded : undefined}
         aria-haspopup={hasSecondaryActions ? "menu" : undefined}
         title={showTooltip ? mainAction.title : undefined}
+        aria-describedby="fab-help-text"
       >
         {/* Main Icon with rotation animation */}
         <span 
@@ -440,13 +476,22 @@ export default function FloatingActionButton({
         />
       </button>
 
-      {/* Background overlay when expanded */}
+      {/* PHASE 6+ STANDARD: Screen reader help text */}
+      <div id="fab-help-text" className="sr-only">
+        {hasSecondaryActions 
+          ? `Press Enter or Space to ${isExpanded ? 'collapse' : 'expand'} actions menu. Use arrow keys to navigate when expanded.`
+          : 'Press Enter or Space to activate action'
+        }
+      </div>
+
+      {/* Background overlay when expanded (PHASE 6+ STANDARD: Better visual feedback) */}
       {isExpanded && hasSecondaryActions && (
         <div 
-          className="fixed inset-0 bg-background/20 backdrop-blur-[2px] -z-10"
+          className="fixed inset-0 bg-background/10 backdrop-blur-[1px] -z-10"
           onClick={() => {
             setIsExpanded(false);
             setFocusedActionIndex(-1);
+            announceChange('Actions menu closed');
           }}
           aria-hidden="true"
         />
@@ -455,122 +500,10 @@ export default function FloatingActionButton({
   );
 }
 
-// Pre-configured FAB variants for common business use cases
-export const BusinessFAB = (props: Partial<FloatingActionButtonProps>) => (
-  <FloatingActionButton
-    mainAction={{
-      id: 'main',
-      title: 'Business Quick Actions',
-      icon: '➕',
-      variant: 'primary'
-    }}
-    secondaryActions={[
-      {
-        id: 'new-contact',
-        title: 'New Contact',
-        icon: '👤',
-        href: '/contacts/new',
-        variant: 'secondary'
-      },
-      {
-        id: 'new-project',
-        title: 'New Project',
-        icon: '📁',
-        href: '/projects/new',
-        variant: 'secondary'
-      },
-      {
-        id: 'quick-note',
-        title: 'Quick Note',
-        icon: '📝',
-        onClick: () => alert('Quick note feature'),
-        variant: 'secondary'
-      }
-    ]}
-    ariaLabel="Business management quick actions"
-    {...props}
-  />
-);
+// ===== EXPORT COMPONENT =====
+export default GlobalFAB;
 
-export const SupportFAB = (props: Partial<FloatingActionButtonProps>) => (
-  <FloatingActionButton
-    mainAction={{
-      id: 'support',
-      title: 'Customer Support',
-      icon: '❓',
-      variant: 'ghost'
-    }}
-    secondaryActions={[
-      {
-        id: 'chat',
-        title: 'Live Chat',
-        icon: '💬',
-        onClick: () => alert('Opening live chat...'),
-        variant: 'primary'
-      },
-      {
-        id: 'docs',
-        title: 'Documentation',
-        icon: '📖',
-        href: '/docs',
-        variant: 'secondary'
-      },
-      {
-        id: 'feedback',
-        title: 'Send Feedback',
-        icon: '📧',
-        href: '/feedback',
-        variant: 'secondary'
-      }
-    ]}
-    expandDirection="up"
-    position="bottom-left"
-    ariaLabel="Customer support and help options"
-    {...props}
-  />
-);
-
-export const EcommerceFAB = (props: Partial<FloatingActionButtonProps>) => (
-  <FloatingActionButton
-    mainAction={{
-      id: 'cart',
-      title: 'Shopping Cart Actions',
-      icon: '🛒',
-      variant: 'primary'
-    }}
-    secondaryActions={[
-      {
-        id: 'wishlist',
-        title: 'Wishlist',
-        icon: '❤️',
-        href: '/wishlist',
-        variant: 'secondary'
-      },
-      {
-        id: 'compare',
-        title: 'Compare Products',
-        icon: '⚖️',
-        href: '/compare',
-        variant: 'secondary'
-      },
-      {
-        id: 'search',
-        title: 'Search Products',
-        icon: '🔍',
-        onClick: () => {
-          const searchInput = document.querySelector('input[type="search"]') as HTMLInputElement;
-          searchInput?.focus();
-        },
-        variant: 'ghost'
-      }
-    ]}
-    expandDirection="radial"
-    ariaLabel="E-commerce shopping quick actions"
-    {...props}
-  />
-);
-
-// CSS Animation for ripple effect (inject into head)
+// ===== CSS ANIMATION INJECTION (Phase 6+ Standard) =====
 const rippleStyles = `
 @keyframes ripple {
   0% { transform: scale(0); opacity: 1; }
@@ -578,10 +511,10 @@ const rippleStyles = `
 }
 `;
 
-// Inject styles if not already present
-if (typeof document !== 'undefined' && !document.getElementById('fab-styles')) {
+// Inject styles if not already present (SSR safe)
+if (typeof document !== 'undefined' && !document.getElementById('global-fab-styles')) {
   const style = document.createElement('style');
-  style.id = 'fab-styles';
+  style.id = 'global-fab-styles';
   style.textContent = rippleStyles;
   document.head.appendChild(style);
 }
