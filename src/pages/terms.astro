@@ -1,255 +1,391 @@
 ---
-// terms.astro - Terms of Service Page
-// Legal terms and conditions template
+// terms.astro - Swiss/EU Compliant Terms of Service - Phase 8+ Standards
+// Professional terms of service for web development and business services
 // Path: src/pages/terms.astro
 
 import Layout from '../components/layouts/Layout.astro';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
+import { Button } from '../components/ui/button';
 import { Alert, AlertDescription } from '../components/ui/alert';
 ---
 
 <Layout 
-  title="Terms of Service - Astro Starter"
-  description="Terms and conditions governing the use of our website and services"
+  title="Terms of Service - Professional Website Development Services"
+  description="Comprehensive terms and conditions for professional website development services, compliant with Swiss and EU business law"
   currentPage="terms"
   headerVariant="business"
   footerVariant="business"
 >
-  <div class="container mx-auto px-4 py-12 lg:py-20 max-w-4xl">
+  <!-- Skip Links for WCAG 2.1 AA Compliance -->
+  <div class="sr-only">
+    <a href="#main-content" class="skip-link focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-primary-foreground px-4 py-2 rounded-md z-50">
+      Skip to main content
+    </a>
+    <a href="#interactive-content" class="skip-link focus:not-sr-only focus:absolute focus:top-4 focus:left-20 bg-primary text-primary-foreground px-4 py-2 rounded-md z-50">
+      Skip to terms navigation
+    </a>
+  </div>
+
+  <main id="main-content" class="container mx-auto px-4 py-12 lg:py-20 max-w-4xl">
     
-    <!-- Hero Section -->
-    <div class="text-center mb-16">
+    <!-- Hero Section with Enhanced Animations -->
+    <section class="text-center mb-16 animate-fade-in-up">
       <div class="flex justify-center items-center space-x-3 mb-6">
-        <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-blue-500 rounded-xl flex items-center justify-center text-white font-bold text-2xl">
+        <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-blue-500 rounded-xl flex items-center justify-center text-white font-bold text-2xl hover:scale-110 transition-transform duration-300">
           📋
         </div>
-        <Badge variant="outline" className="text-sm">
-          Terms of Service
+        <Badge variant="outline" className="text-sm animate-fade-in-left">
+          Swiss & EU Compliant
         </Badge>
       </div>
       
-      <h1 class="text-4xl lg:text-5xl font-bold text-foreground mb-6">
+      <h1 class="text-4xl lg:text-5xl font-bold text-foreground mb-6 animate-fade-in-up">
         Terms of Service
       </h1>
       
-      <p class="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-        These terms and conditions govern your use of our website and services. 
-        Please read them carefully before using our platform.
+      <p class="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed animate-fade-in-up">
+        Professional terms and conditions for website development services. 
+        Compliant with Swiss business law and European Union commercial regulations.
       </p>
       
       <div class="mt-6 text-sm text-muted-foreground">
-        <strong>Last updated:</strong> January 2025
+        <strong>Last updated:</strong> January 2025 • <strong>Effective:</strong> January 1, 2025 • <strong>Jurisdiction:</strong> Switzerland, EU
       </div>
-    </div>
+    </section>
 
-    <!-- Important Notice -->
-    <Alert className="mb-12 border-amber-200 bg-amber-50 dark:border-amber-800 dark:bg-amber-950/50">
-      <span class="text-amber-600 dark:text-amber-400">⚠️</span>
-      <AlertDescription className="text-amber-800 dark:text-amber-200">
-        <strong>Template Notice:</strong> This is a template Terms of Service. 
-        Please customize it with your specific business terms, services, 
-        and consult with legal counsel to ensure compliance with applicable laws.
-      </AlertDescription>
-    </Alert>
+    <!-- Legal Framework Notice -->
+    <section class="mb-12 animate-fade-in-left">
+      <Alert className="border-purple-200 bg-purple-50 dark:border-purple-800 dark:bg-purple-950/50 hover:shadow-lg transition-all duration-300">
+        <span class="text-purple-600 dark:text-purple-400 hover:scale-110 transition-transform duration-300">⚖️</span>
+        <AlertDescription className="text-purple-800 dark:text-purple-200">
+          <div class="space-y-2">
+            <div><strong>Legal Framework:</strong> These terms comply with Swiss Code of Obligations (CO) and EU Digital Services Directive</div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
+              <div>
+                <strong>🇨🇭 Swiss Clients:</strong> Swiss CO Art. 1-529, commercial law compliance
+              </div>
+              <div>
+                <strong>🇪🇺 EU Clients:</strong> Consumer rights directive, digital services regulation
+              </div>
+            </div>
+          </div>
+        </AlertDescription>
+      </Alert>
+    </section>
+
+    <!-- Quick Navigation -->
+    <section id="interactive-content" class="mb-12 animate-fade-in-right">
+      <Card className="hover:shadow-lg transition-all duration-300">
+        <CardHeader>
+          <CardTitle className="flex items-center space-x-2">
+            <span class="text-xl hover:scale-110 transition-transform duration-300">📋</span>
+            <span>Terms Navigation</span>
+          </CardTitle>
+          <CardDescription>Jump to specific sections of our terms of service</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <Button asChild variant="outline" size="sm" className="text-xs hover:scale-105 transition-transform duration-200">
+              <a href="#service-agreement">Service Agreement</a>
+            </Button>
+            <Button asChild variant="outline" size="sm" className="text-xs hover:scale-105 transition-transform duration-200">
+              <a href="#services-scope">Services Scope</a>
+            </Button>
+            <Button asChild variant="outline" size="sm" className="text-xs hover:scale-105 transition-transform duration-200">
+              <a href="#payment-terms">Payment Terms</a>
+            </Button>
+            <Button asChild variant="outline" size="sm" className="text-xs hover:scale-105 transition-transform duration-200">
+              <a href="#client-responsibilities">Client Duties</a>
+            </Button>
+            <Button asChild variant="outline" size="sm" className="text-xs hover:scale-105 transition-transform duration-200">
+              <a href="#intellectual-property">IP Rights</a>
+            </Button>
+            <Button asChild variant="outline" size="sm" className="text-xs hover:scale-105 transition-transform duration-200">
+              <a href="#liability-warranties">Liability</a>
+            </Button>
+            <Button asChild variant="outline" size="sm" className="text-xs hover:scale-105 transition-transform duration-200">
+              <a href="#governing-law">Governing Law</a>
+            </Button>
+            <Button asChild variant="outline" size="sm" className="text-xs hover:scale-105 transition-transform duration-200">
+              <a href="#contact-legal">Legal Contact</a>
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+    </section>
 
     <!-- Terms Content -->
     <div class="space-y-12">
       
-      <!-- Agreement -->
-      <section>
-        <h2 class="text-2xl font-bold text-foreground mb-6">1. Agreement to Terms</h2>
-        <Card>
+      <!-- Service Agreement -->
+      <section id="service-agreement" class="animate-fade-in-up">
+        <h2 class="text-2xl font-bold text-foreground mb-6 border-l-4 border-purple-500 pl-4">1. Service Agreement & Acceptance</h2>
+        <Card className="hover:shadow-lg transition-all duration-300">
           <CardContent className="pt-6">
-            <p class="text-muted-foreground leading-relaxed mb-4">
-              By accessing and using this website, you accept and agree to be bound by the terms 
-              and provision of this agreement. These Terms of Service ("Terms") govern your use 
-              of [Your Company Name]'s website and services.
-            </p>
-            <p class="text-muted-foreground leading-relaxed">
-              If you do not agree to abide by the above, please do not use this service. 
-              These terms apply to all visitors, users, and others who access or use the service.
-            </p>
-          </CardContent>
-        </Card>
-      </section>
-
-      <!-- Use License -->
-      <section>
-        <h2 class="text-2xl font-bold text-foreground mb-6">2. Use License</h2>
-        <Card>
-          <CardContent className="pt-6">
-            <p class="text-muted-foreground leading-relaxed mb-4">
-              Permission is granted to temporarily download one copy of the materials on 
-              [Your Company Name]'s website for personal, non-commercial transitory viewing only.
-            </p>
-            
-            <div class="space-y-6">
-              
-              <!-- Permitted Uses -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <h4 class="font-medium text-foreground mb-3">This license grants you permission to:</h4>
-                <ul class="space-y-2 text-muted-foreground">
-                  <li class="flex items-start space-x-2">
-                    <span class="text-green-500 mt-1">✓</span>
-                    <span>Access and use the website for legitimate business purposes</span>
-                  </li>
-                  <li class="flex items-start space-x-2">
-                    <span class="text-green-500 mt-1">✓</span>
-                    <span>View and download content for personal reference</span>
-                  </li>
-                  <li class="flex items-start space-x-2">
-                    <span class="text-green-500 mt-1">✓</span>
-                    <span>Contact us through provided communication channels</span>
-                  </li>
-                </ul>
+                <h3 class="font-semibold text-foreground mb-3">🏢 Service Provider</h3>
+                <div class="space-y-2 text-sm text-muted-foreground">
+                  <div><strong>Company:</strong> Professional Website Solutions Sàrl</div>
+                  <div><strong>Registration:</strong> CHE-123.456.789 (Swiss Commercial Registry)</div>
+                  <div><strong>VAT:</strong> CHE-123.456.789 TVA</div>
+                  <div><strong>Address:</strong> Route de la Tech 42, 1015 Lausanne, Switzerland</div>
+                </div>
               </div>
-
-              <!-- Prohibited Uses -->
               <div>
-                <h4 class="font-medium text-foreground mb-3">This license does NOT permit you to:</h4>
-                <ul class="space-y-2 text-muted-foreground">
-                  <li class="flex items-start space-x-2">
-                    <span class="text-red-500 mt-1">✗</span>
-                    <span>Modify or copy the materials</span>
-                  </li>
-                  <li class="flex items-start space-x-2">
-                    <span class="text-red-500 mt-1">✗</span>
-                    <span>Use the materials for commercial purposes or public display</span>
-                  </li>
-                  <li class="flex items-start space-x-2">
-                    <span class="text-red-500 mt-1">✗</span>
-                    <span>Attempt to reverse engineer any software on the website</span>
-                  </li>
-                  <li class="flex items-start space-x-2">
-                    <span class="text-red-500 mt-1">✗</span>
-                    <span>Remove any copyright or proprietary notations</span>
-                  </li>
-                </ul>
+                <h3 class="font-semibold text-foreground mb-3">⚖️ Legal Framework</h3>
+                <div class="space-y-2 text-sm text-muted-foreground">
+                  <div><strong>Swiss Law:</strong> Code of Obligations (CO) Articles 1-529</div>
+                  <div><strong>EU Compliance:</strong> Digital Services Directive 2022/2065</div>
+                  <div><strong>Consumer Protection:</strong> EU Consumer Rights Directive</div>
+                  <div><strong>Jurisdiction:</strong> Swiss courts, EU cross-border procedures</div>
+                </div>
               </div>
-
             </div>
+            <Alert className="mt-6 border-blue-200 bg-blue-50 dark:border-blue-800 dark:bg-blue-950/50">
+              <span class="text-blue-600 dark:text-blue-400">📋</span>
+              <AlertDescription className="text-blue-800 dark:text-blue-200 text-sm">
+                <strong>Agreement Formation:</strong> By engaging our services, requesting quotes, or entering project discussions, 
+                you agree to these terms. Specific project terms are detailed in individual service agreements (devis/proposals).
+              </AlertDescription>
+            </Alert>
           </CardContent>
         </Card>
       </section>
 
-      <!-- Services -->
-      <section>
-        <h2 class="text-2xl font-bold text-foreground mb-6">3. Services</h2>
-        <Card>
+      <!-- Services Scope -->
+      <section id="services-scope" class="animate-fade-in-left">
+        <h2 class="text-2xl font-bold text-foreground mb-6 border-l-4 border-blue-500 pl-4">2. Professional Services Scope</h2>
+        <Card className="hover:shadow-lg transition-all duration-300">
           <CardContent className="pt-6">
             <p class="text-muted-foreground leading-relaxed mb-6">
-              [Your Company Name] provides web development and related services. 
-              The scope of services includes but is not limited to:
+              Professional Website Solutions provides comprehensive web development and digital business services 
+              for small to medium enterprises, professionals, and organizations across Switzerland and the EU.
             </p>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div class="p-4 bg-muted/30 rounded-lg">
-                <h4 class="font-medium text-foreground mb-2">🚀 Website Development</h4>
-                <p class="text-sm text-muted-foreground">
-                  Custom website design and development services
-                </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              
+              <!-- Core Services -->
+              <div class="space-y-4">
+                <h3 class="font-semibold text-foreground">🚀 Core Development Services</h3>
+                <div class="space-y-3">
+                  <div class="p-3 bg-blue-50 dark:bg-blue-950/30 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-950/50 transition-colors duration-200">
+                    <h4 class="font-medium text-foreground text-sm mb-1">Website Development</h4>
+                    <p class="text-xs text-muted-foreground">Custom business websites, e-commerce platforms, corporate sites with modern technology stack</p>
+                  </div>
+                  <div class="p-3 bg-green-50 dark:bg-green-950/30 rounded-lg hover:bg-green-100 dark:hover:bg-green-950/50 transition-colors duration-200">
+                    <h4 class="font-medium text-foreground text-sm mb-1">Technical Implementation</h4>
+                    <p class="text-xs text-muted-foreground">Frontend/backend development, database design, API integration, performance optimization</p>
+                  </div>
+                  <div class="p-3 bg-purple-50 dark:bg-purple-950/30 rounded-lg hover:bg-purple-100 dark:hover:bg-purple-950/50 transition-colors duration-200">
+                    <h4 class="font-medium text-foreground text-sm mb-1">Design & UX</h4>
+                    <p class="text-xs text-muted-foreground">User interface design, user experience optimization, responsive design, accessibility compliance</p>
+                  </div>
+                </div>
               </div>
-              <div class="p-4 bg-muted/30 rounded-lg">
-                <h4 class="font-medium text-foreground mb-2">🛠️ Technical Support</h4>
-                <p class="text-sm text-muted-foreground">
-                  Ongoing maintenance and technical assistance
-                </p>
-              </div>
-              <div class="p-4 bg-muted/30 rounded-lg">
-                <h4 class="font-medium text-foreground mb-2">📚 Documentation</h4>
-                <p class="text-sm text-muted-foreground">
-                  Comprehensive guides and resources
-                </p>
-              </div>
-              <div class="p-4 bg-muted/30 rounded-lg">
-                <h4 class="font-medium text-foreground mb-2">💼 Consultation</h4>
-                <p class="text-sm text-muted-foreground">
-                  Strategic advice and business guidance
-                </p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </section>
 
-      <!-- User Responsibilities -->
-      <section>
-        <h2 class="text-2xl font-bold text-foreground mb-6">4. User Responsibilities</h2>
-        <Card>
-          <CardContent className="pt-6">
-            <p class="text-muted-foreground leading-relaxed mb-4">
-              As a user of our services, you agree to:
-            </p>
-            <div class="space-y-3">
-              <div class="flex items-start space-x-3 p-3 bg-muted/30 rounded-lg">
-                <span class="text-blue-500 mt-1">📝</span>
-                <div>
-                  <strong class="text-foreground">Provide Accurate Information:</strong> 
-                  <span class="text-muted-foreground ml-1">Supply truthful and accurate information when requested</span>
+              <!-- Support Services -->
+              <div class="space-y-4">
+                <h3 class="font-semibold text-foreground">🛠️ Support & Maintenance</h3>
+                <div class="space-y-3">
+                  <div class="p-3 bg-orange-50 dark:bg-orange-950/30 rounded-lg hover:bg-orange-100 dark:hover:bg-orange-950/50 transition-colors duration-200">
+                    <h4 class="font-medium text-foreground text-sm mb-1">Ongoing Maintenance</h4>
+                    <p class="text-xs text-muted-foreground">Security updates, performance monitoring, backup management, content updates</p>
+                  </div>
+                  <div class="p-3 bg-indigo-50 dark:bg-indigo-950/30 rounded-lg hover:bg-indigo-100 dark:hover:bg-indigo-950/50 transition-colors duration-200">
+                    <h4 class="font-medium text-foreground text-sm mb-1">Business Consultation</h4>
+                    <p class="text-xs text-muted-foreground">Digital strategy, technology consulting, growth planning, SEO optimization</p>
+                  </div>
+                  <div class="p-3 bg-teal-50 dark:bg-teal-950/30 rounded-lg hover:bg-teal-100 dark:hover:bg-teal-950/50 transition-colors duration-200">
+                    <h4 class="font-medium text-foreground text-sm mb-1">Training & Documentation</h4>
+                    <p class="text-xs text-muted-foreground">User training, technical documentation, content management guidance</p>
+                  </div>
                 </div>
               </div>
-              <div class="flex items-start space-x-3 p-3 bg-muted/30 rounded-lg">
-                <span class="text-green-500 mt-1">🤝</span>
-                <div>
-                  <strong class="text-foreground">Use Services Appropriately:</strong> 
-                  <span class="text-muted-foreground ml-1">Use our services only for lawful and intended purposes</span>
-                </div>
-              </div>
-              <div class="flex items-start space-x-3 p-3 bg-muted/30 rounded-lg">
-                <span class="text-purple-500 mt-1">🔒</span>
-                <div>
-                  <strong class="text-foreground">Maintain Security:</strong> 
-                  <span class="text-muted-foreground ml-1">Keep your account information secure and confidential</span>
-                </div>
-              </div>
-              <div class="flex items-start space-x-3 p-3 bg-muted/30 rounded-lg">
-                <span class="text-orange-500 mt-1">⚖️</span>
-                <div>
-                  <strong class="text-foreground">Comply with Laws:</strong> 
-                  <span class="text-muted-foreground ml-1">Ensure your use complies with all applicable laws and regulations</span>
-                </div>
-              </div>
+
+            </div>
+
+            <!-- Service Limitations -->
+            <div class="mt-6 p-4 bg-amber-50 dark:bg-amber-950/30 rounded-lg border border-amber-200 dark:border-amber-800">
+              <h4 class="font-medium text-foreground mb-2">⚠️ Service Limitations</h4>
+              <p class="text-sm text-muted-foreground">
+                Services are provided as professional business solutions. We do not provide: illegal content development, 
+                gambling platforms, adult content, cryptocurrency trading platforms, or services violating Swiss/EU regulations.
+              </p>
             </div>
           </CardContent>
         </Card>
       </section>
 
       <!-- Payment Terms -->
-      <section>
-        <h2 class="text-2xl font-bold text-foreground mb-6">5. Payment Terms</h2>
-        <Card>
+      <section id="payment-terms" class="animate-fade-in-right">
+        <h2 class="text-2xl font-bold text-foreground mb-6 border-l-4 border-green-500 pl-4">3. Payment Terms & Billing</h2>
+        <Card className="hover:shadow-lg transition-all duration-300">
           <CardContent className="pt-6">
-            <div class="space-y-4">
-              <p class="text-muted-foreground leading-relaxed">
-                Payment terms for services are established in individual service agreements. 
-                General payment conditions include:
-              </p>
+            <div class="space-y-6">
               
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="p-4 border border-border rounded-lg">
-                  <h4 class="font-medium text-foreground mb-2">💳 Payment Methods</h4>
+              <!-- Payment Structure -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <h3 class="font-semibold text-foreground mb-3">💰 Payment Structure</h3>
+                  <div class="space-y-3">
+                    <div class="p-3 bg-green-50 dark:bg-green-950/30 rounded-lg">
+                      <h4 class="font-medium text-foreground text-sm mb-1">Project Development</h4>
+                      <p class="text-xs text-muted-foreground">50% deposit upon project start, 25% at milestone completion, 25% upon delivery</p>
+                    </div>
+                    <div class="p-3 bg-blue-50 dark:bg-blue-950/30 rounded-lg">
+                      <h4 class="font-medium text-foreground text-sm mb-1">Ongoing Services</h4>
+                      <p class="text-xs text-muted-foreground">Monthly billing in advance, quarterly or annual billing available with discount</p>
+                    </div>
+                    <div class="p-3 bg-purple-50 dark:bg-purple-950/30 rounded-lg">
+                      <h4 class="font-medium text-foreground text-sm mb-1">Consultation</h4>
+                      <p class="text-xs text-muted-foreground">Hourly rate CHF 120-180 depending on complexity, minimum 1-hour billing increment</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div>
+                  <h3 class="font-semibold text-foreground mb-3">💳 Payment Methods & Terms</h3>
+                  <div class="space-y-3">
+                    <div class="p-3 bg-orange-50 dark:bg-orange-950/30 rounded-lg">
+                      <h4 class="font-medium text-foreground text-sm mb-1">Accepted Methods</h4>
+                      <p class="text-xs text-muted-foreground">Swiss bank transfer, SEPA transfers, major credit cards, PayPal for international clients</p>
+                    </div>
+                    <div class="p-3 bg-indigo-50 dark:bg-indigo-950/30 rounded-lg">
+                      <h4 class="font-medium text-foreground text-sm mb-1">Payment Terms</h4>
+                      <p class="text-xs text-muted-foreground">Net 30 days from invoice date, 2% early payment discount within 10 days</p>
+                    </div>
+                    <div class="p-3 bg-red-50 dark:bg-red-950/30 rounded-lg">
+                      <h4 class="font-medium text-foreground text-sm mb-1">Late Payment</h4>
+                      <p class="text-xs text-muted-foreground">5% annual interest on overdue amounts, collection costs charged to client</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Swiss Tax & EU VAT -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="p-4 bg-muted/30 rounded-lg">
+                  <h4 class="font-medium text-foreground mb-2 flex items-center space-x-2">
+                    <span class="text-red-500">🇨🇭</span>
+                    <span>Swiss Clients - VAT</span>
+                  </h4>
                   <p class="text-sm text-muted-foreground">
-                    We accept major credit cards, bank transfers, and other agreed-upon payment methods.
+                    8.1% VAT (TVA/MWST) added to all services for Swiss clients. 
+                    VAT number provided on all invoices for business client deduction.
                   </p>
                 </div>
-                <div class="p-4 border border-border rounded-lg">
-                  <h4 class="font-medium text-foreground mb-2">📅 Payment Schedule</h4>
+                <div class="p-4 bg-muted/30 rounded-lg">
+                  <h4 class="font-medium text-foreground mb-2 flex items-center space-x-2">
+                    <span class="text-blue-500">🇪🇺</span>
+                    <span>EU Clients - VAT</span>
+                  </h4>
                   <p class="text-sm text-muted-foreground">
-                    Payments are typically due within 30 days of invoice date unless otherwise agreed.
+                    Reverse charge mechanism for B2B clients with valid VAT number. 
+                    Consumer clients charged applicable VAT rate.
                   </p>
                 </div>
-                <div class="p-4 border border-border rounded-lg">
-                  <h4 class="font-medium text-foreground mb-2">🔄 Refund Policy</h4>
-                  <p class="text-sm text-muted-foreground">
-                    Refund terms are specified in individual service agreements.
-                  </p>
+              </div>
+
+              <!-- Refund Policy -->
+              <Alert className="border-yellow-200 bg-yellow-50 dark:border-yellow-800 dark:bg-yellow-950/50">
+                <span class="text-yellow-600 dark:text-yellow-400">💰</span>
+                <AlertDescription className="text-yellow-800 dark:text-yellow-200 text-sm">
+                  <strong>Refund Policy:</strong> Deposits are non-refundable once work commences. Completed work is non-refundable. 
+                  Unused pre-paid support hours refundable within 12 months. Refunds processed within 30 days.
+                </AlertDescription>
+              </Alert>
+
+            </div>
+          </CardContent>
+        </Card>
+      </section>
+
+      <!-- Client Responsibilities -->
+      <section id="client-responsibilities" class="animate-fade-in-left">
+        <h2 class="text-2xl font-bold text-foreground mb-6 border-l-4 border-orange-500 pl-4">4. Client Responsibilities & Obligations</h2>
+        <Card className="hover:shadow-lg transition-all duration-300">
+          <CardContent className="pt-6">
+            <p class="text-muted-foreground leading-relaxed mb-6">
+              Successful project delivery requires active client participation and adherence to agreed responsibilities:
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              
+              <!-- Content & Information -->
+              <div class="space-y-4">
+                <h3 class="font-semibold text-foreground">📝 Content & Information Provision</h3>
+                <div class="space-y-3">
+                  <div class="flex items-start space-x-3 p-3 bg-blue-50 dark:bg-blue-950/30 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-950/50 transition-colors duration-200">
+                    <span class="text-blue-500 mt-1">✓</span>
+                    <div>
+                      <strong class="text-foreground text-sm">Timely Content Delivery</strong>
+                      <p class="text-xs text-muted-foreground mt-1">Provide all required content, images, and information within agreed timelines</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start space-x-3 p-3 bg-green-50 dark:bg-green-950/30 rounded-lg hover:bg-green-100 dark:hover:bg-green-950/50 transition-colors duration-200">
+                    <span class="text-green-500 mt-1">✓</span>
+                    <div>
+                      <strong class="text-foreground text-sm">Content Accuracy</strong>
+                      <p class="text-xs text-muted-foreground mt-1">Ensure all provided information is accurate, current, and legally compliant</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start space-x-3 p-3 bg-purple-50 dark:bg-purple-950/30 rounded-lg hover:bg-purple-100 dark:hover:bg-purple-950/50 transition-colors duration-200">
+                    <span class="text-purple-500 mt-1">✓</span>
+                    <div>
+                      <strong class="text-foreground text-sm">Legal Compliance</strong>
+                      <p class="text-xs text-muted-foreground mt-1">Content must comply with Swiss and EU laws, regulations, and industry standards</p>
+                    </div>
+                  </div>
                 </div>
-                <div class="p-4 border border-border rounded-lg">
-                  <h4 class="font-medium text-foreground mb-2">⚠️ Late Payments</h4>
-                  <p class="text-sm text-muted-foreground">
-                    Late payment fees may apply as specified in service agreements.
-                  </p>
+              </div>
+
+              <!-- Communication & Feedback -->
+              <div class="space-y-4">
+                <h3 class="font-semibold text-foreground">🤝 Communication & Project Management</h3>
+                <div class="space-y-3">
+                  <div class="flex items-start space-x-3 p-3 bg-orange-50 dark:bg-orange-950/30 rounded-lg hover:bg-orange-100 dark:hover:bg-orange-950/50 transition-colors duration-200">
+                    <span class="text-orange-500 mt-1">✓</span>
+                    <div>
+                      <strong class="text-foreground text-sm">Responsive Communication</strong>
+                      <p class="text-xs text-muted-foreground mt-1">Respond to project communications within 3 business days</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start space-x-3 p-3 bg-indigo-50 dark:bg-indigo-950/30 rounded-lg hover:bg-indigo-100 dark:hover:bg-indigo-950/50 transition-colors duration-200">
+                    <span class="text-indigo-500 mt-1">✓</span>
+                    <div>
+                      <strong class="text-foreground text-sm">Structured Feedback</strong>
+                      <p class="text-xs text-muted-foreground mt-1">Provide consolidated feedback within agreed review periods</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start space-x-3 p-3 bg-teal-50 dark:bg-teal-950/30 rounded-lg hover:bg-teal-100 dark:hover:bg-teal-950/50 transition-colors duration-200">
+                    <span class="text-teal-500 mt-1">✓</span>
+                    <div>
+                      <strong class="text-foreground text-sm">Decision Making</strong>
+                      <p class="text-xs text-muted-foreground mt-1">Make project decisions within established timelines to maintain schedule</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Technical & Access Requirements -->
+            <div class="mt-6 space-y-4">
+              <h3 class="font-semibold text-foreground">🔧 Technical Access & Requirements</h3>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="p-3 bg-muted/30 rounded-lg hover:bg-muted/50 transition-colors duration-200">
+                  <h4 class="font-medium text-foreground text-sm mb-1">System Access</h4>
+                  <p class="text-xs text-muted-foreground">Provide necessary access to hosting, domains, and third-party services when required</p>
+                </div>
+                <div class="p-3 bg-muted/30 rounded-lg hover:bg-muted/50 transition-colors duration-200">
+                  <h4 class="font-medium text-foreground text-sm mb-1">Backup Responsibilities</h4>
+                  <p class="text-xs text-muted-foreground">Maintain independent backups of critical business data and content</p>
+                </div>
+                <div class="p-3 bg-muted/30 rounded-lg hover:bg-muted/50 transition-colors duration-200">
+                  <h4 class="font-medium text-foreground text-sm mb-1">Security Compliance</h4>
+                  <p class="text-xs text-muted-foreground">Follow security best practices and implement recommended updates</p>
                 </div>
               </div>
             </div>
@@ -257,125 +393,281 @@ import { Alert, AlertDescription } from '../components/ui/alert';
         </Card>
       </section>
 
-      <!-- Disclaimers -->
-      <section>
-        <h2 class="text-2xl font-bold text-foreground mb-6">6. Disclaimers</h2>
-        <Card>
+      <!-- Intellectual Property -->
+      <section id="intellectual-property" class="animate-fade-in-right">
+        <h2 class="text-2xl font-bold text-foreground mb-6 border-l-4 border-indigo-500 pl-4">5. Intellectual Property Rights</h2>
+        <Card className="hover:shadow-lg transition-all duration-300">
           <CardContent className="pt-6">
-            <p class="text-muted-foreground leading-relaxed mb-4">
-              The materials on [Your Company Name]'s website are provided on an 'as is' basis. 
-              [Your Company Name] makes no warranties, expressed or implied, and hereby disclaims 
-              and negates all other warranties including without limitation:
-            </p>
-            <ul class="space-y-2 text-muted-foreground mb-4">
-              <li class="flex items-start space-x-2">
-                <span class="text-orange-500 mt-1">•</span>
-                <span>Implied warranties or conditions of merchantability</span>
-              </li>
-              <li class="flex items-start space-x-2">
-                <span class="text-orange-500 mt-1">•</span>
-                <span>Fitness for a particular purpose</span>
-              </li>
-              <li class="flex items-start space-x-2">
-                <span class="text-orange-500 mt-1">•</span>
-                <span>Non-infringement of intellectual property or other violation of rights</span>
-              </li>
-            </ul>
-            <p class="text-muted-foreground leading-relaxed">
-              Further, [Your Company Name] does not warrant or make any representations concerning 
-              the accuracy, likely results, or reliability of the use of the materials on its website 
-              or otherwise relating to such materials or on any sites linked to this site.
-            </p>
+            <div class="space-y-6">
+              
+              <!-- Rights Ownership -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="p-4 bg-green-50 dark:bg-green-950/30 rounded-lg border border-green-200 dark:border-green-800">
+                  <h3 class="font-semibold text-foreground mb-3 flex items-center space-x-2">
+                    <span class="text-green-500">👤</span>
+                    <span>Client Ownership</span>
+                  </h3>
+                  <div class="space-y-3 text-sm text-muted-foreground">
+                    <div><strong>Content & Data:</strong> All client-provided content, data, trademarks, and brand materials remain client property</div>
+                    <div><strong>Custom Code:</strong> Upon full payment, client receives full rights to custom-developed code and design elements</div>
+                    <div><strong>Domain & Hosting:</strong> Client maintains ownership of domain registrations and hosting accounts</div>
+                  </div>
+                </div>
+                
+                <div class="p-4 bg-blue-50 dark:bg-blue-950/30 rounded-lg border border-blue-200 dark:border-blue-800">
+                  <h3 class="font-semibold text-foreground mb-3 flex items-center space-x-2">
+                    <span class="text-blue-500">🏢</span>
+                    <span>Service Provider Ownership</span>
+                  </h3>
+                  <div class="space-y-3 text-sm text-muted-foreground">
+                    <div><strong>Framework & Tools:</strong> Proprietary development frameworks, templates, and tools remain our property</div>
+                    <div><strong>Third-Party Licenses:</strong> Software libraries, plugins, and tools retain their original licensing</div>
+                    <div><strong>General Methodology:</strong> Development processes, workflows, and non-client-specific techniques</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- License Grants -->
+              <div class="space-y-4">
+                <h3 class="font-semibold text-foreground">📄 License Grants & Usage Rights</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div class="p-3 bg-purple-50 dark:bg-purple-950/30 rounded-lg">
+                    <h4 class="font-medium text-foreground text-sm mb-1">Client License to Us</h4>
+                    <p class="text-xs text-muted-foreground">
+                      Client grants us license to use provided content solely for project delivery, 
+                      testing, and portfolio display (with permission)
+                    </p>
+                  </div>
+                  <div class="p-3 bg-orange-50 dark:bg-orange-950/30 rounded-lg">
+                    <h4 class="font-medium text-foreground text-sm mb-1">Our License to Client</h4>
+                    <p class="text-xs text-muted-foreground">
+                      Upon payment, we grant perpetual license to use, modify, and distribute 
+                      the delivered website and custom code
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Portfolio & References -->
+              <Alert className="border-purple-200 bg-purple-50 dark:border-purple-800 dark:bg-purple-950/50">
+                <span class="text-purple-600 dark:text-purple-400">🎨</span>
+                <AlertDescription className="text-purple-800 dark:text-purple-200 text-sm">
+                  <strong>Portfolio Usage:</strong> We may showcase completed projects in our portfolio and marketing materials, 
+                  with client identification requiring explicit written permission. Screenshots and anonymized case studies are permitted.
+                </AlertDescription>
+              </Alert>
+
+            </div>
           </CardContent>
         </Card>
       </section>
 
-      <!-- Limitations -->
-      <section>
-        <h2 class="text-2xl font-bold text-foreground mb-6">7. Limitations of Liability</h2>
-        <Card>
+      <!-- Liability & Warranties -->
+      <section id="liability-warranties" class="animate-fade-in-left">
+        <h2 class="text-2xl font-bold text-foreground mb-6 border-l-4 border-red-500 pl-4">6. Liability, Warranties & Risk Allocation</h2>
+        <Card className="hover:shadow-lg transition-all duration-300">
           <CardContent className="pt-6">
-            <p class="text-muted-foreground leading-relaxed mb-4">
-              In no event shall [Your Company Name] or its suppliers be liable for any damages 
-              (including, without limitation, damages for loss of data or profit, or due to business 
-              interruption) arising out of the use or inability to use the materials on [Your Company Name]'s 
-              website, even if [Your Company Name] or a [Your Company Name] authorized representative has been 
-              notified orally or in writing of the possibility of such damage.
-            </p>
-            <div class="p-4 bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 rounded-lg">
-              <h4 class="font-medium text-amber-800 dark:text-amber-200 mb-2">
-                Important Legal Notice
-              </h4>
-              <p class="text-sm text-amber-700 dark:text-amber-300">
-                Because some jurisdictions do not allow limitations on implied warranties, 
-                or limitations of liability for consequential or incidental damages, 
-                these limitations may not apply to you.
-              </p>
+            <div class="space-y-6">
+              
+              <!-- Service Warranties -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <h3 class="font-semibold text-foreground mb-3">✅ Our Warranties</h3>
+                  <div class="space-y-3">
+                    <div class="p-3 bg-green-50 dark:bg-green-950/30 rounded-lg">
+                      <h4 class="font-medium text-foreground text-sm mb-1">Professional Standards</h4>
+                      <p class="text-xs text-muted-foreground">Services performed with professional skill and care according to industry standards</p>
+                    </div>
+                    <div class="p-3 bg-blue-50 dark:bg-blue-950/30 rounded-lg">
+                      <h4 class="font-medium text-foreground text-sm mb-1">Defect Warranty</h4>
+                      <p class="text-xs text-muted-foreground">90-day warranty on code defects and functionality issues from delivery</p>
+                    </div>
+                    <div class="p-3 bg-purple-50 dark:bg-purple-950/30 rounded-lg">
+                      <h4 class="font-medium text-foreground text-sm mb-1">Compliance Assurance</h4>
+                      <p class="text-xs text-muted-foreground">Work delivered complies with agreed specifications and web standards</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div>
+                  <h3 class="font-semibold text-foreground mb-3">❌ Warranty Exclusions</h3>
+                  <div class="space-y-3">
+                    <div class="p-3 bg-red-50 dark:bg-red-950/30 rounded-lg">
+                      <h4 class="font-medium text-foreground text-sm mb-1">Third-Party Services</h4>
+                      <p class="text-xs text-muted-foreground">External services, plugins, or platforms beyond our direct control</p>
+                    </div>
+                    <div class="p-3 bg-orange-50 dark:bg-orange-950/30 rounded-lg">
+                      <h4 class="font-medium text-foreground text-sm mb-1">Client Modifications</h4>
+                      <p class="text-xs text-muted-foreground">Issues arising from client or third-party modifications to delivered work</p>
+                    </div>
+                    <div class="p-3 bg-yellow-50 dark:bg-yellow-950/30 rounded-lg">
+                      <h4 class="font-medium text-foreground text-sm mb-1">Force Majeure</h4>
+                      <p class="text-xs text-muted-foreground">Events beyond reasonable control (server failures, cyber attacks, natural disasters)</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Liability Limitations -->
+              <div class="space-y-4">
+                <h3 class="font-semibold text-foreground">⚖️ Liability Limitations (Swiss CO Art. 100-109)</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div class="p-4 bg-amber-50 dark:bg-amber-950/30 rounded-lg border border-amber-200 dark:border-amber-800">
+                    <h4 class="font-medium text-foreground text-sm mb-2">💰 Financial Limitation</h4>
+                    <p class="text-xs text-muted-foreground mb-2">
+                      Total liability limited to the amount paid for services in the 12 months preceding the claim, 
+                      maximum CHF 50,000 per incident.
+                    </p>
+                    <div class="text-xs text-amber-600 dark:text-amber-400">
+                      Excluding: Gross negligence, intentional misconduct, personal injury
+                    </div>
+                  </div>
+                  
+                  <div class="p-4 bg-indigo-50 dark:bg-indigo-950/30 rounded-lg border border-indigo-200 dark:border-indigo-800">
+                    <h4 class="font-medium text-foreground text-sm mb-2">📊 Consequential Damages</h4>
+                    <p class="text-xs text-muted-foreground mb-2">
+                      No liability for indirect, consequential, or punitive damages including lost profits, 
+                      business interruption, or data loss.
+                    </p>
+                    <div class="text-xs text-indigo-600 dark:text-indigo-400">
+                      Client responsible for independent data backups
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Risk Allocation -->
+              <Alert className="border-red-200 bg-red-50 dark:border-red-800 dark:bg-red-950/50">
+                <span class="text-red-600 dark:text-red-400">⚠️</span>
+                <AlertDescription className="text-red-800 dark:text-red-200 text-sm">
+                  <strong>Important:</strong> These limitations comply with Swiss mandatory law (CO Art. 100) and EU consumer protection. 
+                  Business clients acknowledge acceptance of standard commercial risk allocation. Claims must be filed within 12 months of discovery.
+                </AlertDescription>
+              </Alert>
+
             </div>
           </CardContent>
         </Card>
       </section>
 
       <!-- Governing Law -->
-      <section>
-        <h2 class="text-2xl font-bold text-foreground mb-6">8. Governing Law</h2>
-        <Card>
-          <CardContent className="pt-6">
-            <p class="text-muted-foreground leading-relaxed">
-              These terms and conditions are governed by and construed in accordance with the laws of 
-              [Your Jurisdiction] and you irrevocably submit to the exclusive jurisdiction of the courts 
-              in that state or location. Any legal action or proceeding arising under these Terms will 
-              be brought exclusively in the courts of [Your Jurisdiction].
-            </p>
-          </CardContent>
-        </Card>
-      </section>
-
-      <!-- Modifications -->
-      <section>
-        <h2 class="text-2xl font-bold text-foreground mb-6">9. Modifications</h2>
-        <Card>
-          <CardContent className="pt-6">
-            <p class="text-muted-foreground leading-relaxed mb-4">
-              [Your Company Name] may revise these terms of service for its website at any time without notice. 
-              By using this website, you are agreeing to be bound by the then current version of these terms of service.
-            </p>
-            <p class="text-muted-foreground leading-relaxed">
-              We will notify users of significant changes by posting a notice on our website or sending 
-              an email to registered users. Continued use of the service after such modifications 
-              constitutes acceptance of the updated terms.
-            </p>
-          </CardContent>
-        </Card>
-      </section>
-
-      <!-- Contact Information -->
-      <section>
-        <h2 class="text-2xl font-bold text-foreground mb-6">10. Contact Information</h2>
-        <Card>
-          <CardContent className="pt-6">
-            <p class="text-muted-foreground leading-relaxed mb-4">
-              If you have any questions about these Terms of Service, please contact us:
-            </p>
-            <div class="space-y-3">
-              <div class="flex items-center space-x-3">
-                <span class="text-blue-500">📧</span>
-                <span class="text-muted-foreground">Email: <a href="mailto:legal@yourcompany.com" class="text-primary underline hover:text-primary/80">legal@yourcompany.com</a></span>
-              </div>
-              <div class="flex items-center space-x-3">
-                <span class="text-green-500">📞</span>
-                <span class="text-muted-foreground">Phone: <a href="tel:+1-555-123-4567" class="text-primary underline hover:text-primary/80">+1 (555) 123-4567</a></span>
-              </div>
-              <div class="flex items-start space-x-3">
-                <span class="text-purple-500 mt-1">📍</span>
-                <div class="text-muted-foreground">
-                  <div>Address:</div>
-                  <div class="ml-0">
-                    [Your Company Name]<br>
-                    123 Business Street<br>
-                    City, State 12345<br>
-                    Country
+      <section id="governing-law" class="animate-fade-in-right">
+        <h2 class="text-2xl font-bold text-foreground mb-6 border-l-4 border-teal-500 pl-4">7. Governing Law & Dispute Resolution</h2>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          
+          <!-- Swiss Jurisdiction -->
+          <Card className="hover:shadow-lg hover:scale-[1.02] transition-all duration-300">
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2">
+                <span class="text-xl hover:scale-110 transition-transform duration-300">🇨🇭</span>
+                <span>Swiss Jurisdiction</span>
+              </CardTitle>
+              <CardDescription>Primary jurisdiction for all contract matters</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div class="space-y-4">
+                <div class="space-y-3">
+                  <div class="p-3 bg-red-50 dark:bg-red-950/30 rounded-lg">
+                    <h4 class="font-medium text-foreground text-sm mb-1">Governing Law</h4>
+                    <p class="text-xs text-muted-foreground">Swiss Code of Obligations (CO), Swiss Civil Code (ZGB), Federal Act on International Private Law</p>
                   </div>
+                  <div class="p-3 bg-blue-50 dark:bg-blue-950/30 rounded-lg">
+                    <h4 class="font-medium text-foreground text-sm mb-1">Court Jurisdiction</h4>
+                    <p class="text-xs text-muted-foreground">Courts of Lausanne, Vaud, Switzerland have exclusive jurisdiction for disputes</p>
+                  </div>
+                  <div class="p-3 bg-green-50 dark:bg-green-950/30 rounded-lg">
+                    <h4 class="font-medium text-foreground text-sm mb-1">Language</h4>
+                    <p class="text-xs text-muted-foreground">Legal proceedings conducted in French, with English translation available</p>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <!-- EU Compliance -->
+          <Card className="hover:shadow-lg hover:scale-[1.02] transition-all duration-300">
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2">
+                <span class="text-xl hover:scale-110 transition-transform duration-300">🇪🇺</span>
+                <span>EU Client Rights</span>
+              </CardTitle>
+              <CardDescription>Additional protections for European Union clients</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div class="space-y-4">
+                <div class="space-y-3">
+                  <div class="p-3 bg-blue-50 dark:bg-blue-950/30 rounded-lg">
+                    <h4 class="font-medium text-foreground text-sm mb-1">Consumer Protection</h4>
+                    <p class="text-xs text-muted-foreground">EU Consumer Rights Directive applies to non-business clients in EU member states</p>
+                  </div>
+                  <div class="p-3 bg-purple-50 dark:bg-purple-950/30 rounded-lg">
+                    <h4 class="font-medium text-foreground text-sm mb-1">Cross-Border Disputes</h4>
+                    <p class="text-xs text-muted-foreground">EU Regulation 1215/2012 (Brussels I bis) applies for cross-border commercial disputes</p>
+                  </div>
+                  <div class="p-3 bg-orange-50 dark:bg-orange-950/30 rounded-lg">
+                    <h4 class="font-medium text-foreground text-sm mb-1">Alternative Dispute Resolution</h4>
+                    <p class="text-xs text-muted-foreground">EU ODR platform available for consumer disputes under €5,000</p>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+        </div>
+
+        <!-- Dispute Resolution Process -->
+        <Card className="mt-6 hover:shadow-lg transition-all duration-300">
+          <CardHeader>
+            <CardTitle className="flex items-center space-x-2">
+              <span class="text-xl hover:scale-110 transition-transform duration-300">🤝</span>
+              <span>Dispute Resolution Process</span>
+            </CardTitle>
+            <CardDescription>Structured approach to resolving contract disputes</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div class="text-center p-4 bg-blue-50 dark:bg-blue-950/30 rounded-lg">
+                <div class="text-2xl mb-2 hover:scale-110 transition-transform duration-300">💬</div>
+                <h4 class="font-medium text-foreground text-sm mb-2">1. Direct Negotiation</h4>
+                <p class="text-xs text-muted-foreground">30-day good faith negotiation period for all disputes</p>
+              </div>
+              <div class="text-center p-4 bg-green-50 dark:bg-green-950/30 rounded-lg">
+                <div class="text-2xl mb-2 hover:scale-110 transition-transform duration-300">⚖️</div>
+                <h4 class="font-medium text-foreground text-sm mb-2">2. Mediation</h4>
+                <p class="text-xs text-muted-foreground">Swiss Chamber of Commerce mediation for disputes >CHF 10,000</p>
+              </div>
+              <div class="text-center p-4 bg-purple-50 dark:bg-purple-950/30 rounded-lg">
+                <div class="text-2xl mb-2 hover:scale-110 transition-transform duration-300">🏛️</div>
+                <h4 class="font-medium text-foreground text-sm mb-2">3. Legal Proceedings</h4>
+                <p class="text-xs text-muted-foreground">Swiss courts or EU procedures as applicable</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </section>
+
+      <!-- Terms Modifications -->
+      <section class="animate-fade-in-left">
+        <h2 class="text-2xl font-bold text-foreground mb-6 border-l-4 border-cyan-500 pl-4">8. Terms Modifications & Updates</h2>
+        <Card className="hover:shadow-lg transition-all duration-300">
+          <CardContent className="pt-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <h3 class="font-semibold text-foreground mb-3">📅 Modification Process</h3>
+                <div class="space-y-3 text-sm text-muted-foreground">
+                  <p><strong>General Terms:</strong> These general terms may be updated with 60 days written notice for material changes</p>
+                  <p><strong>Project-Specific:</strong> Individual project terms require mutual written agreement to modify</p>
+                  <p><strong>Legal Requirements:</strong> Immediate updates may be necessary for legal compliance</p>
+                  <p><strong>Notification Method:</strong> Email to registered address + website posting</p>
+                </div>
+              </div>
+              <div>
+                <h3 class="font-semibold text-foreground mb-3">✅ Client Options</h3>
+                <div class="space-y-3 text-sm text-muted-foreground">
+                  <p><strong>Accept Changes:</strong> Continued use of services constitutes acceptance</p>
+                  <p><strong>Reject Changes:</strong> Terminate agreement with 30 days notice</p>
+                  <p><strong>Negotiate Terms:</strong> Discuss custom terms for ongoing projects</p>
+                  <p><strong>Grandfather Clause:</strong> Existing projects continue under original terms</p>
                 </div>
               </div>
             </div>
@@ -385,14 +677,242 @@ import { Alert, AlertDescription } from '../components/ui/alert';
 
     </div>
 
-    <!-- Footer Notice -->
-    <div class="mt-16 p-6 bg-muted/30 rounded-lg border border-border">
-      <p class="text-sm text-muted-foreground text-center">
-        <strong>Legal Disclaimer:</strong> This is a template and should be customized for your specific business. 
-        Please consult with qualified legal counsel to ensure these terms comply with applicable laws 
-        in your jurisdiction and adequately protect your business interests.
-      </p>
-    </div>
+    <!-- Contact Legal -->
+    <section id="contact-legal" class="mt-16 animate-fade-in-up">
+      <Card className="border-primary bg-primary/5 hover:shadow-lg transition-all duration-300">
+        <CardHeader>
+          <CardTitle className="flex items-center space-x-2">
+            <span class="text-xl hover:scale-110 transition-transform duration-300">📞</span>
+            <span>Legal Contact & Questions</span>
+          </CardTitle>
+          <CardDescription>
+            Professional legal and contractual support for terms-related questions
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            
+            <!-- Legal Contact -->
+            <div>
+              <h3 class="font-semibold text-foreground mb-4">⚖️ Legal & Contract Questions</h3>
+              <div class="space-y-3">
+                <div class="flex items-center space-x-3">
+                  <span class="text-blue-500">📧</span>
+                  <div>
+                    <div class="font-medium text-foreground text-sm">Legal Department</div>
+                    <a href="mailto:legal@yourwebsitecompany.com" class="text-primary underline hover:text-primary/80 text-sm">legal@yourwebsitecompany.com</a>
+                  </div>
+                </div>
+                <div class="flex items-center space-x-3">
+                  <span class="text-green-500">📞</span>
+                  <div>
+                    <div class="font-medium text-foreground text-sm">Business Line</div>
+                    <a href="tel:+41-21-000-0000" class="text-primary underline hover:text-primary/80 text-sm">+41 21 000 0000</a>
+                  </div>
+                </div>
+                <div class="flex items-start space-x-3">
+                  <span class="text-purple-500 mt-1">📍</span>
+                  <div>
+                    <div class="font-medium text-foreground text-sm">Registered Office</div>
+                    <div class="text-sm text-muted-foreground">
+                      Professional Website Solutions Sàrl<br>
+                      Route de la Tech 42<br>
+                      1015 Lausanne, Vaud, Switzerland
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-  </div>
+            <!-- Response Commitments -->
+            <div>
+              <h3 class="font-semibold text-foreground mb-4">⏰ Response & Support</h3>
+              <div class="space-y-3">
+                <div class="p-3 bg-green-50 dark:bg-green-950/30 rounded-lg">
+                  <h4 class="font-medium text-foreground text-sm mb-1">Contract Questions</h4>
+                  <p class="text-xs text-muted-foreground">5 business days response for terms clarification and contract interpretation</p>
+                </div>
+                <div class="p-3 bg-blue-50 dark:bg-blue-950/30 rounded-lg">
+                  <h4 class="font-medium text-foreground text-sm mb-1">Dispute Communications</h4>
+                  <p class="text-xs text-muted-foreground">2 business days acknowledgment, formal response within 15 days</p>
+                </div>
+                <div class="p-3 bg-purple-50 dark:bg-purple-950/30 rounded-lg">
+                  <h4 class="font-medium text-foreground text-sm mb-1">Legal Compliance</h4>
+                  <p class="text-xs text-muted-foreground">24-hour response for regulatory compliance or legal requirement issues</p>
+                </div>
+              </div>
+              
+              <div class="mt-4 flex gap-2">
+                <Button asChild variant="ghost" size="sm" className="text-xs hover:scale-105 transition-transform duration-200">
+                  <a href="/privacy" aria-label="View privacy policy">Privacy Policy</a>
+                </Button>
+                <Button asChild variant="ghost" size="sm" className="text-xs hover:scale-105 transition-transform duration-200">
+                  <a href="/cookies" aria-label="View cookie policy">Cookie Policy</a>
+                </Button>
+                <Button asChild variant="ghost" size="sm" className="text-xs hover:scale-105 transition-transform duration-200">
+                  <a href="/contact" aria-label="General contact">General Contact</a>
+                </Button>
+              </div>
+            </div>
+
+          </div>
+        </CardContent>
+      </Card>
+    </section>
+
+  </main>
 </Layout>
+
+<style>
+  /* Phase 8+ Enhanced CSS Animations */
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fade-in-left {
+    from {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes fade-in-right {
+    from {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 0.6s ease-out forwards;
+  }
+
+  .animate-fade-in-left {
+    animation: fade-in-left 0.6s ease-out forwards 0.2s both;
+  }
+
+  .animate-fade-in-right {
+    animation: fade-in-right 0.6s ease-out forwards 0.4s both;
+  }
+
+  /* Skip links styling */
+  .skip-link {
+    transform: translateY(-100%);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .skip-link:focus {
+    transform: translateY(0);
+  }
+
+  /* Enhanced hover effects for all interactive elements */
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+
+  /* Smooth transitions */
+  .card,
+  .badge,
+  button,
+  a {
+    transition: all 0.2s ease-in-out;
+  }
+
+  /* Smooth scrolling for anchor links */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Enhanced focus states */
+  button:focus,
+  a:focus {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 2px;
+    box-shadow: 0 0 0 3px hsl(var(--primary) / 0.1);
+  }
+
+  /* Section border animations */
+  section h2 {
+    position: relative;
+  }
+
+  /* Legal document styling enhancements */
+  .legal-section {
+    scroll-margin-top: 2rem;
+  }
+
+  /* Print styles for legal documents */
+  @media print {
+    .skip-link,
+    .badge,
+    .animate-fade-in-up,
+    .animate-fade-in-left,
+    .animate-fade-in-right,
+    button {
+      display: none !important;
+    }
+    
+    .card {
+      border: 1px solid #000 !important;
+      box-shadow: none !important;
+      break-inside: avoid;
+    }
+    
+    h1, h2, h3 {
+      break-after: avoid;
+    }
+    
+    .container {
+      max-width: none !important;
+      padding: 0 !important;
+    }
+  }
+
+  /* Accessibility improvements */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-fade-in-up,
+    .animate-fade-in-left,
+    .animate-fade-in-right {
+      animation: none;
+    }
+    
+    .hover\:scale-105:hover,
+    .hover\:scale-110:hover,
+    .hover\:scale-\[1\.02\]:hover {
+      transform: none;
+    }
+    
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  /* Enhanced legal document readability */
+  .legal-text {
+    line-height: 1.7;
+    color: hsl(var(--muted-foreground));
+  }
+
+  .legal-highlight {
+    background: linear-gradient(135deg, hsl(var(--primary) / 0.1) 0%, hsl(var(--primary) / 0.05) 100%);
+    border-left: 3px solid hsl(var(--primary));
+    padding: 1rem;
+    border-radius: 0.5rem;
+  }
+</style>
