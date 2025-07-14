@@ -1,6 +1,6 @@
 ---
-// docs.astro - Public Documentation Hub
-// User-facing documentation vs internal /docs/ folder
+// Documentation Hub - Comprehensive User-Facing Documentation
+// Production-ready documentation portal for website owners and content managers
 // Path: src/pages/docs.astro
 
 import Layout from '../components/layouts/Layout.astro';
@@ -10,29 +10,46 @@ import { Button } from '../components/ui/button';
 ---
 
 <Layout 
-  title="Documentation - Astro Starter"
-  description="Complete documentation and guides for using your Astro website built with modern technologies"
+  title="Documentation Hub - Complete Website Guide & Resources"
+  description="Comprehensive documentation and guides for your Astro website - from quick start to advanced customization"
   currentPage="documentation"
   headerVariant="business"
   showCTA={true}
   ctaText="Get Support"
   ctaHref="/contact"
 >
+  
+  <!-- Skip Links for Accessibility -->
+  <div class="sr-only">
+    <a href="#main-content" class="focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-primary-foreground px-4 py-2 rounded">
+      Skip to main content
+    </a>
+    <a href="#interactive-content" class="focus:not-sr-only focus:absolute focus:top-4 focus:left-20 bg-primary text-primary-foreground px-4 py-2 rounded">
+      Skip to documentation sections
+    </a>
+  </div>
+
+  <!-- Page Entry Animation -->
+  <div class="animate-fade-in-up">
+
   <div class="container mx-auto px-4 py-12 lg:py-20">
     
     <!-- Hero Section -->
-    <div class="text-center mb-16">
+    <div class="text-center mb-16 animate-fade-in-up">
       <div class="flex justify-center items-center space-x-3 mb-6">
-        <div class="w-12 h-12 bg-gradient-to-br from-primary to-primary/70 rounded-xl flex items-center justify-center text-primary-foreground font-bold text-2xl">
+        <div class="w-12 h-12 bg-gradient-to-br from-primary to-primary/70 rounded-xl flex items-center justify-center text-primary-foreground font-bold text-2xl hover:scale-110 transition-transform">
           📚
         </div>
-        <Badge variant="outline" className="text-sm">
+        <Badge variant="outline" className="text-sm hover:scale-105 transition-transform">
           Documentation Hub
         </Badge>
       </div>
       
       <h1 class="text-4xl lg:text-6xl font-bold text-foreground mb-6">
-        Documentation
+        Complete Website
+        <span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+          Documentation
+        </span>
       </h1>
       
       <p class="text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
@@ -43,181 +60,207 @@ import { Button } from '../components/ui/button';
       </p>
     </div>
 
-    <!-- Quick Navigation -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-      
-      <!-- Quick Start -->
-      <Card className="hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-        <CardHeader>
-          <div class="flex items-center space-x-3">
-            <div class="w-10 h-10 bg-green-500/10 rounded-lg flex items-center justify-center">
-              <span class="text-2xl">⚡</span>
-            </div>
-            <div>
-              <CardTitle>Quick Start Guide</CardTitle>
-              <CardDescription>Get your site running in minutes</CardDescription>
-            </div>
-          </div>
-        </CardHeader>
-        <CardContent>
-          <p class="text-sm text-muted-foreground mb-4">
-            Step-by-step instructions to customize your website, add content, and make it your own.
-          </p>
-          <Button asChild variant="outline" className="w-full">
-            <a href="/quick-start">
-              Start Here →
-            </a>
-          </Button>
-        </CardContent>
-      </Card>
+    <!-- Main Content -->
+    <main id="main-content" role="main">
 
-      <!-- Component Showcase -->
-      <Card className="hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-        <CardHeader>
-          <div class="flex items-center space-x-3">
-            <div class="w-10 h-10 bg-blue-500/10 rounded-lg flex items-center justify-center">
-              <span class="text-2xl">🧩</span>
-            </div>
-            <div>
-              <CardTitle>Components</CardTitle>
-              <CardDescription>Interactive component library</CardDescription>
-            </div>
-          </div>
-        </CardHeader>
-        <CardContent>
-          <p class="text-sm text-muted-foreground mb-4">
-            Explore all available components and see how they work in your site.
-          </p>
-          <Button asChild variant="outline" className="w-full">
-            <a href="/components-showcase">
-              View Components →
-            </a>
-          </Button>
-        </CardContent>
-      </Card>
-
-      <!-- Get Help -->
-      <Card className="hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-        <CardHeader>
-          <div class="flex items-center space-x-3">
-            <div class="w-10 h-10 bg-purple-500/10 rounded-lg flex items-center justify-center">
-              <span class="text-2xl">🆘</span>
-            </div>
-            <div>
-              <CardTitle>Get Help</CardTitle>
-              <CardDescription>Support and contact options</CardDescription>
-            </div>
-          </div>
-        </CardHeader>
-        <CardContent>
-          <p class="text-sm text-muted-foreground mb-4">
-            Need assistance? Contact us or browse frequently asked questions.
-          </p>
-          <Button asChild variant="outline" className="w-full">
-            <a href="/contact">
-              Contact Support →
-            </a>
-          </Button>
-        </CardContent>
-      </Card>
-
-    </div>
-
-    <!-- Main Documentation Sections -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
-      
-      <!-- Getting Started -->
-      <div class="space-y-6">
-        <div class="flex items-center space-x-3 mb-6">
-          <div class="w-8 h-8 bg-green-500/10 rounded-lg flex items-center justify-center">
-            <span class="text-lg">🚀</span>
-          </div>
-          <h2 class="text-2xl font-bold text-foreground">Getting Started</h2>
-        </div>
+      <!-- Quick Navigation -->
+      <section id="interactive-content" class="mb-16 animate-fade-in-left">
+        <h2 class="text-2xl font-bold text-foreground mb-8 text-center">Quick Access</h2>
         
-        <div class="space-y-4">
-          <div class="flex items-start space-x-3 p-4 rounded-lg bg-muted/30">
-            <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center text-white text-sm font-bold">
-              1
-            </div>
-            <div>
-              <h3 class="font-medium text-foreground">Quick Start</h3>
-              <p class="text-sm text-muted-foreground">Basic setup and customization</p>
-            </div>
-          </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           
-          <div class="flex items-start space-x-3 p-4 rounded-lg bg-muted/30">
-            <div class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm font-bold">
-              2
-            </div>
-            <div>
-              <h3 class="font-medium text-foreground">Content Management</h3>
-              <p class="text-sm text-muted-foreground">Adding and editing your content</p>
-            </div>
-          </div>
-          
-          <div class="flex items-start space-x-3 p-4 rounded-lg bg-muted/30">
-            <div class="w-6 h-6 bg-purple-500 rounded-full flex items-center justify-center text-white text-sm font-bold">
-              3
-            </div>
-            <div>
-              <h3 class="font-medium text-foreground">Customization</h3>
-              <p class="text-sm text-muted-foreground">Colors, fonts, and styling</p>
-            </div>
-          </div>
-        </div>
-      </div>
+          <!-- Quick Start -->
+          <Card className="hover:shadow-lg transition-all duration-300 hover:scale-105 animate-fade-in-up">
+            <CardHeader>
+              <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-green-500/10 rounded-lg flex items-center justify-center hover:scale-110 transition-transform">
+                  <span class="text-2xl">⚡</span>
+                </div>
+                <div>
+                  <CardTitle>Quick Start Guide</CardTitle>
+                  <CardDescription>Get your site running in minutes</CardDescription>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <p class="text-sm text-muted-foreground mb-4">
+                Step-by-step instructions to customize your website, add content, and make it your own.
+              </p>
+              <Button asChild variant="outline" className="w-full hover:scale-105 transition-transform">
+                <a href="/quick-start">
+                  Start Here →
+                </a>
+              </Button>
+            </CardContent>
+          </Card>
 
-      <!-- Features & Components -->
-      <div class="space-y-6">
-        <div class="flex items-center space-x-3 mb-6">
-          <div class="w-8 h-8 bg-blue-500/10 rounded-lg flex items-center justify-center">
-            <span class="text-lg">⚙️</span>
-          </div>
-          <h2 class="text-2xl font-bold text-foreground">Features & Components</h2>
+          <!-- Component Showcase -->
+          <Card className="hover:shadow-lg transition-all duration-300 hover:scale-105 animate-fade-in-up">
+            <CardHeader>
+              <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-blue-500/10 rounded-lg flex items-center justify-center hover:scale-110 transition-transform">
+                  <span class="text-2xl">🧩</span>
+                </div>
+                <div>
+                  <CardTitle>Components Library</CardTitle>
+                  <CardDescription>Interactive component showcase</CardDescription>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <p class="text-sm text-muted-foreground mb-4">
+                Explore all available components and see how they work in your site.
+              </p>
+              <Button asChild variant="outline" className="w-full hover:scale-105 transition-transform">
+                <a href="/components-showcase">
+                  View Components →
+                </a>
+              </Button>
+            </CardContent>
+          </Card>
+
+          <!-- Get Help -->
+          <Card className="hover:shadow-lg transition-all duration-300 hover:scale-105 animate-fade-in-up">
+            <CardHeader>
+              <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-purple-500/10 rounded-lg flex items-center justify-center hover:scale-110 transition-transform">
+                  <span class="text-2xl">🆘</span>
+                </div>
+                <div>
+                  <CardTitle>Get Support</CardTitle>
+                  <CardDescription>Professional assistance available</CardDescription>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <p class="text-sm text-muted-foreground mb-4">
+                Need assistance? Contact us or browse frequently asked questions.
+              </p>
+              <Button asChild variant="outline" className="w-full hover:scale-105 transition-transform">
+                <a href="/contact">
+                  Contact Support →
+                </a>
+              </Button>
+            </CardContent>
+          </Card>
+
         </div>
+      </section>
+
+      <!-- Main Documentation Sections -->
+      <section class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
         
-        <div class="grid grid-cols-1 gap-3">
-          <a href="/form-showcase" class="flex items-center justify-between p-3 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors">
-            <div class="flex items-center space-x-3">
-              <span class="text-lg">📝</span>
-              <span class="font-medium text-foreground">Forms</span>
+        <!-- Getting Started -->
+        <div class="space-y-6 animate-fade-in-right">
+          <div class="flex items-center space-x-3 mb-6">
+            <div class="w-8 h-8 bg-green-500/10 rounded-lg flex items-center justify-center hover:scale-110 transition-transform">
+              <span class="text-lg">🚀</span>
             </div>
-            <span class="text-sm text-muted-foreground">→</span>
-          </a>
+            <h2 class="text-2xl font-bold text-foreground">Getting Started</h2>
+          </div>
           
-          <a href="/navigation-showcase" class="flex items-center justify-between p-3 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors">
-            <div class="flex items-center space-x-3">
-              <span class="text-lg">🧭</span>
-              <span class="font-medium text-foreground">Navigation</span>
+          <div class="space-y-4">
+            <div class="flex items-start space-x-3 p-4 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors hover:scale-105 transform">
+              <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center text-white text-sm font-bold hover:scale-110 transition-transform">
+                1
+              </div>
+              <div>
+                <h3 class="font-medium text-foreground">Quick Start</h3>
+                <p class="text-sm text-muted-foreground">Basic setup and customization</p>
+              </div>
             </div>
-            <span class="text-sm text-muted-foreground">→</span>
-          </a>
-          
-          <a href="/data-display-showcase" class="flex items-center justify-between p-3 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors">
-            <div class="flex items-center space-x-3">
-              <span class="text-lg">📊</span>
-              <span class="font-medium text-foreground">Data Display</span>
+            
+            <div class="flex items-start space-x-3 p-4 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors hover:scale-105 transform">
+              <div class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm font-bold hover:scale-110 transition-transform">
+                2
+              </div>
+              <div>
+                <h3 class="font-medium text-foreground">Content Management</h3>
+                <p class="text-sm text-muted-foreground">Adding and editing your content</p>
+              </div>
             </div>
-            <span class="text-sm text-muted-foreground">→</span>
-          </a>
-          
-          <a href="/advanced-showcase" class="flex items-center justify-between p-3 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors">
-            <div class="flex items-center space-x-3">
-              <span class="text-lg">🔮</span>
-              <span class="font-medium text-foreground">Advanced</span>
+            
+            <div class="flex items-start space-x-3 p-4 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors hover:scale-105 transform">
+              <div class="w-6 h-6 bg-purple-500 rounded-full flex items-center justify-center text-white text-sm font-bold hover:scale-110 transition-transform">
+                3
+              </div>
+              <div>
+                <h3 class="font-medium text-foreground">Customization</h3>
+                <p class="text-sm text-muted-foreground">Colors, fonts, and styling</p>
+              </div>
             </div>
-            <span class="text-sm text-muted-foreground">→</span>
-          </a>
+          </div>
         </div>
-      </div>
 
-    </div>
+        <!-- Features & Components -->
+        <div class="space-y-6 animate-fade-in-left">
+          <div class="flex items-center space-x-3 mb-6">
+            <div class="w-8 h-8 bg-blue-500/10 rounded-lg flex items-center justify-center hover:scale-110 transition-transform">
+              <span class="text-lg">⚙️</span>
+            </div>
+            <h2 class="text-2xl font-bold text-foreground">Features & Components</h2>
+          </div>
+          
+          <div class="grid grid-cols-1 gap-3">
+            <a href="/form-showcase" class="flex items-center justify-between p-3 rounded-lg bg-muted/30 hover:bg-muted/50 transition-all hover:scale-105 transform focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+              <div class="flex items-center space-x-3">
+                <span class="text-lg">📝</span>
+                <span class="font-medium text-foreground">Forms & Input Components</span>
+              </div>
+              <span class="text-sm text-muted-foreground">→</span>
+            </a>
+            
+            <a href="/navigation-showcase" class="flex items-center justify-between p-3 rounded-lg bg-muted/30 hover:bg-muted/50 transition-all hover:scale-105 transform focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+              <div class="flex items-center space-x-3">
+                <span class="text-lg">🧭</span>
+                <span class="font-medium text-foreground">Navigation & Feedback</span>
+              </div>
+              <span class="text-sm text-muted-foreground">→</span>
+            </a>
+            
+            <a href="/data-display-showcase" class="flex items-center justify-between p-3 rounded-lg bg-muted/30 hover:bg-muted/50 transition-all hover:scale-105 transform focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+              <div class="flex items-center space-x-3">
+                <span class="text-lg">📊</span>
+                <span class="font-medium text-foreground">Data Display & Tables</span>
+              </div>
+              <span class="text-sm text-muted-foreground">→</span>
+            </a>
+            
+            <a href="/advanced-showcase" class="flex items-center justify-between p-3 rounded-lg bg-muted/30 hover:bg-muted/50 transition-all hover:scale-105 transform focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+              <div class="flex items-center space-x-3">
+                <span class="text-lg">🔮</span>
+                <span class="font-medium text-foreground">Advanced Components</span>
+              </div>
+              <span class="text-sm text-muted-foreground">→</span>
+            </a>
+
+            <!-- Additional Showcase Links -->
+            <a href="/layout-showcase" class="flex items-center justify-between p-3 rounded-lg bg-muted/30 hover:bg-muted/50 transition-all hover:scale-105 transform focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+              <div class="flex items-center space-x-3">
+                <span class="text-lg">🏗️</span>
+                <span class="font-medium text-foreground">Layout System</span>
+              </div>
+              <span class="text-sm text-muted-foreground">→</span>
+            </a>
+
+            <a href="/business-demo" class="flex items-center justify-between p-3 rounded-lg bg-muted/30 hover:bg-muted/50 transition-all hover:scale-105 transform focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+              <div class="flex items-center space-x-3">
+                <span class="text-lg">💼</span>
+                <span class="font-medium text-foreground">Business Examples</span>
+              </div>
+              <span class="text-sm text-muted-foreground">→</span>
+            </a>
+          </div>
+        </div>
+
+      </section>
+
+    </main>
 
     <!-- Technical Information -->
-    <div class="border-t border-border pt-16">
+    <section class="border-t border-border pt-16 animate-fade-in-up">
       <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-foreground mb-4">Technical Details</h2>
+        <h2 class="text-3xl font-bold text-foreground mb-4">Built with Modern Technologies</h2>
         <p class="text-muted-foreground max-w-2xl mx-auto">
           Your website is built with modern, industry-standard technologies for optimal performance and maintainability.
         </p>
@@ -226,61 +269,64 @@ import { Button } from '../components/ui/button';
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         
         <!-- Astro 5 -->
-        <div class="text-center p-6 rounded-lg bg-muted/30">
-          <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-xl flex items-center justify-center mx-auto mb-4">
+        <div class="text-center p-6 rounded-lg bg-muted/30 hover:bg-muted/50 transition-all hover:scale-105 transform">
+          <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-xl flex items-center justify-center mx-auto mb-4 hover:scale-110 transition-transform">
             <span class="text-2xl text-white">🚀</span>
           </div>
           <h3 class="text-xl font-bold text-foreground mb-2">Astro 5</h3>
           <p class="text-sm text-muted-foreground">
-            Modern web framework delivering lightning-fast performance with minimal JavaScript.
+            Modern web framework delivering lightning-fast performance with minimal JavaScript footprint.
           </p>
         </div>
 
         <!-- TailwindCSS 4 -->
-        <div class="text-center p-6 rounded-lg bg-muted/30">
-          <div class="w-16 h-16 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-xl flex items-center justify-center mx-auto mb-4">
+        <div class="text-center p-6 rounded-lg bg-muted/30 hover:bg-muted/50 transition-all hover:scale-105 transform">
+          <div class="w-16 h-16 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-xl flex items-center justify-center mx-auto mb-4 hover:scale-110 transition-transform">
             <span class="text-2xl text-white">🎨</span>
           </div>
           <h3 class="text-xl font-bold text-foreground mb-2">TailwindCSS 4</h3>
           <p class="text-sm text-muted-foreground">
-            Utility-first CSS framework providing consistent, customizable styling.
+            Utility-first CSS framework providing consistent, customizable styling with excellent performance.
           </p>
         </div>
 
         <!-- shadcn/ui -->
-        <div class="text-center p-6 rounded-lg bg-muted/30">
-          <div class="w-16 h-16 bg-gradient-to-br from-violet-500 to-purple-500 rounded-xl flex items-center justify-center mx-auto mb-4">
+        <div class="text-center p-6 rounded-lg bg-muted/30 hover:bg-muted/50 transition-all hover:scale-105 transform">
+          <div class="w-16 h-16 bg-gradient-to-br from-violet-500 to-purple-500 rounded-xl flex items-center justify-center mx-auto mb-4 hover:scale-110 transition-transform">
             <span class="text-2xl text-white">🧩</span>
           </div>
           <h3 class="text-xl font-bold text-foreground mb-2">shadcn/ui</h3>
           <p class="text-sm text-muted-foreground">
-            Beautiful, accessible components built with Radix UI and Tailwind CSS.
+            Beautiful, accessible components built with Radix UI primitives and Tailwind CSS styling.
           </p>
         </div>
 
       </div>
-    </div>
+    </section>
 
     <!-- Call to Action -->
-    <div class="text-center mt-16 p-8 rounded-xl bg-primary/5 border border-primary/10">
+    <section class="text-center mt-16 p-8 rounded-xl bg-primary/5 border border-primary/10 hover:bg-primary/10 transition-colors animate-fade-in-up">
       <h2 class="text-2xl font-bold text-foreground mb-4">Need More Help?</h2>
       <p class="text-muted-foreground mb-6 max-w-xl mx-auto">
         Our team is here to help you get the most out of your new website. 
-        Don't hesitate to reach out with any questions.
+        Don't hesitate to reach out with any questions or customization needs.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <Button asChild size="lg">
+        <Button asChild size="lg" className="hover:scale-105 transition-transform">
           <a href="/contact">
             Contact Support
           </a>
         </Button>
-        <Button asChild variant="outline" size="lg">
+        <Button asChild variant="outline" size="lg" className="hover:scale-105 transition-transform">
           <a href="/quick-start">
             Quick Start Guide
           </a>
         </Button>
       </div>
-    </div>
+    </section>
 
   </div>
+
+  </div>
+
 </Layout>
