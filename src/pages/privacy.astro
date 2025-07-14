@@ -1,186 +1,424 @@
 ---
-// privacy.astro - Privacy Policy Page
-// GDPR compliant privacy policy template
+// privacy.astro - GDPR/LPD Compliant Privacy Policy - Phase 8+ Standards
+// Comprehensive privacy policy for EU (GDPR) and Swiss (LPD) compliance
 // Path: src/pages/privacy.astro
 
 import Layout from '../components/layouts/Layout.astro';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
 import { Alert, AlertDescription } from '../components/ui/alert';
+import { Button } from '../components/ui/button';
 ---
 
 <Layout 
-  title="Privacy Policy - Astro Starter"
-  description="Our privacy policy explains how we collect, use, and protect your personal information"
+  title="Privacy Policy - GDPR & LPD Compliant Data Protection"
+  description="Comprehensive privacy policy compliant with GDPR (European Union) and LPD (Switzerland) regulations for professional website services"
   currentPage="privacy"
   headerVariant="business"
   footerVariant="business"
 >
-  <div class="container mx-auto px-4 py-12 lg:py-20 max-w-4xl">
+  <!-- Skip Links for WCAG 2.1 AA Compliance -->
+  <div class="sr-only">
+    <a href="#main-content" class="skip-link focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-primary-foreground px-4 py-2 rounded-md z-50">
+      Skip to main content
+    </a>
+    <a href="#interactive-content" class="skip-link focus:not-sr-only focus:absolute focus:top-4 focus:left-20 bg-primary text-primary-foreground px-4 py-2 rounded-md z-50">
+      Skip to your rights section
+    </a>
+  </div>
+
+  <main id="main-content" class="container mx-auto px-4 py-12 lg:py-20 max-w-4xl">
     
-    <!-- Hero Section -->
-    <div class="text-center mb-16">
+    <!-- Hero Section with Enhanced Animations -->
+    <section class="text-center mb-16 animate-fade-in-up">
       <div class="flex justify-center items-center space-x-3 mb-6">
-        <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-green-500 rounded-xl flex items-center justify-center text-white font-bold text-2xl">
+        <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-green-500 rounded-xl flex items-center justify-center text-white font-bold text-2xl hover:scale-110 transition-transform duration-300">
           🛡️
         </div>
-        <Badge variant="outline" className="text-sm">
-          Privacy Policy
+        <Badge variant="outline" className="text-sm animate-fade-in-left">
+          GDPR & LPD Compliant
         </Badge>
       </div>
       
-      <h1 class="text-4xl lg:text-5xl font-bold text-foreground mb-6">
+      <h1 class="text-4xl lg:text-5xl font-bold text-foreground mb-6 animate-fade-in-up">
         Privacy Policy
       </h1>
       
-      <p class="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-        We value your privacy and are committed to protecting your personal information. 
-        This policy explains how we collect, use, and safeguard your data.
+      <p class="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed animate-fade-in-up">
+        Comprehensive data protection policy compliant with GDPR (European Union) and LPD (Switzerland). 
+        We value your privacy and are committed to protecting your personal information.
       </p>
       
       <div class="mt-6 text-sm text-muted-foreground">
-        <strong>Last updated:</strong> January 2025
+        <strong>Last updated:</strong> January 2025 • <strong>Effective:</strong> January 1, 2025
       </div>
-    </div>
+    </section>
 
-    <!-- Important Notice -->
-    <Alert className="mb-12 border-blue-200 bg-blue-50 dark:border-blue-800 dark:bg-blue-950/50">
-      <span class="text-blue-600 dark:text-blue-400">ℹ️</span>
-      <AlertDescription className="text-blue-800 dark:text-blue-200">
-        <strong>Template Notice:</strong> This is a template privacy policy. 
-        Please customize it with your specific business information, data practices, 
-        and legal requirements for your jurisdiction.
-      </AlertDescription>
-    </Alert>
+    <!-- Legal Compliance Notice -->
+    <section class="mb-12 animate-fade-in-left">
+      <Alert className="border-blue-200 bg-blue-50 dark:border-blue-800 dark:bg-blue-950/50 hover:shadow-lg transition-all duration-300">
+        <span class="text-blue-600 dark:text-blue-400 hover:scale-110 transition-transform duration-300">⚖️</span>
+        <AlertDescription className="text-blue-800 dark:text-blue-200">
+          <div class="space-y-2">
+            <div><strong>Legal Framework:</strong> This policy complies with GDPR (EU Regulation 2016/679) and LPD (Swiss Federal Act on Data Protection)</div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
+              <div>
+                <strong>🇪🇺 EU/EEA Users:</strong> GDPR rights and EU data protection standards
+              </div>
+              <div>
+                <strong>🇨🇭 Swiss Users:</strong> LPD compliance and FDPIC oversight
+              </div>
+            </div>
+          </div>
+        </AlertDescription>
+      </Alert>
+    </section>
+
+    <!-- Quick Navigation -->
+    <section class="mb-12 animate-fade-in-right">
+      <Card className="hover:shadow-lg transition-all duration-300">
+        <CardHeader>
+          <CardTitle className="flex items-center space-x-2">
+            <span class="text-xl hover:scale-110 transition-transform duration-300">📋</span>
+            <span>Quick Navigation</span>
+          </CardTitle>
+          <CardDescription>Jump to specific sections of our privacy policy</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <Button asChild variant="outline" size="sm" className="text-xs hover:scale-105 transition-transform duration-200">
+              <a href="#data-controller">Data Controller</a>
+            </Button>
+            <Button asChild variant="outline" size="sm" className="text-xs hover:scale-105 transition-transform duration-200">
+              <a href="#data-collection">Data Collection</a>
+            </Button>
+            <Button asChild variant="outline" size="sm" className="text-xs hover:scale-105 transition-transform duration-200">
+              <a href="#legal-basis">Legal Basis</a>
+            </Button>
+            <Button asChild variant="outline" size="sm" className="text-xs hover:scale-105 transition-transform duration-200">
+              <a href="#your-rights">Your Rights</a>
+            </Button>
+            <Button asChild variant="outline" size="sm" className="text-xs hover:scale-105 transition-transform duration-200">
+              <a href="#data-retention">Data Retention</a>
+            </Button>
+            <Button asChild variant="outline" size="sm" className="text-xs hover:scale-105 transition-transform duration-200">
+              <a href="#data-security">Data Security</a>
+            </Button>
+            <Button asChild variant="outline" size="sm" className="text-xs hover:scale-105 transition-transform duration-200">
+              <a href="#international-transfers">Data Transfers</a>
+            </Button>
+            <Button asChild variant="outline" size="sm" className="text-xs hover:scale-105 transition-transform duration-200">
+              <a href="#contact-info">Contact & DPO</a>
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+    </section>
 
     <!-- Privacy Policy Content -->
     <div class="space-y-12">
       
-      <!-- Overview -->
-      <section>
-        <h2 class="text-2xl font-bold text-foreground mb-6">1. Overview</h2>
-        <Card>
+      <!-- Data Controller -->
+      <section id="data-controller" class="animate-fade-in-up">
+        <h2 class="text-2xl font-bold text-foreground mb-6 border-l-4 border-blue-500 pl-4">1. Data Controller & Contact Information</h2>
+        <Card className="hover:shadow-lg transition-all duration-300">
           <CardContent className="pt-6">
-            <p class="text-muted-foreground leading-relaxed mb-4">
-              This Privacy Policy describes how [Your Company Name] ("we," "our," or "us") 
-              collects, uses, and shares information about you when you visit our website 
-              or use our services.
-            </p>
-            <p class="text-muted-foreground leading-relaxed">
-              By using our website, you agree to the collection and use of information 
-              in accordance with this policy. We are committed to protecting your privacy 
-              and ensuring transparency about our data practices.
-            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <h3 class="font-semibold text-foreground mb-3">🏢 Data Controller</h3>
+                <div class="space-y-2 text-muted-foreground text-sm">
+                  <div><strong>Company:</strong> Professional Website Solutions</div>
+                  <div><strong>Address:</strong> Route de la Tech 42, 1015 Lausanne, Switzerland</div>
+                  <div><strong>Registration:</strong> CHE-123.456.789</div>
+                  <div><strong>VAT:</strong> CHE-123.456.789 TVA</div>
+                </div>
+              </div>
+              <div>
+                <h3 class="font-semibold text-foreground mb-3">📞 Contact & DPO</h3>
+                <div class="space-y-2 text-muted-foreground text-sm">
+                  <div><strong>Privacy Email:</strong> <a href="mailto:privacy@yourwebsitecompany.com" class="text-primary underline hover:text-primary/80">privacy@yourwebsitecompany.com</a></div>
+                  <div><strong>DPO Contact:</strong> <a href="mailto:dpo@yourwebsitecompany.com" class="text-primary underline hover:text-primary/80">dpo@yourwebsitecompany.com</a></div>
+                  <div><strong>Phone:</strong> <a href="tel:+41-21-000-0000" class="text-primary underline hover:text-primary/80">+41 21 000 0000</a></div>
+                  <div><strong>Response Time:</strong> 30 days (GDPR/LPD compliant)</div>
+                </div>
+              </div>
+            </div>
           </CardContent>
         </Card>
       </section>
 
-      <!-- Information We Collect -->
-      <section>
-        <h2 class="text-2xl font-bold text-foreground mb-6">2. Information We Collect</h2>
+      <!-- Data Collection -->
+      <section id="data-collection" class="animate-fade-in-left">
+        <h2 class="text-2xl font-bold text-foreground mb-6 border-l-4 border-green-500 pl-4">2. Personal Data We Collect</h2>
         
         <div class="space-y-6">
           
-          <!-- Personal Information -->
-          <Card>
+          <!-- Direct Collection -->
+          <Card className="hover:shadow-lg hover:scale-[1.02] transition-all duration-300">
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">
-                <span class="text-xl">👤</span>
-                <span>Personal Information</span>
+                <span class="text-xl hover:scale-110 transition-transform duration-300">👤</span>
+                <span>Data You Provide Directly</span>
               </CardTitle>
-              <CardDescription>
-                Information you provide directly to us
-              </CardDescription>
+              <CardDescription>Information you voluntarily provide when using our services</CardDescription>
             </CardHeader>
             <CardContent>
-              <ul class="space-y-2 text-muted-foreground">
-                <li class="flex items-start space-x-2">
-                  <span class="text-blue-500 mt-1">•</span>
-                  <span>Contact information (name, email address, phone number)</span>
-                </li>
-                <li class="flex items-start space-x-2">
-                  <span class="text-blue-500 mt-1">•</span>
-                  <span>Business information (company name, job title)</span>
-                </li>
-                <li class="flex items-start space-x-2">
-                  <span class="text-blue-500 mt-1">•</span>
-                  <span>Messages and correspondence sent through contact forms</span>
-                </li>
-                <li class="flex items-start space-x-2">
-                  <span class="text-blue-500 mt-1">•</span>
-                  <span>Any other information you choose to provide</span>
-                </li>
-              </ul>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <h4 class="font-medium text-foreground mb-3">Business Contact Data:</h4>
+                  <ul class="space-y-2 text-muted-foreground text-sm">
+                    <li class="flex items-start space-x-2">
+                      <span class="text-blue-500 mt-1">•</span>
+                      <span>Full name and professional title</span>
+                    </li>
+                    <li class="flex items-start space-x-2">
+                      <span class="text-blue-500 mt-1">•</span>
+                      <span>Business email address</span>
+                    </li>
+                    <li class="flex items-start space-x-2">
+                      <span class="text-blue-500 mt-1">•</span>
+                      <span>Phone number (optional)</span>
+                    </li>
+                    <li class="flex items-start space-x-2">
+                      <span class="text-blue-500 mt-1">•</span>
+                      <span>Company name and address</span>
+                    </li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="font-medium text-foreground mb-3">Service Communication:</h4>
+                  <ul class="space-y-2 text-muted-foreground text-sm">
+                    <li class="flex items-start space-x-2">
+                      <span class="text-green-500 mt-1">•</span>
+                      <span>Support requests and inquiries</span>
+                    </li>
+                    <li class="flex items-start space-x-2">
+                      <span class="text-green-500 mt-1">•</span>
+                      <span>Project requirements and specifications</span>
+                    </li>
+                    <li class="flex items-start space-x-2">
+                      <span class="text-green-500 mt-1">•</span>
+                      <span>Feedback and correspondence</span>
+                    </li>
+                    <li class="flex items-start space-x-2">
+                      <span class="text-green-500 mt-1">•</span>
+                      <span>Payment and billing information</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </CardContent>
           </Card>
 
-          <!-- Technical Information -->
-          <Card>
+          <!-- Automatic Collection -->
+          <Card className="hover:shadow-lg hover:scale-[1.02] transition-all duration-300">
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">
-                <span class="text-xl">📱</span>
-                <span>Technical Information</span>
+                <span class="text-xl hover:scale-110 transition-transform duration-300">📱</span>
+                <span>Data Collected Automatically</span>
               </CardTitle>
-              <CardDescription>
-                Information collected automatically when you visit our website
-              </CardDescription>
+              <CardDescription>Technical information collected when you visit our website</CardDescription>
             </CardHeader>
             <CardContent>
-              <ul class="space-y-2 text-muted-foreground">
-                <li class="flex items-start space-x-2">
-                  <span class="text-green-500 mt-1">•</span>
-                  <span>IP address and browser information</span>
-                </li>
-                <li class="flex items-start space-x-2">
-                  <span class="text-green-500 mt-1">•</span>
-                  <span>Device type and operating system</span>
-                </li>
-                <li class="flex items-start space-x-2">
-                  <span class="text-green-500 mt-1">•</span>
-                  <span>Pages visited and time spent on our website</span>
-                </li>
-                <li class="flex items-start space-x-2">
-                  <span class="text-green-500 mt-1">•</span>
-                  <span>Referring website and search terms used</span>
-                </li>
-              </ul>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <h4 class="font-medium text-foreground mb-3">Technical Data:</h4>
+                  <ul class="space-y-2 text-muted-foreground text-sm">
+                    <li class="flex items-start space-x-2">
+                      <span class="text-purple-500 mt-1">•</span>
+                      <span>IP address (anonymized after 30 days)</span>
+                    </li>
+                    <li class="flex items-start space-x-2">
+                      <span class="text-purple-500 mt-1">•</span>
+                      <span>Browser type and version</span>
+                    </li>
+                    <li class="flex items-start space-x-2">
+                      <span class="text-purple-500 mt-1">•</span>
+                      <span>Operating system and device type</span>
+                    </li>
+                    <li class="flex items-start space-x-2">
+                      <span class="text-purple-500 mt-1">•</span>
+                      <span>Screen resolution and language preferences</span>
+                    </li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="font-medium text-foreground mb-3">Usage Analytics:</h4>
+                  <ul class="space-y-2 text-muted-foreground text-sm">
+                    <li class="flex items-start space-x-2">
+                      <span class="text-orange-500 mt-1">•</span>
+                      <span>Pages visited and time spent</span>
+                    </li>
+                    <li class="flex items-start space-x-2">
+                      <span class="text-orange-500 mt-1">•</span>
+                      <span>Referring website and search terms</span>
+                    </li>
+                    <li class="flex items-start space-x-2">
+                      <span class="text-orange-500 mt-1">•</span>
+                      <span>Click patterns and user interactions</span>
+                    </li>
+                    <li class="flex items-start space-x-2">
+                      <span class="text-orange-500 mt-1">•</span>
+                      <span>Download and form completion events</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </CardContent>
           </Card>
 
         </div>
       </section>
 
-      <!-- How We Use Information -->
-      <section>
-        <h2 class="text-2xl font-bold text-foreground mb-6">3. How We Use Your Information</h2>
-        <Card>
+      <!-- Legal Basis -->
+      <section id="legal-basis" class="animate-fade-in-right">
+        <h2 class="text-2xl font-bold text-foreground mb-6 border-l-4 border-purple-500 pl-4">3. Legal Basis for Data Processing</h2>
+        <Card className="hover:shadow-lg transition-all duration-300">
           <CardContent className="pt-6">
-            <p class="text-muted-foreground leading-relaxed mb-4">
-              We use the information we collect for the following purposes:
+            <p class="text-muted-foreground leading-relaxed mb-6">
+              We process your personal data based on the following legal grounds under GDPR (Article 6) and LPD:
             </p>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div class="p-4 bg-muted/30 rounded-lg">
-                <h4 class="font-medium text-foreground mb-2">Communication</h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="space-y-4">
+                <div class="p-4 bg-blue-50 dark:bg-blue-950/30 rounded-lg border border-blue-200 dark:border-blue-800">
+                  <h4 class="font-medium text-foreground mb-2 flex items-center space-x-2">
+                    <span class="text-blue-500">📋</span>
+                    <span>Contract Performance</span>
+                  </h4>
+                  <p class="text-sm text-muted-foreground">Processing necessary for the performance of a contract with you or to take steps prior to entering into a contract (Art. 6(1)(b) GDPR)</p>
+                </div>
+                <div class="p-4 bg-green-50 dark:bg-green-950/30 rounded-lg border border-green-200 dark:border-green-800">
+                  <h4 class="font-medium text-foreground mb-2 flex items-center space-x-2">
+                    <span class="text-green-500">✅</span>
+                    <span>Consent</span>
+                  </h4>
+                  <p class="text-sm text-muted-foreground">When you have given clear consent for specific processing activities, such as marketing communications (Art. 6(1)(a) GDPR)</p>
+                </div>
+              </div>
+              <div class="space-y-4">
+                <div class="p-4 bg-purple-50 dark:bg-purple-950/30 rounded-lg border border-purple-200 dark:border-purple-800">
+                  <h4 class="font-medium text-foreground mb-2 flex items-center space-x-2">
+                    <span class="text-purple-500">⚖️</span>
+                    <span>Legitimate Interest</span>
+                  </h4>
+                  <p class="text-sm text-muted-foreground">For our legitimate business interests, such as website analytics, security, and service improvement (Art. 6(1)(f) GDPR)</p>
+                </div>
+                <div class="p-4 bg-orange-50 dark:bg-orange-950/30 rounded-lg border border-orange-200 dark:border-orange-800">
+                  <h4 class="font-medium text-foreground mb-2 flex items-center space-x-2">
+                    <span class="text-orange-500">🏛️</span>
+                    <span>Legal Obligation</span>
+                  </h4>
+                  <p class="text-sm text-muted-foreground">To comply with legal requirements such as accounting, tax obligations, and regulatory compliance (Art. 6(1)(c) GDPR)</p>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </section>
+
+      <!-- Data Usage -->
+      <section class="animate-fade-in-left">
+        <h2 class="text-2xl font-bold text-foreground mb-6 border-l-4 border-indigo-500 pl-4">4. How We Use Your Personal Data</h2>
+        <Card className="hover:shadow-lg transition-all duration-300">
+          <CardContent className="pt-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="space-y-4">
+                <div class="p-4 bg-muted/30 rounded-lg hover:bg-muted/50 transition-colors duration-200">
+                  <h4 class="font-medium text-foreground mb-2 flex items-center space-x-2">
+                    <span class="text-blue-500">💼</span>
+                    <span>Service Delivery</span>
+                  </h4>
+                  <ul class="text-sm text-muted-foreground space-y-1">
+                    <li>• Providing website development services</li>
+                    <li>• Technical support and maintenance</li>
+                    <li>• Project management and communication</li>
+                    <li>• Billing and payment processing</li>
+                  </ul>
+                </div>
+                <div class="p-4 bg-muted/30 rounded-lg hover:bg-muted/50 transition-colors duration-200">
+                  <h4 class="font-medium text-foreground mb-2 flex items-center space-x-2">
+                    <span class="text-green-500">📞</span>
+                    <span>Communication</span>
+                  </h4>
+                  <ul class="text-sm text-muted-foreground space-y-1">
+                    <li>• Responding to inquiries and support requests</li>
+                    <li>• Service updates and notifications</li>
+                    <li>• Technical documentation and guidance</li>
+                    <li>• Contract and legal communications</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="space-y-4">
+                <div class="p-4 bg-muted/30 rounded-lg hover:bg-muted/50 transition-colors duration-200">
+                  <h4 class="font-medium text-foreground mb-2 flex items-center space-x-2">
+                    <span class="text-purple-500">📊</span>
+                    <span>Analytics & Improvement</span>
+                  </h4>
+                  <ul class="text-sm text-muted-foreground space-y-1">
+                    <li>• Website performance optimization</li>
+                    <li>• User experience improvement</li>
+                    <li>• Service quality enhancement</li>
+                    <li>• Statistical analysis (anonymized)</li>
+                  </ul>
+                </div>
+                <div class="p-4 bg-muted/30 rounded-lg hover:bg-muted/50 transition-colors duration-200">
+                  <h4 class="font-medium text-foreground mb-2 flex items-center space-x-2">
+                    <span class="text-orange-500">🛡️</span>
+                    <span>Legal & Security</span>
+                  </h4>
+                  <ul class="text-sm text-muted-foreground space-y-1">
+                    <li>• Fraud prevention and security</li>
+                    <li>• Legal compliance and record keeping</li>
+                    <li>• Dispute resolution and legal claims</li>
+                    <li>• Regulatory reporting requirements</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </section>
+
+      <!-- Data Sharing -->
+      <section class="animate-fade-in-right">
+        <h2 class="text-2xl font-bold text-foreground mb-6 border-l-4 border-red-500 pl-4">5. Data Sharing & Disclosure</h2>
+        <Card className="hover:shadow-lg transition-all duration-300">
+          <CardContent className="pt-6">
+            <p class="text-muted-foreground leading-relaxed mb-6">
+              We do not sell, trade, or otherwise transfer your personal information to third parties except in the following circumstances:
+            </p>
+            <div class="space-y-4">
+              <div class="p-4 border border-orange-200 dark:border-orange-800 rounded-lg bg-orange-50 dark:bg-orange-950/30">
+                <h4 class="font-medium text-foreground mb-2 flex items-center space-x-2">
+                  <span class="text-orange-500">🔧</span>
+                  <span>Service Providers (Data Processors)</span>
+                </h4>
+                <p class="text-sm text-muted-foreground mb-3">
+                  We may share data with trusted service providers who assist in operating our business, subject to strict data processing agreements:
+                </p>
+                <ul class="text-sm text-muted-foreground space-y-1">
+                  <li>• Hosting providers (EU/Swiss data centers only)</li>
+                  <li>• Email service providers (GDPR compliant)</li>
+                  <li>• Analytics providers (privacy-focused, anonymized data)</li>
+                  <li>• Payment processors (PCI DSS compliant)</li>
+                </ul>
+              </div>
+              <div class="p-4 border border-red-200 dark:border-red-800 rounded-lg bg-red-50 dark:bg-red-950/30">
+                <h4 class="font-medium text-foreground mb-2 flex items-center space-x-2">
+                  <span class="text-red-500">⚖️</span>
+                  <span>Legal Requirements</span>
+                </h4>
                 <p class="text-sm text-muted-foreground">
-                  To respond to your inquiries and provide customer support
+                  We may disclose information when required by Swiss or EU law, court orders, or to protect our legal rights, safety, or property. Any such disclosure will be limited to what is legally required.
                 </p>
               </div>
-              <div class="p-4 bg-muted/30 rounded-lg">
-                <h4 class="font-medium text-foreground mb-2">Service Delivery</h4>
+              <div class="p-4 border border-blue-200 dark:border-blue-800 rounded-lg bg-blue-50 dark:bg-blue-950/30">
+                <h4 class="font-medium text-foreground mb-2 flex items-center space-x-2">
+                  <span class="text-blue-500">🔄</span>
+                  <span>Business Transfers</span>
+                </h4>
                 <p class="text-sm text-muted-foreground">
-                  To provide and improve our services and website functionality
-                </p>
-              </div>
-              <div class="p-4 bg-muted/30 rounded-lg">
-                <h4 class="font-medium text-foreground mb-2">Analytics</h4>
-                <p class="text-sm text-muted-foreground">
-                  To understand how our website is used and improve user experience
-                </p>
-              </div>
-              <div class="p-4 bg-muted/30 rounded-lg">
-                <h4 class="font-medium text-foreground mb-2">Legal Compliance</h4>
-                <p class="text-sm text-muted-foreground">
-                  To comply with legal obligations and protect our rights
+                  In the event of a merger, acquisition, or sale of assets, your information may be transferred. You will be notified of any such change in ownership or control.
                 </p>
               </div>
             </div>
@@ -188,187 +426,170 @@ import { Alert, AlertDescription } from '../components/ui/alert';
         </Card>
       </section>
 
-      <!-- Information Sharing -->
-      <section>
-        <h2 class="text-2xl font-bold text-foreground mb-6">4. Information Sharing</h2>
-        <Card>
+      <!-- Data Retention -->
+      <section id="data-retention" class="animate-fade-in-left">
+        <h2 class="text-2xl font-bold text-foreground mb-6 border-l-4 border-cyan-500 pl-4">6. Data Retention Periods</h2>
+        <Card className="hover:shadow-lg transition-all duration-300">
           <CardContent className="pt-6">
-            <p class="text-muted-foreground leading-relaxed mb-4">
-              We do not sell, trade, or otherwise transfer your personal information to third parties, 
-              except in the following circumstances:
+            <p class="text-muted-foreground leading-relaxed mb-6">
+              We retain personal data only as long as necessary for the purposes outlined in this policy, in compliance with GDPR and LPD requirements:
             </p>
-            <ul class="space-y-3 text-muted-foreground">
-              <li class="flex items-start space-x-3">
-                <span class="text-orange-500 mt-1">⚠️</span>
-                <div>
-                  <strong class="text-foreground">Service Providers:</strong> 
-                  <span class="ml-1">We may share information with trusted third-party service providers who assist us in operating our website or conducting business.</span>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="space-y-4">
+                <div class="p-4 bg-green-50 dark:bg-green-950/30 rounded-lg border border-green-200 dark:border-green-800">
+                  <h4 class="font-medium text-foreground mb-2">📞 Contact & Communication Data</h4>
+                  <ul class="text-sm text-muted-foreground space-y-1">
+                    <li>• <strong>Inquiries:</strong> 3 years after last contact</li>
+                    <li>• <strong>Support requests:</strong> 5 years for service quality</li>
+                    <li>• <strong>Marketing consent:</strong> Until withdrawal</li>
+                  </ul>
                 </div>
-              </li>
-              <li class="flex items-start space-x-3">
-                <span class="text-red-500 mt-1">⚖️</span>
-                <div>
-                  <strong class="text-foreground">Legal Requirements:</strong> 
-                  <span class="ml-1">We may disclose information when required by law or to protect our rights, safety, or property.</span>
+                <div class="p-4 bg-blue-50 dark:bg-blue-950/30 rounded-lg border border-blue-200 dark:border-blue-800">
+                  <h4 class="font-medium text-foreground mb-2">💼 Contract & Business Data</h4>
+                  <ul class="text-sm text-muted-foreground space-y-1">
+                    <li>• <strong>Project data:</strong> 10 years (Swiss CO Art. 958f)</li>
+                    <li>• <strong>Invoicing:</strong> 10 years (tax obligations)</li>
+                    <li>• <strong>Contracts:</strong> 10 years after termination</li>
+                  </ul>
                 </div>
-              </li>
-              <li class="flex items-start space-x-3">
-                <span class="text-blue-500 mt-1">🔄</span>
-                <div>
-                  <strong class="text-foreground">Business Transfers:</strong> 
-                  <span class="ml-1">In the event of a merger, acquisition, or sale of assets, your information may be transferred.</span>
+              </div>
+              <div class="space-y-4">
+                <div class="p-4 bg-purple-50 dark:bg-purple-950/30 rounded-lg border border-purple-200 dark:border-purple-800">
+                  <h4 class="font-medium text-foreground mb-2">📊 Technical & Analytics Data</h4>
+                  <ul class="text-sm text-muted-foreground space-y-1">
+                    <li>• <strong>IP addresses:</strong> Anonymized after 30 days</li>
+                    <li>• <strong>Usage analytics:</strong> 24 months (aggregated)</li>
+                    <li>• <strong>Error logs:</strong> 12 months for debugging</li>
+                  </ul>
                 </div>
-              </li>
-            </ul>
+                <div class="p-4 bg-orange-50 dark:bg-orange-950/30 rounded-lg border border-orange-200 dark:border-orange-800">
+                  <h4 class="font-medium text-foreground mb-2">🔒 Security & Legal Data</h4>
+                  <ul class="text-sm text-muted-foreground space-y-1">
+                    <li>• <strong>Security logs:</strong> 12 months</li>
+                    <li>• <strong>Legal disputes:</strong> Until resolution + 5 years</li>
+                    <li>• <strong>Audit records:</strong> 7 years (regulatory)</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </section>
+
+      <!-- International Transfers -->
+      <section id="international-transfers" class="animate-fade-in-right">
+        <h2 class="text-2xl font-bold text-foreground mb-6 border-l-4 border-yellow-500 pl-4">7. International Data Transfers</h2>
+        <Card className="hover:shadow-lg transition-all duration-300">
+          <CardContent className="pt-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <h3 class="font-semibold text-foreground mb-4 flex items-center space-x-2">
+                  <span class="text-green-500">🇪🇺</span>
+                  <span>EU/EEA Data Transfers</span>
+                </h3>
+                <div class="space-y-3">
+                  <div class="p-3 bg-green-50 dark:bg-green-950/30 rounded-lg">
+                    <h4 class="font-medium text-foreground text-sm mb-1">Primary Data Storage</h4>
+                    <p class="text-xs text-muted-foreground">All personal data is stored within EU/EEA data centers with GDPR compliance</p>
+                  </div>
+                  <div class="p-3 bg-blue-50 dark:bg-blue-950/30 rounded-lg">
+                    <h4 class="font-medium text-foreground text-sm mb-1">Adequacy Decisions</h4>
+                    <p class="text-xs text-muted-foreground">Transfers only to countries with EU adequacy decisions (Switzerland, UK, etc.)</p>
+                  </div>
+                  <div class="p-3 bg-purple-50 dark:bg-purple-950/30 rounded-lg">
+                    <h4 class="font-medium text-foreground text-sm mb-1">Safeguards</h4>
+                    <p class="text-xs text-muted-foreground">Standard Contractual Clauses (SCCs) for any non-adequate country transfers</p>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <h3 class="font-semibold text-foreground mb-4 flex items-center space-x-2">
+                  <span class="text-red-500">🇨🇭</span>
+                  <span>Swiss Data Transfers</span>
+                </h3>
+                <div class="space-y-3">
+                  <div class="p-3 bg-red-50 dark:bg-red-950/30 rounded-lg">
+                    <h4 class="font-medium text-foreground text-sm mb-1">LPD Compliance</h4>
+                    <p class="text-xs text-muted-foreground">Transfers comply with Swiss LPD requirements and FDPIC guidelines</p>
+                  </div>
+                  <div class="p-3 bg-orange-50 dark:bg-orange-950/30 rounded-lg">
+                    <h4 class="font-medium text-foreground text-sm mb-1">Adequate Protection</h4>
+                    <p class="text-xs text-muted-foreground">Only to countries providing adequate data protection (EU/EEA, recognized jurisdictions)</p>
+                  </div>
+                  <div class="p-3 bg-indigo-50 dark:bg-indigo-950/30 rounded-lg">
+                    <h4 class="font-medium text-foreground text-sm mb-1">Cross-Border Contracts</h4>
+                    <p class="text-xs text-muted-foreground">Binding data protection agreements for all international service providers</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <Alert className="mt-6 border-yellow-200 bg-yellow-50 dark:border-yellow-800 dark:bg-yellow-950/50">
+              <span class="text-yellow-600 dark:text-yellow-400">⚠️</span>
+              <AlertDescription className="text-yellow-800 dark:text-yellow-200">
+                <strong>Important:</strong> We do not transfer personal data to countries without adequate protection. All service providers undergo strict data protection assessments before engagement.
+              </AlertDescription>
+            </Alert>
           </CardContent>
         </Card>
       </section>
 
       <!-- Data Security -->
-      <section>
-        <h2 class="text-2xl font-bold text-foreground mb-6">5. Data Security</h2>
-        <Card>
+      <section id="data-security" class="animate-fade-in-left">
+        <h2 class="text-2xl font-bold text-foreground mb-6 border-l-4 border-emerald-500 pl-4">8. Data Security Measures</h2>
+        <Card className="hover:shadow-lg transition-all duration-300">
           <CardContent className="pt-6">
             <p class="text-muted-foreground leading-relaxed mb-6">
-              We implement appropriate security measures to protect your personal information against 
-              unauthorized access, alteration, disclosure, or destruction.
+              We implement comprehensive technical and organizational measures to protect your personal data against unauthorized access, alteration, disclosure, or destruction:
             </p>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div class="text-center p-4 bg-green-50 dark:bg-green-950/20 rounded-lg border border-green-200 dark:border-green-800">
-                <div class="w-8 h-8 bg-green-500/10 rounded-lg flex items-center justify-center mx-auto mb-3">
-                  <span class="text-lg">🔒</span>
-                </div>
-                <h4 class="font-medium text-foreground mb-2">Encryption</h4>
-                <p class="text-xs text-muted-foreground">SSL/TLS encryption for data transmission</p>
-              </div>
-              <div class="text-center p-4 bg-blue-50 dark:bg-blue-950/20 rounded-lg border border-blue-200 dark:border-blue-800">
-                <div class="w-8 h-8 bg-blue-500/10 rounded-lg flex items-center justify-center mx-auto mb-3">
-                  <span class="text-lg">🛡️</span>
-                </div>
-                <h4 class="font-medium text-foreground mb-2">Access Control</h4>
-                <p class="text-xs text-muted-foreground">Limited access to authorized personnel only</p>
-              </div>
-              <div class="text-center p-4 bg-purple-50 dark:bg-purple-950/20 rounded-lg border border-purple-200 dark:border-purple-800">
-                <div class="w-8 h-8 bg-purple-500/10 rounded-lg flex items-center justify-center mx-auto mb-3">
-                  <span class="text-lg">🔄</span>
-                </div>
-                <h4 class="font-medium text-foreground mb-2">Regular Updates</h4>
-                <p class="text-xs text-muted-foreground">Security measures are regularly reviewed and updated</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </section>
-
-      <!-- Your Rights -->
-      <section>
-        <h2 class="text-2xl font-bold text-foreground mb-6">6. Your Rights</h2>
-        <Card>
-          <CardContent className="pt-6">
-            <p class="text-muted-foreground leading-relaxed mb-4">
-              Depending on your location, you may have the following rights regarding your personal information:
-            </p>
-            <div class="space-y-3">
-              <div class="flex items-start space-x-3 p-3 bg-muted/30 rounded-lg">
-                <span class="text-blue-500 mt-1">📋</span>
-                <div>
-                  <strong class="text-foreground">Access:</strong> 
-                  <span class="text-muted-foreground ml-1">Request access to your personal information we hold</span>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div class="space-y-4">
+                <h3 class="font-semibold text-foreground">🔒 Technical Safeguards</h3>
+                <div class="space-y-3">
+                  <div class="p-3 bg-green-50 dark:bg-green-950/30 rounded-lg border border-green-200 dark:border-green-800">
+                    <h4 class="font-medium text-foreground text-sm mb-1">Encryption</h4>
+                    <p class="text-xs text-muted-foreground">TLS 1.3 for transmission, AES-256 for storage</p>
+                  </div>
+                  <div class="p-3 bg-blue-50 dark:bg-blue-950/30 rounded-lg border border-blue-200 dark:border-blue-800">
+                    <h4 class="font-medium text-foreground text-sm mb-1">Access Control</h4>
+                    <p class="text-xs text-muted-foreground">Multi-factor authentication, role-based permissions</p>
+                  </div>
+                  <div class="p-3 bg-purple-50 dark:bg-purple-950/30 rounded-lg border border-purple-200 dark:border-purple-800">
+                    <h4 class="font-medium text-foreground text-sm mb-1">Infrastructure</h4>
+                    <p class="text-xs text-muted-foreground">ISO 27001 certified data centers, redundant backups</p>
+                  </div>
                 </div>
               </div>
-              <div class="flex items-start space-x-3 p-3 bg-muted/30 rounded-lg">
-                <span class="text-green-500 mt-1">✏️</span>
-                <div>
-                  <strong class="text-foreground">Correction:</strong> 
-                  <span class="text-muted-foreground ml-1">Request correction of inaccurate information</span>
+              <div class="space-y-4">
+                <h3 class="font-semibold text-foreground">👥 Organizational Measures</h3>
+                <div class="space-y-3">
+                  <div class="p-3 bg-orange-50 dark:bg-orange-950/30 rounded-lg border border-orange-200 dark:border-orange-800">
+                    <h4 class="font-medium text-foreground text-sm mb-1">Staff Training</h4>
+                    <p class="text-xs text-muted-foreground">Regular GDPR/LPD training, confidentiality agreements</p>
+                  </div>
+                  <div class="p-3 bg-indigo-50 dark:bg-indigo-950/30 rounded-lg border border-indigo-200 dark:border-indigo-800">
+                    <h4 class="font-medium text-foreground text-sm mb-1">Data Minimization</h4>
+                    <p class="text-xs text-muted-foreground">Principle of data minimization, regular data audits</p>
+                  </div>
+                  <div class="p-3 bg-red-50 dark:bg-red-950/30 rounded-lg border border-red-200 dark:border-red-800">
+                    <h4 class="font-medium text-foreground text-sm mb-1">Incident Response</h4>
+                    <p class="text-xs text-muted-foreground">72-hour breach notification procedures</p>
+                  </div>
                 </div>
               </div>
-              <div class="flex items-start space-x-3 p-3 bg-muted/30 rounded-lg">
-                <span class="text-red-500 mt-1">🗑️</span>
-                <div>
-                  <strong class="text-foreground">Deletion:</strong> 
-                  <span class="text-muted-foreground ml-1">Request deletion of your personal information</span>
-                </div>
-              </div>
-              <div class="flex items-start space-x-3 p-3 bg-muted/30 rounded-lg">
-                <span class="text-purple-500 mt-1">📤</span>
-                <div>
-                  <strong class="text-foreground">Portability:</strong> 
-                  <span class="text-muted-foreground ml-1">Request a copy of your information in a portable format</span>
-                </div>
-              </div>
-            </div>
-            <p class="text-sm text-muted-foreground mt-4">
-              To exercise these rights, please <a href="/contact" class="text-primary underline hover:text-primary/80">contact us</a> 
-              with your request and proof of identity.
-            </p>
-          </CardContent>
-        </Card>
-      </section>
-
-      <!-- Cookies -->
-      <section>
-        <h2 class="text-2xl font-bold text-foreground mb-6">7. Cookies and Tracking</h2>
-        <Card>
-          <CardContent className="pt-6">
-            <p class="text-muted-foreground leading-relaxed mb-4">
-              Our website may use cookies and similar technologies to enhance your experience. 
-              For detailed information about our cookie usage, please see our 
-              <a href="/cookies" class="text-primary underline hover:text-primary/80">Cookie Policy</a>.
-            </p>
-            <div class="p-4 bg-muted/30 rounded-lg">
-              <h4 class="font-medium text-foreground mb-2">Cookie Types We Use:</h4>
-              <ul class="text-sm text-muted-foreground space-y-1">
-                <li>• Essential cookies for website functionality</li>
-                <li>• Analytics cookies to understand website usage</li>
-                <li>• Preference cookies to remember your settings</li>
-              </ul>
-            </div>
-          </CardContent>
-        </Card>
-      </section>
-
-      <!-- Changes to Policy -->
-      <section>
-        <h2 class="text-2xl font-bold text-foreground mb-6">8. Changes to This Policy</h2>
-        <Card>
-          <CardContent className="pt-6">
-            <p class="text-muted-foreground leading-relaxed">
-              We may update this Privacy Policy from time to time. We will notify you of any changes 
-              by posting the new Privacy Policy on this page and updating the "Last updated" date. 
-              We encourage you to review this Privacy Policy periodically for any changes.
-            </p>
-          </CardContent>
-        </Card>
-      </section>
-
-      <!-- Contact Information -->
-      <section>
-        <h2 class="text-2xl font-bold text-foreground mb-6">9. Contact Us</h2>
-        <Card>
-          <CardContent className="pt-6">
-            <p class="text-muted-foreground leading-relaxed mb-4">
-              If you have any questions about this Privacy Policy or our data practices, 
-              please don't hesitate to contact us:
-            </p>
-            <div class="space-y-3">
-              <div class="flex items-center space-x-3">
-                <span class="text-blue-500">📧</span>
-                <span class="text-muted-foreground">Email: <a href="mailto:privacy@yourcompany.com" class="text-primary underline hover:text-primary/80">privacy@yourcompany.com</a></span>
-              </div>
-              <div class="flex items-center space-x-3">
-                <span class="text-green-500">📞</span>
-                <span class="text-muted-foreground">Phone: <a href="tel:+1-555-123-4567" class="text-primary underline hover:text-primary/80">+1 (555) 123-4567</a></span>
-              </div>
-              <div class="flex items-start space-x-3">
-                <span class="text-purple-500 mt-1">📍</span>
-                <div class="text-muted-foreground">
-                  <div>Address:</div>
-                  <div class="ml-0">
-                    [Your Company Name]<br>
-                    123 Business Street<br>
-                    City, State 12345<br>
-                    Country
+              <div class="space-y-4">
+                <h3 class="font-semibold text-foreground">🛡️ Compliance Standards</h3>
+                <div class="space-y-3">
+                  <div class="p-3 bg-cyan-50 dark:bg-cyan-950/30 rounded-lg border border-cyan-200 dark:border-cyan-800">
+                    <h4 class="font-medium text-foreground text-sm mb-1">Certifications</h4>
+                    <p class="text-xs text-muted-foreground">ISO 27001, SOC 2 Type II compliance</p>
+                  </div>
+                  <div class="p-3 bg-pink-50 dark:bg-pink-950/30 rounded-lg border border-pink-200 dark:border-pink-800">
+                    <h4 class="font-medium text-foreground text-sm mb-1">Regular Audits</h4>
+                    <p class="text-xs text-muted-foreground">Annual security assessments, penetration testing</p>
+                  </div>
+                  <div class="p-3 bg-yellow-50 dark:bg-yellow-950/30 rounded-lg border border-yellow-200 dark:border-yellow-800">
+                    <h4 class="font-medium text-foreground text-sm mb-1">Documentation</h4>
+                    <p class="text-xs text-muted-foreground">Complete records of processing activities (GDPR Art. 30)</p>
                   </div>
                 </div>
               </div>
@@ -377,7 +598,528 @@ import { Alert, AlertDescription } from '../components/ui/alert';
         </Card>
       </section>
 
+      <!-- Your Rights -->
+      <section id="your-rights" class="animate-fade-in-right">
+        <h2 class="text-2xl font-bold text-foreground mb-6 border-l-4 border-violet-500 pl-4">9. Your Privacy Rights</h2>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          
+          <!-- GDPR Rights -->
+          <Card className="hover:shadow-lg hover:scale-[1.02] transition-all duration-300">
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2">
+                <span class="text-xl hover:scale-110 transition-transform duration-300">🇪🇺</span>
+                <span>GDPR Rights (EU/EEA)</span>
+              </CardTitle>
+              <CardDescription>Your rights under the General Data Protection Regulation</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div class="space-y-3">
+                <div class="p-3 bg-blue-50 dark:bg-blue-950/30 rounded-lg">
+                  <h4 class="font-medium text-foreground text-sm mb-1 flex items-center space-x-2">
+                    <span class="text-blue-500">📋</span>
+                    <span>Right of Access (Art. 15)</span>
+                  </h4>
+                  <p class="text-xs text-muted-foreground">Request a copy of your personal data we hold</p>
+                </div>
+                <div class="p-3 bg-green-50 dark:bg-green-950/30 rounded-lg">
+                  <h4 class="font-medium text-foreground text-sm mb-1 flex items-center space-x-2">
+                    <span class="text-green-500">✏️</span>
+                    <span>Right to Rectification (Art. 16)</span>
+                  </h4>
+                  <p class="text-xs text-muted-foreground">Request correction of inaccurate or incomplete data</p>
+                </div>
+                <div class="p-3 bg-red-50 dark:bg-red-950/30 rounded-lg">
+                  <h4 class="font-medium text-foreground text-sm mb-1 flex items-center space-x-2">
+                    <span class="text-red-500">🗑️</span>
+                    <span>Right to Erasure (Art. 17)</span>
+                  </h4>
+                  <p class="text-xs text-muted-foreground">Request deletion of your personal data ("right to be forgotten")</p>
+                </div>
+                <div class="p-3 bg-purple-50 dark:bg-purple-950/30 rounded-lg">
+                  <h4 class="font-medium text-foreground text-sm mb-1 flex items-center space-x-2">
+                    <span class="text-purple-500">📤</span>
+                    <span>Right to Data Portability (Art. 20)</span>
+                  </h4>
+                  <p class="text-xs text-muted-foreground">Receive your data in a machine-readable format</p>
+                </div>
+                <div class="p-3 bg-orange-50 dark:bg-orange-950/30 rounded-lg">
+                  <h4 class="font-medium text-foreground text-sm mb-1 flex items-center space-x-2">
+                    <span class="text-orange-500">🚫</span>
+                    <span>Right to Object (Art. 21)</span>
+                  </h4>
+                  <p class="text-xs text-muted-foreground">Object to processing based on legitimate interests or direct marketing</p>
+                </div>
+                <div class="p-3 bg-indigo-50 dark:bg-indigo-950/30 rounded-lg">
+                  <h4 class="font-medium text-foreground text-sm mb-1 flex items-center space-x-2">
+                    <span class="text-indigo-500">⏸️</span>
+                    <span>Right to Restriction (Art. 18)</span>
+                  </h4>
+                  <p class="text-xs text-muted-foreground">Request limitation of processing in certain circumstances</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <!-- LPD Rights -->
+          <Card className="hover:shadow-lg hover:scale-[1.02] transition-all duration-300">
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2">
+                <span class="text-xl hover:scale-110 transition-transform duration-300">🇨🇭</span>
+                <span>LPD Rights (Switzerland)</span>
+              </CardTitle>
+              <CardDescription>Your rights under the Swiss Federal Act on Data Protection</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div class="space-y-3">
+                <div class="p-3 bg-red-50 dark:bg-red-950/30 rounded-lg">
+                  <h4 class="font-medium text-foreground text-sm mb-1 flex items-center space-x-2">
+                    <span class="text-red-500">📊</span>
+                    <span>Right of Information</span>
+                  </h4>
+                  <p class="text-xs text-muted-foreground">Be informed about data processing and your rights</p>
+                </div>
+                <div class="p-3 bg-blue-50 dark:bg-blue-950/30 rounded-lg">
+                  <h4 class="font-medium text-foreground text-sm mb-1 flex items-center space-x-2">
+                    <span class="text-blue-500">🔍</span>
+                    <span>Right of Access</span>
+                  </h4>
+                  <p class="text-xs text-muted-foreground">Access your personal data and information about processing</p>
+                </div>
+                <div class="p-3 bg-green-50 dark:bg-green-950/30 rounded-lg">
+                  <h4 class="font-medium text-foreground text-sm mb-1 flex items-center space-x-2">
+                    <span class="text-green-500">🔧</span>
+                    <span>Right to Rectification & Deletion</span>
+                  </h4>
+                  <p class="text-xs text-muted-foreground">Correct or delete incorrect or unlawfully processed data</p>
+                </div>
+                <div class="p-3 bg-purple-50 dark:bg-purple-950/30 rounded-lg">
+                  <h4 class="font-medium text-foreground text-sm mb-1 flex items-center space-x-2">
+                    <span class="text-purple-500">📤</span>
+                    <span>Right to Data Portability</span>
+                  </h4>
+                  <p class="text-xs text-muted-foreground">Receive data in a commonly used, machine-readable format</p>
+                </div>
+                <div class="p-3 bg-orange-50 dark:bg-orange-950/30 rounded-lg">
+                  <h4 class="font-medium text-foreground text-sm mb-1 flex items-center space-x-2">
+                    <span class="text-orange-500">⚖️</span>
+                    <span>Right to Lodge Complaints</span>
+                  </h4>
+                  <p class="text-xs text-muted-foreground">File complaints with the FDPIC (Federal Data Protection Commissioner)</p>
+                </div>
+                <div class="p-3 bg-indigo-50 dark:bg-indigo-950/30 rounded-lg">
+                  <h4 class="font-medium text-foreground text-sm mb-1 flex items-center space-x-2">
+                    <span class="text-indigo-500">🚫</span>
+                    <span>Right to Object</span>
+                  </h4>
+                  <p class="text-xs text-muted-foreground">Object to data processing in certain circumstances</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+        </div>
+
+        <!-- How to Exercise Rights -->
+        <Card className="mt-6 hover:shadow-lg transition-all duration-300" id="interactive-content">
+          <CardHeader>
+            <CardTitle className="flex items-center space-x-2">
+              <span class="text-xl hover:scale-110 transition-transform duration-300">📞</span>
+              <span>How to Exercise Your Rights</span>
+            </CardTitle>
+            <CardDescription>Simple process to submit privacy requests</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div class="text-center p-4 bg-muted/30 rounded-lg hover:bg-muted/50 transition-colors duration-200">
+                <div class="text-3xl mb-3">📧</div>
+                <h4 class="font-medium text-foreground mb-2">Contact Us</h4>
+                <p class="text-sm text-muted-foreground mb-3">Send your request to our DPO</p>
+                <Button asChild size="sm" className="hover:scale-105 transition-transform duration-200">
+                  <a href="mailto:dpo@yourwebsitecompany.com" aria-label="Contact data protection officer">
+                    dpo@yourwebsitecompany.com
+                  </a>
+                </Button>
+              </div>
+              <div class="text-center p-4 bg-muted/30 rounded-lg hover:bg-muted/50 transition-colors duration-200">
+                <div class="text-3xl mb-3">📝</div>
+                <h4 class="font-medium text-foreground mb-2">Provide Details</h4>
+                <p class="text-sm text-muted-foreground mb-3">Include proof of identity and specific request</p>
+                <div class="text-xs text-muted-foreground">Required: ID copy + request description</div>
+              </div>
+              <div class="text-center p-4 bg-muted/30 rounded-lg hover:bg-muted/50 transition-colors duration-200">
+                <div class="text-3xl mb-3">⏱️</div>
+                <h4 class="font-medium text-foreground mb-2">Response Time</h4>
+                <p class="text-sm text-muted-foreground mb-3">We respond within 30 days</p>
+                <div class="text-xs text-muted-foreground">Extension possible for complex requests</div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </section>
+
+      <!-- Supervisory Authorities -->
+      <section class="animate-fade-in-left">
+        <h2 class="text-2xl font-bold text-foreground mb-6 border-l-4 border-pink-500 pl-4">10. Supervisory Authorities</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          
+          <Card className="hover:shadow-lg hover:scale-[1.02] transition-all duration-300">
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2">
+                <span class="text-xl hover:scale-110 transition-transform duration-300">🇪🇺</span>
+                <span>EU/EEA Residents</span>
+              </CardTitle>
+              <CardDescription>Contact your local data protection authority</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div class="space-y-4">
+                <p class="text-sm text-muted-foreground">
+                  You have the right to lodge a complaint with your local supervisory authority if you believe we have not complied with GDPR requirements.
+                </p>
+                <div class="p-3 bg-blue-50 dark:bg-blue-950/30 rounded-lg">
+                  <h4 class="font-medium text-foreground text-sm mb-2">Find Your Authority</h4>
+                  <p class="text-xs text-muted-foreground mb-2">
+                    Each EU member state has a designated data protection authority. 
+                  </p>
+                  <Button asChild variant="outline" size="sm" className="text-xs hover:scale-105 transition-transform duration-200">
+                    <a href="https://edpb.europa.eu/about-edpb/about-edpb/members_en" target="_blank" rel="noopener noreferrer" aria-label="Find EU data protection authorities">
+                      Find Your DPA
+                    </a>
+                  </Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="hover:shadow-lg hover:scale-[1.02] transition-all duration-300">
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2">
+                <span class="text-xl hover:scale-110 transition-transform duration-300">🇨🇭</span>
+                <span>Swiss Residents</span>
+              </CardTitle>
+              <CardDescription>Federal Data Protection and Information Commissioner</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div class="space-y-4">
+                <p class="text-sm text-muted-foreground">
+                  Swiss residents can file complaints with the Federal Data Protection and Information Commissioner (FDPIC).
+                </p>
+                <div class="p-3 bg-red-50 dark:bg-red-950/30 rounded-lg">
+                  <h4 class="font-medium text-foreground text-sm mb-2">FDPIC Contact Information</h4>
+                  <div class="space-y-1 text-xs text-muted-foreground">
+                    <div><strong>Website:</strong> <a href="https://www.edoeb.admin.ch" target="_blank" rel="noopener noreferrer" class="text-primary underline hover:text-primary/80">www.edoeb.admin.ch</a></div>
+                    <div><strong>Email:</strong> info@edoeb.admin.ch</div>
+                    <div><strong>Address:</strong> Feldeggweg 1, 3003 Bern, Switzerland</div>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+        </div>
+      </section>
+
+      <!-- Cookies Reference -->
+      <section class="animate-fade-in-right">
+        <h2 class="text-2xl font-bold text-foreground mb-6 border-l-4 border-amber-500 pl-4">11. Cookies & Tracking Technologies</h2>
+        <Card className="hover:shadow-lg transition-all duration-300">
+          <CardContent className="pt-6">
+            <p class="text-muted-foreground leading-relaxed mb-4">
+              Our website uses cookies and similar technologies to enhance your experience and analyze website usage. 
+              For comprehensive information about our cookie practices, please review our dedicated 
+              <a href="/cookies" class="text-primary underline hover:text-primary/80 font-medium">Cookie Policy</a>.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div class="p-4 bg-muted/30 rounded-lg hover:bg-muted/50 transition-colors duration-200">
+                <h4 class="font-medium text-foreground mb-2 flex items-center space-x-2">
+                  <span class="text-green-500">✅</span>
+                  <span>Essential Cookies</span>
+                </h4>
+                <p class="text-sm text-muted-foreground">Required for website functionality, no consent needed</p>
+              </div>
+              <div class="p-4 bg-muted/30 rounded-lg hover:bg-muted/50 transition-colors duration-200">
+                <h4 class="font-medium text-foreground mb-2 flex items-center space-x-2">
+                  <span class="text-blue-500">📊</span>
+                  <span>Analytics Cookies</span>
+                </h4>
+                <p class="text-sm text-muted-foreground">Anonymous usage statistics, opt-in consent required</p>
+              </div>
+              <div class="p-4 bg-muted/30 rounded-lg hover:bg-muted/50 transition-colors duration-200">
+                <h4 class="font-medium text-foreground mb-2 flex items-center space-x-2">
+                  <span class="text-purple-500">⚙️</span>
+                  <span>Preference Cookies</span>
+                </h4>
+                <p class="text-sm text-muted-foreground">Remember your settings and choices</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </section>
+
+      <!-- Policy Updates -->
+      <section class="animate-fade-in-left">
+        <h2 class="text-2xl font-bold text-foreground mb-6 border-l-4 border-slate-500 pl-4">12. Changes to This Privacy Policy</h2>
+        <Card className="hover:shadow-lg transition-all duration-300">
+          <CardContent className="pt-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <h3 class="font-semibold text-foreground mb-3">📅 Update Process</h3>
+                <div class="space-y-3 text-sm text-muted-foreground">
+                  <p>We may update this Privacy Policy to reflect changes in our practices, technology, legal requirements, or other operational reasons.</p>
+                  <ul class="space-y-1">
+                    <li>• <strong>Material changes:</strong> 30 days advance notice</li>
+                    <li>• <strong>Minor updates:</strong> Posted immediately with date change</li>
+                    <li>• <strong>Legal requirements:</strong> Immediate updates when required</li>
+                  </ul>
+                </div>
+              </div>
+              <div>
+                <h3 class="font-semibold text-foreground mb-3">📧 Notification Methods</h3>
+                <div class="space-y-3 text-sm text-muted-foreground">
+                  <p>We will notify you of significant changes through:</p>
+                  <ul class="space-y-1">
+                    <li>• Email notification to registered users</li>
+                    <li>• Prominent notice on our website</li>
+                    <li>• Update to the "Last updated" date above</li>
+                  </ul>
+                  <p class="mt-3 text-xs bg-muted/30 p-2 rounded">
+                    <strong>Recommendation:</strong> Review this policy periodically to stay informed about our privacy practices.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </section>
+
+      <!-- Contact Information -->
+      <section id="contact-info" class="animate-fade-in-right">
+        <h2 class="text-2xl font-bold text-foreground mb-6 border-l-4 border-teal-500 pl-4">13. Contact Information & Data Protection Officer</h2>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          
+          <Card className="hover:shadow-lg hover:scale-[1.02] transition-all duration-300">
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2">
+                <span class="text-xl hover:scale-110 transition-transform duration-300">🏢</span>
+                <span>Data Controller</span>
+              </CardTitle>
+              <CardDescription>Company information and business contact details</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div class="space-y-4">
+                <div class="space-y-2">
+                  <h4 class="font-medium text-foreground">Company Details</h4>
+                  <div class="text-sm text-muted-foreground space-y-1">
+                    <div><strong>Legal Name:</strong> Professional Website Solutions Sàrl</div>
+                    <div><strong>Commercial Registry:</strong> CHE-123.456.789</div>
+                    <div><strong>VAT Number:</strong> CHE-123.456.789 TVA</div>
+                  </div>
+                </div>
+                <div class="space-y-2">
+                  <h4 class="font-medium text-foreground">Business Address</h4>
+                  <div class="text-sm text-muted-foreground">
+                    Route de la Tech 42<br>
+                    1015 Lausanne<br>
+                    Vaud, Switzerland
+                  </div>
+                </div>
+                <div class="space-y-2">
+                  <h4 class="font-medium text-foreground">General Contact</h4>
+                  <div class="space-y-1 text-sm text-muted-foreground">
+                    <div>📧 <a href="mailto:info@yourwebsitecompany.com" class="text-primary underline hover:text-primary/80">info@yourwebsitecompany.com</a></div>
+                    <div>📞 <a href="tel:+41-21-000-0000" class="text-primary underline hover:text-primary/80">+41 21 000 0000</a></div>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="hover:shadow-lg hover:scale-[1.02] transition-all duration-300">
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2">
+                <span class="text-xl hover:scale-110 transition-transform duration-300">🛡️</span>
+                <span>Data Protection Officer</span>
+              </CardTitle>
+              <CardDescription>Dedicated privacy and data protection contact</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div class="space-y-4">
+                <div class="space-y-2">
+                  <h4 class="font-medium text-foreground">DPO Contact Information</h4>
+                  <div class="space-y-1 text-sm text-muted-foreground">
+                    <div>📧 <a href="mailto:dpo@yourwebsitecompany.com" class="text-primary underline hover:text-primary/80">dpo@yourwebsitecompany.com</a></div>
+                    <div>📧 <a href="mailto:privacy@yourwebsitecompany.com" class="text-primary underline hover:text-primary/80">privacy@yourwebsitecompany.com</a></div>
+                    <div>📞 <a href="tel:+41-21-000-0001" class="text-primary underline hover:text-primary/80">+41 21 000 0001</a> (Privacy Hotline)</div>
+                  </div>
+                </div>
+                <div class="space-y-2">
+                  <h4 class="font-medium text-foreground">Response Commitments</h4>
+                  <div class="space-y-2 text-sm text-muted-foreground">
+                    <div class="p-2 bg-green-50 dark:bg-green-950/30 rounded">
+                      <strong>Privacy requests:</strong> 30 days (GDPR/LPD compliant)
+                    </div>
+                    <div class="p-2 bg-blue-50 dark:bg-blue-950/30 rounded">
+                      <strong>Urgent matters:</strong> 72 hours acknowledgment
+                    </div>
+                    <div class="p-2 bg-purple-50 dark:bg-purple-950/30 rounded">
+                      <strong>Data breaches:</strong> Immediate investigation protocol
+                    </div>
+                  </div>
+                </div>
+                <Alert className="border-blue-200 bg-blue-50 dark:border-blue-800 dark:bg-blue-950/50">
+                  <span class="text-blue-600 dark:text-blue-400">ℹ️</span>
+                  <AlertDescription className="text-blue-800 dark:text-blue-200 text-xs">
+                    <strong>Direct Line:</strong> For urgent privacy matters, call our privacy hotline for immediate assistance from our data protection team.
+                  </AlertDescription>
+                </Alert>
+              </div>
+            </CardContent>
+          </Card>
+
+        </div>
+      </section>
+
     </div>
 
-  </div>
+  </main>
 </Layout>
+
+<style>
+  /* Phase 8+ Enhanced CSS Animations */
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fade-in-left {
+    from {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes fade-in-right {
+    from {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 0.6s ease-out forwards;
+  }
+
+  .animate-fade-in-left {
+    animation: fade-in-left 0.6s ease-out forwards 0.2s both;
+  }
+
+  .animate-fade-in-right {
+    animation: fade-in-right 0.6s ease-out forwards 0.4s both;
+  }
+
+  /* Skip links styling */
+  .skip-link {
+    transform: translateY(-100%);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .skip-link:focus {
+    transform: translateY(0);
+  }
+
+  /* Enhanced hover effects for all interactive elements */
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+
+  /* Smooth transitions */
+  .card,
+  .badge,
+  button,
+  a {
+    transition: all 0.2s ease-in-out;
+  }
+
+  /* Smooth scrolling for anchor links */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Enhanced focus states */
+  button:focus,
+  a:focus {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 2px;
+    box-shadow: 0 0 0 3px hsl(var(--primary) / 0.1);
+  }
+
+  /* Section border animations */
+  section h2 {
+    position: relative;
+  }
+
+  section h2::before {
+    content: '';
+    position: absolute;
+    left: -20px;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+
+  /* Accessibility improvements */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-fade-in-up,
+    .animate-fade-in-left,
+    .animate-fade-in-right {
+      animation: none;
+    }
+    
+    .hover\:scale-105:hover,
+    .hover\:scale-110:hover,
+    .hover\:scale-\[1\.02\]:hover {
+      transform: none;
+    }
+    
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  /* Print styles for legal documents */
+  @media print {
+    .skip-link,
+    .badge,
+    .animate-fade-in-up,
+    .animate-fade-in-left,
+    .animate-fade-in-right {
+      display: none !important;
+    }
+    
+    .card {
+      border: 1px solid #000 !important;
+      box-shadow: none !important;
+      break-inside: avoid;
+    }
+    
+    h1, h2, h3 {
+      break-after: avoid;
+    }
+  }
+</style>

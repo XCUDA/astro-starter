@@ -1,6 +1,6 @@
 ---
-// support.astro - Support Center Page
-// Comprehensive support hub for clients and users
+// support.astro - Professional Support Center - Phase 8+ Standards
+// Comprehensive support hub for business clients and technical users
 // Path: src/pages/support.astro
 
 import Layout from '../components/layouts/Layout.astro';
@@ -11,177 +11,193 @@ import { Alert, AlertDescription } from '../components/ui/alert';
 ---
 
 <Layout 
-  title="Support Center - Astro Starter"
-  description="Get comprehensive support for your website including guides, resources, and direct contact options"
+  title="Professional Support Center - Website Solutions & Technical Assistance"
+  description="Comprehensive support services for your business website including technical help, customization guidance, and professional consultation"
   currentPage="support"
   headerVariant="business"
   showCTA={true}
-  ctaText="Contact Us"
+  ctaText="Contact Support"
   ctaHref="/contact"
 >
-  <div class="container mx-auto px-4 py-12 lg:py-20">
+  <!-- Skip Links for WCAG 2.1 AA Compliance -->
+  <div class="sr-only">
+    <a href="#main-content" class="skip-link focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-primary-foreground px-4 py-2 rounded-md z-50">
+      Skip to main content
+    </a>
+    <a href="#interactive-content" class="skip-link focus:not-sr-only focus:absolute focus:top-4 focus:left-20 bg-primary text-primary-foreground px-4 py-2 rounded-md z-50">
+      Skip to support options
+    </a>
+  </div>
+
+  <main id="main-content" class="container mx-auto px-4 py-12 lg:py-20">
     
-    <!-- Hero Section -->
-    <div class="text-center mb-16">
+    <!-- Hero Section with Enhanced Animations -->
+    <section class="text-center mb-16 animate-fade-in-up">
       <div class="flex justify-center items-center space-x-3 mb-6">
-        <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-green-500 rounded-xl flex items-center justify-center text-white font-bold text-2xl">
+        <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-green-500 rounded-xl flex items-center justify-center text-white font-bold text-2xl hover:scale-110 transition-transform duration-300">
           🛠️
         </div>
-        <Badge variant="outline" className="text-sm">
-          Support Center
+        <Badge variant="outline" className="text-sm animate-fade-in-left">
+          Professional Support
         </Badge>
       </div>
       
-      <h1 class="text-4xl lg:text-6xl font-bold text-foreground mb-6">
+      <h1 class="text-4xl lg:text-6xl font-bold text-foreground mb-6 animate-fade-in-up">
         Support Center
       </h1>
       
-      <p class="text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-        Everything you need to get help, learn more about your website, 
-        and make the most of your online presence.
+      <p class="text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed animate-fade-in-up">
+        Professional technical support, business consultation, and comprehensive assistance 
+        for your website success and online presence optimization.
       </p>
-    </div>
+    </section>
 
-    <!-- Support Options -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+    <!-- Primary Support Options -->
+    <section id="interactive-content" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16" aria-label="Primary Support Options">
       
-      <!-- Quick Help -->
-      <Card className="hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+      <!-- Instant Help -->
+      <Card className="hover:shadow-lg hover:scale-105 transition-all duration-300 hover:-translate-y-1 animate-fade-in-up">
         <CardHeader>
-          <div class="w-12 h-12 bg-green-500/10 rounded-xl flex items-center justify-center mb-4">
-            <span class="text-2xl">⚡</span>
+          <div class="w-12 h-12 bg-green-500/10 rounded-xl flex items-center justify-center mb-4 hover:scale-110 transition-transform duration-300">
+            <span class="text-2xl" role="img" aria-label="Lightning bolt">⚡</span>
           </div>
-          <CardTitle>Quick Help</CardTitle>
+          <CardTitle>Instant Help Center</CardTitle>
           <CardDescription>
-            Get immediate answers to common questions
+            Immediate solutions for common questions and technical issues
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <p class="text-sm text-muted-foreground">
-            Browse our FAQ section for instant solutions to the most common questions and issues.
+            Access our comprehensive FAQ database with solutions for 95% of common questions, 
+            troubleshooting guides, and step-by-step tutorials.
           </p>
-          <Button asChild className="w-full">
-            <a href="/faq">
-              Browse FAQ
+          <Button asChild className="w-full hover:scale-105 transition-transform duration-200 focus:ring-2 focus:ring-primary focus:ring-offset-2">
+            <a href="/faq" aria-label="Browse frequently asked questions">
+              Browse FAQ & Guides
             </a>
           </Button>
         </CardContent>
       </Card>
 
-      <!-- Documentation -->
-      <Card className="hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+      <!-- Technical Documentation -->
+      <Card className="hover:shadow-lg hover:scale-105 transition-all duration-300 hover:-translate-y-1 animate-fade-in-up">
         <CardHeader>
-          <div class="w-12 h-12 bg-blue-500/10 rounded-xl flex items-center justify-center mb-4">
-            <span class="text-2xl">📚</span>
+          <div class="w-12 h-12 bg-blue-500/10 rounded-xl flex items-center justify-center mb-4 hover:scale-110 transition-transform duration-300">
+            <span class="text-2xl" role="img" aria-label="Documentation">📚</span>
           </div>
-          <CardTitle>Documentation</CardTitle>
+          <CardTitle>Technical Documentation</CardTitle>
           <CardDescription>
-            Complete guides and step-by-step instructions
+            Complete developer guides, API documentation, and implementation examples
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <p class="text-sm text-muted-foreground">
-            Detailed documentation covering all features, customization options, and best practices.
+            Detailed technical documentation covering customization, deployment, 
+            integrations, and advanced configuration for developers and technical users.
           </p>
-          <Button asChild variant="outline" className="w-full">
-            <a href="/docs">
-              View Documentation
+          <Button asChild variant="outline" className="w-full hover:scale-105 transition-transform duration-200 focus:ring-2 focus:ring-primary focus:ring-offset-2">
+            <a href="/docs" aria-label="Access technical documentation">
+              Access Documentation
             </a>
           </Button>
         </CardContent>
       </Card>
 
-      <!-- Direct Contact -->
-      <Card className="hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+      <!-- Personal Support -->
+      <Card className="hover:shadow-lg hover:scale-105 transition-all duration-300 hover:-translate-y-1 animate-fade-in-up">
         <CardHeader>
-          <div class="w-12 h-12 bg-purple-500/10 rounded-xl flex items-center justify-center mb-4">
-            <span class="text-2xl">💬</span>
+          <div class="w-12 h-12 bg-purple-500/10 rounded-xl flex items-center justify-center mb-4 hover:scale-110 transition-transform duration-300">
+            <span class="text-2xl" role="img" aria-label="Support chat">💬</span>
           </div>
-          <CardTitle>Direct Contact</CardTitle>
+          <CardTitle>Personal Support</CardTitle>
           <CardDescription>
-            Speak with our support team directly
+            Direct assistance from our technical team and business consultants
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <p class="text-sm text-muted-foreground">
-            Email, phone, or chat support for personalized assistance with your specific needs.
+            Email, phone, and consultation support for personalized assistance with your 
+            specific business requirements, customization needs, and technical challenges.
           </p>
-          <Button asChild variant="outline" className="w-full">
-            <a href="/contact">
-              Contact Support
+          <Button asChild variant="outline" className="w-full hover:scale-105 transition-transform duration-200 focus:ring-2 focus:ring-primary focus:ring-offset-2">
+            <a href="/contact" aria-label="Contact our support team">
+              Contact Support Team
             </a>
           </Button>
         </CardContent>
       </Card>
 
-    </div>
+    </section>
 
     <!-- Support Categories -->
-    <div class="space-y-12">
+    <section class="space-y-12" aria-label="Detailed Support Categories">
       
       <!-- Getting Started -->
-      <div class="border-l-4 border-green-500 pl-8">
+      <div class="border-l-4 border-green-500 pl-8 animate-fade-in-left">
         <div class="flex items-center space-x-3 mb-6">
-          <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white font-bold">
+          <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white font-bold hover:scale-110 transition-transform duration-300">
             1
           </div>
-          <h2 class="text-3xl font-bold text-foreground">Getting Started</h2>
+          <h2 class="text-3xl font-bold text-foreground">Getting Started & Setup</h2>
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           
-          <Card>
+          <Card className="hover:shadow-lg hover:scale-105 transition-all duration-300">
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">
-                <span class="text-xl">🚀</span>
+                <span class="text-xl hover:scale-110 transition-transform duration-300">🚀</span>
                 <span>Quick Start Guide</span>
               </CardTitle>
             </CardHeader>
             <CardContent>
               <p class="text-sm text-muted-foreground mb-4">
-                Learn the basics of customizing your website and adding your content.
+                Complete setup guide covering initial configuration, content customization, 
+                and essential business information integration.
               </p>
-              <Button asChild variant="outline" size="sm" className="w-full">
-                <a href="/quick-start">
-                  Get Started
+              <Button asChild variant="outline" size="sm" className="w-full hover:scale-105 transition-transform duration-200">
+                <a href="/quick-start" aria-label="Access quick start guide">
+                  Access Setup Guide
                 </a>
               </Button>
             </CardContent>
           </Card>
           
-          <Card>
+          <Card className="hover:shadow-lg hover:scale-105 transition-all duration-300">
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">
-                <span class="text-xl">🎨</span>
-                <span>Customization</span>
+                <span class="text-xl hover:scale-110 transition-transform duration-300">🎨</span>
+                <span>Brand Customization</span>
               </CardTitle>
             </CardHeader>
             <CardContent>
               <p class="text-sm text-muted-foreground mb-4">
-                Change colors, fonts, logos, and layout to match your brand.
+                Learn to customize colors, fonts, logos, layouts, and visual elements 
+                to perfectly match your business brand and identity.
               </p>
-              <Button asChild variant="outline" size="sm" className="w-full">
-                <a href="/docs">
-                  Learn More
+              <Button asChild variant="outline" size="sm" className="w-full hover:scale-105 transition-transform duration-200">
+                <a href="/docs#customization" aria-label="Learn about brand customization">
+                  Customization Guide
                 </a>
               </Button>
             </CardContent>
           </Card>
           
-          <Card>
+          <Card className="hover:shadow-lg hover:scale-105 transition-all duration-300">
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">
-                <span class="text-xl">📝</span>
-                <span>Content Updates</span>
+                <span class="text-xl hover:scale-110 transition-transform duration-300">📝</span>
+                <span>Content Management</span>
               </CardTitle>
             </CardHeader>
             <CardContent>
               <p class="text-sm text-muted-foreground mb-4">
-                Add your business information, services, and contact details.
+                Step-by-step instructions for updating business information, services, 
+                portfolio content, and contact details efficiently.
               </p>
-              <Button asChild variant="outline" size="sm" className="w-full">
-                <a href="/docs">
-                  View Guide
+              <Button asChild variant="outline" size="sm" className="w-full hover:scale-105 transition-transform duration-200">
+                <a href="/docs#content" aria-label="Learn about content management">
+                  Content Guide
                 </a>
               </Button>
             </CardContent>
@@ -191,69 +207,77 @@ import { Alert, AlertDescription } from '../components/ui/alert';
       </div>
 
       <!-- Technical Support -->
-      <div class="border-l-4 border-blue-500 pl-8">
+      <div class="border-l-4 border-blue-500 pl-8 animate-fade-in-right">
         <div class="flex items-center space-x-3 mb-6">
-          <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold">
+          <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold hover:scale-110 transition-transform duration-300">
             2
           </div>
-          <h2 class="text-3xl font-bold text-foreground">Technical Support</h2>
+          <h2 class="text-3xl font-bold text-foreground">Technical Support & Troubleshooting</h2>
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           
-          <!-- Common Issues -->
-          <Card>
+          <!-- Common Solutions -->
+          <Card className="hover:shadow-lg hover:scale-105 transition-all duration-300">
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">
-                <span class="text-xl">🔧</span>
-                <span>Common Issues</span>
+                <span class="text-xl hover:scale-110 transition-transform duration-300">🔧</span>
+                <span>Common Solutions</span>
               </CardTitle>
               <CardDescription>
-                Solutions to frequently encountered problems
+                Quick fixes for frequently encountered technical issues
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div class="space-y-3">
-                <div class="p-3 bg-muted/30 rounded-lg">
-                  <h4 class="font-medium text-foreground text-sm mb-1">Website not loading correctly</h4>
-                  <p class="text-xs text-muted-foreground">Clear browser cache and check internet connection</p>
+                <div class="p-3 bg-muted/30 rounded-lg hover:bg-muted/50 transition-colors duration-200">
+                  <h4 class="font-medium text-foreground text-sm mb-1">Website Loading Issues</h4>
+                  <p class="text-xs text-muted-foreground">Cache clearing, DNS propagation, CDN optimization solutions</p>
                 </div>
-                <div class="p-3 bg-muted/30 rounded-lg">
-                  <h4 class="font-medium text-foreground text-sm mb-1">Contact form not working</h4>
-                  <p class="text-xs text-muted-foreground">Verify form configuration and email settings</p>
+                <div class="p-3 bg-muted/30 rounded-lg hover:bg-muted/50 transition-colors duration-200">
+                  <h4 class="font-medium text-foreground text-sm mb-1">Contact Form Problems</h4>
+                  <p class="text-xs text-muted-foreground">SMTP configuration, spam filters, form validation debugging</p>
                 </div>
-                <div class="p-3 bg-muted/30 rounded-lg">
-                  <h4 class="font-medium text-foreground text-sm mb-1">Mobile display issues</h4>
-                  <p class="text-xs text-muted-foreground">Test on different devices and browsers</p>
+                <div class="p-3 bg-muted/30 rounded-lg hover:bg-muted/50 transition-colors duration-200">
+                  <h4 class="font-medium text-foreground text-sm mb-1">Mobile Display Issues</h4>
+                  <p class="text-xs text-muted-foreground">Responsive design fixes, viewport configuration, cross-device testing</p>
+                </div>
+                <div class="p-3 bg-muted/30 rounded-lg hover:bg-muted/50 transition-colors duration-200">
+                  <h4 class="font-medium text-foreground text-sm mb-1">SEO Optimization</h4>
+                  <p class="text-xs text-muted-foreground">Meta tags, structured data, sitemap generation, search console setup</p>
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          <!-- Performance -->
-          <Card>
+          <!-- Performance Optimization -->
+          <Card className="hover:shadow-lg hover:scale-105 transition-all duration-300">
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">
-                <span class="text-xl">⚡</span>
-                <span>Performance</span>
+                <span class="text-xl hover:scale-110 transition-transform duration-300">⚡</span>
+                <span>Performance & Security</span>
               </CardTitle>
               <CardDescription>
-                Keep your website running at peak performance
+                Keep your website running at optimal performance and security
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div class="space-y-3">
-                <div class="p-3 bg-muted/30 rounded-lg">
+                <div class="p-3 bg-muted/30 rounded-lg hover:bg-muted/50 transition-colors duration-200">
                   <h4 class="font-medium text-foreground text-sm mb-1">Speed Optimization</h4>
-                  <p class="text-xs text-muted-foreground">Built-in optimizations for fast loading</p>
+                  <p class="text-xs text-muted-foreground">Image compression, code minification, lazy loading implementation</p>
                 </div>
-                <div class="p-3 bg-muted/30 rounded-lg">
-                  <h4 class="font-medium text-foreground text-sm mb-1">SEO Best Practices</h4>
-                  <p class="text-xs text-muted-foreground">Structured for search engine optimization</p>
+                <div class="p-3 bg-muted/30 rounded-lg hover:bg-muted/50 transition-colors duration-200">
+                  <h4 class="font-medium text-foreground text-sm mb-1">Core Web Vitals</h4>
+                  <p class="text-xs text-muted-foreground">LCP, FID, CLS optimization for Google ranking improvement</p>
                 </div>
-                <div class="p-3 bg-muted/30 rounded-lg">
-                  <h4 class="font-medium text-foreground text-sm mb-1">Mobile Performance</h4>
-                  <p class="text-xs text-muted-foreground">Optimized for all device types</p>
+                <div class="p-3 bg-muted/30 rounded-lg hover:bg-muted/50 transition-colors duration-200">
+                  <h4 class="font-medium text-foreground text-sm mb-1">Security Monitoring</h4>
+                  <p class="text-xs text-muted-foreground">SSL certificates, security headers, vulnerability scanning</p>
+                </div>
+                <div class="p-3 bg-muted/30 rounded-lg hover:bg-muted/50 transition-colors duration-200">
+                  <h4 class="font-medium text-foreground text-sm mb-1">Backup & Recovery</h4>
+                  <p class="text-xs text-muted-foreground">Automated backups, disaster recovery, version control</p>
                 </div>
               </div>
             </CardContent>
@@ -263,63 +287,66 @@ import { Alert, AlertDescription } from '../components/ui/alert';
       </div>
 
       <!-- Business Support -->
-      <div class="border-l-4 border-purple-500 pl-8">
+      <div class="border-l-4 border-purple-500 pl-8 animate-fade-in-left">
         <div class="flex items-center space-x-3 mb-6">
-          <div class="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center text-white font-bold">
+          <div class="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center text-white font-bold hover:scale-110 transition-transform duration-300">
             3
           </div>
-          <h2 class="text-3xl font-bold text-foreground">Business Support</h2>
+          <h2 class="text-3xl font-bold text-foreground">Business Growth & Strategy</h2>
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           
-          <Card>
+          <Card className="hover:shadow-lg hover:scale-105 transition-all duration-300">
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">
-                <span class="text-xl">💼</span>
+                <span class="text-xl hover:scale-110 transition-transform duration-300">💼</span>
                 <span>Business Consulting</span>
               </CardTitle>
             </CardHeader>
             <CardContent>
               <p class="text-sm text-muted-foreground mb-4">
-                Strategic advice for maximizing your website's business impact.
+                Strategic consultation for maximizing your website's business impact, 
+                conversion optimization, and online presence strategy.
               </p>
-              <div class="text-xs text-muted-foreground">
-                Available via consultation
+              <div class="text-xs text-muted-foreground p-2 bg-blue-50 dark:bg-blue-950/30 rounded">
+                <strong>Includes:</strong> Business analysis, competitor research, conversion strategy
               </div>
             </CardContent>
           </Card>
           
-          <Card>
+          <Card className="hover:shadow-lg hover:scale-105 transition-all duration-300">
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">
-                <span class="text-xl">📈</span>
+                <span class="text-xl hover:scale-110 transition-transform duration-300">📈</span>
                 <span>Growth Features</span>
               </CardTitle>
             </CardHeader>
             <CardContent>
               <p class="text-sm text-muted-foreground mb-4">
-                Additional features to help grow your business online.
+                Advanced features and integrations to scale your business: analytics, 
+                CRM integration, marketing automation, and e-commerce solutions.
               </p>
-              <div class="text-xs text-muted-foreground">
-                Contact us for options
+              <div class="text-xs text-muted-foreground p-2 bg-green-50 dark:bg-green-950/30 rounded">
+                <strong>Available:</strong> Google Analytics, CRM connectors, payment gateways
               </div>
             </CardContent>
           </Card>
           
-          <Card>
+          <Card className="hover:shadow-lg hover:scale-105 transition-all duration-300">
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">
-                <span class="text-xl">🎓</span>
-                <span>Training</span>
+                <span class="text-xl hover:scale-110 transition-transform duration-300">🎓</span>
+                <span>Training & Education</span>
               </CardTitle>
             </CardHeader>
             <CardContent>
               <p class="text-sm text-muted-foreground mb-4">
-                Learn to manage and update your website independently.
+                Comprehensive training programs to empower your team: content management, 
+                basic customization, and ongoing maintenance skills.
               </p>
-              <div class="text-xs text-muted-foreground">
-                Available on request
+              <div class="text-xs text-muted-foreground p-2 bg-purple-50 dark:bg-purple-950/30 rounded">
+                <strong>Formats:</strong> Video tutorials, live sessions, documentation
               </div>
             </CardContent>
           </Card>
@@ -327,100 +354,106 @@ import { Alert, AlertDescription } from '../components/ui/alert';
         </div>
       </div>
 
-    </div>
+    </section>
 
-    <!-- Support Levels -->
-    <div class="border-t border-border pt-16 mt-16">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-foreground mb-4">Support Levels</h2>
+    <!-- Support Service Levels -->
+    <section class="border-t border-border pt-16 mt-16" aria-label="Support Service Levels">
+      <div class="text-center mb-12 animate-fade-in-up">
+        <h2 class="text-3xl font-bold text-foreground mb-4">Professional Support Levels</h2>
         <p class="text-muted-foreground max-w-2xl mx-auto">
-          Choose the level of support that fits your needs
+          Choose the support level that matches your business needs and technical requirements
         </p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         
-        <!-- Basic Support -->
-        <Card className="relative">
+        <!-- Community Support -->
+        <Card className="relative hover:shadow-lg hover:scale-105 transition-all duration-300 animate-fade-in-up">
           <CardHeader>
             <Badge variant="outline" className="w-fit">
-              Basic
+              Community
             </Badge>
-            <CardTitle>Community Support</CardTitle>
+            <CardTitle>Self-Service Support</CardTitle>
             <CardDescription>
-              Self-service resources and documentation
+              Comprehensive resources for independent problem-solving
             </CardDescription>
           </CardHeader>
           <CardContent>
             <div class="space-y-3 mb-6">
               <div class="flex items-center space-x-2">
                 <span class="text-green-500">✓</span>
-                <span class="text-sm">Complete documentation</span>
+                <span class="text-sm">Complete documentation & guides</span>
               </div>
               <div class="flex items-center space-x-2">
                 <span class="text-green-500">✓</span>
-                <span class="text-sm">FAQ and guides</span>
+                <span class="text-sm">FAQ database & video tutorials</span>
               </div>
               <div class="flex items-center space-x-2">
                 <span class="text-green-500">✓</span>
-                <span class="text-sm">Email support</span>
+                <span class="text-sm">Email support (business hours)</span>
               </div>
               <div class="flex items-center space-x-2">
                 <span class="text-muted-foreground">→</span>
-                <span class="text-sm text-muted-foreground">Response: 48-72 hours</span>
+                <span class="text-sm text-muted-foreground">Response: 24-48 hours</span>
               </div>
             </div>
-            <Button variant="outline" className="w-full">
-              Get Started
+            <Button variant="outline" className="w-full hover:scale-105 transition-transform duration-200">
+              Included with License
             </Button>
           </CardContent>
         </Card>
 
         <!-- Priority Support -->
-        <Card className="relative border-primary bg-primary/5">
+        <Card className="relative border-primary bg-primary/5 hover:shadow-lg hover:scale-105 transition-all duration-300 animate-fade-in-up">
           <CardHeader>
             <Badge className="w-fit">
               Priority
             </Badge>
-            <CardTitle>Priority Support</CardTitle>
+            <CardTitle>Priority Business Support</CardTitle>
             <CardDescription>
-              Faster response times and direct assistance
+              Expedited assistance with direct access to technical experts
             </CardDescription>
           </CardHeader>
           <CardContent>
             <div class="space-y-3 mb-6">
               <div class="flex items-center space-x-2">
                 <span class="text-green-500">✓</span>
-                <span class="text-sm">Everything in Basic</span>
+                <span class="text-sm">Everything in Community</span>
               </div>
               <div class="flex items-center space-x-2">
                 <span class="text-green-500">✓</span>
-                <span class="text-sm">Priority email support</span>
+                <span class="text-sm">Priority email & phone support</span>
               </div>
               <div class="flex items-center space-x-2">
                 <span class="text-green-500">✓</span>
-                <span class="text-sm">Phone consultation</span>
+                <span class="text-sm">Technical consultation sessions</span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-green-500">✓</span>
+                <span class="text-sm">Basic customization assistance</span>
               </div>
               <div class="flex items-center space-x-2">
                 <span class="text-muted-foreground">→</span>
-                <span class="text-sm text-muted-foreground">Response: 24 hours</span>
+                <span class="text-sm text-muted-foreground">Response: 4-8 hours</span>
               </div>
             </div>
-            <Button className="w-full">
-              Contact Sales
+            <Button className="w-full hover:scale-105 transition-transform duration-200" asChild>
+              <a href="/contact?priority=business" aria-label="Contact for priority support">
+                Contact for Pricing
+              </a>
             </Button>
           </CardContent>
         </Card>
 
-        <!-- Premium Support -->
-        <Card className="relative">
+        <!-- Enterprise Support -->
+        <Card className="relative hover:shadow-lg hover:scale-105 transition-all duration-300 animate-fade-in-up">
           <CardHeader>
             <Badge variant="outline" className="w-fit">
-              Premium
+              Enterprise
             </Badge>
-            <CardTitle>Premium Support</CardTitle>
+            <CardTitle>Enterprise Support</CardTitle>
             <CardDescription>
-              Dedicated support with custom development
+              Dedicated support with custom development and strategic consulting
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -431,35 +464,175 @@ import { Alert, AlertDescription } from '../components/ui/alert';
               </div>
               <div class="flex items-center space-x-2">
                 <span class="text-green-500">✓</span>
-                <span class="text-sm">Dedicated support agent</span>
+                <span class="text-sm">Dedicated support manager</span>
               </div>
               <div class="flex items-center space-x-2">
                 <span class="text-green-500">✓</span>
-                <span class="text-sm">Custom development</span>
+                <span class="text-sm">Custom development services</span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-green-500">✓</span>
+                <span class="text-sm">Strategic business consulting</span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-green-500">✓</span>
+                <span class="text-sm">24/7 emergency support</span>
               </div>
               <div class="flex items-center space-x-2">
                 <span class="text-muted-foreground">→</span>
-                <span class="text-sm text-muted-foreground">Response: 4-8 hours</span>
+                <span class="text-sm text-muted-foreground">Response: 1-2 hours</span>
               </div>
             </div>
-            <Button variant="outline" className="w-full">
-              Contact Sales
+            <Button variant="outline" className="w-full hover:scale-105 transition-transform duration-200" asChild>
+              <a href="/contact?priority=enterprise" aria-label="Contact for enterprise support">
+                Contact for Quote
+              </a>
             </Button>
           </CardContent>
         </Card>
 
       </div>
-    </div>
+    </section>
 
     <!-- Emergency Support -->
-    <Alert className="mt-16 border-amber-200 bg-amber-50 dark:border-amber-800 dark:bg-amber-950/50">
-      <span class="text-amber-600 dark:text-amber-400">🚨</span>
-      <AlertDescription className="text-amber-800 dark:text-amber-200">
-        <strong>Emergency Support:</strong> For critical issues affecting your live website, 
-        call our emergency line at <strong>+1 (555) 911-HELP</strong>. 
-        Available 24/7 for urgent technical problems.
-      </AlertDescription>
-    </Alert>
+    <section class="mt-16" aria-label="Emergency Support Information">
+      <Alert className="border-amber-200 bg-amber-50 dark:border-amber-800 dark:bg-amber-950/50 hover:shadow-lg transition-all duration-300 animate-fade-in-up">
+        <span class="text-amber-600 dark:text-amber-400 hover:scale-110 transition-transform duration-300">🚨</span>
+        <AlertDescription className="text-amber-800 dark:text-amber-200">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+            <div>
+              <strong>Emergency Technical Support</strong><br>
+              For critical website issues affecting your business operations, security breaches, 
+              or complete site downtime requiring immediate intervention.
+            </div>
+            <div class="text-center">
+              <Button asChild variant="outline" className="border-amber-300 text-amber-800 hover:bg-amber-100 dark:border-amber-700 dark:text-amber-200 dark:hover:bg-amber-950/50 hover:scale-105 transition-all duration-200">
+                <a href="tel:+41-79-911-0000" aria-label="Call emergency support line">
+                  Emergency: +41 79 911 0000
+                </a>
+              </Button>
+              <p class="text-xs mt-1">Available 24/7 for Priority & Enterprise clients</p>
+            </div>
+          </div>
+        </AlertDescription>
+      </Alert>
+    </section>
 
-  </div>
+    <!-- Success Metrics -->
+    <section class="mt-16 text-center" aria-label="Support Success Metrics">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 animate-fade-in-up">
+        <div class="text-center">
+          <div class="text-3xl font-bold text-primary mb-2">95%</div>
+          <div class="text-sm text-muted-foreground">Issues resolved in FAQ</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-primary mb-2">4.8/5</div>
+          <div class="text-sm text-muted-foreground">Support satisfaction</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-primary mb-2">&lt;4h</div>
+          <div class="text-sm text-muted-foreground">Average response time</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-primary mb-2">24/7</div>
+          <div class="text-sm text-muted-foreground">Emergency availability</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
 </Layout>
+
+<style>
+  /* Phase 8+ Enhanced CSS Animations */
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fade-in-left {
+    from {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes fade-in-right {
+    from {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 0.6s ease-out forwards;
+  }
+
+  .animate-fade-in-left {
+    animation: fade-in-left 0.6s ease-out forwards 0.2s both;
+  }
+
+  .animate-fade-in-right {
+    animation: fade-in-right 0.6s ease-out forwards 0.4s both;
+  }
+
+  /* Skip links styling */
+  .skip-link {
+    transform: translateY(-100%);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .skip-link:focus {
+    transform: translateY(0);
+  }
+
+  /* Enhanced hover effects for all interactive elements */
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+
+  /* Smooth transitions */
+  .card,
+  .badge,
+  button,
+  a {
+    transition: all 0.2s ease-in-out;
+  }
+
+  /* Accessibility improvements */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-fade-in-up,
+    .animate-fade-in-left,
+    .animate-fade-in-right {
+      animation: none;
+    }
+    
+    .hover\:scale-105:hover,
+    .hover\:scale-110:hover {
+      transform: none;
+    }
+  }
+
+  /* Enhanced focus states */
+  button:focus,
+  a:focus {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 2px;
+    box-shadow: 0 0 0 3px hsl(var(--primary) / 0.1);
+  }
+</style>

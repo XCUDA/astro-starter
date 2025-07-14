@@ -1,6 +1,6 @@
 ---
-// cookies.astro - Cookie Policy Page
-// GDPR compliant cookie policy and preferences
+// cookies.astro - GDPR/LPD Compliant Cookie Policy - Phase 8+ Standards
+// Professional cookie consent management with full legal compliance
 // Path: src/pages/cookies.astro
 
 import Layout from '../components/layouts/Layout.astro';
@@ -11,282 +11,480 @@ import { Alert, AlertDescription } from '../components/ui/alert';
 ---
 
 <Layout 
-  title="Cookie Policy - Astro Starter"
-  description="Learn about how we use cookies and similar technologies on our website"
+  title="Cookie Policy & Consent Management - GDPR/LPD Compliant"
+  description="Comprehensive cookie policy with professional consent management compliant with GDPR and Swiss LPD regulations"
   currentPage="cookies"
   headerVariant="business"
   footerVariant="business"
 >
-  <div class="container mx-auto px-4 py-12 lg:py-20 max-w-4xl">
+  <!-- Skip Links for WCAG 2.1 AA Compliance -->
+  <div class="sr-only">
+    <a href="#main-content" class="skip-link focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-primary-foreground px-4 py-2 rounded-md z-50">
+      Skip to main content
+    </a>
+    <a href="#interactive-content" class="skip-link focus:not-sr-only focus:absolute focus:top-4 focus:left-20 bg-primary text-primary-foreground px-4 py-2 rounded-md z-50">
+      Skip to cookie preferences
+    </a>
+  </div>
+
+  <main id="main-content" class="container mx-auto px-4 py-12 lg:py-20 max-w-4xl">
     
-    <!-- Hero Section -->
-    <div class="text-center mb-16">
+    <!-- Hero Section with Enhanced Animations -->
+    <section class="text-center mb-16 animate-fade-in-up">
       <div class="flex justify-center items-center space-x-3 mb-6">
-        <div class="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-500 rounded-xl flex items-center justify-center text-white font-bold text-2xl">
+        <div class="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-500 rounded-xl flex items-center justify-center text-white font-bold text-2xl hover:scale-110 transition-transform duration-300">
           🍪
         </div>
-        <Badge variant="outline" className="text-sm">
-          Cookie Policy
+        <Badge variant="outline" className="text-sm animate-fade-in-left">
+          GDPR & LPD Compliant
         </Badge>
       </div>
       
-      <h1 class="text-4xl lg:text-5xl font-bold text-foreground mb-6">
-        Cookie Policy
+      <h1 class="text-4xl lg:text-5xl font-bold text-foreground mb-6 animate-fade-in-up">
+        Cookie Policy & Consent
       </h1>
       
-      <p class="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-        This Cookie Policy explains what cookies are, how we use them, 
-        and how you can manage your cookie preferences.
+      <p class="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed animate-fade-in-up">
+        Professional cookie management with transparent consent options. Compliant with GDPR (EU) and LPD (Switzerland) 
+        for legitimate business website operations.
       </p>
       
       <div class="mt-6 text-sm text-muted-foreground">
-        <strong>Last updated:</strong> January 2025
+        <strong>Last updated:</strong> January 2025 • <strong>Legal basis:</strong> GDPR Art. 6(1)(a) + LPD Art. 6
       </div>
-    </div>
+    </section>
 
-    <!-- Important Notice -->
-    <Alert className="mb-12 border-blue-200 bg-blue-50 dark:border-blue-800 dark:bg-blue-950/50">
-      <span class="text-blue-600 dark:text-blue-400">ℹ️</span>
-      <AlertDescription className="text-blue-800 dark:text-blue-200">
-        <strong>Template Notice:</strong> This is a template Cookie Policy. 
-        Please customize it to reflect your actual cookie usage and ensure 
-        compliance with applicable privacy laws in your jurisdiction.
-      </AlertDescription>
-    </Alert>
+    <!-- Legal Compliance Notice -->
+    <section class="mb-12 animate-fade-in-left">
+      <Alert className="border-blue-200 bg-blue-50 dark:border-blue-800 dark:bg-blue-950/50 hover:shadow-lg transition-all duration-300">
+        <span class="text-blue-600 dark:text-blue-400 hover:scale-110 transition-transform duration-300">⚖️</span>
+        <AlertDescription className="text-blue-800 dark:text-blue-200">
+          <div class="space-y-2">
+            <div><strong>Legal Framework:</strong> This cookie policy complies with GDPR Article 6 and LPD Article 6 requirements for lawful data processing</div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
+              <div>
+                <strong>🇪🇺 EU/EEA:</strong> ePrivacy Directive + GDPR consent requirements
+              </div>
+              <div>
+                <strong>🇨🇭 Switzerland:</strong> LPD consent + FDPIC guidelines compliance
+              </div>
+            </div>
+          </div>
+        </AlertDescription>
+      </Alert>
+    </section>
+
+    <!-- Cookie Consent Management Panel -->
+    <section id="interactive-content" class="mb-12 animate-fade-in-right">
+      <Card className="border-primary bg-primary/5 hover:shadow-lg transition-all duration-300">
+        <CardHeader>
+          <CardTitle className="flex items-center space-x-2">
+            <span class="text-xl hover:scale-110 transition-transform duration-300">⚙️</span>
+            <span>Cookie Consent Management</span>
+          </CardTitle>
+          <CardDescription>
+            Manage your cookie preferences and consent settings for our website
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div class="space-y-6">
+            
+            <!-- Current Status Overview -->
+            <div class="p-4 bg-muted/50 rounded-lg">
+              <h3 class="font-semibold text-foreground mb-3">Current Consent Status</h3>
+              <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                <div class="text-center p-3 bg-green-50 dark:bg-green-950/30 rounded-lg">
+                  <div class="text-lg font-bold text-green-600" id="essential-status">✓</div>
+                  <div class="text-xs text-muted-foreground">Essential</div>
+                </div>
+                <div class="text-center p-3 bg-orange-50 dark:bg-orange-950/30 rounded-lg">
+                  <div class="text-lg font-bold text-orange-600" id="functional-status">−</div>
+                  <div class="text-xs text-muted-foreground">Functional</div>
+                </div>
+                <div class="text-center p-3 bg-blue-50 dark:bg-blue-950/30 rounded-lg">
+                  <div class="text-lg font-bold text-blue-600" id="analytics-status">−</div>
+                  <div class="text-xs text-muted-foreground">Analytics</div>
+                </div>
+                <div class="text-center p-3 bg-purple-50 dark:bg-purple-950/30 rounded-lg">
+                  <div class="text-lg font-bold text-purple-600" id="marketing-status">−</div>
+                  <div class="text-xs text-muted-foreground">Marketing</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="flex flex-col sm:flex-row gap-3">
+              <Button 
+                id="accept-all-btn" 
+                className="flex-1 hover:scale-105 transition-transform duration-200 focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                aria-label="Accept all cookies"
+              >
+                Accept All Cookies
+              </Button>
+              <Button 
+                id="essential-only-btn" 
+                variant="outline" 
+                className="flex-1 hover:scale-105 transition-transform duration-200 focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                aria-label="Accept only essential cookies"
+              >
+                Essential Only
+              </Button>
+              <Button 
+                id="custom-settings-btn" 
+                variant="outline" 
+                className="flex-1 hover:scale-105 transition-transform duration-200 focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                aria-label="Customize cookie settings"
+              >
+                Customize Settings
+              </Button>
+            </div>
+
+          </div>
+        </CardContent>
+      </Card>
+    </section>
 
     <!-- Cookie Policy Content -->
     <div class="space-y-12">
       
       <!-- What Are Cookies -->
-      <section>
-        <h2 class="text-2xl font-bold text-foreground mb-6">1. What Are Cookies?</h2>
-        <Card>
+      <section class="animate-fade-in-up">
+        <h2 class="text-2xl font-bold text-foreground mb-6 border-l-4 border-orange-500 pl-4">1. Understanding Cookies & Similar Technologies</h2>
+        <Card className="hover:shadow-lg transition-all duration-300">
           <CardContent className="pt-6">
             <p class="text-muted-foreground leading-relaxed mb-6">
-              Cookies are small text files that are stored on your computer or mobile device when you visit a website. 
-              They help websites remember information about your visit, which can make your next visit easier 
-              and the site more useful to you.
+              Cookies are small text files stored on your device when you visit our website. They help us provide 
+              essential functionality, improve your experience, and understand how our website is used.
             </p>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               
               <!-- First-Party Cookies -->
-              <div class="p-4 bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 rounded-lg">
+              <div class="p-4 bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-950/40 transition-colors duration-200">
                 <div class="flex items-center space-x-3 mb-3">
-                  <div class="w-8 h-8 bg-blue-500/10 rounded-lg flex items-center justify-center">
+                  <div class="w-8 h-8 bg-blue-500/10 rounded-lg flex items-center justify-center hover:scale-110 transition-transform duration-300">
                     <span class="text-lg">🏠</span>
                   </div>
                   <h4 class="font-medium text-foreground">First-Party Cookies</h4>
                 </div>
-                <p class="text-sm text-muted-foreground">
-                  Set directly by our website and only readable by us. 
-                  These help our site function properly and provide basic features.
+                <p class="text-sm text-muted-foreground mb-3">
+                  Set directly by Professional Website Solutions. These cookies are essential for website functionality 
+                  and cannot be disabled without affecting core features.
                 </p>
+                <div class="text-xs text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/30 p-2 rounded">
+                  <strong>Legal basis:</strong> GDPR Art. 6(1)(f) - Legitimate interest
+                </div>
               </div>
 
               <!-- Third-Party Cookies -->
-              <div class="p-4 bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 rounded-lg">
+              <div class="p-4 bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 rounded-lg hover:bg-green-100 dark:hover:bg-green-950/40 transition-colors duration-200">
                 <div class="flex items-center space-x-3 mb-3">
-                  <div class="w-8 h-8 bg-green-500/10 rounded-lg flex items-center justify-center">
+                  <div class="w-8 h-8 bg-green-500/10 rounded-lg flex items-center justify-center hover:scale-110 transition-transform duration-300">
                     <span class="text-lg">🌐</span>
                   </div>
                   <h4 class="font-medium text-foreground">Third-Party Cookies</h4>
                 </div>
-                <p class="text-sm text-muted-foreground">
-                  Set by external services we use, such as analytics providers 
-                  or social media platforms. These help us understand how our site is used.
+                <p class="text-sm text-muted-foreground mb-3">
+                  Set by external services (analytics, social media). These require your explicit consent and 
+                  can be disabled without affecting core website functionality.
                 </p>
+                <div class="text-xs text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-950/30 p-2 rounded">
+                  <strong>Legal basis:</strong> GDPR Art. 6(1)(a) - Explicit consent
+                </div>
               </div>
 
+            </div>
+
+            <!-- Similar Technologies -->
+            <div class="mt-6 p-4 bg-muted/30 rounded-lg">
+              <h4 class="font-medium text-foreground mb-2">Similar Technologies We Use:</h4>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-muted-foreground">
+                <div>
+                  <strong>Local Storage:</strong> Browser storage for preferences and session data
+                </div>
+                <div>
+                  <strong>Session Storage:</strong> Temporary data for single browser sessions
+                </div>
+                <div>
+                  <strong>Web Beacons:</strong> Small tracking pixels in emails and web pages
+                </div>
+              </div>
             </div>
           </CardContent>
         </Card>
       </section>
 
-      <!-- Types of Cookies -->
-      <section>
-        <h2 class="text-2xl font-bold text-foreground mb-6">2. Types of Cookies We Use</h2>
+      <!-- Cookie Categories -->
+      <section class="animate-fade-in-left">
+        <h2 class="text-2xl font-bold text-foreground mb-6 border-l-4 border-red-500 pl-4">2. Cookie Categories & Legal Basis</h2>
         
         <div class="space-y-6">
           
           <!-- Essential Cookies -->
-          <Card>
+          <Card className="hover:shadow-lg hover:scale-[1.02] transition-all duration-300">
             <CardHeader>
-              <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 bg-red-500/10 rounded-lg flex items-center justify-center">
-                  <span class="text-xl">🚨</span>
-                </div>
-                <div>
-                  <CardTitle>Essential Cookies</CardTitle>
-                  <Badge variant="destructive" className="text-xs">
-                    Always Active
-                  </Badge>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                  <div class="w-10 h-10 bg-red-500/10 rounded-lg flex items-center justify-center hover:scale-110 transition-transform duration-300">
+                    <span class="text-xl">🚨</span>
+                  </div>
+                  <div>
+                    <CardTitle>Essential Cookies</CardTitle>
+                    <Badge variant="destructive" className="text-xs">
+                      Always Active - No Consent Required
+                    </Badge>
+                  </div>
                 </div>
               </div>
               <CardDescription>
-                These cookies are necessary for the website to function and cannot be disabled
+                Necessary for website functionality under GDPR Art. 6(1)(f) legitimate interest
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div class="space-y-3">
-                <div class="p-3 bg-muted/30 rounded-lg">
-                  <h4 class="font-medium text-foreground text-sm mb-1">Session Management</h4>
-                  <p class="text-xs text-muted-foreground">
-                    Keep you logged in and maintain your session across pages
-                  </p>
+              <div class="space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div class="p-3 bg-muted/30 rounded-lg hover:bg-muted/50 transition-colors duration-200">
+                    <h4 class="font-medium text-foreground text-sm mb-1 flex items-center space-x-2">
+                      <span class="text-blue-500">🔐</span>
+                      <span>Security & Session Management</span>
+                    </h4>
+                    <p class="text-xs text-muted-foreground mb-2">
+                      CSRF protection, session maintenance, form security tokens
+                    </p>
+                    <div class="text-xs text-blue-600 dark:text-blue-400">Duration: Session only</div>
+                  </div>
+                  <div class="p-3 bg-muted/30 rounded-lg hover:bg-muted/50 transition-colors duration-200">
+                    <h4 class="font-medium text-foreground text-sm mb-1 flex items-center space-x-2">
+                      <span class="text-green-500">⚖️</span>
+                      <span>Load Balancing & Performance</span>
+                    </h4>
+                    <p class="text-xs text-muted-foreground mb-2">
+                      Server distribution, CDN routing, performance optimization
+                    </p>
+                    <div class="text-xs text-green-600 dark:text-green-400">Duration: 24 hours</div>
+                  </div>
+                  <div class="p-3 bg-muted/30 rounded-lg hover:bg-muted/50 transition-colors duration-200">
+                    <h4 class="font-medium text-foreground text-sm mb-1 flex items-center space-x-2">
+                      <span class="text-purple-500">🛡️</span>
+                      <span>Privacy & Consent Management</span>
+                    </h4>
+                    <p class="text-xs text-muted-foreground mb-2">
+                      Cookie consent choices, privacy preferences storage
+                    </p>
+                    <div class="text-xs text-purple-600 dark:text-purple-400">Duration: 12 months</div>
+                  </div>
+                  <div class="p-3 bg-muted/30 rounded-lg hover:bg-muted/50 transition-colors duration-200">
+                    <h4 class="font-medium text-foreground text-sm mb-1 flex items-center space-x-2">
+                      <span class="text-orange-500">🌐</span>
+                      <span>Language & Accessibility</span>
+                    </h4>
+                    <p class="text-xs text-muted-foreground mb-2">
+                      Language preferences, accessibility settings, theme choices
+                    </p>
+                    <div class="text-xs text-orange-600 dark:text-orange-400">Duration: 6 months</div>
+                  </div>
                 </div>
-                <div class="p-3 bg-muted/30 rounded-lg">
-                  <h4 class="font-medium text-foreground text-sm mb-1">Security</h4>
-                  <p class="text-xs text-muted-foreground">
-                    Protect against cross-site request forgery and other security threats
-                  </p>
-                </div>
-                <div class="p-3 bg-muted/30 rounded-lg">
-                  <h4 class="font-medium text-foreground text-sm mb-1">Load Balancing</h4>
-                  <p class="text-xs text-muted-foreground">
-                    Ensure proper distribution of website traffic across our servers
-                  </p>
-                </div>
+                <Alert className="border-red-200 bg-red-50 dark:border-red-800 dark:bg-red-950/50">
+                  <span class="text-red-600 dark:text-red-400">ℹ️</span>
+                  <AlertDescription className="text-red-800 dark:text-red-200 text-sm">
+                    <strong>Legal Note:</strong> These cookies are necessary for the website to function and are processed under legitimate interest. 
+                    Disabling them may result in website functionality issues.
+                  </AlertDescription>
+                </Alert>
               </div>
             </CardContent>
           </Card>
 
           <!-- Functional Cookies -->
-          <Card>
+          <Card className="hover:shadow-lg hover:scale-[1.02] transition-all duration-300">
             <CardHeader>
               <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-3">
-                  <div class="w-10 h-10 bg-blue-500/10 rounded-lg flex items-center justify-center">
+                  <div class="w-10 h-10 bg-blue-500/10 rounded-lg flex items-center justify-center hover:scale-110 transition-transform duration-300">
                     <span class="text-xl">⚙️</span>
                   </div>
                   <div>
                     <CardTitle>Functional Cookies</CardTitle>
                     <Badge variant="outline" className="text-xs">
-                      Optional
+                      Requires Consent - GDPR Art. 6(1)(a)
                     </Badge>
                   </div>
                 </div>
-                <Button variant="outline" size="sm" id="functional-toggle">
-                  Enable
-                </Button>
+                <div class="flex items-center space-x-2">
+                  <span class="text-sm text-muted-foreground">Status:</span>
+                  <span id="functional-consent-status" class="text-sm font-medium">Not Set</span>
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    id="functional-toggle"
+                    className="hover:scale-105 transition-transform duration-200 focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                    aria-label="Toggle functional cookies consent"
+                  >
+                    Configure
+                  </Button>
+                </div>
               </div>
               <CardDescription>
-                These cookies enable enhanced functionality and personalization
+                Enhanced website features and personalization - completely optional
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div class="space-y-3">
-                <div class="p-3 bg-muted/30 rounded-lg">
-                  <h4 class="font-medium text-foreground text-sm mb-1">Theme Preferences</h4>
-                  <p class="text-xs text-muted-foreground">
-                    Remember your dark/light mode preference
-                  </p>
+              <div class="space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div class="p-3 bg-muted/30 rounded-lg hover:bg-muted/50 transition-colors duration-200">
+                    <h4 class="font-medium text-foreground text-sm mb-1">🎨 Theme & UI Preferences</h4>
+                    <p class="text-xs text-muted-foreground mb-2">Dark/light mode, layout preferences, font size adjustments</p>
+                    <div class="text-xs text-blue-600 dark:text-blue-400">Duration: 12 months</div>
+                  </div>
+                  <div class="p-3 bg-muted/30 rounded-lg hover:bg-muted/50 transition-colors duration-200">
+                    <h4 class="font-medium text-foreground text-sm mb-1">📝 Form Enhancement</h4>
+                    <p class="text-xs text-muted-foreground mb-2">Auto-fill suggestions, form progress saving, validation preferences</p>
+                    <div class="text-xs text-green-600 dark:text-green-400">Duration: 3 months</div>
+                  </div>
+                  <div class="p-3 bg-muted/30 rounded-lg hover:bg-muted/50 transition-colors duration-200">
+                    <h4 class="font-medium text-foreground text-sm mb-1">🔖 Content Personalization</h4>
+                    <p class="text-xs text-muted-foreground mb-2">Bookmarked content, reading preferences, content filters</p>
+                    <div class="text-xs text-purple-600 dark:text-purple-400">Duration: 6 months</div>
+                  </div>
+                  <div class="p-3 bg-muted/30 rounded-lg hover:bg-muted/50 transition-colors duration-200">
+                    <h4 class="font-medium text-foreground text-sm mb-1">🌍 Localization</h4>
+                    <p class="text-xs text-muted-foreground mb-2">Regional settings, currency preferences, timezone adjustments</p>
+                    <div class="text-xs text-orange-600 dark:text-orange-400">Duration: 12 months</div>
+                  </div>
                 </div>
-                <div class="p-3 bg-muted/30 rounded-lg">
-                  <h4 class="font-medium text-foreground text-sm mb-1">Language Settings</h4>
-                  <p class="text-xs text-muted-foreground">
-                    Save your preferred language and regional settings
-                  </p>
-                </div>
-                <div class="p-3 bg-muted/30 rounded-lg">
-                  <h4 class="font-medium text-foreground text-sm mb-1">Form Data</h4>
-                  <p class="text-xs text-muted-foreground">
-                    Remember form inputs to improve user experience
-                  </p>
+                <div class="text-xs text-muted-foreground bg-blue-50 dark:bg-blue-950/30 p-3 rounded">
+                  <strong>Your Control:</strong> These cookies enhance your experience but are not necessary for basic website functionality. 
+                  You can withdraw consent at any time without affecting essential features.
                 </div>
               </div>
             </CardContent>
           </Card>
 
           <!-- Analytics Cookies -->
-          <Card>
+          <Card className="hover:shadow-lg hover:scale-[1.02] transition-all duration-300">
             <CardHeader>
               <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-3">
-                  <div class="w-10 h-10 bg-green-500/10 rounded-lg flex items-center justify-center">
+                  <div class="w-10 h-10 bg-green-500/10 rounded-lg flex items-center justify-center hover:scale-110 transition-transform duration-300">
                     <span class="text-xl">📊</span>
                   </div>
                   <div>
                     <CardTitle>Analytics Cookies</CardTitle>
                     <Badge variant="outline" className="text-xs">
-                      Optional
+                      Requires Consent - GDPR Art. 6(1)(a)
                     </Badge>
                   </div>
                 </div>
-                <Button variant="outline" size="sm" id="analytics-toggle">
-                  Enable
-                </Button>
+                <div class="flex items-center space-x-2">
+                  <span class="text-sm text-muted-foreground">Status:</span>
+                  <span id="analytics-consent-status" class="text-sm font-medium">Not Set</span>
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    id="analytics-toggle"
+                    className="hover:scale-105 transition-transform duration-200 focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                    aria-label="Toggle analytics cookies consent"
+                  >
+                    Configure
+                  </Button>
+                </div>
               </div>
               <CardDescription>
-                These cookies help us understand how visitors interact with our website
+                Help us understand website performance and user behavior (anonymized data)
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div class="space-y-3">
-                <div class="p-3 bg-muted/30 rounded-lg">
-                  <h4 class="font-medium text-foreground text-sm mb-1">Google Analytics</h4>
-                  <p class="text-xs text-muted-foreground">
-                    Understand visitor behavior and improve website performance
-                  </p>
+              <div class="space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div class="p-3 bg-muted/30 rounded-lg hover:bg-muted/50 transition-colors duration-200">
+                    <h4 class="font-medium text-foreground text-sm mb-1">📈 Website Performance</h4>
+                    <p class="text-xs text-muted-foreground mb-2">Page load times, error tracking, performance metrics (anonymized)</p>
+                    <div class="text-xs text-green-600 dark:text-green-400">Duration: 24 months</div>
+                  </div>
+                  <div class="p-3 bg-muted/30 rounded-lg hover:bg-muted/50 transition-colors duration-200">
+                    <h4 class="font-medium text-foreground text-sm mb-1">👥 User Behavior (Anonymous)</h4>
+                    <p class="text-xs text-muted-foreground mb-2">Page views, navigation patterns, feature usage (no personal data)</p>
+                    <div class="text-xs text-blue-600 dark:text-blue-400">Duration: 24 months</div>
+                  </div>
+                  <div class="p-3 bg-muted/30 rounded-lg hover:bg-muted/50 transition-colors duration-200">
+                    <h4 class="font-medium text-foreground text-sm mb-1">🔍 Content Optimization</h4>
+                    <p class="text-xs text-muted-foreground mb-2">Popular content identification, search query analysis, UX improvements</p>
+                    <div class="text-xs text-purple-600 dark:text-purple-400">Duration: 12 months</div>
+                  </div>
+                  <div class="p-3 bg-muted/30 rounded-lg hover:bg-muted/50 transition-colors duration-200">
+                    <h4 class="font-medium text-foreground text-sm mb-1">🌐 Technical Analytics</h4>
+                    <p class="text-xs text-muted-foreground mb-2">Browser compatibility, device types, screen resolutions</p>
+                    <div class="text-xs text-orange-600 dark:text-orange-400">Duration: 12 months</div>
+                  </div>
                 </div>
-                <div class="p-3 bg-muted/30 rounded-lg">
-                  <h4 class="font-medium text-foreground text-sm mb-1">Page Views</h4>
-                  <p class="text-xs text-muted-foreground">
-                    Track which pages are most popular and useful
-                  </p>
-                </div>
-                <div class="p-3 bg-muted/30 rounded-lg">
-                  <h4 class="font-medium text-foreground text-sm mb-1">Performance Metrics</h4>
-                  <p class="text-xs text-muted-foreground">
-                    Monitor site speed and technical performance
-                  </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div class="text-xs text-muted-foreground bg-green-50 dark:bg-green-950/30 p-3 rounded">
+                    <strong>Privacy-First:</strong> All analytics data is anonymized and aggregated. We cannot identify individual users from this data.
+                  </div>
+                  <div class="text-xs text-muted-foreground bg-blue-50 dark:bg-blue-950/30 p-3 rounded">
+                    <strong>Third-Party Services:</strong> We use privacy-focused analytics tools that comply with GDPR data processing agreements.
+                  </div>
                 </div>
               </div>
             </CardContent>
           </Card>
 
           <!-- Marketing Cookies -->
-          <Card>
+          <Card className="hover:shadow-lg hover:scale-[1.02] transition-all duration-300">
             <CardHeader>
               <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-3">
-                  <div class="w-10 h-10 bg-purple-500/10 rounded-lg flex items-center justify-center">
+                  <div class="w-10 h-10 bg-purple-500/10 rounded-lg flex items-center justify-center hover:scale-110 transition-transform duration-300">
                     <span class="text-xl">📢</span>
                   </div>
                   <div>
                     <CardTitle>Marketing Cookies</CardTitle>
                     <Badge variant="outline" className="text-xs">
-                      Optional
+                      Requires Explicit Consent - GDPR Art. 6(1)(a)
                     </Badge>
                   </div>
                 </div>
-                <Button variant="outline" size="sm" id="marketing-toggle">
-                  Enable
-                </Button>
+                <div class="flex items-center space-x-2">
+                  <span class="text-sm text-muted-foreground">Status:</span>
+                  <span id="marketing-consent-status" class="text-sm font-medium">Not Set</span>
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    id="marketing-toggle"
+                    className="hover:scale-105 transition-transform duration-200 focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                    aria-label="Toggle marketing cookies consent"
+                  >
+                    Configure
+                  </Button>
+                </div>
               </div>
               <CardDescription>
-                These cookies are used to deliver personalized advertisements
+                Personalized content and advertising (currently not active - optional future feature)
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div class="space-y-3">
-                <div class="p-3 bg-muted/30 rounded-lg">
-                  <h4 class="font-medium text-foreground text-sm mb-1">Targeted Advertising</h4>
-                  <p class="text-xs text-muted-foreground">
-                    Show relevant ads based on your interests and browsing behavior
-                  </p>
+              <div class="space-y-4">
+                <Alert className="border-purple-200 bg-purple-50 dark:border-purple-800 dark:bg-purple-950/50">
+                  <span class="text-purple-600 dark:text-purple-400">ℹ️</span>
+                  <AlertDescription className="text-purple-800 dark:text-purple-200 text-sm">
+                    <strong>Current Status:</strong> We do not currently use marketing cookies. This section is prepared for future optional features.
+                  </AlertDescription>
+                </Alert>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 opacity-60">
+                  <div class="p-3 bg-muted/30 rounded-lg">
+                    <h4 class="font-medium text-foreground text-sm mb-1">🎯 Personalized Content</h4>
+                    <p class="text-xs text-muted-foreground mb-2">Tailored content recommendations, relevant service suggestions</p>
+                    <div class="text-xs text-purple-600 dark:text-purple-400">Duration: Would be 6 months</div>
+                  </div>
+                  <div class="p-3 bg-muted/30 rounded-lg">
+                    <h4 class="font-medium text-foreground text-sm mb-1">📧 Email Marketing</h4>
+                    <p class="text-xs text-muted-foreground mb-2">Newsletter personalization, targeted business communications</p>
+                    <div class="text-xs text-blue-600 dark:text-blue-400">Duration: Would be 12 months</div>
+                  </div>
                 </div>
-                <div class="p-3 bg-muted/30 rounded-lg">
-                  <h4 class="font-medium text-foreground text-sm mb-1">Social Media Integration</h4>
-                  <p class="text-xs text-muted-foreground">
-                    Enable sharing and social media features
-                  </p>
-                </div>
-                <div class="p-3 bg-muted/30 rounded-lg">
-                  <h4 class="font-medium text-foreground text-sm mb-1">Conversion Tracking</h4>
-                  <p class="text-xs text-muted-foreground">
-                    Measure the effectiveness of our marketing campaigns
-                  </p>
+                <div class="text-xs text-muted-foreground bg-purple-50 dark:bg-purple-950/30 p-3 rounded">
+                  <strong>Future Feature:</strong> If we implement marketing features, we will request separate explicit consent 
+                  and provide detailed information about data usage and your rights.
                 </div>
               </div>
             </CardContent>
@@ -295,168 +493,267 @@ import { Alert, AlertDescription } from '../components/ui/alert';
         </div>
       </section>
 
-      <!-- Cookie Duration -->
-      <section>
-        <h2 class="text-2xl font-bold text-foreground mb-6">3. Cookie Duration</h2>
-        <Card>
+      <!-- Cookie Duration & Retention -->
+      <section class="animate-fade-in-right">
+        <h2 class="text-2xl font-bold text-foreground mb-6 border-l-4 border-blue-500 pl-4">3. Cookie Duration & Data Retention</h2>
+        <Card className="hover:shadow-lg transition-all duration-300">
           <CardContent className="pt-6">
             <p class="text-muted-foreground leading-relaxed mb-6">
-              Cookies can be either session cookies or persistent cookies, depending on how long they last:
+              Cookie retention periods are determined by their purpose and legal requirements under GDPR and LPD:
             </p>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               
               <!-- Session Cookies -->
-              <div class="p-4 border border-border rounded-lg">
+              <div class="p-4 border border-border rounded-lg hover:shadow-md transition-all duration-200">
                 <div class="flex items-center space-x-3 mb-3">
-                  <div class="w-8 h-8 bg-orange-500/10 rounded-lg flex items-center justify-center">
+                  <div class="w-8 h-8 bg-orange-500/10 rounded-lg flex items-center justify-center hover:scale-110 transition-transform duration-300">
                     <span class="text-lg">⏳</span>
                   </div>
                   <h4 class="font-medium text-foreground">Session Cookies</h4>
                 </div>
                 <p class="text-sm text-muted-foreground mb-3">
-                  Temporary cookies that are deleted when you close your browser
+                  Temporary cookies deleted when you close your browser
                 </p>
-                <div class="text-xs text-muted-foreground bg-muted/30 p-2 rounded">
-                  <strong>Duration:</strong> Until browser is closed
+                <div class="space-y-2">
+                  <div class="text-xs text-muted-foreground bg-muted/30 p-2 rounded">
+                    <strong>Duration:</strong> Until browser session ends
+                  </div>
+                  <div class="text-xs text-muted-foreground bg-muted/30 p-2 rounded">
+                    <strong>Examples:</strong> Login status, form data, cart contents
+                  </div>
+                  <div class="text-xs text-muted-foreground bg-muted/30 p-2 rounded">
+                    <strong>Legal basis:</strong> GDPR Art. 6(1)(f) - Legitimate interest
+                  </div>
                 </div>
               </div>
 
               <!-- Persistent Cookies -->
-              <div class="p-4 border border-border rounded-lg">
+              <div class="p-4 border border-border rounded-lg hover:shadow-md transition-all duration-200">
                 <div class="flex items-center space-x-3 mb-3">
-                  <div class="w-8 h-8 bg-blue-500/10 rounded-lg flex items-center justify-center">
+                  <div class="w-8 h-8 bg-blue-500/10 rounded-lg flex items-center justify-center hover:scale-110 transition-transform duration-300">
                     <span class="text-lg">💾</span>
                   </div>
                   <h4 class="font-medium text-foreground">Persistent Cookies</h4>
                 </div>
                 <p class="text-sm text-muted-foreground mb-3">
-                  Remain on your device for a set period or until manually deleted
+                  Remain on your device for a specific period or until deleted
                 </p>
-                <div class="text-xs text-muted-foreground bg-muted/30 p-2 rounded">
-                  <strong>Duration:</strong> Varies (30 days to 2 years)
+                <div class="space-y-2">
+                  <div class="text-xs text-muted-foreground bg-muted/30 p-2 rounded">
+                    <strong>Duration:</strong> 3 months to 24 months (category dependent)
+                  </div>
+                  <div class="text-xs text-muted-foreground bg-muted/30 p-2 rounded">
+                    <strong>Examples:</strong> Preferences, analytics, consent choices
+                  </div>
+                  <div class="text-xs text-muted-foreground bg-muted/30 p-2 rounded">
+                    <strong>Legal basis:</strong> GDPR Art. 6(1)(a) - Consent (non-essential)
+                  </div>
                 </div>
               </div>
 
+            </div>
+
+            <!-- Detailed Retention Schedule -->
+            <div class="mt-6">
+              <h4 class="font-semibold text-foreground mb-4">Detailed Retention Schedule</h4>
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="text-center p-3 bg-red-50 dark:bg-red-950/30 rounded-lg border border-red-200 dark:border-red-800">
+                  <div class="text-lg font-bold text-red-600 mb-1">Session - 12m</div>
+                  <div class="text-xs text-muted-foreground">Essential Cookies</div>
+                </div>
+                <div class="text-center p-3 bg-blue-50 dark:bg-blue-950/30 rounded-lg border border-blue-200 dark:border-blue-800">
+                  <div class="text-lg font-bold text-blue-600 mb-1">3m - 12m</div>
+                  <div class="text-xs text-muted-foreground">Functional Cookies</div>
+                </div>
+                <div class="text-center p-3 bg-green-50 dark:bg-green-950/30 rounded-lg border border-green-200 dark:border-green-800">
+                  <div class="text-lg font-bold text-green-600 mb-1">12m - 24m</div>
+                  <div class="text-xs text-muted-foreground">Analytics Cookies</div>
+                </div>
+                <div class="text-center p-3 bg-purple-50 dark:bg-purple-950/30 rounded-lg border border-purple-200 dark:border-purple-800">
+                  <div class="text-lg font-bold text-purple-600 mb-1">Not Active</div>
+                  <div class="text-xs text-muted-foreground">Marketing Cookies</div>
+                </div>
+              </div>
             </div>
           </CardContent>
         </Card>
       </section>
 
-      <!-- Cookie Management -->
-      <section>
-        <h2 class="text-2xl font-bold text-foreground mb-6">4. Managing Your Cookie Preferences</h2>
+      <!-- Cookie Management Tools -->
+      <section class="animate-fade-in-left">
+        <h2 class="text-2xl font-bold text-foreground mb-6 border-l-4 border-green-500 pl-4">4. Cookie Management & Your Rights</h2>
         
         <div class="space-y-6">
           
           <!-- Browser Settings -->
-          <Card>
+          <Card className="hover:shadow-lg transition-all duration-300">
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">
-                <span class="text-xl">🌐</span>
-                <span>Browser Settings</span>
+                <span class="text-xl hover:scale-110 transition-transform duration-300">🌐</span>
+                <span>Browser-Level Cookie Control</span>
               </CardTitle>
               <CardDescription>
-                You can control cookies through your browser settings
+                Universal cookie management through your web browser settings
               </CardDescription>
             </CardHeader>
             <CardContent>
               <p class="text-muted-foreground leading-relaxed mb-4">
-                Most web browsers allow you to control cookies through their settings preferences. 
-                Here's how to manage cookies in popular browsers:
+                All modern browsers provide built-in cookie management tools. You can control cookies globally 
+                or for specific websites through these settings:
               </p>
               
               <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div class="p-3 bg-muted/30 rounded-lg text-center">
-                  <div class="text-2xl mb-2">🔵</div>
-                  <h4 class="font-medium text-foreground text-sm mb-1">Chrome</h4>
-                  <p class="text-xs text-muted-foreground">Settings → Privacy → Cookies</p>
+                <div class="p-3 bg-muted/30 rounded-lg text-center hover:bg-muted/50 transition-colors duration-200">
+                  <div class="text-2xl mb-2 hover:scale-110 transition-transform duration-300">🔵</div>
+                  <h4 class="font-medium text-foreground text-sm mb-1">Google Chrome</h4>
+                  <p class="text-xs text-muted-foreground mb-2">Settings → Privacy & Security → Cookies</p>
+                  <Button asChild variant="ghost" size="sm" className="text-xs hover:scale-105 transition-transform duration-200">
+                    <a href="chrome://settings/cookies" target="_blank" rel="noopener" aria-label="Open Chrome cookie settings">
+                      Open Settings
+                    </a>
+                  </Button>
                 </div>
-                <div class="p-3 bg-muted/30 rounded-lg text-center">
-                  <div class="text-2xl mb-2">🦊</div>
-                  <h4 class="font-medium text-foreground text-sm mb-1">Firefox</h4>
-                  <p class="text-xs text-muted-foreground">Options → Privacy → Cookies</p>
+                <div class="p-3 bg-muted/30 rounded-lg text-center hover:bg-muted/50 transition-colors duration-200">
+                  <div class="text-2xl mb-2 hover:scale-110 transition-transform duration-300">🦊</div>
+                  <h4 class="font-medium text-foreground text-sm mb-1">Mozilla Firefox</h4>
+                  <p class="text-xs text-muted-foreground mb-2">Options → Privacy & Security → Cookies</p>
+                  <Button asChild variant="ghost" size="sm" className="text-xs hover:scale-105 transition-transform duration-200">
+                    <a href="about:preferences#privacy" target="_blank" rel="noopener" aria-label="Open Firefox privacy settings">
+                      Open Settings
+                    </a>
+                  </Button>
                 </div>
-                <div class="p-3 bg-muted/30 rounded-lg text-center">
-                  <div class="text-2xl mb-2">🧭</div>
+                <div class="p-3 bg-muted/30 rounded-lg text-center hover:bg-muted/50 transition-colors duration-200">
+                  <div class="text-2xl mb-2 hover:scale-110 transition-transform duration-300">🧭</div>
                   <h4 class="font-medium text-foreground text-sm mb-1">Safari</h4>
-                  <p class="text-xs text-muted-foreground">Preferences → Privacy</p>
+                  <p class="text-xs text-muted-foreground mb-2">Preferences → Privacy → Cookies</p>
+                  <div class="text-xs text-muted-foreground">System Preferences Required</div>
                 </div>
-                <div class="p-3 bg-muted/30 rounded-lg text-center">
-                  <div class="text-2xl mb-2">🔷</div>
-                  <h4 class="font-medium text-foreground text-sm mb-1">Edge</h4>
-                  <p class="text-xs text-muted-foreground">Settings → Privacy → Cookies</p>
+                <div class="p-3 bg-muted/30 rounded-lg text-center hover:bg-muted/50 transition-colors duration-200">
+                  <div class="text-2xl mb-2 hover:scale-110 transition-transform duration-300">🔷</div>
+                  <h4 class="font-medium text-foreground text-sm mb-1">Microsoft Edge</h4>
+                  <p class="text-xs text-muted-foreground mb-2">Settings → Cookies & Site Permissions</p>
+                  <Button asChild variant="ghost" size="sm" className="text-xs hover:scale-105 transition-transform duration-200">
+                    <a href="edge://settings/cookies" target="_blank" rel="noopener" aria-label="Open Edge cookie settings">
+                      Open Settings
+                    </a>
+                  </Button>
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          <!-- Our Cookie Preferences -->
-          <Card>
+          <!-- Our Cookie Preferences Center -->
+          <Card className="border-primary bg-primary/5 hover:shadow-lg transition-all duration-300">
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">
-                <span class="text-xl">⚙️</span>
-                <span>Your Cookie Preferences</span>
+                <span class="text-xl hover:scale-110 transition-transform duration-300">⚙️</span>
+                <span>Professional Cookie Preferences Center</span>
               </CardTitle>
               <CardDescription>
-                Manage your cookie preferences for this website
+                Granular control over cookie categories with instant effect
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div class="space-y-4">
                 <p class="text-muted-foreground leading-relaxed">
-                  You can customize your cookie preferences using the controls below. 
-                  Note that essential cookies cannot be disabled as they are necessary for the website to function.
+                  Use the controls below to manage your cookie preferences for our website. 
+                  Changes take effect immediately and are stored for future visits.
                 </p>
                 
                 <div class="space-y-3">
-                  <div class="flex items-center justify-between p-3 bg-muted/30 rounded-lg">
-                    <div>
-                      <h4 class="font-medium text-foreground text-sm">Essential Cookies</h4>
-                      <p class="text-xs text-muted-foreground">Required for website functionality</p>
+                  <!-- Essential Cookies Control -->
+                  <div class="flex items-center justify-between p-3 bg-red-50 dark:bg-red-950/30 rounded-lg border border-red-200 dark:border-red-800">
+                    <div class="flex-1">
+                      <h4 class="font-medium text-foreground text-sm flex items-center space-x-2">
+                        <span class="text-red-500">🚨</span>
+                        <span>Essential Cookies</span>
+                      </h4>
+                      <p class="text-xs text-muted-foreground">Required for website functionality - cannot be disabled</p>
                     </div>
                     <Badge variant="destructive" className="text-xs">
-                      Always On
+                      Always Active
                     </Badge>
                   </div>
                   
-                  <div class="flex items-center justify-between p-3 bg-muted/30 rounded-lg">
-                    <div>
-                      <h4 class="font-medium text-foreground text-sm">Functional Cookies</h4>
-                      <p class="text-xs text-muted-foreground">Enhanced features and personalization</p>
+                  <!-- Functional Cookies Control -->
+                  <div class="flex items-center justify-between p-3 bg-muted/30 rounded-lg hover:bg-muted/50 transition-colors duration-200">
+                    <div class="flex-1">
+                      <h4 class="font-medium text-foreground text-sm flex items-center space-x-2">
+                        <span class="text-blue-500">⚙️</span>
+                        <span>Functional Cookies</span>
+                      </h4>
+                      <p class="text-xs text-muted-foreground">Enhanced features and personalization options</p>
                     </div>
-                    <Button variant="outline" size="sm">
-                      Configure
-                    </Button>
+                    <div class="flex items-center space-x-2">
+                      <span class="text-xs text-muted-foreground" id="functional-status-text">Disabled</span>
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        id="functional-detailed-toggle"
+                        className="hover:scale-105 transition-transform duration-200 focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                        aria-label="Toggle functional cookies"
+                      >
+                        Enable
+                      </Button>
+                    </div>
                   </div>
                   
-                  <div class="flex items-center justify-between p-3 bg-muted/30 rounded-lg">
-                    <div>
-                      <h4 class="font-medium text-foreground text-sm">Analytics Cookies</h4>
-                      <p class="text-xs text-muted-foreground">Help us improve our website</p>
+                  <!-- Analytics Cookies Control -->
+                  <div class="flex items-center justify-between p-3 bg-muted/30 rounded-lg hover:bg-muted/50 transition-colors duration-200">
+                    <div class="flex-1">
+                      <h4 class="font-medium text-foreground text-sm flex items-center space-x-2">
+                        <span class="text-green-500">📊</span>
+                        <span>Analytics Cookies</span>
+                      </h4>
+                      <p class="text-xs text-muted-foreground">Anonymous website performance and usage analytics</p>
                     </div>
-                    <Button variant="outline" size="sm">
-                      Configure
-                    </Button>
+                    <div class="flex items-center space-x-2">
+                      <span class="text-xs text-muted-foreground" id="analytics-status-text">Disabled</span>
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        id="analytics-detailed-toggle"
+                        className="hover:scale-105 transition-transform duration-200 focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                        aria-label="Toggle analytics cookies"
+                      >
+                        Enable
+                      </Button>
+                    </div>
                   </div>
                   
-                  <div class="flex items-center justify-between p-3 bg-muted/30 rounded-lg">
-                    <div>
-                      <h4 class="font-medium text-foreground text-sm">Marketing Cookies</h4>
-                      <p class="text-xs text-muted-foreground">Personalized advertising</p>
+                  <!-- Marketing Cookies Control -->
+                  <div class="flex items-center justify-between p-3 bg-muted/30 rounded-lg opacity-60">
+                    <div class="flex-1">
+                      <h4 class="font-medium text-foreground text-sm flex items-center space-x-2">
+                        <span class="text-purple-500">📢</span>
+                        <span>Marketing Cookies</span>
+                      </h4>
+                      <p class="text-xs text-muted-foreground">Personalized advertising and content (not currently used)</p>
                     </div>
-                    <Button variant="outline" size="sm">
-                      Configure
-                    </Button>
+                    <Badge variant="secondary" className="text-xs">
+                      Not Active
+                    </Badge>
                   </div>
                 </div>
                 
-                <div class="flex flex-col sm:flex-row gap-3 pt-4">
-                  <Button className="flex-1">
-                    Accept All Cookies
+                <!-- Action Buttons -->
+                <div class="flex flex-col sm:flex-row gap-3 pt-4 border-t border-border">
+                  <Button 
+                    id="save-preferences-btn" 
+                    className="flex-1 hover:scale-105 transition-transform duration-200 focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                    aria-label="Save cookie preferences"
+                  >
+                    Save Preferences
                   </Button>
-                  <Button variant="outline" className="flex-1">
-                    Accept Only Essential
+                  <Button 
+                    id="reset-preferences-btn" 
+                    variant="outline" 
+                    className="flex-1 hover:scale-105 transition-transform duration-200 focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                    aria-label="Reset to default preferences"
+                  >
+                    Reset to Defaults
                   </Button>
                 </div>
               </div>
@@ -467,100 +764,662 @@ import { Alert, AlertDescription } from '../components/ui/alert';
       </section>
 
       <!-- Third-Party Services -->
-      <section>
-        <h2 class="text-2xl font-bold text-foreground mb-6">5. Third-Party Services</h2>
-        <Card>
+      <section class="animate-fade-in-right">
+        <h2 class="text-2xl font-bold text-foreground mb-6 border-l-4 border-purple-500 pl-4">5. Third-Party Services & Data Processors</h2>
+        <Card className="hover:shadow-lg transition-all duration-300">
           <CardContent className="pt-6">
             <p class="text-muted-foreground leading-relaxed mb-6">
-              We use various third-party services that may set their own cookies. 
-              Here are the main services we use and links to their privacy policies:
+              We carefully select GDPR/LPD compliant service providers. All third-party processors are bound 
+              by strict data processing agreements (DPAs) and adequacy decisions.
             </p>
             
             <div class="space-y-4">
               
-              <div class="p-4 border border-border rounded-lg">
-                <div class="flex items-center justify-between mb-2">
-                  <h4 class="font-medium text-foreground">Google Analytics</h4>
-                  <Badge variant="outline" className="text-xs">Analytics</Badge>
+              <!-- Analytics Services -->
+              <div class="p-4 border border-border rounded-lg hover:shadow-md transition-all duration-200">
+                <div class="flex items-center justify-between mb-3">
+                  <h4 class="font-medium text-foreground flex items-center space-x-2">
+                    <span class="text-green-500">📊</span>
+                    <span>Analytics Services</span>
+                  </h4>
+                  <div class="flex gap-2">
+                    <Badge variant="outline" className="text-xs">EU-Based</Badge>
+                    <Badge variant="outline" className="text-xs">GDPR DPA</Badge>
+                  </div>
                 </div>
                 <p class="text-sm text-muted-foreground mb-3">
-                  Helps us understand how visitors interact with our website
+                  Privacy-focused analytics with data anonymization and EU data residency
                 </p>
-                <a href="https://policies.google.com/privacy" target="_blank" rel="noopener" 
-                   class="text-primary underline hover:text-primary/80 text-sm">
-                  View Google Privacy Policy →
-                </a>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs text-muted-foreground">
+                  <div>
+                    <strong>Data Location:</strong> EU/Switzerland only
+                  </div>
+                  <div>
+                    <strong>Processing Agreement:</strong> Standard Contractual Clauses
+                  </div>
+                  <div>
+                    <strong>Data Anonymization:</strong> IP addresses masked, no personal identification
+                  </div>
+                  <div>
+                    <strong>Retention:</strong> 24 months, then automatic deletion
+                  </div>
+                </div>
               </div>
               
-              <div class="p-4 border border-border rounded-lg">
-                <div class="flex items-center justify-between mb-2">
-                  <h4 class="font-medium text-foreground">Hosting Provider</h4>
-                  <Badge variant="outline" className="text-xs">Essential</Badge>
+              <!-- Hosting & CDN -->
+              <div class="p-4 border border-border rounded-lg hover:shadow-md transition-all duration-200">
+                <div class="flex items-center justify-between mb-3">
+                  <h4 class="font-medium text-foreground flex items-center space-x-2">
+                    <span class="text-blue-500">🌐</span>
+                    <span>Hosting & CDN Services</span>
+                  </h4>
+                  <div class="flex gap-2">
+                    <Badge variant="outline" className="text-xs">ISO 27001</Badge>
+                    <Badge variant="outline" className="text-xs">Swiss/EU</Badge>
+                  </div>
                 </div>
                 <p class="text-sm text-muted-foreground mb-3">
-                  Our hosting provider may set cookies for security and performance
+                  Secure hosting infrastructure with European data centers and CDN
                 </p>
-                <span class="text-sm text-muted-foreground">
-                  Refer to your hosting provider's privacy policy
-                </span>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs text-muted-foreground">
+                  <div>
+                    <strong>Primary Location:</strong> Switzerland & EU data centers
+                  </div>
+                  <div>
+                    <strong>Security Standards:</strong> ISO 27001, SOC 2 Type II
+                  </div>
+                  <div>
+                    <strong>Cookie Purpose:</strong> Load balancing, security, performance
+                  </div>
+                  <div>
+                    <strong>Legal Basis:</strong> Legitimate interest (essential functionality)
+                  </div>
+                </div>
+              </div>
+
+              <!-- Security Services -->
+              <div class="p-4 border border-border rounded-lg hover:shadow-md transition-all duration-200">
+                <div class="flex items-center justify-between mb-3">
+                  <h4 class="font-medium text-foreground flex items-center space-x-2">
+                    <span class="text-orange-500">🛡️</span>
+                    <span>Security & Protection Services</span>
+                  </h4>
+                  <div class="flex gap-2">
+                    <Badge variant="outline" className="text-xs">Essential</Badge>
+                    <Badge variant="outline" className="text-xs">No Consent Required</Badge>
+                  </div>
+                </div>
+                <p class="text-sm text-muted-foreground mb-3">
+                  DDoS protection, firewall, and security monitoring services
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs text-muted-foreground">
+                  <div>
+                    <strong>Purpose:</strong> Website security and availability
+                  </div>
+                  <div>
+                    <strong>Data Processed:</strong> IP addresses, request patterns
+                  </div>
+                  <div>
+                    <strong>Retention:</strong> 30 days for security logs
+                  </div>
+                  <div>
+                    <strong>Legal Basis:</strong> Legitimate interest (security)
+                  </div>
+                </div>
               </div>
 
             </div>
+
+            <!-- Data Transfer Information -->
+            <Alert className="mt-6 border-blue-200 bg-blue-50 dark:border-blue-800 dark:bg-blue-950/50">
+              <span class="text-blue-600 dark:text-blue-400">🔒</span>
+              <AlertDescription className="text-blue-800 dark:text-blue-200 text-sm">
+                <strong>Data Transfer Safeguards:</strong> All international data transfers are protected by EU adequacy decisions 
+                or Standard Contractual Clauses. No data is transferred to countries without adequate protection levels.
+              </AlertDescription>
+            </Alert>
           </CardContent>
         </Card>
       </section>
 
-      <!-- Contact -->
-      <section>
-        <h2 class="text-2xl font-bold text-foreground mb-6">6. Questions About Cookies</h2>
-        <Card>
-          <CardContent className="pt-6">
-            <p class="text-muted-foreground leading-relaxed mb-4">
-              If you have any questions about our use of cookies or this Cookie Policy, please contact us:
-            </p>
-            <div class="space-y-3">
-              <div class="flex items-center space-x-3">
-                <span class="text-blue-500">📧</span>
-                <span class="text-muted-foreground">Email: <a href="mailto:privacy@yourcompany.com" class="text-primary underline hover:text-primary/80">privacy@yourcompany.com</a></span>
+      <!-- Your Rights & Contact -->
+      <section class="animate-fade-in-left">
+        <h2 class="text-2xl font-bold text-foreground mb-6 border-l-4 border-teal-500 pl-4">6. Your Rights & Contact Information</h2>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          
+          <!-- Your Rights -->
+          <Card className="hover:shadow-lg hover:scale-[1.02] transition-all duration-300">
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2">
+                <span class="text-xl hover:scale-110 transition-transform duration-300">⚖️</span>
+                <span>Your Privacy Rights</span>
+              </CardTitle>
+              <CardDescription>Rights under GDPR and LPD regarding cookie data</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div class="space-y-3">
+                <div class="p-3 bg-blue-50 dark:bg-blue-950/30 rounded-lg">
+                  <h4 class="font-medium text-foreground text-sm mb-1 flex items-center space-x-2">
+                    <span class="text-blue-500">🔍</span>
+                    <span>Right to Information</span>
+                  </h4>
+                  <p class="text-xs text-muted-foreground">Know what cookies are set and how your data is processed</p>
+                </div>
+                <div class="p-3 bg-green-50 dark:bg-green-950/30 rounded-lg">
+                  <h4 class="font-medium text-foreground text-sm mb-1 flex items-center space-x-2">
+                    <span class="text-green-500">✋</span>
+                    <span>Right to Withdraw Consent</span>
+                  </h4>
+                  <p class="text-xs text-muted-foreground">Withdraw consent for non-essential cookies at any time</p>
+                </div>
+                <div class="p-3 bg-purple-50 dark:bg-purple-950/30 rounded-lg">
+                  <h4 class="font-medium text-foreground text-sm mb-1 flex items-center space-x-2">
+                    <span class="text-purple-500">🗑️</span>
+                    <span>Right to Deletion</span>
+                  </h4>
+                  <p class="text-xs text-muted-foreground">Request deletion of cookie data and associated information</p>
+                </div>
+                <div class="p-3 bg-orange-50 dark:bg-orange-950/30 rounded-lg">
+                  <h4 class="font-medium text-foreground text-sm mb-1 flex items-center space-x-2">
+                    <span class="text-orange-500">📞</span>
+                    <span>Right to Complain</span>
+                  </h4>
+                  <p class="text-xs text-muted-foreground">Lodge complaints with data protection authorities</p>
+                </div>
               </div>
-              <div class="flex items-center space-x-3">
-                <span class="text-green-500">📞</span>
-                <span class="text-muted-foreground">Phone: <a href="tel:+1-555-123-4567" class="text-primary underline hover:text-primary/80">+1 (555) 123-4567</a></span>
+            </CardContent>
+          </Card>
+
+          <!-- Contact Information -->
+          <Card className="hover:shadow-lg hover:scale-[1.02] transition-all duration-300">
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2">
+                <span class="text-xl hover:scale-110 transition-transform duration-300">📞</span>
+                <span>Contact & Data Protection</span>
+              </CardTitle>
+              <CardDescription>Professional support for privacy and cookie questions</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div class="space-y-4">
+                <div class="space-y-3">
+                  <div class="flex items-center space-x-3">
+                    <span class="text-blue-500">📧</span>
+                    <div>
+                      <div class="font-medium text-foreground text-sm">Data Protection Officer</div>
+                      <a href="mailto:dpo@yourwebsitecompany.com" class="text-primary underline hover:text-primary/80 text-sm">dpo@yourwebsitecompany.com</a>
+                    </div>
+                  </div>
+                  <div class="flex items-center space-x-3">
+                    <span class="text-green-500">📞</span>
+                    <div>
+                      <div class="font-medium text-foreground text-sm">Privacy Hotline</div>
+                      <a href="tel:+41-21-000-0001" class="text-primary underline hover:text-primary/80 text-sm">+41 21 000 0001</a>
+                    </div>
+                  </div>
+                  <div class="flex items-start space-x-3">
+                    <span class="text-purple-500 mt-1">📍</span>
+                    <div>
+                      <div class="font-medium text-foreground text-sm">Business Address</div>
+                      <div class="text-sm text-muted-foreground">
+                        Professional Website Solutions Sàrl<br>
+                        Route de la Tech 42<br>
+                        1015 Lausanne, Switzerland
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="p-3 bg-green-50 dark:bg-green-950/30 rounded-lg">
+                  <h4 class="font-medium text-foreground text-sm mb-1">Response Commitment</h4>
+                  <p class="text-xs text-muted-foreground">
+                    Cookie and privacy requests answered within 30 days (GDPR/LPD compliant). 
+                    Urgent matters acknowledged within 72 hours.
+                  </p>
+                </div>
+                
+                <div class="space-y-2">
+                  <div class="text-xs text-muted-foreground">
+                    <strong>Related Policies:</strong>
+                  </div>
+                  <div class="flex gap-2">
+                    <Button asChild variant="ghost" size="sm" className="text-xs hover:scale-105 transition-transform duration-200">
+                      <a href="/privacy" aria-label="View privacy policy">Privacy Policy</a>
+                    </Button>
+                    <Button asChild variant="ghost" size="sm" className="text-xs hover:scale-105 transition-transform duration-200">
+                      <a href="/terms" aria-label="View terms of service">Terms of Service</a>
+                    </Button>
+                  </div>
+                </div>
               </div>
-              <div class="flex items-center space-x-3">
-                <span class="text-purple-500">📄</span>
-                <span class="text-muted-foreground">
-                  See also our <a href="/privacy" class="text-primary underline hover:text-primary/80">Privacy Policy</a>
-                </span>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
+
+        </div>
       </section>
 
     </div>
 
-  </div>
+    <!-- Footer Actions -->
+    <section class="mt-16 text-center animate-fade-in-up">
+      <Card className="border-primary bg-primary/5 hover:shadow-lg transition-all duration-300">
+        <CardContent className="pt-6">
+          <h3 class="text-xl font-semibold text-foreground mb-4">Ready to Manage Your Cookie Preferences?</h3>
+          <p class="text-muted-foreground mb-6">
+            Take control of your privacy with our comprehensive cookie management tools
+          </p>
+          <div class="flex flex-col sm:flex-row gap-3 justify-center">
+            <Button 
+              id="footer-preferences-btn" 
+              size="lg" 
+              className="hover:scale-105 transition-transform duration-200 focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              aria-label="Open cookie preferences"
+            >
+              Manage Cookie Preferences
+            </Button>
+            <Button 
+              asChild 
+              variant="outline" 
+              size="lg" 
+              className="hover:scale-105 transition-transform duration-200 focus:ring-2 focus:ring-primary focus:ring-offset-2"
+            >
+              <a href="/privacy" aria-label="View full privacy policy">
+                View Privacy Policy
+              </a>
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+    </section>
+
+  </main>
 </Layout>
 
 <script>
-  // Simple cookie preference management (demo)
-  function toggleCookieCategory(category: string) {
-    const button = document.getElementById(`${category}-toggle`);
-    if (button) {
-      const isEnabled = button.textContent === 'Disable';
-      button.textContent = isEnabled ? 'Enable' : 'Disable';
-      button.className = isEnabled 
-        ? 'inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-8 px-3'
-        : 'inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-8 px-3';
+  // Professional Cookie Consent Management System
+  interface CookiePreferences {
+    essential: boolean;
+    functional: boolean;
+    analytics: boolean;
+    marketing: boolean;
+    timestamp: number;
+    version: string;
+  }
+
+  class CookieManager {
+    private preferences: CookiePreferences;
+    private readonly storageKey = 'cookie_preferences';
+    private readonly version = '1.0';
+
+    constructor() {
+      this.preferences = this.loadPreferences();
+      this.initializeUI();
+      this.bindEvents();
+      this.updateUI();
+    }
+
+    private loadPreferences(): CookiePreferences {
+      try {
+        const stored = localStorage.getItem(this.storageKey);
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          // Validate version compatibility
+          if (parsed.version === this.version) {
+            return parsed;
+          }
+        }
+      } catch (e) {
+        console.warn('Failed to load cookie preferences:', e);
+      }
+
+      // Default preferences
+      return {
+        essential: true, // Always true
+        functional: false,
+        analytics: false,
+        marketing: false,
+        timestamp: Date.now(),
+        version: this.version
+      };
+    }
+
+    private savePreferences(): void {
+      try {
+        this.preferences.timestamp = Date.now();
+        localStorage.setItem(this.storageKey, JSON.stringify(this.preferences));
+        this.announceChange('Cookie preferences saved successfully');
+      } catch (e) {
+        console.error('Failed to save cookie preferences:', e);
+        this.announceChange('Failed to save preferences. Please try again.');
+      }
+    }
+
+    private announceChange(message: string): void {
+      // Create announcement for screen readers
+      const announcement = document.createElement('div');
+      announcement.setAttribute('aria-live', 'polite');
+      announcement.setAttribute('aria-atomic', 'true');
+      announcement.className = 'sr-only';
+      announcement.textContent = message;
+      document.body.appendChild(announcement);
       
-      // In a real implementation, this would save preferences and update cookie settings
-      console.log(`${category} cookies ${isEnabled ? 'disabled' : 'enabled'}`);
+      setTimeout(() => {
+        document.body.removeChild(announcement);
+      }, 1000);
+    }
+
+    private updateUI(): void {
+      // Update status indicators
+      this.updateStatusIndicator('essential', this.preferences.essential);
+      this.updateStatusIndicator('functional', this.preferences.functional);
+      this.updateStatusIndicator('analytics', this.preferences.analytics);
+      this.updateStatusIndicator('marketing', this.preferences.marketing);
+
+      // Update toggle buttons
+      this.updateToggleButton('functional', this.preferences.functional);
+      this.updateToggleButton('analytics', this.preferences.analytics);
+      this.updateToggleButton('marketing', this.preferences.marketing);
+
+      // Update detailed toggles
+      this.updateDetailedToggle('functional', this.preferences.functional);
+      this.updateDetailedToggle('analytics', this.preferences.analytics);
+    }
+
+    private updateStatusIndicator(category: string, enabled: boolean): void {
+      const indicator = document.getElementById(`${category}-status`);
+      if (indicator) {
+        indicator.textContent = enabled ? '✓' : '−';
+        indicator.className = enabled 
+          ? `text-lg font-bold text-green-600` 
+          : `text-lg font-bold text-orange-600`;
+      }
+
+      const statusText = document.getElementById(`${category}-status-text`);
+      if (statusText) {
+        statusText.textContent = enabled ? 'Enabled' : 'Disabled';
+      }
+
+      const consentStatus = document.getElementById(`${category}-consent-status`);
+      if (consentStatus) {
+        consentStatus.textContent = enabled ? 'Accepted' : 'Declined';
+        consentStatus.className = enabled 
+          ? 'text-sm font-medium text-green-600'
+          : 'text-sm font-medium text-orange-600';
+      }
+    }
+
+    private updateToggleButton(category: string, enabled: boolean): void {
+      const button = document.getElementById(`${category}-toggle`) as HTMLButtonElement;
+      if (button) {
+        button.textContent = enabled ? 'Disable' : 'Enable';
+        button.className = enabled
+          ? 'inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-8 px-3 hover:scale-105 transition-transform duration-200 focus:ring-2 focus:ring-primary focus:ring-offset-2'
+          : 'inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-8 px-3 hover:scale-105 transition-transform duration-200 focus:ring-2 focus:ring-primary focus:ring-offset-2';
+      }
+    }
+
+    private updateDetailedToggle(category: string, enabled: boolean): void {
+      const button = document.getElementById(`${category}-detailed-toggle`) as HTMLButtonElement;
+      if (button) {
+        button.textContent = enabled ? 'Disable' : 'Enable';
+        button.className = enabled
+          ? 'inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-8 px-3 hover:scale-105 transition-transform duration-200 focus:ring-2 focus:ring-primary focus:ring-offset-2'
+          : 'inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-8 px-3 hover:scale-105 transition-transform duration-200 focus:ring-2 focus:ring-primary focus:ring-offset-2';
+      }
+    }
+
+    private toggleCategory(category: 'functional' | 'analytics' | 'marketing'): void {
+      this.preferences[category] = !this.preferences[category];
+      this.savePreferences();
+      this.updateUI();
+      
+      const action = this.preferences[category] ? 'enabled' : 'disabled';
+      this.announceChange(`${category} cookies ${action}`);
+    }
+
+    private acceptAll(): void {
+      this.preferences.functional = true;
+      this.preferences.analytics = true;
+      // Marketing remains false as it's not active
+      this.savePreferences();
+      this.updateUI();
+      this.announceChange('All available cookies accepted');
+    }
+
+    private acceptEssentialOnly(): void {
+      this.preferences.functional = false;
+      this.preferences.analytics = false;
+      this.preferences.marketing = false;
+      this.savePreferences();
+      this.updateUI();
+      this.announceChange('Only essential cookies accepted');
+    }
+
+    private resetToDefaults(): void {
+      this.preferences = {
+        essential: true,
+        functional: false,
+        analytics: false,
+        marketing: false,
+        timestamp: Date.now(),
+        version: this.version
+      };
+      this.savePreferences();
+      this.updateUI();
+      this.announceChange('Cookie preferences reset to defaults');
+    }
+
+    private initializeUI(): void {
+      // Set initial ARIA states
+      const toggleButtons = document.querySelectorAll('[id$="-toggle"], [id$="-detailed-toggle"]');
+      toggleButtons.forEach(button => {
+        button.setAttribute('role', 'switch');
+        button.setAttribute('aria-checked', 'false');
+      });
+    }
+
+    private bindEvents(): void {
+      // Quick action buttons
+      document.getElementById('accept-all-btn')?.addEventListener('click', () => this.acceptAll());
+      document.getElementById('essential-only-btn')?.addEventListener('click', () => this.acceptEssentialOnly());
+      
+      // Category toggles
+      document.getElementById('functional-toggle')?.addEventListener('click', () => this.toggleCategory('functional'));
+      document.getElementById('analytics-toggle')?.addEventListener('click', () => this.toggleCategory('analytics'));
+      document.getElementById('marketing-toggle')?.addEventListener('click', () => this.toggleCategory('marketing'));
+      
+      // Detailed toggles
+      document.getElementById('functional-detailed-toggle')?.addEventListener('click', () => this.toggleCategory('functional'));
+      document.getElementById('analytics-detailed-toggle')?.addEventListener('click', () => this.toggleCategory('analytics'));
+      
+      // Preference management
+      document.getElementById('save-preferences-btn')?.addEventListener('click', () => {
+        this.savePreferences();
+        this.announceChange('Preferences saved successfully');
+      });
+      document.getElementById('reset-preferences-btn')?.addEventListener('click', () => this.resetToDefaults());
+      
+      // Footer action
+      document.getElementById('footer-preferences-btn')?.addEventListener('click', () => {
+        document.getElementById('interactive-content')?.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'center' 
+        });
+      });
+
+      // Keyboard support
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          // Allow escape to close focused elements
+          (document.activeElement as HTMLElement)?.blur();
+        }
+      });
     }
   }
 
-  // Add click handlers
-  document.getElementById('functional-toggle')?.addEventListener('click', () => toggleCookieCategory('functional'));
-  document.getElementById('analytics-toggle')?.addEventListener('click', () => toggleCookieCategory('analytics'));
-  document.getElementById('marketing-toggle')?.addEventListener('click', () => toggleCookieCategory('marketing'));
+  // Initialize cookie management system
+  document.addEventListener('DOMContentLoaded', () => {
+    new CookieManager();
+  });
 </script>
+
+<style>
+  /* Phase 8+ Enhanced CSS Animations */
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fade-in-left {
+    from {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes fade-in-right {
+    from {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 0.6s ease-out forwards;
+  }
+
+  .animate-fade-in-left {
+    animation: fade-in-left 0.6s ease-out forwards 0.2s both;
+  }
+
+  .animate-fade-in-right {
+    animation: fade-in-right 0.6s ease-out forwards 0.4s both;
+  }
+
+  /* Skip links styling */
+  .skip-link {
+    transform: translateY(-100%);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .skip-link:focus {
+    transform: translateY(0);
+  }
+
+  /* Enhanced hover effects for all interactive elements */
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+
+  /* Smooth transitions */
+  .card,
+  .badge,
+  button,
+  a {
+    transition: all 0.2s ease-in-out;
+  }
+
+  /* Smooth scrolling for anchor links */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Enhanced focus states */
+  button:focus,
+  a:focus {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 2px;
+    box-shadow: 0 0 0 3px hsl(var(--primary) / 0.1);
+  }
+
+  /* Cookie preference panel styling */
+  #interactive-content .card {
+    background: linear-gradient(135deg, hsl(var(--primary) / 0.05) 0%, hsl(var(--primary) / 0.02) 100%);
+  }
+
+  /* Status indicator animations */
+  #essential-status,
+  #functional-status,
+  #analytics-status,
+  #marketing-status {
+    transition: all 0.3s ease-in-out;
+  }
+
+  /* Toggle button enhanced states */
+  button[id$="-toggle"],
+  button[id$="-detailed-toggle"] {
+    transition: all 0.2s ease-in-out;
+    position: relative;
+  }
+
+  button[id$="-toggle"]:hover,
+  button[id$="-detailed-toggle"]:hover {
+    transform: scale(1.05);
+  }
+
+  /* Accessibility improvements */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-fade-in-up,
+    .animate-fade-in-left,
+    .animate-fade-in-right {
+      animation: none;
+    }
+    
+    .hover\:scale-105:hover,
+    .hover\:scale-110:hover,
+    .hover\:scale-\[1\.02\]:hover {
+      transform: none;
+    }
+    
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  /* Print styles for legal documents */
+  @media print {
+    .skip-link,
+    .badge,
+    .animate-fade-in-up,
+    .animate-fade-in-left,
+    .animate-fade-in-right,
+    button {
+      display: none !important;
+    }
+    
+    .card {
+      border: 1px solid #000 !important;
+      box-shadow: none !important;
+      break-inside: avoid;
+    }
+    
+    h1, h2, h3 {
+      break-after: avoid;
+    }
+  }
+
+  /* Cookie consent panel special styling */
+  .cookie-consent-active {
+    animation: gentle-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes gentle-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.95; }
+  }
+</style>

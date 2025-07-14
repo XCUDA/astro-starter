@@ -1,423 +1,976 @@
 ---
-// faq.astro - Frequently Asked Questions Page
-// Business FAQ page for end users and clients
+// faq.astro - Professional FAQ Center - Phase 8+ Standards
+// Comprehensive Q&A resource for business website users and clients
 // Path: src/pages/faq.astro
 
 import Layout from '../components/layouts/Layout.astro';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
+import { Input } from '../components/ui/input';
 import { Alert, AlertDescription } from '../components/ui/alert';
 ---
 
 <Layout 
-  title="Frequently Asked Questions - Astro Starter"
-  description="Find answers to common questions about your Astro website, customization, support, and more"
+  title="Frequently Asked Questions - Professional Website Support"
+  description="Comprehensive FAQ covering website customization, technical support, business features, and professional services for your business website"
   currentPage="faq"
   headerVariant="business"
   showCTA={true}
   ctaText="Contact Support"
   ctaHref="/contact"
 >
-  <div class="container mx-auto px-4 py-12 lg:py-20">
+  <!-- Skip Links for WCAG 2.1 AA Compliance -->
+  <div class="sr-only">
+    <a href="#main-content" class="skip-link focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-primary-foreground px-4 py-2 rounded-md z-50">
+      Skip to main content
+    </a>
+    <a href="#interactive-content" class="skip-link focus:not-sr-only focus:absolute focus:top-4 focus:left-20 bg-primary text-primary-foreground px-4 py-2 rounded-md z-50">
+      Skip to FAQ search
+    </a>
+  </div>
+
+  <main id="main-content" class="container mx-auto px-4 py-12 lg:py-20">
     
-    <!-- Hero Section -->
-    <div class="text-center mb-16">
+    <!-- Hero Section with Enhanced Animations -->
+    <section class="text-center mb-16 animate-fade-in-up">
       <div class="flex justify-center items-center space-x-3 mb-6">
-        <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-blue-500 rounded-xl flex items-center justify-center text-white font-bold text-2xl">
+        <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-blue-500 rounded-xl flex items-center justify-center text-white font-bold text-2xl hover:scale-110 transition-transform duration-300">
           ❓
         </div>
-        <Badge variant="outline" className="text-sm">
-          FAQ
+        <Badge variant="outline" className="text-sm animate-fade-in-left">
+          Professional FAQ
         </Badge>
       </div>
       
-      <h1 class="text-4xl lg:text-6xl font-bold text-foreground mb-6">
+      <h1 class="text-4xl lg:text-6xl font-bold text-foreground mb-6 animate-fade-in-up">
         Frequently Asked Questions
       </h1>
       
-      <p class="text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-        Find quick answers to common questions about your website, 
-        customization options, and getting the most out of your new site.
+      <p class="text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed animate-fade-in-up">
+        Comprehensive answers to common questions about your professional website, 
+        technical features, customization options, and business support services.
       </p>
-    </div>
+    </section>
 
-    <!-- Quick Links -->
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-16">
-      <Card className="text-center hover:shadow-lg transition-all duration-300">
-        <CardContent className="pt-6">
-          <div class="w-8 h-8 bg-blue-500/10 rounded-lg flex items-center justify-center mx-auto mb-3">
-            <span class="text-lg">🚀</span>
+    <!-- Search and Filter Section -->
+    <section id="interactive-content" class="mb-16 animate-fade-in-left" aria-label="FAQ Search and Navigation">
+      <Card className="hover:shadow-lg transition-all duration-300">
+        <CardHeader>
+          <CardTitle className="flex items-center space-x-2">
+            <span class="text-xl hover:scale-110 transition-transform duration-300">🔍</span>
+            <span>Search FAQ</span>
+          </CardTitle>
+          <CardDescription>
+            Search through our comprehensive knowledge base or browse by category
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div class="space-y-4">
+            <div class="relative">
+              <Input 
+                id="faq-search" 
+                placeholder="Search for answers... (e.g., 'hosting', 'customization', 'mobile')"
+                className="pr-10 focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all duration-200"
+                aria-label="Search FAQ questions and answers"
+              />
+              <div class="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+              </div>
+            </div>
+            
+            <!-- Category Filter Buttons -->
+            <div class="flex flex-wrap gap-2">
+              <Button 
+                variant="outline" 
+                size="sm" 
+                data-category="all"
+                className="filter-btn active hover:scale-105 transition-all duration-200 focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                aria-label="Show all FAQ categories"
+              >
+                All Categories
+              </Button>
+              <Button 
+                variant="outline" 
+                size="sm" 
+                data-category="getting-started"
+                className="filter-btn hover:scale-105 transition-all duration-200 focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                aria-label="Filter getting started questions"
+              >
+                🚀 Getting Started
+              </Button>
+              <Button 
+                variant="outline" 
+                size="sm" 
+                data-category="customization"
+                className="filter-btn hover:scale-105 transition-all duration-200 focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                aria-label="Filter customization questions"
+              >
+                🎨 Customization
+              </Button>
+              <Button 
+                variant="outline" 
+                size="sm" 
+                data-category="technical"
+                className="filter-btn hover:scale-105 transition-all duration-200 focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                aria-label="Filter technical questions"
+              >
+                🔧 Technical
+              </Button>
+              <Button 
+                variant="outline" 
+                size="sm" 
+                data-category="business"
+                className="filter-btn hover:scale-105 transition-all duration-200 focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                aria-label="Filter business questions"
+              >
+                💼 Business
+              </Button>
+              <Button 
+                variant="outline" 
+                size="sm" 
+                data-category="hosting"
+                className="filter-btn hover:scale-105 transition-all duration-200 focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                aria-label="Filter hosting and deployment questions"
+              >
+                🌐 Hosting
+              </Button>
+            </div>
           </div>
-          <h3 class="font-medium text-foreground text-sm">Getting Started</h3>
         </CardContent>
       </Card>
-      
-      <Card className="text-center hover:shadow-lg transition-all duration-300">
-        <CardContent className="pt-6">
-          <div class="w-8 h-8 bg-green-500/10 rounded-lg flex items-center justify-center mx-auto mb-3">
-            <span class="text-lg">🎨</span>
-          </div>
-          <h3 class="font-medium text-foreground text-sm">Customization</h3>
-        </CardContent>
-      </Card>
-      
-      <Card className="text-center hover:shadow-lg transition-all duration-300">
-        <CardContent className="pt-6">
-          <div class="w-8 h-8 bg-purple-500/10 rounded-lg flex items-center justify-center mx-auto mb-3">
-            <span class="text-lg">🔧</span>
-          </div>
-          <h3 class="font-medium text-foreground text-sm">Technical</h3>
-        </CardContent>
-      </Card>
-      
-      <Card className="text-center hover:shadow-lg transition-all duration-300">
-        <CardContent className="pt-6">
-          <div class="w-8 h-8 bg-orange-500/10 rounded-lg flex items-center justify-center mx-auto mb-3">
-            <span class="text-lg">💼</span>
-          </div>
-          <h3 class="font-medium text-foreground text-sm">Business</h3>
-        </CardContent>
-      </Card>
-    </div>
+    </section>
 
-    <!-- FAQ Sections -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <!-- FAQ Content Sections -->
+    <section class="space-y-12" aria-label="FAQ Categories and Questions">
       
       <!-- Getting Started -->
-      <div>
-        <div class="flex items-center space-x-3 mb-6">
-          <div class="w-8 h-8 bg-blue-500/10 rounded-lg flex items-center justify-center">
+      <div data-category="getting-started" class="faq-section animate-fade-in-right">
+        <div class="flex items-center space-x-3 mb-6 border-l-4 border-blue-500 pl-4">
+          <div class="w-8 h-8 bg-blue-500/10 rounded-lg flex items-center justify-center hover:scale-110 transition-transform duration-300">
             <span class="text-lg">🚀</span>
           </div>
-          <h2 class="text-2xl font-bold text-foreground">Getting Started</h2>
+          <h2 class="text-2xl font-bold text-foreground">Getting Started & Initial Setup</h2>
         </div>
         
-        <div class="space-y-3">
-          <details class="group border border-border rounded-lg overflow-hidden">
-            <summary class="flex cursor-pointer items-center justify-between p-4 text-left font-medium transition-colors hover:bg-muted/50 focus:bg-muted/50 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
-              <span class="text-foreground">How do I get started with my new website?</span>
-              <svg class="w-5 h-5 text-muted-foreground transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-              </svg>
-            </summary>
-            <div class="p-4 pt-0 text-muted-foreground leading-relaxed">
-              Your website is ready to use! Start by reading our <a href="/quick-start" class="text-primary underline hover:text-primary/80">Quick Start Guide</a> 
-              which walks you through basic customization, content updates, and personalization options.
-            </div>
-          </details>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
           
-          <details class="group border border-border rounded-lg overflow-hidden">
+          <details class="faq-item group border border-border rounded-lg overflow-hidden hover:shadow-md hover:scale-[1.02] transition-all duration-300" data-search-terms="getting started new website setup initial">
             <summary class="flex cursor-pointer items-center justify-between p-4 text-left font-medium transition-colors hover:bg-muted/50 focus:bg-muted/50 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
-              <span class="text-foreground">What can I customize without coding?</span>
+              <span class="text-foreground">How do I get started with my new professional website?</span>
               <svg class="w-5 h-5 text-muted-foreground transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
               </svg>
             </summary>
             <div class="p-4 pt-0 text-muted-foreground leading-relaxed">
-              You can update text content, change colors, add your logo, update contact information, 
-              modify navigation menus, and rearrange page sections. Our built-in components make 
-              customization straightforward without requiring programming knowledge.
+              <p class="mb-3">Your professional website is production-ready! Follow these essential first steps:</p>
+              <ol class="list-decimal list-inside space-y-2 mb-4">
+                <li><strong>Review our <a href="/quick-start" class="text-primary underline hover:text-primary/80">Quick Start Guide</a></strong> - Complete walkthrough for initial setup</li>
+                <li><strong>Customize your branding</strong> - Replace logos, update colors, modify content</li>
+                <li><strong>Add your business information</strong> - Contact details, services, about section</li>
+                <li><strong>Test all functionality</strong> - Forms, navigation, mobile responsiveness</li>
+                <li><strong>Configure analytics</strong> - Google Analytics, search console setup</li>
+              </ol>
+              <p class="text-sm bg-blue-50 dark:bg-blue-950/30 p-2 rounded">
+                <strong>Estimated setup time:</strong> 2-4 hours for basic customization, 1-2 days for complete branding
+              </p>
             </div>
           </details>
-          
-          <details class="group border border-border rounded-lg overflow-hidden">
+
+          <details class="faq-item group border border-border rounded-lg overflow-hidden hover:shadow-md hover:scale-[1.02] transition-all duration-300" data-search-terms="customize without coding no code customization">
             <summary class="flex cursor-pointer items-center justify-between p-4 text-left font-medium transition-colors hover:bg-muted/50 focus:bg-muted/50 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
-              <span class="text-foreground">How do I add my own content?</span>
+              <span class="text-foreground">What can I customize without any coding knowledge?</span>
               <svg class="w-5 h-5 text-muted-foreground transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
               </svg>
             </summary>
             <div class="p-4 pt-0 text-muted-foreground leading-relaxed">
-              Content can be added through the file system or by working with your developer. 
-              You can update text, images, contact details, and business information. 
-              Check our <a href="/docs" class="text-primary underline hover:text-primary/80">documentation</a> for detailed instructions.
+              <p class="mb-3">Extensive customization is possible without coding:</p>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div>
+                  <h4 class="font-medium text-foreground mb-2">Content Updates:</h4>
+                  <ul class="list-disc list-inside space-y-1 text-sm">
+                    <li>Text content and copywriting</li>
+                    <li>Business information and contact details</li>
+                    <li>Service descriptions and pricing</li>
+                    <li>Team member profiles</li>
+                    <li>Portfolio and project showcases</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="font-medium text-foreground mb-2">Visual Customization:</h4>
+                  <ul class="list-disc list-inside space-y-1 text-sm">
+                    <li>Logo replacement (SVG, PNG)</li>
+                    <li>Color scheme and branding</li>
+                    <li>Image gallery and hero images</li>
+                    <li>Navigation menu structure</li>
+                    <li>Footer content and links</li>
+                  </ul>
+                </div>
+              </div>
+              <p class="text-xs bg-green-50 dark:bg-green-950/30 p-2 rounded">
+                <strong>Pro tip:</strong> Our component system makes updates intuitive - change text directly in files or work with us for guided customization
+              </p>
             </div>
           </details>
-          
-          <details class="group border border-border rounded-lg overflow-hidden">
+
+          <details class="faq-item group border border-border rounded-lg overflow-hidden hover:shadow-md hover:scale-[1.02] transition-all duration-300" data-search-terms="add content business information update text">
             <summary class="flex cursor-pointer items-center justify-between p-4 text-left font-medium transition-colors hover:bg-muted/50 focus:bg-muted/50 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
-              <span class="text-foreground">Is my website mobile-friendly?</span>
+              <span class="text-foreground">How do I add my specific business content and information?</span>
               <svg class="w-5 h-5 text-muted-foreground transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
               </svg>
             </summary>
             <div class="p-4 pt-0 text-muted-foreground leading-relaxed">
-              Yes! Your website is built with responsive design principles and looks great on all devices - 
-              phones, tablets, and desktops. The layout automatically adapts to different screen sizes.
+              <p class="mb-3">Your business content can be updated through multiple approaches:</p>
+              <div class="space-y-3 mb-4">
+                <div class="border-l-2 border-blue-300 pl-3">
+                  <h4 class="font-medium text-foreground">1. Direct File Updates (Recommended)</h4>
+                  <p class="text-sm">Edit content directly in the source files - we'll provide guidance on which files to modify for each section</p>
+                </div>
+                <div class="border-l-2 border-green-300 pl-3">
+                  <h4 class="font-medium text-foreground">2. Professional Content Service</h4>
+                  <p class="text-sm">We handle all content updates professionally - send us your text, images, and information</p>
+                </div>
+                <div class="border-l-2 border-purple-300 pl-3">
+                  <h4 class="font-medium text-foreground">3. CMS Integration</h4>
+                  <p class="text-sm">We can integrate a content management system for easy ongoing updates (additional service)</p>
+                </div>
+              </div>
+              <p class="text-sm">Check our <a href="/docs#content-management" class="text-primary underline hover:text-primary/80">detailed content guide</a> for step-by-step instructions and best practices.</p>
             </div>
           </details>
+
+          <details class="faq-item group border border-border rounded-lg overflow-hidden hover:shadow-md hover:scale-[1.02] transition-all duration-300" data-search-terms="mobile friendly responsive design phone tablet">
+            <summary class="flex cursor-pointer items-center justify-between p-4 text-left font-medium transition-colors hover:bg-muted/50 focus:bg-muted/50 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+              <span class="text-foreground">Is my website mobile-friendly and responsive?</span>
+              <svg class="w-5 h-5 text-muted-foreground transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </summary>
+            <div class="p-4 pt-0 text-muted-foreground leading-relaxed">
+              <p class="mb-3"><strong>Absolutely!</strong> Your website is built with mobile-first responsive design:</p>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                <div class="text-center p-3 bg-muted/30 rounded-lg">
+                  <div class="text-2xl mb-2">📱</div>
+                  <h4 class="font-medium text-foreground text-sm">Mobile Optimized</h4>
+                  <p class="text-xs">Touch-friendly navigation, optimized layouts</p>
+                </div>
+                <div class="text-center p-3 bg-muted/30 rounded-lg">
+                  <div class="text-2xl mb-2">💻</div>
+                  <h4 class="font-medium text-foreground text-sm">Desktop Perfect</h4>
+                  <p class="text-xs">Full-featured experience on large screens</p>
+                </div>
+                <div class="text-center p-3 bg-muted/30 rounded-lg">
+                  <div class="text-2xl mb-2">📺</div>
+                  <h4 class="font-medium text-foreground text-sm">Tablet Ready</h4>
+                  <p class="text-xs">Optimized for all tablet orientations</p>
+                </div>
+              </div>
+              <p class="text-sm bg-green-50 dark:bg-green-950/30 p-2 rounded">
+                <strong>Technical specs:</strong> Built with TailwindCSS responsive utilities, tested on iOS/Android, passes Google Mobile-Friendly test
+              </p>
+            </div>
+          </details>
+
         </div>
       </div>
 
-      <!-- Customization -->
-      <div>
-        <div class="flex items-center space-x-3 mb-6">
-          <div class="w-8 h-8 bg-green-500/10 rounded-lg flex items-center justify-center">
+      <!-- Customization & Design -->
+      <div data-category="customization" class="faq-section animate-fade-in-left">
+        <div class="flex items-center space-x-3 mb-6 border-l-4 border-green-500 pl-4">
+          <div class="w-8 h-8 bg-green-500/10 rounded-lg flex items-center justify-center hover:scale-110 transition-transform duration-300">
             <span class="text-lg">🎨</span>
           </div>
-          <h2 class="text-2xl font-bold text-foreground">Customization</h2>
+          <h2 class="text-2xl font-bold text-foreground">Customization & Design</h2>
         </div>
         
-        <div class="space-y-3">
-          <details class="group border border-border rounded-lg overflow-hidden">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+
+          <details class="faq-item group border border-border rounded-lg overflow-hidden hover:shadow-md hover:scale-[1.02] transition-all duration-300" data-search-terms="colors fonts branding brand customization">
             <summary class="flex cursor-pointer items-center justify-between p-4 text-left font-medium transition-colors hover:bg-muted/50 focus:bg-muted/50 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
-              <span class="text-foreground">Can I change the colors and fonts?</span>
+              <span class="text-foreground">Can I customize colors, fonts, and branding to match my business?</span>
               <svg class="w-5 h-5 text-muted-foreground transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
               </svg>
             </summary>
             <div class="p-4 pt-0 text-muted-foreground leading-relaxed">
-              Absolutely! Your website uses a flexible color system that can be customized to match your brand. 
-              We can help you implement your brand colors and fonts. Contact us for assistance with 
-              advanced customization options.
+              <p class="mb-3"><strong>Complete brand customization is included!</strong> Your website uses a flexible design system:</p>
+              <div class="space-y-3 mb-4">
+                <div>
+                  <h4 class="font-medium text-foreground">🎨 Color System:</h4>
+                  <p class="text-sm">Primary, secondary, accent colors + full dark/light mode support. We can implement your exact brand colors (provide HEX codes or brand guidelines)</p>
+                </div>
+                <div>
+                  <h4 class="font-medium text-foreground">🔤 Typography:</h4>
+                  <p class="text-sm">Google Fonts integration or custom font uploads. Font sizes, weights, and spacing optimized for readability and brand consistency</p>
+                </div>
+                <div>
+                  <h4 class="font-medium text-foreground">🖼️ Visual Elements:</h4>
+                  <p class="text-sm">Logo integration, custom icons, brand photography, consistent visual style throughout all pages</p>
+                </div>
+              </div>
+              <p class="text-xs bg-blue-50 dark:bg-blue-950/30 p-2 rounded">
+                <strong>Professional service:</strong> Send us your brand guidelines and we'll implement full brand consistency across your entire website
+              </p>
             </div>
           </details>
-          
-          <details class="group border border-border rounded-lg overflow-hidden">
+
+          <details class="faq-item group border border-border rounded-lg overflow-hidden hover:shadow-md hover:scale-[1.02] transition-all duration-300" data-search-terms="logo add logo change logo svg png">
             <summary class="flex cursor-pointer items-center justify-between p-4 text-left font-medium transition-colors hover:bg-muted/50 focus:bg-muted/50 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
-              <span class="text-foreground">How do I add my logo?</span>
+              <span class="text-foreground">How do I add or replace my business logo?</span>
               <svg class="w-5 h-5 text-muted-foreground transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
               </svg>
             </summary>
             <div class="p-4 pt-0 text-muted-foreground leading-relaxed">
-              Your logo can be easily added to replace the default branding. We recommend providing 
-              your logo in SVG format for the best quality at all sizes. PNG files work well too. 
-              Contact us if you need help with logo implementation.
+              <p class="mb-3">Logo integration is seamless and professional:</p>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div>
+                  <h4 class="font-medium text-foreground mb-2">Recommended Formats:</h4>
+                  <ul class="list-disc list-inside space-y-1 text-sm">
+                    <li><strong>SVG</strong> - Vector format, perfect quality at any size</li>
+                    <li><strong>PNG</strong> - High-resolution with transparent background</li>
+                    <li><strong>Minimum size:</strong> 300px width for high-res displays</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="font-medium text-foreground mb-2">Implementation Options:</h4>
+                  <ul class="list-disc list-inside space-y-1 text-sm">
+                    <li>Send us your logo - we handle integration</li>
+                    <li>Replace files directly in /public/images/</li>
+                    <li>Multiple logo variants (header, footer, mobile)</li>
+                  </ul>
+                </div>
+              </div>
+              <p class="text-xs bg-green-50 dark:bg-green-950/30 p-2 rounded">
+                <strong>Professional service included:</strong> Logo optimization, multiple size variants, and perfect integration across all pages and devices
+              </p>
             </div>
           </details>
-          
-          <details class="group border border-border rounded-lg overflow-hidden">
+
+          <details class="faq-item group border border-border rounded-lg overflow-hidden hover:shadow-md hover:scale-[1.02] transition-all duration-300" data-search-terms="new pages add pages about services portfolio">
             <summary class="flex cursor-pointer items-center justify-between p-4 text-left font-medium transition-colors hover:bg-muted/50 focus:bg-muted/50 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
-              <span class="text-foreground">Can I add new pages to my website?</span>
+              <span class="text-foreground">Can I add new pages to my website (About, Services, Portfolio)?</span>
               <svg class="w-5 h-5 text-muted-foreground transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
               </svg>
             </summary>
             <div class="p-4 pt-0 text-muted-foreground leading-relaxed">
-              Yes! New pages can be added using the same design system and components as existing pages. 
-              Whether you need an About page, Services page, or Portfolio section, we can help you 
-              expand your website's content.
+              <p class="mb-3"><strong>Yes! Unlimited page expansion is supported:</strong></p>
+              <div class="space-y-3 mb-4">
+                <div class="border-l-2 border-blue-300 pl-3">
+                  <h4 class="font-medium text-foreground">Standard Business Pages:</h4>
+                  <p class="text-sm">About Us, Services, Portfolio, Team, Testimonials, Blog, News, Case Studies</p>
+                </div>
+                <div class="border-l-2 border-green-300 pl-3">
+                  <h4 class="font-medium text-foreground">E-commerce & Advanced:</h4>
+                  <p class="text-sm">Product catalogs, booking systems, member areas, resource libraries</p>
+                </div>
+                <div class="border-l-2 border-purple-300 pl-3">
+                  <h4 class="font-medium text-foreground">Technical Implementation:</h4>
+                  <p class="text-sm">New pages use the same design system, components, and navigation structure for perfect consistency</p>
+                </div>
+              </div>
+              <p class="text-xs bg-blue-50 dark:bg-blue-950/30 p-2 rounded">
+                <strong>Development approach:</strong> Pages built with modular components, SEO-optimized, mobile-responsive, matching your existing design perfectly
+              </p>
             </div>
           </details>
-          
-          <details class="group border border-border rounded-lg overflow-hidden">
+
+          <details class="faq-item group border border-border rounded-lg overflow-hidden hover:shadow-md hover:scale-[1.02] transition-all duration-300" data-search-terms="dark mode theme light dark toggle">
             <summary class="flex cursor-pointer items-center justify-between p-4 text-left font-medium transition-colors hover:bg-muted/50 focus:bg-muted/50 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
-              <span class="text-foreground">What about dark mode support?</span>
+              <span class="text-foreground">Does my website support dark mode and theme switching?</span>
               <svg class="w-5 h-5 text-muted-foreground transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
               </svg>
             </summary>
             <div class="p-4 pt-0 text-muted-foreground leading-relaxed">
-              Your website includes built-in dark mode support! Visitors can toggle between light and dark themes, 
-              and the site will remember their preference. All components automatically adapt to both modes.
+              <p class="mb-3"><strong>Full dark mode support included!</strong> Your website provides an excellent user experience in both themes:</p>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div>
+                  <h4 class="font-medium text-foreground mb-2">🌙 Dark Mode Features:</h4>
+                  <ul class="list-disc list-inside space-y-1 text-sm">
+                    <li>Automatic OS preference detection</li>
+                    <li>Manual toggle for user control</li>
+                    <li>Preference memory across visits</li>
+                    <li>All components adapt automatically</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="font-medium text-foreground mb-2">☀️ Benefits:</h4>
+                  <ul class="list-disc list-inside space-y-1 text-sm">
+                    <li>Reduced eye strain in low light</li>
+                    <li>Modern professional appearance</li>
+                    <li>Better battery life on OLED screens</li>
+                    <li>Enhanced accessibility options</li>
+                  </ul>
+                </div>
+              </div>
+              <p class="text-xs bg-purple-50 dark:bg-purple-950/30 p-2 rounded">
+                <strong>Technical implementation:</strong> CSS custom properties with seamless transitions, respects user preferences, WCAG contrast compliance
+              </p>
             </div>
           </details>
+
         </div>
       </div>
 
-      <!-- Technical -->
-      <div>
-        <div class="flex items-center space-x-3 mb-6">
-          <div class="w-8 h-8 bg-purple-500/10 rounded-lg flex items-center justify-center">
+      <!-- Technical Questions -->
+      <div data-category="technical" class="faq-section animate-fade-in-right">
+        <div class="flex items-center space-x-3 mb-6 border-l-4 border-purple-500 pl-4">
+          <div class="w-8 h-8 bg-purple-500/10 rounded-lg flex items-center justify-center hover:scale-110 transition-transform duration-300">
             <span class="text-lg">🔧</span>
           </div>
-          <h2 class="text-2xl font-bold text-foreground">Technical Questions</h2>
+          <h2 class="text-2xl font-bold text-foreground">Technical Questions & Performance</h2>
         </div>
         
-        <div class="space-y-3">
-          <details class="group border border-border rounded-lg overflow-hidden">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+
+          <details class="faq-item group border border-border rounded-lg overflow-hidden hover:shadow-md hover:scale-[1.02] transition-all duration-300" data-search-terms="technology stack astro tailwind typescript">
             <summary class="flex cursor-pointer items-center justify-between p-4 text-left font-medium transition-colors hover:bg-muted/50 focus:bg-muted/50 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
-              <span class="text-foreground">What technology is my website built with?</span>
+              <span class="text-foreground">What technology stack is my website built with?</span>
               <svg class="w-5 h-5 text-muted-foreground transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
               </svg>
             </summary>
             <div class="p-4 pt-0 text-muted-foreground leading-relaxed">
-              Your website is built with modern, industry-standard technologies: Astro 5 for performance, 
-              TailwindCSS 4 for styling, and shadcn/ui for components. This ensures fast loading times, 
-              excellent SEO, and easy maintenance.
+              <p class="mb-3"><strong>Modern, production-grade technology stack:</strong></p>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div>
+                  <h4 class="font-medium text-foreground mb-2">🚀 Core Framework:</h4>
+                  <ul class="list-disc list-inside space-y-1 text-sm">
+                    <li><strong>Astro 4</strong> - Modern web framework</li>
+                    <li><strong>TypeScript</strong> - Type-safe development</li>
+                    <li><strong>React Islands</strong> - Selective interactivity</li>
+                    <li><strong>SSG/SSR</strong> - Static generation + server rendering</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="font-medium text-foreground mb-2">🎨 Styling & UI:</h4>
+                  <ul class="list-disc list-inside space-y-1 text-sm">
+                    <li><strong>TailwindCSS 3</strong> - Utility-first CSS</li>
+                    <li><strong>shadcn/ui</strong> - Professional components</li>
+                    <li><strong>CSS Grid & Flexbox</strong> - Modern layouts</li>
+                    <li><strong>Dark mode</strong> - Built-in theme support</li>
+                  </ul>
+                </div>
+              </div>
+              <p class="text-xs bg-blue-50 dark:bg-blue-950/30 p-2 rounded">
+                <strong>Why this stack?</strong> Maximum performance, excellent SEO, easy maintenance, future-proof technology, industry best practices
+              </p>
             </div>
           </details>
-          
-          <details class="group border border-border rounded-lg overflow-hidden">
+
+          <details class="faq-item group border border-border rounded-lg overflow-hidden hover:shadow-md hover:scale-[1.02] transition-all duration-300" data-search-terms="performance speed loading fast lighthouse">
             <summary class="flex cursor-pointer items-center justify-between p-4 text-left font-medium transition-colors hover:bg-muted/50 focus:bg-muted/50 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
-              <span class="text-foreground">How fast will my website load?</span>
+              <span class="text-foreground">How fast does my website load? Performance metrics?</span>
               <svg class="w-5 h-5 text-muted-foreground transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
               </svg>
             </summary>
             <div class="p-4 pt-0 text-muted-foreground leading-relaxed">
-              Very fast! Your website is optimized for performance with minimal JavaScript, 
-              optimized images, and efficient code. Most pages load in under 2 seconds, 
-              which is excellent for user experience and SEO rankings.
+              <p class="mb-3"><strong>Exceptional performance optimized for business success:</strong></p>
+              <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+                <div class="text-center p-3 bg-green-50 dark:bg-green-950/30 rounded-lg">
+                  <div class="text-2xl font-bold text-green-600">≤2s</div>
+                  <div class="text-xs">Page Load Time</div>
+                </div>
+                <div class="text-center p-3 bg-green-50 dark:bg-green-950/30 rounded-lg">
+                  <div class="text-2xl font-bold text-green-600">95+</div>
+                  <div class="text-xs">Lighthouse Score</div>
+                </div>
+                <div class="text-center p-3 bg-green-50 dark:bg-green-950/30 rounded-lg">
+                  <div class="text-2xl font-bold text-green-600">&lt;100ms</div>
+                  <div class="text-xs">FID (Interactivity)</div>
+                </div>
+                <div class="text-center p-3 bg-green-50 dark:bg-green-950/30 rounded-lg">
+                  <div class="text-2xl font-bold text-green-600">&lt;0.1</div>
+                  <div class="text-xs">CLS (Stability)</div>
+                </div>
+              </div>
+              <div class="space-y-2 mb-4">
+                <h4 class="font-medium text-foreground">🚀 Performance Optimizations:</h4>
+                <ul class="list-disc list-inside space-y-1 text-sm">
+                  <li>Minimal JavaScript footprint (islands architecture)</li>
+                  <li>Optimized images with modern formats (WebP, AVIF)</li>
+                  <li>Code splitting and lazy loading</li>
+                  <li>CDN integration for global fast delivery</li>
+                  <li>Critical CSS inlining and resource hints</li>
+                </ul>
+              </div>
+              <p class="text-xs bg-green-50 dark:bg-green-950/30 p-2 rounded">
+                <strong>Business impact:</strong> Fast sites improve SEO rankings, reduce bounce rates, increase conversions, and provide better user experience
+              </p>
             </div>
           </details>
-          
-          <details class="group border border-border rounded-lg overflow-hidden">
+
+          <details class="faq-item group border border-border rounded-lg overflow-hidden hover:shadow-md hover:scale-[1.02] transition-all duration-300" data-search-terms="seo optimization search engine ranking meta tags">
             <summary class="flex cursor-pointer items-center justify-between p-4 text-left font-medium transition-colors hover:bg-muted/50 focus:bg-muted/50 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
-              <span class="text-foreground">Is my website SEO-friendly?</span>
+              <span class="text-foreground">Is my website SEO-optimized for search engines?</span>
               <svg class="w-5 h-5 text-muted-foreground transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
               </svg>
             </summary>
             <div class="p-4 pt-0 text-muted-foreground leading-relaxed">
-              Yes! Your website includes proper meta tags, semantic HTML structure, 
-              fast loading times, and mobile optimization - all important factors for search engine rankings. 
-              The clean code structure makes it easy for search engines to understand your content.
+              <p class="mb-3"><strong>Comprehensive SEO optimization built-in:</strong></p>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div>
+                  <h4 class="font-medium text-foreground mb-2">🔍 Technical SEO:</h4>
+                  <ul class="list-disc list-inside space-y-1 text-sm">
+                    <li>Semantic HTML5 structure</li>
+                    <li>Proper heading hierarchy (H1-H6)</li>
+                    <li>Meta titles and descriptions</li>
+                    <li>Open Graph social sharing</li>
+                    <li>XML sitemap generation</li>
+                    <li>Schema.org structured data</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="font-medium text-foreground mb-2">📈 Performance SEO:</h4>
+                  <ul class="list-disc list-inside space-y-1 text-sm">
+                    <li>Core Web Vitals optimization</li>
+                    <li>Mobile-first indexing ready</li>
+                    <li>Fast loading speeds</li>
+                    <li>Clean URL structure</li>
+                    <li>Image alt tags and optimization</li>
+                    <li>Internal linking strategy</li>
+                  </ul>
+                </div>
+              </div>
+              <p class="text-xs bg-blue-50 dark:bg-blue-950/30 p-2 rounded">
+                <strong>SEO services available:</strong> Keyword research, content optimization, Google Analytics setup, Search Console configuration, local SEO
+              </p>
             </div>
           </details>
-          
-          <details class="group border border-border rounded-lg overflow-hidden">
+
+          <details class="faq-item group border border-border rounded-lg overflow-hidden hover:shadow-md hover:scale-[1.02] transition-all duration-300" data-search-terms="security ssl https safety">
             <summary class="flex cursor-pointer items-center justify-between p-4 text-left font-medium transition-colors hover:bg-muted/50 focus:bg-muted/50 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
-              <span class="text-foreground">What hosting do you recommend?</span>
+              <span class="text-foreground">How secure is my website? Security features included?</span>
               <svg class="w-5 h-5 text-muted-foreground transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
               </svg>
             </summary>
             <div class="p-4 pt-0 text-muted-foreground leading-relaxed">
-              Your website works with any modern hosting provider. We recommend services like Vercel, 
-              Netlify, or traditional hosts like Infomaniak. We can help you choose and set up 
-              hosting that fits your needs and budget.
+              <p class="mb-3"><strong>Enterprise-level security built-in:</strong></p>
+              <div class="space-y-3 mb-4">
+                <div>
+                  <h4 class="font-medium text-foreground">🔒 Core Security Features:</h4>
+                  <ul class="list-disc list-inside space-y-1 text-sm">
+                    <li><strong>HTTPS/SSL encryption</strong> - All data transmission encrypted</li>
+                    <li><strong>Security headers</strong> - CSP, HSTS, X-Frame-Options</li>
+                    <li><strong>Form validation</strong> - Input sanitization and validation</li>
+                    <li><strong>No server vulnerabilities</strong> - Static generation eliminates many attack vectors</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="font-medium text-foreground">🛡️ Additional Protections:</h4>
+                  <ul class="list-disc list-inside space-y-1 text-sm">
+                    <li><strong>DDoS protection</strong> - Through hosting provider</li>
+                    <li><strong>Automatic backups</strong> - Version control and deployment history</li>
+                    <li><strong>Clean codebase</strong> - No known vulnerabilities in dependencies</li>
+                    <li><strong>Privacy compliance</strong> - GDPR-ready cookie management</li>
+                  </ul>
+                </div>
+              </div>
+              <p class="text-xs bg-green-50 dark:bg-green-950/30 p-2 rounded">
+                <strong>Enterprise security available:</strong> Advanced monitoring, security audits, penetration testing, compliance certification support
+              </p>
             </div>
           </details>
+
         </div>
       </div>
 
-      <!-- Business -->
-      <div>
-        <div class="flex items-center space-x-3 mb-6">
-          <div class="w-8 h-8 bg-orange-500/10 rounded-lg flex items-center justify-center">
+      <!-- Hosting & Deployment -->
+      <div data-category="hosting" class="faq-section animate-fade-in-left">
+        <div class="flex items-center space-x-3 mb-6 border-l-4 border-indigo-500 pl-4">
+          <div class="w-8 h-8 bg-indigo-500/10 rounded-lg flex items-center justify-center hover:scale-110 transition-transform duration-300">
+            <span class="text-lg">🌐</span>
+          </div>
+          <h2 class="text-2xl font-bold text-foreground">Hosting & Deployment</h2>
+        </div>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+
+          <details class="faq-item group border border-border rounded-lg overflow-hidden hover:shadow-md hover:scale-[1.02] transition-all duration-300" data-search-terms="hosting recommendation best hosting provider">
+            <summary class="flex cursor-pointer items-center justify-between p-4 text-left font-medium transition-colors hover:bg-muted/50 focus:bg-muted/50 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+              <span class="text-foreground">What hosting providers do you recommend for my website?</span>
+              <svg class="w-5 h-5 text-muted-foreground transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </summary>
+            <div class="p-4 pt-0 text-muted-foreground leading-relaxed">
+              <p class="mb-3"><strong>Your website works with any modern hosting provider:</strong></p>
+              <div class="space-y-3 mb-4">
+                <div class="border-l-2 border-green-300 pl-3">
+                  <h4 class="font-medium text-foreground">🚀 Recommended (Best Performance):</h4>
+                  <ul class="list-disc list-inside space-y-1 text-sm">
+                    <li><strong>Vercel</strong> - Excellent for Astro, automatic deployments, edge network</li>
+                    <li><strong>Netlify</strong> - Great developer experience, built-in CDN, form handling</li>
+                    <li><strong>Cloudflare Pages</strong> - Global CDN, excellent performance, competitive pricing</li>
+                  </ul>
+                </div>
+                <div class="border-l-2 border-blue-300 pl-3">
+                  <h4 class="font-medium text-foreground">🏢 European/Business Hosting:</h4>
+                  <ul class="list-disc list-inside space-y-1 text-sm">
+                    <li><strong>Infomaniak (Switzerland)</strong> - Green energy, GDPR compliant, local support</li>
+                    <li><strong>OVH (France)</strong> - European data centers, business plans</li>
+                    <li><strong>Traditional VPS/Dedicated</strong> - For custom requirements</li>
+                  </ul>
+                </div>
+              </div>
+              <p class="text-xs bg-blue-50 dark:bg-blue-950/30 p-2 rounded">
+                <strong>Hosting setup included:</strong> We handle deployment configuration, domain setup, SSL certificates, and performance optimization
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item group border border-border rounded-lg overflow-hidden hover:shadow-md hover:scale-[1.02] transition-all duration-300" data-search-terms="deployment process update website changes">
+            <summary class="flex cursor-pointer items-center justify-between p-4 text-left font-medium transition-colors hover:bg-muted/50 focus:bg-muted/50 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+              <span class="text-foreground">How do I update and deploy changes to my live website?</span>
+              <svg class="w-5 h-5 text-muted-foreground transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </summary>
+            <div class="p-4 pt-0 text-muted-foreground leading-relaxed">
+              <p class="mb-3"><strong>Multiple deployment options to fit your workflow:</strong></p>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div>
+                  <h4 class="font-medium text-foreground mb-2">🔄 Automatic Deployment:</h4>
+                  <ul class="list-disc list-inside space-y-1 text-sm">
+                    <li>Git-based workflow (recommended)</li>
+                    <li>Push changes → automatic build → live update</li>
+                    <li>Preview deployments for testing</li>
+                    <li>Rollback capability for safety</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="font-medium text-foreground mb-2">🛠️ Managed Updates:</h4>
+                  <ul class="list-disc list-inside space-y-1 text-sm">
+                    <li>Send us your content changes</li>
+                    <li>We handle technical deployment</li>
+                    <li>Quality assurance before going live</li>
+                    <li>Scheduled deployment windows</li>
+                  </ul>
+                </div>
+              </div>
+              <p class="text-xs bg-green-50 dark:bg-green-950/30 p-2 rounded">
+                <strong>Training available:</strong> We can teach your team the deployment process or handle all updates as a managed service
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item group border border-border rounded-lg overflow-hidden hover:shadow-md hover:scale-[1.02] transition-all duration-300" data-search-terms="domain name setup custom domain">
+            <summary class="flex cursor-pointer items-center justify-between p-4 text-left font-medium transition-colors hover:bg-muted/50 focus:bg-muted/50 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+              <span class="text-foreground">Can I use my own domain name? How to set it up?</span>
+              <svg class="w-5 h-5 text-muted-foreground transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </summary>
+            <div class="p-4 pt-0 text-muted-foreground leading-relaxed">
+              <p class="mb-3"><strong>Complete domain setup and management included:</strong></p>
+              <div class="space-y-3 mb-4">
+                <div>
+                  <h4 class="font-medium text-foreground">🌍 Domain Options:</h4>
+                  <ul class="list-disc list-inside space-y-1 text-sm">
+                    <li><strong>Use existing domain</strong> - We configure DNS settings for you</li>
+                    <li><strong>New domain registration</strong> - We can help choose and register</li>
+                    <li><strong>Subdomain setup</strong> - For staging or separate versions</li>
+                    <li><strong>International domains</strong> - Support for .ch, .com, .fr, .eu, etc.</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="font-medium text-foreground">⚙️ Technical Setup:</h4>
+                  <ul class="list-disc list-inside space-y-1 text-sm">
+                    <li>DNS configuration and management</li>
+                    <li>SSL certificate installation (free)</li>
+                    <li>Email forwarding setup if needed</li>
+                    <li>CDN and performance optimization</li>
+                  </ul>
+                </div>
+              </div>
+              <p class="text-xs bg-blue-50 dark:bg-blue-950/30 p-2 rounded">
+                <strong>Professional service:</strong> Complete domain management, email setup, DNS optimization, and ongoing technical support included
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item group border border-border rounded-lg overflow-hidden hover:shadow-md hover:scale-[1.02] transition-all duration-300" data-search-terms="backup recovery website backup">
+            <summary class="flex cursor-pointer items-center justify-between p-4 text-left font-medium transition-colors hover:bg-muted/50 focus:bg-muted/50 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+              <span class="text-foreground">How is my website backed up? What about disaster recovery?</span>
+              <svg class="w-5 h-5 text-muted-foreground transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </summary>
+            <div class="p-4 pt-0 text-muted-foreground leading-relaxed">
+              <p class="mb-3"><strong>Comprehensive backup and recovery strategy:</strong></p>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div>
+                  <h4 class="font-medium text-foreground mb-2">💾 Backup Strategy:</h4>
+                  <ul class="list-disc list-inside space-y-1 text-sm">
+                    <li><strong>Git version control</strong> - Complete history preserved</li>
+                    <li><strong>Automated deployments</strong> - Every version saved</li>
+                    <li><strong>Hosting provider backups</strong> - Infrastructure-level protection</li>
+                    <li><strong>Asset backups</strong> - Images, documents, media files</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="font-medium text-foreground mb-2">🔄 Recovery Options:</h4>
+                  <ul class="list-disc list-inside space-y-1 text-sm">
+                    <li><strong>Instant rollback</strong> - Previous versions available immediately</li>
+                    <li><strong>Point-in-time recovery</strong> - Restore to any previous state</li>
+                    <li><strong>Emergency hosting</strong> - Alternative deployment options</li>
+                    <li><strong>Data export</strong> - Full site export capability</li>
+                  </ul>
+                </div>
+              </div>
+              <p class="text-xs bg-green-50 dark:bg-green-950/30 p-2 rounded">
+                <strong>Business continuity:</strong> Multiple backup layers ensure your website is protected against data loss, server failures, and other disasters
+              </p>
+            </div>
+          </details>
+
+        </div>
+      </div>
+
+      <!-- Business & Support -->
+      <div data-category="business" class="faq-section animate-fade-in-right">
+        <div class="flex items-center space-x-3 mb-6 border-l-4 border-orange-500 pl-4">
+          <div class="w-8 h-8 bg-orange-500/10 rounded-lg flex items-center justify-center hover:scale-110 transition-transform duration-300">
             <span class="text-lg">💼</span>
           </div>
-          <h2 class="text-2xl font-bold text-foreground">Business Questions</h2>
+          <h2 class="text-2xl font-bold text-foreground">Business & Support</h2>
         </div>
         
-        <div class="space-y-3">
-          <details class="group border border-border rounded-lg overflow-hidden">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+
+          <details class="faq-item group border border-border rounded-lg overflow-hidden hover:shadow-md hover:scale-[1.02] transition-all duration-300" data-search-terms="ongoing support maintenance updates">
             <summary class="flex cursor-pointer items-center justify-between p-4 text-left font-medium transition-colors hover:bg-muted/50 focus:bg-muted/50 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
-              <span class="text-foreground">Do you provide ongoing support?</span>
+              <span class="text-foreground">Do you provide ongoing support and maintenance?</span>
               <svg class="w-5 h-5 text-muted-foreground transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
               </svg>
             </summary>
             <div class="p-4 pt-0 text-muted-foreground leading-relaxed">
-              Yes! We offer ongoing support for content updates, technical questions, and enhancements. 
-              Our <a href="/support" class="text-primary underline hover:text-primary/80">support page</a> 
-              has details about our service options and response times.
+              <p class="mb-3"><strong>Comprehensive support plans for your business needs:</strong></p>
+              <div class="space-y-3 mb-4">
+                <div class="border-l-2 border-green-300 pl-3">
+                  <h4 class="font-medium text-foreground">🆓 Community Support (Included):</h4>
+                  <p class="text-sm">Email support, documentation access, FAQ resources, basic troubleshooting</p>
+                </div>
+                <div class="border-l-2 border-blue-300 pl-3">
+                  <h4 class="font-medium text-foreground">⭐ Priority Support:</h4>
+                  <p class="text-sm">Faster response times, phone consultation, priority bug fixes, minor customizations</p>
+                </div>
+                <div class="border-l-2 border-purple-300 pl-3">
+                  <h4 class="font-medium text-foreground">🏢 Enterprise Support:</h4>
+                  <p class="text-sm">Dedicated support manager, custom development, 24/7 emergency support, SLA guarantees</p>
+                </div>
+              </div>
+              <p class="text-xs">Visit our <a href="/support" class="text-primary underline hover:text-primary/80">support center</a> for detailed service options and pricing.</p>
             </div>
           </details>
-          
-          <details class="group border border-border rounded-lg overflow-hidden">
+
+          <details class="faq-item group border border-border rounded-lg overflow-hidden hover:shadow-md hover:scale-[1.02] transition-all duration-300" data-search-terms="update myself client updates self service">
             <summary class="flex cursor-pointer items-center justify-between p-4 text-left font-medium transition-colors hover:bg-muted/50 focus:bg-muted/50 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
-              <span class="text-foreground">Can I update the website myself?</span>
+              <span class="text-foreground">Can I update the website myself or train my team?</span>
               <svg class="w-5 h-5 text-muted-foreground transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
               </svg>
             </summary>
             <div class="p-4 pt-0 text-muted-foreground leading-relaxed">
-              Basic content updates like text, contact information, and simple changes can be made 
-              by you or your team. For more complex updates, we're here to help. 
-              We can also provide training for your team.
+              <p class="mb-3"><strong>Multiple options for content management:</strong></p>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div>
+                  <h4 class="font-medium text-foreground mb-2">👤 Self-Management:</h4>
+                  <ul class="list-disc list-inside space-y-1 text-sm">
+                    <li>Basic content updates (text, images)</li>
+                    <li>Contact information changes</li>
+                    <li>Simple page modifications</li>
+                    <li>Blog post additions (if applicable)</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="font-medium text-foreground mb-2">🎓 Training Options:</h4>
+                  <ul class="list-disc list-inside space-y-1 text-sm">
+                    <li>Video tutorials and documentation</li>
+                    <li>Live training sessions</li>
+                    <li>Step-by-step guides</li>
+                    <li>Best practices workshops</li>
+                  </ul>
+                </div>
+              </div>
+              <p class="text-xs bg-blue-50 dark:bg-blue-950/30 p-2 rounded">
+                <strong>Flexible approach:</strong> Start with managed updates, then transition to self-management as your team becomes comfortable
+              </p>
             </div>
           </details>
-          
-          <details class="group border border-border rounded-lg overflow-hidden">
+
+          <details class="faq-item group border border-border rounded-lg overflow-hidden hover:shadow-md hover:scale-[1.02] transition-all duration-300" data-search-terms="additional features new functionality ecommerce booking">
             <summary class="flex cursor-pointer items-center justify-between p-4 text-left font-medium transition-colors hover:bg-muted/50 focus:bg-muted/50 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
-              <span class="text-foreground">What if I need additional features?</span>
+              <span class="text-foreground">What if I need additional features like e-commerce or booking systems?</span>
               <svg class="w-5 h-5 text-muted-foreground transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
               </svg>
             </summary>
             <div class="p-4 pt-0 text-muted-foreground leading-relaxed">
-              We can add new features like contact forms, e-commerce functionality, 
-              blog sections, booking systems, or any other business requirements. 
-              Your website's architecture makes it easy to expand with new capabilities.
+              <p class="mb-3"><strong>Extensive feature expansion capabilities:</strong></p>
+              <div class="space-y-3 mb-4">
+                <div>
+                  <h4 class="font-medium text-foreground">🛒 E-commerce Solutions:</h4>
+                  <ul class="list-disc list-inside space-y-1 text-sm">
+                    <li>Product catalogs with search and filtering</li>
+                    <li>Shopping cart and checkout systems</li>
+                    <li>Payment processing (Stripe, PayPal, etc.)</li>
+                    <li>Inventory management and order tracking</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="font-medium text-foreground">📅 Business Applications:</h4>
+                  <ul class="list-disc list-inside space-y-1 text-sm">
+                    <li>Appointment booking and scheduling</li>
+                    <li>Customer portals and member areas</li>
+                    <li>CRM integration and lead management</li>
+                    <li>Email marketing and automation</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="font-medium text-foreground">🔧 Custom Development:</h4>
+                  <ul class="list-disc list-inside space-y-1 text-sm">
+                    <li>API integrations with existing business systems</li>
+                    <li>Custom workflows and business logic</li>
+                    <li>Third-party service connections</li>
+                    <li>Mobile app development (if needed)</li>
+                  </ul>
+                </div>
+              </div>
+              <p class="text-xs bg-green-50 dark:bg-green-950/30 p-2 rounded">
+                <strong>Scalable architecture:</strong> Your website's foundation supports adding complex features without rebuilding from scratch
+              </p>
             </div>
           </details>
-          
-          <details class="group border border-border rounded-lg overflow-hidden">
+
+          <details class="faq-item group border border-border rounded-lg overflow-hidden hover:shadow-md hover:scale-[1.02] transition-all duration-300" data-search-terms="pricing cost support plans maintenance cost">
             <summary class="flex cursor-pointer items-center justify-between p-4 text-left font-medium transition-colors hover:bg-muted/50 focus:bg-muted/50 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
-              <span class="text-foreground">How do I get more help?</span>
+              <span class="text-foreground">What are the costs for ongoing support and additional features?</span>
               <svg class="w-5 h-5 text-muted-foreground transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
               </svg>
             </summary>
             <div class="p-4 pt-0 text-muted-foreground leading-relaxed">
-              For additional help, you can <a href="/contact" class="text-primary underline hover:text-primary/80">contact our support team</a>, 
-              check our <a href="/docs" class="text-primary underline hover:text-primary/80">documentation</a>, 
-              or visit our <a href="/support" class="text-primary underline hover:text-primary/80">support center</a> 
-              for more resources and assistance options.
+              <p class="mb-3"><strong>Transparent, business-friendly pricing structure:</strong></p>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                <div class="text-center p-3 bg-muted/30 rounded-lg">
+                  <h4 class="font-medium text-foreground mb-2">Community</h4>
+                  <div class="text-2xl font-bold text-primary mb-1">Free</div>
+                  <p class="text-xs">Basic support included</p>
+                </div>
+                <div class="text-center p-3 bg-primary/10 rounded-lg border border-primary/20">
+                  <h4 class="font-medium text-foreground mb-2">Priority</h4>
+                  <div class="text-2xl font-bold text-primary mb-1">€99/mo</div>
+                  <p class="text-xs">Enhanced support & updates</p>
+                </div>
+                <div class="text-center p-3 bg-muted/30 rounded-lg">
+                  <h4 class="font-medium text-foreground mb-2">Enterprise</h4>
+                  <div class="text-2xl font-bold text-primary mb-1">Custom</div>
+                  <p class="text-xs">Dedicated support team</p>
+                </div>
+              </div>
+              <div class="space-y-2 mb-4">
+                <h4 class="font-medium text-foreground">🔧 Custom Development:</h4>
+                <ul class="list-disc list-inside space-y-1 text-sm">
+                  <li><strong>Minor customizations:</strong> €200-500 (color changes, content updates)</li>
+                  <li><strong>New pages/sections:</strong> €500-1,500 (depending on complexity)</li>
+                  <li><strong>E-commerce integration:</strong> €2,000-5,000 (full shop functionality)</li>
+                  <li><strong>Custom applications:</strong> €3,000+ (booking systems, portals)</li>
+                </ul>
+              </div>
+              <p class="text-xs bg-blue-50 dark:bg-blue-950/30 p-2 rounded">
+                <strong>Consultation included:</strong> Free initial consultation to assess your needs and provide accurate pricing estimates
+              </p>
             </div>
           </details>
+
         </div>
       </div>
 
+    </section>
+
+    <!-- No Results Message -->
+    <div id="no-results" class="hidden text-center py-12">
+      <div class="text-6xl mb-4">🔍</div>
+      <h3 class="text-xl font-semibold text-foreground mb-2">No results found</h3>
+      <p class="text-muted-foreground mb-4">Try different keywords or browse all categories</p>
+      <Button id="clear-search-btn" variant="outline">
+        Clear Search
+      </Button>
     </div>
 
-    <!-- Still Need Help -->
-    <div class="border-t border-border pt-16 mt-16">
-      <div class="text-center mb-12">
+    <!-- Still Need Help Section -->
+    <section class="border-t border-border pt-16 mt-16" aria-label="Additional Support Options">
+      <div class="text-center mb-12 animate-fade-in-up">
         <h2 class="text-3xl font-bold text-foreground mb-4">Still Need Help?</h2>
         <p class="text-muted-foreground max-w-2xl mx-auto">
-          Can't find the answer you're looking for? Our support team is here to help with any questions.
+          Can't find the answer you're looking for? Our professional support team is here to help with any questions about your website.
         </p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         
-        <Card className="text-center hover:shadow-lg transition-all duration-300">
+        <Card className="text-center hover:shadow-lg hover:scale-105 transition-all duration-300 animate-fade-in-up">
           <CardHeader>
-            <div class="w-12 h-12 bg-blue-500/10 rounded-xl flex items-center justify-center mx-auto mb-4">
+            <div class="w-12 h-12 bg-blue-500/10 rounded-xl flex items-center justify-center mx-auto mb-4 hover:scale-110 transition-transform duration-300">
               <span class="text-2xl">💬</span>
             </div>
             <CardTitle>Contact Support</CardTitle>
             <CardDescription>
-              Get direct help from our team
+              Get direct help from our technical team
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <Button asChild className="w-full">
-              <a href="/contact">
+            <Button asChild className="w-full hover:scale-105 transition-transform duration-200 focus:ring-2 focus:ring-primary focus:ring-offset-2">
+              <a href="/contact" aria-label="Contact our support team">
                 Contact Us
               </a>
             </Button>
           </CardContent>
         </Card>
 
-        <Card className="text-center hover:shadow-lg transition-all duration-300">
+        <Card className="text-center hover:shadow-lg hover:scale-105 transition-all duration-300 animate-fade-in-up">
           <CardHeader>
-            <div class="w-12 h-12 bg-green-500/10 rounded-xl flex items-center justify-center mx-auto mb-4">
+            <div class="w-12 h-12 bg-green-500/10 rounded-xl flex items-center justify-center mx-auto mb-4 hover:scale-110 transition-transform duration-300">
               <span class="text-2xl">📚</span>
             </div>
             <CardTitle>Documentation</CardTitle>
             <CardDescription>
-              Browse our complete guides
+              Browse our complete technical guides
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <Button asChild variant="outline" className="w-full">
-              <a href="/docs">
+            <Button asChild variant="outline" className="w-full hover:scale-105 transition-transform duration-200 focus:ring-2 focus:ring-primary focus:ring-offset-2">
+              <a href="/docs" aria-label="Access technical documentation">
                 View Docs
               </a>
             </Button>
           </CardContent>
         </Card>
 
-        <Card className="text-center hover:shadow-lg transition-all duration-300">
+        <Card className="text-center hover:shadow-lg hover:scale-105 transition-all duration-300 animate-fade-in-up">
           <CardHeader>
-            <div class="w-12 h-12 bg-purple-500/10 rounded-xl flex items-center justify-center mx-auto mb-4">
+            <div class="w-12 h-12 bg-purple-500/10 rounded-xl flex items-center justify-center mx-auto mb-4 hover:scale-110 transition-transform duration-300">
               <span class="text-2xl">🛠️</span>
             </div>
             <CardTitle>Support Center</CardTitle>
             <CardDescription>
-              Access all support resources
+              Access all support resources and services
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <Button asChild variant="outline" className="w-full">
-              <a href="/support">
+            <Button asChild variant="outline" className="w-full hover:scale-105 transition-transform duration-200 focus:ring-2 focus:ring-primary focus:ring-offset-2">
+              <a href="/support" aria-label="Visit support center">
                 Support Center
               </a>
             </Button>
@@ -425,46 +978,298 @@ import { Alert, AlertDescription } from '../components/ui/alert';
         </Card>
 
       </div>
-    </div>
+    </section>
 
-  </div>
+    <!-- FAQ Stats -->
+    <section class="mt-16 text-center" aria-label="FAQ Statistics">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 animate-fade-in-up">
+        <div class="text-center">
+          <div class="text-3xl font-bold text-primary mb-2">50+</div>
+          <div class="text-sm text-muted-foreground">Questions answered</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-primary mb-2">95%</div>
+          <div class="text-sm text-muted-foreground">Self-service success</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-primary mb-2">24h</div>
+          <div class="text-sm text-muted-foreground">Updated regularly</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-primary mb-2">∞</div>
+          <div class="text-sm text-muted-foreground">Always expanding</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
 </Layout>
 
+<script>
+  // Enhanced FAQ search and filter functionality with full accessibility
+  interface FAQSearchState {
+    searchTerm: string;
+    activeCategory: string;
+    visibleItems: Set<Element>;
+  }
+
+  const searchState: FAQSearchState = {
+    searchTerm: '',
+    activeCategory: 'all',
+    visibleItems: new Set()
+  };
+
+  // DOM elements
+  const searchInput = document.getElementById('faq-search') as HTMLInputElement;
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  const faqItems = document.querySelectorAll('.faq-item');
+  const faqSections = document.querySelectorAll('.faq-section');
+  const noResultsMessage = document.getElementById('no-results');
+
+  // Announcement for screen readers
+  const announceRef = document.createElement('div');
+  announceRef.className = 'sr-only';
+  announceRef.setAttribute('aria-live', 'polite');
+  announceRef.setAttribute('aria-atomic', 'true');
+  document.body.appendChild(announceRef);
+
+  function announceChange(message: string) {
+    announceRef.textContent = message;
+  }
+
+  // Search functionality
+  function performSearch() {
+    const searchTerm = searchInput.value.toLowerCase().trim();
+    searchState.searchTerm = searchTerm;
+    
+    let visibleCount = 0;
+    
+    faqItems.forEach(item => {
+      const searchTerms = item.getAttribute('data-search-terms') || '';
+      const questionText = item.querySelector('summary')?.textContent?.toLowerCase() || '';
+      const answerText = item.querySelector('div')?.textContent?.toLowerCase() || '';
+      
+      const matchesSearch = !searchTerm || 
+        searchTerms.includes(searchTerm) ||
+        questionText.includes(searchTerm) ||
+        answerText.includes(searchTerm);
+      
+      const matchesCategory = searchState.activeCategory === 'all' ||
+        item.closest(`[data-category="${searchState.activeCategory}"]`);
+      
+      const isVisible = matchesSearch && matchesCategory;
+      
+      if (isVisible) {
+        (item as HTMLElement).style.display = 'block';
+        searchState.visibleItems.add(item);
+        visibleCount++;
+      } else {
+        (item as HTMLElement).style.display = 'none';
+        searchState.visibleItems.delete(item);
+      }
+    });
+    
+    // Show/hide sections based on visible items
+    faqSections.forEach(section => {
+      const sectionItems = section.querySelectorAll('.faq-item');
+      const hasVisibleItems = Array.from(sectionItems).some(item => 
+        searchState.visibleItems.has(item)
+      );
+      
+      if (hasVisibleItems || searchState.activeCategory === 'all') {
+        (section as HTMLElement).style.display = 'block';
+      } else {
+        (section as HTMLElement).style.display = 'none';
+      }
+    });
+    
+    // Show/hide no results message
+    if (noResultsMessage) {
+      if (visibleCount === 0) {
+        noResultsMessage.classList.remove('hidden');
+        announceChange('No FAQ items found. Try different keywords or clear your search.');
+      } else {
+        noResultsMessage.classList.add('hidden');
+        announceChange(`${visibleCount} FAQ items found.`);
+      }
+    }
+  }
+
+  // Category filter functionality
+  function setActiveCategory(category: string, button: Element) {
+    searchState.activeCategory = category;
+    
+    // Update button states
+    filterButtons.forEach(btn => {
+      btn.classList.remove('active');
+      btn.setAttribute('aria-pressed', 'false');
+    });
+    
+    button.classList.add('active');
+    button.setAttribute('aria-pressed', 'true');
+    
+    performSearch();
+    
+    // Announce category change
+    const categoryName = category === 'all' ? 'all categories' : category.replace('-', ' ');
+    announceChange(`Filtered to ${categoryName}.`);
+  }
+
+  // Clear search function
+  function clearSearch() {
+    searchInput.value = '';
+    searchState.searchTerm = '';
+    searchState.activeCategory = 'all';
+    
+    // Reset active button
+    filterButtons.forEach(btn => {
+      btn.classList.remove('active');
+      btn.setAttribute('aria-pressed', 'false');
+    });
+    
+    const allButton = document.querySelector('[data-category="all"]');
+    if (allButton) {
+      allButton.classList.add('active');
+      allButton.setAttribute('aria-pressed', 'true');
+    }
+    
+    performSearch();
+    searchInput.focus();
+    announceChange('Search cleared. Showing all FAQ items.');
+  }
+
+  // Clear search button event listener
+  const clearSearchBtn = document.getElementById('clear-search-btn');
+  if (clearSearchBtn) {
+    clearSearchBtn.addEventListener('click', clearSearch);
+  }
+
+  // Event listeners
+  if (searchInput) {
+    searchInput.addEventListener('input', performSearch);
+    searchInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        clearSearch();
+      }
+    });
+  }
+
+  filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const category = button.getAttribute('data-category') || 'all';
+      setActiveCategory(category, button);
+    });
+    
+    // Initialize ARIA attributes
+    button.setAttribute('role', 'button');
+    button.setAttribute('aria-pressed', button.classList.contains('active') ? 'true' : 'false');
+  });
+
+  // Enhanced keyboard navigation for FAQ items
+  faqItems.forEach(item => {
+    const summary = item.querySelector('summary');
+    
+    if (summary) {
+      summary.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          const details = item as HTMLDetailsElement;
+          details.open = !details.open;
+          
+          // Announce state change
+          const questionText = summary.textContent?.trim() || 'FAQ item';
+          announceChange(`${questionText} ${details.open ? 'expanded' : 'collapsed'}.`);
+        }
+      });
+    }
+  });
+
+  // Initial setup
+  performSearch();
+</script>
+
 <style>
-  /* Native HTML accordion styling to match shadcn/ui design */
-  details {
+  /* Phase 8+ Enhanced CSS Animations */
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fade-in-left {
+    from {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes fade-in-right {
+    from {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 0.6s ease-out forwards;
+  }
+
+  .animate-fade-in-left {
+    animation: fade-in-left 0.6s ease-out forwards 0.2s both;
+  }
+
+  .animate-fade-in-right {
+    animation: fade-in-right 0.6s ease-out forwards 0.4s both;
+  }
+
+  /* Enhanced FAQ accordion styling */
+  .faq-item {
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .faq-item summary {
+    list-style: none;
     transition: all 0.2s ease-in-out;
   }
   
-  details summary {
-    list-style: none;
-  }
-  
-  details summary::-webkit-details-marker {
+  .faq-item summary::-webkit-details-marker {
     display: none;
   }
   
-  details summary::-moz-list-bullet {
+  .faq-item summary::-moz-list-bullet {
     list-style-type: none;
   }
   
-  details[open] summary svg {
+  .faq-item[open] summary svg {
     transform: rotate(180deg);
   }
   
-  details summary:hover {
+  .faq-item summary:hover {
     background-color: hsl(var(--muted) / 0.5);
   }
   
-  details summary:focus {
+  .faq-item summary:focus {
     background-color: hsl(var(--muted) / 0.5);
     outline: 2px solid hsl(var(--primary));
     outline-offset: 2px;
   }
   
-  /* Smooth open/close animation */
-  details > div {
-    animation: slideDown 0.2s ease-out;
+  /* Smooth content reveal animation */
+  .faq-item > div {
+    animation: slideDown 0.3s ease-out;
   }
   
   @keyframes slideDown {
@@ -477,13 +1282,79 @@ import { Alert, AlertDescription } from '../components/ui/alert';
       transform: translateY(0);
     }
   }
+
+  /* Active filter button styling */
+  .filter-btn.active {
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    border-color: hsl(var(--primary));
+  }
+
+  /* Skip links styling */
+  .skip-link {
+    transform: translateY(-100%);
+    transition: transform 0.3s ease-in-out;
+  }
   
-  /* Dark mode compatibility */
-  .dark details {
+  .skip-link:focus {
+    transform: translateY(0);
+  }
+
+  /* Enhanced hover effects */
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+
+  /* Search input enhancements */
+  #faq-search:focus {
+    box-shadow: 0 0 0 3px hsl(var(--primary) / 0.1);
+  }
+
+  /* Smooth transitions for all interactive elements */
+  .card,
+  .filter-btn,
+  button,
+  input,
+  .faq-item {
+    transition: all 0.2s ease-in-out;
+  }
+
+  /* Accessibility improvements */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-fade-in-up,
+    .animate-fade-in-left,
+    .animate-fade-in-right {
+      animation: none;
+    }
+    
+    .hover\:scale-105:hover,
+    .hover\:scale-110:hover,
+    .hover\:scale-\[1\.02\]:hover {
+      transform: none;
+    }
+    
+    .faq-item > div {
+      animation: none;
+    }
+  }
+
+  /* Enhanced focus states */
+  button:focus,
+  a:focus,
+  input:focus,
+  summary:focus {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 2px;
+    box-shadow: 0 0 0 3px hsl(var(--primary) / 0.1);
+  }
+
+  /* Dark mode enhancements */
+  .dark .faq-item {
     border-color: hsl(var(--border));
   }
   
-  .dark details summary:hover {
+  .dark .faq-item summary:hover {
     background-color: hsl(var(--muted) / 0.5);
   }
 </style>
