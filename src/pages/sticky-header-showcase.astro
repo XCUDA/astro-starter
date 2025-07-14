@@ -1,402 +1,643 @@
 ---
-// Sticky Header Showcase Page - Test all sticky behaviors (Sprint 9 - Step 1)
-// Demonstrates the 4 different sticky behaviors with live examples
+// Sticky Header Behaviors Showcase - Professional Header Demonstration
+// Complete showcase of intelligent sticky header behaviors with interactive examples
 // Path: src/pages/sticky-header-showcase.astro
 
 import Layout from '../components/layouts/Layout.astro';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
+import { 
+  PageTransition,
+  ScrollReveal, 
+  StaggeredAnimation,
+  TypewriterEffect,
+  AnimatedButton,
+  AnimatedCounter
+} from '../components/islands/SmoothTransitions';
 ---
 
 <Layout 
-  title="Sticky Header Showcase - Sprint 9"
-  description="Interactive demonstration of intelligent sticky header behaviors with scroll effects"
+  title="Professional Sticky Header Behaviors"
+  description="Complete showcase of intelligent sticky header behaviors: scroll-responsive, auto-hide, and performance-optimized navigation"
   currentPage="sticky-header-showcase"
   headerVariant="business"
   footerVariant="business"
   
-  {/* Test different sticky behaviors - change these to test */}
+  {/* Active sticky behavior configuration for demonstration */}
   stickyBehavior="scroll-up-show"
   showScrollIndicator={true}
   scrollThreshold={50}
 
-  keywords={["sticky header, scroll behavior, hide on scroll, smart navigation"]}
+  keywords={["sticky header, scroll behavior, smart navigation, responsive header, mobile optimization"]}
 >
-  <!-- Hero Section -->
+  {/* Skip Links - WCAG 2.1 AA */}
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 z-50 px-4 py-2 bg-primary text-primary-foreground rounded-md">
+    Skip to main content
+  </a>
+  <a href="#interactive-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-20 z-50 px-4 py-2 bg-primary text-primary-foreground rounded-md">
+    Skip to interactive demo
+  </a>
+
+  {/* Hero Section */}
   <section class="bg-gradient-to-br from-primary/5 via-background to-secondary/5 py-16" role="banner" aria-labelledby="hero-title">
     <div class="container mx-auto px-4">
-      <div class="max-w-4xl mx-auto text-center">
-        <div class="flex items-center justify-center space-x-2 mb-6">
-          <span class="text-4xl" aria-hidden="true">📌</span>
-          <Badge variant="secondary" className="text-sm font-medium">
-            Sprint 9 - Step 1
-          </Badge>
-        </div>
-        
-        <h1 id="hero-title" class="text-4xl lg:text-5xl font-bold text-foreground mb-6">
-          Sticky Header Behaviors Demo
-        </h1>
-        
-        <p class="text-xl text-muted-foreground mb-8 leading-relaxed">
-          Test and experience all intelligent sticky header behaviors. 
-          Scroll down to see the header behavior in action!
-        </p>
-        
-        <div class="flex flex-col sm:flex-row gap-4 justify-center" role="group" aria-label="Sticky header testing actions">
-          <Button size="lg" className="text-lg px-8" aria-label="Start scrolling to test sticky header behavior">
-            <span class="mr-2" aria-hidden="true">⬇️</span>
-            Start Scrolling
-          </Button>
-          <Button variant="outline" size="lg" className="text-lg px-8" aria-label="Learn about different sticky header behaviors">
-            <span class="mr-2" aria-hidden="true">📌</span>
-            Test Behaviors
-          </Button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Current Behavior Info -->
-  <section class="py-8 bg-muted/30" role="region" aria-labelledby="current-config">
-    <div class="container mx-auto px-4">
-      <Card className="border-primary/20 bg-primary/5">
-        <CardHeader>
-          <CardTitle id="current-config" className="flex items-center space-x-2">
-            <span aria-hidden="true">🎯</span>
-            <span>Current Header Configuration</span>
-          </CardTitle>
-          <CardDescription>
-            This page demonstrates: <strong>scroll-up-show</strong> behavior with scroll indicator
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-sm" role="list" aria-label="Current sticky header configuration settings">
-            <div role="listitem">
-              <strong>Behavior:</strong> scroll-up-show
-            </div>
-            <div role="listitem">
-              <strong>Scroll Threshold:</strong> 50px
-            </div>
-            <div role="listitem">
-              <strong>Scroll Indicator:</strong> Enabled
-            </div>
-            <div role="listitem">
-              <strong>Variant:</strong> business
-            </div>
-            <div role="listitem">
-              <strong>Background:</strong> Adaptive
-            </div>
-            <div role="listitem">
-              <strong>Performance:</strong> Optimized
-            </div>
+      <PageTransition client:load config={{ direction: 'up', duration: 800, delay: 200 }}>
+        <div class="max-w-4xl mx-auto text-center">
+          <div class="flex items-center justify-center space-x-2 mb-6">
+            <span class="text-4xl" aria-hidden="true">📌</span>
+            <Badge variant="secondary" className="text-sm font-medium">
+              Professional Header System
+            </Badge>
           </div>
-        </CardContent>
-      </Card>
+          
+          <h1 id="hero-title" class="text-4xl lg:text-5xl font-bold text-foreground mb-6">
+            <TypewriterEffect 
+              client:load
+              text="Intelligent Sticky Headers"
+              speed={80}
+              delay={500}
+            />
+          </h1>
+          
+          <p class="text-xl text-muted-foreground mb-8 leading-relaxed">
+            Experience our complete sticky header system with scroll-responsive behaviors, 
+            performance optimization, and mobile-first design. Perfect for modern business applications.
+          </p>
+          
+          <div class="flex flex-col sm:flex-row gap-4 justify-center" role="group" aria-label="Sticky header demonstration actions">
+            <AnimatedButton 
+              client:load
+              variant="primary" 
+              size="lg" 
+              animation="bounce"
+              className="text-lg px-8"
+              aria-label="Start scrolling to experience intelligent sticky header behavior"
+            >
+              <span class="mr-2" aria-hidden="true">⬇️</span>
+              Experience Smart Headers
+            </AnimatedButton>
+            <AnimatedButton 
+              client:load
+              variant="ghost" 
+              size="lg" 
+              animation="scale"
+              className="text-lg px-8"
+              aria-label="Explore different sticky header behavior configurations"
+            >
+              <span class="mr-2" aria-hidden="true">📌</span>
+              Explore Behaviors
+            </AnimatedButton>
+          </div>
+        </div>
+      </PageTransition>
     </div>
   </section>
 
-  <!-- Sticky Behaviors Overview -->
-  <section class="py-16" role="region" aria-labelledby="behaviors-title">
-    <div class="container mx-auto px-4">
-      <div class="text-center mb-12">
-        <h2 id="behaviors-title" class="text-3xl font-bold text-foreground mb-4">
-          Available Sticky Behaviors
-        </h2>
-        <p class="text-lg text-muted-foreground max-w-3xl mx-auto">
-          Five different behaviors to match your application's needs. 
-          Each optimized for performance and user experience.
-        </p>
-      </div>
+  {/* Main Content */}
+  <main id="main-content" role="main" tabindex="-1">
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" role="list" aria-label="Available sticky header behavior types">
-        <!-- Static Behavior -->
-        <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105" role="listitem">
-          <CardHeader className="text-center">
-            <div class="text-3xl mb-2" aria-hidden="true">📍</div>
-            <CardTitle className="text-lg">Static (Default)</CardTitle>
-            <CardDescription>
-              Traditional sticky header, always visible
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <ul class="text-sm space-y-2 text-muted-foreground" role="list" aria-label="Static behavior features">
-              <li role="listitem">• Always visible at top</li>
-              <li role="listitem">• No scroll animations</li>
-              <li role="listitem">• Maximum compatibility</li>
-              <li role="listitem">• Best performance</li>
-            </ul>
-          </CardContent>
-        </Card>
-
-        <!-- Always Visible -->
-        <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105" role="listitem">
-          <CardHeader className="text-center">
-            <div class="text-3xl mb-2" aria-hidden="true">👁️</div>
-            <CardTitle className="text-lg">Always Visible</CardTitle>
-            <CardDescription>
-              Enhanced sticky, always shown with effects
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <ul class="text-sm space-y-2 text-muted-foreground" role="list" aria-label="Always visible behavior features">
-              <li role="listitem">• Always visible</li>
-              <li role="listitem">• Background adaptation</li>
-              <li role="listitem">• Scroll indicators</li>
-              <li role="listitem">• Smooth transitions</li>
-            </ul>
-          </CardContent>
-        </Card>
-
-        <!-- Hide on Scroll -->
-        <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105" role="listitem">
-          <CardHeader className="text-center">
-            <div class="text-3xl mb-2" aria-hidden="true">⬇️</div>
-            <CardTitle className="text-lg">Hide on Scroll</CardTitle>
-            <CardDescription>
-              Hides when scrolling down, shows when up
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <ul class="text-sm space-y-2 text-muted-foreground" role="list" aria-label="Hide on scroll behavior features">
-              <li role="listitem">• Hides on scroll down</li>
-              <li role="listitem">• Shows on scroll up</li>
-              <li role="listitem">• More content space</li>
-              <li role="listitem">• Modern UX pattern</li>
-            </ul>
-          </CardContent>
-        </Card>
-
-        <!-- Auto Hide -->
-        <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105" role="listitem">
-          <CardHeader className="text-center">
-            <div class="text-3xl mb-2" aria-hidden="true">⏰</div>
-            <CardTitle className="text-lg">Auto Hide</CardTitle>
-            <CardDescription>
-              Hides automatically, returns after delay
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <ul class="text-sm space-y-2 text-muted-foreground" role="list" aria-label="Auto hide behavior features">
-              <li role="listitem">• Hides after scrolling</li>
-              <li role="listitem">• Reappears after delay</li>
-              <li role="listitem">• Configurable timing</li>
-              <li role="listitem">• Balanced approach</li>
-            </ul>
-          </CardContent>
-        </Card>
-
-        <!-- Scroll Up Show (Current) -->
-        <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105 border-primary/20 bg-primary/5" role="listitem">
-          <CardHeader className="text-center">
-            <div class="text-3xl mb-2" aria-hidden="true">⬆️</div>
-            <CardTitle className="text-lg text-primary">Scroll Up Show</CardTitle>
-            <CardDescription>
-              Smart behavior: shows only when scrolling up
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <ul class="text-sm space-y-2 text-muted-foreground" role="list" aria-label="Scroll up show behavior features">
-              <li role="listitem">• <strong>Currently active</strong></li>
-              <li role="listitem">• Shows on scroll up intent</li>
-              <li role="listitem">• Hides on scroll down</li>
-              <li role="listitem">• Intelligent detection</li>
-            </ul>
-          </CardContent>
-        </Card>
-
-        <!-- Configuration -->
-        <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105" role="listitem">
-          <CardHeader className="text-center">
-            <div class="text-3xl mb-2" aria-hidden="true">⚙️</div>
-            <CardTitle className="text-lg">Configuration</CardTitle>
-            <CardDescription>
-              Customizable thresholds and timing
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <ul class="text-sm space-y-2 text-muted-foreground" role="list" aria-label="Configuration options">
-              <li role="listitem">• Scroll threshold</li>
-              <li role="listitem">• Hide delay timing</li>
-              <li role="listitem">• Progress indicators</li>
-              <li role="listitem">• Variant-specific styles</li>
-            </ul>
-          </CardContent>
-        </Card>
-      </div>
-    </div>
-  </section>
-
-  <!-- Implementation Examples -->
-  <section class="py-16 bg-muted/30" role="region" aria-labelledby="implementation-title">
-    <div class="container mx-auto px-4">
-      <h2 id="implementation-title" class="text-3xl font-bold text-foreground text-center mb-12">
-        Implementation Examples
-      </h2>
-
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8" role="list" aria-label="Code implementation examples">
-        <!-- Basic Usage -->
-        <Card role="listitem">
-          <CardHeader>
-            <CardTitle class="flex items-center space-x-2">
-              <span aria-hidden="true">⚡</span>
-              <span>Basic Usage</span>
-            </CardTitle>
-            <CardDescription>
-              Simple sticky header with scroll-up-show behavior
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div class="bg-muted p-4 rounded-lg text-sm font-mono" role="code" aria-label="Basic sticky header usage code example">
-              {`<Layout 
-  stickyBehavior="scroll-up-show"
-  showScrollIndicator={true}
-  scrollThreshold={100}
-/>`}
-            </div>
-          </CardContent>
-        </Card>
-
-        <!-- Advanced Configuration -->
-        <Card role="listitem">
-          <CardHeader>
-            <CardTitle class="flex items-center space-x-2">
-              <span aria-hidden="true">🔧</span>
-              <span>Advanced Configuration</span>
-            </CardTitle>
-            <CardDescription>
-              Full configuration with custom timing and behavior
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div class="bg-muted p-4 rounded-lg text-sm font-mono" role="code" aria-label="Advanced sticky header configuration code example">
-              {`<Layout 
-  stickyBehavior="auto-hide"
-  hideDelay={3000}
-  scrollThreshold={50}
-  showScrollIndicator={true}
-  headerVariant="business"
-/>`}
-            </div>
-          </CardContent>
-        </Card>
-
-        <!-- Mobile Optimized -->
-        <Card role="listitem">
-          <CardHeader>
-            <CardTitle class="flex items-center space-x-2">
-              <span aria-hidden="true">📱</span>
-              <span>Mobile Optimized</span>
-            </CardTitle>
-            <CardDescription>
-              Optimized for mobile with hide on scroll
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div class="bg-muted p-4 rounded-lg text-sm font-mono" role="code" aria-label="Mobile optimized sticky header code example">
-              {`<Layout 
-  hideOnScroll={true}
-  scrollThreshold={30}
-  headerVariant="minimal"
-/>`}
-            </div>
-          </CardContent>
-        </Card>
-
-        <!-- Performance Focused -->
-        <Card role="listitem">
-          <CardHeader>
-            <CardTitle class="flex items-center space-x-2">
-              <span aria-hidden="true">🚀</span>
-              <span>Performance Focused</span>
-            </CardTitle>
-            <CardDescription>
-              Static header for maximum performance
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div class="bg-muted p-4 rounded-lg text-sm font-mono" role="code" aria-label="Performance focused static header code example">
-              {`<Layout 
-  stickyBehavior="static"
-  headerVariant="default"
-/>`}
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-    </div>
-  </section>
-
-  <!-- Long Content for Scroll Testing -->
-  <section class="py-16" role="region" aria-labelledby="test-content-title">
-    <div class="container mx-auto px-4">
-      <h2 id="test-content-title" class="text-3xl font-bold text-foreground text-center mb-12">
-        Scroll Test Content
-      </h2>
-      
-      <div class="max-w-3xl mx-auto space-y-8" role="list" aria-label="Scroll testing content sections">
-        {Array.from({ length: 10 }, (_, i) => (
-          <Card key={`test-section-${i}`} role="listitem">
+    {/* Current Configuration Status */}
+    <section class="py-8 bg-gradient-to-r from-primary/5 to-secondary/5" role="region" aria-labelledby="current-config">
+      <div class="container mx-auto px-4">
+        <ScrollReveal client:load config={{ direction: 'scale', threshold: 0.3 }}>
+          <Card className="border-primary/20 bg-card/95 backdrop-blur-sm">
             <CardHeader>
-              <CardTitle>Test Section {i + 1}</CardTitle>
-              <CardDescription>
-                Scroll through this content to test the sticky header behavior
+              <CardTitle id="current-config" className="flex items-center space-x-2 text-primary">
+                <span aria-hidden="true">🎯</span>
+                <span>Active Header Configuration</span>
+              </CardTitle>
+              <CardDescription className="text-muted-foreground text-lg">
+                This page demonstrates scroll-up-show behavior with intelligent scroll detection
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <p class="text-muted-foreground leading-relaxed">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-              </p>
-              <p class="text-muted-foreground leading-relaxed mt-4">
-                Continue scrolling to experience how the header behaves with the current configuration. 
-                Notice how the header background adapts and the scroll indicator updates as you move through the content.
-              </p>
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-sm" role="list" aria-label="Current sticky header configuration">
+                <div class="text-center p-4 bg-primary/5 rounded-lg" role="listitem">
+                  <div class="text-2xl mb-2" aria-hidden="true">⬆️</div>
+                  <div class="font-medium">Scroll-Up-Show</div>
+                  <div class="text-muted-foreground text-xs">Active behavior</div>
+                </div>
+                <div class="text-center p-4 bg-secondary/5 rounded-lg" role="listitem">
+                  <div class="text-2xl mb-2" aria-hidden="true">📊</div>
+                  <div class="font-medium">50px Threshold</div>
+                  <div class="text-muted-foreground text-xs">Scroll sensitivity</div>
+                </div>
+                <div class="text-center p-4 bg-green-500/5 rounded-lg" role="listitem">
+                  <div class="text-2xl mb-2" aria-hidden="true">📈</div>
+                  <div class="font-medium">Progress Indicator</div>
+                  <div class="text-muted-foreground text-xs">Scroll visualization</div>
+                </div>
+                <div class="text-center p-4 bg-blue-500/5 rounded-lg" role="listitem">
+                  <div class="text-2xl mb-2" aria-hidden="true">🚀</div>
+                  <div class="font-medium">Performance</div>
+                  <div class="text-muted-foreground text-xs">GPU optimized</div>
+                </div>
+              </div>
             </CardContent>
           </Card>
-        ))}
+        </ScrollReveal>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Performance Notes -->
-  <section class="py-16 bg-muted/30" role="region" aria-labelledby="performance-notes">
-    <div class="container mx-auto px-4">
-      <Card>
-        <CardHeader>
-          <CardTitle id="performance-notes" class="text-2xl">🚀 Performance Optimizations</CardTitle>
-          <CardDescription>
-            Built-in optimizations for smooth scrolling experience
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div role="group" aria-labelledby="smart-throttling">
-              <h3 id="smart-throttling" class="font-semibold mb-3">🎯 Smart Throttling</h3>
-              <ul class="text-sm space-y-1 text-muted-foreground" role="list" aria-label="Smart throttling optimization features">
-                <li role="listitem">• RequestAnimationFrame for smooth animations</li>
-                <li role="listitem">• Passive scroll listeners for better performance</li>
-                <li role="listitem">• Intelligent state tracking to avoid unnecessary updates</li>
-                <li role="listitem">• Memory-efficient cleanup on component unmount</li>
-              </ul>
-            </div>
+    {/* Sticky Behaviors Overview */}
+    <section class="py-16" role="region" aria-labelledby="behaviors-title">
+      <div class="container mx-auto px-4">
+        <ScrollReveal client:load config={{ direction: 'up', threshold: 0.2 }}>
+          <div class="text-center mb-12">
+            <h2 id="behaviors-title" class="text-3xl font-bold text-foreground mb-4">
+              Intelligent Header Behaviors
+            </h2>
+            <p class="text-lg text-muted-foreground max-w-3xl mx-auto">
+              Five sophisticated behaviors designed for modern business applications. 
+              Each optimized for performance, accessibility, and user experience.
+            </p>
+          </div>
+        </ScrollReveal>
+
+        <StaggeredAnimation client:load staggerDelay={150}>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" role="list" aria-label="Available sticky header behavior types">
             
-            <div role="group" aria-labelledby="optimization-features">
-              <h3 id="optimization-features" class="font-semibold mb-3">⚡ Optimization Features</h3>
-              <ul class="text-sm space-y-1 text-muted-foreground" role="list" aria-label="Performance optimization features">
-                <li role="listitem">• Will-change CSS hints for GPU acceleration</li>
-                <li role="listitem">• Transform-based animations instead of position</li>
-                <li role="listitem">• Minimal DOM queries with efficient caching</li>
-                <li role="listitem">• Configurable thresholds to reduce sensitivity</li>
-              </ul>
+            {/* Static Behavior */}
+            <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105" role="listitem">
+              <CardHeader className="text-center">
+                <div class="text-3xl mb-2" aria-hidden="true">📍</div>
+                <CardTitle className="text-lg">Static Header</CardTitle>
+                <CardDescription>
+                  Traditional sticky, maximum performance
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ul class="text-sm space-y-2 text-muted-foreground" role="list" aria-label="Static header behavior features">
+                  <li role="listitem">• <strong>Always visible</strong> at top position</li>
+                  <li role="listitem">• <strong>No animations</strong> for best performance</li>
+                  <li role="listitem">• <strong>Maximum compatibility</strong> across devices</li>
+                  <li role="listitem">• <strong>Use case:</strong> Content-heavy sites, accessibility priority</li>
+                </ul>
+              </CardContent>
+            </Card>
+
+            {/* Always Visible */}
+            <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105" role="listitem">
+              <CardHeader className="text-center">
+                <div class="text-3xl mb-2" aria-hidden="true">👁️</div>
+                <CardTitle className="text-lg">Always Visible</CardTitle>
+                <CardDescription>
+                  Enhanced sticky with smart adaptations
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ul class="text-sm space-y-2 text-muted-foreground" role="list" aria-label="Always visible behavior features">
+                  <li role="listitem">• <strong>Always visible</strong> with enhancements</li>
+                  <li role="listitem">• <strong>Background adaptation</strong> on scroll</li>
+                  <li role="listitem">• <strong>Progress indicators</strong> integrated</li>
+                  <li role="listitem">• <strong>Use case:</strong> Dashboard apps, navigation-heavy sites</li>
+                </ul>
+              </CardContent>
+            </Card>
+
+            {/* Hide on Scroll */}
+            <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105" role="listitem">
+              <CardHeader className="text-center">
+                <div class="text-3xl mb-2" aria-hidden="true">⬇️</div>
+                <CardTitle className="text-lg">Hide on Scroll</CardTitle>
+                <CardDescription>
+                  Maximizes content space when reading
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ul class="text-sm space-y-2 text-muted-foreground" role="list" aria-label="Hide on scroll behavior features">
+                  <li role="listitem">• <strong>Hides when scrolling down</strong> (reading mode)</li>
+                  <li role="listitem">• <strong>Shows when scrolling up</strong> (navigation intent)</li>
+                  <li role="listitem">• <strong>More content space</strong> for immersion</li>
+                  <li role="listitem">• <strong>Use case:</strong> Blogs, documentation, reading apps</li>
+                </ul>
+              </CardContent>
+            </Card>
+
+            {/* Auto Hide */}
+            <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105" role="listitem">
+              <CardHeader className="text-center">
+                <div class="text-3xl mb-2" aria-hidden="true">⏰</div>
+                <CardTitle className="text-lg">Auto Hide</CardTitle>
+                <CardDescription>
+                  Intelligent timing-based visibility
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ul class="text-sm space-y-2 text-muted-foreground" role="list" aria-label="Auto hide behavior features">
+                  <li role="listitem">• <strong>Hides after scroll stop</strong> (configurable delay)</li>
+                  <li role="listitem">• <strong>Reappears on movement</strong> or interaction</li>
+                  <li role="listitem">• <strong>Balanced approach</strong> between space and access</li>
+                  <li role="listitem">• <strong>Use case:</strong> Media sites, portfolios, presentations</li>
+                </ul>
+              </CardContent>
+            </Card>
+
+            {/* Scroll Up Show (Active) */}
+            <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105 border-primary/20 bg-primary/5" role="listitem">
+              <CardHeader className="text-center">
+                <div class="text-3xl mb-2" aria-hidden="true">⬆️</div>
+                <CardTitle className="text-lg text-primary">Scroll Up Show</CardTitle>
+                <CardDescription>
+                  Smart navigation intent detection
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ul class="text-sm space-y-2 text-muted-foreground" role="list" aria-label="Scroll up show behavior features">
+                  <li role="listitem">• <strong>Currently active</strong> on this page</li>
+                  <li role="listitem">• <strong>Intelligent detection</strong> of navigation intent</li>
+                  <li role="listitem">• <strong>Hides when reading</strong> (scroll down)</li>
+                  <li role="listitem">• <strong>Use case:</strong> E-commerce, business apps, SaaS platforms</li>
+                </ul>
+              </CardContent>
+            </Card>
+
+            {/* Configuration Options */}
+            <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105" role="listitem">
+              <CardHeader className="text-center">
+                <div class="text-3xl mb-2" aria-hidden="true">⚙️</div>
+                <CardTitle className="text-lg">Advanced Configuration</CardTitle>
+                <CardDescription>
+                  Fine-tuned performance and behavior
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ul class="text-sm space-y-2 text-muted-foreground" role="list" aria-label="Configuration and performance features">
+                  <li role="listitem">• <strong>Scroll thresholds</strong> customizable</li>
+                  <li role="listitem">• <strong>Animation timing</strong> configurable</li>
+                  <li role="listitem">• <strong>Progress indicators</strong> toggle</li>
+                  <li role="listitem">• <strong>Performance</strong> GPU-accelerated transforms</li>
+                </ul>
+              </CardContent>
+            </Card>
+
+          </div>
+        </StaggeredAnimation>
+      </div>
+    </section>
+
+    {/* Interactive Testing Section */}
+    <section id="interactive-content" class="py-16 bg-muted/30" role="region" aria-labelledby="testing-title">
+      <div class="container mx-auto px-4">
+        <ScrollReveal client:load config={{ direction: 'scale', threshold: 0.3 }}>
+          <div class="text-center mb-12">
+            <h2 id="testing-title" class="text-3xl font-bold text-foreground mb-4">
+              Live Behavior Testing
+            </h2>
+            <p class="text-lg text-muted-foreground max-w-3xl mx-auto">
+              Test the scroll-up-show behavior in real-time. Notice how the header responds 
+              intelligently to your scroll direction and intent.
+            </p>
+            <Badge variant="secondary" className="mt-4">
+              <span class="mr-2" aria-hidden="true">🎯</span>
+              Scroll-Up-Show Active
+            </Badge>
+          </div>
+        </ScrollReveal>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8" role="list" aria-label="Header behavior testing instructions">
+          
+          {/* Desktop Testing */}
+          <Card role="listitem">
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2">
+                <span aria-hidden="true">🖥️</span>
+                <span>Desktop Testing Guide</span>
+              </CardTitle>
+              <CardDescription>
+                How to test sticky header behavior on desktop
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div class="space-y-3" role="list" aria-label="Desktop testing instructions">
+                <div class="flex items-start space-x-3" role="listitem">
+                  <span class="text-primary font-bold">1.</span>
+                  <div>
+                    <strong>Scroll Down:</strong> Header hides after 50px scroll to maximize content space
+                  </div>
+                </div>
+                <div class="flex items-start space-x-3" role="listitem">
+                  <span class="text-primary font-bold">2.</span>
+                  <div>
+                    <strong>Scroll Up:</strong> Header reappears immediately, anticipating navigation need
+                  </div>
+                </div>
+                <div class="flex items-start space-x-3" role="listitem">
+                  <span class="text-primary font-bold">3.</span>
+                  <div>
+                    <strong>Watch Indicator:</strong> Progress bar shows scroll position in real-time
+                  </div>
+                </div>
+                <div class="flex items-start space-x-3" role="listitem">
+                  <span class="text-primary font-bold">4.</span>
+                  <div>
+                    <strong>Background Adaptation:</strong> Header background adapts to content context
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Mobile Testing */}
+          <Card role="listitem">
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2">
+                <span aria-hidden="true">📱</span>
+                <span>Mobile Testing Guide</span>
+              </CardTitle>
+              <CardDescription>
+                Optimized behavior for mobile interactions
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div class="space-y-3" role="list" aria-label="Mobile testing instructions">
+                <div class="flex items-start space-x-3" role="listitem">
+                  <span class="text-primary font-bold">1.</span>
+                  <div>
+                    <strong>Touch Scroll:</strong> Smooth finger scroll triggers intelligent hide/show
+                  </div>
+                </div>
+                <div class="flex items-start space-x-3" role="listitem">
+                  <span class="text-primary font-bold">2.</span>
+                  <div>
+                    <strong>Reduced Threshold:</strong> Mobile uses lower threshold (30px) for quick response
+                  </div>
+                </div>
+                <div class="flex items-start space-x-3" role="listitem">
+                  <span class="text-primary font-bold">3.</span>
+                  <div>
+                    <strong>Performance:</strong> GPU-accelerated transforms ensure 60fps scrolling
+                  </div>
+                </div>
+                <div class="flex items-start space-x-3" role="listitem">
+                  <span class="text-primary font-bold">4.</span>
+                  <div>
+                    <strong>Safe Areas:</strong> Header respects device notches and safe areas
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+        </div>
+      </div>
+    </section>
+
+    {/* Implementation Examples */}
+    <section class="py-16" role="region" aria-labelledby="implementation-title">
+      <div class="container mx-auto px-4">
+        <ScrollReveal client:load config={{ direction: 'up', threshold: 0.3 }}>
+          <h2 id="implementation-title" class="text-3xl font-bold text-foreground text-center mb-12">
+            Implementation Examples
+          </h2>
+        </ScrollReveal>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8" role="list" aria-label="Code implementation examples">
+          
+          {/* Basic Scroll-Up-Show */}
+          <Card role="listitem">
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2">
+                <span aria-hidden="true">⬆️</span>
+                <span>Scroll-Up-Show (Active)</span>
+              </CardTitle>
+              <CardDescription>
+                Current configuration used on this page
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div class="bg-muted p-4 rounded-lg text-sm font-mono" role="code" aria-label="Scroll-up-show header implementation">
+                {`<Layout 
+  stickyBehavior="scroll-up-show"
+  showScrollIndicator={true}
+  scrollThreshold={50}
+  headerVariant="business"
+/>`}
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Auto-Hide Configuration */}
+          <Card role="listitem">
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2">
+                <span aria-hidden="true">⏰</span>
+                <span>Auto-Hide Timing</span>
+              </CardTitle>
+              <CardDescription>
+                Time-based header visibility control
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div class="bg-muted p-4 rounded-lg text-sm font-mono" role="code" aria-label="Auto-hide header implementation">
+                {`<Layout 
+  stickyBehavior="auto-hide"
+  hideDelay={3000}
+  scrollThreshold={100}
+  showScrollIndicator={false}
+/>`}
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Mobile-First Configuration */}
+          <Card role="listitem">
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2">
+                <span aria-hidden="true">📱</span>
+                <span>Mobile-First Optimization</span>
+              </CardTitle>
+              <CardDescription>
+                Optimized for mobile performance and UX
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div class="bg-muted p-4 rounded-lg text-sm font-mono" role="code" aria-label="Mobile-optimized header implementation">
+                {`<Layout 
+  stickyBehavior="hide-on-scroll"
+  scrollThreshold={30}
+  mobileOptimized={true}
+  headerVariant="minimal"
+/>`}
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Performance-First Static */}
+          <Card role="listitem">
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2">
+                <span aria-hidden="true">🚀</span>
+                <span>Performance-First</span>
+              </CardTitle>
+              <CardDescription>
+                Maximum performance with static behavior
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div class="bg-muted p-4 rounded-lg text-sm font-mono" role="code" aria-label="Performance-optimized static header implementation">
+                {`<Layout 
+  stickyBehavior="static"
+  headerVariant="default"
+  // No scroll listeners = best performance
+/>`}
+              </div>
+            </CardContent>
+          </Card>
+
+        </div>
+      </div>
+    </section>
+
+    {/* Performance & Technical Excellence */}
+    <section class="py-16 bg-muted/30" role="region" aria-labelledby="technical-title">
+      <div class="container mx-auto px-4">
+        <ScrollReveal client:load config={{ direction: 'scale', threshold: 0.3 }}>
+          <h2 id="technical-title" class="text-3xl font-bold text-foreground text-center mb-12">
+            Performance & Technical Excellence
+          </h2>
+        </ScrollReveal>
+        
+        <div class="max-w-4xl mx-auto">
+          <StaggeredAnimation client:load staggerDelay={200}>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8" role="list" aria-label="Technical excellence and performance features">
+              
+              {/* Performance Metrics */}
+              <div class="space-y-4" role="listitem">
+                <h3 class="text-xl font-semibold flex items-center space-x-2">
+                  <span aria-hidden="true">⚡</span>
+                  <span>Performance Optimizations</span>
+                </h3>
+                <ul class="space-y-2 text-muted-foreground" role="list" aria-label="Performance optimization features">
+                  <li role="listitem">• <strong>GPU Acceleration:</strong> Transform-based animations for 60fps</li>
+                  <li role="listitem">• <strong>RAF Throttling:</strong> RequestAnimationFrame for smooth scrolling</li>
+                  <li role="listitem">• <strong>Passive Listeners:</strong> Non-blocking scroll event handling</li>
+                  <li role="listitem">• <strong>Smart Caching:</strong> Efficient state management and DOM queries</li>
+                  <li role="listitem">• <strong>Will-Change Hints:</strong> Browser optimization guidance</li>
+                </ul>
+              </div>
+
+              {/* Business Benefits */}
+              <div class="space-y-4" role="listitem">
+                <h3 class="text-xl font-semibold flex items-center space-x-2">
+                  <span aria-hidden="true">💼</span>
+                  <span>Business Impact</span>
+                </h3>
+                <ul class="space-y-2 text-muted-foreground" role="list" aria-label="Business impact and benefits">
+                  <li role="listitem">• <strong>User Engagement:</strong> Smart navigation improves interaction rates</li>
+                  <li role="listitem">• <strong>Content Focus:</strong> Maximized reading space increases engagement</li>
+                  <li role="listitem">• <strong>Mobile Performance:</strong> Optimized for mobile-first business apps</li>
+                  <li role="listitem">• <strong>Brand Consistency:</strong> Professional header variants</li>
+                  <li role="listitem">• <strong>Conversion Optimization:</strong> Reduced friction in navigation</li>
+                </ul>
+              </div>
+
+              {/* Technical Architecture */}
+              <div class="space-y-4" role="listitem">
+                <h3 class="text-xl font-semibold flex items-center space-x-2">
+                  <span aria-hidden="true">🏗️</span>
+                  <span>Technical Architecture</span>
+                </h3>
+                <ul class="space-y-2 text-muted-foreground" role="list" aria-label="Technical architecture features">
+                  <li role="listitem">• <strong>Behavior Patterns:</strong> 5 intelligent sticky behaviors</li>
+                  <li role="listitem">• <strong>Scroll Detection:</strong> Direction-aware scroll intent analysis</li>
+                  <li role="listitem">• <strong>State Management:</strong> Efficient component state tracking</li>
+                  <li role="listitem">• <strong>Responsive Design:</strong> Adaptive across all screen sizes</li>
+                  <li role="listitem">• <strong>Framework Integration:</strong> Native Astro component system</li>
+                </ul>
+              </div>
+
+              {/* Accessibility Excellence */}
+              <div class="space-y-4" role="listitem">
+                <h3 class="text-xl font-semibold flex items-center space-x-2">
+                  <span aria-hidden="true">♿</span>
+                  <span>Accessibility Standards</span>
+                </h3>
+                <ul class="space-y-2 text-muted-foreground" role="list" aria-label="Accessibility compliance features">
+                  <li role="listitem">• <strong>WCAG 2.1 AA:</strong> Complete compliance with skip links</li>
+                  <li role="listitem">• <strong>Reduced Motion:</strong> Respects user motion preferences</li>
+                  <li role="listitem">• <strong>Screen Readers:</strong> Proper semantic structure and landmarks</li>
+                  <li role="listitem">• <strong>Keyboard Navigation:</strong> Full keyboard accessibility</li>
+                  <li role="listitem">• <strong>Focus Management:</strong> Logical focus flow preservation</li>
+                </ul>
+              </div>
+
+            </div>
+          </StaggeredAnimation>
+        </div>
+      </div>
+    </section>
+
+    {/* Scroll Test Content */}
+    <section class="py-16" role="region" aria-labelledby="test-content-title">
+      <div class="container mx-auto px-4">
+        <ScrollReveal client:load config={{ direction: 'scale', threshold: 0.3 }}>
+          <div class="text-center mb-12">
+            <h2 id="test-content-title" class="text-3xl font-bold text-foreground mb-4">
+              Header Behavior Test Content
+            </h2>
+            <p class="text-lg text-muted-foreground max-w-3xl mx-auto">
+              Scroll through the content below to experience the scroll-up-show behavior. 
+              Notice how the header intelligently responds to your scroll direction.
+            </p>
+            <div class="flex items-center justify-center space-x-4 mt-6">
+              <div class="text-center">
+                <AnimatedCounter client:load end={5} duration={1500} className="text-2xl font-bold text-primary" />
+                <div class="text-sm text-muted-foreground">Behavior Types</div>
+              </div>
+              <div class="text-center">
+                <AnimatedCounter client:load end={50} suffix="px" duration={2000} className="text-2xl font-bold text-primary" />
+                <div class="text-sm text-muted-foreground">Scroll Threshold</div>
+              </div>
+              <div class="text-center">
+                <AnimatedCounter client:load end={60} suffix="fps" duration={1800} className="text-2xl font-bold text-primary" />
+                <div class="text-sm text-muted-foreground">Animation Performance</div>
+              </div>
             </div>
           </div>
-        </CardContent>
-      </Card>
-    </div>
-  </section>
+        </ScrollReveal>
+        
+        <div class="max-w-3xl mx-auto space-y-6" role="list" aria-label="Scroll testing content sections">
+          {Array.from({ length: 12 }, (_, i) => (
+            <ScrollReveal key={`test-section-${i}`} client:load config={{ direction: 'up', threshold: 0.4, delay: i * 50 }}>
+              <Card role="listitem">
+                <CardHeader>
+                  <CardTitle>Header Test Section {i + 1}</CardTitle>
+                  <CardDescription>
+                    Content section for testing sticky header scroll behavior
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p class="text-muted-foreground leading-relaxed">
+                    This content demonstrates how the intelligent sticky header responds to scroll behavior. 
+                    As you scroll down through this content, the header gracefully hides to maximize your reading space 
+                    and minimize distractions. The scroll-up-show behavior intelligently detects when you're looking 
+                    for navigation options and smoothly reveals the header.
+                  </p>
+                  <p class="text-muted-foreground leading-relaxed mt-4">
+                    The header system uses GPU-accelerated transforms and throttled scroll listeners to ensure 
+                    smooth 60fps performance. Progress indicators provide visual feedback about your position in the content, 
+                    while the responsive design adapts perfectly across desktop and mobile devices.
+                  </p>
+                  {i === 5 && (
+                    <div class="mt-6 p-4 bg-primary/5 rounded-lg border border-primary/20">
+                      <h4 class="font-semibold text-primary mb-2">💡 Header Behavior Notice</h4>
+                      <p class="text-sm text-muted-foreground">
+                        You're halfway through the test content! Notice how the header has been intelligently 
+                        hiding and showing based on your scroll direction. This creates an optimal balance 
+                        between content immersion and navigation accessibility.
+                      </p>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            </ScrollReveal>
+          ))}
+        </div>
+      </div>
+    </section>
+
+  </main>
 
 </Layout>
