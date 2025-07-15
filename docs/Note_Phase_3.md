@@ -7,6 +7,7 @@
 **Complexity:** Low-Medium
 
 ### 📍 Context
+
 During Phase A revision (2025-07-08), discovered that multiple pages use `showBreadcrumbs={true}` prop but Layout.astro has no breadcrumbs implementation.
 
 **Decision:** Clean unused props now, implement feature properly in Phase 3.
@@ -14,16 +15,19 @@ During Phase A revision (2025-07-08), discovered that multiple pages use `showBr
 ### 🔧 Implementation Required
 
 1. **Add to Layout.astro interface:**
+
    ```typescript
    showBreadcrumbs?: boolean;
    ```
 
 2. **Import Breadcrumbs component in Layout.astro:**
+
    ```astro
    import Breadcrumbs from './Breadcrumbs.astro';
    ```
 
 3. **Add conditional rendering in Layout.astro:**
+
    ```astro
    {showBreadcrumbs && (
      <Breadcrumbs 
@@ -43,12 +47,14 @@ During Phase A revision (2025-07-08), discovered that multiple pages use `showBr
    - sidebar-showcase.astro
 
 ### 🎯 Business Value
+
 - **SEO**: Better page hierarchy understanding
 - **UX**: Improved navigation for complex sites
 - **Accessibility**: Enhanced screen reader navigation
 - **E-commerce**: Essential for product categories
 
 ### ✅ Existing Component
+
 Breadcrumbs.astro already exists in `/src/components/layouts/` with full functionality.
 
 **Estimated effort:** 1-2 hours implementation + testing
