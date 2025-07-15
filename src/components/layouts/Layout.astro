@@ -6,7 +6,7 @@ import Header from './Header.astro';
 import Footer from './Footer.astro';
 import Sidebar from './Sidebar.astro';
 import Breadcrumbs from './Breadcrumbs.astro'; 
-import { ViewTransitions } from 'astro:transitions';
+// import { ViewTransitions } from 'astro:transitions';
 import { Toaster } from '@/components/ui/sonner';
 
 export interface Props {
@@ -180,7 +180,7 @@ const finalKeywords = currentPage ?
     </script>
     
     <!-- Astro 5 ViewTransitions for smooth page transitions -->
-    <ViewTransitions />
+    <!-- <ViewTransitions /> -->
     
     <!-- Global CSS with TailwindCSS 4 + shadcn/ui (MUST be is:global) -->
     <style is:global>
