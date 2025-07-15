@@ -1,8 +1,8 @@
 {
   "name": "astro-starter",
   "type": "module",
-  "version": "2.0.0",
-  "description": "🚀 Production-ready Astro 5 starter with TailwindCSS 4, shadcn/ui, and TypeScript. Complete professional website solution with 25 pages, comprehensive layout system, responsive navigation, mega menus, breadcrumbs, touch gestures, flexible grid system with templates and page compositions, comprehensive sidebar navigation for admin dashboards, intelligent sticky headers with scroll behaviors, fixed sidebar with scroll indicators, professional floating action buttons with boundary detection, complete scroll tracking system with reading progress and table of contents, smooth transitions with micro-interactions and loading states. PHASE 8+ COMPLETE - 100% Achievement with professional business components, legal compliance (Swiss/EU), WCAG 2.1 AA accessibility, and production-ready content.",
+  "version": "2.0.1",
+  "description": "Production-ready Astro 5 starter with TailwindCSS 4, shadcn/ui, and TypeScript.",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",

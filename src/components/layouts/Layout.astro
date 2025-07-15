@@ -5,6 +5,7 @@
 import Header from './Header.astro';
 import Footer from './Footer.astro';
 import Sidebar from './Sidebar.astro';
+import Breadcrumbs from './Breadcrumbs.astro'; 
 import { ViewTransitions } from 'astro:transitions';
 import { Toaster } from '@/components/ui/sonner';
 
@@ -23,6 +24,7 @@ export interface Props {
   showCTA?: boolean;
   ctaText?: string;
   ctaHref?: string;
+  showBreadcrumbs?: boolean;
   // Business props (for Footer)
   showBusinessInfo?: boolean;
   showNewsletter?: boolean;
@@ -66,6 +68,7 @@ const {
   showCTA = false,
   ctaText = "Get Started",
   ctaHref = "/contact",
+  showBreadcrumbs = true,
   // Business features
   showBusinessInfo = false,
   showNewsletter = false,
@@ -286,6 +289,16 @@ const finalKeywords = currentPage ?
           hideDelay={hideDelay}
           showScrollIndicator={showScrollIndicator}
         />
+
+        <!-- Breadcrumbs Navigation -->
+        {showBreadcrumbs && (
+          <Breadcrumbs 
+            variant="business"
+            showHome={true}
+            showIcons={true}
+            currentPageTitle={title}
+          />
+        )}
         
         <!-- Main Content -->
         <main id="main-content" role="main" class="flex-1" tabindex="-1">

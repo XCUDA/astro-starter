@@ -14,6 +14,8 @@ export interface Props {
     icon?: string;
   }>;
   currentPageTitle?: string;
+  showCurrentPage?: boolean;
+  showVirtualCategories?: boolean;
 }
 
 const { 
@@ -22,7 +24,8 @@ const {
   showIcons = true,
   maxItems = 5,
   customBreadcrumbs,
-  currentPageTitle
+  currentPageTitle,
+  showVirtualCategories,
 } = Astro.props;
 
 // Breadcrumb item interface for type safety
@@ -32,6 +35,8 @@ interface BreadcrumbItem {
   icon?: string;
   current?: boolean;
   ellipsis?: boolean;
+  parent?: string; // For virtual categories
+  category?: string; // For virtual categories
 }
 
 // Site page information interface
@@ -40,6 +45,11 @@ interface PageInfo {
   icon: string;
   parent?: string;
   category?: string;
+  // Optional properties for virtual categories
+  virtual?: boolean; // Indicates if this is a virtual category
+  virtualCategory?: string; // Category for virtual pages
+  virtualIcon?: string; // Icon for virtual pages
+  virtualName?: string; // Name for virtual pages
 }
 
 // Site structure mapping for intelligent breadcrumb generation
@@ -48,7 +58,15 @@ const siteStructure: Record<string, PageInfo> = {
   '': { name: 'Home', icon: '🏠' },
   'home': { name: 'Home', icon: '🏠' },
   
-  // Showcases
+  // Virtual categories
+  'components': { name: 'Components', icon: '🧩' },
+  'layouts': { name: 'Layouts', icon: '📐' },
+  'features': { name: 'Features', icon: '✨' },
+  'demo': { name: 'Demo', icon: '🎬' },
+  'resources': { name: 'Resources', icon: '📖' },
+  'legal': { name: 'Legal', icon: '⚖️' },
+
+  // Component Showcases
   'form-showcase': { 
     name: 'Form Components', 
     icon: '📝',
@@ -79,54 +97,159 @@ const siteStructure: Record<string, PageInfo> = {
     parent: 'components',
     category: 'Components'
   },
-  
-  // Business sections
-  'about': { name: 'About Us', icon: '🏢' },
-  'services': { name: 'Services', icon: '💼' },
-  'contact': { name: 'Contact', icon: '📞' },
-  'blog': { name: 'Blog', icon: '📝' },
-  'portfolio': { name: 'Portfolio', icon: '🎨' },
-  'team': { name: 'Team', icon: '👥' },
-  
-  // Documentation
-  'docs': { name: 'Documentation', icon: '📚' },
+  // Layout Showcases
+  'layout-showcase': { 
+    name: 'Layouts & Patterns', 
+    icon: '📐',
+    parent: 'layouts',
+    category: 'layouts'
+  },
+  'grid-showcase': { 
+    name: 'Grid & Flexbox', 
+    icon: '📏',
+    parent: 'layouts',
+    category: 'layouts'
+  },
+  'sidebar-showcase': { 
+    name: 'Sidebar & Navigation', 
+    icon: '📚',
+    parent: 'layouts',
+    category: 'layouts'
+  },
+  // Feature Showcases
+  'sticky-header-showcase': { 
+    name: 'Sticky Headers', 
+    icon: '📌',
+    parent: 'features',
+    category: 'features'
+  },
+  'fab-showcase': { 
+    name: 'Floating Action Buttons', 
+    icon: '⚙️',
+    parent: 'features',
+    category: 'features'
+  },
+  'scroll-showcase': { 
+    name: 'Scroll Effects', 
+    icon: '📜',
+    parent: 'features',
+    category: 'features'
+  },
+  'transitions-showcase': { 
+    name: 'Smooth Transitions', 
+    icon: '🌊',
+    parent: 'features',
+    category: 'features'
+  },
+  // Demo pages
+  'business-demo': { 
+    name: 'Business Demo', 
+    icon: '💼',
+    parent: 'demo',
+    category: 'Demo'
+  },
+  'corporate-demo': { 
+    name: 'Corporate Demo', 
+    icon: '🏢',
+    parent: 'demo',
+    category: 'demo'
+  },
+  'startup-demo': { 
+    name: 'Startup Demo', 
+    icon: '🚀',
+    parent: 'demo',
+    category: 'Demo'
+  },
+  'ecommerce-demo': { 
+    name: 'E-commerce Demo', 
+    icon: '🛒',
+    parent: 'demo',
+    category: 'demo'
+  },
+  'portfolio-demo': { 
+    name: 'Portfolio Demo', 
+    icon: '🎨',
+    parent: 'demo',
+    category: 'demo'
+  },
+    // Documentation
+  'docs': { 
+    name: 'Documentation', 
+    icon: '📚',
+    parent: 'resources',
+    category: 'resources'},
   'quick-start': { 
     name: 'Quick Start', 
     icon: '⚡',
-    parent: 'docs',
-    category: 'Documentation'
+    parent: 'resources',
+    category: 'resources'
   },
   'api': { 
     name: 'API Reference', 
     icon: '🔧',
     parent: 'docs',
-    category: 'Documentation'
+    category: 'resources'
   },
-  
-  // Virtual categories
-  'components': { name: 'Components', icon: '🧩' },
-  
+  // Support sections
+  'support': { 
+    name: 'Support', 
+    icon: '💬', 
+    parent: 'resources',
+    category: 'resources'
+  },
+  'faq': { 
+    name: 'FAQ', 
+    icon: '❓',
+    parent: 'resources',
+    category: 'resources'
+  },
+  'help': { 
+    name: 'Help Center', 
+    icon: '🆘',
+    parent: 'resources',
+    category: 'resources'
+  },
+  'contact': { 
+    name: 'Contact Support', 
+    icon: '📧',
+    parent: 'resources',
+    category: 'resources'
+  },
+  'privacy': { 
+    name: 'Privacy Policy', 
+    icon: '🔒',
+    parent: 'legal',
+    category: 'legal'
+  },
+  'terms': { 
+    name: 'Terms of Service', 
+    icon: '📜',
+    parent: 'legal',
+    category: 'legal'
+  },
+  'cookies': { 
+    name: 'Cookie Policy', 
+    icon: '🍪',
+    parent: 'legal',
+    category: 'legal'
+  },
+
+  // Business sections
+  /*'about': { name: 'About Us', icon: '🏢' },
+  'services': { name: 'Services', icon: '💼' },
+  'contact': { name: 'Contact', icon: '📞' },
+  'blog': { name: 'Blog', icon: '📝' },
+  'portfolio': { name: 'Portfolio', icon: '🎨' },
+  'team': { name: 'Team', icon: '👥' },
+  */
+ /*
   // E-commerce sections
   'products': { name: 'Products', icon: '📦' },
   'categories': { name: 'Categories', icon: '📂' },
   'cart': { name: 'Shopping Cart', icon: '🛒' },
   'checkout': { name: 'Checkout', icon: '💳' },
   'account': { name: 'My Account', icon: '👤' },
-  
-  // Support sections
-  'support': { name: 'Support', icon: '💬' },
-  'faq': { 
-    name: 'FAQ', 
-    icon: '❓',
-    parent: 'support',
-    category: 'Support'
-  },
-  'help': { 
-    name: 'Help Center', 
-    icon: '🆘',
-    parent: 'support',
-    category: 'Support'
-  }
+  */
 };
 
 // Generate breadcrumbs from URL or custom props
