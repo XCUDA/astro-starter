@@ -1,0 +1,142 @@
+---
+// src/pages/about.astro - VERSION CORRIGÉE TYPESCRIPT
+import Layout from '@/components/layouts/Layout.astro';
+import { getEntry, getCollection, type CollectionEntry } from 'astro:content';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+
+// Get about page content
+const aboutPage = await getEntry('pages', 'about');
+const { Content } = await aboutPage!.render();
+
+// Get some testimonials for the about page with proper typing
+const testimonials = await getCollection('testimonials');
+const featuredTestimonials = testimonials
+  .filter((t: CollectionEntry<'testimonials'>) => t.data.featured)
+  .sort((a: CollectionEntry<'testimonials'>, b: CollectionEntry<'testimonials'>) => b.data.rating - a.data.rating)
+  .slice(0, 3);
+
+// Render testimonials content beforehand to avoid async issues in template
+const testimonialContents = await Promise.all(
+  featuredTestimonials.map(async (testimonial: CollectionEntry<'testimonials'>) => {
+    const { Content: TestimonialContent } = await testimonial.render();
+    return {
+      testimonial,
+      Content: TestimonialContent
+    };
+  })
+);
+---
+
+<Layout 
+  title={aboutPage!.data.title}
+  description={aboutPage!.data.description}
+  currentPage="about"
+  showBreadcrumbs={true}
+>
+  <div class="min-h-screen">
+    
+    <!-- Hero Section -->
+    <section class="py-20 bg-gradient-to-br from-green-50 to-blue-50 dark:from-gray-900 dark:to-gray-800">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto text-center">
+          <h1 class="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
+            {aboutPage!.data.title}
+          </h1>
+          <p class="text-xl text-muted-foreground mb-12">
+            {aboutPage!.data.description}
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Content -->
+    <section class="py-16">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto">
+          <Card>
+            <CardContent className="prose prose-lg max-w-none p-8">
+              <Content />
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    {featuredTestimonials.length > 0 && (
+      <section class="py-16 bg-gray-50 dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+          <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-12">Ce que disent nos clients</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+              {testimonialContents.map(({ testimonial, Content: TestimonialContent }) => (
+                <Card>
+                  <CardHeader>
+                    <div class="flex items-center justify-between">
+                      <div>
+                        <CardTitle className="text-lg">{testimonial.data.author}</CardTitle>
+                        {testimonial.data.location && (
+                          <p class="text-sm text-muted-foreground">{testimonial.data.location}</p>
+                        )}
+                      </div>
+                      <div class="flex text-yellow-400">
+                        {Array.from({ length: testimonial.data.rating }, (_, i) => (
+                          <span>⭐</span>
+                        ))}
+                      </div>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <div class="prose prose-sm">
+                      <TestimonialContent />
+                    </div>
+                    <p class="text-xs text-muted-foreground mt-4">
+                      Service: {testimonial.data.service}
+                    </p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- CTA Section -->
+    <section class="py-16">
+      <div class="container mx-auto px-4 text-center">
+        <div class="max-w-2xl mx-auto">
+          <h2 class="text-3xl font-bold mb-6">Prêt à débuter votre parcours ?</h2>
+          <p class="text-lg text-muted-foreground mb-8">
+            Découvrez comment nos services peuvent vous aider à retrouver votre équilibre naturel.
+          </p>
+          <div class="flex flex-wrap justify-center gap-4">
+            <Button size="lg" asChild>
+              <a href="/services">Découvrir nos services</a>
+            </Button>
+            <Button size="lg" variant="outline" asChild>
+              <a href="/contact">Nous contacter</a>
+            </Button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</Layout>
+
+<style>
+  .prose h2 {
+    @apply text-2xl font-semibold text-green-700 dark:text-green-300 mt-8 mb-4;
+  }
+  
+  .prose h3 {
+    @apply text-xl font-medium text-gray-700 dark:text-gray-300 mt-6 mb-3;
+  }
+  
+  .prose p {
+    @apply text-gray-600 dark:text-gray-300 leading-relaxed mb-4;
+  }
+</style>

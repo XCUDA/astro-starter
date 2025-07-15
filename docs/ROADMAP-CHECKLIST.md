@@ -1,4 +1,4 @@
-# 📋 Checklist de Conformité - Feuille de Route v2.0.0
+# 📋 Checklist de Conformité - Feuille de Route v2.1.0
 
 ## 🏗️ Phase 1 : Initialisation et Configuration de Base - ✅ COMPLÈTE
 
@@ -285,15 +285,63 @@
 
 ---
 
-## 🚀 Phase 3 : Fonctionnalités Avancées (Option C - final) - 0% COMPLÈTE
+## 🚀 Phase 3 : Fonctionnalités Avancées - 🔄 EN COURS
 
-### ❌ 3.1 Content Layer API (Astro 5)
+### 🔄 3.1 Content Layer API (Astro 5) - **EN COURS 85% COMPLÈTE**
 
-- [ ] **Configuration Markdown/MDX** avec syntaxe highlighting
+#### **✅ 3.1.1 Configuration Content Collections (Juillet 2025)**
+
+- [x] **src/content/config.ts** : Schémas TypeScript pour thérapeute holistique
+  - [x] **Pages collection** : about.md avec meta SEO complètes
+  - [x] **Services collection** : massage-therapeutique.md, reflexologie-plantaire.md
+  - [x] **Testimonials collection** : témoignages clients avec ratings
+  - [x] **Booking collection** : horaires, contact, politique annulation
+- [x] **Type safety** : CollectionEntry types stricts pour TypeScript
+- [x] **Validation schema** : Zod validation pour tous les champs requis
+
+#### **✅ 3.1.2 Pages Dynamiques Business (Juillet 2025)**
+
+- [x] **src/pages/services.astro** : Page index avec listing automatique par catégorie
+- [x] **src/pages/services/[...slug].astro** : Pages services individuelles avec booking sidebar
+- [x] **src/pages/about.astro** : Modifiée pour contenu dynamique + témoignages featured
+- [x] **Dynamic routing** : Generation automatique pages services
+- [x] **Type-safe rendering** : Tous composants avec types CollectionEntry corrects
+
+#### **✅ 3.1.3 Toggle Demo/Client Implementation (Juillet 2025)**
+
+- [x] **astro.config.mjs** : Variables CLIENT_MODE/DEMO_MODE configurées
+- [x] **package.json** : Scripts dev:client, build:client (Windows PowerShell compatible)
+- [x] **Navigation.astro** : Double navigation (demo showcase complète vs client simplifiée)
+- [x] **index.astro** : Homepage adaptative (Astro Starter vs Thérapie Holistique)
+- [x] **Cross-platform scripts** : set CLIENT_MODE=true && astro dev pour Windows
+
+#### **✅ 3.1.4 Business Content Integration (Juillet 2025)**
+
+- [x] **Contenu thérapeute** : 4 services avec frontmatter complet
+- [x] **Témoignages clients** : 2 témoignages avec système rating 5 étoiles
+- [x] **Pages utilitaires** : contact, horaires avec coordonnées réalistes
+- [x] **SEO optimization** : Meta tags adaptés, keywords business-specific
+- [x] **Markdown linting** : Correction MD025, MD041 pour conformité
+
+#### **❌ 3.1.5 TailwindCSS 4 Integration Issues (EN COURS)**
+
+- [x] **Problème identifié** : Classes text-2xl, text-xl non reconnues en mode client
+- [x] **Cause analysée** : TailwindCSS 4 CSS-first approach, utilities manquantes
+- [ ] **Solution global.css** : Configuration TW4 + shadcn/ui sans casser mode demo
+- [ ] **Testing cross-mode** : Validation classes fonctionnent demo + client
+- [ ] **Documentation upgrade** : Guide TailwindCSS 4 migration
+
+#### **🔄 3.1.6 Prochaines Étapes Content Layer**
+
+- [ ] **RSS feeds automatiques** pour blog/services
 - [ ] **Support CMS headless** (Strapi, Sanity, Contentful)
-- [ ] **Collections typées** pour blog/portfolio
-- [ ] **Dynamic routing** avec content collections
-- [ ] **RSS feeds** automatiques
+- [ ] **Dynamic collections** portfolio, blog avec pagination
+- [ ] **Image optimization** avec content collections
+- [ ] **Search functionality** avec collections
+
+**📊 PHASE 3.1 : 85% COMPLÈTE** - Système Content Layer fonctionnel avec problème CSS à résoudre
+
+---
 
 ### ❌ 3.2 Server Islands & Performance
 
@@ -374,6 +422,7 @@
 - [x] **Smooth transitions showcase** page dédiée système animations complet
 - [x] **Business demos** : business-demo, corporate-demo, startup-demo pages
 - [x] **Utility pages** : contact, support, faq, privacy, cookies, terms
+- [x] **Phase 3.1 Content Guide** : Documentation Content Layer API avec toggle demo/client
 - [ ] **Storybook integration** pour documentation composants
 - [ ] **Best practices guide** pour développement client
 
@@ -387,10 +436,10 @@
 
 ---
 
-## 📈 MÉTRIQUES FINALES v2.0.0
+## 📈 MÉTRIQUES FINALES v2.1.0
 
-| Métrique | Cible | Status Final |
-|----------|-------|--------------|
+| Métrique | Cible | Status Juillet 2025 |
+|----------|-------|---------------------|
 | **Total Pages** | 25 | ✅ **25** (19 showcases + 6 utilitaires) |
 | **Components** | 50+ | ✅ **59** (26 shadcn/ui + 33 custom) |
 | **TypeScript Errors** | 0 | ✅ **0** |
@@ -399,40 +448,33 @@
 | **Legal Compliance** | Swiss/EU | ✅ **Complete** |
 | **Business Ready** | Production | ✅ **Client deployable** |
 | **Breadcrumbs System** | Complete | ✅ **25/25 pages** |
+| **Content Layer API** | Functional | 🔄 **85% - CSS issues** |
+| **Demo/Client Toggle** | Working | ✅ **Operational** |
 
 ---
 
-## 🎯 PLAN D'EXÉCUTION STRATÉGIQUE
+## 🎯 PHASE 3.1 PROGRESS SUMMARY (Juillet 2025)
 
-### **✅ PHASE 1-2 TERMINÉES : Foundation & Component System Complete**
+### ✅ **ACCOMPLISSEMENTS MAJEURS**
 
-**Résultat :** 59 composants opérationnels + Layout system complet + 16 showcases
+1. **✅ Content Collections System** : TypeScript strict avec 4 collections business
+2. **✅ Dynamic Pages Generation** : Services automatiques + about dynamique  
+3. **✅ Demo/Client Toggle** : Navigation et homepage adaptatifs
+4. **✅ Business Content** : Thérapeute holistique avec contenu réaliste
+5. **✅ Cross-Platform Scripts** : Windows PowerShell compatible
 
-### **✅ PHASE A-B TERMINÉES : Post-Phase 2 Audit & Enhancement Complete**
+### 🔄 **PROBLÈMES EN COURS**
 
-**Résultat :** Technical excellence + Content cohérence + Navigation optimization + 6 business utilities + Legal compliance
+1. **❌ TailwindCSS 4 Classes** : text-2xl, text-xl non reconnues en mode client
+   - **Cause** : Nouvelle approche CSS-first de TW4
+   - **Impact** : Mode demo fonctionne, mode client a classes manquantes
+   - **Solution** : Configuration global.css sans casser version demo
 
-### **🎊 RELEASE v2.0.0 - PRODUCTION-READY COMPLETE**
+### 🎯 **PROCHAINES ACTIONS**
 
-**Résultat :** 25 pages, 59 composants, WCAG 2.1 AA, Swiss/EU compliant, Client deployable
-
-### **🎯 PROCHAINES ACTIONS STRATÉGIQUES**
-
-**Option A - Phase 3 Advanced Features (Recommandé) :**
-
-1. **Content Layer API** : Support CMS headless et collections typées
-2. **Server Islands & Performance** : Optimisations avancées et monitoring
-3. **SEO & Analytics** : Intégrations complètes pour business
-
-**Option B - Phase 4 Tooling & DX :**
-
-1. **Development Setup** : ESLint, Prettier, VS Code optimisations
-2. **Deployment & CI/CD** : GitHub Actions, monitoring production
-
-**Option C - Phase 5 Documentation & Templates :**
-
-1. **Storybook Integration** : Documentation interactive composants
-2. **Complete Templates** : Landing page, blog, portfolio prêts à l'emploi
+1. **Phase 3.1 Completion** : Résoudre problème TailwindCSS 4 classes
+2. **Testing & Validation** : Mode demo + client 100% fonctionnels
+3. **Phase 3.2 Planning** : Server Islands & Performance optimization
 
 ---
 
@@ -450,13 +492,17 @@
 
 **25 pages, 59 components, Swiss/EU compliant, WCAG 2.1 AA, Client-ready .**
 
----
+### **🚀 PHASE 3.1 - CONTENT LAYER BREAKTHROUGH**
 
-**🏷️ Version actuelle :** v2.0.0 - Production Complete  
-**📅 Dernière mise à jour :** Juillet 2025  
-**🎯 Statut :** 🎊 **PRODUCTION-READY - 100% Complete**  
-**🚀 Prochaine action :** Phase 3 Advanced Features ou déploiement client
+**Content Collections + Dynamic routing + Demo/Client toggle + Business integration - Modern CMS foundation.**
 
 ---
 
-**🎊 HISTORIC ACHIEVEMENT : Version 2.0.0 - Professional Website Starter Ready for Client Deployment.**
+**🏷️ Version actuelle :** v2.1.0 - Phase 3.1 Content Layer (85% Complete)  
+**📅 Dernière mise à jour :** 15 Juillet 2025  
+**🎯 Statut :** 🔄 **PHASE 3.1 EN COURS - TailwindCSS issue à résoudre**  
+**🚀 Prochaine action :** Corriger classes TW4 sans casser mode demo
+
+---
+
+**🎊 PHASE 3.1 MAJOR ACHIEVEMENT : Content Layer API opérationnel avec toggle Demo/Client - Foundation moderne CMS établie.**

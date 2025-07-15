@@ -1,20 +1,62 @@
 ---
 import Layout from '../components/layouts/Layout.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+
+// Toggle Demo/Client mode
+const isClientMode = import.meta.env.CLIENT_MODE;
+const isDemoMode = import.meta.env.DEMO_MODE;
+
+// En mode client, charger le contenu dynamique
+let services: CollectionEntry<'services'>[] = [];
+let testimonials: CollectionEntry<'testimonials'>[] = [];
+
+if (isClientMode) {
+  try {
+    const allServices = await getCollection('services');
+    const allTestimonials = await getCollection('testimonials');
+    
+    // Limiter pour la homepage
+    services = allServices.filter((s: CollectionEntry<'services'>) => s.data.featured).slice(0, 3);
+    testimonials = allTestimonials.filter((t: CollectionEntry<'testimonials'>) => t.data.featured).slice(0, 2);
+  } catch (error) {
+    // Si les collections n'existent pas encore, on continue sans erreur
+    console.log('Content collections not yet available');
+  }
+}
+
+// Render testimonials content beforehand to avoid async issues in template (client mode only)
+const testimonialContents = isClientMode ? await Promise.all(
+  testimonials.map(async (testimonial: CollectionEntry<'testimonials'>) => {
+    const { Content: TestimonialContent } = await testimonial.render();
+    return {
+      testimonial,
+      Content: TestimonialContent
+    };
+  })
+) : [];
 ---
 
 <Layout 
-	title="Astro Professional Starter"
-	description="Astro Professional Starter - Modern web development foundation with Astro 5, TailwindCSS 4, and shadcn/ui."
+	title={isClientMode ? "Thérapie Holistique - Sarah Dubois | Lausanne" : "Astro Professional Starter"}
+	description={isClientMode ? "Thérapeute holistique à Lausanne. Massages thérapeutiques, réflexologie plantaire, soins énergétiques pour votre bien-être." : "Astro Professional Starter - Modern web development foundation with Astro 5, TailwindCSS 4, and shadcn/ui."}
   	currentPage="index"
   	headerVariant="default"
-  	footerVariant="business"
+  	footerVariant={isClientMode ? "minimal" : "business"}
 	
 	stickyBehavior="always-visible"
 	showScrollIndicator={false}
 	scrollThreshold={50}
+	showBreadcrumbs={false}
 
-	keywords={["Astro Starter", "Astro 5", "TailwindCSS 4", "shadcn/ui", "web development", "modern web design", "responsive design", "accessible components", "performance optimization", "Astro components", "Astro layout system", "Astro design system", "Astro UI components", "Astro starter template", "Astro professional website", "Astro web architecture", "Astro 5 features", "Astro 5 components", "Astro 5 design system"]}
+	keywords={isClientMode ? 
+		["thérapie holistique", "massage thérapeutique", "réflexologie plantaire", "soins énergétiques", "bien-être", "Lausanne", "thérapeute", "relaxation", "détente", "équilibre naturel"] :
+		["Astro Starter", "Astro 5", "TailwindCSS 4", "shadcn/ui", "web development", "modern web design", "responsive design", "accessible components", "performance optimization", "Astro components", "Astro layout system", "Astro design system", "Astro UI components", "Astro starter template", "Astro professional website", "Astro web architecture", "Astro 5 features", "Astro 5 components", "Astro 5 design system"]}
 >
+
+{isDemoMode ? (
+	<!-- MODE DEMO - Contenu showcase complet original -->
 	<main class="min-h-screen bg-background" role="main">
 		
 		<!-- Hero Section - Base Technique  -->
@@ -466,4 +508,134 @@ npm run dev</code></pre>
 		</section>
 
 	</main>
+) : (
+	<!-- MODE CLIENT - Homepage thérapeutique -->
+	<main class="min-h-screen">
+		
+		<!-- Hero Section Thérapeutique -->
+		<section class="py-20 bg-gradient-to-br from-green-50 to-blue-50 dark:from-gray-900 dark:to-gray-800">
+			<div class="container mx-auto px-4 text-center">
+				<h1 class="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
+					Thérapie Holistique
+				</h1>
+				<p class="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
+					Retrouvez votre équilibre naturel grâce à une approche intégrative du bien-être
+				</p>
+				<div class="flex flex-wrap justify-center gap-4">
+					<Button size="lg" asChild>
+						<a href="/services">Découvrir nos services</a>
+					</Button>
+					<Button size="lg" variant="outline" asChild>
+						<a href="/contact">Prendre rendez-vous</a>
+					</Button>
+				</div>
+			</div>
+		</section>
+
+		<!-- Services Présentés -->
+		{services.length > 0 && (
+			<section class="py-16">
+				<div class="container mx-auto px-4">
+					<h2 class="text-3xl font-bold text-center mb-12">Nos Services Principaux</h2>
+					<div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+						{services.map((service: CollectionEntry<'services'>) => (
+							<Card className="text-center hover:shadow-lg transition-shadow">
+								<CardHeader>
+									<CardTitle>{service.data.title}</CardTitle>
+									<CardDescription>{service.data.subtitle}</CardDescription>
+								</CardHeader>
+								<CardContent>
+									<p class="text-muted-foreground mb-4">{service.data.description}</p>
+									<div class="flex justify-between items-center mb-4">
+										<span class="text-sm text-muted-foreground">{service.data.duration}</span>
+										<span class="font-semibold text-green-600">{service.data.price}</span>
+									</div>
+									<Button asChild className="w-full">
+										<a href={`/services/${service.slug}`}>En savoir plus</a>
+									</Button>
+								</CardContent>
+							</Card>
+						))}
+					</div>
+				</div>
+			</section>
+		)}
+
+		<!-- Témoignages -->
+		{testimonials.length > 0 && (
+			<section class="py-16 bg-gray-50 dark:bg-gray-800">
+				<div class="container mx-auto px-4">
+					<h2 class="text-3xl font-bold text-center mb-12">Ce que disent nos clients</h2>
+					<div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+						{testimonialContents.map(({ testimonial, Content: TestimonialContent }) => (
+							<Card>
+								<CardHeader>
+									<div class="flex justify-between items-start">
+										<div>
+											<CardTitle className="text-lg">{testimonial.data.author}</CardTitle>
+											<CardDescription>{testimonial.data.service}</CardDescription>
+										</div>
+										<div class="flex text-yellow-400">
+											{Array.from({ length: testimonial.data.rating }, (_, i) => (
+												<span>⭐</span>
+											))}
+										</div>
+									</div>
+								</CardHeader>
+								<CardContent>
+									<div class="prose prose-sm">
+										<TestimonialContent />
+									</div>
+								</CardContent>
+							</Card>
+						))}
+					</div>
+				</div>
+			</section>
+		)}
+
+		<!-- À Propos Section -->
+		<section class="py-16">
+			<div class="container mx-auto px-4">
+				<div class="max-w-4xl mx-auto text-center">
+					<h2 class="text-3xl font-bold mb-6">Votre Thérapeute</h2>
+					<p class="text-lg text-muted-foreground mb-8">
+						Diplômée en thérapies manuelles et énergétiques avec plus de 10 ans d'expérience, 
+						je vous accompagne dans votre parcours vers un bien-être durable et équilibré.
+					</p>
+					<div class="flex flex-wrap justify-center gap-4">
+						<Button size="lg" asChild>
+							<a href="/about">En savoir plus sur mon parcours</a>
+						</Button>
+						<Button size="lg" variant="outline" asChild>
+							<a href="/services">Découvrir mes services</a>
+						</Button>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- CTA Final -->
+		<section class="py-16 bg-green-600 text-white">
+			<div class="container mx-auto px-4 text-center">
+				<h2 class="text-3xl font-bold mb-4">Prêt à commencer votre parcours de bien-être ?</h2>
+				<p class="text-xl mb-8 opacity-90">
+					Contactez-nous dès aujourd'hui pour une consultation personnalisée.
+				</p>
+				<div class="flex flex-wrap justify-center gap-4">
+					<Button size="lg" variant="secondary">
+						<span class="mr-2">📞</span>
+						+41 21 123 45 67
+					</Button>
+					<Button size="lg" variant="outline" className="text-white border-white hover:bg-white hover:text-green-600">
+						<span class="mr-2">📧</span>
+						Nous contacter
+					</Button>
+				</div>
+			</div>
+		</section>
+
+	</main>
+)}
+
 </Layout>

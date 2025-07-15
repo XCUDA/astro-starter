@@ -1,0 +1,239 @@
+---
+// src/pages/services/[...slug].astro - VERSION CORRIGÉE TYPESCRIPT
+import Layout from '@/components/layouts/Layout.astro';
+import { getCollection, getEntry, type CollectionEntry } from 'astro:content';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+
+export async function getStaticPaths() {
+  const services = await getCollection('services');
+  return services.map((service: CollectionEntry<'services'>) => ({
+    params: { slug: service.slug },
+    props: { service },
+  }));
+}
+
+type Props = {
+  service: CollectionEntry<'services'>;
+};
+
+const { service } = Astro.props;
+const { Content } = await service.render();
+
+// Get booking info for contact details with proper typing
+const bookingInfo = await getCollection('booking');
+const contactInfo = bookingInfo.find((item: CollectionEntry<'booking'>) => item.data.type === 'schedule');
+---
+
+<Layout 
+  title={`${service.data.title} - Thérapie Holistique`}
+  description={service.data.description}
+  currentPage="services"
+  showBreadcrumbs={true}
+>
+  <div class="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 dark:from-gray-900 dark:to-gray-800">
+    
+    <!-- Hero Section -->
+    <section class="py-20">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto">
+          
+          <!-- Service Header -->
+          <div class="text-center mb-12">
+            <Badge variant="secondary" className="mb-4">
+              {service.data.category}
+            </Badge>
+            <h1 class="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
+              {service.data.title}
+            </h1>
+            {service.data.subtitle && (
+              <p class="text-xl text-muted-foreground mb-8">
+                {service.data.subtitle}
+              </p>
+            )}
+            <div class="flex flex-wrap justify-center gap-4 mb-8">
+              <div class="flex items-center gap-2">
+                <span class="text-2xl">⏱️</span>
+                <span class="font-medium">{service.data.duration}</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-2xl">💰</span>
+                <span class="font-medium">{service.data.price}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Service Content -->
+          <div class="grid lg:grid-cols-3 gap-8">
+            
+            <!-- Main Content -->
+            <div class="lg:col-span-2">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Description du Service</CardTitle>
+                </CardHeader>
+                <CardContent className="prose prose-lg max-w-none">
+                  <Content />
+                </CardContent>
+              </Card>
+
+              <!-- Benefits -->
+              {service.data.benefits.length > 0 && (
+                <Card className="mt-6">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <span>✨</span> Bienfaits
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <ul class="grid md:grid-cols-2 gap-3">
+                      {service.data.benefits.map((benefit: string) => (
+                        <li class="flex items-start gap-2">
+                          <span class="text-green-500 mt-1">✓</span>
+                          <span>{benefit}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </CardContent>
+                </Card>
+              )}
+
+              <!-- Suitable For & Contraindications -->
+              <div class="grid md:grid-cols-2 gap-6 mt-6">
+                {service.data.suitable_for.length > 0 && (
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-green-600">Indiqué pour</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <ul class="space-y-2">
+                        {service.data.suitable_for.map((indication: string) => (
+                          <li class="flex items-center gap-2">
+                            <span class="text-green-500">👍</span>
+                            <span class="text-sm">{indication}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </CardContent>
+                  </Card>
+                )}
+
+                {service.data.contraindications.length > 0 && (
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-amber-600">Contre-indications</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <ul class="space-y-2">
+                        {service.data.contraindications.map((contra: string) => (
+                          <li class="flex items-center gap-2">
+                            <span class="text-amber-500">⚠️</span>
+                            <span class="text-sm">{contra}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </CardContent>
+                  </Card>
+                )}
+              </div>
+            </div>
+
+            <!-- Sidebar - Booking Info -->
+            <div class="lg:col-span-1">
+              <Card className="sticky top-6">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <span>📅</span> Prendre Rendez-vous
+                  </CardTitle>
+                  <CardDescription>
+                    Réservez votre séance de {service.data.title}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  
+                  <!-- Price Display -->
+                  <div class="text-center p-4 bg-green-50 dark:bg-green-900/20 rounded-lg">
+                    <div class="text-2xl font-bold text-green-600">
+                      {service.data.price}
+                    </div>
+                    <div class="text-sm text-muted-foreground">
+                      Durée: {service.data.duration}
+                    </div>
+                  </div>
+
+                  <!-- Contact Options -->
+                  <div class="space-y-3">
+                    <Button className="w-full" size="lg">
+                      <span class="mr-2">📞</span>
+                      Appeler maintenant
+                    </Button>
+                    
+                    <Button variant="outline" className="w-full">
+                      <span class="mr-2">💬</span>
+                      WhatsApp
+                    </Button>
+                    
+                    <Button variant="outline" className="w-full">
+                      <span class="mr-2">📧</span>
+                      Email
+                    </Button>
+                  </div>
+
+                  <!-- Schedule Info -->
+                  {contactInfo && (
+                    <div class="text-sm text-muted-foreground text-center pt-4 border-t">
+                      <p>Horaires de consultation disponibles</p>
+                      <p class="font-medium">Lun-Ven: 8h-18h</p>
+                      <p class="font-medium">Sam: 9h-16h</p>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Related Services -->
+    <section class="py-16 bg-white/50 dark:bg-gray-800/50">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto">
+          <h2 class="text-3xl font-bold text-center mb-8">Autres Services</h2>
+          <div class="text-center">
+            <Button asChild>
+              <a href="/services">
+                Voir tous nos services
+              </a>
+            </Button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</Layout>
+
+<style>
+  /* Smooth animations for service page */
+  .prose h2 {
+    @apply text-2xl font-semibold text-green-700 dark:text-green-300 mt-8 mb-4;
+  }
+  
+  .prose h3 {
+    @apply text-xl font-medium text-gray-700 dark:text-gray-300 mt-6 mb-3;
+  }
+  
+  .prose p {
+    @apply text-gray-600 dark:text-gray-300 leading-relaxed mb-4;
+  }
+  
+  .prose ul {
+    @apply space-y-2;
+  }
+  
+  .prose li {
+    @apply text-gray-600 dark:text-gray-300;
+  }
+</style>

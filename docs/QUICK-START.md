@@ -3,7 +3,8 @@
 ## 🚀 Utilisation de ce starter
 
 ### Prérequis
-- Node.js 22+ 
+
+- Node.js 22+
 - npm ou yarn
 - Git
 
@@ -38,6 +39,7 @@ npm run dev
 ```
 
 **PAS :**
+
 ```astro
 <!-- ❌ INCORRECT - Styles scopés -->
 <style>
@@ -52,7 +54,7 @@ npm run dev
 | Si le client est... | Choisir |
 |---------------------|---------|
 | Corporate, finance, minimal | `Neutral` |
-| Moderne, dynamique | `Slate` | 
+| Moderne, dynamique | `Slate` |
 | Traditionnel, stable | `Gray` |
 | Créatif, chaleureux | `Stone` |
 | Tech, précis | `Zinc` |
@@ -70,7 +72,6 @@ npx shadcn@latest add navigation-menu
 
 ### Structure du projet
 
-```
 src/
 ├── components/
 │   ├── ui/           # Composants shadcn/ui
@@ -79,7 +80,6 @@ src/
 ├── pages/            # Routes Astro
 ├── styles/           # CSS global et thème
 └── lib/              # Utilitaires
-```
 
 ### Déploiement
 
@@ -99,20 +99,24 @@ npm run preview
 ## 🆘 Dépannage rapide
 
 ### ❌ Les composants shadcn/ui ne s'affichent pas
+
 1. **Vérifier `is:global`** dans `src/components/layouts/Layout.astro` (problème #1)
 2. Vérifier que React est configuré dans `astro.config.mjs`
 3. S'assurer que les alias d'import sont correctement configurés dans `tsconfig.json`
 
 ### ❌ Erreurs "classe inconnue" TailwindCSS
+
 1. **Vérifier `is:global`** dans Layout.astro (problème principal)
 2. Vérifier que `@tailwindcss/vite` est dans `astro.config.mjs`
 3. Contrôler l'import dans `src/styles/global.css`
 
 ### ❌ Composants React non interactifs
+
 1. Ajouter une directive client (`client:load`, `client:visible`, etc.)
 2. Vérifier que le composant est dans un fichier `.tsx`
 
 ### ❌ Boutons shadcn/ui invisibles/identiques
+
 1. **Vérifier `is:global`** - c'est 99% du temps ce problème
 2. Tester avec couleurs Tailwind standards (`bg-red-500`) pour confirmer
 3. Vérifier les variables CSS dans global.css

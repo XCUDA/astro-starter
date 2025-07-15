@@ -1,0 +1,171 @@
+---
+// src/pages/services.astro - CORRECTION TYPESCRIPT UNIQUEMENT
+import Layout from '@/components/layouts/Layout.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+
+// Get all services with proper typing
+const allServices = await getCollection('services');
+const services = allServices.sort((a: CollectionEntry<'services'>, b: CollectionEntry<'services'>) => {
+  if (a.data.featured && !b.data.featured) return -1;
+  if (!a.data.featured && b.data.featured) return 1;
+  return a.data.order - b.data.order;
+});
+
+// Group services by category with proper typing - CORRECTION ICI
+type ServicesByCategory = Record<string, CollectionEntry<'services'>[]>;
+const servicesByCategory: ServicesByCategory = services.reduce((acc: ServicesByCategory, service: CollectionEntry<'services'>) => {
+  const category = service.data.category;
+  if (!acc[category]) acc[category] = [];
+  acc[category].push(service);
+  return acc;
+}, {});
+
+const categoryLabels: Record<string, string> = {
+  massage: 'Massages Thérapeutiques',
+  energetic: 'Soins Énergétiques', 
+  movement: 'Thérapies par le Mouvement',
+  consultation: 'Consultations'
+};
+---
+
+<Layout 
+  title="Nos Services - Thérapie Holistique"
+  description="Découvrez notre gamme complète de services de thérapie holistique : massages, soins énergétiques, thérapies par le mouvement."
+  currentPage="services"
+  showBreadcrumbs={true}
+>
+  <div class="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 dark:from-gray-900 dark:to-gray-800">
+    
+    <!-- Hero Section -->
+    <section class="py-20">
+      <div class="container mx-auto px-4 text-center">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
+          Nos Services
+        </h1>
+        <p class="text-xl text-muted-foreground max-w-3xl mx-auto mb-12">
+          Une approche holistique pour votre bien-être physique, émotionnel et énergétique. 
+          Chaque service est adapté à vos besoins spécifiques.
+        </p>
+      </div>
+    </section>
+
+    <!-- Services by Category -->
+    <section class="pb-20">
+      <div class="container mx-auto px-4">
+        <div class="max-w-7xl mx-auto space-y-16">
+          
+          {Object.entries(servicesByCategory).map(([category, categoryServices]) => (
+            <div>
+              <h2 class="text-3xl font-bold text-center mb-12 text-gray-800 dark:text-gray-200">
+                {categoryLabels[category]}
+              </h2>
+              
+              <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {(categoryServices as CollectionEntry<'services'>[]).map((service: CollectionEntry<'services'>) => (
+                  <Card className={`transition-all duration-300 hover:shadow-lg hover:scale-105 ${service.data.featured ? 'ring-2 ring-green-500 relative' : ''}`}>
+                    {service.data.featured && (
+                      <Badge className="absolute -top-2 -right-2 bg-green-500">
+                        ⭐ Populaire
+                      </Badge>
+                    )}
+                    
+                    <CardHeader>
+                      <div class="flex items-start justify-between">
+                        <div class="flex-1">
+                          <CardTitle className="text-xl mb-2">{service.data.title}</CardTitle>
+                          {service.data.subtitle && (
+                            <CardDescription className="text-sm mb-3">
+                              {service.data.subtitle}
+                            </CardDescription>
+                          )}
+                        </div>
+                      </div>
+                      
+                      <div class="flex flex-wrap gap-2 text-sm text-muted-foreground">
+                        <span class="flex items-center gap-1">
+                          <span>⏱️</span> {service.data.duration}
+                        </span>
+                        <span class="flex items-center gap-1">
+                          <span>💰</span> {service.data.price}
+                        </span>
+                      </div>
+                    </CardHeader>
+                    
+                    <CardContent>
+                      <p class="text-sm text-muted-foreground mb-4 line-clamp-3">
+                        {service.data.description}
+                      </p>
+                      
+                      <!-- Key Benefits Preview -->
+                      {service.data.benefits.length > 0 && (
+                        <div class="mb-4">
+                          <p class="text-xs font-medium text-green-600 mb-2">Principaux bienfaits:</p>
+                          <div class="flex flex-wrap gap-1">
+                            {service.data.benefits.slice(0, 3).map((benefit: string) => (
+                              <Badge variant="secondary" className="text-xs">
+                                {benefit}
+                              </Badge>
+                            ))}
+                            {service.data.benefits.length > 3 && (
+                              <Badge variant="outline" className="text-xs">
+                                +{service.data.benefits.length - 3} autres
+                              </Badge>
+                            )}
+                          </div>
+                        </div>
+                      )}
+                      
+                      <div class="flex gap-2">
+                        <Button asChild className="flex-1">
+                          <a href={`/services/${service.slug}`}>
+                            En savoir plus
+                          </a>
+                        </Button>
+                        <Button variant="outline" size="sm">
+                          📞 RDV
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-green-600 text-white">
+      <div class="container mx-auto px-4 text-center">
+        <h2 class="text-3xl font-bold mb-4">Prêt à commencer votre parcours de bien-être ?</h2>
+        <p class="text-xl mb-8 opacity-90">
+          Contactez-nous pour une consultation personnalisée et découvrez le service qui vous convient le mieux.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <Button size="lg" variant="secondary">
+            <span class="mr-2">📞</span>
+            Appeler maintenant
+          </Button>
+          <Button size="lg" variant="outline" className="text-white border-white hover:bg-white hover:text-green-600">
+            <span class="mr-2">📧</span>
+            Nous contacter
+          </Button>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</Layout>
+
+<style>
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>

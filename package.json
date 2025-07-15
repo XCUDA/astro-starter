@@ -5,9 +5,14 @@
   "description": "Production-ready Astro 5 starter with TailwindCSS 4, shadcn/ui, and TypeScript.",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "dev:client": "cross-env CLIENT_MODE=true astro dev",
+    "build": "astro build", 
+    "build:client": "cross-env CLIENT_MODE=true astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "preview:client": "cross-env CLIENT_MODE=true astro preview",
+    "astro": "astro",
+    "test:demo": "npm run build && npm run preview",
+    "test:client": "npm run build:client && npm run preview:client"
   },
   "dependencies": {
     "@astrojs/react": "^4.3.0",
@@ -38,11 +43,12 @@
     "tailwindcss": "^4.1.10"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "tw-animate-css": "^1.3.4"
   },
   "keywords": [
     "astro",
-    "astro5", 
+    "astro5",
     "tailwindcss",
     "tailwindcss4",
     "shadcn-ui",
@@ -154,7 +160,7 @@
     "utilityPages": 6,
     "standards": [
       "WCAG 2.1 AA",
-      "Swiss/EU Legal Compliance", 
+      "Swiss/EU Legal Compliance",
       "Production-Ready Content",
       "TypeScript Strict",
       "Phase 8+ Animations",
