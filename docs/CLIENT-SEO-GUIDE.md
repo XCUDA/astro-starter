@@ -15,8 +15,11 @@ Pour chaque service, le système crée automatiquement :
 ```✅ Titre SEO : "Massage Thérapeutique | Thérapeute Holistique - Bien-être & Relaxation"
 ✅ Description : "Découvrez massage thérapeutique pour votre bien-être. Un massage classique..."
 ✅ Mots-clés : ["thérapie", "bien-être", "relaxation", "massage", "santé", "détente", "lausanne"]
+✅ Open Graph : Image + titre/description pour réseaux sociaux automatiques
 ✅ Données Google : Prix CHF 120, Durée 60 minutes
-✅ Analytics : Tracking Plausible automatique
+✅ Analytics : Tracking Plausible + Google Analytics
+✅ Sitemap : Pages ajoutées automatiquement à sitemap.xml
+✅ Robots.txt : Génération automatique pour moteurs de recherche
 ```
 
 ## 🛠️ Comment Personnaliser (Méthode Simple)
@@ -85,6 +88,7 @@ seo:
 const seoConfig = {
   businessName: "Cabinet Wellness Lausanne",
   location: "Lausanne",
+  siteUrl: "https://cabinet-wellness.ch",    # ✅ IMPORTANT pour images Open Graph
   defaultTemplate: "therapist",
   defaultKeywords: ["thérapie", "bien-être", "Lausanne"],
   
@@ -92,7 +96,7 @@ const seoConfig = {
   social: {
     facebook: "https://facebook.com/votre-page",
     instagram: "https://instagram.com/votre-compte",
-    twitter: "https://twitter.com/votre-compte"
+    twitter: "@votre-compte"
   },
   
   # ✅ ANALYTICS
@@ -102,6 +106,28 @@ const seoConfig = {
   }
 };
 ```
+
+### Images Open Graph Automatiques
+
+Le système sélectionne automatiquement les images de partage selon :
+
+**1. Priorité** : Custom → Catégorie service → Template default → Fallback
+
+**2. Images par catégorie** (dossier `/public/images/og/`) :
+
+- **massage** → `massage-therapy.jpg`
+- **energetic** → `energy-healing.jpg`  
+- **movement** → `movement-therapy.jpg`
+- **consultation** → `consultation.jpg`
+
+**3. Customisation image** :
+
+```yaml
+seo:
+  ogImage: "/images/og/mon-image-custom.jpg"  # Image spécifique
+```
+
+**4. Taille recommandée** : 1200x630 pixels
 
 ## 🎯 Cas d'Usage Concrets
 
@@ -247,21 +273,28 @@ analytics: {
 
 ## 🔍 Comment Vérifier
 
+### SEO de Base (vérification)
+
+1. **Google** : `site:votre-domaine.ch massage`
+2. **Titre et description** affichés correctement
+3. **Sitemap** : `https://votre-site.ch/sitemap.xml` (doit lister vos pages)
+
+### Open Graph (Réseaux Sociaux)
+
+1. **Facebook Debugger** : [developers.facebook.com/tools/debug](https://developers.facebook.com/tools/debug/)
+2. **LinkedIn Post Inspector** : [linkedin.com/post-inspector](https://www.linkedin.com/post-inspector/)
+3. **Twitter Card Validator** : [cards-dev.twitter.com/validator](https://cards-dev.twitter.com/validator)
+
 ### Google Search Console
 
-1. Aller sur [Google Search Console](https://search.google.com/search-console)
-2. Ajouter votre site
-3. Vérifier indexation pages
+1. Ajouter votre site : [Google Search Console](https://search.google.com/search-console)
+2. **Soumettre sitemap** : Sitemaps → Ajouter → `https://votre-site.ch/sitemap.xml`
+3. **Vérifier indexation** : Pages → Toutes les pages connues
 
-### Test Direct
+### Tests Locaux
 
-1. Google : `site:votre-domaine.ch massage`
-2. Vérifier titre et description affichés
-
-### Réseaux Sociaux
-
-1. Partager lien service sur Facebook/LinkedIn
-2. Vérifier aperçu généré
+1. **Partager lien** sur Facebook/LinkedIn → Vérifier aperçu
+2. **DevTools** → Elements → `<head>` → Vérifier meta tags
 
 ## 🆘 Problèmes Fréquents
 

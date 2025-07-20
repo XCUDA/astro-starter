@@ -1,7 +1,7 @@
 {
   "name": "astro-starter",
   "type": "module",
-  "version": "2.0.1",
+  "version": "2.2.0",
   "description": "Production-ready Astro 5 starter with TailwindCSS 4, shadcn/ui, and TypeScript.",
   "scripts": {
     "dev": "astro dev",
@@ -139,7 +139,17 @@
     "breadcrumb",
     "tabs",
     "alert",
-    "badge"
+    "badge",
+    "seo",
+    "sitemap",
+    "robots-txt",
+    "structured-data",
+    "open-graph",
+    "meta-tags",
+    "canonical-urls",
+    "analytics",
+    "google-analytics",
+    "plausible-analytics"
   ],
   "author": "XCUDA (Angelo Bedoni)",
   "license": "MIT",

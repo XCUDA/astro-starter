@@ -1,6 +1,5 @@
 // src/lib/seo.ts
-// SEO Utility System - Auto generation + Custom override
-// Auto-generates meta tags from Content Collections with full customization support
+// SEO Utility System - COMPLETELY SELF-CONTAINED (no external imports)
 
 import type { CollectionEntry } from 'astro:content';
 
@@ -48,6 +47,7 @@ export const seoTemplates = {
 export interface SeoConfig {
   businessName: string;
   location: string;
+  siteUrl?: string;
   defaultTemplate: keyof typeof seoTemplates;
   defaultKeywords: string[];
   social: {
@@ -70,11 +70,90 @@ export interface SeoData {
   ogDescription?: string;
   ogImage?: string;
   ogType?: string;
+  ogImageMeta?: {
+    url: string;
+    width: number;
+    height: number;
+    alt: string;
+  };
+  openGraphData?: object;
   twitterCard?: string;
   canonical?: string;
   noindex?: boolean;
   author?: string;
   structuredData?: object;
+}
+
+// INTERNAL UTILITY FUNCTIONS (no exports to avoid import issues)
+
+function makeAbsoluteUrl(imageUrl: string, config: SeoConfig): string {
+  if (imageUrl.startsWith('http')) {
+    return imageUrl;
+  }
+  const baseUrl = config.siteUrl || `https://${config.businessName.toLowerCase().replace(/\s+/g, '-')}.ch`;
+  return `${baseUrl}${imageUrl}`;
+}
+
+function selectOgImage(
+  contentEntry?: CollectionEntry<'services'> | CollectionEntry<'pages'> | CollectionEntry<'testimonials'>,
+  config?: SeoConfig,
+  customOgImage?: string
+): string {
+  
+  // Priority 1: Custom image
+  if (customOgImage) {
+    return customOgImage.startsWith('http') ? customOgImage : makeAbsoluteUrl(customOgImage, config!);
+  }
+  
+  // Priority 2: Service category image
+  if (contentEntry?.collection === 'services') {
+    const serviceData = contentEntry.data as any;
+    const categoryImages: Record<string, string> = {
+      massage: '/images/og/massage-therapy.jpg',
+      energetic: '/images/og/energy-healing.jpg',
+      movement: '/images/og/movement-therapy.jpg',
+      consultation: '/images/og/consultation.jpg'
+    };
+    
+    if (serviceData.category && categoryImages[serviceData.category]) {
+      return makeAbsoluteUrl(categoryImages[serviceData.category], config!);
+    }
+  }
+  
+  // Priority 3: Template default
+  const template = config?.defaultTemplate || 'therapist';
+  const defaultImages: Record<string, string> = {
+    therapist: '/images/og/therapist-default.jpg',
+    restaurant: '/images/og/restaurant-default.jpg',
+    ecommerce: '/images/og/shop-default.jpg',
+    consultant: '/images/og/consulting-default.jpg'
+  };
+  
+  return makeAbsoluteUrl(defaultImages[template] || defaultImages.therapist, config!);
+}
+
+function buildOpenGraphData(
+  title: string,
+  description: string,
+  imageUrl: string,
+  canonicalUrl: string,
+  config: SeoConfig,
+  contentType: 'website' | 'article' = 'website'
+) {
+  return {
+    type: contentType,
+    title: title,
+    description: description,
+    url: canonicalUrl,
+    site_name: config.businessName,
+    locale: 'fr_CH',
+    image: {
+      url: imageUrl,
+      width: 1200,
+      height: 630,
+      alt: `Image de partage pour ${title}`
+    }
+  };
 }
 
 // Extract SEO data from Content Collections
@@ -86,15 +165,14 @@ export function extractContentSeo(
   const { data, slug } = entry;
   const template = seoTemplates[config.defaultTemplate];
   
-  // Handle different collection types
+  // Handle testimonials differently (no title/description)
   if (entry.collection === 'testimonials') {
-    // Testimonials don't have title/description, skip auto-generation
     return {
       keywords: [...template.defaultKeywords]
     };
   }
   
-  // Type assertion for services and pages (both have title and description)
+  // Type assertion for services and pages
   const contentData = data as { 
     title: string; 
     description: string; 
@@ -103,7 +181,7 @@ export function extractContentSeo(
     benefits?: string[];
   };
   
-  // Check for manual SEO override in frontmatter
+  // Check for manual SEO override
   if (contentData.seo) {
     return {
       title: contentData.seo.metaTitle || contentData.title,
@@ -112,12 +190,12 @@ export function extractContentSeo(
     };
   }
 
-  // Auto-generation based on content type
+  // Auto-generation
   let autoTitle = contentData.title;
   let autoDescription = contentData.description;
   let autoKeywords = [...template.defaultKeywords];
 
-  // Service-specific auto-generation
+  // Service-specific enhancement
   if (entry.collection === 'services') {
     autoTitle = `${contentData.title}${template.titleSuffix.replace('{businessName}', config.businessName)}`;
     
@@ -128,14 +206,14 @@ export function extractContentSeo(
         .replace('{description}', `${contentData.description} ${firstBenefit}.`);
     }
     
-    // Add service-specific keywords
+    // Add category keywords
     if (contentData.category === 'massage') {
       autoKeywords.push('massage thérapeutique', 'soin corporel', contentData.title.toLowerCase());
     } else if (contentData.category === 'energetic') {
       autoKeywords.push('énergie', 'chakras', 'harmonisation');
     }
     
-    // Add location-based keywords
+    // Add location keywords
     autoKeywords.push(config.location.toLowerCase(), `${config.location.toLowerCase()} ${contentData.category || 'service'}`);
   }
 
@@ -152,13 +230,15 @@ export function generateSeoData(
   pageDescription?: string,
   contentEntry?: CollectionEntry<'services'> | CollectionEntry<'pages'> | CollectionEntry<'testimonials'>,
   customSeo?: Partial<SeoData>,
-  config?: SeoConfig
+  config?: SeoConfig,
+  canonicalUrl?: string
 ): SeoData {
   
-  // Default config if not provided
+  // Default config
   const defaultConfig: SeoConfig = {
     businessName: "Votre Entreprise",
     location: "Suisse",
+    siteUrl: "https://votre-site.ch",
     defaultTemplate: "therapist",
     defaultKeywords: ["professionnel", "qualité", "service"],
     social: {},
@@ -166,18 +246,29 @@ export function generateSeoData(
   };
   
   const finalConfig = config || defaultConfig;
+  const finalCanonicalUrl = canonicalUrl || `${finalConfig.siteUrl}/`;
   
-  // Priority 1: Custom SEO override (highest priority)
+  // Priority 1: Custom SEO override
   if (customSeo?.title) {
+    const ogImageUrl = selectOgImage(contentEntry, finalConfig, customSeo.ogImage);
+    
     return {
       title: customSeo.title,
       description: customSeo.description || pageDescription || "Description par défaut",
       keywords: customSeo.keywords || finalConfig.defaultKeywords,
       ogTitle: customSeo.ogTitle || customSeo.title,
       ogDescription: customSeo.ogDescription || customSeo.description,
-      ogImage: customSeo.ogImage || "/og-default.jpg",
+      ogImage: ogImageUrl,
       ogType: customSeo.ogType || "website",
-      canonical: customSeo.canonical,
+      openGraphData: buildOpenGraphData(
+        customSeo.ogTitle || customSeo.title,
+        customSeo.ogDescription || customSeo.description || pageDescription || "Description par défaut",
+        ogImageUrl,
+        finalCanonicalUrl,
+        finalConfig,
+        customSeo.ogType as 'website' | 'article' || 'website'
+      ),
+      canonical: customSeo.canonical || finalCanonicalUrl,
       noindex: customSeo.noindex || false,
       ...customSeo
     };
@@ -186,29 +277,49 @@ export function generateSeoData(
   // Priority 2: Content Collection auto-generation
   if (contentEntry) {
     const contentSeo = extractContentSeo(contentEntry, finalConfig);
+    const autoOgImageUrl = selectOgImage(contentEntry, finalConfig);
+    
     return {
       title: contentSeo.title || pageTitle,
       description: contentSeo.description || pageDescription || "Description générée automatiquement",
       keywords: contentSeo.keywords || finalConfig.defaultKeywords,
       ogTitle: contentSeo.title || pageTitle,
       ogDescription: contentSeo.description || pageDescription,
-      ogImage: "/og-default.jpg",
-      ogType: "website",
+      ogImage: autoOgImageUrl,
+      ogType: contentEntry.collection === 'services' ? 'article' : 'website',
+      openGraphData: buildOpenGraphData(
+        contentSeo.title || pageTitle,
+        contentSeo.description || pageDescription || "Description générée automatiquement",
+        autoOgImageUrl,
+        finalCanonicalUrl,
+        finalConfig,
+        contentEntry.collection === 'services' ? 'article' : 'website'
+      ),
+      canonical: finalCanonicalUrl,
       noindex: false,
       ...contentSeo
     };
   }
   
   // Priority 3: Manual page data (fallback)
-  const template = seoTemplates[finalConfig.defaultTemplate];
+  const defaultOgImageUrl = selectOgImage(undefined, finalConfig);
+  
   return {
     title: pageTitle,
     description: pageDescription || `Page ${pageTitle} - ${finalConfig.businessName}`,
     keywords: finalConfig.defaultKeywords,
     ogTitle: pageTitle,
     ogDescription: pageDescription || `Découvrez ${pageTitle} avec ${finalConfig.businessName}`,
-    ogImage: "/og-default.jpg", 
+    ogImage: defaultOgImageUrl,
     ogType: "website",
+    openGraphData: buildOpenGraphData(
+      pageTitle,
+      pageDescription || `Découvrez ${pageTitle} avec ${finalConfig.businessName}`,
+      defaultOgImageUrl,
+      finalCanonicalUrl,
+      finalConfig
+    ),
+    canonical: finalCanonicalUrl,
     noindex: false
   };
 }
@@ -252,14 +363,16 @@ export function prepareSeoForLayout(
     customSeo?: Partial<SeoData>;
   },
   contentEntry?: CollectionEntry<'services'> | CollectionEntry<'pages'> | CollectionEntry<'testimonials'>,
-  config?: SeoConfig
+  config?: SeoConfig,
+  canonicalUrl?: string
 ) {
   const seoData = generateSeoData(
     pageProps.title,
     pageProps.description,
     contentEntry,
     pageProps.customSeo,
-    config
+    config,
+    canonicalUrl
   );
   
   return {

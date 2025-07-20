@@ -358,13 +358,13 @@
 - [x] **Lazy loading** ASTRO 5 NATIVE - Images + client directives pour composants React
 - [ ] **Core Web Vitals** monitoring - Skip (optionnel, éviter surcharge projet)
 
-### 🔄 3.3 SEO & Analytics - 60% COMPLÈTE
+### ✅ 3.3 SEO & Analytics - 100% COMPLÈTE
 
-- [x] **Meta tags automatiques** ✅ FAIT - Système hybride auto + custom via Content Collections
-- [x] **JSON-LD structured data** ✅ FAIT - Services schema avec prix/durée automatique  
-- [x] **Analytics intégration** ✅ FAIT - Plausible + GA4 ready via seoConfig
-- [ ] **Open Graph** dynamique avec images - En cours (meta tags base faits)
-- [ ] **Sitemap** automatique depuis Content Collections
+- [x] **Meta tags automatiques** : Système hybride auto + custom via Content Collections
+- [x] **Open Graph dynamique** : Images automatiques par catégorie + custom override
+- [x] **JSON-LD structured data** : Services schema avec prix/durée automatique  
+- [x] **Analytics intégration** : Plausible + GA4 ready via seoConfig
+- [x] **Sitemap automatique** : XML sitemap + robots.txt depuis Content Collections
 
 ### ❌ 3.4 Advanced Features
 

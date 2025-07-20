@@ -109,10 +109,11 @@ const {
   currentPage
 } = Astro.props;
 
-// Default SEO configuration for therapist business
+// Default SEO configuration for therapist business (enhanced with siteUrl)
 const defaultSeoConfig: SeoConfig = {
   businessName: companyName || "Cabinet Wellness",
   location: "Lausanne",
+  siteUrl: "https://cabinet-wellness.ch", // ✅ Important pour OG images
   defaultTemplate: "therapist",
   defaultKeywords: ["bien-être", "thérapie", "santé", "relaxation", "Lausanne"],
   social: {
@@ -124,7 +125,11 @@ const defaultSeoConfig: SeoConfig = {
   }
 };
 
-// Generate advanced SEO data
+// Generate canonical URL
+const finalCanonicalURL = canonicalURL || new URL(Astro.url.pathname, Astro.site).toString();
+
+
+// Generate advanced SEO data (with canonical URL)
 const seo = prepareSeoForLayout(
   {
     title,
@@ -138,11 +143,9 @@ const seo = prepareSeoForLayout(
     }
   },
   contentEntry,
-  seoConfig || defaultSeoConfig
+  seoConfig || defaultSeoConfig,
+  finalCanonicalURL // ✅ Pass canonical URL for OG generation
 );
-
-// Generate canonical URL
-const finalCanonicalURL = seo.canonical || new URL(Astro.url.pathname, Astro.site).toString();
 
 // Generate absolute URL for Open Graph
 const absoluteImageUrl = seo.ogImage?.startsWith('http') 
@@ -168,19 +171,28 @@ const absoluteImageUrl = seo.ogImage?.startsWith('http')
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     
-    <!-- Open Graph / Facebook -->
+    <!-- Open Graph / Facebook (Enhanced) -->
     <meta property="og:type" content={seo.ogType || "website"} />
     <meta property="og:url" content={finalCanonicalURL} />
     <meta property="og:title" content={seo.ogTitle || seo.title} />
     <meta property="og:description" content={seo.ogDescription || seo.description} />
     <meta property="og:image" content={absoluteImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`Image de ${seo.ogTitle || seo.title}`} />
+    <meta property="og:site_name" content={(seoConfig || defaultSeoConfig).businessName} />
+    <meta property="og:locale" content="fr_CH" />
     
-    <!-- Twitter -->
-    <meta property="twitter:card" content={seo.twitterCard || "summary_large_image"} />
-    <meta property="twitter:url" content={finalCanonicalURL} />
-    <meta property="twitter:title" content={seo.ogTitle || seo.title} />
-    <meta property="twitter:description" content={seo.ogDescription || seo.description} />
-    <meta property="twitter:image" content={absoluteImageUrl} />
+    <!-- Twitter Card (Enhanced) -->
+    <meta name="twitter:card" content={seo.twitterCard || "summary_large_image"} />
+    <meta name="twitter:url" content={finalCanonicalURL} />
+    <meta name="twitter:title" content={seo.ogTitle || seo.title} />
+    <meta name="twitter:description" content={seo.ogDescription || seo.description} />
+    <meta name="twitter:image" content={absoluteImageUrl} />
+    <meta name="twitter:image:alt" content={`Image de ${seo.ogTitle || seo.title}`} />
+    {(seoConfig || defaultSeoConfig).social?.twitter && (
+      <meta name="twitter:site" content={(seoConfig || defaultSeoConfig).social.twitter} />
+    )}
     
     <!-- Structured Data (JSON-LD) -->
     {seo.structuredData && (
@@ -412,6 +424,7 @@ const absoluteImageUrl = seo.ogImage?.startsWith('http')
   </body>
 </html>
 
+<!-- Le reste du CSS reste identique -->
 <style>
   /* Optimize critical rendering path */
   html {
