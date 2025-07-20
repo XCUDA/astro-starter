@@ -15,6 +15,11 @@ schedule:
   friday: "8h00 - 16h00"
   saturday: "9h00 - 15h00"
   sunday: "Fermé"
+
+# custom SEO pour cette page
+metaTitle: "Cabinet L'essence | horaires et rendez-vous"
+metaDescription: "ceci est une description test"
+keywords: ["cabinet", "bien-être","vive la vie"]
 ---
 
 ## Disponibilités Hebdomadaires

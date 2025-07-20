@@ -1,13 +1,14 @@
 ---
-// Layout.astro - Production-Ready Layout with Sonner Integration
+// Layout.astro - Production-Ready Layout with Advanced SEO System
 // Path: src/components/layouts/Layout.astro
 
 import Header from './Header.astro';
 import Footer from './Footer.astro';
 import Sidebar from './Sidebar.astro';
 import Breadcrumbs from './Breadcrumbs.astro'; 
-// import { ViewTransitions } from 'astro:transitions';
 import { Toaster } from '@/components/ui/sonner';
+import { prepareSeoForLayout, type SeoData, type SeoConfig } from '@/lib/seo';
+import type { CollectionEntry } from 'astro:content';
 
 export interface Props {
   title: string;
@@ -15,6 +16,11 @@ export interface Props {
   keywords?: string[];
   author?: string;
   image?: string;
+  
+  // Advanced SEO Configuration
+  contentEntry?: CollectionEntry<'services'> | CollectionEntry<'pages'> | CollectionEntry<'testimonials'>;
+  customSeo?: Partial<SeoData>;
+  seoConfig?: SeoConfig;
   
   // Layout configuration
   headerVariant?: 'default' | 'minimal' | 'business' | 'landing';
@@ -25,6 +31,7 @@ export interface Props {
   ctaText?: string;
   ctaHref?: string;
   showBreadcrumbs?: boolean;
+  
   // Business props (for Footer)
   showBusinessInfo?: boolean;
   showNewsletter?: boolean;
@@ -44,7 +51,7 @@ export interface Props {
   hideDelay?: number;
   showScrollIndicator?: boolean;
   
-  // SEO and meta
+  // Legacy SEO (deprecated - use customSeo instead)
   canonicalURL?: string;
   noindex?: boolean;
   
@@ -60,6 +67,11 @@ const {
   author = "XCUDA - Professional Web Development",
   image = "/og-image.jpg",
   
+  // Advanced SEO
+  contentEntry,
+  customSeo,
+  seoConfig,
+  
   // Layout defaults optimized for business sites
   headerVariant = 'default',
   footerVariant = 'business',
@@ -69,6 +81,7 @@ const {
   ctaText = "Get Started",
   ctaHref = "/contact",
   showBreadcrumbs = true,
+  
   // Business features
   showBusinessInfo = false,
   showNewsletter = false,
@@ -88,7 +101,7 @@ const {
   hideDelay = 2000,
   showScrollIndicator = false,
   
-  // SEO defaults
+  // Legacy SEO (backward compatibility)
   canonicalURL,
   noindex = false,
   
@@ -96,54 +109,102 @@ const {
   currentPage
 } = Astro.props;
 
-// Generate canonical URL if not provided
-const finalCanonicalURL = canonicalURL || new URL(Astro.url.pathname, Astro.site);
+// Default SEO configuration for therapist business
+const defaultSeoConfig: SeoConfig = {
+  businessName: companyName || "Cabinet Wellness",
+  location: "Lausanne",
+  defaultTemplate: "therapist",
+  defaultKeywords: ["bien-être", "thérapie", "santé", "relaxation", "Lausanne"],
+  social: {
+    facebook: "https://facebook.com/cabinet-wellness",
+    instagram: "https://instagram.com/cabinet.wellness"
+  },
+  analytics: {
+    plausible: "cabinet-wellness.ch"
+  }
+};
 
-// Generate page-specific meta description
-const finalDescription = currentPage ? 
-  `${description} - ${currentPage.charAt(0).toUpperCase() + currentPage.slice(1).replace('-', ' ')}` : 
-  description;
+// Generate advanced SEO data
+const seo = prepareSeoForLayout(
+  {
+    title,
+    description,
+    keywords,
+    customSeo: {
+      ...customSeo,
+      // Backward compatibility
+      canonical: customSeo?.canonical || canonicalURL,
+      noindex: customSeo?.noindex || noindex
+    }
+  },
+  contentEntry,
+  seoConfig || defaultSeoConfig
+);
 
-// Keywords enhancement based on current page
-const finalKeywords = currentPage ? 
-  [...keywords, currentPage.replace('-', ' '), 'showcase', 'demo'] : 
-  keywords;
+// Generate canonical URL
+const finalCanonicalURL = seo.canonical || new URL(Astro.url.pathname, Astro.site).toString();
+
+// Generate absolute URL for Open Graph
+const absoluteImageUrl = seo.ogImage?.startsWith('http') 
+  ? seo.ogImage 
+  : new URL(seo.ogImage || image, Astro.site).toString();
 ---
 
 <!doctype html>
 <html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content={finalDescription} />
-    <meta name="keywords" content={finalKeywords.join(', ')} />
-    <meta name="author" content={author} />
+    <meta name="description" content={seo.description} />
+    <meta name="keywords" content={seo.keywords.join(', ')} />
+    <meta name="author" content={seo.author || author} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
     <!-- Canonical URL for SEO -->
     <link rel="canonical" href={finalCanonicalURL} />
     
     <!-- Robots meta -->
-    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    {seo.noindex && <meta name="robots" content="noindex, nofollow" />}
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     
     <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={seo.ogType || "website"} />
     <meta property="og:url" content={finalCanonicalURL} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={finalDescription} />
-    <meta property="og:image" content={image} />
+    <meta property="og:title" content={seo.ogTitle || seo.title} />
+    <meta property="og:description" content={seo.ogDescription || seo.description} />
+    <meta property="og:image" content={absoluteImageUrl} />
     
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:card" content={seo.twitterCard || "summary_large_image"} />
     <meta property="twitter:url" content={finalCanonicalURL} />
-    <meta property="twitter:title" content={title} />
-    <meta property="twitter:description" content={finalDescription} />
-    <meta property="twitter:image" content={image} />
+    <meta property="twitter:title" content={seo.ogTitle || seo.title} />
+    <meta property="twitter:description" content={seo.ogDescription || seo.description} />
+    <meta property="twitter:image" content={absoluteImageUrl} />
+    
+    <!-- Structured Data (JSON-LD) -->
+    {seo.structuredData && (
+      <script type="application/ld+json" set:html={JSON.stringify(seo.structuredData)} />
+    )}
     
     <!-- Page title -->
-    <title>{title}</title>
+    <title>{seo.title}</title>
+    
+    <!-- Analytics -->
+    {seoConfig?.analytics?.plausible && (
+      <script defer data-domain={seoConfig.analytics.plausible} src="https://plausible.io/js/script.js"></script>
+    )}
+    {seoConfig?.analytics?.ga4 && (
+      <>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${seoConfig.analytics.ga4}`}></script>
+        <script is:inline define:vars={{ga4: seoConfig.analytics.ga4}}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', ga4);
+        </script>
+      </>
+    )}
     
     <!-- ASTRO 5 OFFICIAL SOLUTION: Inline theme script to prevent FOUC -->
     <script is:inline>
@@ -178,9 +239,6 @@ const finalKeywords = currentPage ?
         });
       })();
     </script>
-    
-    <!-- Astro 5 ViewTransitions for smooth page transitions -->
-    <!-- <ViewTransitions /> -->
     
     <!-- Global CSS with TailwindCSS 4 + shadcn/ui (MUST be is:global) -->
     <style is:global>
@@ -296,7 +354,7 @@ const finalKeywords = currentPage ?
             variant="business"
             showHome={true}
             showIcons={true}
-            currentPageTitle={title}
+            currentPageTitle={seo.title}
           />
         )}
         
@@ -354,7 +412,6 @@ const finalKeywords = currentPage ?
   </body>
 </html>
 
-<!-- Performance and Accessibility optimizations -->
 <style>
   /* Optimize critical rendering path */
   html {

@@ -348,21 +348,23 @@
 
 ## 🎯 Phase 3 : Fonctionnalités Avancées (Option future) - 0% COMPLÈTE
 
-### ❌ 3.2 Server Islands & Performance
+## 🎯 Phase 3 : Fonctionnalités Avancées - 25% COMPLÈTE
 
-- [ ] **Server Islands** pour composants dynamiques optimisés
-- [ ] **Rendu hybride** statique/dynamique intelligent
-- [ ] **Image optimization** avec Picture component
-- [ ] **Lazy loading** avancé
-- [ ] **Core Web Vitals** monitoring intégré
+### ✅ 3.2 Server Islands & Performance - SKIPPED (90% Astro 5 Native)
 
-### ❌ 3.3 SEO & Analytics
+- [x] **Server Islands** ASTRO 5 NATIVE - Directive `server:defer` disponible
+- [x] **Rendu hybride** ASTRO 5 NATIVE - Static/hybrid fusionnés, config automatique  
+- [x] **Image optimization** ASTRO 5 NATIVE - Composants `<Image />` et `<Picture />` built-in
+- [x] **Lazy loading** ASTRO 5 NATIVE - Images + client directives pour composants React
+- [ ] **Core Web Vitals** monitoring - Skip (optionnel, éviter surcharge projet)
 
-- [ ] **Meta tags automatiques** basés sur content
-- [ ] **Open Graph** dynamique avec images
-- [ ] **JSON-LD** structured data
-- [ ] **Sitemap** automatique
-- [ ] **Analytics** intégration (GA4, Plausible)
+### 🔄 3.3 SEO & Analytics - 60% COMPLÈTE
+
+- [x] **Meta tags automatiques** ✅ FAIT - Système hybride auto + custom via Content Collections
+- [x] **JSON-LD structured data** ✅ FAIT - Services schema avec prix/durée automatique  
+- [x] **Analytics intégration** ✅ FAIT - Plausible + GA4 ready via seoConfig
+- [ ] **Open Graph** dynamique avec images - En cours (meta tags base faits)
+- [ ] **Sitemap** automatique depuis Content Collections
 
 ### ❌ 3.4 Advanced Features
 
@@ -455,24 +457,6 @@
 
 **Résultat :** 25 pages, 59 composants, 4 content collections, business template, dual-mode system, WCAG 2.1 AA, Swiss/EU compliant, Client deployable avec Content Layer API
 
-### **🎯 PROCHAINES ACTIONS STRATÉGIQUES**
-
-**Option A - Phase 3.2+ Advanced Features (Recommandé) :**
-
-1. **Server Islands & Performance** : Optimisations avancées et monitoring
-2. **SEO & Analytics** : Intégrations complètes pour business
-3. **Advanced Features** : Search, i18n, PWA capabilities
-
-**Option B - Phase 4 Tooling & DX :**
-
-1. **Development Setup** : ESLint, Prettier, VS Code optimisations
-2. **Deployment & CI/CD** : GitHub Actions, monitoring production
-
-**Option C - Phase 5 Documentation & Templates :**
-
-1. **Storybook Integration** : Documentation interactive composants
-2. **Complete Templates** : Landing page, blog, portfolio prêts à l'emploi
-
 ---
 
 ## 🏆 ACCOMPLISSEMENTS HISTORIQUES
@@ -498,21 +482,25 @@
 ## 🔧 TECHNICAL BREAKTHROUGH: TailwindCSS 4 Bug Resolution
 
 ### **🚨 Critical Issue Identified**
+
 - **Problem**: TailwindCSS 4 + Astro scoped CSS + @apply = Build failure
 - **Symptoms**: `Cannot apply unknown utility class text-2xl` on page navigation
 - **Files Affected**: `about.astro`, `services/[slug].astro`
 
 ### **✅ Root Cause Analysis**
+
 - **Technical**: TailwindCSS 4 CSS-first incompatible with Astro scoped `<style>` + `@apply`
 - **Pattern**: `<style>` (scopé) + `@apply text-2xl` = ❌ Error
 - **Working**: `<style is:global>` + `@apply text-2xl` = ✅ Success
 
 ### **🔧 Solution Implemented**
+
 - **Action**: Removed redundant `<style>` sections from affected pages
 - **Rationale**: Styles were redundant with existing shadcn/ui + TailwindCSS system
 - **Result**: 100% functionality restored, zero design regression
 
 ### **📊 Impact Assessment**
+
 - **Performance**: Zero impact
 - **Design**: Zero regression (styles were redundant)
 - **Functionality**: 100% restoration of navigation
@@ -523,7 +511,7 @@
 **🏷️ Version actuelle :** v2.1.0 - Content Layer API Complete  
 **📅 Dernière mise à jour :** Juillet 2025  
 **🎯 Statut :** 🎊 **CONTENT LAYER API - 100% Complete**  
-**🚀 Prochaine action :** Phase 3.2 Advanced Features ou déploiement client
+**🚀 Prochaine action :** Phase 3.3
 
 ---
 

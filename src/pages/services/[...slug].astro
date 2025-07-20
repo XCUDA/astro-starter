@@ -1,5 +1,5 @@
 ---
-// src/pages/services/[...slug].astro - VERSION CORRIGÉE TYPESCRIPT
+// src/pages/services/[...slug].astro - VERSION AVEC SEO INTÉGRÉ
 import Layout from '@/components/layouts/Layout.astro';
 import { getCollection, getEntry, type CollectionEntry } from 'astro:content';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -24,6 +24,32 @@ const { Content } = await service.render();
 // Get booking info for contact details with proper typing
 const bookingInfo = await getCollection('booking');
 const contactInfo = bookingInfo.find((item: CollectionEntry<'booking'>) => item.data.type === 'schedule');
+
+// ✅ AJOUT SEO : Configuration SEO pour business thérapeute
+const seoConfig = {
+  businessName: "Cabinet Wellness Lausanne",
+  location: "Lausanne",
+  defaultTemplate: "therapist" as const,
+  defaultKeywords: ["thérapie", "bien-être", "Lausanne", "massage", "relaxation"],
+  social: {
+    facebook: "https://facebook.com/cabinet-wellness-lausanne",
+    instagram: "https://instagram.com/cabinet.wellness"
+  },
+  analytics: {
+    plausible: "cabinet-wellness.ch"
+  }
+};
+
+// ✅ AJOUT SEO : Customisation optionnelle pour services spéciaux
+let customSeo = undefined;
+if (service.slug === 'massage-prenatal') {
+  customSeo = {
+    title: "Massage Prénatal Expert | Grossesse Sereine à Lausanne",
+    description: "Massage prénatal spécialisé par thérapeute certifiée. Soulagement douleurs grossesse, relaxation future maman. Lausanne centre.",
+    keywords: ["massage prénatal", "grossesse", "future maman", "Lausanne", "douleurs grossesse", "thérapeute certifiée"],
+    ogImage: "/images/massage-prenatal-og.jpg"
+  };
+}
 ---
 
 <Layout 
@@ -31,6 +57,9 @@ const contactInfo = bookingInfo.find((item: CollectionEntry<'booking'>) => item.
   description={service.data.description}
   currentPage="services"
   showBreadcrumbs={true}
+  contentEntry={service}
+  seoConfig={seoConfig}
+  customSeo={customSeo}
 >
   <div class="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 dark:from-gray-900 dark:to-gray-800">
     
